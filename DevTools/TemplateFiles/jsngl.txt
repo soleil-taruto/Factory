@@ -1,0 +1,20 @@
+/// Java ƒVƒ“ƒOƒ‹ƒgƒ“
+
+public class $P {
+	private static $P _i = null;
+
+	public static $P i() {
+		if(_i == null) {
+			_i = new $P();
+		}
+		return _i;
+	}
+
+	private $P() {
+		// TODO
+	}
+
+	public Object get() {
+		return null;
+	}
+}

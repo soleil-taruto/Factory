@@ -1,0 +1,41 @@
+----
+2020.8.11 謎仕様
+
+curl ^
+	pop3s://pop.gmail.com:995/1 ^
+	-u xxxxxxxxxxxxx@gmail.com:xxxxxxxxxxxxxxxxxxxxxx ^
+	-o C:\temp\1.txt
+
+で受信すると、受信したメールはサーバーから削除されない。
+                                              ~~~~~~~~
+
+curl ^
+	-m 300 ^
+	pop3s://pop.gmail.com:995/1 ^
+	-u xxxxxxxxxxxxx@gmail.com:xxxxxxxxxxxxxxxxxxxxxx ^
+	-o C:\temp\1.txt
+
+で受信すると、受信したメールはサーバーから削除される。
+                                              ~~~~~~
+
+----
+2020.8.11 謎仕様2
+
+curl ^
+	pop3s://pop.gmail.com:995/1 ^
+	-u xxxxxxxxxxxxx@gmail.com:xxxxxxxxxxxxxxxxxxxxxx ^
+	--request DELE ^
+	--list-only
+
+で削除すると、1番目のメールが削除される。
+                                 ~~~~~~
+
+curl ^
+	-m 300 ^
+	pop3s://pop.gmail.com:995/1 ^
+	-u xxxxxxxxxxxxx@gmail.com:xxxxxxxxxxxxxxxxxxxxxx ^
+	--request DELE ^
+	--list-only
+
+で削除すると、1番目のメールが削除されない。
+                                 ~~~~~~~~

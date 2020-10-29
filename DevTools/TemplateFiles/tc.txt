@@ -1,0 +1,23 @@
+/// テンプレートクラス
+
+//template <class Key_t, class Value_t>
+//template <class Element_t>
+class $P
+{
+private:
+	int Dummy;
+
+public:
+	$P()
+	{
+		1; // TODO
+	}
+	$P(const $P &source)
+	{
+		error();
+	}
+	~$P()
+	{
+		1; // TODO
+	}
+};

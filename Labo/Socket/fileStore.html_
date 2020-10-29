@@ -1,0 +1,56 @@
+<!--
+	アクセス日時 = *time-stamp*
+	ファイル総数 = *file-num* 個
+	ファイル空き = *file-let* 個
+	ファイル最大サイズ = *file-max* バイト
+	ディレクトリサイズ = *dir-size* バイト
+	ディレクトリ空き = *dir-free* バイト
+-->
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<title>*title*</title>
+<style>
+
+body {
+	background-color: *back-color*;
+}
+
+div {
+	font-family: Tahoma;
+	font-size: x-small;
+	margin: 1em;
+	white-space: nowrap;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.upfile-row {
+	color: *fore-color*;
+}
+
+.upfile-link {
+	color: *fore-color-file*;
+}
+
+</style>
+</head>
+<body>
+<div>
+<form method="post" action="/" enctype="multipart/form-data" accept-charset="Shift_JIS">
+<input type="hidden" name="upload" value="upload"/>
+<input type="file" name="file" size="80"/>
+<input type="submit" value="*submit*"/>
+</form>
+</div>
+<br/>
+*div-list*
+</body>
+</html>

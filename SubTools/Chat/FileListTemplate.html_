@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>__TITLE__</title>
+<style>
+
+body {
+	background-color: __BACK-COLOR__;
+}
+
+div {
+	color: __TEXT-COLOR__;
+	font-family: "Meiryo";
+	white-space: nowrap;
+	margin-left: 0.5em;
+	line-height: 150%;
+}
+
+a {
+	color: __LINK-COLOR__;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+</style>
+</head>
+<body>
+<div>ホスト名：__COMPUTER-NAME__</div>
+<div>場所　　：__LIST-PATH__</div>
+<hr/>
+__LIST__
+<br/>
+<br/>
+<br/>
+</body>
+</html>

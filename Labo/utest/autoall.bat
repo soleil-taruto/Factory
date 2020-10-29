@@ -1,0 +1,1 @@
+runsub.exe /R auto *

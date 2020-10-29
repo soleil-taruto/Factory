@@ -1,0 +1,99 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<style>
+
+body {
+	color: white;
+	background-color: *BACK_COLOR*;
+}
+
+table {
+	margin-left: auto;
+	margin-right: auto;
+	border-spacing: 10px;
+	width: 90%;
+}
+
+td {
+	font-family: Meiryo, Arial;
+	padding: 10px;
+	background-color: *TD_BACK_COLOR*;
+	vertical-align: middle;
+}
+
+td.appname {
+	font-size: 150%;
+	text-align: center;
+}
+
+td.description {
+	text-align: left;
+}
+
+td.menuitem {
+	text-align: left;
+}
+
+td.menuitem-sourcecodelink {
+	text-align: left;
+	background-color: *TD_BACK_HILITE_COLOR*;
+}
+
+a {
+	color: white;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #ddeeff;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+</style>
+<title>*app-name*</title>
+</head>
+<body>
+
+*app-name*　(最新版のバージョン＝*newest-rev*)
+
+<table>
+
+<tr>
+<td class="appname">*app-name*</td>
+</tr>
+
+<tr>
+<td class="description">*description*</td>
+</tr>
+
+<tr>
+<td class="menuitem">
+<a href="*newest*">最新版</a>
+</td>
+</tr>
+
+<tr>
+<td class="menuitem">
+<a href="allver.html">最新版と旧版</a>
+</td>
+</tr>
+
+<tr>
+<td class="menuitem-sourcecodelink">
+<a href="*sourcecodelink*" target="_blank">ソースコード</a>*extra-sourcecodelink*</td>
+</tr>
+
+<tr>
+<td class="menuitem">
+<a href="../index.html">戻る<a/>
+</td>
+</tr>
+
+</table>
+<br/>
+</body>
+</html>

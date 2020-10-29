@@ -1,0 +1,35 @@
+/// クラスっぽい(初期化・開放付き)構造体
+
+typedef struct $P_st
+{
+	int Dummy;
+}
+$P_t;
+
+$P_t *Create$P(void);
+void Release$P($P_t *i);
+
+// <-- cdtor
+
+// <-- accessor
+
+
+$P_t *Create$P(void)
+{
+	$P_t *i = nb($P_t);
+
+	i->Dummy = 0;
+
+	return i;
+}
+void Release$P($P_t *i)
+{
+	if(!i)
+		return;
+
+	memFree(i);
+}
+
+// <-- cdtor
+
+// <-- accessor

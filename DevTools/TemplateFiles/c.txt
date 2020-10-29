@@ -1,0 +1,33 @@
+/// ƒNƒ‰ƒX
+
+#pragma once
+
+class $P
+{
+private:
+	int Dummy;
+
+public:
+	$P();
+	$P(const $P &source);
+	~$P();
+};
+
+
+// <-- h / cpp -->
+
+
+#include "all.h"
+
+$P::$P()
+{
+	this->Dummy = 1; // TODO
+}
+$P::$P(const $P &source)
+{
+	error(); // never
+}
+$P::~$P()
+{
+	this->Dummy = 2; // TODO
+}

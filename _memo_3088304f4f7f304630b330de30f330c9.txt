@@ -1,0 +1,43 @@
+----
+定期的に実行・必要に応じて実行
+
+ucc
+
+newcsrr
+newcs /d
+
+mkt
+
+zz
+
+----
+気が向いたら実行
+
+CheckRum [.rum_ディレクトリ]
+
+----
+バックアップ・デプロイ・シャットダウン
+
+C:\var\bat\CoffeeBreakRelease.bat
+C:\var\bat\DailyRelease.bat
+
+----
+プログラム・プロジェクトをテンプレートから作成
+
+new
+newcs
+newcpp
+
+----
+圧縮・展開
+
+7z
+z7
+z9
+cc
+
+----
+C:\Dev を qq する
+
+dd
+qq -f

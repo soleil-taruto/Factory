@@ -1,0 +1,74 @@
+----
+
+タイムスタンプのソート順がファイル名のソート順になるようにタイムスタンプを変更する。
+
+	SubTools\OrderStamp.c
+
+----
+
+Distinct
+
+	DevTools\TypeGroupBy /-c
+
+----
+
+ファイル名のソート順が逆になるようにファイル名を変更する。
+
+	Renum /R 1 1
+
+	又は
+
+	SubTools\OrderStamp /R　してから　SubTools\RenumStamp
+
+----
+
+Encluded
+
+	updateTagRng
+
+----
+
+最短行を探す。
+最長行を探す。
+最短パスを探す。
+最長パスを探す。
+
+	Longest.exe /S [最短の下限] 対象パス
+
+	★最短と最長を探す。
+
+----
+
+テキストファイルを行毎に一定の書式で出力したい。
+
+	ListFmt.c
+
+連番を一定の書式で出力したい。
+
+	seq.c
+
+----
+
+lssファイルリストを編集
+
+	ef
+
+----
+
+ｎ以下の文字列の長さ
+
+	strlen_max
+
+文字列をｎ以上ｍ未満の長さに
+
+	setStrLenMin
+	setStrLenMax
+	setStrLenRng
+
+----
+
+StringTools.Island
+StringTools.Enclosed
+
+	updateTagRng
+	updateAsciiTagRng

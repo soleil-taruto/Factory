@@ -1,0 +1,70 @@
+/// DataCenter•t‚«Main DxLib_app—p
+
+typedef struct $UDc_st
+{
+	// <---- prm
+
+	// <---- ret
+
+	int Dummy;
+}
+$UDc_t;
+
+extern $UDc_t $UDc;
+
+void $PInit(void);
+void $PFnlz(void);
+
+
+$UDc_t $UDc;
+
+void $PInit(void)
+{
+	memset(&$UDc, 0x00, sizeof($UDc));
+}
+void $PFnlz(void)
+{
+	memset(&$UDc, 0x00, sizeof($UDc));
+}
+
+
+
+// <-- $P.c.h / $PMain.c.h -->
+
+
+
+void $PMain(void);
+
+
+static void DrawWall(void)
+{
+	DrawCurtain();
+	DrawRect(P_WHITEBOX, 100, 100, SCREEN_W - 200, SCREEN_H - 200);
+}
+void $PMain(void)
+{
+	SetCurtain();
+	FreezeInput();
+
+//	MusicPlay(MUS_XXX);
+
+	for(; ; )
+	{
+		if(GetPound(INP_PAUSE))
+		{
+			break;
+		}
+		DrawWall();
+		EachFrame();
+	}
+	FreezeInput();
+	MusicFade();
+	SetCurtain(30, -1.0);
+
+	forscene(40)
+	{
+		DrawWall();
+		EachFrame();
+	}
+	sceneLeave();
+}

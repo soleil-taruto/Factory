@@ -1,0 +1,2 @@
+http://info.isl.ntt.co.jp/crypt/camellia/engine.html
+http://info.isl.ntt.co.jp/crypt/camellia/dl/cryptrec/t_camellia.txt

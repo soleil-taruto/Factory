@@ -1,0 +1,9 @@
+/// テンプレート関数
+
+//template <class Var1_t, class Var2_t>
+//Var1_t $P(Var1_t prm, Var2_t subPrm)
+template <class Var_t>
+Var_t $P(Var_t prm)
+{
+	return prm;
+}

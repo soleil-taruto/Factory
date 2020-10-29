@@ -1,0 +1,4 @@
+<project outputDir="" baseDir="C:\tmp\ConfuserEx" xmlns="http://confuser.codeplex.com">
+  <rule pattern="true" preset="normal" inherit="false" />
+  <module path="$TARGET_EXE$" />
+</project>
