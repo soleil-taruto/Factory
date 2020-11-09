@@ -4047,6 +4047,11 @@ C:\Factory\DevTools\makeTags.c(335) : MakeTags // ŠÖ”
 C:\Factory\DevTools\makeTags.c(353) : MakeJSTags // ŠÖ”
 C:\Factory\DevTools\makeTags.c(366) : MakeJSTags_Dir // ŠÖ”
 C:\Factory\DevTools\makeTags.c(377) : main // ŠÖ”
+C:\Factory\DevTools\mask.c(15) : MaskStartIndex // •Ï”–”‚ÍéŒ¾
+C:\Factory\DevTools\mask.c(16) : MaskLen // •Ï”–”‚ÍéŒ¾
+C:\Factory\DevTools\mask.c(18) : RLFS_LineAction // ŠÖ”
+C:\Factory\DevTools\mask.c(34) : ReadLinesFromStdin // ŠÖ”
+C:\Factory\DevTools\mask.c(44) : main // ŠÖ”
 C:\Factory\DevTools\md5TenLine.c(8) : PART_LNUM // ’è‹`
 C:\Factory\DevTools\md5TenLine.c(10) : GetPartHash // ŠÖ”
 C:\Factory\DevTools\md5TenLine.c(31) : main // ŠÖ”
