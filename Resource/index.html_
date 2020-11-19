@@ -35,5 +35,7 @@ a:hover {
 $(HEADER)
 $(DIV-LIST)
 $(FOOTER)
+<br/>
+<br/>
 </body>
 </html>
