@@ -26,8 +26,7 @@ a {
 }
 
 a:hover {
-	color: $(BACK-COLOR);
-	background-color: $(TEXT-COLOR);
+	text-decoration: underline;
 }
 
 </style>
