@@ -9355,6 +9355,13 @@ C:\Factory\Tools\CheckRum.c(128) : Check_FilesTxt // ŠÖ”
 C:\Factory\Tools\CheckRum.c(149) : Check_TreeTxt // ŠÖ”
 C:\Factory\Tools\CheckRum.c(168) : CheckRum // ŠÖ”
 C:\Factory\Tools\CheckRum.c(297) : main // ŠÖ”
+C:\Factory\Tools\CheckRumInDir.c(14) : IntoSubDir // •Ï”–”‚ÍéŒ¾
+C:\Factory\Tools\CheckRumInDir.c(15) : DoCheckRum // •Ï”–”‚ÍéŒ¾
+C:\Factory\Tools\CheckRumInDir.c(16) : NoStrict // •Ï”–”‚ÍéŒ¾
+C:\Factory\Tools\CheckRumInDir.c(18) : CollectRumDirs // ŠÖ”
+C:\Factory\Tools\CheckRumInDir.c(38) : CheckRum // ŠÖ”
+C:\Factory\Tools\CheckRumInDir.c(54) : CheckRumInDir // ŠÖ”
+C:\Factory\Tools\CheckRumInDir.c(69) : main // ŠÖ”
 C:\Factory\Tools\Cleaver.c(3) : BUFFSIZE // ’è‹`
 C:\Factory\Tools\Cleaver.c(5) : DivSize // •Ï”–”‚ÍéŒ¾
 C:\Factory\Tools\Cleaver.c(6) : DeleteMode // •Ï”–”‚ÍéŒ¾
