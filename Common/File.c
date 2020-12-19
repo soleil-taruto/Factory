@@ -808,6 +808,28 @@ void copyDir(char *srcDir, char *destDir) // destDir は作成されていること。
 	memFree(destDir);
 }
 
+static int DoCmdMove(char *srcPath, char *destPath) // ret: ? 成功
+{
+	LOGPOS();
+	srcPath  = makeFullPath(srcPath);
+	destPath = makeFullPath(destPath);
+
+	errorCase(!existPath(srcPath));
+	errorCase(existPath(destPath));
+
+	coExecute_x(xcout("MOVE /Y \"%s\" \"%s\"", srcPath, destPath));
+
+	if(existPath(srcPath)) // ? 失敗
+	{
+		LOGPOS();
+		errorCase(existPath(destPath));
+		return 0;
+	}
+	LOGPOS();
+	errorCase(!existPath(destPath));
+	return 1;
+}
+
 /*
 	moveFile()    ファイル - 何処でも
 	          ディレクトリ - 同じディレクトリ内
@@ -824,8 +846,13 @@ void moveFile(char *srcFile, char *destFile)
 
 	for(c = 1; ; c++)
 	{
+#if 0 // rename(), MOVE 共に LastError=5 で常に失敗してしまう。PC再起動したら直った。何だったんだ... @ 2020.12.15
+		if(DoCmdMove(srcFile, destFile)) // ? 成功
+			break;
+#else
 		if(!rename(srcFile, destFile)) // ? 成功
 			break;
+#endif
 
 		cout("Failed rename() \"%s\" -> \"%s\", %u-th trial. LastError: %08x\n", srcFile, destFile, c, GetLastError());
 		errorCase(c == 10);
