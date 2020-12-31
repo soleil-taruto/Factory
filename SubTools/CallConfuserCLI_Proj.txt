@@ -1,7 +1,7 @@
 <project outputDir="" baseDir="C:\tmp\ConfuserEx" xmlns="http://confuser.codeplex.com">
 	<rule preset="none" pattern="true">
 		<protection id="rename">
-			<argument name="mode" value="unicode" />
+			<argument name="mode" value="letters" />
 			<argument name="renXaml" value="false" />
 		</protection>
 		<protection id="constants">

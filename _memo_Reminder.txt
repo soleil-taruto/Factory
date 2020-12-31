@@ -72,3 +72,9 @@ StringTools.Enclosed
 
 	updateTagRng
 	updateAsciiTagRng
+
+----
+
+.wav ƒtƒ@ƒCƒ‹‚Ì‰¹—Ê’²®
+
+	wavVolume
