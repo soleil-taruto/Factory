@@ -78,3 +78,12 @@ StringTools.Enclosed
 .wav ファイルの音量調整
 
 	wavVolume
+
+----
+
+複数のリビジョンを削除する方法
+
+	-- .rum_ディレクトリ群の親ディレクトリに移動して
+
+	rumCommitHistory.exe /E 削除予定
+	rumTrim
