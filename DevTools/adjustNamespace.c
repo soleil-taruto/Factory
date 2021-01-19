@@ -7,6 +7,7 @@
 */
 
 #include "C:\Factory\Common\all.h"
+#include "C:\Factory\Common\Options\UTF.h"
 
 static int BatchMode;
 
@@ -59,18 +60,34 @@ static char *GetProjRootNamespace(char *projFile)
 		{
 			ret = strx(ne_strchr(line, '>') + 1);
 			*ne_strchr(ret, '<') = '\0';
+			ret = UTF8ToSJISText_x(ret);
 			goto endFunc;
 		}
 	}
-	errorCase(!ret);
+	error(); // not found
 
 endFunc:
 	releaseDim(lines, 1);
 	return ret;
 }
+
+static int NSWithBracket;
+
 static char *GetNamespaceFromLine(char *line)
 {
-	return strx(line + 10);
+	char *namespace = strx(line + 10);
+
+	if(endsWith(namespace, " {"))
+	{
+		namespace[strlen(namespace) - 2] = '\0';
+		NSWithBracket = 1;
+	}
+	else
+		NSWithBracket = 0;
+
+	namespace = UTF8ToSJISText(namespace);
+
+	return namespace;
 }
 static char *GetNamespaceFromPath(char *rootNamespace, char *rootDir, char *file)
 {
@@ -128,7 +145,7 @@ static void AdjustNamespace(char *targetDir)
 
 			foreach(lines, line, index)
 			{
-				if(lineExp("namespace <1,,..__09AZaz>", line))
+				if(lineExp("namespace <1,,>", line))
 				{
 					char *oldNamespace = GetNamespaceFromLine(line);
 					char *newNamespace = GetNamespaceFromPath(rootNamespace, rootDir, file);
@@ -141,7 +158,8 @@ static void AdjustNamespace(char *targetDir)
 					{
 						LOGPOS();
 						memFree(line);
-						line = xcout("namespace %s", newNamespace);
+						line = xcout("namespace %s%s", newNamespace, NSWithBracket ? " {" : "");
+						line = SJISToUTF8Text_x(line);
 						setElement(lines, index, (uint)line);
 						modified = 1;
 					}

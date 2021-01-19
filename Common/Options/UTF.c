@@ -266,3 +266,37 @@ void SJISToUTF8File(char *rFile, char *wFile) // rFile == wFile ok
 {
 	DblConv(rFile, wFile, SJISToUTF16File, UTF16ToUTF8File);
 }
+
+static char *DblConvText(char *text, void (*conv)(char *, char *))
+{
+	char *tmpFile = makeTempPath("u2s-mid");
+
+	writeOneLineNoRet_b(tmpFile, text);
+	conv(tmpFile, tmpFile);
+	text = readText_b(tmpFile);
+
+	removeFile(tmpFile);
+	memFree(tmpFile);
+
+	return text;
+}
+char *UTF8ToSJISText(char *text)
+{
+	return DblConvText(text, UTF8ToSJISFile);
+}
+char *SJISToUTF8Text(char *text)
+{
+	return DblConvText(text, SJISToUTF8File);
+}
+char *UTF8ToSJISText_x(char *text)
+{
+	char *ret = UTF8ToSJISText(text);
+	memFree(text);
+	return ret;
+}
+char *SJISToUTF8Text_x(char *text)
+{
+	char *ret = SJISToUTF8Text(text);
+	memFree(text);
+	return ret;
+}

@@ -87,3 +87,9 @@ StringTools.Enclosed
 
 	rumCommitHistory.exe /E íœ—\’è
 	rumTrim
+
+----
+
+Backup.log ‚Ì“à—eŠm”F
+
+	TYPE C:\tmp\Backup.log | Grape "ECHO ERRORLEVEL=" | mask 1 24 | TypeGroupBy
