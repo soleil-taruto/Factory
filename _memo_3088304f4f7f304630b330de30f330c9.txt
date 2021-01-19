@@ -1,5 +1,5 @@
 ----
-’èŠú“I‚ÉŽÀsE•K—v‚É‰ž‚¶‚ÄŽÀs
+å®šæœŸçš„ã«å®Ÿè¡Œãƒ»å¿…è¦ã«å¿œã˜ã¦å®Ÿè¡Œ
 
 ucc
 
@@ -11,26 +11,26 @@ mkt
 zz
 
 ----
-‹C‚ªŒü‚¢‚½‚çŽÀs
+æ°—ãŒå‘ã„ãŸã‚‰å®Ÿè¡Œ
 
-CheckRum [.rum_ƒfƒBƒŒƒNƒgƒŠ]
-CheckRumInDir [.rum_ƒfƒBƒŒƒNƒgƒŠŒQ‚ÌeƒfƒBƒŒƒNƒgƒŠ]
+CheckRum [.rum_ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª]
+CheckRumInDir [.rum_ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªç¾¤ã®è¦ªãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª]
 
 ----
-ƒoƒbƒNƒAƒbƒvEƒfƒvƒƒCEƒVƒƒƒbƒgƒ_ƒEƒ“
+ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ãƒ»ãƒ‡ãƒ—ãƒ­ã‚¤ãƒ»ã‚·ãƒ£ãƒƒãƒˆãƒ€ã‚¦ãƒ³
 
 C:\var\bat\CoffeeBreakRelease.bat
 C:\var\bat\DailyRelease.bat
 
 ----
-ƒvƒƒOƒ‰ƒ€EƒvƒƒWƒFƒNƒg‚ðƒeƒ“ƒvƒŒ[ƒg‚©‚çì¬
+ãƒ—ãƒ­ã‚°ãƒ©ãƒ ãƒ»ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã‚’ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‹ã‚‰ä½œæˆ
 
 new
 newcs
 newcpp
 
 ----
-ˆ³kE“WŠJ
+åœ§ç¸®ãƒ»å±•é–‹
 
 7z
 z7
@@ -38,7 +38,7 @@ z9
 cc
 
 ----
-C:\Dev ‚ð qq ‚·‚é
+C:\Dev ã‚’ qq ã™ã‚‹
 
 dd
 qq -f

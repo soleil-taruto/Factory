@@ -58,7 +58,7 @@ a:hover {
 </head>
 <body>
 
-*app-name*@(ÅV”Å‚Ìƒo[ƒWƒ‡ƒ“*newest-rev*)
+*app-name*ã€€(æœ€æ–°ç‰ˆã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ï¼*newest-rev*)
 
 <table>
 
@@ -72,24 +72,24 @@ a:hover {
 
 <tr>
 <td class="menuitem">
-<a href="*newest*">ÅV”Å</a>
+<a href="*newest*">æœ€æ–°ç‰ˆ</a>
 </td>
 </tr>
 
 <tr>
 <td class="menuitem">
-<a href="allver.html">ÅV”Å‚Æ‹Œ”Å</a>
+<a href="allver.html">æœ€æ–°ç‰ˆã¨æ—§ç‰ˆ</a>
 </td>
 </tr>
 
 <tr>
 <td class="menuitem-sourcecodelink">
-<a href="*sourcecodelink*" target="_blank">ƒ\[ƒXƒR[ƒh</a>*extra-sourcecodelink*</td>
+<a href="*sourcecodelink*" target="_blank">ã‚½ãƒ¼ã‚¹ã‚³ãƒ¼ãƒ‰</a>*extra-sourcecodelink*</td>
 </tr>
 
 <tr>
 <td class="menuitem">
-<a href="../index.html">–ß‚é<a/>
+<a href="../index.html">æˆ»ã‚‹<a/>
 </td>
 </tr>
 

@@ -28,13 +28,13 @@ a:hover {
 <body>
 
 <br/>
-ªÅV<br/>
+â†‘æœ€æ–°<br/>
 <br/>
 *app-list*
 <br/>
-«‘¾ŒÃ<br/>
+â†“å¤ªå¤<br/>
 <br/>
-<a href="index.html">–ß‚é</a><br/>
+<a href="index.html">æˆ»ã‚‹</a><br/>
 <br/>
 
 </body>

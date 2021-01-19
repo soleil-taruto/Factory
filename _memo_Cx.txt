@@ -1,93 +1,93 @@
 ----
 Cx.exe
 
-                                                         í‚Éƒrƒ‹ƒh
-ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“       “®ì                                (ƒrƒ‹ƒh•s—v‚Å‚àƒXƒLƒbƒv‚µ‚È‚¢)   *Test.obj‚Ö‚ÌƒŠƒ“ƒNæ‚ÌØ‚è‘Ö‚¦
+                                                         å¸¸ã«ãƒ“ãƒ«ãƒ‰
+ã‚³ãƒžãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³       å‹•ä½œ                                (ãƒ“ãƒ«ãƒ‰ä¸è¦ã§ã‚‚ã‚¹ã‚­ãƒƒãƒ—ã—ãªã„)   *Test.objã¸ã®ãƒªãƒ³ã‚¯å…ˆã®åˆ‡ã‚Šæ›¿ãˆ
 -------------------------------------------------------------------------------------------------------------------------
 cx Program.x
-cx Program           Program.c ‚ðƒrƒ‹ƒh                  N                                N
+cx Program           Program.c ã‚’ãƒ“ãƒ«ãƒ‰                  N                                N
 
-cx *                 ƒJƒŒƒ“ƒgDIR‚ðƒrƒ‹ƒh                 N                                N
+cx *                 ã‚«ãƒ¬ãƒ³ãƒˆDIRã‚’ãƒ“ãƒ«ãƒ‰                 N                                N
 
-cx **                ƒJƒŒƒ“ƒgDIR‚Æ”z‰º‚ðƒrƒ‹ƒh           N                                N
+cx **                ã‚«ãƒ¬ãƒ³ãƒˆDIRã¨é…ä¸‹ã‚’ãƒ“ãƒ«ãƒ‰           N                                N
 
-cx ***               ƒJƒŒƒ“ƒgDIR‚Æ”z‰º‚ðƒrƒ‹ƒh           Y                                N
+cx ***               ã‚«ãƒ¬ãƒ³ãƒˆDIRã¨é…ä¸‹ã‚’ãƒ“ãƒ«ãƒ‰           Y                                N
 
 cx ++ Program.x
-cx ++ Program        Program.c ‚ðƒrƒ‹ƒh                  Y                                N
+cx ++ Program        Program.c ã‚’ãƒ“ãƒ«ãƒ‰                  Y                                N
 
-cx ++ *              ƒJƒŒƒ“ƒgDIR‚ðƒrƒ‹ƒh                 Y                                N
+cx ++ *              ã‚«ãƒ¬ãƒ³ãƒˆDIRã‚’ãƒ“ãƒ«ãƒ‰                 Y                                N
 
 cx clean Program.x
-cx clean Program     Program.c ‚ðƒNƒŠ[ƒ“ƒAƒbƒv          -                                N
+cx clean Program     Program.c ã‚’ã‚¯ãƒªãƒ¼ãƒ³ã‚¢ãƒƒãƒ—          -                                N
 
-cx clean *           ƒJƒŒƒ“ƒgDIR‚ðƒNƒŠ[ƒ“ƒAƒbƒv         -                                N
+cx clean *           ã‚«ãƒ¬ãƒ³ãƒˆDIRã‚’ã‚¯ãƒªãƒ¼ãƒ³ã‚¢ãƒƒãƒ—         -                                N
 
-cx clean **          ƒJƒŒƒ“ƒgDIR‚Æ”z‰º‚ðƒNƒŠ[ƒ“ƒAƒbƒv   -                                N
+cx clean **          ã‚«ãƒ¬ãƒ³ãƒˆDIRã¨é…ä¸‹ã‚’ã‚¯ãƒªãƒ¼ãƒ³ã‚¢ãƒƒãƒ—   -                                N
 
 cx -- Program.x
-cx -- Program        Program.c ‚ðƒrƒ‹ƒh                  N                                Y
+cx -- Program        Program.c ã‚’ãƒ“ãƒ«ãƒ‰                  N                                Y
 
-cx -- *              ƒJƒŒƒ“ƒgDIR‚ðƒrƒ‹ƒh                 N                                Y
+cx -- *              ã‚«ãƒ¬ãƒ³ãƒˆDIRã‚’ãƒ“ãƒ«ãƒ‰                 N                                Y
 
-cx -- **             ƒJƒŒƒ“ƒgDIR‚Æ”z‰º‚ðƒrƒ‹ƒh           N                                Y
+cx -- **             ã‚«ãƒ¬ãƒ³ãƒˆDIRã¨é…ä¸‹ã‚’ãƒ“ãƒ«ãƒ‰           N                                Y
 
-cx -- ***            ƒJƒŒƒ“ƒgDIR‚Æ”z‰º‚ðƒrƒ‹ƒh           Y                                Y
+cx -- ***            ã‚«ãƒ¬ãƒ³ãƒˆDIRã¨é…ä¸‹ã‚’ãƒ“ãƒ«ãƒ‰           Y                                Y
 
 cx ++ -- Program.x
 cx ++ -- Program
 cx -- ++ Program.x
-cx -- ++ Program     Program.c ‚ðƒrƒ‹ƒh                  Y                                Y
+cx -- ++ Program     Program.c ã‚’ãƒ“ãƒ«ãƒ‰                  Y                                Y
 
 cx ++ -- *
-cx -- ++ *           ƒJƒŒƒ“ƒgDIR‚ðƒrƒ‹ƒh                 Y                                Y
+cx -- ++ *           ã‚«ãƒ¬ãƒ³ãƒˆDIRã‚’ãƒ“ãƒ«ãƒ‰                 Y                                Y
 
 ----
 GitFactory
 
-ƒ\[ƒXƒtƒ@ƒCƒ‹“à‚Ìƒpƒ^[ƒ“
+ã‚½ãƒ¼ã‚¹ãƒ•ã‚¡ã‚¤ãƒ«å†…ã®ãƒ‘ã‚¿ãƒ¼ãƒ³
 	$_git:secret
-		‚±‚Ìs‚Ìs“ª`‚±‚Ìƒpƒ^[ƒ“‚Ì’¼‘O‚Ü‚Å‚ðƒ}ƒXƒN‚·‚éB
+		ã“ã®è¡Œã®è¡Œé ­ï½žã“ã®ãƒ‘ã‚¿ãƒ¼ãƒ³ã®ç›´å‰ã¾ã§ã‚’ãƒžã‚¹ã‚¯ã™ã‚‹ã€‚
 
 	$_git:secretBegin
-		‚±‚Ìs‚ÌŽŸs`I—¹ƒ}[ƒN‚Ì‚ ‚és‚Ì’¼‘O‚Ìs‚Ü‚Å‚ðƒ}ƒXƒN‚·‚éB
+		ã“ã®è¡Œã®æ¬¡è¡Œï½žçµ‚äº†ãƒžãƒ¼ã‚¯ã®ã‚ã‚‹è¡Œã®ç›´å‰ã®è¡Œã¾ã§ã‚’ãƒžã‚¹ã‚¯ã™ã‚‹ã€‚
 
 	$_git:secretEnd
-		I—¹ƒ}[ƒN
+		çµ‚äº†ãƒžãƒ¼ã‚¯
 
-ƒtƒ@ƒCƒ‹
+ãƒ•ã‚¡ã‚¤ãƒ«
 	_gitignore
-		‚±‚Ìƒtƒ@ƒCƒ‹‚Æ“¯‚¶êŠ‚ÌƒfƒBƒŒƒNƒgƒŠEƒtƒ@ƒCƒ‹‚ðíœ‚·‚éB
-		‚±‚Ìƒtƒ@ƒCƒ‹‚ÍŽc‚·B
+		ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã¨åŒã˜å ´æ‰€ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãƒ»ãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‰Šé™¤ã™ã‚‹ã€‚
+		ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã¯æ®‹ã™ã€‚
 
 	_gitresmsk
-		‚±‚Ìƒtƒ@ƒCƒ‹‚Æ“¯‚¶êŠ‚Æ”z‰º‚É‚ ‚éƒŠƒ\[ƒXƒtƒ@ƒCƒ‹‚ðƒ}ƒXƒN‚·‚éB
+		ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã¨åŒã˜å ´æ‰€ã¨é…ä¸‹ã«ã‚ã‚‹ãƒªã‚½ãƒ¼ã‚¹ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒžã‚¹ã‚¯ã™ã‚‹ã€‚
 
 	_gitsrcmsk
-		‚±‚Ìƒtƒ@ƒCƒ‹‚Æ“¯‚¶êŠ‚Æ”z‰º‚É‚ ‚éƒ\[ƒXƒtƒ@ƒCƒ‹‚ðƒ}ƒXƒN‚·‚éB
+		ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã¨åŒã˜å ´æ‰€ã¨é…ä¸‹ã«ã‚ã‚‹ã‚½ãƒ¼ã‚¹ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒžã‚¹ã‚¯ã™ã‚‹ã€‚
 
 	_gittxtmsk
-		‚±‚Ìƒtƒ@ƒCƒ‹‚Æ“¯‚¶êŠ‚Æ”z‰º‚É‚ ‚éƒeƒLƒXƒgŒnƒtƒ@ƒCƒ‹‚ðƒ}ƒXƒN‚·‚éB
+		ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã¨åŒã˜å ´æ‰€ã¨é…ä¸‹ã«ã‚ã‚‹ãƒ†ã‚­ã‚¹ãƒˆç³»ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒžã‚¹ã‚¯ã™ã‚‹ã€‚
 
 	_gitsrcmsk_files
-		‚±‚Ìƒtƒ@ƒCƒ‹‚É‘‚©‚ê‚Ä‚¢‚éƒtƒ@ƒCƒ‹‚ðƒ}ƒXƒN‚·‚éB
-		Šes‚ÍA‚±‚Ìƒtƒ@ƒCƒ‹‚ÌêŠ‚©‚ç‚Ì‘Š‘ÎƒpƒX‚Å‚ ‚é‚±‚ÆB
+		ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã«æ›¸ã‹ã‚Œã¦ã„ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒžã‚¹ã‚¯ã™ã‚‹ã€‚
+		å„è¡Œã¯ã€ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã®å ´æ‰€ã‹ã‚‰ã®ç›¸å¯¾ãƒ‘ã‚¹ã§ã‚ã‚‹ã“ã¨ã€‚
 
 	_gitignore_files
-		‚±‚Ìƒtƒ@ƒCƒ‹‚É‘‚©‚ê‚Ä‚¢‚éƒtƒ@ƒCƒ‹‚ðíœ‚·‚éB
-		Šes‚ÍA‚±‚Ìƒtƒ@ƒCƒ‹‚ÌêŠ‚©‚ç‚Ì‘Š‘ÎƒpƒX‚Å‚ ‚é‚±‚ÆB
+		ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã«æ›¸ã‹ã‚Œã¦ã„ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‰Šé™¤ã™ã‚‹ã€‚
+		å„è¡Œã¯ã€ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã®å ´æ‰€ã‹ã‚‰ã®ç›¸å¯¾ãƒ‘ã‚¹ã§ã‚ã‚‹ã“ã¨ã€‚
 
 	_gitignore_dirs
-		‚±‚Ìƒtƒ@ƒCƒ‹‚É‘‚©‚ê‚Ä‚¢‚éƒfƒBƒŒƒNƒgƒŠ‚ðíœ‚·‚éB
-		Šes‚ÍA‚±‚Ìƒtƒ@ƒCƒ‹‚ÌêŠ‚©‚ç‚Ì‘Š‘ÎƒpƒX‚Å‚ ‚é‚±‚ÆB
+		ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã«æ›¸ã‹ã‚Œã¦ã„ã‚‹ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’å‰Šé™¤ã™ã‚‹ã€‚
+		å„è¡Œã¯ã€ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã®å ´æ‰€ã‹ã‚‰ã®ç›¸å¯¾ãƒ‘ã‚¹ã§ã‚ã‚‹ã“ã¨ã€‚
 
 ----
 chkuuidcoll.c
 
-... "{99999999-9999-9999-9999-999999999999}"; // shared_uuid@ign   -- –³Ž‹‚·‚éB‚±‚ÌUUID‚Í–³‚©‚Á‚½‚à‚Ì‚Æ‚µ‚Äˆ—‚·‚éB
-... "{99999999-9999-9999-9999-999999999999}"; // shared_uuid@g     -- ¢ŠE‘S‘Ì‚Åd•¡‚ð”F‚ß‚éB
-... "{99999999-9999-9999-9999-999999999999}"; // shared_uuid       -- “¯‚¶ƒvƒƒWƒFƒNƒg“à‚Åd•¡‚ð”F‚ß‚éB
-... "{99999999-9999-9999-9999-999999999999}"; // shared_uuid:2     -- “¯‚¶ƒvƒƒWƒFƒNƒg“à‚Å 2 ‰ÓŠ‚É‘¶Ý‚·‚éB
-... "{99999999-9999-9999-9999-999999999999}"; // shared_uuid:3     -- “¯‚¶ƒvƒƒWƒFƒNƒg“à‚Å 3 ‰ÓŠ‚É‘¶Ý‚·‚éB
-... "{99999999-9999-9999-9999-999999999999}"; // shared_uuid:10    -- “¯‚¶ƒvƒƒWƒFƒNƒg“à‚Å 10 ‰ÓŠ‚É‘¶Ý‚·‚éB
-... "{99999999-9999-9999-9999-999999999999}"; // shared_uuid:777   -- “¯‚¶ƒvƒƒWƒFƒNƒg“à‚Å 777 ‰ÓŠ‚É‘¶Ý‚·‚éB
+... "{99999999-9999-9999-9999-999999999999}"; // shared_uuid@ign   -- ç„¡è¦–ã™ã‚‹ã€‚ã“ã®UUIDã¯ç„¡ã‹ã£ãŸã‚‚ã®ã¨ã—ã¦å‡¦ç†ã™ã‚‹ã€‚
+... "{99999999-9999-9999-9999-999999999999}"; // shared_uuid@g     -- ä¸–ç•Œå…¨ä½“ã§é‡è¤‡ã‚’èªã‚ã‚‹ã€‚
+... "{99999999-9999-9999-9999-999999999999}"; // shared_uuid       -- åŒã˜ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå†…ã§é‡è¤‡ã‚’èªã‚ã‚‹ã€‚
+... "{99999999-9999-9999-9999-999999999999}"; // shared_uuid:2     -- åŒã˜ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå†…ã§ 2 ç®‡æ‰€ã«å­˜åœ¨ã™ã‚‹ã€‚
+... "{99999999-9999-9999-9999-999999999999}"; // shared_uuid:3     -- åŒã˜ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå†…ã§ 3 ç®‡æ‰€ã«å­˜åœ¨ã™ã‚‹ã€‚
+... "{99999999-9999-9999-9999-999999999999}"; // shared_uuid:10    -- åŒã˜ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå†…ã§ 10 ç®‡æ‰€ã«å­˜åœ¨ã™ã‚‹ã€‚
+... "{99999999-9999-9999-9999-999999999999}"; // shared_uuid:777   -- åŒã˜ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå†…ã§ 777 ç®‡æ‰€ã«å­˜åœ¨ã™ã‚‹ã€‚

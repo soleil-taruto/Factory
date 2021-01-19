@@ -1,22 +1,22 @@
 ----
-ŠJ”­ŠÂ‹«‚ÌƒtƒHƒ‹ƒ_\¬ (Ž©•ª—pƒƒ‚) @ 2020.8.xx
+é–‹ç™ºç’°å¢ƒã®ãƒ•ã‚©ãƒ«ãƒ€æ§‹æˆ (è‡ªåˆ†ç”¨ãƒ¡ãƒ¢) @ 2020.8.xx
 
-C:\app         = ƒtƒŠ[ƒ\ƒtƒg“™‚ÌŠO•”ƒAƒvƒŠ’u‚«ê
-C:\app2        = ƒtƒŠ[ƒ\ƒtƒg“™‚ÌŠO•”ƒAƒvƒŠ’u‚«ê
+C:\app         = ãƒ•ãƒªãƒ¼ã‚½ãƒ•ãƒˆç­‰ã®å¤–éƒ¨ã‚¢ãƒ—ãƒªç½®ãå ´
+C:\app2        = ãƒ•ãƒªãƒ¼ã‚½ãƒ•ãƒˆç­‰ã®å¤–éƒ¨ã‚¢ãƒ—ãƒªç½®ãå ´
 C:\app\Kit     = https://github.com/stackprobe/Kit
-C:\appdata     = APP_DATA ‚â ProgramData ‚Ý‚½‚¢‚ÈêŠ
-C:\Dat         = C:\Dev‚ÅŽg‚¤‹¤’Êƒf[ƒ^
-C:\Dev         = ŠJ”­ŠÂ‹«
-C:\etc         = •¨’u
-C:\Factory     = ‚±‚±
-C:\home        = •¨’u
-C:\huge        = •¨’u (GitHubŠÖŒW)
+C:\appdata     = APP_DATA ã‚„ ProgramData ã¿ãŸã„ãªå ´æ‰€
+C:\Dat         = C:\Devã§ä½¿ã†å…±é€šãƒ‡ãƒ¼ã‚¿
+C:\Dev         = é–‹ç™ºç’°å¢ƒ
+C:\etc         = ç‰©ç½®
+C:\Factory     = ã“ã“
+C:\home        = ç‰©ç½®
+C:\huge        = ç‰©ç½® (GitHubé–¢ä¿‚)
 C:\pleiades    = Pleiades All in One
 C:\prv         = SUBST S: C:\prv
-C:\temp        = ˆêŽžƒtƒ@ƒCƒ‹—p (ƒTƒCƒ“ƒCƒ“Žž‚É‹ó‚É‚·‚é)
-C:\tmp         = ˆêŽžƒtƒ@ƒCƒ‹—p (ƒNƒŠƒA‚µ‚È‚¢)
-C:\var         = •¨’u
-C:\var2        = •¨’u
-C:\wb          = •¨’u
-C:\wb2         = •¨’u
-S:\            = •¨’u (Œ³‚Íƒlƒbƒgƒ[ƒNƒhƒ‰ƒCƒu, Žg‚í‚È‚­‚È‚Á‚ÄŒ`Š[‰»)
+C:\temp        = ä¸€æ™‚ãƒ•ã‚¡ã‚¤ãƒ«ç”¨ (ã‚µã‚¤ãƒ³ã‚¤ãƒ³æ™‚ã«ç©ºã«ã™ã‚‹)
+C:\tmp         = ä¸€æ™‚ãƒ•ã‚¡ã‚¤ãƒ«ç”¨ (ã‚¯ãƒªã‚¢ã—ãªã„)
+C:\var         = ç‰©ç½®
+C:\var2        = ç‰©ç½®
+C:\wb          = ç‰©ç½®
+C:\wb2         = ç‰©ç½®
+S:\            = ç‰©ç½® (å…ƒã¯ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ãƒ‰ãƒ©ã‚¤ãƒ–, ä½¿ã‚ãªããªã£ã¦å½¢éª¸åŒ–)

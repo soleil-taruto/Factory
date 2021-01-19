@@ -1,6 +1,6 @@
 ----
 
-�^�C���X�^���v�̃\�[�g�����t�@�C�����̃\�[�g���ɂȂ�悤�Ƀ^�C���X�^���v��ύX����B
+タイムスタンプのソート順がファイル名のソート順になるようにタイムスタンプを変更する。
 
 	SubTools\OrderStamp.c
 
@@ -12,13 +12,13 @@ Distinct
 
 ----
 
-�t�@�C�����̃\�[�g�����t�ɂȂ�悤�Ƀt�@�C������ύX����B
+ファイル名のソート順が逆になるようにファイル名を変更する。
 
 	Renum /R 1 1
 
-	����
+	又は
 
-	SubTools\OrderStamp /R�@���Ă���@SubTools\RenumStamp
+	SubTools\OrderStamp /R　してから　SubTools\RenumStamp
 
 ----
 
@@ -28,38 +28,38 @@ Encluded
 
 ----
 
-�ŒZ�s��T���B
-�Œ��s��T���B
-�ŒZ�p�X��T���B
-�Œ��p�X��T���B
+最短行を探す。
+最長行を探す。
+最短パスを探す。
+最長パスを探す。
 
-	Longest.exe /S [�ŒZ�̉���] �Ώۃp�X
+	Longest.exe /S [最短の下限] 対象パス
 
-	���ŒZ�ƍŒ���T���B
+	★最短と最長を探す。
 
 ----
 
-�e�L�X�g�t�@�C�����s���Ɉ��̏����ŏo�͂������B
+テキストファイルを行毎に一定の書式で出力したい。
 
 	ListFmt.c
 
-�A�Ԃ����̏����ŏo�͂������B
+連番を一定の書式で出力したい。
 
 	seq.c
 
 ----
 
-lss�t�@�C�����X�g��ҏW
+lssファイルリストを編集
 
 	ef
 
 ----
 
-���ȉ��̕�����̒���
+ｎ以下の文字列の長さ
 
 	strlen_max
 
-����������ȏろ�����̒�����
+文字列をｎ以上ｍ未満の長さに
 
 	setStrLenMin
 	setStrLenMax
@@ -75,21 +75,21 @@ StringTools.Enclosed
 
 ----
 
-.wav �t�@�C���̉��ʒ���
+.wav ファイルの音量調整
 
 	wavVolume
 
 ----
 
-�����̃��r�W�������폜������@
+複数のリビジョンを削除する方法
 
-	-- .rum_�f�B���N�g���Q�̐e�f�B���N�g���Ɉړ�����
+	-- .rum_ディレクトリ群の親ディレクトリに移動して
 
-	rumCommitHistory.exe /E �폜�\��
+	rumCommitHistory.exe /E 削除予定
 	rumTrim
 
 ----
 
-Backup.log �̓��e�m�F
+Backup.log の内容確認
 
 	TYPE C:\tmp\Backup.log | Grape "ECHO ERRORLEVEL=" | mask 1 24 | TypeGroupBy

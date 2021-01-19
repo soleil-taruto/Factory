@@ -55,18 +55,18 @@ static autoList_t *GetTargetDirs(void)
 			!_stricmp(dir, "C:\\Config.Msi") || // for 7
 			!_stricmp(dir, "C:\\Recovery") || // for 7
 			!_stricmp(dir, "C:\\Users") || // for 7
-			!_stricmp(dir, "C:\\$SysReset") || // for 10 ƒSƒ~
-			!_stricmp(dir, "C:\\Windows.old") || // for 10 ƒSƒ~
+			!_stricmp(dir, "C:\\$SysReset") || // for 10 ã‚´ãƒŸ
+			!_stricmp(dir, "C:\\Windows.old") || // for 10 ã‚´ãƒŸ
 			!_stricmp(dir, "C:\\MSOCache") || // for 7, 10 Office 2010
 
-			dir[3] == '_' || m_isdecimal(dir[3]) || // _ 0`9 ‚Ån‚Ü‚éƒtƒHƒ‹ƒ_‚Í‘ÎÛŠO
+			dir[3] == '_' || m_isdecimal(dir[3]) || // _ 0ï½9 ã§å§‹ã¾ã‚‹ãƒ•ã‚©ãƒ«ãƒ€ã¯å¯¾è±¡å¤–
 
 //			!_stricmp(dir, "C:\\huge") || // del @ 2017.12.16
 
 			0
 			)
 		{
-			cout("šœŠOF%s\n", dir);
+			cout("â˜…é™¤å¤–ï¼š%s\n", dir);
 		}
 		else
 		{
@@ -84,14 +84,14 @@ static autoList_t *GetTargetDirs(void)
 	if(existDir("C:\\Users")) // ? 7
 	{
 		addElement(retDirs, (uint)xcout("C:\\Users\\%s\\Favorites", userName));
-//		addElement(retDirs, (uint)xcout("C:\\Users\\%s\\Documents", userName)); // Œ ŒÀ‚ª–³‚¢‚Æ‚©Œ¾‚í‚ê‚éB
+//		addElement(retDirs, (uint)xcout("C:\\Users\\%s\\Documents", userName)); // æ¨©é™ãŒç„¡ã„ã¨ã‹è¨€ã‚ã‚Œã‚‹ã€‚
 		addElement(retDirs, (uint)xcout("C:\\Users\\%s\\Desktop", userName));
 	}
 	else // ? XP
 	{
 		addElement(retDirs, (uint)xcout("C:\\Documents and Settings\\%s\\Favorites", userName));
 		addElement(retDirs, (uint)xcout("C:\\Documents and Settings\\%s\\My Documents", userName));
-		addElement(retDirs, (uint)xcout("C:\\Documents and Settings\\%s\\ƒfƒXƒNƒgƒbƒv", userName));
+		addElement(retDirs, (uint)xcout("C:\\Documents and Settings\\%s\\ãƒ‡ã‚¹ã‚¯ãƒˆãƒƒãƒ—", userName));
 	}
 	return retDirs;
 }
@@ -112,7 +112,7 @@ static void CheckTargetDirs(autoList_t *dirs)
 	foreach(localDirs, dir, index)
 	{
 		autoList_t followDirs = gndFollowElements(localDirs, index + 1);
-		errorCase(findJLineICase(&followDirs, dir) < getCount(&followDirs)); // ? d•¡‚µ‚½B
+		errorCase(findJLineICase(&followDirs, dir) < getCount(&followDirs)); // ? é‡è¤‡ã—ãŸã€‚
 	}
 	releaseAutoList(localDirs);
 }
@@ -141,11 +141,11 @@ static void BackupDirs(autoList_t *targetDirs)
 
 		fileClose(fp);
 
-		cout("ƒRƒs[‚µ‚Ä‚¢‚Ü‚·...\n");
+		cout("ã‚³ãƒ”ãƒ¼ã—ã¦ã„ã¾ã™...\n");
 
 		execute(line = xcout("START /B /WAIT CMD /C %s", BATCH_BACKUP)); memFree(line);
 
-		cout("ƒRƒs[‚µ‚Ü‚µ‚½B\n");
+		cout("ã‚³ãƒ”ãƒ¼ã—ã¾ã—ãŸã€‚\n");
 		cout("\n");
 	}
 	cmdTitle("Backup - done");
@@ -297,7 +297,7 @@ int main(int argc, char **argv)
 	char *cmdln;
 	int doShutdownFlag;
 
-	// ŠO•”ƒRƒ}ƒ“ƒh‘¶İŠm”F
+	// å¤–éƒ¨ã‚³ãƒãƒ³ãƒ‰å­˜åœ¨ç¢ºèª
 	{
 		errorCase(!existFile(FILE_TOOLKIT_EXE));
 	}
@@ -307,16 +307,16 @@ int main(int argc, char **argv)
 	if(!NoShutdownFlag)
 	{
 		cout("********************************\n");
-		cout("** I—¹ŒãƒVƒƒƒbƒgƒ_ƒEƒ“‚µ‚Ü‚· **\n");
+		cout("** çµ‚äº†å¾Œã‚·ãƒ£ãƒƒãƒˆãƒ€ã‚¦ãƒ³ã—ã¾ã™ **\n");
 		cout("********************************\n");
 	}
 	cout("+---------------------------------------------+\n");
-	cout("| ƒ[ƒ‰[‚È‚ÇA“®ì’†‚ÌƒAƒvƒŠ‚ğ•Â‚¶‚Ä‰º‚³‚¢B|\n");
+	cout("| ãƒ¡ãƒ¼ãƒ©ãƒ¼ãªã©ã€å‹•ä½œä¸­ã®ã‚¢ãƒ—ãƒªã‚’é–‰ã˜ã¦ä¸‹ã•ã„ã€‚|\n");
 	cout("+---------------------------------------------+\n");
 	cout("+---------------------------------------+\n");
-	cout("| ƒEƒBƒ‹ƒX‘Îôƒ\ƒtƒg‚ğ–³Œø‚É‚µ‚Ä‰º‚³‚¢B|\n");
+	cout("| ã‚¦ã‚£ãƒ«ã‚¹å¯¾ç­–ã‚½ãƒ•ãƒˆã‚’ç„¡åŠ¹ã«ã—ã¦ä¸‹ã•ã„ã€‚|\n");
 	cout("+---------------------------------------+\n");
-	cout("ƒoƒbƒNƒAƒbƒvæƒhƒ‰ƒCƒu‚ğƒhƒƒbƒv‚µ‚Ä‰º‚³‚¢B\n");
+	cout("ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—å…ˆãƒ‰ãƒ©ã‚¤ãƒ–ã‚’ãƒ‰ãƒ­ãƒƒãƒ—ã—ã¦ä¸‹ã•ã„ã€‚\n");
 
 	strDestDrv = dropPath();
 
@@ -341,7 +341,7 @@ int main(int argc, char **argv)
 	destBackDir = xcout("%s_", destDir);
 	memFree(pcname);
 
-	cout("o—Íæ: %s (%s)\n", destDir, destBackDir);
+	cout("å‡ºåŠ›å…ˆ: %s (%s)\n", destDir, destBackDir);
 	cout("\n");
 
 	targetDirs = GetTargetDirs();
@@ -349,26 +349,26 @@ int main(int argc, char **argv)
 
 	if(existDir(destBackDir))
 	{
-		cout("‘OX‰ñ‚ÌƒoƒbƒNƒAƒbƒv‚ğíœ‚µ‚Ä‚¢‚Ü‚·...\n");
+		cout("å‰ã€…å›ã®ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚’å‰Šé™¤ã—ã¦ã„ã¾ã™...\n");
 
 		cmdln = xcout("RD /S /Q %s", destBackDir);
 		execute(cmdln);
 		memFree(cmdln);
 
-		cout("íœ‚µ‚Ü‚µ‚½B\n");
+		cout("å‰Šé™¤ã—ã¾ã—ãŸã€‚\n");
 		cout("\n");
 	}
 	errorCase(existPath(destBackDir));
 
 	if(existDir(destDir))
 	{
-		cout("‘O‰ñ‚ÌƒoƒbƒNƒAƒbƒv‚ğƒoƒbƒNƒAƒbƒv‚µ‚Ä‚¢‚Ü‚·...\n");
+		cout("å‰å›ã®ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚’ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã—ã¦ã„ã¾ã™...\n");
 
 		cmdln = xcout("REN %s %s", destDir, getLocal(destBackDir));
 		execute(cmdln);
 		memFree(cmdln);
 
-		cout("ƒoƒbƒNƒAƒbƒv‚µ‚Ü‚µ‚½B\n");
+		cout("ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã—ã¾ã—ãŸã€‚\n");
 		cout("\n");
 	}
 	errorCase(existPath(destDir));
@@ -381,9 +381,9 @@ int main(int argc, char **argv)
 	unaddCwd();
 //	BackupHugeDir(destDir); // del @ 2017.12.16
 
-	// _ 0`9 ‚Ån‚Ü‚é–¼‘O‚ÍƒoƒbƒNƒAƒbƒv‘ÎÛŠO‚È‚Ì‚ÅAdestDir ‚Ì’¼‰º‚Í _ 0`9 ‚Ån‚ß‚Ä‚¨‚¯‚Îd•¡‚µ‚È‚¢‚Í‚¸B
+	// _ 0ï½9 ã§å§‹ã¾ã‚‹åå‰ã¯ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—å¯¾è±¡å¤–ãªã®ã§ã€destDir ã®ç›´ä¸‹ã¯ _ 0ï½9 ã§å§‹ã‚ã¦ãŠã‘ã°é‡è¤‡ã—ãªã„ã¯ãšã€‚
 
-#if 1 // Toolkit ‚ª USB HDD ‚Ö‚Ì‘‚«‚İƒGƒ‰[‚ğ‹N‚±‚µ‚½‚Ì‚ÅA‘‚«‚İæ‚ğƒVƒXƒeƒ€ƒhƒ‰ƒCƒu‚É‚µ‚Ä—lq‚ğŒ©‚éB@ 2018.3.5
+#if 1 // Toolkit ãŒ USB HDD ã¸ã®æ›¸ãè¾¼ã¿ã‚¨ãƒ©ãƒ¼ã‚’èµ·ã“ã—ãŸã®ã§ã€æ›¸ãè¾¼ã¿å…ˆã‚’ã‚·ã‚¹ãƒ†ãƒ ãƒ‰ãƒ©ã‚¤ãƒ–ã«ã—ã¦æ§˜å­ã‚’è¦‹ã‚‹ã€‚@ 2018.3.5
 	{
 		char *midDir = makeTempDir("Backup_Hash_txt_mid");
 
@@ -391,7 +391,7 @@ int main(int argc, char **argv)
 
 		coExecute_x(xcout("COPY /Y %s\\_Hash.txt %s\\_Hash.txt", midDir, destDir));
 		coExecute_x(xcout("COPY /Y %s\\_Hash.txt C:\\tmp\\Backup_Hash.txt", midDir));
-		coExecute_x(xcout("COPY /Y %s\\_Hash.txt C:\\tmp\\Backup_Hash_old.txt", destBackDir)); // –³‚¢‚©‚à‚µ‚ê‚È‚¢B
+		coExecute_x(xcout("COPY /Y %s\\_Hash.txt C:\\tmp\\Backup_Hash_old.txt", destBackDir)); // ç„¡ã„ã‹ã‚‚ã—ã‚Œãªã„ã€‚
 
 		recurRemoveDir_x(midDir);
 	}
@@ -400,11 +400,11 @@ int main(int argc, char **argv)
 		coExecute_x(xcout(FILE_TOOLKIT_EXE " /SHA-512-128 %s %s\\_Hash.txt", destDir, destDir));
 
 		coExecute_x(xcout("COPY /Y %s\\_Hash.txt C:\\tmp\\Backup_Hash.txt", destDir));
-		coExecute_x(xcout("COPY /Y %s\\_Hash.txt C:\\tmp\\Backup_Hash_old.txt", destBackDir)); // –³‚¢‚©‚à‚µ‚ê‚È‚¢B
+		coExecute_x(xcout("COPY /Y %s\\_Hash.txt C:\\tmp\\Backup_Hash_old.txt", destBackDir)); // ç„¡ã„ã‹ã‚‚ã—ã‚Œãªã„ã€‚
 	}
 #endif
 
-	// Backup.bat ‚Æ‚Ì˜AŒg
+	// Backup.bat ã¨ã®é€£æº
 	{
 		if(existDir("C:\\888"))
 		{

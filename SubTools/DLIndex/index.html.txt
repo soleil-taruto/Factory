@@ -45,11 +45,11 @@ a:hover {
 }
 
 </style>
-<title>ƒ_ƒEƒ“ƒ[ƒh</title>
+<title>ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰</title>
 </head>
 <body>
 
-ƒ_ƒEƒ“ƒ[ƒh
+ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰
 
 <table>
 

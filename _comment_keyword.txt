@@ -1,162 +1,162 @@
 ----
-�ŗL�̈Ӗ������R�����g
+固有の意味を持つコメント
 
 // ts_
 
-	�X���b�h�Z�[�t�ł���B
+	スレッドセーフである。
 
 // mbs_
 
-	�}���`�o�C�g�������l�����Ă���B
+	マルチバイト文字を考慮している。
 
 // pub_member
 
-	�\���̃����o�͉�������ł����R�ɃA�N�Z�X���ėǂ��B
+	構造体メンバは何処からでも自由にアクセスして良い。
 
 // static member
 
-	�\���̃����o�́u�\���̂���`����Ă���w�b�_�A�w�b�_�Ɠ����̃\�[�X�v�ȊO����A�N�Z�X���Ă͂Ȃ�Ȃ��B
+	構造体メンバは「構造体が定義されているヘッダ、ヘッダと同名のソース」以外からアクセスしてはならない。
 
 // ? xxx
 
-	���� xxx ���^�Ȃ��...
-	�܂���
-	���� xxx ���^�ł��邱�Ƃ������^�U�l
+	条件 xxx が真ならば...
+	または
+	条件 xxx が真であることを示す真偽値
 
 // ? ! xxx
 
-	���� xxx ���U�Ȃ��...
-	�܂���
-	���� xxx ���U�ł��邱�Ƃ������^�U�l
+	条件 xxx が偽ならば...
+	または
+	条件 xxx が偽であることを示す真偽値
 
 // ppp: xxx
 
-	���� ppp �� xxx �ł���B
+	引数 ppp は xxx である。
 
 // ret: xxx
 
-	�߂�l�� xxx �ł���B
+	戻り値は xxx である。
 
 // xxx: yyy == zzz
 
-	xxx �� yyy �̂Ƃ��� zzz �ł���B
+	xxx が yyy のときは zzz である。
 
-	��
-		ret: NULL == ���s     ---->     �߂�l�� NULL �̂Ƃ��͎��s�ł���B
+	例
+		ret: NULL == 失敗     ---->     戻り値が NULL のときは失敗である。
 
 // "XYZ"
 
-	'X', 'Y', 'Z' �̒l�����B
+	'X', 'Y', 'Z' の値を取る。
 
 // "XYZ" == xxx, yyy, zzz
 
-	'X', 'Y', 'Z' �̒l�����A
-	'X' �̈Ӗ��� xxx, 'Y' �̈Ӗ��� yyy, 'Z' �̈Ӗ��� zzz �ł���B
+	'X', 'Y', 'Z' の値を取り、
+	'X' の意味は xxx, 'Y' の意味は yyy, 'Z' の意味は zzz である。
 
 // g
 
-	�S�~����������B
-	�����Ŋm�ۂ����������u���b�N�͊J�����Ȃ��B
-	�܂���
-	�����ɓ��B����܂łɊm�ۂ��ꂽ�������u���b�N�̂����J�������ɃX�R�[�v���O�����̂�����B
+	ゴミが発生する。
+	ここで確保したメモリブロックは開放しない。
+	または
+	ここに到達するまでに確保されたメモリブロックのうち開放せずにスコープを外れるものがある。
 
 // 2bs
 
 	to be safe
-	���S����킩��₷���̂��߂Ɏ������Ă��邾���ŁA��������K�v�͖����͂��B
-	�ߏ�ȃ`�F�b�N����
-	�A�T�[�V�����݂����Ȃ���
+	安全性やわかりやすさのために実装しているだけで、実装する必要は無いはず。
+	過剰なチェック処理
+	アサーションみたいなもの
 
 // 2bs?
 
-	���� "// 2bs" ���������ǁA���͎�������K�v������B
+	元は "// 2bs" だったけど、今は実装する必要がある。
 
 // HACK
 // HACK: xxx
 
-	�A�m�e�[�V�����R�����g�̕t�����ɖ�肪�������̂ŁA��U TODO �ȊO�� HACK �ɓ��ꂵ���B@ 2020.8.3
+	アノテーションコメントの付け方に問題があったので、一旦 TODO 以外を HACK に統一した。@ 2020.8.3
 
 // ret: strx()
 
-	���̊֐����œ��I�Ɋm�ۂ����������u���b�N��̕������Ԃ��B
+	この関数内で動的に確保したメモリブロック上の文字列を返す。
 
 // ret: strr(xxx)
 
-	���̊֐����� xxx ���Ĕz�u�����������u���b�N��̕������Ԃ��B
+	この関数内で xxx を再配置したメモリブロック上の文字列を返す。
 
 // external
 
-	���̊֐��錾�̎��͕̂ʂ̃��W���[���ɒ�`����Ă���B
+	この関数宣言の実体は別のモジュールに定義されている。
 
 // use int
 
-	���̃t�@�C���ł� uint, sint ��������Ȃ��B
+	このファイルでは uint, sint 縛りをしない。
 
 
 ----
-�@�\�����R�����g
+機能を持つコメント
 
 // app > @ xxx
 // < app
 
-	�A�v���ŗL�R�[�h
-	xxx �͔C�ӂ̎��ʖ�, xxx �� <> �ł��邱�ƁB(���ł��ǂ�)
-	���� xxx ���m�̃C���f���g���͓����łȂ���΂Ȃ�Ȃ��B
+	アプリ固有コード
+	xxx は任意の識別名, xxx は <> であること。(何でも良い)
+	同じ xxx 同士のインデント幅は同じでなければならない。
 	https://github.com/stackprobe/Factory/blob/master/SubTools/CopyLib.c
 
 // discmt >
 // < discmt
 
-	�����R�����g�}�~
+	自動コメント抑止
 	https://github.com/stackprobe/Factory/blob/master/SubTools/CopyLib.c
 
 // ^ sync @ xxx
 
-	�����R�[�h
-	xxx �͔C�ӂ̎��ʖ�, xxx �� <1,,__09AZaz> �ł��邱�ƁB
-	���� xxx ���m�̃C���f���g���͈���Ă��Ă��ǂ����A�������ɃC���f���g���͒�������Ȃ��B
+	同期コード
+	xxx は任意の識別名, xxx は <1,,__09AZaz> であること。
+	同じ xxx 同士のインデント幅は違っていても良いが、同期時にインデント幅は調整されない。
 	https://github.com/stackprobe/Factory/blob/master/DevTools/SyncDevUsing.c
 
 // sync > @ xxx
 // < sync
 
-	�����R�[�h
-	xxx �͔C�ӂ̎��ʖ�, xxx �� <1,,__09AZaz> �ł��邱�ƁB
-	���� xxx ���m�̃C���f���g���͈���Ă��Ă��ǂ��B�������ɃC���f���g���͒��������B
+	同期コード
+	xxx は任意の識別名, xxx は <1,,__09AZaz> であること。
+	同じ xxx 同士のインデント幅は違っていても良い。同期時にインデント幅は調整される。
 	https://github.com/stackprobe/Factory/blob/master/DevTools/SyncDevRange.c
 
 
-�� _memo_Cx.txt �ɂ��L�ڂ���B
+★ _memo_Cx.txt にも記載あり。
 
 
 ----
-�ŗL�̈Ӗ��������ʎq���̐ړ����E�ڔ����E�p�^�[��
+固有の意味を持つ識別子内の接頭辞・接尾辞・パターン
 
 x_
 
-	�߂�l�͌Ăяo�����ŊJ�����Ȃ���΂Ȃ�Ȃ��B
+	戻り値は呼び出し側で開放しなければならない。
 
 c_
 
-	�߂�l�͌Ăяo�����ŊJ�����Ă͂Ȃ�Ȃ��B
+	戻り値は呼び出し側で開放してはならない。
 
 _x
 
-	�����͊֐����ŊJ�������B
+	引数は関数内で開放される。
 
 _c
 
-	�����͊֐����ŊJ������Ȃ��B
+	引数は関数内で開放されない。
 
 	-- -- --
 
-	���⑫
-		_xx, _ccc, _xcx, _ccxc �̂悤�ɑg�ݍ��킹�邱�Ƃ�����B
-		xc �̕��т͈����̕��тɈ�v����B
-		xc �̕��т̌��������̌���菭�Ȃ����Ƃ�����B(�J���̗L���̋c�_�����������͔�΂�����)
+	★補足
+		_xx, _ccc, _xcx, _ccxc のように組み合わせることがある。
+		xc の並びは引数の並びに一致する。
+		xc の並びの個数が引数の個数より少ないことがある。(開放の有無の議論が無い引数は飛ばすため)
 
-		c_ �̓��W���[��(.obj)�ł͎g�p�֎~, ���s�`��(.exe)�ł̂ݎg�p����B
-		(c_�̖߂�l���g���Ă���ԁA����c_�͌ĂׂȂ��B���W���[���ŌĂ΂��Ɖ��������ŌĂ΂�邩�c���o���Ȃ��Ȃ邽��)
+		c_ はモジュール(.obj)では使用禁止, 実行形式(.exe)でのみ使用する。
+		(c_の戻り値を使っている間、同じc_は呼べない。モジュールで呼ばれると何時何処で呼ばれるか把握出来なくなるため)
 
 	-- -- --
 
@@ -165,48 +165,48 @@ _c
 
 ne_
 
-	�߂�l�� NULL �ɂȂ�ꍇ�� error(); �ɂ���B
+	戻り値が NULL になる場合は error(); にする。
 
 nn_
 
-	�߂�l�� NULL �ɂȂ�ꍇ�͑�֒l��Ԃ��B
+	戻り値が NULL になる場合は代替値を返す。
 
-/* �p�~
+/* 廃止
 ts_
 
-	�X���b�h�Z�[�t�ł���B
+	スレッドセーフである。
 */
 
 mbs_
 
-	�}���`�o�C�g�������l�����Ă���B
+	マルチバイト文字を考慮している。
 
 m_
 
-	�}�N���ł���B
+	マクロである。
 
 
 - - -
 
-get �� ref
+get と ref
 
-	get ... �l��v�f���擾����B�ړI�̒l��v�f�͑��݂��Ȃ���΂Ȃ�Ȃ��B
-	ref ... �l��v�f���擾����B�ړI�̒l��v�f�����݂��Ȃ���Α�֒l��Ԃ��B
+	get ... 値や要素を取得する。目的の値や要素は存在しなければならない。
+	ref ... 値や要素を取得する。目的の値や要素が存在しなければ代替値を返す。
 
-set �� put
+set と put
 
-	set ... �l��v�f��ݒ肷��B�ݒ��̗̈�͊m�ۂ���Ă��Ȃ���΂Ȃ�Ȃ��B
-	put ... �l��v�f��ݒ肷��B�ݒ��̗̈悪�m�ۂ���Ă��Ȃ���Η̈�̊m�ۂ��s���B
+	set ... 値や要素を設定する。設定先の領域は確保されていなければならない。
+	put ... 値や要素を設定する。設定先の領域が確保されていなければ領域の確保も行う。
 
-add �� unadd
+add と unadd
 
-	add   ... ���X�g�̍Ō�ɒǉ�
-	unadd ... ���X�g�̍Ōォ����o���B(add�̋t)
+	add   ... リストの最後に追加
+	unadd ... リストの最後から取り出す。(addの逆)
 
-insert �� desert
+insert と desert
 
-	insert ... ���X�g�̎w��ʒu�ɑ}��
-	desert ... ���X�g�̎w��ʒu������o���B(insert�̋t)
+	insert ... リストの指定位置に挿入
+	desert ... リストの指定位置から取り出す。(insertの逆)
 
 
 - - -
@@ -215,7 +215,7 @@ insert �� desert
 
 	To
 
-	��
+	例
 		c2upper        ---->     c To upper
 		line2JLine     ---->     line To JLine
 

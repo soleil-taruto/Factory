@@ -1,1 +1,1 @@
-ŠO•”‚ÌƒvƒƒOƒ‰ƒ€‚Æ‚Ì˜AŒg‚ðs‚¤BŽå‚É C:\app\*, C:\app\Kit\* ‚Æ˜AŒg‚·‚éB
+å¤–éƒ¨ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã¨ã®é€£æºã‚’è¡Œã†ã€‚ä¸»ã« C:\app\*, C:\app\Kit\* ã¨é€£æºã™ã‚‹ã€‚

@@ -1,4 +1,4 @@
-/// Java ƒVƒ“ƒOƒ‹ƒgƒ“
+/// Java ç¹§ï½·ç¹ï½³ç¹§ï½°ç¹ï½«ç¹åŒ»Î¦
 
 public class $P {
 	private static $P _i = null;

@@ -1,4 +1,4 @@
-/// DataCenter•t‚«Main DxLib_app—p
+/// DataCenterèŽ‰å€¥â€³Main DxLib_appé€•ï½¨
 
 typedef struct $UDc_st
 {
