@@ -1,4 +1,4 @@
-#include "C:\Factory\Common\all.h"
+﻿#include "C:\Factory\Common\all.h"
 #include "C:\Factory\Meteor\Toolkit.h"
 
 static int NoShutdownFlag;

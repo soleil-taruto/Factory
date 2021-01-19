@@ -1,4 +1,4 @@
-/// Java 繧ｷ繝ｳ繧ｰ繝ｫ繝医Φ
+﻿/// Java シングルトン
 
 public class $P {
 	private static $P _i = null;
