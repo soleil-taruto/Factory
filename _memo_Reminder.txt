@@ -93,3 +93,9 @@ StringTools.Enclosed
 Backup.log の内容確認
 
 	TYPE C:\tmp\Backup.log | Grape "ECHO ERRORLEVEL=" | mask 1 24 | TypeGroupBy
+
+----
+
+フォルダ配下のファイル重複を解消する。
+
+	EtcSlim

@@ -1,5 +1,5 @@
 /*
-	mkcr.exe [/F KB-OUT-FILE] [ROW [COLUMN]?]?
+	mkcr.exe [/F KB-OUT-FILE] [ROW [COLUMN]]
 */
 
 #include "C:\Factory\Common\all.h"
@@ -58,7 +58,7 @@ int main(int argc, char **argv)
 
 	if(hasArgs(2))
 	{
-		MakeCryptoRand(toValue(getArg(0)), toValue(getArg(1)));
+		MakeCryptoRand(toValue(getArg(0)), toValue(getArg(1))); // n x m x 8 bits
 		return;
 	}
 	if(hasArgs(1))
