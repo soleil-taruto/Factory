@@ -1,7 +1,7 @@
-/*
-	newcpp g  ƒvƒƒWƒFƒNƒg–¼
-	newcpp g2 ƒvƒƒWƒFƒNƒg–¼
-	newcpp g3 ƒvƒƒWƒFƒNƒg–¼
+ï»¿/*
+	newcpp g  ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå
+	newcpp g2 ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå
+	newcpp g3 ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå
 */
 
 #include "C:\Factory\Common\all.h"
@@ -51,7 +51,7 @@ static void ChangeAppIdent(char *srcFile)
 	errorCase(!p);
 	q = strstr(p, "\";");
 	errorCase(!q);
-	errorCase((uint)q - (uint)p != 38); // {} •t‚« UUID ‚Ì’·‚³
+	errorCase((uint)q - (uint)p != 38); // {} ä»˜ã UUID ã®é•·ã•
 
 	uuid = MakeUUID(1);
 
@@ -68,8 +68,8 @@ static void Main2(char *tmplProject, char *tmplDir)
 
 	errorCase(!existDir(tmplDir));
 
-	errorCase_m(!lineExp("<1,30,__09AZaz>", project), "•s³‚ÈƒvƒƒWƒFƒNƒg–¼‚Å‚·B");
-	errorCase_m(existPath(project), "Šù‚É‘¶İ‚µ‚Ü‚·B");
+	errorCase_m(!lineExp("<1,30,__09AZaz>", project), "ä¸æ­£ãªãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆåã§ã™ã€‚");
+	errorCase_m(existPath(project), "æ—¢ã«å­˜åœ¨ã—ã¾ã™ã€‚");
 
 	createDir(project);
 	copyDir(tmplDir, project);
@@ -91,7 +91,7 @@ static void Main2(char *tmplProject, char *tmplDir)
 		}
 		unaddCwd();
 
-		removeFileIfExist("C:\\Factory\\tmp\\Sections.txt"); // ˆÓ}‚µ‚È‚¢ŒŸõŒ‹‰Ê‚ğ trep ‚µ‚È‚¢‚æ‚¤‚ÉA”O‚Ì‚½‚ßŒŸõŒ‹‰Ê‚ğƒNƒŠƒA
+		removeFileIfExist("C:\\Factory\\tmp\\Sections.txt"); // æ„å›³ã—ãªã„æ¤œç´¢çµæœã‚’ trep ã—ãªã„ã‚ˆã†ã«ã€å¿µã®ãŸã‚æ¤œç´¢çµæœã‚’ã‚¯ãƒªã‚¢
 
 		coExecute_x(xcout("Search.exe %s", tmplProject));
 		coExecute_x(xcout("trep.exe /F %s", project));
@@ -119,7 +119,7 @@ int main(int argc, char **argv)
 		Main2("GGGGTMPL", "C:\\Dev\\Annex\\Template\\GameTemplate3");
 		return;
 	}
-	cout("usage: newcpp (GbG2bG3b?) ƒvƒƒWƒFƒNƒg–¼\n");
-	cout("                      ª\n");
-	cout("                     ’è”Ô\n");
+	cout("usage: newcpp (Gï½œG2ï½œG3ï½œ?) ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå\n");
+	cout("                      â†‘\n");
+	cout("                     å®šç•ª\n");
 }
