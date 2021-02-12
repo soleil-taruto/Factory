@@ -1,20 +1,20 @@
-/*
-	newcs c ƒvƒƒWƒFƒNƒg–¼
-	newcs f ƒvƒƒWƒFƒNƒg–¼
-	newcs t ƒvƒƒWƒFƒNƒg–¼
-	newcs d ƒvƒƒWƒFƒNƒg–¼ [–¼‘O‹óŠÔ]
+ï»¿/*
+	newcs c ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå
+	newcs f ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå
+	newcs t ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå
+	newcs d ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå [åå‰ç©ºé–“]
 
-	newcs c2 ƒvƒƒWƒFƒNƒg–¼
-	newcs f2 ƒvƒƒWƒFƒNƒg–¼
-	newcs t2 ƒvƒƒWƒFƒNƒg–¼
-	newcs d2 ƒvƒƒWƒFƒNƒg–¼ [–¼‘O‹óŠÔ]
+	newcs c2 ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå
+	newcs f2 ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå
+	newcs t2 ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå
+	newcs d2 ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå [åå‰ç©ºé–“]
 
-	newcs c3 ƒvƒƒWƒFƒNƒg–¼
-	newcs f3 ƒvƒƒWƒFƒNƒg–¼
-	newcs t3 ƒvƒƒWƒFƒNƒg–¼
-	newcs d3 ƒvƒƒWƒFƒNƒg–¼ [–¼‘O‹óŠÔ]
+	newcs c3 ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå
+	newcs f3 ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå
+	newcs t3 ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå
+	newcs d3 ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå [åå‰ç©ºé–“]
 
-	newcs tt ƒvƒƒWƒFƒNƒg–¼
+	newcs tt ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå
 
 	newcs
 	newcs /r
@@ -110,7 +110,7 @@ static void ChangeAppIdent(char *srcFile)
 	errorCase(!p);
 	q = strstr(p, "\";");
 	errorCase(!q);
-	errorCase((uint)q - (uint)p != 38); // {} •t‚« UUID ‚Ì’·‚³
+	errorCase((uint)q - (uint)p != 38); // {} ä»˜ã UUID ã®é•·ã•
 
 	uuid = MakeUUID(1);
 
@@ -170,15 +170,15 @@ static void Main2(char *tmplProject, char *tmplDir, int utFlag, int m2Flag, char
 
 	errorCase(!existDir(tmplDir));
 
-	errorCase_m(!lineExp("<1,30,__09AZaz>", project), "•s³‚ÈƒvƒƒWƒFƒNƒg–¼‚Å‚·B");
-	errorCase_m(existPath(project), "Šù‚É‘¶İ‚µ‚Ü‚·B");
+	errorCase_m(!lineExp("<1,30,__09AZaz>", project), "ä¸æ­£ãªãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆåã§ã™ã€‚");
+	errorCase_m(existPath(project), "æ—¢ã«å­˜åœ¨ã—ã¾ã™ã€‚");
 
 	createDir(project);
 	copyDir(tmplDir, project);
 
 	addCwd(project);
 	{
-		coExecute("qq -f"); // ƒeƒ“ƒvƒŒ[ƒg‘¤‚ª qq ‚µ‚Ä‚¢‚È‚­‚Ä‚àA‚±‚±‚Å qq ‚µ‚Ä‚¢‚é‚Ì‚ÅˆÀSB
+		coExecute("qq -f"); // ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆå´ãŒ qq ã—ã¦ã„ãªãã¦ã‚‚ã€ã“ã“ã§ qq ã—ã¦ã„ã‚‹ã®ã§å®‰å¿ƒã€‚
 
 		RenamePaths(tmplProject, project);
 
@@ -202,7 +202,7 @@ static void Main2(char *tmplProject, char *tmplDir, int utFlag, int m2Flag, char
 		}
 		unaddCwd();
 
-		removeFileIfExist("C:\\Factory\\tmp\\Sections.txt"); // ˆÓ}‚µ‚È‚¢ŒŸõŒ‹‰Ê‚ğ trep ‚µ‚È‚¢‚æ‚¤‚ÉA”O‚Ì‚½‚ßŒŸõŒ‹‰Ê‚ğƒNƒŠƒA
+		removeFileIfExist("C:\\Factory\\tmp\\Sections.txt"); // æ„å›³ã—ãªã„æ¤œç´¢çµæœã‚’ trep ã—ãªã„ã‚ˆã†ã«ã€å¿µã®ãŸã‚æ¤œç´¢çµæœã‚’ã‚¯ãƒªã‚¢
 
 		coExecute_x(xcout("Search.exe %s", tmplProject));
 		coExecute_x(xcout("trep.exe /F %s", project));
@@ -228,7 +228,7 @@ static void Main2_TDEN(char *tmplProject, char *tmplRootDirEnvName, char *tmplLo
 	char *tmplRootDir = getAppDataEnv(tmplRootDirEnvName, NULL);
 	char *tmplDir;
 
-	errorCase_m(!tmplRootDir, "env ‚É [" TEMPLATE_3_DIR_ENV_NAME "] ‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB");
+	errorCase_m(!tmplRootDir, "env ã« [" TEMPLATE_3_DIR_ENV_NAME "] ãŒè¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚");
 	errorCase(!existDir(tmplRootDir));
 
 	tmplDir = combine(tmplRootDir, tmplLocalDir);
@@ -248,10 +248,10 @@ static uint64 GetChocolateSourceLeastStamp(void)
 	{
 		uint64 stamp;
 
-		if(mbs_stristr(file, "\\bin\\")) // bin ‚Ì”z‰º‚ÍœŠO
+		if(mbs_stristr(file, "\\bin\\")) // bin ã®é…ä¸‹ã¯é™¤å¤–
 			continue;
 
-		if(mbs_stristr(file, "\\obj\\")) // obj ‚Ì”z‰º‚ÍœŠO
+		if(mbs_stristr(file, "\\obj\\")) // obj ã®é…ä¸‹ã¯é™¤å¤–
 			continue;
 
 		getFileStamp(file, NULL, NULL, &stamp);
@@ -274,9 +274,9 @@ static int IsChocolateSourceUpdated(void)
 }
 int main(int argc, char **argv)
 {
-	// Chocolate.dll ‚ğƒrƒ‹ƒh‚·‚éB
+	// Chocolate.dll ã‚’ãƒ“ãƒ«ãƒ‰ã™ã‚‹ã€‚
 	{
-		if(argIs("/R")) // ƒŠƒrƒ‹ƒh
+		if(argIs("/R")) // ãƒªãƒ“ãƒ«ãƒ‰
 		{
 			addCwd("C:\\Dev\\CSharp\\Chocolate");
 			{
@@ -295,7 +295,7 @@ int main(int argc, char **argv)
 		}
 	}
 
-	// DLL ‚ğƒrƒ‹ƒh‚·‚éB(—vƒIƒvƒVƒ‡ƒ“w’è)
+	// DLL ã‚’ãƒ“ãƒ«ãƒ‰ã™ã‚‹ã€‚(è¦ã‚ªãƒ—ã‚·ãƒ§ãƒ³æŒ‡å®š)
 	{
 		if(argIs("/DR"))
 		{
@@ -385,9 +385,9 @@ int main(int argc, char **argv)
 		Main2("UUUUTMPL", FindUserTemplate(), 1, 0, NULL); // g
 		return;
 	}
-	cout("usage: newcs (CbFbTbDbC2bF2bT2bD2b\n");
-	cout("                          C3bF3bT3bD3bTT) ƒvƒƒWƒFƒNƒg–¼ [–¼‘O‹óŠÔ]\n");
-	cout("–¼‘O‹óŠÔ‚Í D D2 D3 ‚Ì‚Ì‚İ\n");
-	cout("(“Á‚ÉDLL‚Ì)–¼‘O‹óŠÔ‚ÍƒNƒ‰ƒX–¼‚Æ”í‚ç‚È‚¢‚æ‚¤‚É•¡”Œ`‚É‚µ‚Ä‚¢‚é @ 2020.x.x\n");
-	cout("’è”ÔFC2 F2 T2 D2\n");
+	cout("usage: newcs (Cï½œFï½œTï½œDï½œC2ï½œF2ï½œT2ï½œD2ï½œ\n");
+	cout("                          C3ï½œF3ï½œT3ï½œD3ï½œTT) ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå [åå‰ç©ºé–“]\n");
+	cout("åå‰ç©ºé–“ã¯ D D2 D3 ã®æ™‚ã®ã¿\n");
+	cout("(ç‰¹ã«DLLã®)åå‰ç©ºé–“ã¯ã‚¯ãƒ©ã‚¹åã¨è¢«ã‚‰ãªã„ã‚ˆã†ã«è¤‡æ•°å½¢ã«ã—ã¦ã„ã‚‹ @ 2020.x.x\n");
+	cout("å®šç•ªï¼šC2 F2 T2 D2\n");
 }
