@@ -4,9 +4,9 @@
 
 #include "C:\Factory\Common\all.h"
 
-#define LOG_FILE "C:\\tmp\\PublicLog.txt"
-#define LOG_FILE_02 LOG_FILE "_02.txt"
-#define LOG_FILE_03 LOG_FILE "_03.txt"
+#define LOG_FILE    "C:\\tmp\\PublicLog.txt"
+#define LOG_FILE_02 "C:\\tmp\\PublicLog2.txt"
+#define LOG_FILE_03 "C:\\tmp\\PublicLog3.txt"
 
 #define LOG_FILE_SIZE_MAX 8000000
 
