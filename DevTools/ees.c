@@ -14,6 +14,7 @@
 */
 
 #include "C:\Factory\Common\all.h"
+#include "C:\Factory\OpenSource\md5.h"
 
 static int S_HasDifferentFile = 0;
 
@@ -106,26 +107,15 @@ static void EditSame_LSS(void)
 		baseFileIndex = 0;
 
 	baseFile = (char *)desertElement(files, baseFileIndex);
-	cout("baseFile: %s\n", baseFile);
+	cout("%s %s <編集対象>\n", c_md5_makeHexHashFile(baseFile), baseFile);
 
 	foreach(files, file, index)
 	{
-		if(isSameFile(file, baseFile))
-		{
-			cout("----SAME: %s\n", file);
-		}
-		else if(!index || isSameFile(file, getLine(files, 0)))
-		{
-			cout("NOT-SAME: %s\n", file);
-			hasDifferentFile = 1;
-		}
-		else
-		{
-			cout("-UNKNOWN: %s\n", file);
-			hasDifferentFile = 1;
-		}
-	}
+		cout("%s %s\n", c_md5_makeHexHashFile(file), file);
 
+		if(!isSameFile(file, baseFile))
+			hasDifferentFile = 1;
+	}
 	if(hasDifferentFile)
 	{
 		cout("内容の異なるファイルが含まれています。\n");
@@ -136,7 +126,6 @@ static void EditSame_LSS(void)
 
 		cout("続行します。\n");
 	}
-
 	S_HasDifferentFile = hasDifferentFile;
 
 	EditSame(baseFile, files);
