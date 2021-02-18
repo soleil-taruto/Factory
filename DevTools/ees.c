@@ -64,26 +64,64 @@ static void EditSame_LSS(void)
 	autoList_t *files = readLines(FOUNDLISTFILE);
 	char *file;
 	uint index;
+	char *file_2;
+	uint index_2;
+	uint baseFileIndex;
 	char *baseFile;
 	int hasDifferentFile = 0;
 
+	// ---- Check ----
+
 	errorCase(getCount(files) < 1);
 
+	foreach(files, file, index)
+		errorCase(!existFile(file));
+
+	foreach(files, file, index)
+	foreach(files, file_2, index_2)
+		errorCase(index < index_2 && !mbs_stricmp(file, file_2));
+
+	// ----
+
 	sortJLinesICase(files);
-	baseFile = (char *)desertElement(files, 0);
 
+	// ベースファイル選び：
+	// 1ファイルのみ違っていて(編集済み)で、それ以外同じ(未編集)である場合を想定して、
+	// 編集済みのファイルを採用する。
+	//
+	if(3 <= getCount(files))
+	{
+		for(index = 1; index < getCount(files); index++)
+			if(!isSameFile(getLine(files, 0), getLine(files, index)))
+				break;
+
+		if(index == 1)
+			baseFileIndex = isSameFile(getLine(files, 0), getLine(files, 2)) ? 1 : 0;
+		else if(index == getCount(files))
+			baseFileIndex = 0;
+		else
+			baseFileIndex = index;
+	}
+	else
+		baseFileIndex = 0;
+
+	baseFile = (char *)desertElement(files, baseFileIndex);
 	cout("baseFile: %s\n", baseFile);
-
-	errorCase(!existFile(baseFile));
 
 	foreach(files, file, index)
 	{
-		errorCase(!mbs_stricmp(file, baseFile));
-		errorCase(!existFile(file));
-
-		if(!isSameFile(file, baseFile))
+		if(isSameFile(file, baseFile))
 		{
-			cout("NOT_SAME: %s\n", file);
+			cout("----SAME: %s\n", file);
+		}
+		else if(!index || isSameFile(file, getLine(files, 0)))
+		{
+			cout("NOT-SAME: %s\n", file);
+			hasDifferentFile = 1;
+		}
+		else
+		{
+			cout("-UNKNOWN: %s\n", file);
 			hasDifferentFile = 1;
 		}
 	}
