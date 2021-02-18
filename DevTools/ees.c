@@ -15,6 +15,7 @@
 
 #include "C:\Factory\Common\all.h"
 
+static int S_HasDifferentFile = 0;
 
 static void EditSame(char *baseFile, autoList_t *files)
 {
@@ -34,9 +35,9 @@ static void EditSame(char *baseFile, autoList_t *files)
 	if(!existFile(baseFile)) // ? 秀丸によって削除された。-> 復元
 		copyFile(escBaseFile, baseFile);
 
-	if(!isSameFile(baseFile, escBaseFile))
+	if(!isSameFile(baseFile, escBaseFile) || S_HasDifferentFile)
 	{
-		cout("編集を適用します。\n");
+		cout("編集を適用します。%d\n", S_HasDifferentFile);
 		cout("続行？\n");
 
 		if(clearGetKey() == 0x1b)
@@ -97,6 +98,8 @@ static void EditSame_LSS(void)
 
 		cout("続行します。\n");
 	}
+
+	S_HasDifferentFile = hasDifferentFile;
 
 	EditSame(baseFile, files);
 

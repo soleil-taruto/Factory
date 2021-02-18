@@ -3959,10 +3959,11 @@ C:\Factory\DevTools\eeJava.c(4) : DecodeJP // ŠÖ”
 C:\Factory\DevTools\eeJava.c(72) : EncodeJP // ŠÖ”
 C:\Factory\DevTools\eeJava.c(128) : Main2 // ŠÖ”
 C:\Factory\DevTools\eeJava.c(156) : main // ŠÖ”
-C:\Factory\DevTools\ees.c(19) : EditSame // ŠÖ”
-C:\Factory\DevTools\ees.c(61) : EditSame_LSS // ŠÖ”
-C:\Factory\DevTools\ees.c(106) : EditSame_File // ŠÖ”
-C:\Factory\DevTools\ees.c(128) : main // ŠÖ”
+C:\Factory\DevTools\ees.c(18) : S_HasDifferentFile // •Ï”–”‚ÍéŒ¾
+C:\Factory\DevTools\ees.c(20) : EditSame // ŠÖ”
+C:\Factory\DevTools\ees.c(62) : EditSame_LSS // ŠÖ”
+C:\Factory\DevTools\ees.c(109) : EditSame_File // ŠÖ”
+C:\Factory\DevTools\ees.c(131) : main // ŠÖ”
 C:\Factory\DevTools\ef.c(3) : main // ŠÖ”
 C:\Factory\DevTools\env.c(3) : main // ŠÖ”
 C:\Factory\DevTools\fe.c(3) : main // ŠÖ”
