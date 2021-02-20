@@ -9450,11 +9450,7 @@ C:\Factory\Tools\dmd5.c(189) : MakeCredentials // ŠÖ”
 C:\Factory\Tools\dmd5.c(197) : main // ŠÖ”
 C:\Factory\Tools\Drop2Text.c(9) : FileOnlyMode // •Ï”–”‚ÍéŒ¾
 C:\Factory\Tools\Drop2Text.c(11) : main // ŠÖ”
-C:\Factory\Tools\dropCompact.c(8) : COMPACT_FILE_SIZE_MAX // ’è‹`
-C:\Factory\Tools\dropCompact.c(10) : IsUncompactExt_File // ŠÖ”
-C:\Factory\Tools\dropCompact.c(18) : CompactDirHasHugeFile // ŠÖ”
-C:\Factory\Tools\dropCompact.c(43) : HasHugeFile // ŠÖ”
-C:\Factory\Tools\dropCompact.c(64) : main // ŠÖ”
+C:\Factory\Tools\dropCompact.c(7) : main // ŠÖ”
 C:\Factory\Tools\ds.c(9) : DirSize // ŠÖ”
 C:\Factory\Tools\ds.c(70) : main // ŠÖ”
 C:\Factory\Tools\Encryptor.c(23) : EXT_CIPHER // ’è‹`
