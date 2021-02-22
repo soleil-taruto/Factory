@@ -7659,6 +7659,8 @@ C:\Factory\Petra\PublicLog.c(8) : LOG_FILE_02 // ’è‹`
 C:\Factory\Petra\PublicLog.c(9) : LOG_FILE_03 // ’è‹`
 C:\Factory\Petra\PublicLog.c(11) : LOG_FILE_SIZE_MAX // ’è‹`
 C:\Factory\Petra\PublicLog.c(13) : main // ŠÖ”
+C:\Factory\Petra\RemoveOldest.c(12) : RemoveOldest // ŠÖ”
+C:\Factory\Petra\RemoveOldest.c(38) : main // ŠÖ”
 C:\Factory\Petra\RunOnBatch.c(7) : RunOnBatch // ŠÖ”
 C:\Factory\Petra\RunOnBatch.c(20) : main // ŠÖ”
 C:\Factory\Petra\UpdatingCopy.c(7) : RemoveOldZip // ŠÖ”
