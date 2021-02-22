@@ -185,7 +185,15 @@ static void DispAllRange_GroupByName(void)
 	uint index;
 	uint idx;
 
-	errorCase_m(!getCount(Ranges), "// sync > Å` // sync < Ç™ÇPÇ¬Ç‡ñ≥Ç¢ÅB");
+	if(!getCount(Ranges))
+	{
+		cout("+--------------------------------------+\n");
+		cout("| // sync > Å` // sync < Ç™ÇPÇ¬Ç‡ñ≥Ç¢ÅB|\n");
+		cout("+--------------------------------------+\n");
+
+		termination(0);
+	}
+//	errorCase_m(!getCount(Ranges), "// sync > Å` // sync < Ç™ÇPÇ¬Ç‡ñ≥Ç¢ÅB"); // old
 
 	foreach(Ranges, range, index)
 		if(findLine(names, range->Name) == getCount(names))
