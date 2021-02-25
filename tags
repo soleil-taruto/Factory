@@ -7654,6 +7654,7 @@ C:\Factory\OpenSource\sha512\sha512.h(192) : char // •Ï”–”‚ÍéŒ¾
 C:\Factory\OpenSource\sha512\sha512.h(193) : SHA512_Transform // •Ï”–”‚ÍéŒ¾
 C:\Factory\Petra\CxBuiltBatOnly.c(3) : main // ŠÖ”
 C:\Factory\Petra\EditConfig.c(7) : main // ŠÖ”
+C:\Factory\Petra\Lock.c(7) : main // ŠÖ”
 C:\Factory\Petra\PublicLog.c(7) : LOG_FILE // ’è‹`
 C:\Factory\Petra\PublicLog.c(8) : LOG_FILE_02 // ’è‹`
 C:\Factory\Petra\PublicLog.c(9) : LOG_FILE_03 // ’è‹`
