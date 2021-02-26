@@ -1,5 +1,5 @@
 /*
-	RenameAll.exe [対象フォルダ]
+	RenameAllSub.exe [対象フォルダ]
 */
 
 #include "C:\Factory\Common\all.h"
@@ -19,9 +19,6 @@ static void MovePubFiles(void)
 		moveFile(path, getLine(PubFiles2, index));
 	}
 }
-
-#define MIDFILE_PREF "_$$$_" // HACK: より確実にユニークになるように
-
 static int RenumberPaths(autoList_t *paths)
 {
 	char *path;
@@ -91,13 +88,12 @@ static int Confirm(void)
 
 static void RenameEx(void)
 {
-	autoList_t *paths = ls(".");
+	autoList_t *paths = lss(".");
 	autoList_t *newPaths;
 	autoList_t *tmpPaths;
 	char *path;
 	uint index;
 
-	eraseParents(paths);
 	rapidSort(paths, (sint (*)(uint, uint))mbs_stricmp);
 	newPaths = copyLines(paths);
 
@@ -149,7 +145,16 @@ static void RenameEx(void)
 	{
 		cout("< %s\n", path);
 		cout("> %s\n", getLine(newPaths, index));
-		errorCase(mbs_strchr(getLine(newPaths, index), '\\')); // ? ローカル名ではない
+
+		errorCase(!existFile(path)); // ? ! ファイル // HACK: フォルダは未対応
+
+		// Check
+		{
+			char *tmp = toFairFullPathFltr(getLine(newPaths, index));
+			cout("$ %s\n", tmp);
+			errorCase(strcmp(tmp, getLine(newPaths, index))); // ? ! 完全に一致
+			memFree(tmp);
+		}
 	}
 	if(!Confirm())
 		goto endfunc;
@@ -158,7 +163,7 @@ static void RenameEx(void)
 
 	foreach(paths, path, index)
 	{
-		addElement(tmpPaths, (uint)xcout("%05u" MIDFILE_PREF "%s", index + 1, path));
+		addElement(tmpPaths, (uint)makeTempPath(NULL));
 	}
 	foreach(paths, path, index) // 試し移動
 	{
