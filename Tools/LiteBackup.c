@@ -9,11 +9,12 @@
 /*
 	格納先フォルダ
 	存在しない場合は手動で作成すること。
+	★空白不可
 */
 #define BACKUP_DIR "C:\\tmp\\Backup"
 
 /*
-	rum.exe
+	rum.exe へのパス
 */
 #define RUM_EXE "C:\\Factory\\Tools\\rum.exe"
 
@@ -27,8 +28,8 @@ static void LiteBackup(char *targDir)
 	copyDir(targDir, BACKUP_DIR);
 
 	coExecute_x(xcout(RUM_EXE " /C \"%s\"", targDir));
-	coExecute_x(xcout(RUM_EXE " /Q \"%s\"", targDir));
-	coExecute(RUM_EXE " /-C");
+	coExecute(RUM_EXE " /Q " BACKUP_DIR);
+	coExecute(RUM_EXE " /C-");
 
 	memFree(targDir);
 }

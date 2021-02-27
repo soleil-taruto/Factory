@@ -42,3 +42,9 @@ C:\Dev を qq する
 
 dd
 qq -f
+
+----
+★最近追加した。
+
+Snapshot
+LiteBackup
