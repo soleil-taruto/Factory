@@ -9551,6 +9551,10 @@ C:\Factory\Tools\ListFmt.c(151) : ZeroPad // ŠÖ”
 C:\Factory\Tools\ListFmt.c(160) : main // ŠÖ”
 C:\Factory\Tools\ListType.c(3) : ListType // ŠÖ”
 C:\Factory\Tools\ListType.c(29) : main // ŠÖ”
+C:\Factory\Tools\LiteBackup.c(13) : BACKUP_DIR // ’è‹`
+C:\Factory\Tools\LiteBackup.c(18) : RUM_EXE // ’è‹`
+C:\Factory\Tools\LiteBackup.c(20) : LiteBackup // ŠÖ”
+C:\Factory\Tools\LiteBackup.c(35) : main // ŠÖ”
 C:\Factory\Tools\Longest.c(17) : ShortestMin // •Ï”–”‚ÍéŒ¾
 C:\Factory\Tools\Longest.c(19) : DispLongest_Lines_x // ŠÖ”
 C:\Factory\Tools\Longest.c(50) : DispLongest // ŠÖ”
