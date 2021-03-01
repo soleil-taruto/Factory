@@ -19,6 +19,49 @@ static void SZTEL_ZeroToEmptyLine(autoList_t *lines)
 		if(!line)
 			setElement(lines, index, (uint)strx(""));
 }
+static void SZTEL_RemoveZeroBracket(autoList_t *lines)
+{
+	char *line;
+	uint index;
+
+restart:
+	foreach(lines, line, index)
+	if(!line)
+	{
+		int removeFlag = 0;
+
+		if(index)
+		{
+			char *tmp = strx(getLine(lines, index - 1));
+
+			ucTrim(tmp);
+
+			if(!strcmp(tmp, "{"))
+			{
+				removeFlag = 1;
+			}
+			memFree(tmp);
+		}
+		if(index + 1 < getCount(lines))
+		{
+			char *tmp = strx(getLine(lines, index + 1));
+
+			ucTrim(tmp);
+
+			if(!strcmp(tmp, "}"))
+			{
+				removeFlag = 1;
+			}
+			memFree(tmp);
+		}
+		if(removeFlag)
+		{
+			desertElement(lines, index);
+
+			goto restart; // HACK: ŽG -- •s—v‚¶‚á‚ËH
+		}
+	}
+}
 static void SZTEL_SqZeroToZero(autoList_t *lines)
 {
 	uint index;
@@ -40,6 +83,7 @@ restart:
 static void SqZeroToEmptyLine(autoList_t *lines)
 {
 	SZTEL_SqZeroToZero(lines);
+	SZTEL_RemoveZeroBracket(lines);
 	SZTEL_ZeroToEmptyLine(lines);
 }
 static void RemoveAroundEmptyLines(autoList_t *lines)
