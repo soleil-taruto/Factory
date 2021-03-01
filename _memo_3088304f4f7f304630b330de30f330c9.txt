@@ -1,4 +1,11 @@
 ﻿----
+★最近追加したコマンド @ 2021.3
+
+Snapshot
+LiteBackup
+RemoveSync
+
+----
 定期的に実行・必要に応じて実行
 
 ucc
