@@ -10,11 +10,44 @@ static char *RangeName;
 
 static autoList_t *TargetExts;
 
+static void SZTEL_ZeroToEmptyLine(autoList_t *lines)
+{
+	char *line;
+	uint index;
+
+	foreach(lines, line, index)
+		if(!line)
+			setElement(lines, index, (uint)strx(""));
+}
+static void SZTEL_SqZeroToZero(autoList_t *lines)
+{
+	uint index;
+
+restart:
+	for(index = 1; index < getCount(lines); index++)
+	{
+		if(
+			!getElement(lines, index - 1) &&
+			!getElement(lines, index - 0)
+			)
+		{
+			desertElement(lines, index);
+
+			goto restart; // HACK: ŽG
+		}
+	}
+}
+static void SqZeroToEmptyLine(autoList_t *lines)
+{
+	SZTEL_SqZeroToZero(lines);
+	SZTEL_ZeroToEmptyLine(lines);
+}
 static void RemoveAroundEmptyLines(autoList_t *lines)
 {
 	char *line;
 	uint index;
 
+restart:
 	foreach(lines, line, index)
 	{
 		if(line && !*line) // ? ‹ós
@@ -25,6 +58,8 @@ static void RemoveAroundEmptyLines(autoList_t *lines)
 		{
 			memFree(line);
 			setElement(lines, index, 0);
+
+			goto restart; // HACK: ŽG
 		}
 	}
 }
@@ -62,7 +97,7 @@ static void RemoveSync_File(char *file)
 	uint index;
 	int modified = 0;
 
-	cout("%s\n", file);
+//	cout("%s\n", file);
 
 	foreach(lines, line, index)
 	{
@@ -93,19 +128,14 @@ static void RemoveSync_File(char *file)
 	}
 	if(modified)
 	{
-		LOGPOS();
+		cout("> %s\n", file);
 
-		// HACK: ŽG
-		RemoveAroundEmptyLines(lines); // 1
-		RemoveAroundEmptyLines(lines); // 2
-		RemoveAroundEmptyLines(lines); // 3
+		RemoveAroundEmptyLines(lines);
 
-		removeZero(lines);
+		SqZeroToEmptyLine(lines);
 
 		semiRemovePath(file);
 		writeLines(file, lines);
-
-		LOGPOS();
 	}
 	releaseDim(lines, 1);
 }
