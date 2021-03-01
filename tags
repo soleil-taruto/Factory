@@ -4099,6 +4099,15 @@ C:\Factory\DevTools\newcom.c(61) : main // ŠÖ”
 C:\Factory\DevTools\Proto.c(7) : MakeProtoList // ŠÖ”
 C:\Factory\DevTools\Proto.c(47) : main // ŠÖ”
 C:\Factory\DevTools\qrumall.c(10) : main // ŠÖ”
+C:\Factory\DevTools\RemoveSync.c(7) : RootDir // •Ï”–”‚ÍéŒ¾
+C:\Factory\DevTools\RemoveSync.c(8) : S_TargetExts // •Ï”–”‚ÍéŒ¾
+C:\Factory\DevTools\RemoveSync.c(9) : RangeName // •Ï”–”‚ÍéŒ¾
+C:\Factory\DevTools\RemoveSync.c(11) : TargetExts // •Ï”–”‚ÍéŒ¾
+C:\Factory\DevTools\RemoveSync.c(13) : RemoveAroundEmptyLines // ŠÖ”
+C:\Factory\DevTools\RemoveSync.c(31) : FindEnd // ŠÖ”
+C:\Factory\DevTools\RemoveSync.c(58) : RemoveSync_File // ŠÖ”
+C:\Factory\DevTools\RemoveSync.c(112) : RemoveSync // ŠÖ”
+C:\Factory\DevTools\RemoveSync.c(125) : main // ŠÖ”
 C:\Factory\DevTools\rev.c(28) : MakeRev // ŠÖ”
 C:\Factory\DevTools\rev.c(72) : UnmakeRev // ŠÖ”
 C:\Factory\DevTools\rev.c(100) : main // ŠÖ”
