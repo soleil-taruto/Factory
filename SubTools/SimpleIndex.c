@@ -27,7 +27,10 @@ static int IsSimpleName(char *localPath)
 }
 static char *MkDivLine(char *href, char *lref, char *trailer)
 {
-	return xcout("<div><a href=\"%s\">%s</a>%s</div>", c_urlEncoder(href), lref, trailer);
+	if(href)
+		return xcout("<div><a href=\"%s\">%s</a>%s</div>", c_urlEncoder(href), lref, trailer);
+	else
+		return xcout("<div>%s%s</div>", lref, trailer);
 }
 
 static void MakeIndex(char *, uint);
@@ -87,6 +90,7 @@ static char *MakeDivList(uint depth)
 		char *href;
 		char *lref;
 		char *trailer;
+		uint64 size;
 
 		if(!IsSimpleName(getLocal(path)))
 			cout("URL‚É“K‚³‚È‚¢–¼‘O: %s\n", path);
@@ -115,11 +119,13 @@ static char *MakeDivList(uint depth)
 		}
 		else // ? file
 		{
-			char *lsize = xcout("%I64u", getFileSize(path));
+			char *lsize;
 			char *hash;
 			autoBlock_t *pab;
 			char *stamp;
 
+			size = getFileSize(path);
+			lsize = xcout("%I64u", size);
 			lsize = thousandComma(lsize);
 
 			if(!MD5Disabled)
@@ -144,48 +150,53 @@ static char *MakeDivList(uint depth)
 		}
 
 		{
-			addElement(divs, (uint)MkDivLine(href, lref, trailer));
+			char *prm_href = href;
 
-			if(!ImageTagDisabled)
+			if(size == 0)
+				prm_href = NULL;
+
+			addElement(divs, (uint)MkDivLine(prm_href, lref, trailer));
+		}
+
+		if(!ImageTagDisabled)
+		{
+			char *ext = getExt(href);
+
+			if(
+				!_stricmp("BMP", ext) ||
+				!_stricmp("GIF", ext) ||
+				!_stricmp("JPG", ext) ||
+				!_stricmp("JPEG", ext) ||
+				!_stricmp("PNG", ext)
+				)
 			{
-				char *ext = getExt(href);
+				char *div = xcout("<div><a href=\"%s\"><img src=\"%s\"/></a></div>", c_urlEncoder(href), href);
 
-				if(
-					!_stricmp("BMP", ext) ||
-					!_stricmp("GIF", ext) ||
-					!_stricmp("JPG", ext) ||
-					!_stricmp("JPEG", ext) ||
-					!_stricmp("PNG", ext)
-					)
-				{
-					char *div = xcout("<div><a href=\"%s\"><img src=\"%s\"/></a></div>", c_urlEncoder(href), href);
+				addElement(divs, (uint)div);
+			}
+			else if(
+				!_stricmp("avi", ext) ||
+				!_stricmp("mp4", ext) ||
+				!_stricmp("mpeg", ext) ||
+				!_stricmp("mpg", ext) ||
+				!_stricmp("webm", ext)
+				)
+			{
+				char *div = xcout("<div><video src=\"%s\" controls style=\"max-height: 75vh;\"></video></div>", href);
 
-					addElement(divs, (uint)div);
-				}
-				else if(
-					!_stricmp("avi", ext) ||
-					!_stricmp("mp4", ext) ||
-					!_stricmp("mpeg", ext) ||
-					!_stricmp("mpg", ext) ||
-					!_stricmp("webm", ext)
-					)
-				{
-					char *div = xcout("<div><video src=\"%s\" controls style=\"max-height: 75vh;\"></video></div>", href);
+				addElement(divs, (uint)div);
+			}
+			else if(
+				!_stricmp("mid", ext) ||
+				!_stricmp("midi", ext) ||
+				!_stricmp("mp3", ext) ||
+				!_stricmp("wav", ext) ||
+				!_stricmp("wma", ext)
+				)
+			{
+				char *div = xcout("<div><audio src=\"%s\" controls></audio></div>", href);
 
-					addElement(divs, (uint)div);
-				}
-				else if(
-					!_stricmp("mid", ext) ||
-					!_stricmp("midi", ext) ||
-					!_stricmp("mp3", ext) ||
-					!_stricmp("wav", ext) ||
-					!_stricmp("wma", ext)
-					)
-				{
-					char *div = xcout("<div><audio src=\"%s\" controls></audio></div>", href);
-
-					addElement(divs, (uint)div);
-				}
+				addElement(divs, (uint)div);
 			}
 		}
 
