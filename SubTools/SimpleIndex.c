@@ -32,6 +32,38 @@ static char *MkDivLine(char *href, char *lref, char *trailer)
 
 static void MakeIndex(char *, uint);
 
+static char *S_PC_MaskPath(char *path) // ret: strx()
+{
+	path = strx(path);
+
+	replaceChar(path, '_', '\x01');
+
+	return path;
+}
+static sint S_PathComp(char *path1, char *path2)
+{
+	int ret;
+
+	path1 = S_PC_MaskPath(path1);
+	path2 = S_PC_MaskPath(path2);
+
+	ret = mbs_stricmp(path1, path2);
+
+	memFree(path1);
+	memFree(path2);
+
+	return ret;
+}
+static sint S_DirFileComp(char *path1, char *path2)
+{
+	int d1 = existDir(path1);
+	int d2 = existDir(path2);
+
+	if(d1 && !d2) return -1;
+	if(d2 && !d1) return 1;
+
+	return S_PathComp(path1, path2);
+}
 static char *MakeDivList(uint depth)
 {
 	autoList_t *paths = ls(".");
@@ -48,7 +80,7 @@ static char *MakeDivList(uint depth)
 	else if(RootParentHRef)
 		addElement(divs, (uint)MkDivLine(RootParentHRef, "&lt;return&gt;", ""));
 
-	rapidSort(paths, (sint (*)(uint, uint))dirFileComp);
+	rapidSort(paths, (sint (*)(uint, uint))S_DirFileComp);
 
 	foreach(paths, path, index)
 	{

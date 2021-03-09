@@ -9194,10 +9194,13 @@ C:\Factory\SubTools\SimpleIndex.c(17) : MD5Disabled // •Ï”–”‚ÍéŒ¾
 C:\Factory\SubTools\SimpleIndex.c(19) : IsSimpleName // ŠÖ”
 C:\Factory\SubTools\SimpleIndex.c(28) : MkDivLine // ŠÖ”
 C:\Factory\SubTools\SimpleIndex.c(33) : MakeIndex // •Ï”–”‚ÍéŒ¾
-C:\Factory\SubTools\SimpleIndex.c(35) : MakeDivList // ŠÖ”
-C:\Factory\SubTools\SimpleIndex.c(171) : GetTemplate // ŠÖ”
-C:\Factory\SubTools\SimpleIndex.c(184) : MakeIndex // ŠÖ”
-C:\Factory\SubTools\SimpleIndex.c(215) : main // ŠÖ”
+C:\Factory\SubTools\SimpleIndex.c(35) : S_PC_MaskPath // ŠÖ”
+C:\Factory\SubTools\SimpleIndex.c(43) : S_PathComp // ŠÖ”
+C:\Factory\SubTools\SimpleIndex.c(57) : S_DirFileComp // ŠÖ”
+C:\Factory\SubTools\SimpleIndex.c(67) : MakeDivList // ŠÖ”
+C:\Factory\SubTools\SimpleIndex.c(203) : GetTemplate // ŠÖ”
+C:\Factory\SubTools\SimpleIndex.c(216) : MakeIndex // ŠÖ”
+C:\Factory\SubTools\SimpleIndex.c(247) : main // ŠÖ”
 C:\Factory\SubTools\Smpl\DateTime2Sec.c(29) : main // ŠÖ”
 C:\Factory\SubTools\Socket\Chat.c(13) : Domain // •Ï”–”‚ÍéŒ¾
 C:\Factory\SubTools\Socket\Chat.c(14) : PortNo // •Ï”–”‚ÍéŒ¾
