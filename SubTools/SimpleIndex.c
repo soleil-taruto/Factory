@@ -1,3 +1,7 @@
+/*
+	SimpleIndex.exe [/T タイトル] [/L リンク色] [/X テキスト色] [/B 背景色] [/P ルートの親リンク] [/-I] [/-M] ルートDIR
+*/
+
 #include "C:\Factory\Common\all.h"
 #include "C:\Factory\Common\Options\URL.h"
 #include "C:\Factory\OpenSource\md5.h"
