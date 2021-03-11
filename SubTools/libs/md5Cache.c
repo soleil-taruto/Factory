@@ -2,24 +2,6 @@
 
 #define CACHE_DIR "C:\\Factory\\tmp\\md5Cache"
 
-static char *GSC_FS_Hash;
-
-static int GSC_FS_Action(struct _finddata_t *i)
-{
-	char *sHash;
-
-	if(i->name[0] == '.') // ? "." or ".."
-		return 1;
-
-	sHash = strx(i->name);
-	toLowerLine(sHash);
-
-	errorCase(!lineExp("<32,09af>", sHash));
-
-	GSC_FS_Hash = sHash;
-
-	return 0; // åpë±ÇµÇ»Ç¢ÅB
-}
 static char *GetOrSetCache(char *sHFile, char *sHInfo, char *sHash)
 {
 	char *dir1 = combine(CACHE_DIR, sHFile);
@@ -39,15 +21,19 @@ static char *GetOrSetCache(char *sHFile, char *sHInfo, char *sHash)
 
 		memFree(symFile);
 	}
-	else // Get
+	else if(existDir(dir2)) // Get
 	{
-		char *wCard = xcout("%s\\*", dir2);
+		autoList_t *symFiles = lsFiles(dir2);
 
-		GSC_FS_Hash = NULL;
-		fileSearch(wCard, GSC_FS_Action);
-		sHash = GSC_FS_Hash;
+		errorCase(getCount(symFiles) != 1);
 
-		memFree(wCard);
+		sHash = getLine(symFiles, 0);
+		eraseParent(sHash);
+		toLowerLine(sHash);
+
+		errorCase(!lineExp("<32,09af>", sHash));
+
+		releaseAutoList(symFiles);
 	}
 	memFree(dir1);
 	memFree(dir2);
