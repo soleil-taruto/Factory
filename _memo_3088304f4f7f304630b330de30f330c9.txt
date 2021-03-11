@@ -4,6 +4,7 @@
 Snapshot
 LiteBackup
 RemoveSync
+ficon
 
 ----
 定期的に実行・必要に応じて実行
