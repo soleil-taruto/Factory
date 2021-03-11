@@ -4,7 +4,7 @@
 
 #include "C:\Factory\Common\all.h"
 #include "C:\Factory\Common\Options\URL.h"
-#include "C:\Factory\OpenSource\md5.h"
+#include "libs\md5Cache.h"
 
 #define DEF_INDEXTEMPLATE "C:\\Factory\\Resource\\index.html_"
 #define INDEXTEMPLATE "_index.html_"
@@ -134,7 +134,7 @@ static char *MakeDivList(uint depth)
 
 			if(!MD5Disabled)
 			{
-				pab = md5_makeHashFile(path);
+				pab = md5Cache_makeHashFile(path);
 				hash = makeHexLine(pab);
 				releaseAutoBlock(pab);
 			}
