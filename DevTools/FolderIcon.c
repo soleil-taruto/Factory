@@ -1,3 +1,9 @@
+/*
+	FolderIcon.exe [/C]
+
+		/C ... 全てのアイコン設定を解除する。
+*/
+
 #include "C:\Factory\Common\all.h"
 
 #define MAPPING_FILE "FolderIcon.conf"
@@ -67,6 +73,9 @@ static void SetFolderIcon(char *dir, char *iconFile)
 	}
 	memFree(iniFile);
 }
+
+static int ClearMode;
+
 static void ChangeFolderIcons(void)
 {
 	autoList_t *dirs = lsDirs(".");
@@ -79,7 +88,7 @@ static void ChangeFolderIcons(void)
 	{
 		uint fipIndex = findLineCase(FIP_Dirs, dir, 1);
 
-		if(fipIndex < getCount(FIP_Dirs))
+		if(fipIndex < getCount(FIP_Dirs) && !ClearMode)
 		{
 			SetFolderIcon(dir, getLine(FIP_IconFiles, fipIndex));
 		}
@@ -97,5 +106,9 @@ static void Main2(void)
 }
 int main(int argc, char **argv)
 {
+	if(argIs("/C"))
+	{
+		ClearMode = 1;
+	}
 	Main2();
 }

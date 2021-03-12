@@ -1,1 +1,1 @@
-FolderIcon.exe
+FolderIcon.exe %*
