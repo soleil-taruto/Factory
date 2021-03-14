@@ -1,7 +1,5 @@
 /*
-	LiteBackup.exe
-
-	★オプション無し
+	LiteBackup.exe [対象ディレクトリ]
 */
 
 #include "C:\Factory\Common\all.h"
@@ -41,9 +39,10 @@ int main(int argc, char **argv)
 	cout("| LITE-BACKUP |\n");
 	cout("+-------------+\n");
 
-	dir = dropDir();
+	if(hasArgs(1))
+		dir = nextArg();
+	else
+		dir = c_dropDir();
 
 	LiteBackup(dir);
-
-	memFree(dir);
 }

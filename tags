@@ -9582,10 +9582,10 @@ C:\Factory\Tools\ListFmt.c(151) : ZeroPad // 関数
 C:\Factory\Tools\ListFmt.c(160) : main // 関数
 C:\Factory\Tools\ListType.c(3) : ListType // 関数
 C:\Factory\Tools\ListType.c(29) : main // 関数
-C:\Factory\Tools\LiteBackup.c(14) : BACKUP_DIR // 定義
-C:\Factory\Tools\LiteBackup.c(19) : RUM_EXE // 定義
-C:\Factory\Tools\LiteBackup.c(21) : LiteBackup // 関数
-C:\Factory\Tools\LiteBackup.c(36) : main // 関数
+C:\Factory\Tools\LiteBackup.c(12) : BACKUP_DIR // 定義
+C:\Factory\Tools\LiteBackup.c(17) : RUM_EXE // 定義
+C:\Factory\Tools\LiteBackup.c(19) : LiteBackup // 関数
+C:\Factory\Tools\LiteBackup.c(34) : main // 関数
 C:\Factory\Tools\Longest.c(17) : ShortestMin // 変数又は宣言
 C:\Factory\Tools\Longest.c(19) : DispLongest_Lines_x // 関数
 C:\Factory\Tools\Longest.c(50) : DispLongest // 関数
