@@ -6,6 +6,7 @@ LiteBackup
 RemoveSync
 ficon
 qbk
+FindSame
 
 ----
 定期的に実行・必要に応じて実行

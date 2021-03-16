@@ -9511,6 +9511,8 @@ C:\Factory\Tools\FindBmpOnScreen.c(74) : FindBmp_Screen // ä÷êî
 C:\Factory\Tools\FindBmpOnScreen.c(91) : FindBmpOnScreen // ä÷êî
 C:\Factory\Tools\FindBmpOnScreen.c(109) : InitFCD // ä÷êî
 C:\Factory\Tools\FindBmpOnScreen.c(140) : main // ä÷êî
+C:\Factory\Tools\FindSame.c(8) : FindSame // ä÷êî
+C:\Factory\Tools\FindSame.c(56) : main // ä÷êî
 C:\Factory\Tools\fmt.c(12) : FTypeNames // ä÷êî
 C:\Factory\Tools\fmt.c(22) : GetFTypeByExt // ä÷êî
 C:\Factory\Tools\fmt.c(32) : GetFTypeBySignature // ä÷êî
