@@ -12,6 +12,7 @@
 
 		/E  ... コメント編集
 		/T  ... ごみファイル削除 + コメントが "削除予定" または "削除予定, " で始まるリビジョンを削除する。
+		                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   <---   廃止 @ 2021.3.16
 		/HA ... ファイルの変更履歴を取得、ファイルの一覧を全リビジョンから取得
 		/H  ... ファイルの変更履歴を取得、ファイルの一覧を最後のリビジョンから取得
 		/1A ... 最後のファイルを取得、ファイルの一覧を全リビジョンから取得
@@ -93,8 +94,9 @@
 
 #define DEFAULT_COMMENT "コメント無し"
 
-#define DELETABLE_COMMENT_01 "削除予定"
-#define DELETABLE_COMMENT_02_START_PTN "削除予定, "
+// 廃止 @ 2021.3.16
+//#define DELETABLE_COMMENT_01 "削除予定"
+//#define DELETABLE_COMMENT_02_START_PTN "削除予定, "
 
 #define AUTO_COMMENT_FILE "C:\\appdata\\rum-auto-comment.txt"
 //#define AUTO_COMMENT_FILE "C:\\Factory\\tmp\\auto-comment.txt" // qrumall /D で消される。
@@ -316,6 +318,7 @@ static void EraseDeletableRevisions(char *storeDir, int quietFlag)
 		comment = readFirstLine(FILE_REV_COMMENT);
 		unaddCwd();
 
+#if 0 // 廃止 @ 2021.3.16
 		if(!strcmp(comment, DELETABLE_COMMENT_01) || startsWith(comment, DELETABLE_COMMENT_02_START_PTN))
 		{
 			cout("削除予定のリビジョンです。\n");
@@ -329,6 +332,7 @@ static void EraseDeletableRevisions(char *storeDir, int quietFlag)
 				semiRemovePath(stamp);
 			}
 		}
+#endif
 		memFree(comment);
 	}
 	releaseDim(revisions, 1);
