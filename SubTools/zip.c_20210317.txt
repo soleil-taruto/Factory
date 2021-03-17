@@ -1,71 +1,69 @@
-/*
+ï»¿/*
 	zip.exe /P ZIP-FILE SRC-DIR [BASE-NAME]
 
-		... SRC-DIR ‚ğ ZIP-FILE ‚ÉƒpƒbƒN‚·‚éB
-			•s—v‚ÈÅãˆÊŠK‘w‚ğœ‹‚·‚éB
-			BASE-NAME ‚ğw’è‚·‚é‚ÆA‚±‚Ì–¼‘O‚ğƒpƒbƒN“à‚ÌÅãˆÊŠK‘w‚É‚·‚éB"$" ‚ğw’è‚·‚é‚Æ ZIP-FILE ‚Ìƒ[ƒJƒ‹–¼‚Ìƒm[ƒh‚É‚È‚éB
-			ZIP-FILE ‚ÌŠg’£q‚Í "zip" ‚Å‚È‚­‚Ä‚à—Ç‚¢B
+		... SRC-DIR ã‚’ ZIP-FILE ã«ãƒ‘ãƒƒã‚¯ã™ã‚‹ã€‚
+			ä¸è¦ãªæœ€ä¸Šä½éšå±¤ã‚’é™¤å»ã™ã‚‹ã€‚
+			BASE-NAME ã‚’æŒ‡å®šã™ã‚‹ã¨ã€ã“ã®åå‰ã‚’ãƒ‘ãƒƒã‚¯å†…ã®æœ€ä¸Šä½éšå±¤ã«ã™ã‚‹ã€‚"$" ã‚’æŒ‡å®šã™ã‚‹ã¨ ZIP-FILE ã®ãƒ­ãƒ¼ã‚«ãƒ«åã®ãƒãƒ¼ãƒ‰ã«ãªã‚‹ã€‚
+			ZIP-FILE ã®æ‹¡å¼µå­ã¯ "zip" ã§ãªãã¦ã‚‚è‰¯ã„ã€‚
 
 	zip.exe /PK ZIP-FILE SRC-DIR [BASE-NAME]
 
-		... SRC-DIR ‚ğ ZIP-FILE ‚ÉƒpƒbƒN‚·‚éB
-			ÅãˆÊŠK‘w‚Í‚»‚Ì‚Ü‚ÜI (/P‚Æ‚Ìˆá‚¢‚Í‚±‚±‚¾‚¯I)
-			BASE-NAME ‚ğw’è‚·‚é‚ÆA‚±‚Ì–¼‘O‚ğƒpƒbƒN“à‚ÌÅãˆÊŠK‘w‚É‚·‚éB"$" ‚ğw’è‚·‚é‚Æ ZIP-FILE ‚Ìƒ[ƒJƒ‹–¼‚Ìƒm[ƒh‚É‚È‚éB
-			ZIP-FILE ‚ÌŠg’£q‚Í "zip" ‚Å‚È‚­‚Ä‚à—Ç‚¢B
+		... SRC-DIR ã‚’ ZIP-FILE ã«ãƒ‘ãƒƒã‚¯ã™ã‚‹ã€‚
+			æœ€ä¸Šä½éšå±¤ã¯ãã®ã¾ã¾ï¼ (/Pã¨ã®é•ã„ã¯ã“ã“ã ã‘ï¼)
+			BASE-NAME ã‚’æŒ‡å®šã™ã‚‹ã¨ã€ã“ã®åå‰ã‚’ãƒ‘ãƒƒã‚¯å†…ã®æœ€ä¸Šä½éšå±¤ã«ã™ã‚‹ã€‚"$" ã‚’æŒ‡å®šã™ã‚‹ã¨ ZIP-FILE ã®ãƒ­ãƒ¼ã‚«ãƒ«åã®ãƒãƒ¼ãƒ‰ã«ãªã‚‹ã€‚
+			ZIP-FILE ã®æ‹¡å¼µå­ã¯ "zip" ã§ãªãã¦ã‚‚è‰¯ã„ã€‚
 
 	zip.exe /R ZIP-FILE [BASE-NAME]
 
-		... ZIP-FILE ‚ğÄƒpƒbƒN‚·‚éB
-			•s—v‚ÈÅãˆÊŠK‘w‚ğœ‹‚·‚éB
-			BASE-NAME ‚ğw’è‚·‚é‚ÆA‚±‚Ì–¼‘O‚ğƒpƒbƒN“à‚ÌÅãˆÊŠK‘w‚É‚·‚éB"$" ‚ğw’è‚·‚é‚Æ ZIP-FILE ‚Ìƒ[ƒJƒ‹–¼‚Ìƒm[ƒh‚É‚È‚éB
-			ZIP-FILE ‚ÌŠg’£q‚Í "zip" ‚Å‚È‚­‚Ä‚à—Ç‚¢B
+		... ZIP-FILE ã‚’å†ãƒ‘ãƒƒã‚¯ã™ã‚‹ã€‚
+			ä¸è¦ãªæœ€ä¸Šä½éšå±¤ã‚’é™¤å»ã™ã‚‹ã€‚
+			BASE-NAME ã‚’æŒ‡å®šã™ã‚‹ã¨ã€ã“ã®åå‰ã‚’ãƒ‘ãƒƒã‚¯å†…ã®æœ€ä¸Šä½éšå±¤ã«ã™ã‚‹ã€‚"$" ã‚’æŒ‡å®šã™ã‚‹ã¨ ZIP-FILE ã®ãƒ­ãƒ¼ã‚«ãƒ«åã®ãƒãƒ¼ãƒ‰ã«ãªã‚‹ã€‚
+			ZIP-FILE ã®æ‹¡å¼µå­ã¯ "zip" ã§ãªãã¦ã‚‚è‰¯ã„ã€‚
 
 	zip.exe /RB ZIP-FILE
 
-		... ZIP-FILE ‚ğÄƒpƒbƒN‚·‚éB
-			•s—v‚ÈÅãˆÊŠK‘w‚ğœ‹‚·‚éB
-			ZIP-FILE ‚Ìƒ[ƒJƒ‹–¼‚ÌŠg’£q‚ğœ‹‚µ‚½–¼‘O‚ğƒpƒbƒN“à‚ÌÅãˆÊŠK‘w‚É‚·‚éB
-			ZIP-FILE ‚ÌŠg’£q‚Í "zip" ‚Å‚È‚­‚Ä‚à—Ç‚¢B
+		... ZIP-FILE ã‚’å†ãƒ‘ãƒƒã‚¯ã™ã‚‹ã€‚
+			ä¸è¦ãªæœ€ä¸Šä½éšå±¤ã‚’é™¤å»ã™ã‚‹ã€‚
+			ZIP-FILE ã®ãƒ­ãƒ¼ã‚«ãƒ«åã®æ‹¡å¼µå­ã‚’é™¤å»ã—ãŸåå‰ã‚’ãƒ‘ãƒƒã‚¯å†…ã®æœ€ä¸Šä½éšå±¤ã«ã™ã‚‹ã€‚
+			ZIP-FILE ã®æ‹¡å¼µå­ã¯ "zip" ã§ãªãã¦ã‚‚è‰¯ã„ã€‚
 
 	zip.exe /RBD ROOT-DIR
 
-		... ROOT-DIR ”z‰º‚Ì‘S‚Ä‚ÌuŠg’£q "zip" ‚Ìƒtƒ@ƒCƒ‹v‚É‚Â‚¢‚Ä
+		... ROOT-DIR é…ä¸‹ã®å…¨ã¦ã®ã€Œæ‹¡å¼µå­ "zip" ã®ãƒ•ã‚¡ã‚¤ãƒ«ã€ã«ã¤ã„ã¦
 			> zip.exe /RB ZIP-FILE
-			‚Æ“¯‚¶ˆ—‚ğs‚¤B
+			ã¨åŒã˜å‡¦ç†ã‚’è¡Œã†ã€‚
 
 	zip.exe [/PE-] /O OUT-DIR PROJ-NAME
 
 		... OUT-DIR -> OUT-DIR \ { PROJ-NAME } .zip
-			PROJ-NAME ‚É "*P" ‚ğw’è‚·‚é‚ÆƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚Ìƒ[ƒJƒ‹–¼‚Ì e99999999_xxxx ‚Ì xxxx ‚Ì•”•ª‚É‚È‚éB
 
 	zip.exe [/PE-] [/RVE-] [/B | /V VER-VAL] /G OUT-DIR PROJ-NAME
 
 		... OUT-DIR -> OUT-DIR \ { PROJ-NAME } _v123.zip
-			PROJ-NAME ‚É "*P" ‚ğw’è‚·‚é‚ÆƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚Ìƒ[ƒJƒ‹–¼‚Ì e99999999_xxxx ‚Ì xxxx ‚Ì•”•ª‚É‚È‚éB
 
 	zip.exe /X ZIP-FILE OUT-DIR
 
-		... ZIP-FILE ‚ğ OUT-DIR ‚É“WŠJ‚·‚éB
-			OUT-DIR ‚ª‘¶İ‚µ‚È‚¯‚ê‚Îì¬‚·‚éB
-			ÅãˆÊŠK‘w‚Í‚»‚Ì‚Ü‚ÜI
-			ZIP-FILE ‚ÌŠg’£q‚Í "zip" ‚Å‚È‚­‚Ä‚à—Ç‚¢B
-			OUT-DIR ‚ÉŠù‘¶‚Ìƒtƒ@ƒCƒ‹‚ª‚ ‚Á‚½‚çã‘‚«‚·‚éB
-			OUT-DIR ‚ÌŠù‘¶‚Ìƒtƒ@ƒCƒ‹‚É‘Î‚µ‚ÄƒfƒBƒŒƒNƒgƒŠ‚Ìã‘‚«‚Í¸”s‚·‚éBerror(); ‚É‚È‚ç‚È‚¢B
-			OUT-DIR ‚ÌŠù‘¶‚ÌƒfƒBƒŒƒNƒgƒŠ‚É‘Î‚µ‚Äƒtƒ@ƒCƒ‹‚Ìã‘‚«‚Í¸”s‚·‚éBerror(); ‚É‚È‚ç‚È‚¢B
+		... ZIP-FILE ã‚’ OUT-DIR ã«å±•é–‹ã™ã‚‹ã€‚
+			OUT-DIR ãŒå­˜åœ¨ã—ãªã‘ã‚Œã°ä½œæˆã™ã‚‹ã€‚
+			æœ€ä¸Šä½éšå±¤ã¯ãã®ã¾ã¾ï¼
+			ZIP-FILE ã®æ‹¡å¼µå­ã¯ "zip" ã§ãªãã¦ã‚‚è‰¯ã„ã€‚
+			OUT-DIR ã«æ—¢å­˜ã®ãƒ•ã‚¡ã‚¤ãƒ«ãŒã‚ã£ãŸã‚‰ä¸Šæ›¸ãã™ã‚‹ã€‚
+			OUT-DIR ã®æ—¢å­˜ã®ãƒ•ã‚¡ã‚¤ãƒ«ã«å¯¾ã—ã¦ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®ä¸Šæ›¸ãã¯å¤±æ•—ã™ã‚‹ã€‚error(); ã«ãªã‚‰ãªã„ã€‚
+			OUT-DIR ã®æ—¢å­˜ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã«å¯¾ã—ã¦ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¸Šæ›¸ãã¯å¤±æ•—ã™ã‚‹ã€‚error(); ã«ãªã‚‰ãªã„ã€‚
 
 	zip.exe /U ZIP-FILE OUT-DIR
 
-		... /X ‚Æ“¯‚¶‚¾‚ªA‚±‚¿‚ç‚Í...
-			•s—v‚ÈÅãˆÊŠK‘w‚ğœ‹‚·‚éI
-			OUT-DIR ‚ÌŠù‘¶‚Ìƒtƒ@ƒCƒ‹‚É‘Î‚µ‚ÄƒfƒBƒŒƒNƒgƒŠ‚Ìã‘‚«‚Í¬Œ÷‚·‚éB
-			OUT-DIR ‚ÌŠù‘¶‚ÌƒfƒBƒŒƒNƒgƒŠ‚É‘Î‚µ‚Äƒtƒ@ƒCƒ‹‚Ìã‘‚«‚Í¬Œ÷‚·‚éB
+		... /X ã¨åŒã˜ã ãŒã€ã“ã¡ã‚‰ã¯...
+			ä¸è¦ãªæœ€ä¸Šä½éšå±¤ã‚’é™¤å»ã™ã‚‹ï¼
+			OUT-DIR ã®æ—¢å­˜ã®ãƒ•ã‚¡ã‚¤ãƒ«ã«å¯¾ã—ã¦ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®ä¸Šæ›¸ãã¯æˆåŠŸã™ã‚‹ã€‚
+			OUT-DIR ã®æ—¢å­˜ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã«å¯¾ã—ã¦ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¸Šæ›¸ãã¯æˆåŠŸã™ã‚‹ã€‚
 
 	----
-	ŠÂ‹«•Ï”
+	ç’°å¢ƒå¤‰æ•°
 
 	zip_NoPause
 
-		... "1" ‚Ì‚Æ‚«“ü—Í‘Ò‚¿‚ğs‚í‚È‚¢B
+		... "1" ã®ã¨ãå…¥åŠ›å¾…ã¡ã‚’è¡Œã‚ãªã„ã€‚
 */
 
 #include "C:\Factory\Common\all.h"
@@ -78,8 +76,8 @@
 #define ZIP_MD5_HISTORY_LMT 40
 
 /*
-	7-Zip Extra 16.02 ‚©‰½‚©
-	‹ó”’‚ğŠÜ‚Ü‚È‚¢ƒpƒX‚Å‚ ‚é‚±‚ÆB
+	7-Zip Extra 16.02 ã‹ä½•ã‹
+	ç©ºç™½ã‚’å«ã¾ãªã„ãƒ‘ã‚¹ã§ã‚ã‚‹ã“ã¨ã€‚
 */
 #define ZIP7_LOCAL_FILE LOCALFILE_7Z_EXE
 #define ZIP7_FILE FILE_7Z_EXE
@@ -87,7 +85,6 @@
 #define VER_BETA 1100000000
 
 #define BASENAME_AUTO "$"
-#define PROJNAME_AUTO "*P"
 
 static int IsBatchMode(void)
 {
@@ -104,7 +101,7 @@ static char *GetZip7File(void)
 		if(!existFile(file))
 		{
 			file = ZIP7_FILE;
-			errorCase_m(!existFile(file), "[" ZIP7_FILE "]‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB");
+			errorCase_m(!existFile(file), "[" ZIP7_FILE "]ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚");
 		}
 	}
 	return file;
@@ -168,7 +165,7 @@ static void PackZipFile(char *zipFile, char *srcDir)
 	}
 	memFree(md5);
 }
-static uint InputVersion(void) // ret: 0 == cancel, 1 ` 999 == "0.01" ` "9.99", VER_BETA == BETA
+static uint InputVersion(void) // ret: 0 == cancel, 1 ï½ 999 == "0.01" ï½ "9.99", VER_BETA == BETA
 {
 	char *sVersion;
 	uint version;
@@ -179,7 +176,7 @@ static uint InputVersion(void) // ret: 0 == cancel, 1 ` 999 == "0.01" ` "9.99"
 		return VER_BETA;
 	}
 	cout("######################################################################\n");
-	cout("## ƒo[ƒWƒ‡ƒ“”Ô†‚ğ“ü—Í‚µ‚Ä‰º‚³‚¢B[1-999] as 0.01-9.99, [] as BETA ##\n");
+	cout("## ãƒãƒ¼ã‚¸ãƒ§ãƒ³ç•ªå·ã‚’å…¥åŠ›ã—ã¦ä¸‹ã•ã„ã€‚[1-999] as 0.01-9.99, [] as BETA ##\n");
 	cout("######################################################################\n");
 
 	sVersion = coInputLine();
@@ -203,7 +200,7 @@ static uint FindStringInExe(autoBlock_t *text, char *ptnString) // ret: UINTMAX 
 	for(index = 0; index < getSize(text); index++)
 	{
 	recheck:
-		if(getByte(text, index) == ptnString[rPos]) // ÅŒã‚Ì '\0' ‚Ü‚Åˆê’v‚·‚é‚©”»’è‚·‚éB
+		if(getByte(text, index) == ptnString[rPos]) // æœ€å¾Œã® '\0' ã¾ã§ä¸€è‡´ã™ã‚‹ã‹åˆ¤å®šã™ã‚‹ã€‚
 		{
 			if(ptnString[rPos] == '\0') // ? found
 				return index - rPos;
@@ -235,7 +232,7 @@ static void DestroyFindVersionPtn(autoBlock_t *text, uint startPos, uint count)
 		}
 		while(chr == ':');
 #else
-		chr = ';'; // ':' ‚Å‚È‚¯‚ê‚Î‰½‚Å‚à—Ç‚¢B
+		chr = ';'; // ':' ã§ãªã‘ã‚Œã°ä½•ã§ã‚‚è‰¯ã„ã€‚
 #endif
 
 		setByte(text, startPos + index, chr);
@@ -244,7 +241,7 @@ static void DestroyFindVersionPtn(autoBlock_t *text, uint startPos, uint count)
 
 static int ReplaceVersionExeFileDisabled;
 
-static void ReplaceVersion(char *dir, uint version) // version: 1 ` 999, VER_BETA
+static void ReplaceVersion(char *dir, uint version) // version: 1 ï½ 999, VER_BETA
 {
 	autoList_t *files = lssFiles(dir);
 	char *file;
@@ -260,7 +257,7 @@ static void ReplaceVersion(char *dir, uint version) // version: 1 ` 999, VER_BE
 	{
 		if(
 			!_stricmp("Manual.txt", getLocal(file)) ||
-			!_stricmp("ƒ}ƒjƒ…ƒAƒ‹.txt", getLocal(file)) ||
+			!_stricmp("ãƒãƒ‹ãƒ¥ã‚¢ãƒ«.txt", getLocal(file)) ||
 			!_stricmp("Properties.dat", getLocal(file))
 			)
 //		if(!_stricmp("txt", getExt(file))) // old @ 2017.8.5
@@ -296,7 +293,7 @@ static void ReplaceVersion(char *dir, uint version) // version: 1 ` 999, VER_BE
 				LOGPOS();
 				errorCase(strlen(sVersion) != 4); // 2bs
 				strcpy((char *)directGetBuffer(text) + conPos + strlen(CONCERT_PTN) - 4, sVersion);
-				errorCase(FindStringInExe(text, CONCERT_PTN) != UINTMAX); // ? 2‰ÓŠˆÈã‚ ‚é
+				errorCase(FindStringInExe(text, CONCERT_PTN) != UINTMAX); // ? 2ç®‡æ‰€ä»¥ä¸Šã‚ã‚‹
 				DestroyFindVersionPtn(text, conPos, strlen(CONCERT_PTN) - 5);
 				writeBinary(file, text);
 			}
@@ -436,28 +433,11 @@ static void AdjustAllPETimeDateStamp(char *dir)
 	if(!ChangePEDisabled)
 		ChangeAllPETimeDateStamp(dir, 0x5aaaaaaa);
 }
-static char *x_ProjNameFilter(char *projName)
-{
-	if(!strcmp(projName, PROJNAME_AUTO))
-	{
-		char *tmppn = getCwd();
-
-		eraseParent(tmppn);
-		errorCase(!lineExp("<1,AZaz><8,09>_<1,100,\x21\x7e>", tmppn)); // ƒvƒƒWƒFƒNƒg‚ÌƒtƒHƒ‹ƒ_–¼
-		eraseLine(tmppn, 10);
-		cout("projName: %s -> %s\n", PROJNAME_AUTO, tmppn);
-		projName = strr(tmppn);
-	}
-	else
-		projName = strx(projName);
-
-	return projName;
-}
 int main(int argc, char **argv)
 {
 	uint autoVersion = 0;
 
-	errorCase_m(!existFile(ZIP7_LOCAL_FILE) && !existFile(ZIP7_FILE), "7z‚³‚ñ‚ª‹‚Ü‚¹‚ñB");
+	errorCase_m(!existFile(ZIP7_LOCAL_FILE) && !existFile(ZIP7_FILE), "7zã•ã‚“ãŒå±…ã¾ã›ã‚“ã€‚");
 
 readArgs:
 	if(argIs("/PE-"))
@@ -485,7 +465,7 @@ readArgs:
 	}
 
 	/*
-		ššš ƒpƒX‚Í‚±‚ÌŠÖ”“à‚Åƒtƒ‹ƒpƒX‚É‚·‚é‚±‚ÆBššš
+		â˜…â˜…â˜… ãƒ‘ã‚¹ã¯ã“ã®é–¢æ•°å†…ã§ãƒ•ãƒ«ãƒ‘ã‚¹ã«ã™ã‚‹ã“ã¨ã€‚â˜…â˜…â˜…
 	*/
 
 	if(argIs("/P"))
@@ -582,7 +562,7 @@ readArgs:
 		memFree(rootDir);
 		return;
 	}
-	if(argIs("/O")) // C:\Dev ‚ÌƒŠƒŠ[ƒXŒü‚¯
+	if(argIs("/O")) // C:\Dev ã®ãƒªãƒªãƒ¼ã‚¹å‘ã‘
 	{
 		char *outDir;
 		char *projName;
@@ -590,7 +570,7 @@ readArgs:
 		char *midZipFile;
 
 		outDir = makeFullPath(nextArg());
-		projName = lineToFairLocalPath_x(x_ProjNameFilter(nextArg()), 100);
+		projName = lineToFairLocalPath(nextArg(), 100);
 		destZipFile = combine_cx(outDir, addExt(strx(projName), "zip"));
 		midZipFile = makeTempPath("zip");
 
@@ -605,7 +585,7 @@ readArgs:
 		PackZipFileEx(midZipFile, outDir, 1, projName, 0);
 		PZF_DestZipFile = NULL;
 		createDir(outDir);
-		coExecute_x(xcout("Compact.exe /C \"%s\"", outDir)); // ˆ³k
+		coExecute_x(xcout("Compact.exe /C \"%s\"", outDir)); // åœ§ç¸®
 		copyFile(midZipFile, destZipFile);
 		removeFile(midZipFile);
 
@@ -615,7 +595,7 @@ readArgs:
 		memFree(midZipFile);
 		return;
 	}
-	if(argIs("/G")) // C:\Dev ‚ÌƒQ[ƒ€iƒo[ƒWƒ‡ƒ“”Ô†•t‚«ƒAƒvƒŠj‚ÌƒŠƒŠ[ƒXŒü‚¯
+	if(argIs("/G")) // C:\Dev ã®ã‚²ãƒ¼ãƒ ï¼ˆãƒãƒ¼ã‚¸ãƒ§ãƒ³ç•ªå·ä»˜ãã‚¢ãƒ—ãƒªï¼‰ã®ãƒªãƒªãƒ¼ã‚¹å‘ã‘
 	{
 		char *outDir;
 		char *projName;
@@ -624,7 +604,7 @@ readArgs:
 		uint version = autoVersion ? autoVersion : InputVersion();
 
 		outDir = makeFullPath(nextArg());
-		projName = lineToFairLocalPath_x(x_ProjNameFilter(nextArg()), 100);
+		projName = lineToFairLocalPath(nextArg(), 100);
 		destZipFile = combine_cx(outDir, addExt(xcout("%s%s", projName, GetPathTailVer(version)), "zip"));
 		midZipFile = makeTempPath("zip");
 
@@ -642,13 +622,13 @@ readArgs:
 			PackZipFileEx(midZipFile, outDir, 1, projName, version);
 			PZF_DestZipFile = NULL;
 			createDir(outDir);
-			coExecute_x(xcout("Compact.exe /C \"%s\"", outDir)); // ˆ³k
+			coExecute_x(xcout("Compact.exe /C \"%s\"", outDir)); // åœ§ç¸®
 			copyFile(midZipFile, destZipFile);
 			removeFile(midZipFile);
 		}
 		else
 		{
-			cout("ƒLƒƒƒ“ƒZƒ‹‚³‚ê‚Ü‚µ‚½B\n");
+			cout("ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã•ã‚Œã¾ã—ãŸã€‚\n");
 
 #if 0
 			recurClearDir(outDir);
