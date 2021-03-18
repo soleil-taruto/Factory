@@ -7686,10 +7686,12 @@ C:\Factory\Petra\RemoveOldest.c(12) : RemoveOldest // ŠÖ”
 C:\Factory\Petra\RemoveOldest.c(38) : main // ŠÖ”
 C:\Factory\Petra\RunOnBatch.c(7) : RunOnBatch // ŠÖ”
 C:\Factory\Petra\RunOnBatch.c(20) : main // ŠÖ”
-C:\Factory\Petra\UpdatingCopy.c(7) : RemoveOldZip // ŠÖ”
-C:\Factory\Petra\UpdatingCopy.c(19) : GetFirstZipFile // ŠÖ”
-C:\Factory\Petra\UpdatingCopy.c(35) : CopyZip // ŠÖ”
-C:\Factory\Petra\UpdatingCopy.c(47) : main // ŠÖ”
+C:\Factory\Petra\UpdatingCopy.c(9) : x_DirFilter // ŠÖ”
+C:\Factory\Petra\UpdatingCopy.c(13) : CheckWDir // ŠÖ”
+C:\Factory\Petra\UpdatingCopy.c(33) : RemoveOldZip // ŠÖ”
+C:\Factory\Petra\UpdatingCopy.c(45) : GetFirstZipFile // ŠÖ”
+C:\Factory\Petra\UpdatingCopy.c(61) : CopyZip // ŠÖ”
+C:\Factory\Petra\UpdatingCopy.c(73) : main // ŠÖ”
 C:\Factory\Program\FilingCase3\Server.c(15) : FILEIO_MAX // ’è‹`
 C:\Factory\Program\FilingCase3\Server.c(17) : KeepDiskFree // •Ï”–”‚ÍéŒ¾
 C:\Factory\Program\FilingCase3\Server.c(18) : RootDir // •Ï”–”‚ÍéŒ¾

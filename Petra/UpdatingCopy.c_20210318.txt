@@ -1,35 +1,9 @@
-/*
-	UpdatingCopy.exe “ü—Í‘¤ƒfƒBƒŒƒNƒgƒŠ o—Í‘¤ƒfƒBƒŒƒNƒgƒŠ
-
-		o—Í‘¤ƒfƒBƒŒƒNƒgƒŠ ... "*" ‚ğƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚Ìƒ[ƒJƒ‹–¼‚É’u‚«Š·‚¦‚éB
+ï»¿/*
+	UpdatingCopy.exe å…¥åŠ›å´ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª å‡ºåŠ›å´ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
 */
 
 #include "C:\Factory\Common\all.h"
 
-static char *x_DirFilter(char *dir)
-{
-	return replaceLine(strx(dir), "*", getLocal(getCwd()), 0); // g
-}
-static void CheckWDir(char *wDir)
-{
-	if(!existDir(wDir))
-	{
-		// Confirm >
-
-		cout("o—Í‘¤ƒfƒBƒŒƒNƒgƒŠ‚ğì¬‚µ‚Ü‚·B\n");
-		cout("wDir: %s\n", wDir);
-		cout("‘±sH\n");
-
-		if(clearGetKey() == 0x1b)
-			termination(0);
-
-		cout("‘±s‚µ‚Ü‚·B\n");
-
-		// < Confirm
-
-		createPath(wDir, 'D');
-	}
-}
 static void RemoveOldZip(char *wDir)
 {
 	autoList_t *files = lsFiles(wDir);
@@ -52,7 +26,7 @@ static char *GetFirstZipFile(char *rDir)
 		if(!_stricmp(getExt(file), "zip"))
 			break;
 
-	errorCase_m(!file, ".zip ƒtƒ@ƒCƒ‹‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB");
+	errorCase_m(!file, ".zip ãƒ•ã‚¡ã‚¤ãƒ«ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚");
 
 	file = strx(file);
 	releaseDim(files, 1);
@@ -79,18 +53,12 @@ int main(int argc, char **argv)
 	rDir = nextArg();
 	wDir = nextArg();
 
-	wDir = x_DirFilter(wDir);
-
-	CheckWDir(wDir);
-
 	errorCase(!existDir(rDir));
-	errorCase(!existDir(wDir)); // 2bs
+	errorCase(!existDir(wDir));
 
 	LOGPOS();
 	RemoveOldZip(wDir);
 	LOGPOS();
 	CopyZip(rDir, wDir);
 	LOGPOS();
-
-	memFree(wDir);
 }
