@@ -14,20 +14,10 @@ static void CheckWDir(char *wDir)
 {
 	if(!existDir(wDir))
 	{
-		// Confirm >
-
 		cout("出力側ディレクトリを作成します。\n");
 		cout("wDir: %s\n", wDir);
-		cout("続行？\n");
 
-		if(clearGetKey() == 0x1b)
-			termination(0);
-
-		cout("続行します。\n");
-
-		// < Confirm
-
-		createPath(wDir, 'D');
+		createDir(wDir);
 	}
 }
 static void RemoveOldZip(char *wDir)
