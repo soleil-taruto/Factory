@@ -1,5 +1,5 @@
 /*
-	cpLatest.exe コピー元DIR検索DIR コピー元ローカルファイル名 コピー先ファイル
+	cpLatest.exe コピー元DIRを検索するDIR コピー元ローカルファイル名 コピー先ファイル
 */
 
 #include "C:\Factory\Common\all.h"

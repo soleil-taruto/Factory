@@ -20,7 +20,8 @@ static char *RootParentHRef;
 static int ImageTagDisabled;
 static int MD5Disabled;
 
-#define HIDDEN_FILE_TRAILER " (íœ—\’è)"
+#define HIDDEN_FILE_TRAILER " (this file will be deleted soon)"
+//#define HIDDEN_FILE_TRAILER " (íœ—\’è)"
 //#define HIDDEN_FILE_TRAILER " (HIDDEN)"
 
 static int IsSimpleName(char *localPath)
