@@ -156,7 +156,10 @@ static char *MakeDivList(uint depth)
 		{
 			char *prm_href = href;
 
-			if(size == 0)
+			if(
+				size == 0 ||
+				getFileAttr_Hidden(path)
+				)
 				prm_href = NULL;
 
 			addElement(divs, (uint)MkDivLine(prm_href, lref, trailer));
