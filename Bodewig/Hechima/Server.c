@@ -12,7 +12,8 @@
 #include "C:\Factory\Common\Options\SockServerTh.h"
 #include "C:\Factory\Common\Options\SockStream.h"
 
-#define REMARKS_SAVE_FILE "C:\\appdata\\HechimaServerRemarks.txt"
+#define REMARKS_SAVE_FILE "C:\\Factory\\tmp\\HechimaServerRemarks.txt"
+//#define REMARKS_SAVE_FILE "C:\\appdata\\HechimaServerRemarks.txt" // appdata —}Ž~ @ 2021.3.19
 
 #define COMMAND_LENMAX 50
 #define SVAL64_LENMAX 30

@@ -18,7 +18,8 @@ static char *DownloadedEventCommand;
 
 // ---- known url ----
 
-#define KNOWN_URL_FILE "C:\\appdata\\instagram-dl\\known-url.txt"
+#define KNOWN_URL_FILE "C:\\Factory\\tmp\\instagram-dl\\known-url.txt"
+//#define KNOWN_URL_FILE "C:\\appdata\\instagram-dl\\known-url.txt" // appdata —}Ž~ @ 2021.3.19
 #define KNOWN_URL_MAX 20
 
 static autoList_t *GetAllKnownUrl(void)
@@ -59,7 +60,8 @@ static void AddKnownUrl(char *url)
 
 // ---- known hash ----
 
-#define KNOWN_HASH_FILE "C:\\appdata\\instagram-dl\\known-hash.txt"
+#define KNOWN_HASH_FILE "C:\\Factory\\tmp\\instagram-dl\\known-hash.txt"
+//#define KNOWN_HASH_FILE "C:\\appdata\\instagram-dl\\known-hash.txt" // appdata —}Ž~ @ 2021.3.19
 #define KNOWN_HASH_MAX 20
 
 static autoList_t *GetAllKnownHash(void)

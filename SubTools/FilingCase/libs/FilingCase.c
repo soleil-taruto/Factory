@@ -1,7 +1,7 @@
 /*
 	ファイル構成
 
-		C:\appdata\FilingCase\<TABLE_ID>\<COLUMN_ID>\
+		C:\Factory\tmp\FilingCase\<TABLE_ID>\<COLUMN_ID>\
 
 			rv\<ROW_ID> == VALUE
 			vr\<VALUE_ID>\<ROW_ID> == {}
@@ -98,7 +98,8 @@ void FC_Unlock(void)
 
 // ---- table ----
 
-#define ROOT_DIR "C:\\appdata\\FilingCase"
+#define ROOT_DIR "C:\\Factory\\tmp\\FilingCase"
+//#define ROOT_DIR "C:\\appdata\\FilingCase" // appdata 抑止 @ 2021.3.19
 
 static char *GetTableDir(char *tableId)
 {

@@ -28,7 +28,8 @@ static char *S_Id;
 
 // ---- time table ----
 
-#define TIME_TABLE_FILE "C:\\appdata\\Period.dat"
+#define TIME_TABLE_FILE "C:\\Factory\\tmp\\Period.dat"
+//#define TIME_TABLE_FILE "C:\\appdata\\Period.dat" // appdata —}Ž~ @ 2021.3.19
 
 static autoList_t *TTbl;
 static uint TTPos;
@@ -189,7 +190,7 @@ static void Update_TimeDay(uint day)
 int main(int argc, char **argv)
 {
 	mt19937_initCRnd();
-	mkAppDataDir();
+//	mkAppDataDir(); // appdata —}Ž~ @ 2021.3.19
 
 	if(argIs("/EI"))
 	{

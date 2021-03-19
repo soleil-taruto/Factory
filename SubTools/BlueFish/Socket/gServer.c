@@ -2,7 +2,8 @@
 #include "C:\Factory\Common\Options\SockStream.h"
 #include "gDefine.h"
 
-#define ROOTDIR "C:\\appdata\\gLanes"
+#define ROOTDIR "C:\\Factory\\tmp\\gLanes"
+//#define ROOTDIR "C:\\appdata\\gLanes" // appdata —}Ž~ @ 2021.3.19
 #define LANE_NUM_LMT 1000
 #define FILE_NUM_LMT 1000
 #define TOTAL_SIZE_LMT 30000000000ui64 // 30 gb
@@ -263,7 +264,7 @@ int main(int argc, char **argv)
 	cmdTitle("gServer");
 
 	LOGPOS();
-	mkAppDataDir();
+//	mkAppDataDir(); // appdata —}Ž~ @ 2021.3.19
 	LOGPOS();
 	createDirIfNotExist(ROOTDIR);
 

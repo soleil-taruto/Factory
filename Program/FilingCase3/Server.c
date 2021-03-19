@@ -15,7 +15,8 @@
 #define FILEIO_MAX 20
 
 static uint64 KeepDiskFree = 500000000ui64; // 500 MB
-static char *RootDir = "C:\\appdata\\FilingCase3\\LongPath_aaaaaaaaaa_bbbbbbbbbb_cccccccccc_dddddddddd_eeeeeeeeee_ffffffffff_gggggggggg"; // 100 ï∂éöÇ≠ÇÁÇ¢ÅB
+static char *RootDir = "C:\\Factory\\tmp\\FilingCase3\\LongPath_aaaaaaaaaa_bbbbbbbbbb_cccccccccc_dddddddddd_eeeeeeeeee_ffffffffff_gggggggggg";
+//static char *RootDir = "C:\\appdata\\FilingCase3\\LongPath_aaaaaaaaaa_bbbbbbbbbb_cccccccccc_dddddddddd_eeeeeeeeee_ffffffffff_gggggggggg"; // 100 ï∂éöÇ≠ÇÁÇ¢ÅB// appdata ó}é~ @ 2021.3.19
 static char *DataDir;
 static char *TempDir;
 static char *SigFile;

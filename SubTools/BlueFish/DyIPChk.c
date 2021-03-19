@@ -4,8 +4,10 @@
 
 #include "C:\Factory\Common\all.h"
 
-#define SAVE_DATA_DIR "C:\\appdata\\DyIPChk_SaveData"
-#define COMMON_SAVE_DATA_FILE "C:\\appdata\\DyIPChk_SaveData.txt"
+#define SAVE_DATA_DIR "C:\\Factory\\tmp\\DyIPChk_SaveData"
+//#define SAVE_DATA_DIR "C:\\appdata\\DyIPChk_SaveData" // appdata —}Ž~ @ 2021.3.19
+#define COMMON_SAVE_DATA_FILE "C:\\Factory\\tmp\\DyIPChk_SaveData.txt"
+//#define COMMON_SAVE_DATA_FILE "C:\\appdata\\DyIPChk_SaveData.txt" // appdata —}Ž~ @ 2021.3.19
 
 #define DY_IP_CHK_COMMAND "C:\\Factory\\Labo\\Socket\\hget.exe /L http://ieserver.net/ipcheck.shtml IP.tmp"
 #define IP_OUT_FILE "IP.tmp"
