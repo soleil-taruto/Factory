@@ -1,12 +1,10 @@
-/*
-	UpdatingCopy.exe “ü—Í‘¤ƒfƒBƒŒƒNƒgƒŠ o—Í‘¤ƒfƒBƒŒƒNƒgƒŠ
+ï»¿/*
+	UpdatingCopy.exe å…¥åŠ›å´ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª å‡ºåŠ›å´ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
 
-		o—Í‘¤ƒfƒBƒŒƒNƒgƒŠ ... "*" ‚ğƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚Ìƒ[ƒJƒ‹–¼‚É’u‚«Š·‚¦‚éB
+		å‡ºåŠ›å´ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª ... "*" ã‚’ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®ãƒ­ãƒ¼ã‚«ãƒ«åã«ç½®ãæ›ãˆã‚‹ã€‚
 */
 
 #include "C:\Factory\Common\all.h"
-
-#define DELETE_MARK " (íœ—\’è).flg" // endsWithICase() ‚ª mbs_ ‚Å‚Í‚È‚¢‚Ì‚Å MBC_2 ‚Ån‚Ü‚ç‚È‚¢‚±‚ÆB
 
 static char *x_DirFilter(char *dir)
 {
@@ -16,7 +14,7 @@ static void CheckWDir(char *wDir)
 {
 	if(!existDir(wDir))
 	{
-		cout("o—Í‘¤ƒfƒBƒŒƒNƒgƒŠ‚ğì¬‚µ‚Ü‚·B\n");
+		cout("å‡ºåŠ›å´ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’ä½œæˆã—ã¾ã™ã€‚\n");
 		cout("wDir: %s\n", wDir);
 
 		createDir(wDir);
@@ -29,32 +27,9 @@ static void RemoveOldZip(char *wDir)
 	uint index;
 
 	foreach(files, file, index)
-	{
-		if(!existFile(file)) // ? Šù‚Éíœ‚³‚ê‚½B
-			continue;
+		if(!_stricmp(getExt(file), "zip"))
+			removeFile(file);
 
-		if(endsWithICase(file, DELETE_MARK))
-		{
-			char *deleteMarkedFile = strxl(file, strlen(file) - strlen(DELETE_MARK));
-
-			if(!existFile(deleteMarkedFile)) // ? ŒÇ—§‚µ‚½íœƒ}[ƒNƒtƒ@ƒCƒ‹ -> Á‚·
-				removeFile(file);
-		}
-		else if(!_stricmp(getExt(file), "zip"))
-		{
-			char *deleteMarkFile = xcout("%s%s", file, DELETE_MARK);
-
-			if(existFile(deleteMarkFile)) // ? íœƒ}[ƒNÏ‚İ -> Á‚·
-			{
-				removeFile(file);
-				removeFile(deleteMarkFile);
-			}
-			else
-				createFile(deleteMarkFile);
-
-			memFree(deleteMarkFile);
-		}
-	}
 	releaseDim(files, 1);
 }
 static char *GetFirstZipFile(char *rDir)
@@ -67,7 +42,7 @@ static char *GetFirstZipFile(char *rDir)
 		if(!_stricmp(getExt(file), "zip"))
 			break;
 
-	errorCase_m(!file, ".zip ƒtƒ@ƒCƒ‹‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB");
+	errorCase_m(!file, ".zip ãƒ•ã‚¡ã‚¤ãƒ«ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚");
 
 	file = strx(file);
 	releaseDim(files, 1);
