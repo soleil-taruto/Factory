@@ -20,6 +20,9 @@ static char *RootParentHRef;
 static int ImageTagDisabled;
 static int MD5Disabled;
 
+#define HIDDEN_FILE_TRAILER " (削除予定)"
+//#define HIDDEN_FILE_TRAILER " (HIDDEN)"
+
 static int IsSimpleName(char *localPath)
 {
 	return lineExp("<1,,-.__09AZaz>", localPath) &&
@@ -29,12 +32,12 @@ static int IsSimpleName(char *localPath)
 
 	// "<>." というローカル名は作成出来ないぽい。。。
 }
-static char *MkDivLine(char *href, char *lref, char *trailer)
+static char *MkDivLine(char *href, char *lref, char *trailer, char *exTrailer)
 {
 	if(href)
-		return xcout("<div><a href=\"%s\">%s</a>%s</div>", c_urlEncoder(href), lref, trailer);
+		return xcout("<div><a href=\"%s\">%s</a>%s%s</div>", c_urlEncoder(href), lref, trailer, exTrailer);
 	else
-		return xcout("<div>%s%s</div>", lref, trailer);
+		return xcout("<div>%s%s%s</div>", lref, trailer, exTrailer);
 }
 
 static void MakeIndex(char *, uint);
@@ -83,9 +86,9 @@ static char *MakeDivList(uint depth)
 	dircnt = lastDirCount;
 
 	if(depth)
-		addElement(divs, (uint)MkDivLine("../" INDEXFILE, "&lt;parent directory&gt;", ""));
+		addElement(divs, (uint)MkDivLine("../" INDEXFILE, "&lt;parent directory&gt;", "", ""));
 	else if(RootParentHRef)
-		addElement(divs, (uint)MkDivLine(RootParentHRef, "&lt;return&gt;", ""));
+		addElement(divs, (uint)MkDivLine(RootParentHRef, "&lt;return&gt;", "", ""));
 
 	rapidSort(paths, (sint (*)(uint, uint))S_DirFileComp);
 
@@ -155,14 +158,18 @@ static char *MakeDivList(uint depth)
 
 		{
 			char *prm_href = href;
+			char *exTrailer = "";
 
-			if(
-				size == 0 ||
-				getFileAttr_Hidden(path)
-				)
+			if(getFileAttr_Hidden(path))
+			{
 				prm_href = NULL;
-
-			addElement(divs, (uint)MkDivLine(prm_href, lref, trailer));
+				exTrailer = HIDDEN_FILE_TRAILER;
+			}
+			else if(size == 0)
+			{
+				prm_href = NULL;
+			}
+			addElement(divs, (uint)MkDivLine(prm_href, lref, trailer, exTrailer));
 		}
 
 		if(!ImageTagDisabled)
