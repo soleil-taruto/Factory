@@ -422,6 +422,19 @@ static int IsRangeEmptyText(Range_t *range)
 	memFree(text);
 	return ret;
 }
+static sint Comp_RangeTextMD5(uint v1, uint v2)
+{
+	Range_t *a = (Range_t *)v1;
+	Range_t *b = (Range_t *)v2;
+	sint ret;
+
+	ret = strcmp(a->TextMD5, b->TextMD5);
+
+	if(!ret)
+		ret = strcmp(a->File, b->File);
+
+	return ret;
+}
 static void DispRangeGroup(autoList_t *rangeGroup)
 {
 	Range_t *range;
@@ -449,16 +462,25 @@ static void DispRangeGroup(autoList_t *rangeGroup)
 		cout("%s %c %I64u %u\n", range->TextMD5, IsRangeEmptyText(range) ? '-' : '+', range->Stamp, strlen(range->Text));
 	}
 	cout("====\n");
+	cout("Represents:\n");
 
-	// ‚Â‚¢‚Å‚É FOUNDLISTFILE ‚Öo—Í
 	{
-		FILE *fp = fileOpen(FOUNDLISTFILE, "wt");
+		autoList_t *tmp_rangeGroup = copyAutoList(rangeGroup);
+		FILE *foundList_fp = fileOpen(FOUNDLISTFILE, "wt"); // ‚Â‚¢‚Å‚É FOUNDLISTFILE ‚Öo—Í
 
-		foreach(rangeGroup, range, index)
-			writeLine(fp, range->File);
+		rapidSort(tmp_rangeGroup, Comp_RangeTextMD5);
 
-		fileClose(fp);
+		foreach(tmp_rangeGroup, range, index)
+		if(!index || strcmp(range->TextMD5, ((Range_t *)getElement(tmp_rangeGroup, index - 1))->TextMD5))
+		{
+			cout("%s %s\n", range->TextMD5, range->File);
+			writeLine(foundList_fp, range->File);
+		}
+		releaseAutoList(tmp_rangeGroup);
+		fileClose(foundList_fp);
 	}
+
+	cout("====\n");
 }
 static sint Comp_RangeStampDesc(uint v1, uint v2)
 {
