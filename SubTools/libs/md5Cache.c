@@ -19,28 +19,39 @@ static char *GetCacheDir(void)
 	}
 	return dir;
 }
-static char *GetOrSetCache(char *sHFile, char *sHInfo, char *sHash)
+static char *GetOrSetCache(char *sHPath, char *sHInfo, char *sHash)
 {
-	char *dir1 = combine(GetCacheDir(), sHFile);
-	char *dir2;
+	char *dirG0 = GetCacheDir();
+	char *dirG1;
+	char *dirG2;
+	char *dirG3;
+	char *dirHP;
+	char *dirHI;
 
-	dir2 = combine(dir1, sHInfo);
+	dirG1 = combine_cx(dirG0, strxl(sHPath + 0, 3));
+	dirG2 = combine_cx(dirG1, strxl(sHPath + 3, 3));
+	dirG3 = combine_cx(dirG2, strxl(sHPath + 6, 3));
+	dirHP = combine(dirG3, sHPath);
+	dirHI = combine(dirHP, sHInfo);
 
 	if(sHash) // Set
 	{
-		char *symFile = combine(dir2, sHash);
+		char *symFile = combine(dirHI, sHash);
 
-		createDirIfNotExist(GetCacheDir());
-		recurRemoveDirIfExist(dir1);
-		createDir(dir1);
-		createDir(dir2);
+		createDirIfNotExist(dirG0);
+		createDirIfNotExist(dirG1);
+		createDirIfNotExist(dirG2);
+		createDirIfNotExist(dirG3);
+		recurRemoveDirIfExist(dirHP);
+		createDir(dirHP);
+		createDir(dirHI);
 		createFile(symFile);
 
 		memFree(symFile);
 	}
-	else if(existDir(dir2)) // Get
+	else if(existDir(dirHI)) // Get
 	{
-		autoList_t *symFiles = lsFiles(dir2);
+		autoList_t *symFiles = lsFiles(dirHI);
 
 		errorCase(getCount(symFiles) != 1);
 
@@ -52,13 +63,17 @@ static char *GetOrSetCache(char *sHFile, char *sHInfo, char *sHash)
 
 		releaseAutoList(symFiles);
 	}
-	memFree(dir1);
-	memFree(dir2);
+//	memFree(dirG0); // dont!
+	memFree(dirG1);
+	memFree(dirG2);
+	memFree(dirG3);
+	memFree(dirHP);
+	memFree(dirHI);
 	return sHash;
 }
 char *md5Cache_makeHexHashFile(char *file)
 {
-	char *sHFile;
+	char *sHPath;
 	char *sInfo;
 	char *sHInfo;
 	char *sHash;
@@ -67,18 +82,18 @@ char *md5Cache_makeHexHashFile(char *file)
 
 	file = makeFullPath(file);
 	toUpperLine(file);
-	sHFile = md5_makeHexHashLine(file);
+	sHPath = md5_makeHexHashLine(file);
 	sInfo = xcout("%I64u:%I64d:%I64d", getFileSize(file), getFileCreateTime(file), getFileWriteTime(file)); // この情報が変わらなければ、変更無しと見なし、ハッシュ再計算を行わない。
 	sHInfo = md5_makeHexHashLine(sInfo);
-	sHash = GetOrSetCache(sHFile, sHInfo, NULL);
+	sHash = GetOrSetCache(sHPath, sHInfo, NULL);
 
 	if(!sHash)
 	{
 		sHash = md5_makeHexHashFile(file);
-		GetOrSetCache(sHFile, sHInfo, sHash);
+		GetOrSetCache(sHPath, sHInfo, sHash);
 	}
 	memFree(file);
-	memFree(sHFile);
+	memFree(sHPath);
 	memFree(sInfo);
 	memFree(sHInfo);
 	return sHash;
