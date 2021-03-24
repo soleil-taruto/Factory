@@ -315,5 +315,7 @@ readArgs:
 	dir = nextArg();
 	errorCase(!existDir(dir));
 
+	errorCase(hasArgs(1)); // ? •s–¾‚Èˆø”
+
 	MakeIndex(dir, 0);
 }
