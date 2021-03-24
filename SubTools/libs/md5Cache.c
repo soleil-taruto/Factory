@@ -13,7 +13,8 @@ static char *GetCacheDir(void)
 		errorCase(m_isEmpty(tmpDir));
 		errorCase(!existDir(tmpDir));
 
-		dir = combine_cx(tmpDir, xcout("%s_%u", CACHE_UUID, (uint)(toValue64_x(makeCompactStamp(NULL)) / 1000000)));
+		dir = combine(tmpDir, CACHE_UUID);
+//		dir = combine_cx(tmpDir, xcout("%s_%u", CACHE_UUID, (uint)(toValue64_x(makeCompactStamp(NULL)) / 1000000)));
 //		dir = combine_cx(tmpDir, xcout("%s_%u", CACHE_UUID, (uint)(time(NULL) / 86400)));
 	}
 	return dir;
