@@ -9,6 +9,7 @@ qbk
 FindSame
 RemoveHiddenFiles
 SimpleTree
+FileList2MD5List
 
 ----
 定期的に実行・必要に応じて実行
