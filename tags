@@ -7687,6 +7687,8 @@ C:\Factory\OpenSource\sha512\sha512.h(192) : char // •Ï”–”‚ÍéŒ¾
 C:\Factory\OpenSource\sha512\sha512.h(193) : SHA512_Transform // •Ï”–”‚ÍéŒ¾
 C:\Factory\Petra\CxBuiltBatOnly.c(3) : main // ŠÖ”
 C:\Factory\Petra\EditConfig.c(7) : main // ŠÖ”
+C:\Factory\Petra\FileList2MD5List.c(8) : FileList2MD5List // ŠÖ”
+C:\Factory\Petra\FileList2MD5List.c(22) : main // ŠÖ”
 C:\Factory\Petra\Lock.c(7) : main // ŠÖ”
 C:\Factory\Petra\PublicLog.c(7) : LOG_FILE // ’è‹`
 C:\Factory\Petra\PublicLog.c(8) : LOG_FILE_02 // ’è‹`
@@ -7697,7 +7699,6 @@ C:\Factory\Petra\RemoveOldest.c(12) : RemoveOldest // ŠÖ”
 C:\Factory\Petra\RemoveOldest.c(38) : main // ŠÖ”
 C:\Factory\Petra\RunOnBatch.c(7) : RunOnBatch // ŠÖ”
 C:\Factory\Petra\RunOnBatch.c(20) : main // ŠÖ”
-C:\Factory\Petra\SimpleMD5.c(4) : main // ŠÖ”
 C:\Factory\Petra\UpdatingCopy.c(9) : x_DirFilter // ŠÖ”
 C:\Factory\Petra\UpdatingCopy.c(13) : CheckWDir // ŠÖ”
 C:\Factory\Petra\UpdatingCopy.c(23) : RemoveOldZip // ŠÖ”
