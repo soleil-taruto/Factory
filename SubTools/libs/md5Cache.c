@@ -1,10 +1,26 @@
 #include "md5Cache.h"
 
-#define CACHE_DIR "C:\\Factory\\tmp\\md5Cache"
+#define CACHE_UUID "{cb89b2e7-6f61-4a3b-9ccc-39212b231988}"
 
+static char *GetCacheDir(void)
+{
+	static char *dir;
+
+	if(!dir)
+	{
+		char *tmpDir = getEnvLine("TMP");
+
+		errorCase(m_isEmpty(tmpDir));
+		errorCase(!existDir(tmpDir));
+
+		dir = combine_cx(tmpDir, xcout("%s_%u", CACHE_UUID, (uint)(toValue64_x(makeCompactStamp(NULL)) / 1000000)));
+//		dir = combine_cx(tmpDir, xcout("%s_%u", CACHE_UUID, (uint)(time(NULL) / 86400)));
+	}
+	return dir;
+}
 static char *GetOrSetCache(char *sHFile, char *sHInfo, char *sHash)
 {
-	char *dir1 = combine(CACHE_DIR, sHFile);
+	char *dir1 = combine(GetCacheDir(), sHFile);
 	char *dir2;
 
 	dir2 = combine(dir1, sHInfo);
@@ -13,7 +29,7 @@ static char *GetOrSetCache(char *sHFile, char *sHInfo, char *sHash)
 	{
 		char *symFile = combine(dir2, sHash);
 
-		createDirIfNotExist(CACHE_DIR);
+		createDirIfNotExist(GetCacheDir());
 		recurRemoveDirIfExist(dir1);
 		createDir(dir1);
 		createDir(dir2);
@@ -51,7 +67,7 @@ char *md5Cache_makeHexHashFile(char *file)
 	file = makeFullPath(file);
 	toUpperLine(file);
 	sHFile = md5_makeHexHashLine(file);
-	sInfo = xcout("%I64u:%I64d:%I64d", getFileSize(file), getFileCreateTime(file), getFileWriteTime(file));
+	sInfo = xcout("%I64u:%I64d:%I64d", getFileSize(file), getFileCreateTime(file), getFileWriteTime(file)); // この情報が変わらなければ、変更無しと見なし、ハッシュ再計算を行わない。
 	sHInfo = md5_makeHexHashLine(sInfo);
 	sHash = GetOrSetCache(sHFile, sHInfo, NULL);
 
