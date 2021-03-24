@@ -63,6 +63,8 @@ static autoList_t *GetTargetDirs(void)
 
 //			!_stricmp(dir, "C:\\huge") || // del @ 2017.12.16
 
+			!_stricmp(dir, "C:\\$WinREAgent") || // add @ 2021.3.24
+
 			0
 			)
 		{
