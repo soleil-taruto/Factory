@@ -19,7 +19,7 @@ static char *GetCacheDir(void)
 	}
 	return dir;
 }
-static char *GetOrSetCache(char *sHPath, char *sHInfo, char *sHash)
+static char *GetOrSetCache_NoLock(char *sHPath, char *sHInfo, char *sHash)
 {
 	char *dirG0 = GetCacheDir();
 	char *dirG1;
@@ -69,6 +69,13 @@ static char *GetOrSetCache(char *sHPath, char *sHInfo, char *sHash)
 	memFree(dirG3);
 	memFree(dirHP);
 	memFree(dirHI);
+	return sHash;
+}
+static char *GetOrSetCache(char *sHPath, char *sHInfo, char *sHash)
+{
+	mutex();
+	sHash = GetOrSetCache_NoLock(sHPath, sHInfo, sHash);
+	unmutex();
 	return sHash;
 }
 char *md5Cache_makeHexHashFile(char *file)
