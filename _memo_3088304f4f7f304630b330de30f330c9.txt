@@ -30,10 +30,10 @@ CheckRum [.rum_ディレクトリ]
 CheckRumInDir [.rum_ディレクトリ群の親ディレクトリ]
 
 ----
-バックアップ・デプロイ・シャットダウン
+バックアップとシャットダウン
 
-C:\vaz\bat\CoffeeBreakRelease.bat
-C:\vaz\bat\DailyRelease.bat
+C:\vaz\bat\CoffeeBreakRelease.bat -- ★廃止
+C:\vaz\bat\DailyRelease.bat       -- ★廃止
 
 ----
 プログラム・プロジェクトをテンプレートから作成
