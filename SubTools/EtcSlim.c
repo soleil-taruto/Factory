@@ -15,7 +15,7 @@
 	- - -
 	—á
 
-	EtcSlim.exe /D C:\etc\‰æ‘œ
+	EtcSlim.exe /D C:\etz\‰æ‘œ
 */
 
 #include "C:\Factory\Common\all.h"

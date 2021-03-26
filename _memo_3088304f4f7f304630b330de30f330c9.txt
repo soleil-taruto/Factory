@@ -32,8 +32,8 @@ CheckRumInDir [.rum_ディレクトリ群の親ディレクトリ]
 ----
 バックアップ・デプロイ・シャットダウン
 
-C:\var\bat\CoffeeBreakRelease.bat
-C:\var\bat\DailyRelease.bat
+C:\vaz\bat\CoffeeBreakRelease.bat
+C:\vaz\bat\DailyRelease.bat
 
 ----
 プログラム・プロジェクトをテンプレートから作成

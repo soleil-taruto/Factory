@@ -166,7 +166,7 @@ static void ToDir(char *wDir)
 /*
 static void DoTest01(void)
 {
-	LoadByFile("C:\\var\\mp4\\ddd.mp4");
+	LoadByFile("C:\\vaz\\mp4\\ddd.mp4");
 	ShowBox(Root, 0);
 	ToDir("C:\\temp\\ddd");
 }

@@ -9,7 +9,7 @@
 	‘¶İ‚µ‚È‚¢ê‡‚Íè“®‚Åì¬‚·‚é‚±‚ÆB
 	š‹ó”’•s‰Â
 */
-#define BACKUP_DIR "C:\\var\\Backup"
+#define BACKUP_DIR "C:\\vaz\\Backup"
 //#define BACKUP_DIR "C:\\tmp\\Backup"
 
 /*

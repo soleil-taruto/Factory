@@ -303,7 +303,7 @@ int main(int argc, char **argv)
 	{
 		if(existDir("C:\\888"))
 		{
-			writeOneLine_cx("C:\\888\\Extra_0001.bat", xcout("COPY /Y C:\\var\\Backup.log %s\\_Backup.log", destDir));
+			writeOneLine_cx("C:\\888\\Extra_0001.bat", xcout("COPY /Y C:\\vaz\\Backup.log %s\\_Backup.log", destDir));
 		}
 	}
 

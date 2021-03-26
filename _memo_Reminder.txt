@@ -92,7 +92,7 @@ StringTools.Enclosed
 
 Backup.log の内容確認
 
-	TYPE C:\var\Backup.log | Grape "ECHO ERRORLEVEL=" | mask 1 24 | TypeGroupBy
+	TYPE C:\vaz\Backup.log | Grape "ECHO ERRORLEVEL=" | mask 1 24 | TypeGroupBy
 
 ----
 

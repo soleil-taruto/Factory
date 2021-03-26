@@ -4,9 +4,9 @@
 
 #include "C:\Factory\Common\all.h"
 
-#define LOG_FILE    "C:\\var\\PublicLog.txt"
-#define LOG_FILE_02 "C:\\var\\PublicLog2.txt"
-#define LOG_FILE_03 "C:\\var\\PublicLog3.txt"
+#define LOG_FILE    "C:\\vaz\\PublicLog.txt"
+#define LOG_FILE_02 "C:\\vaz\\PublicLog2.txt"
+#define LOG_FILE_03 "C:\\vaz\\PublicLog3.txt"
 /*
 #define LOG_FILE    "C:\\tmp\\PublicLog.txt"
 #define LOG_FILE_02 "C:\\tmp\\PublicLog2.txt"
