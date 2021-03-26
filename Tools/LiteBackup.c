@@ -9,7 +9,8 @@
 	存在しない場合は手動で作成すること。
 	★空白不可
 */
-#define BACKUP_DIR "C:\\tmp\\Backup"
+#define BACKUP_DIR "C:\\var\\Backup"
+//#define BACKUP_DIR "C:\\tmp\\Backup"
 
 /*
 	rum.exe へのパス
