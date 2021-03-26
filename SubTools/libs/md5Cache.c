@@ -15,7 +15,7 @@ static char *GetCacheDir(void)
 //		errorCase(m_isEmpty(tmpDir));
 		errorCase(!existDir(tmpDir));
 
-		dir = combine(tmpDir, "md5Cache");
+		dir = combine(tmpDir, "md5");
 //		dir = combine(tmpDir, CACHE_UUID);
 //		dir = combine_cx(tmpDir, xcout("%s_%u", CACHE_UUID, (uint)(toValue64_x(makeCompactStamp(NULL)) / 10000000000))); // ”N–ˆ
 //		dir = combine_cx(tmpDir, xcout("%s_%u", CACHE_UUID, (uint)(toValue64_x(makeCompactStamp(NULL)) /   100000000))); // ŒŽ–ˆ
