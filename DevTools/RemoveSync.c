@@ -144,7 +144,7 @@ static void RemoveSync_File(char *file)
 
 //	cout("%s\n", file);
 
-	foreach(lines, line, index)
+	foreach(lines, line, index) // SyncDevRange -- // sync > @ xxx ‚Æ // < sync
 	{
 		char *tLine = strx(line);
 		uint tabIndent = 0;
@@ -167,6 +167,32 @@ static void RemoveSync_File(char *file)
 
 			index = end;
 			modified = 1;
+
+			cout("DEL-RANGE\n");
+		}
+		memFree(tLine);
+		memFree(targTLine);
+	}
+	foreach(lines, line, index) // SyncDevUsing -- // ^ sync @ xxx
+	if(line)
+	{
+		char *tLine = strx(line);
+		uint tabIndent = 0;
+		char *targTLine = xcout("// ^ sync @ %s", RangeName);
+
+		while(*tLine == '\t')
+		{
+			eraseChar(tLine);
+			tabIndent++;
+		}
+		if(!strcmp(tLine, targTLine))
+		{
+			memFree(line);
+			setElement(lines, index, 0);
+
+			modified = 1;
+
+			cout("DEL-USING\n");
 		}
 		memFree(tLine);
 		memFree(targTLine);
@@ -181,7 +207,7 @@ static void RemoveSync_File(char *file)
 
 		if(!PseudoMode)
 		{
-			LOGPOS();
+			cout("DELETE\n");
 
 			semiRemovePath(file);
 			writeLines(file, lines);

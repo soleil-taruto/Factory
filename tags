@@ -4130,8 +4130,8 @@ C:\Factory\DevTools\RemoveSync.c(84) : SqZeroToEmptyLine // ä÷êî
 C:\Factory\DevTools\RemoveSync.c(90) : RemoveAroundEmptyLines // ä÷êî
 C:\Factory\DevTools\RemoveSync.c(111) : FindEnd // ä÷êî
 C:\Factory\DevTools\RemoveSync.c(138) : RemoveSync_File // ä÷êî
-C:\Factory\DevTools\RemoveSync.c(192) : RemoveSync // ä÷êî
-C:\Factory\DevTools\RemoveSync.c(205) : main // ä÷êî
+C:\Factory\DevTools\RemoveSync.c(218) : RemoveSync // ä÷êî
+C:\Factory\DevTools\RemoveSync.c(231) : main // ä÷êî
 C:\Factory\DevTools\rev.c(28) : MakeRev // ä÷êî
 C:\Factory\DevTools\rev.c(72) : UnmakeRev // ä÷êî
 C:\Factory\DevTools\rev.c(100) : main // ä÷êî
