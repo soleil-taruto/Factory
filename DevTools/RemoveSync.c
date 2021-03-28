@@ -9,6 +9,7 @@ static char *S_TargetExts = "c.h.cpp.cs";
 static char *RangeName;
 
 static autoList_t *TargetExts;
+static int PseudoMode;
 
 static void SZTEL_ZeroToEmptyLine(autoList_t *lines)
 {
@@ -178,8 +179,13 @@ static void RemoveSync_File(char *file)
 
 		SqZeroToEmptyLine(lines);
 
-		semiRemovePath(file);
-		writeLines(file, lines);
+		if(!PseudoMode)
+		{
+			LOGPOS();
+
+			semiRemovePath(file);
+			writeLines(file, lines);
+		}
 	}
 	releaseDim(lines, 1);
 }
@@ -208,5 +214,20 @@ int main(int argc, char **argv)
 
 	errorCase(m_isEmpty(RangeName));
 
+	PseudoMode = 1;
+	RemoveSync();
+
+	// Confirm
+	{
+		cout("RangeName: %s\n", RangeName);
+		cout("続行？\n");
+
+		if(clearGetKey() == 0x1b)
+			termination(0);
+
+		cout("続行します。\n");
+	}
+
+	PseudoMode = 0;
 	RemoveSync();
 }
