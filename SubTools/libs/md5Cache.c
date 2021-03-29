@@ -30,13 +30,52 @@ static char *GetOrSetCache_NoLock(char *sHPath, char *sHInfo, char *sHash)
 	char *dirG1;
 	char *dirG2;
 	char *dirG3;
+	char *dirG4;
 	char *dirHP;
 	char *dirHI;
+
+	// 定期的なキャッシュクリア
+	{
+		static int oncePerProc;
+
+		if(!oncePerProc)
+		{
+			oncePerProc = 1;
+
+			{
+				char *EXPIRE_TIME_FILE = combine(dirG0, "____expire.txt");
+				char *TARGET_DIR = dirG0;
+				time_t PERIOD_SEC = 100 * 86400;
+				time_t currTime = time(NULL);
+				int cancel = 0;
+
+				if(existFile(EXPIRE_TIME_FILE))
+				{
+					time_t expireTime = (time_t)toValue64_x(readText_b(EXPIRE_TIME_FILE));
+
+					if(currTime < expireTime)
+						cancel = 1;
+				}
+				if(!cancel)
+				{
+					time_t nextExpireTime = currTime + PERIOD_SEC;
+
+					LOGPOS();
+					recurRemoveDirIfExist(TARGET_DIR);
+					createDir(TARGET_DIR);
+					writeOneLineNoRet_b_cx(EXPIRE_TIME_FILE, xcout("%I64d", nextExpireTime));
+					LOGPOS();
+				}
+				memFree(EXPIRE_TIME_FILE);
+			}
+		}
+	}
 
 	dirG1 = combine_cx(dirG0, strxl(sHPath + 0, 3));
 	dirG2 = combine_cx(dirG1, strxl(sHPath + 3, 3));
 	dirG3 = combine_cx(dirG2, strxl(sHPath + 6, 3));
-	dirHP = combine(dirG3, sHPath);
+	dirG4 = combine_cx(dirG3, strxl(sHPath + 9, 3));
+	dirHP = combine(dirG4, sHPath);
 	dirHI = combine(dirHP, sHInfo);
 
 	if(sHash) // Set
@@ -47,6 +86,7 @@ static char *GetOrSetCache_NoLock(char *sHPath, char *sHInfo, char *sHash)
 		createDirIfNotExist(dirG1);
 		createDirIfNotExist(dirG2);
 		createDirIfNotExist(dirG3);
+		createDirIfNotExist(dirG4);
 		recurRemoveDirIfExist(dirHP);
 		createDir(dirHP);
 		createDir(dirHI);
@@ -72,6 +112,7 @@ static char *GetOrSetCache_NoLock(char *sHPath, char *sHInfo, char *sHash)
 	memFree(dirG1);
 	memFree(dirG2);
 	memFree(dirG3);
+	memFree(dirG4);
 	memFree(dirHP);
 	memFree(dirHI);
 	return sHash;
