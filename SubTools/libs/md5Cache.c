@@ -41,7 +41,7 @@ static char *GetOrSetCache_NoLock(char *sHPath, char *sHInfo, char *sHash)
 
 	if(sHash) // Set
 	{
-		char *symFile = combine(dirHI, sHash);
+		char *symDir = combine(dirHI, sHash);
 
 		createDirIfNotExist(dirG0);
 		createDirIfNotExist(dirG1);
@@ -50,23 +50,23 @@ static char *GetOrSetCache_NoLock(char *sHPath, char *sHInfo, char *sHash)
 		recurRemoveDirIfExist(dirHP);
 		createDir(dirHP);
 		createDir(dirHI);
-		createFile(symFile);
+		createDir(symDir);
 
-		memFree(symFile);
+		memFree(symDir);
 	}
 	else if(existDir(dirHI)) // Get
 	{
-		autoList_t *symFiles = lsFiles(dirHI);
+		autoList_t *symDirs = lsDirs(dirHI);
 
-		errorCase(getCount(symFiles) != 1);
+		errorCase(getCount(symDirs) != 1);
 
-		sHash = getLine(symFiles, 0);
+		sHash = getLine(symDirs, 0);
 		eraseParent(sHash);
 		toLowerLine(sHash);
 
 		errorCase(!lineExp("<32,09af>", sHash));
 
-		releaseAutoList(symFiles);
+		releaseAutoList(symDirs);
 	}
 //	memFree(dirG0); // dont!
 	memFree(dirG1);
