@@ -1,5 +1,5 @@
 /*
-	SimpleIndex.exe [/T タイトル] [/L リンク色] [/X テキスト色] [/B 背景色] [/P ルートの親リンク] [/-I] [/-M] ルートDIR
+	SimpleIndex.exe [/T タイトル] [/L リンク色] [/X テキスト色] [/B 背景色] [/P ルートの親リンク] [/-I] [/-M] [/-S] ルートDIR
 */
 
 #include "C:\Factory\Common\all.h"
@@ -24,6 +24,10 @@ static int MD5Disabled;
 //#define HIDDEN_FILE_TRAILER " (削除予定)"
 //#define HIDDEN_FILE_TRAILER " (HIDDEN)"
 
+static int MakeIndexMaxDepth = IMAX;
+
+static void MakeIndex(char *, uint);
+
 static int IsSimpleName(char *localPath)
 {
 	return lineExp("<1,,-.__09AZaz>", localPath) &&
@@ -40,9 +44,6 @@ static char *MkDivLine(char *href, char *lref, char *trailer, char *exTrailer)
 	else
 		return xcout("<div>%s%s%s</div>", lref, trailer, exTrailer);
 }
-
-static void MakeIndex(char *, uint);
-
 static char *S_PC_MaskPath(char *path) // ret: strx()
 {
 	path = strx(path);
@@ -245,6 +246,9 @@ static void MakeIndex(char *dir, uint depth)
 	char *lhtml;
 	char *divlist;
 
+	if(MakeIndexMaxDepth < depth)
+		return;
+
 	addCwd(dir);
 	lines = readLines(existFile(INDEXTEMPLATE) ? INDEXTEMPLATE : DEF_INDEXTEMPLATE);
 
@@ -308,6 +312,11 @@ readArgs:
 	if(argIs("/-M"))
 	{
 		MD5Disabled = 1;
+		goto readArgs;
+	}
+	if(argIs("/-S"))
+	{
+		MakeIndexMaxDepth = 0;
 		goto readArgs;
 	}
 

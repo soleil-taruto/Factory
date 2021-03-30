@@ -85,7 +85,7 @@ static void Search(char *rootDir, uint depth, char *pathPrefix)
 }
 static void WriteHeader(void)
 {
-	writeLine(OutFp, "<html><head><meta charset=\"Shift_JIS\"></head><body><h1>–Ø</h1><pre style=\"font-family: Meiryo\">");
+	writeLine(OutFp, "<html><head><meta charset=\"Shift_JIS\"></head><body><h1>TREE</h1><pre style=\"font-family: Meiryo\">");
 }
 static void WriteFooter(void)
 {
