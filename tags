@@ -4510,6 +4510,8 @@ C:\Factory\Labo\Junk\CrypRandCheck.c(8) : CBytes // •Ï”–”‚ÍéŒ¾
 C:\Factory\Labo\Junk\CrypRandCheck.c(10) : LoadCBytes // ŠÖ”
 C:\Factory\Labo\Junk\CrypRandCheck.c(32) : CheckCBytes // ŠÖ”
 C:\Factory\Labo\Junk\CrypRandCheck.c(51) : main // ŠÖ”
+C:\Factory\Labo\Junk\EchoNoRet.c(3) : main // ŠÖ”
+C:\Factory\Labo\Junk\EchoRet.c(3) : main // ŠÖ”
 C:\Factory\Labo\Junk\FloatDoubleFormat.c(4) : BinStrToBlock // ŠÖ”
 C:\Factory\Labo\Junk\FloatDoubleFormat.c(39) : ShowFloat_Main // ŠÖ”
 C:\Factory\Labo\Junk\FloatDoubleFormat.c(116) : ShowFloat // ŠÖ”
