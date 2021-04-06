@@ -9907,8 +9907,8 @@ C:\Factory\Tools\UTF2SJIS.c(246) : main // ŠÖ”
 C:\Factory\Tools\UTF2SJIS.c(44) : Enc_t // Œ^éŒ¾
 C:\Factory\Tools\VwPw.c(7) : ViewPassword // ŠÖ”
 C:\Factory\Tools\VwPw.c(51) : main // ŠÖ”
-C:\Factory\Tools\wait.c(26) : DoAntiScreenSaver // ŠÖ”
-C:\Factory\Tools\wait.c(38) : main // ŠÖ”
+C:\Factory\Tools\wait.c(39) : DoAntiScreenSaver // ŠÖ”
+C:\Factory\Tools\wait.c(51) : main // ŠÖ”
 C:\Factory\Tools\xcp.c(26) : main // ŠÖ”
 C:\Factory\Tools\z7.c(18) : OutputSameDir // •Ï”–”‚ÍéŒ¾
 C:\Factory\Tools\z7.c(19) : TrimTopDir // •Ï”–”‚ÍéŒ¾
