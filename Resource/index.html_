@@ -1,6 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<meta name="robots" content="$(ROBOTS)">
 <title>$(TITLE)</title>
 <style>
 

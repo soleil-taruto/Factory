@@ -26,7 +26,7 @@ static int MD5Disabled;
 
 static int MakeIndexMaxDepth = IMAX;
 
-static void MakeIndex(char *, uint);
+static void MakeIndex(char *, uint, int);
 
 static int IsSimpleName(char *localPath)
 {
@@ -76,7 +76,7 @@ static sint S_DirFileComp(char *path1, char *path2)
 
 	return S_PathComp(path1, path2);
 }
-static char *MakeDivList(uint depth)
+static char *MakeDivList(uint depth, int noIndex)
 {
 	autoList_t *paths = ls(".");
 	char *path;
@@ -108,9 +108,11 @@ static char *MakeDivList(uint depth)
 
 		if(index < dircnt) // ? dir
 		{
-			MakeIndex(path, depth + 1);
+			int hiddenItem = path[0] == '_'; // "_" で始まるローカルディレクトリは隠す。(項目を表示しない) かつ robots=noindex にする。
 
-			if(path[0] == '_') // "_" で始まるローカルディレクトリは隠す。(項目を表示しない)
+			MakeIndex(path, depth + 1, hiddenItem || noIndex);
+
+			if(hiddenItem)
 				goto next_path;
 
 			href = xcout("%s/" INDEXFILE, path);
@@ -240,7 +242,7 @@ static char *GetTemplate(char *file) // ret: bind
 
 	return text;
 }
-static void MakeIndex(char *dir, uint depth)
+static void MakeIndex(char *dir, uint depth, int noIndex)
 {
 	autoList_t *lines;
 	char *lhtml;
@@ -254,6 +256,7 @@ static void MakeIndex(char *dir, uint depth)
 
 	lhtml = untokenize(lines, "\n");
 
+	lhtml = replaceLine(lhtml, "$(ROBOTS)", noIndex ? "noindex" : "all", 1);
 	lhtml = replaceLine(lhtml, "$(TITLE)", Title, 1);
 	lhtml = replaceLine(lhtml, "$(LINK-COLOR)", LinkColor, 1);
 	lhtml = replaceLine(lhtml, "$(TEXT-COLOR)", TextColor, 1);
@@ -261,7 +264,7 @@ static void MakeIndex(char *dir, uint depth)
 	lhtml = replaceLine(lhtml, "$(HEADER)", GetTemplate(HEADERFILE), 1);
 	lhtml = replaceLine(lhtml, "$(FOOTER)", GetTemplate(FOOTERFILE), 1);
 
-	divlist = MakeDivList(depth);
+	divlist = MakeDivList(depth, noIndex);
 
 	lhtml = replaceLine(lhtml, "$(DIV-LIST)", divlist, 1);
 
@@ -326,5 +329,5 @@ readArgs:
 
 	errorCase(hasArgs(1)); // ? 不明な引数
 
-	MakeIndex(dir, 0);
+	MakeIndex(dir, 0, 0);
 }

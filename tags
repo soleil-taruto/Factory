@@ -9235,9 +9235,9 @@ C:\Factory\SubTools\SimpleIndex.c(47) : S_PC_MaskPath // ŠÖ”
 C:\Factory\SubTools\SimpleIndex.c(55) : S_PathComp // ŠÖ”
 C:\Factory\SubTools\SimpleIndex.c(69) : S_DirFileComp // ŠÖ”
 C:\Factory\SubTools\SimpleIndex.c(79) : MakeDivList // ŠÖ”
-C:\Factory\SubTools\SimpleIndex.c(230) : GetTemplate // ŠÖ”
-C:\Factory\SubTools\SimpleIndex.c(243) : MakeIndex // ŠÖ”
-C:\Factory\SubTools\SimpleIndex.c(277) : main // ŠÖ”
+C:\Factory\SubTools\SimpleIndex.c(232) : GetTemplate // ŠÖ”
+C:\Factory\SubTools\SimpleIndex.c(245) : MakeIndex // ŠÖ”
+C:\Factory\SubTools\SimpleIndex.c(280) : main // ŠÖ”
 C:\Factory\SubTools\SimpleTree.c(8) : OutFp // •Ï”–”‚ÍéŒ¾
 C:\Factory\SubTools\SimpleTree.c(10) : IsIgnorePath // ŠÖ”
 C:\Factory\SubTools\SimpleTree.c(31) : IsNoLinkPath // ŠÖ”
