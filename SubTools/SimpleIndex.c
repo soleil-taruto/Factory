@@ -1,5 +1,5 @@
 /*
-	SimpleIndex.exe [/T タイトル] [/L リンク色] [/X テキスト色] [/B 背景色] [/P ルートの親リンク] [/-I] [/-M] [/-S] ルートDIR
+	SimpleIndex.exe [/T タイトル] [/L リンク色] [/X テキスト色] [/B 背景色] [/P ルートの親リンク] [/-I] [/-M] [/-S] [/RN] ルートDIR
 */
 
 #include "C:\Factory\Common\all.h"
@@ -279,6 +279,7 @@ static void MakeIndex(char *dir, uint depth, int noIndex)
 
 int main(int argc, char **argv)
 {
+	int noIndex = 0;
 	char *dir;
 
 readArgs:
@@ -322,12 +323,17 @@ readArgs:
 		MakeIndexMaxDepth = 0;
 		goto readArgs;
 	}
+	if(argIs("/RN"))
+	{
+		noIndex = 1;
+		goto readArgs;
+	}
 
 //	dir = hasArgs(1) ? nextArg() : c_dropDir();
 	dir = nextArg();
 	errorCase(!existDir(dir));
 
-	errorCase(hasArgs(1)); // ? 不明な引数
+	errorCase_m(hasArgs(1), "不明なコマンド引数");
 
-	MakeIndex(dir, 0, 0);
+	MakeIndex(dir, 0, noIndex);
 }
