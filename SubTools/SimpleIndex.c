@@ -270,9 +270,9 @@ static void MakeIndex(char *dir, uint depth, int noIndex)
 	lhtml = replaceLine(lhtml, "$(DIV-LIST)", divlist, 1);
 
 	{
-		char *lhtmlOld = readText(INDEXFILE);
+		char *lhtmlOld = existFile(INDEXFILE) ? readText(INDEXFILE) : NULL;
 
-		if(strcmp(lhtmlOld, lhtml)) // ? indexファイルの内容が更新された。
+		if(!lhtmlOld || strcmp(lhtmlOld, lhtml)) // ? indexファイル新規作成 || indexファイルの内容が更新された。
 		{
 #if 0
 			// test test test test test -- lhtml, lhtmlOld 比較用
@@ -283,7 +283,7 @@ static void MakeIndex(char *dir, uint depth, int noIndex)
 
 				writeOneLineNoRet_b_xc(getOutFile_x(xcout("%04u_dir.txt", out_no)), dir);
 				writeOneLineNoRet_b_xc(getOutFile_x(xcout("%04u_new.txt", out_no)), lhtml);
-				writeOneLineNoRet_b_xc(getOutFile_x(xcout("%04u_old.txt", out_no)), lhtmlOld);
+				writeOneLineNoRet_b_xc(getOutFile_x(xcout("%04u_old.txt", out_no)), lhtmlOld ? lhtmlOld : "<NULL>");
 			}
 #endif
 
