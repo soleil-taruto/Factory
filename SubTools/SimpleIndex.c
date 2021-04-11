@@ -274,6 +274,7 @@ static void MakeIndex(char *dir, uint depth, int noIndex)
 
 		if(strcmp(lhtmlOld, lhtml)) // ? indexファイルの内容が更新された。
 		{
+#if 0
 			// test test test test test -- lhtml, lhtmlOld 比較用
 			{
 				static uint out_no;
@@ -284,6 +285,7 @@ static void MakeIndex(char *dir, uint depth, int noIndex)
 				writeOneLineNoRet_b_xc(getOutFile_x(xcout("%04u_new.txt", out_no)), lhtml);
 				writeOneLineNoRet_b_xc(getOutFile_x(xcout("%04u_old.txt", out_no)), lhtmlOld);
 			}
+#endif
 
 			writeOneLineNoRet(INDEXFILE, lhtml);
 		}
