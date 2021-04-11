@@ -1055,7 +1055,8 @@ C:\Factory\Common\FileStream.c(820) : writeBinary_xx // ŠÖ”
 C:\Factory\Common\FileStream.c(825) : writeJoinBinary_cx // ŠÖ”
 C:\Factory\Common\FileStream.c(830) : writeOneLineNoRet_cx // ŠÖ”
 C:\Factory\Common\FileStream.c(835) : writeOneLineNoRet_b_cx // ŠÖ”
-C:\Factory\Common\FileStream.c(840) : writeOneLineNoRet_b_xx // ŠÖ”
+C:\Factory\Common\FileStream.c(840) : writeOneLineNoRet_b_xc // ŠÖ”
+C:\Factory\Common\FileStream.c(845) : writeOneLineNoRet_b_xx // ŠÖ”
 C:\Factory\Common\FileStream.h(3) : stdin_set_bin // •Ï”–”‚ÍéŒ¾
 C:\Factory\Common\FileStream.h(4) : stdin_set_text // •Ï”–”‚ÍéŒ¾
 C:\Factory\Common\FileStream.h(6) : termination_fileCloseAll // •Ï”–”‚ÍéŒ¾
@@ -1144,7 +1145,8 @@ C:\Factory\Common\FileStream.h(109) : writeBinary_xx // •Ï”–”‚ÍéŒ¾
 C:\Factory\Common\FileStream.h(110) : writeJoinBinary_cx // •Ï”–”‚ÍéŒ¾
 C:\Factory\Common\FileStream.h(111) : writeOneLineNoRet_cx // •Ï”–”‚ÍéŒ¾
 C:\Factory\Common\FileStream.h(112) : writeOneLineNoRet_b_cx // •Ï”–”‚ÍéŒ¾
-C:\Factory\Common\FileStream.h(113) : writeOneLineNoRet_b_xx // •Ï”–”‚ÍéŒ¾
+C:\Factory\Common\FileStream.h(113) : writeOneLineNoRet_b_xc // •Ï”–”‚ÍéŒ¾
+C:\Factory\Common\FileStream.h(114) : writeOneLineNoRet_b_xx // •Ï”–”‚ÍéŒ¾
 C:\Factory\Common\FileStream.h(76) : BUFF // Œ^éŒ¾
 C:\Factory\Common\FileTime.c(3) : FileTimeToStamp // ŠÖ”
 C:\Factory\Common\FileTime.c(20) : StampToFileTime // ŠÖ”
@@ -9237,7 +9239,7 @@ C:\Factory\SubTools\SimpleIndex.c(69) : S_DirFileComp // ŠÖ”
 C:\Factory\SubTools\SimpleIndex.c(79) : MakeDivList // ŠÖ”
 C:\Factory\SubTools\SimpleIndex.c(232) : GetTemplate // ŠÖ”
 C:\Factory\SubTools\SimpleIndex.c(245) : MakeIndex // ŠÖ”
-C:\Factory\SubTools\SimpleIndex.c(280) : main // ŠÖ”
+C:\Factory\SubTools\SimpleIndex.c(300) : main // ŠÖ”
 C:\Factory\SubTools\SimpleTree.c(8) : OutFp // •Ï”–”‚ÍéŒ¾
 C:\Factory\SubTools\SimpleTree.c(10) : IsIgnorePath // ŠÖ”
 C:\Factory\SubTools\SimpleTree.c(31) : IsNoLinkPath // ŠÖ”

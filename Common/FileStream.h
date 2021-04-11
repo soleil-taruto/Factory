@@ -110,4 +110,5 @@ void writeBinary_xx(char *file, autoBlock_t *block);
 void writeJoinBinary_cx(char *file, autoBlock_t *block);
 void writeOneLineNoRet_cx(char *file, char *line);
 void writeOneLineNoRet_b_cx(char *file, char *line);
+void writeOneLineNoRet_b_xc(char *file, char *line);
 void writeOneLineNoRet_b_xx(char *file, char *line);

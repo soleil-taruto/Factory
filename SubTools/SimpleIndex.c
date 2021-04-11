@@ -255,6 +255,7 @@ static void MakeIndex(char *dir, uint depth, int noIndex)
 	lines = readLines(existFile(INDEXTEMPLATE) ? INDEXTEMPLATE : DEF_INDEXTEMPLATE);
 
 	lhtml = untokenize(lines, "\n");
+	lhtml = addChar(lhtml, '\n');
 
 	lhtml = replaceLine(lhtml, "$(ROBOTS)", noIndex ? "noindex" : "all", 1);
 	lhtml = replaceLine(lhtml, "$(TITLE)", Title, 1);
@@ -268,7 +269,26 @@ static void MakeIndex(char *dir, uint depth, int noIndex)
 
 	lhtml = replaceLine(lhtml, "$(DIV-LIST)", divlist, 1);
 
-	writeOneLine(INDEXFILE, lhtml);
+	{
+		char *lhtmlOld = readText(INDEXFILE);
+
+		if(strcmp(lhtmlOld, lhtml)) // ? indexファイルの内容が更新された。
+		{
+			// test test test test test -- lhtml, lhtmlOld 比較用
+			{
+				static uint out_no;
+
+				out_no++;
+
+				writeOneLineNoRet_b_xc(getOutFile_x(xcout("%04u_dir.txt", out_no)), dir);
+				writeOneLineNoRet_b_xc(getOutFile_x(xcout("%04u_new.txt", out_no)), lhtml);
+				writeOneLineNoRet_b_xc(getOutFile_x(xcout("%04u_old.txt", out_no)), lhtmlOld);
+			}
+
+			writeOneLineNoRet(INDEXFILE, lhtml);
+		}
+		memFree(lhtmlOld);
+	}
 
 	releaseDim(lines, 1);
 	memFree(lhtml);
