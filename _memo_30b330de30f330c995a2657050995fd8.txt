@@ -79,6 +79,10 @@ StringTools.Enclosed
 
 	wavVolume
 
+.wav ファイルの無音長調整
+
+	wavPutMuon
+
 ----
 
 複数のリビジョンを削除する方法 -- ★廃止
