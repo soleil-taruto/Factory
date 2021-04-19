@@ -10,15 +10,31 @@
 
 #define HZ 44100
 #define MUON_LEVEL 32768
-#define MUON_ROW ((MUON_LEVEL << 16) | MUON_LEVEL)
+#define MUON_LEVEL_MARGIN 100
+#define FADE_SZ (HZ / 10)
 
 static autoList_t *WavData;
 static uint FrontMuonMillis;
 static uint EndMuonMillis;
 
+static int IsMuonRow(uint row)
+{
+	uint l = row >> 16;
+	uint r = row & 0xffff;
+
+	return
+		m_isRange(l,
+			MUON_LEVEL - MUON_LEVEL_MARGIN,
+			MUON_LEVEL + MUON_LEVEL_MARGIN
+			) &&
+		m_isRange(r,
+			MUON_LEVEL - MUON_LEVEL_MARGIN,
+			MUON_LEVEL + MUON_LEVEL_MARGIN
+			);
+}
 static void RemoveEndMuon(void)
 {
-	while(getCount(WavData) && getLastElement(WavData) == MUON_ROW)
+	while(getCount(WavData) && IsMuonRow(getLastElement(WavData)))
 		unaddElement(WavData);
 }
 static void RemoveFrontMuon(void)
@@ -33,7 +49,7 @@ static void AddEndMuon_Millis(uint millis)
 	uint index;
 
 	for(index = 0; index < sampleCount; index++)
-		addElement(WavData, MUON_ROW);
+		addElement(WavData, (MUON_LEVEL << 16) | MUON_LEVEL);
 }
 static void AddFrontMuon(void)
 {
@@ -45,10 +61,50 @@ static void AddEndMuon(void)
 {
 	AddEndMuon_Millis(EndMuonMillis);
 }
+static void SetEndFadeOut(void)
+{
+	uint index;
+	uint pos;
+	uint row;
+	sint l;
+	sint r;
+	double rate;
+
+	errorCase(getCount(WavData) < FADE_SZ);
+
+	for(index = 1; index < FADE_SZ; index++)
+	{
+		pos = getCount(WavData) - index;
+		row = getElement(WavData, pos);
+		l = (sint)(row >> 16);
+		r = (sint)(row & 0xffff);
+		rate = (double)index / FADE_SZ;
+
+		l -= MUON_LEVEL;
+		l = d2i(l * rate);
+		l += MUON_LEVEL;
+
+		r -= MUON_LEVEL;
+		r = d2i(r * rate);
+		r += MUON_LEVEL;
+
+		row = ((uint)l << 16) | (uint)r;
+
+		setElement(WavData, pos, row);
+	}
+}
+static void SetFrontFadeIn(void)
+{
+	reverseElements(WavData);
+	SetEndFadeOut();
+	reverseElements(WavData); // restore
+}
 static void PutMuon_D(void)
 {
 	RemoveFrontMuon();
 	RemoveEndMuon();
+	SetFrontFadeIn();
+	SetEndFadeOut();
 	AddFrontMuon();
 	AddEndMuon();
 }
@@ -74,7 +130,7 @@ static void PutMuon_F(char *file)
 	wFile = strx(rFile);
 	wFile = changeExt(wFile, "");
 	wFile = addLine_x(wFile, xcout("_muon-%u-%u.wav", FrontMuonMillis, EndMuonMillis));
-	wFile = toCreatablePath(wFile, 1000);
+	wFile = toCreatableTildaPath(wFile, 1000);
 
 	PutMuon(rFile, wFile);
 
