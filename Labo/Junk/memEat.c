@@ -37,6 +37,11 @@ int main(int argc, char **argv)
 			addElement(blockList, (uint)MakeBlock(100000000)); // += 100MB
 			break;
 
+		case '5':
+			cout("+0.5GB\n");
+			addElement(blockList, (uint)MakeBlock(500000000)); // += 500MB
+			break;
+
 		case '-':
 			memFree((void *)unaddElement(blockList));
 			break;
