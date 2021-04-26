@@ -5,6 +5,7 @@ Snapshot
 LiteBackup
 RemoveSync
 ficon
+reicon
 qbk
 FindSame
 RemoveHiddenFiles
