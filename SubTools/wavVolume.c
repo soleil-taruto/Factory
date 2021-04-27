@@ -20,8 +20,12 @@ static uint ChangeVol(uint index, uint uVol)
 
 	vol = (sint)uVol - 0x8000;
 
+#if 0 // test
+	vol = d2i((vol * (sint)VolumePct) / 100.0);
+#else
 	vol *= VolumePct;
 	vol = divRndOff(vol, 100);
+#endif
 
 	if(!m_isRange(vol, -0x8000, 0x7fff))
 	{
