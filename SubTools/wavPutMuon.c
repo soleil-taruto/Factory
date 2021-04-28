@@ -34,8 +34,14 @@ static int IsMuonRow(uint row)
 }
 static void RemoveEndMuon(void)
 {
-	while(getCount(WavData) && IsMuonRow(getLastElement(WavData)))
-		unaddElement(WavData);
+	uint count = getCount(WavData);
+
+	while(count && IsMuonRow(getElement(WavData, count - 1)))
+		count--;
+
+	count += FADE_SZ;
+	m_minim(count, getCount(WavData));
+	setCount(WavData, count);
 }
 static void RemoveFrontMuon(void)
 {
