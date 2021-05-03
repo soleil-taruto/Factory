@@ -1,8 +1,10 @@
 /*
-	RemoveHiddenFiles.exe [対象DIR]
+	RemoveHiddenFiles.exe [/B] [対象DIR]
 */
 
 #include "C:\Factory\Common\all.h"
+
+static int BatchMode;
 
 static void RemoveHiddenFiles(char *dir)
 {
@@ -25,15 +27,22 @@ static void RemoveHiddenFiles(char *dir)
 	}
 	trimLines(files);
 
-	// Confirm
+	if(BatchMode)
 	{
-		cout("これら隠しファイルを削除します。\n");
-		cout("続行？\n");
+		cout("続行します。(バッチモード)\n");
+	}
+	else
+	{
+		// Confirm
+		{
+			cout("これら隠しファイルを削除します。\n");
+			cout("続行？\n");
 
-		if(clearGetKey() == 0x1b)
-			termination(0);
+			if(clearGetKey() == 0x1b)
+				termination(0);
 
-		cout("続行します。\n");
+			cout("続行します。\n");
+		}
 	}
 
 	foreach(files, file, index)
@@ -43,6 +52,8 @@ static void RemoveHiddenFiles(char *dir)
 }
 int main(int argc, char **argv)
 {
+	BatchMode = argIs("/B");
+
 	if(hasArgs(1))
 	{
 		RemoveHiddenFiles(nextArg());
