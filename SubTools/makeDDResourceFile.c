@@ -54,7 +54,8 @@ static void FilesFilter(autoList_t *files)
 
 	foreach(files, file, index)
 	{
-		if(*getLocal(file) == '_') // '_' で始まるファイルは DDResFile に含めない。
+		if(*file == '_' || mbs_strstr(file, "\\_")) // '_' で始まるファイル・サブフォルダの配下は DDResFile に含めない。
+//		if(*getLocal(file) == '_') // '_' で始まるファイルは DDResFile に含めない。
 		{
 			cout("_d: %s\n", file);
 

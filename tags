@@ -9032,10 +9032,10 @@ C:\Factory\SubTools\makeDDResourceFile.c(35) : MaskingExeFile // •Ï”–”‚ÍéŒ¾
 C:\Factory\SubTools\makeDDResourceFile.c(37) : DDResFp // •Ï”–”‚ÍéŒ¾
 C:\Factory\SubTools\makeDDResourceFile.c(39) : FF_FindStartPtn // ŠÖ”
 C:\Factory\SubTools\makeDDResourceFile.c(50) : FilesFilter // ŠÖ”
-C:\Factory\SubTools\makeDDResourceFile.c(104) : MaskFileData // ŠÖ”
-C:\Factory\SubTools\makeDDResourceFile.c(120) : AddToDDResFile // ŠÖ”
-C:\Factory\SubTools\makeDDResourceFile.c(137) : MakeDDResFile // ŠÖ”
-C:\Factory\SubTools\makeDDResourceFile.c(167) : main // ŠÖ”
+C:\Factory\SubTools\makeDDResourceFile.c(105) : MaskFileData // ŠÖ”
+C:\Factory\SubTools\makeDDResourceFile.c(121) : AddToDDResFile // ŠÖ”
+C:\Factory\SubTools\makeDDResourceFile.c(138) : MakeDDResFile // ŠÖ”
+C:\Factory\SubTools\makeDDResourceFile.c(168) : main // ŠÖ”
 C:\Factory\SubTools\makeDonutCluster.c(4) : SIGNATURE // ’è‹`
 C:\Factory\SubTools\makeDonutCluster.c(5) : SIGNATURE_LEN // ’è‹`
 C:\Factory\SubTools\makeDonutCluster.c(6) : FIRST_RES_SIZE_POS // ’è‹`
