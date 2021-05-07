@@ -47,7 +47,7 @@
 
 		$H で始まる場合、３文字目以降をヘッダーフィールド名と見なし、その値に置き換えます。
 
-			例：  $HHost  ->  stackprobe.dip.jp:8080
+			例：  $HHost  ->  stackprobe.ccsp.mydns.jp:8080
 
 	フィルターコマンド
 
