@@ -241,6 +241,29 @@ static void DestroyFindVersionPtn(autoBlock_t *text, uint startPos, uint count)
 		setByte(text, startPos + index, chr);
 	}
 }
+static char *MakeRev(void)
+{
+	char *revFile = makeTempPath(NULL);
+	char *rev;
+
+	coExecute_x(xcout("C:\\Factory\\DevTools\\rev.exe //O \"%s\" /P", revFile));
+
+	rev = readFirstLine(revFile);
+	errorCase(!lineExp("<4,09>.<3,09>.<5,09>", rev)); // 2bs
+	replaceChar(rev, '.', '0');
+	errorCase(!lineExp("<14,09>", rev)); // 2bs
+	removeFile_x(revFile);
+	return rev;
+}
+static char *GetRev(void) // c_
+{
+	static char *rev;
+
+	if(!rev)
+		rev = MakeRev();
+
+	return rev;
+}
 
 static int ReplaceVersionExeFileDisabled;
 
@@ -249,16 +272,24 @@ static void ReplaceVersion(char *dir, uint version) // version: 1 Å` 999, VER_BE
 	autoList_t *files = lssFiles(dir);
 	char *file;
 	uint index;
-	char *sVersion;
+	char *manVersion;
+	char *exeVersion;
 
 	if(version == VER_BETA)
-		sVersion = strx("BETA");
+	{
+		manVersion = xcout("BETA_%s", GetRev());
+		exeVersion = strx("BETA");
+	}
 	else
-		sVersion = xcout("%u.%02u", version / 100, version % 100);
+	{
+		manVersion = xcout("%u.%02u", version / 100, version % 100);
+		exeVersion = xcout("%u.%02u", version / 100, version % 100);
+	}
 
 	foreach(files, file, index)
 	{
 		if(
+			!_stricmp("Readme.txt", getLocal(file)) ||
 			!_stricmp("Manual.txt", getLocal(file)) ||
 			!_stricmp("É}ÉjÉÖÉAÉã.txt", getLocal(file)) ||
 			!_stricmp("Properties.dat", getLocal(file))
@@ -269,7 +300,7 @@ static void ReplaceVersion(char *dir, uint version) // version: 1 Å` 999, VER_BE
 			char *newText;
 
 			newText = strx(text);
-			newText = replaceLine(newText, "$version$", sVersion, 1);
+			newText = replaceLine(newText, "$version$", manVersion, 1);
 
 			LOGPOS();
 
@@ -294,8 +325,8 @@ static void ReplaceVersion(char *dir, uint version) // version: 1 Å` 999, VER_BE
 			if(conPos != UINTMAX)
 			{
 				LOGPOS();
-				errorCase(strlen(sVersion) != 4); // 2bs
-				strcpy((char *)directGetBuffer(text) + conPos + strlen(CONCERT_PTN) - 4, sVersion);
+				errorCase(strlen(exeVersion) != 4); // 2bs
+				strcpy((char *)directGetBuffer(text) + conPos + strlen(CONCERT_PTN) - 4, exeVersion);
 				errorCase(FindStringInExe(text, CONCERT_PTN) != UINTMAX); // ? 2â”èäà»è„Ç†ÇÈ
 				DestroyFindVersionPtn(text, conPos, strlen(CONCERT_PTN) - 5);
 				writeBinary(file, text);
@@ -304,36 +335,17 @@ static void ReplaceVersion(char *dir, uint version) // version: 1 Å` 999, VER_BE
 		}
 	}
 	releaseDim(files, 1);
-	memFree(sVersion);
+	memFree(manVersion);
+	memFree(exeVersion);
 }
-static char *MakeRev(void)
-{
-	char *revFile = makeTempPath(NULL);
-	char *rev;
-
-	coExecute_x(xcout("C:\\Factory\\DevTools\\rev.exe //O \"%s\" /P", revFile));
-
-	rev = readFirstLine(revFile);
-	errorCase(!lineExp("<4,09>.<3,09>.<5,09>", rev)); // 2bs
-	replaceChar(rev, '.', '0');
-	errorCase(!lineExp("<14,09>", rev)); // 2bs
-	removeFile_x(revFile);
-	return rev;
-}
-static char *c_MakeRev(void)
-{
-	static char *stock;
-	memFree(stock);
-	return stock = MakeRev();
-}
-static char *GetPathTailVer(uint version) // ret: bind
+static char *GetPathTailVer(uint version) // c_
 {
 	static char *pathTail;
 
 	memFree(pathTail);
 
 	if(version == VER_BETA)
-		pathTail = xcout("_BETA_%s", c_MakeRev());
+		pathTail = xcout("_BETA_%s", GetRev());
 	else
 		pathTail = xcout("_v%03u", version);
 
