@@ -253,6 +253,13 @@ static char *MakeRev(void)
 	replaceChar(rev, '.', '0');
 	errorCase(!lineExp("<14,09>", rev)); // 2bs
 	removeFile_x(revFile);
+
+	if(rev[13] == '0') // ÅŒã‚Ì•¶š‚ª '0' ‚É‚È‚é‚Ì‚ªŒÂl“I‚ÉŒ™‚È‚Ì‚Å...
+		rev[13] = '1';
+
+	cout("%s <- rev\n", rev);
+
+	coSleep(2000); // ‚È‚é‚×‚­“¯‚¶ rev ‚ª”­s‚³‚ê‚È‚¢‚æ‚¤‚É...
 	return rev;
 }
 static char *GetRev(void) // c_
