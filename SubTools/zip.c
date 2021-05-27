@@ -271,23 +271,34 @@ static char *GetRev(void) // c_
 
 	return rev;
 }
-static char *GetRev_Sep(void) // c_
+static char *GetRev_Sep(int separator) // c_
 {
 	static char *rev;
 
-	if(!rev)
-	{
-		rev = strx(GetRev());
-//		rev = MakeRev(); // ng -- 2回発行してしまう。
+	memFree(rev);
 
-		errorCase(!lineExp("<4,09>0<3,09>0<5,09>", rev)); // 2bs
+	rev = strx(GetRev());
+//	rev = MakeRev(); // ng -- 2回発行してしまう。
 
-		rev[4] = '-';
-		rev[8] = '-';
+	errorCase(!lineExp("<4,09>0<3,09>0<5,09>", rev)); // 2bs
 
-		errorCase(!lineExp("<4,09>-<3,09>-<5,09>", rev)); // 2bs
-	}
+	rev[4] = separator;
+	rev[8] = separator;
+
+	errorCase(!lineExp("<4,09><1,><3,09><1,><5,09>", rev)); // 2bs
+	//                        ~~~~      ~~~~
+	//                         |         |
+	//                         +---------+--- separator
+
 	return rev;
+}
+static char *GetRev_Dot(void) // c_
+{
+	return GetRev_Sep('.');
+}
+static char *GetRev_Hyp(void) // c_
+{
+	return GetRev_Sep('-');
 }
 
 static int ReplaceVersionExeFileDisabled;
@@ -302,7 +313,7 @@ static void ReplaceVersion(char *dir, uint version) // version: 1 ～ 999, VER_CA
 
 	if(version == VER_CALENDAR)
 	{
-		manVersion = strx(GetRev_Sep());
+		manVersion = strx(GetRev_Dot());
 //		manVersion = xcout("BETA_%s", GetRev()); // old
 		exeVersion = strx("D.DD");
 //		exeVersion = strx("BETA"); // old
@@ -372,7 +383,7 @@ static char *GetPathTailVer(uint version) // c_
 	memFree(pathTail);
 
 	if(version == VER_CALENDAR)
-		pathTail = xcout("_v%s", GetRev_Sep());
+		pathTail = xcout("_v%s", GetRev_Hyp());
 //		pathTail = xcout("_BETA_%s", GetRev()); // old
 	else
 		pathTail = xcout("_v%03u", version);
