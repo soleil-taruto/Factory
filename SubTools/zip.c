@@ -276,16 +276,17 @@ static char *GetRev_Dot(void) // c_
 	static char *rev;
 
 	if(!rev)
+	{
 		rev = strx(GetRev());
 //		rev = MakeRev(); // ng -- 2‰ñ”­s‚µ‚Ä‚µ‚Ü‚¤B
 
-	errorCase(!lineExp("<4,09>0<3,09>0<5,09>", rev)); // 2bs
+		errorCase(!lineExp("<4,09>0<3,09>0<5,09>", rev)); // 2bs
 
-	rev[4] = '.';
-	rev[8] = '.';
+		rev[4] = '.';
+		rev[8] = '.';
 
-	errorCase(!lineExp("<4,09>.<3,09>.<5,09>", rev)); // 2bs
-
+		errorCase(!lineExp("<4,09>.<3,09>.<5,09>", rev)); // 2bs
+	}
 	return rev;
 }
 
