@@ -9397,7 +9397,7 @@ C:\Factory\SubTools\zip.c(198) : FindStringInExe // ŠÖ”
 C:\Factory\SubTools\zip.c(221) : DestroyFindVersionPtn // ŠÖ”
 C:\Factory\SubTools\zip.c(244) : MakeRev // ŠÖ”
 C:\Factory\SubTools\zip.c(265) : GetRev // ŠÖ”
-C:\Factory\SubTools\zip.c(274) : GetRev_Dot // ŠÖ”
+C:\Factory\SubTools\zip.c(274) : GetRev_Sep // ŠÖ”
 C:\Factory\SubTools\zip.c(293) : ReplaceVersionExeFileDisabled // •Ï”–”‚ÍéŒ¾
 C:\Factory\SubTools\zip.c(295) : ReplaceVersion // ŠÖ”
 C:\Factory\SubTools\zip.c(368) : GetPathTailVer // ŠÖ”

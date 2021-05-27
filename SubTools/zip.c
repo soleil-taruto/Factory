@@ -271,7 +271,7 @@ static char *GetRev(void) // c_
 
 	return rev;
 }
-static char *GetRev_Dot(void) // c_
+static char *GetRev_Sep(void) // c_
 {
 	static char *rev;
 
@@ -282,10 +282,10 @@ static char *GetRev_Dot(void) // c_
 
 		errorCase(!lineExp("<4,09>0<3,09>0<5,09>", rev)); // 2bs
 
-		rev[4] = '.';
-		rev[8] = '.';
+		rev[4] = '-';
+		rev[8] = '-';
 
-		errorCase(!lineExp("<4,09>.<3,09>.<5,09>", rev)); // 2bs
+		errorCase(!lineExp("<4,09>-<3,09>-<5,09>", rev)); // 2bs
 	}
 	return rev;
 }
@@ -302,7 +302,7 @@ static void ReplaceVersion(char *dir, uint version) // version: 1 Å` 999, VER_CA
 
 	if(version == VER_CALENDAR)
 	{
-		manVersion = strx(GetRev_Dot());
+		manVersion = strx(GetRev_Sep());
 //		manVersion = xcout("BETA_%s", GetRev()); // old
 		exeVersion = strx("D.DD");
 //		exeVersion = strx("BETA"); // old
@@ -372,7 +372,7 @@ static char *GetPathTailVer(uint version) // c_
 	memFree(pathTail);
 
 	if(version == VER_CALENDAR)
-		pathTail = xcout("_v%s", GetRev_Dot());
+		pathTail = xcout("_v%s", GetRev_Sep());
 //		pathTail = xcout("_BETA_%s", GetRev()); // old
 	else
 		pathTail = xcout("_v%03u", version);
