@@ -315,7 +315,7 @@ static void ReplaceVersion(char *dir, uint version) // version: 1 Å` 999, VER_CA
 	{
 		manVersion = strx(GetRev_Dot());
 //		manVersion = xcout("BETA_%s", GetRev()); // old
-		exeVersion = xcout("v%s", GetRev_Dot());
+		exeVersion = xcout("(v%s)", GetRev_Dot());
 //		exeVersion = strx("BETA"); // old
 	}
 	else
