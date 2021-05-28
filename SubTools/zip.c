@@ -371,12 +371,14 @@ static void ReplaceVersion(char *dir, uint version) // version: 1 Å` 999, VER_CA
 					p[-1] = ':';
 					strcpy(p, exeVersion);
 				}
+
+				DestroyFindVersionPtn(text, conPos, strlen(CONCERT_PTN) - strlen(exeVersion) - 1);
 #else // old
 				errorCase(strlen(exeVersion) != 4); // 2bs
 				strcpy((char *)directGetBuffer(text) + conPos + strlen(CONCERT_PTN) - 4, exeVersion);
+				DestroyFindVersionPtn(text, conPos, strlen(CONCERT_PTN) - 5);
 #endif
 				errorCase(FindStringInExe(text, CONCERT_PTN) != UINTMAX); // ? 2â”èäà»è„Ç†ÇÈ
-				DestroyFindVersionPtn(text, conPos, strlen(CONCERT_PTN) - 5);
 				writeBinary(file, text);
 			}
 			releaseAutoBlock(text);
