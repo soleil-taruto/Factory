@@ -315,7 +315,7 @@ static void ReplaceVersion(char *dir, uint version) // version: 1 Å` 999, VER_CA
 	{
 		manVersion = strx(GetRev_Dot());
 //		manVersion = xcout("BETA_%s", GetRev()); // old
-		exeVersion = strx("D.DD");
+		exeVersion = strx(GetRev_Dot());
 //		exeVersion = strx("BETA"); // old
 	}
 	else
@@ -363,8 +363,18 @@ static void ReplaceVersion(char *dir, uint version) // version: 1 Å` 999, VER_CA
 			if(conPos != UINTMAX)
 			{
 				LOGPOS();
+#if 1
+				errorCase(strlen(exeVersion) < 4 || strlen(CONCERT_PTN) <= strlen(exeVersion)); // 2bs
+
+				{
+					char *p = (char *)directGetBuffer(text) + conPos + strlen(CONCERT_PTN) - strlen(exeVersion);
+					p[-1] = ':';
+					strcpy(p, exeVersion);
+				}
+#else // old
 				errorCase(strlen(exeVersion) != 4); // 2bs
 				strcpy((char *)directGetBuffer(text) + conPos + strlen(CONCERT_PTN) - 4, exeVersion);
+#endif
 				errorCase(FindStringInExe(text, CONCERT_PTN) != UINTMAX); // ? 2â”èäà»è„Ç†ÇÈ
 				DestroyFindVersionPtn(text, conPos, strlen(CONCERT_PTN) - 5);
 				writeBinary(file, text);
