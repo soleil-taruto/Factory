@@ -108,7 +108,7 @@ void restoreYen(char *path)
 {
 	replaceChar(path, '/', '\\');
 }
-autoList_t *tokenizeYen_heap(char *path)
+autoList_t *tokenizeYen_heap(char *path) // path: ヒープ上のメモリブロックと見なして、内容を一時的に書き換える。
 {
 	autoList_t *ptkns;
 
@@ -126,6 +126,12 @@ autoList_t *tokenizeYen(char *path)
 	ptkns = tokenize(path, '/');
 	memFree(path);
 	return ptkns;
+}
+autoList_t *tokenizeYen_x(char *path)
+{
+	autoList_t *ret = tokenizeYen_heap(path); // 開放して良いならヒープ上のメモリブロックであるはず
+	memFree(path);
+	return ret;
 }
 /*
 	strlen(line1) < count || strlen(line2) < count の時は _stricmp(line1, line2) と同じ

@@ -69,6 +69,7 @@ void escapeYen(char *path);
 void restoreYen(char *path);
 autoList_t *tokenizeYen_heap(char *path);
 autoList_t *tokenizeYen(char *path);
+autoList_t *tokenizeYen_x(char *path);
 sint mbs_strnicmp(char *line1, char *line2, uint count);
 sint mbs_stricmp(char *line1, char *line2);
 char *mbs_strchr(char *line, int findChr);

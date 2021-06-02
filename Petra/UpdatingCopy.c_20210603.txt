@@ -1,34 +1,20 @@
-/*
-	UpdatingCopy.exe “ü—Í‘¤ƒfƒBƒŒƒNƒgƒŠ o—Í‘¤ƒfƒBƒŒƒNƒgƒŠ
+ï»¿/*
+	UpdatingCopy.exe å…¥åŠ›å´ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª å‡ºåŠ›å´ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
 
-		o—Í‘¤ƒfƒBƒŒƒNƒgƒŠ
-
-			"*(C)" ‚ðƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚Ìƒ[ƒJƒ‹–¼‚É’u‚«Š·‚¦‚éB
-			"*(P)" ‚ðƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚ÌeƒfƒBƒŒƒNƒgƒŠ‚Ìƒ[ƒJƒ‹–¼‚É’u‚«Š·‚¦‚éB
+		å‡ºåŠ›å´ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª ... "*" ã‚’ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®ãƒ­ãƒ¼ã‚«ãƒ«åã«ç½®ãæ›ãˆã‚‹ã€‚
 */
 
 #include "C:\Factory\Common\all.h"
 
 static char *x_DirFilter(char *dir)
 {
-	autoList_t *pTkns = tokenizeYen_x(getCwd());
-
-	errorCase(getCount(pTkns) < 3); // ? ƒJƒŒƒ“ƒg‚Íƒ‹[ƒgDIR || ƒJƒŒƒ“ƒg‚Ìe‚Íƒ‹[ƒgDIR
-
-	dir = strx(dir);
-
-	dir = replaceLine(dir, "*(C)", getLine(pTkns, getCount(pTkns) - 1), 0); // ƒJƒŒƒ“ƒgDIR‚Ìƒ[ƒJƒ‹–¼
-	dir = replaceLine(dir, "*(P)", getLine(pTkns, getCount(pTkns) - 2), 0); // ƒJƒŒƒ“ƒg‚ÌeDIR‚Ìƒ[ƒJƒ‹–¼
-
-	releaseDim(pTkns, 1);
-
-	return dir;
+	return replaceLine(strx(dir), "*", getLocal(getCwd()), 0); // g
 }
 static void CheckWDir(char *wDir)
 {
 	if(!existDir(wDir))
 	{
-		cout("o—Í‘¤ƒfƒBƒŒƒNƒgƒŠ‚ðì¬‚µ‚Ü‚·B\n");
+		cout("å‡ºåŠ›å´ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’ä½œæˆã—ã¾ã™ã€‚\n");
 		cout("wDir: %s\n", wDir);
 
 		createDir(wDir);
@@ -44,13 +30,13 @@ static void RemoveOldZip(char *wDir)
 	{
 		if(!_stricmp(getExt(file), "zip"))
 		{
-			if(getFileAttr_Hidden(file)) // ? íœƒ}[ƒNÏ‚Ý
+			if(getFileAttr_Hidden(file)) // ? å‰Šé™¤ãƒžãƒ¼ã‚¯æ¸ˆã¿
 			{
 				removeFile(file);
 			}
 			else
 			{
-				setFileAttr(file, 1, 1, 0, 0); // íœƒ}[ƒN
+				setFileAttr(file, 1, 1, 0, 0); // å‰Šé™¤ãƒžãƒ¼ã‚¯
 			}
 		}
 	}
@@ -66,7 +52,7 @@ static char *GetFirstZipFile(char *rDir)
 		if(!_stricmp(getExt(file), "zip"))
 			break;
 
-	errorCase_m(!file, ".zip ƒtƒ@ƒCƒ‹‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB");
+	errorCase_m(!file, ".zip ãƒ•ã‚¡ã‚¤ãƒ«ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚");
 
 	file = strx(file);
 	releaseDim(files, 1);
@@ -79,7 +65,7 @@ static void CopyZip(char *rDir, char *wDir)
 
 	wFile = combine(wDir, getLocal(rFile));
 
-	removeFileIfExist(wFile); // ‰B‚µ‘®«‘Îô -- ‰B‚µ‘®«‚¾‚Æã‘‚«o—ˆ‚È‚¢B‚Å‚àíœ‚Ío—ˆ‚éB
+	removeFileIfExist(wFile); // éš ã—å±žæ€§å¯¾ç­– -- éš ã—å±žæ€§ã ã¨ä¸Šæ›¸ãå‡ºæ¥ãªã„ã€‚ã§ã‚‚å‰Šé™¤ã¯å‡ºæ¥ã‚‹ã€‚
 	copyFile(rFile, wFile);
 
 	memFree(rFile);
@@ -95,9 +81,6 @@ int main(int argc, char **argv)
 	wDir = nextArg();
 
 	wDir = x_DirFilter(wDir);
-
-	cout("< %s\n", rDir);
-	cout("> %s\n", wDir);
 
 	CheckWDir(wDir);
 
