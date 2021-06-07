@@ -1,5 +1,7 @@
 /*
 	SimpleIndex.exe [/T タイトル] [/L リンク色] [/X テキスト色] [/B 背景色] [/P ルートの親リンク] [/-I] [/-M] [/-S] [/RN] ルートDIR
+
+		/RN ... robots=noindex にする。$(ROBOTS) の記述は必要
 */
 
 #include "C:\Factory\Common\all.h"
