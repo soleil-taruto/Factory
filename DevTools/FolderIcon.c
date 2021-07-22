@@ -35,6 +35,8 @@ static void LoadFolderIconPairs(void)
 		{
 			char *dir = line;
 
+			cout("dir: %s\n", dir);
+
 			errorCase(m_isEmpty(dir));
 			errorCase(!isFairLocalPath(dir, 0));
 			errorCase(!existDir(dir));

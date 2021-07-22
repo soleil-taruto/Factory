@@ -4007,11 +4007,11 @@ C:\Factory\DevTools\FolderIcon.c(9) : MAPPING_FILE // ’è‹`
 C:\Factory\DevTools\FolderIcon.c(11) : FIP_Dirs // •Ï”–”‚ÍéŒ¾
 C:\Factory\DevTools\FolderIcon.c(12) : FIP_IconFiles // •Ï”–”‚ÍéŒ¾
 C:\Factory\DevTools\FolderIcon.c(14) : LoadFolderIconPairs // ŠÖ”
-C:\Factory\DevTools\FolderIcon.c(48) : SetFolderIcon // ŠÖ”
-C:\Factory\DevTools\FolderIcon.c(77) : ClearMode // •Ï”–”‚ÍéŒ¾
-C:\Factory\DevTools\FolderIcon.c(79) : ChangeFolderIcons // ŠÖ”
-C:\Factory\DevTools\FolderIcon.c(102) : Main2 // ŠÖ”
-C:\Factory\DevTools\FolderIcon.c(107) : main // ŠÖ”
+C:\Factory\DevTools\FolderIcon.c(50) : SetFolderIcon // ŠÖ”
+C:\Factory\DevTools\FolderIcon.c(79) : ClearMode // •Ï”–”‚ÍéŒ¾
+C:\Factory\DevTools\FolderIcon.c(81) : ChangeFolderIcons // ŠÖ”
+C:\Factory\DevTools\FolderIcon.c(104) : Main2 // ŠÖ”
+C:\Factory\DevTools\FolderIcon.c(109) : main // ŠÖ”
 C:\Factory\DevTools\Grape.c(18) : main // ŠÖ”
 C:\Factory\DevTools\key.c(3) : main // ŠÖ”
 C:\Factory\DevTools\libs\RandData.c(3) : FILEBLOCKSIZE // ’è‹`
