@@ -13,11 +13,11 @@ static char *x_DirFilter(char *dir)
 {
 	autoList_t *pTkns = tokenizeYen_x(getCwd());
 
-	errorCase(getCount(pTkns) < 4); // "C:\\Dev\\PPPP\\x99999999_CCCC" ‚Æ“¯‚¶‚©A‚»‚êˆÈã[‚­‚È‚¯‚ê‚Î‚È‚ç‚È‚¢B
+	errorCase(getCount(pTkns) < 4); // "C:\\Dev\\PPPP\\x99999999_CCCC" ‚Æ“¯‚¶‚©A‚±‚ê‚æ‚è‚à[‚­‚È‚¯‚ê‚Î‚È‚ç‚È‚¢B
 
 	dir = strx(dir);
 
-	dir = replaceLine(dir, "*(P)", getLine(pTkns, 2), 0); // ‘æ‚QŠK‘w‚Ìƒ[ƒJƒ‹–¼
+	dir = replaceLine(dir, "*(P)", getLine(pTkns, 2), 0); // ‘æ2ŠK‘w‚Ìƒ[ƒJƒ‹–¼
 	dir = replaceLine(dir, "*(C)", getLine(pTkns, getCount(pTkns) - 1), 0); // ƒJƒŒƒ“ƒgDIR‚Ìƒ[ƒJƒ‹–¼
 
 	releaseDim(pTkns, 1);
