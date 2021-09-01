@@ -3,8 +3,8 @@
 
 		出力側ディレクトリ
 
+			"*(P)" をルートディレクトリから見て第２階層のディレクトリのローカル名に置き換える。例："C:\\aaaa\\bbbb\\cccc" -> bbbb
 			"*(C)" をカレントディレクトリのローカル名に置き換える。
-			"*(P)" をカレントディレクトリの親ディレクトリのローカル名に置き換える。
 */
 
 #include "C:\Factory\Common\all.h"
@@ -13,12 +13,12 @@ static char *x_DirFilter(char *dir)
 {
 	autoList_t *pTkns = tokenizeYen_x(getCwd());
 
-	errorCase(getCount(pTkns) < 3); // ? カレントはルートDIR || カレントの親はルートDIR
+	errorCase(getCount(pTkns) < 4); // "C:\\Dev\\PPPP\\x99999999_CCCC" と同じか、それ以上深くなければならない。
 
 	dir = strx(dir);
 
+	dir = replaceLine(dir, "*(P)", getLine(pTkns, 2), 0); // 第２階層のローカル名
 	dir = replaceLine(dir, "*(C)", getLine(pTkns, getCount(pTkns) - 1), 0); // カレントDIRのローカル名
-	dir = replaceLine(dir, "*(P)", getLine(pTkns, getCount(pTkns) - 2), 0); // カレントの親DIRのローカル名
 
 	releaseDim(pTkns, 1);
 
