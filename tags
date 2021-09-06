@@ -9425,16 +9425,6 @@ C:\Factory\Tools\7z.c(72) : DoTrimOneDir // ŠÖ”
 C:\Factory\Tools\7z.c(111) : Post7z // ŠÖ”
 C:\Factory\Tools\7z.c(122) : Extract7z // ŠÖ”
 C:\Factory\Tools\7z.c(171) : main // ŠÖ”
-C:\Factory\Tools\Backup_Main.c(4) : NoShutdownFlag // •Ï”–”‚ÍéŒ¾
-C:\Factory\Tools\Backup_Main.c(6) : ToDecAlphaOnly // ŠÖ”
-C:\Factory\Tools\Backup_Main.c(18) : ToOnomast // ŠÖ”
-C:\Factory\Tools\Backup_Main.c(30) : GetTargetDirs // ŠÖ”
-C:\Factory\Tools\Backup_Main.c(101) : CheckTargetDirs // ŠÖ”
-C:\Factory\Tools\Backup_Main.c(123) : BATCH_BACKUP // ’è‹`
-C:\Factory\Tools\Backup_Main.c(125) : ELTD_IsTargetDir // ŠÖ”
-C:\Factory\Tools\Backup_Main.c(136) : EraseLostTargetDirs // ŠÖ”
-C:\Factory\Tools\Backup_Main.c(177) : BackupDirs // ŠÖ”
-C:\Factory\Tools\Backup_Main.c(208) : main // ŠÖ”
 C:\Factory\Tools\Base64.c(8) : main // ŠÖ”
 C:\Factory\Tools\bb.c(72) : BYTE_PER_LINE // ’è‹`
 C:\Factory\Tools\bb.c(73) : TEXT_SEP_POS // ’è‹`
