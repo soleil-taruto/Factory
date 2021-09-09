@@ -12,6 +12,7 @@ void rapidSortLinesICaseSubColumns(autoList_t *lines, autoList_t *subColumn, aut
 sint strcmp3(char *line1, char *line2);
 sint strcmp2(char *line1, char *line2);
 sint simpleComp(uint v1, uint v2);
+sint simpleComp64(uint64 v1, uint64 v2);
 sint pSimpleComp(uint v1, uint v2);
 sint pSimpleComp2(uint v1, uint v2);
 

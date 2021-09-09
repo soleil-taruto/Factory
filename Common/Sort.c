@@ -325,6 +325,16 @@ sint simpleComp(uint v1, uint v2)
 	return 0;
 */
 }
+sint simpleComp64(uint64 v1, uint64 v2)
+{
+	if(v1 < v2)
+		return -1;
+
+	if(v2 < v1)
+		return 1;
+
+	return 0;
+}
 sint pSimpleComp(uint v1, uint v2)
 {
 	return m_simpleComp(*(uint *)v1, *(uint *)v2);
