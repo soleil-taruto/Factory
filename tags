@@ -9176,8 +9176,8 @@ C:\Factory\SubTools\OrderStampEdit.c(28) : CompStamp // ŠÖ”
 C:\Factory\SubTools\OrderStampEdit.c(42) : CompEOIndex // ŠÖ”
 C:\Factory\SubTools\OrderStampEdit.c(49) : EditOrder // ŠÖ”
 C:\Factory\SubTools\OrderStampEdit.c(79) : ChangeStamps // ŠÖ”
-C:\Factory\SubTools\OrderStampEdit.c(83) : DoOrderStampEdit // ŠÖ”
-C:\Factory\SubTools\OrderStampEdit.c(161) : main // ŠÖ”
+C:\Factory\SubTools\OrderStampEdit.c(101) : DoOrderStampEdit // ŠÖ”
+C:\Factory\SubTools\OrderStampEdit.c(179) : main // ŠÖ”
 C:\Factory\SubTools\OrderStampEdit.c(26) : FileInfo_t // Œ^éŒ¾
 C:\Factory\SubTools\Period.c(25) : EqualInterval // •Ï”–”‚ÍéŒ¾
 C:\Factory\SubTools\Period.c(26) : P_CurrTime // •Ï”–”‚ÍéŒ¾

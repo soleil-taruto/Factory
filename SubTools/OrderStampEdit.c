@@ -78,7 +78,25 @@ static void EditOrder(autoList_t *fileInfos)
 }
 static void ChangeStamps(autoList_t *fileInfos)
 {
-	// TODO
+	FileInfo_t *i;
+	uint index;
+
+	foreach(fileInfos, i, index)
+	if(index)
+	{
+		FileInfo_t *i1;
+		FileInfo_t *i2;
+		uint ndx1 = index - 1;
+		uint ndx2 = index;
+
+		i1 = (FileInfo_t *)getElement(fileInfos, ndx1);
+		i2 = i;
+
+		if(i2->Stamp <= i1->Stamp) // ? i1->Stamp < i2->Stamp ではない -> 要スタンプ変更
+		{
+error(); // TODO
+		}
+	}
 }
 static void DoOrderStampEdit(void)
 {
