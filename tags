@@ -9173,11 +9173,11 @@ C:\Factory\SubTools\OrderStamp.c(14) : CaseSensitiveFlag // •Ï”–”‚ÍéŒ¾
 C:\Factory\SubTools\OrderStamp.c(16) : DoOrderStamp // ŠÖ”
 C:\Factory\SubTools\OrderStamp.c(49) : main // ŠÖ”
 C:\Factory\SubTools\OrderStampEdit.c(28) : CompStamp // ŠÖ”
-C:\Factory\SubTools\OrderStampEdit.c(35) : CompEOIndex // ŠÖ”
-C:\Factory\SubTools\OrderStampEdit.c(42) : EditOrder // ŠÖ”
-C:\Factory\SubTools\OrderStampEdit.c(72) : ChangeStamps // ŠÖ”
-C:\Factory\SubTools\OrderStampEdit.c(76) : DoOrderStampEdit // ŠÖ”
-C:\Factory\SubTools\OrderStampEdit.c(152) : main // ŠÖ”
+C:\Factory\SubTools\OrderStampEdit.c(42) : CompEOIndex // ŠÖ”
+C:\Factory\SubTools\OrderStampEdit.c(49) : EditOrder // ŠÖ”
+C:\Factory\SubTools\OrderStampEdit.c(79) : ChangeStamps // ŠÖ”
+C:\Factory\SubTools\OrderStampEdit.c(83) : DoOrderStampEdit // ŠÖ”
+C:\Factory\SubTools\OrderStampEdit.c(161) : main // ŠÖ”
 C:\Factory\SubTools\OrderStampEdit.c(26) : FileInfo_t // Œ^éŒ¾
 C:\Factory\SubTools\Period.c(25) : EqualInterval // •Ï”–”‚ÍéŒ¾
 C:\Factory\SubTools\Period.c(26) : P_CurrTime // •Ï”–”‚ÍéŒ¾

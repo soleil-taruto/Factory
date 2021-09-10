@@ -29,8 +29,15 @@ static sint CompStamp(uint v1, uint v2)
 {
 	FileInfo_t *a = (FileInfo_t *)v1;
 	FileInfo_t *b = (FileInfo_t *)v2;
+	sint ret;
 
-	return simpleComp64((uint64)a->Stamp, (uint64)b->Stamp);
+	ret = simpleComp64((uint64)a->Stamp, (uint64)b->Stamp);
+
+	if(ret)
+		return ret;
+
+	ret = strcmp(a->File, b->File);
+	return ret;
 }
 static sint CompEOIndex(uint v1, uint v2)
 {
@@ -104,6 +111,7 @@ static void DoOrderStampEdit(void)
 
 	{
 		FileInfo_t *i;
+		int changing = 0;
 
 		foreach(fileInfos, i, index)
 		{
@@ -113,13 +121,17 @@ static void DoOrderStampEdit(void)
 				uint64 stamp    = getFileStampByTime(i->Stamp);
 
 				cout("%I64u -> %I64u : %s\n", oldStamp, stamp, i->File);
+
+				changing = 1;
 			}
 		}
+		if(!changing)
+			cout("タイムスタンプの更新はありません。\n");
 	}
 
 	// Confirm
 	{
-		cout("タイムスタンプを更新します。\n");
+		cout("タイムスタンプを更新します。(全てのファイルに setFileStamp を実行します)\n");
 		cout("続行？\n");
 
 		if(clearGetKey() == 0x1b)
@@ -133,14 +145,11 @@ static void DoOrderStampEdit(void)
 
 		foreach(fileInfos, i, index)
 		{
-			if(i->OldStamp != i->Stamp)
-			{
-				uint64 stamp = getFileStampByTime(i->Stamp);
+			uint64 stamp = getFileStampByTime(i->Stamp);
 
-				cout("%I64u -> %s\n", stamp, i->File);
+			cout("%I64u -> %s\n", stamp, i->File);
 
-				setFileStamp(i->File, stamp, stamp, stamp);
-			}
+			setFileStamp(i->File, stamp, stamp, stamp);
 		}
 	}
 
