@@ -4,9 +4,11 @@
 	--
 	コマンド
 
-	ees.exe /LSS
+	ees.exe /LSS [/E]
 
 		FOUNDLISTFILE のファイルを編集する。
+
+		/E ... どのファイルを編集対象とするかユーザー選択とする。
 
 	ees.exe BASE-FILE
 
@@ -60,7 +62,7 @@ static void EditSame(char *baseFile, autoList_t *files)
 	removeFile(escBaseFile);
 	memFree(escBaseFile);
 }
-static void EditSame_LSS(void)
+static void EditSame_LSS(int userSelectMode)
 {
 	autoList_t *files = readLines(FOUNDLISTFILE);
 	char *file;
@@ -86,11 +88,23 @@ static void EditSame_LSS(void)
 
 	sortJLinesICase(files);
 
+	if(userSelectMode)
+	{
+		baseFile = selectLine(files);
+
+		if(!baseFile)
+			termination(0);
+
+		baseFileIndex = findLine(files, baseFile);
+		errorCase(baseFileIndex == getCount(files));
+		memFree(baseFile);
+		baseFile = NULL;
+	}
 	// ベースファイル選び：
 	// 1ファイルのみ違っていて(編集済み)で、それ以外同じ(未編集)である場合を想定して、
 	// 編集済みのファイルを採用する。
 	//
-	if(3 <= getCount(files))
+	else if(3 <= getCount(files))
 	{
 		for(index = 1; index < getCount(files); index++)
 			if(!isSameFile(getLine(files, 0), getLine(files, index)))
@@ -150,6 +164,16 @@ static void EditSame_File(char *baseFile)
 	trimLines(files);
 	sortJLinesICase(files);
 
+	// write to FOUNDLISTFILE
+	{
+		FILE *fp = fileOpen(FOUNDLISTFILE, "wt");
+
+		writeLine(fp, baseFile);
+		writeLines2Stream(fp, files);
+
+		fileClose(fp);
+	}
+
 	EditSame(baseFile, files);
 
 	releaseDim(files, 1);
@@ -161,7 +185,7 @@ int main(int argc, char **argv)
 
 	if(argIs("/LSS"))
 	{
-		EditSame_LSS();
+		EditSame_LSS(argIs("/E"));
 	}
 	else
 	{
