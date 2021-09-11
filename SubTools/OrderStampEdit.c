@@ -19,7 +19,7 @@ typedef struct FileInfo_st
 
 	// -- ChangeStamps --
 
-	// TODO
+	// none
 
 	// --
 }
@@ -49,6 +49,7 @@ static sint CompEOIndex(uint v1, uint v2)
 static void EditOrder(autoList_t *fileInfos)
 {
 	autoList_t *files = newList();
+	autoList_t *filesTmp;
 	char *file;
 	FileInfo_t *i;
 	FileInfo_t *i2;
@@ -58,7 +59,10 @@ static void EditOrder(autoList_t *fileInfos)
 	foreach(fileInfos, i, index)
 		addElement(files, (uint)i->File);
 
-	editLines(files);
+	filesTmp = editLines(files);
+	releaseAutoList(files);
+	files = filesTmp;
+	trimLines(files); // 空行除去
 	errorCase_m(getCount(files) != getCount(fileInfos), "編集エラー：ファイル数が増減した。");
 
 	foreach(fileInfos, i, index)
@@ -75,6 +79,75 @@ static void EditOrder(autoList_t *fileInfos)
 	rapidSort(fileInfos, CompEOIndex);
 
 	releaseAutoList(files);
+}
+static uint CS_ChangeTest_L(autoList_t *fileInfos, uint index) // スタンプ変更「テスト」前方向, ret: 変更する件数
+{
+	time_t t = ((FileInfo_t *)getElement(fileInfos, index))->Stamp;
+	uint ret = 0;
+
+	while(index)
+	{
+		FileInfo_t *i = (FileInfo_t *)getElement(fileInfos, --index);
+
+		t--;
+
+		if(i->Stamp <= t) // ? 変更不要
+			break;
+
+		if(i->Stamp == i->OldStamp) // ? 変更されていない。-- 既に変更されていれば変更する件数としてカウントしない。
+			ret++;
+	}
+	return ret;
+}
+static uint CS_ChangeTest_R(autoList_t *fileInfos, uint index) // スタンプ変更「テスト」後方向, ret: 変更する件数
+{
+	time_t t = ((FileInfo_t *)getElement(fileInfos, index))->Stamp;
+	uint ret = 0;
+
+	while(++index < getCount(fileInfos))
+	{
+		FileInfo_t *i = (FileInfo_t *)getElement(fileInfos, index);
+
+		t++;
+
+		if(t <= i->Stamp) // ? 変更不要
+			break;
+
+		ret++;
+	}
+	return ret;
+}
+static void CS_Change_L(autoList_t *fileInfos, uint index) // スタンプ変更_前方向
+{
+	time_t t = ((FileInfo_t *)getElement(fileInfos, index))->Stamp;
+
+	while(index)
+	{
+		FileInfo_t *i = (FileInfo_t *)getElement(fileInfos, --index);
+
+		t--;
+
+		if(i->Stamp <= t) // ? 変更不要
+			break;
+
+		i->Stamp = t;
+	}
+}
+static void CS_Change_R(autoList_t *fileInfos, uint index) // スタンプ変更_後方向
+{
+	time_t t = ((FileInfo_t *)getElement(fileInfos, index))->Stamp;
+
+	while(++index < getCount(fileInfos))
+	{
+		FileInfo_t *i = (FileInfo_t *)getElement(fileInfos, index);
+
+		t++;
+
+		if(t <= i->Stamp) // ? 変更不要
+			break;
+
+		i->Stamp = t;
+	}
 }
 static void ChangeStamps(autoList_t *fileInfos)
 {
@@ -94,7 +167,13 @@ static void ChangeStamps(autoList_t *fileInfos)
 
 		if(i2->Stamp <= i1->Stamp) // ? i1->Stamp < i2->Stamp ではない -> 要スタンプ変更
 		{
-error(); // TODO
+			uint c1 = CS_ChangeTest_L(fileInfos, ndx2);
+			uint c2 = CS_ChangeTest_R(fileInfos, ndx1);
+
+			if(c1 < c2)
+				CS_Change_L(fileInfos, ndx2);
+			else
+				CS_Change_R(fileInfos, ndx1);
 		}
 	}
 }
@@ -126,6 +205,20 @@ static void DoOrderStampEdit(void)
 	rapidSort(fileInfos, CompStamp);
 	EditOrder(fileInfos);
 	ChangeStamps(fileInfos);
+
+	// test
+	{
+		FileInfo_t *i;
+
+		foreach(fileInfos, i, index)
+		if(index)
+		{
+			FileInfo_t *i1 = (FileInfo_t *)getElement(fileInfos, index - 1);
+			FileInfo_t *i2 = i;
+
+			errorCase(i2->Stamp <= i1->Stamp); // ? i1->Stamp < i2->Stamp ではない -> スタンプ更新失敗
+		}
+	}
 
 	{
 		FileInfo_t *i;
