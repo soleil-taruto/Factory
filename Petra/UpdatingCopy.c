@@ -41,19 +41,9 @@ static void RemoveOldZip(char *wDir)
 	uint index;
 
 	foreach(files, file, index)
-	{
 		if(!_stricmp(getExt(file), "zip"))
-		{
-			if(getFileAttr_Hidden(file)) // ? 削除マーク済み
-			{
-				removeFile(file);
-			}
-			else
-			{
-				setFileAttr(file, 1, 1, 0, 0); // 削除マーク
-			}
-		}
-	}
+			removeFile(file);
+
 	releaseDim(files, 1);
 }
 static char *GetFirstZipFile(char *rDir)
@@ -79,7 +69,6 @@ static void CopyZip(char *rDir, char *wDir)
 
 	wFile = combine(wDir, getLocal(rFile));
 
-	removeFileIfExist(wFile); // 隠し属性対策 -- 隠し属性だと上書き出来ない。でも削除は出来る。
 	copyFile(rFile, wFile);
 
 	memFree(rFile);

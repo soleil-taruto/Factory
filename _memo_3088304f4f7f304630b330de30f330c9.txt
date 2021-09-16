@@ -8,7 +8,7 @@ ficon      -- ★利用中止
 ricon      -- ★利用中止
 qbk
 FindSame
-RemoveHiddenFiles
+RemoveHiddenFiles -- ★利用中止
 SimpleTree
 FileList2MD5List
 

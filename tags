@@ -7719,9 +7719,9 @@ C:\Factory\Petra\RunOnBatch.c(20) : main // ŠÖ”
 C:\Factory\Petra\UpdatingCopy.c(12) : x_DirFilter // ŠÖ”
 C:\Factory\Petra\UpdatingCopy.c(27) : CheckWDir // ŠÖ”
 C:\Factory\Petra\UpdatingCopy.c(37) : RemoveOldZip // ŠÖ”
-C:\Factory\Petra\UpdatingCopy.c(59) : GetFirstZipFile // ŠÖ”
-C:\Factory\Petra\UpdatingCopy.c(75) : CopyZip // ŠÖ”
-C:\Factory\Petra\UpdatingCopy.c(88) : main // ŠÖ”
+C:\Factory\Petra\UpdatingCopy.c(49) : GetFirstZipFile // ŠÖ”
+C:\Factory\Petra\UpdatingCopy.c(65) : CopyZip // ŠÖ”
+C:\Factory\Petra\UpdatingCopy.c(77) : main // ŠÖ”
 C:\Factory\Program\FilingCase3\Server.c(15) : FILEIO_MAX // ’è‹`
 C:\Factory\Program\FilingCase3\Server.c(17) : KeepDiskFree // •Ï”–”‚ÍéŒ¾
 C:\Factory\Program\FilingCase3\Server.c(18) : RootDir // •Ï”–”‚ÍéŒ¾
@@ -9260,9 +9260,9 @@ C:\Factory\SubTools\SimpleIndex.c(49) : S_PC_MaskPath // ŠÖ”
 C:\Factory\SubTools\SimpleIndex.c(57) : S_PathComp // ŠÖ”
 C:\Factory\SubTools\SimpleIndex.c(71) : S_DirFileComp // ŠÖ”
 C:\Factory\SubTools\SimpleIndex.c(81) : MakeDivList // ŠÖ”
-C:\Factory\SubTools\SimpleIndex.c(234) : GetTemplate // ŠÖ”
-C:\Factory\SubTools\SimpleIndex.c(247) : MakeIndex // ŠÖ”
-C:\Factory\SubTools\SimpleIndex.c(304) : main // ŠÖ”
+C:\Factory\SubTools\SimpleIndex.c(227) : GetTemplate // ŠÖ”
+C:\Factory\SubTools\SimpleIndex.c(240) : MakeIndex // ŠÖ”
+C:\Factory\SubTools\SimpleIndex.c(297) : main // ŠÖ”
 C:\Factory\SubTools\SimpleTree.c(8) : OutFp // •Ï”–”‚ÍéŒ¾
 C:\Factory\SubTools\SimpleTree.c(10) : IsIgnorePath // ŠÖ”
 C:\Factory\SubTools\SimpleTree.c(31) : IsNoLinkPath // ŠÖ”
@@ -9772,9 +9772,6 @@ C:\Factory\Tools\RDMD.c(13) : DoRD // ŠÖ”
 C:\Factory\Tools\RDMD.c(25) : DoMD // ŠÖ”
 C:\Factory\Tools\RDMD.c(39) : DoRDMD // ŠÖ”
 C:\Factory\Tools\RDMD.c(45) : main // ŠÖ”
-C:\Factory\Tools\RemoveHiddenFiles.c(7) : BatchMode // •Ï”–”‚ÍéŒ¾
-C:\Factory\Tools\RemoveHiddenFiles.c(9) : RemoveHiddenFiles // ŠÖ”
-C:\Factory\Tools\RemoveHiddenFiles.c(53) : main // ŠÖ”
 C:\Factory\Tools\RenameAll.c(7) : PubFiles1 // •Ï”–”‚ÍéŒ¾
 C:\Factory\Tools\RenameAll.c(8) : PubFiles2 // •Ï”–”‚ÍéŒ¾
 C:\Factory\Tools\RenameAll.c(10) : MovePubFiles // ŠÖ”

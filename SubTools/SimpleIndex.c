@@ -39,12 +39,12 @@ static int IsSimpleName(char *localPath)
 
 	// "<>." というローカル名は作成出来ないぽい。。。
 }
-static char *MkDivLine(char *href, char *lref, char *trailer, char *exTrailer)
+static char *MkDivLine(char *href, char *lref, char *trailer)
 {
 	if(href)
-		return xcout("<div><a href=\"%s\">%s</a>%s%s</div>", c_urlEncoder(href), lref, trailer, exTrailer);
+		return xcout("<div><a href=\"%s\">%s</a>%s</div>", c_urlEncoder(href), lref, trailer);
 	else
-		return xcout("<div>%s%s%s</div>", lref, trailer, exTrailer);
+		return xcout("<div>%s%s</div>", lref, trailer);
 }
 static char *S_PC_MaskPath(char *path) // ret: strx()
 {
@@ -90,9 +90,9 @@ static char *MakeDivList(uint depth, int noIndex)
 	dircnt = lastDirCount;
 
 	if(depth)
-		addElement(divs, (uint)MkDivLine("../" INDEXFILE, "&lt;parent directory&gt;", "", ""));
+		addElement(divs, (uint)MkDivLine("../" INDEXFILE, "&lt;parent directory&gt;", ""));
 	else if(RootParentHRef)
-		addElement(divs, (uint)MkDivLine(RootParentHRef, "&lt;return&gt;", "", ""));
+		addElement(divs, (uint)MkDivLine(RootParentHRef, "&lt;return&gt;", ""));
 
 	rapidSort(paths, (sint (*)(uint, uint))S_DirFileComp);
 
@@ -164,18 +164,11 @@ static char *MakeDivList(uint depth, int noIndex)
 
 		{
 			char *prm_href = href;
-			char *exTrailer = "";
 
-			if(getFileAttr_Hidden(path))
-			{
+			if(size == 0)
 				prm_href = NULL;
-				exTrailer = HIDDEN_FILE_TRAILER;
-			}
-			else if(size == 0)
-			{
-				prm_href = NULL;
-			}
-			addElement(divs, (uint)MkDivLine(prm_href, lref, trailer, exTrailer));
+
+			addElement(divs, (uint)MkDivLine(prm_href, lref, trailer));
 		}
 
 		if(!ImageTagDisabled)
