@@ -30,15 +30,16 @@ static char *GetAutoName(void)
 		char *line;
 		uint index;
 
-	research:
-		for(index = 0; index < getCount(lines); index += 2)
-			if(!_stricmp(sno, getLine(lines, index)))
+		for(; ; )
+		{
+			for(index = 0; index < getCount(lines); index += 2)
+				if(!_stricmp(sno, getLine(lines, index)))
+					break;
+
+			if(index == getCount(lines))
 				break;
 
-		if(index < getCount(lines))
-		{
 			sno = xcout("%u", toValue_x(sno) + 1);
-			goto research;
 		}
 	}
 
@@ -47,6 +48,46 @@ static char *GetAutoName(void)
 static char *GetAutoDir(void)
 {
 	return getCwd();
+}
+static int SSD_IsAutoName(char *line)
+{
+	return lineExp("<1,,09>\n<>", line);
+}
+static sint SSD_Comp(uint v1, uint v2)
+{
+	char *a = (char *)v1;
+	char *b = (char *)v2;
+	sint ret;
+
+	{
+		sint r1 = SSD_IsAutoName(a) ? 1 : 0;
+		sint r2 = SSD_IsAutoName(b) ? 1 : 0;
+
+		ret = r1 - r2;
+
+		if(ret)
+			return ret;
+	}
+
+	ret = strcmp(a, b);
+	return ret;
+}
+static void SortSaveData(autoList_t *lines)
+{
+	uint index;
+
+	for(index = 0; index < getCount(lines); index++)
+		setElement(lines, index, (uint)addLine_x(getLine(lines, index), addLine_x(strx("\n"), (char *)desertElement(lines, index + 1))));
+
+	rapidSort(lines, SSD_Comp);
+
+	for(index = getCount(lines); index; index--)
+	{
+		char *p = ne_strchr(getLine(lines, index - 1), '\n');
+
+		insertElement(lines, index, (uint)strx(p + 1));
+		*p = '\0';
+	}
 }
 int main(int argc, char **argv)
 {
@@ -90,6 +131,7 @@ int main(int argc, char **argv)
 			addElement(lines, (uint)strx(name));
 			addElement(lines, (uint)strx(dir));
 		}
+		SortSaveData(lines);
 		writeLines_cx(SAVE_FILE, lines);
 	}
 

@@ -9886,8 +9886,11 @@ C:\Factory\Tools\SabunTextFile.c(11) : Limit // •Ï”–”‚ÍéŒ¾
 C:\Factory\Tools\SabunTextFile.c(13) : Main2 // ŠÖ”
 C:\Factory\Tools\SabunTextFile.c(31) : main // ŠÖ”
 C:\Factory\Tools\sd.c(22) : GetAutoName // ŠÖ”
-C:\Factory\Tools\sd.c(47) : GetAutoDir // ŠÖ”
-C:\Factory\Tools\sd.c(51) : main // ŠÖ”
+C:\Factory\Tools\sd.c(48) : GetAutoDir // ŠÖ”
+C:\Factory\Tools\sd.c(52) : SSD_IsAutoName // ŠÖ”
+C:\Factory\Tools\sd.c(56) : SSD_Comp // ŠÖ”
+C:\Factory\Tools\sd.c(75) : SortSaveData // ŠÖ”
+C:\Factory\Tools\sd.c(92) : main // ŠÖ”
 C:\Factory\Tools\sha512.c(32) : QuietMode // •Ï”–”‚ÍéŒ¾
 C:\Factory\Tools\sha512.c(34) : char // ŠÖ”
 C:\Factory\Tools\sha512.c(52) : autoBlock_t // ŠÖ”
