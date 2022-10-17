@@ -7722,6 +7722,12 @@ C:\Factory\Petra\CxBuiltBatOnly.c(3) : main // 関数
 C:\Factory\Petra\EditConfig.c(7) : main // 関数
 C:\Factory\Petra\FileList2MD5List.c(8) : FileList2MD5List // 関数
 C:\Factory\Petra\FileList2MD5List.c(22) : main // 関数
+C:\Factory\Petra\GitRelease.c(3) : R_ROOT_DIR // 定義
+C:\Factory\Petra\GitRelease.c(4) : W_ROOT_DIR // 定義
+C:\Factory\Petra\GitRelease.c(6) : ClearRepoDir // 関数
+C:\Factory\Petra\GitRelease.c(18) : CopyToRepoDir // 関数
+C:\Factory\Petra\GitRelease.c(36) : RemoveNotNeedFiles // 関数
+C:\Factory\Petra\GitRelease.c(63) : main // 関数
 C:\Factory\Petra\Lock.c(7) : main // 関数
 C:\Factory\Petra\PublicLog.c(7) : LOG_FILE // 定義
 C:\Factory\Petra\PublicLog.c(8) : LOG_FILE_02 // 定義
