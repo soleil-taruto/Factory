@@ -1,0 +1,3 @@
+moteclean .
+solclean .
+cx clean **

@@ -1,4 +1,4 @@
-�ｻｿ<html>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
 <style>
@@ -28,13 +28,13 @@ a:hover {
 <body>
 
 <br/>
-竊第怙譁ｰ<br/>
+↑最新<br/>
 <br/>
 *app-list*
 <br/>
-竊灘､ｪ蜿､<br/>
+↓太古<br/>
 <br/>
-<a href="index.html">謌ｻ繧�</a><br/>
+<a href="index.html">戻る</a><br/>
 <br/>
 
 </body>

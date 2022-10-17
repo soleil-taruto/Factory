@@ -294,8 +294,8 @@ int existPath(char *path) // path: NULL -> 不可(指定してはならない)
 	return !_access(path, 0); // ? アクセス可
 }
 /*
-	Xドライブが存在する && 準備出来ている -> existDir("X:\\") は真を返す。
-	Xドライブが存在しない || 準備出来ていない -> existDir("X:\\") は偽を返す。
+	Xドライブが存在する && 準備できている -> existDir("X:\\") は真を返す。
+	Xドライブが存在しない || 準備できていない -> existDir("X:\\") は偽を返す。
 */
 int existDir(char *dir)
 {

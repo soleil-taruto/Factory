@@ -1,1 +1,1 @@
-﻿外部のプログラムとの連携を行う。主に C:\app\*, C:\app\Kit\* と連携する。
+�O���̃v���O�����Ƃ̘A�g���s���B��� C:\app\*, C:\app\Kit\* �ƘA�g����B

@@ -4,13 +4,15 @@
 
 #include "C:\Factory\Common\all.h"
 
+#define LOG_FILE    "C:\\Factory\\tmp\\PublicLog.txt"
+#define LOG_FILE_02 "C:\\Factory\\tmp\\PublicLog2.txt"
+#define LOG_FILE_03 "C:\\Factory\\tmp\\PublicLog3.txt"
+
+// del @ 2022.1.23
+/*
 #define LOG_FILE    "C:\\vaz\\PublicLog.txt"
 #define LOG_FILE_02 "C:\\vaz\\PublicLog2.txt"
 #define LOG_FILE_03 "C:\\vaz\\PublicLog3.txt"
-/*
-#define LOG_FILE    "C:\\tmp\\PublicLog.txt"
-#define LOG_FILE_02 "C:\\tmp\\PublicLog2.txt"
-#define LOG_FILE_03 "C:\\tmp\\PublicLog3.txt"
 */
 
 #define LOG_FILE_SIZE_MAX 8000000

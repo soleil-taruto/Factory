@@ -1,4 +1,4 @@
-ï»¿/// ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚¯ãƒ©ã‚¹
+/// ƒeƒ“ƒvƒŒ[ƒgƒNƒ‰ƒX
 
 //template <class Key_t, class Value_t>
 //template <class Element_t>

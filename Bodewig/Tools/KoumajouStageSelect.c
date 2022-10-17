@@ -8,7 +8,7 @@
 
 #include "C:\Factory\Common\all.h"
 
-static char *GameDir = "C:\\etz\\ƒQ[ƒ€’u‚«ê\\g–‚é“`à";
+static char *GameDir = "C:\\home\\Game\\g–‚é“`à";
 
 static char *GetSaveDataFile(void)
 {

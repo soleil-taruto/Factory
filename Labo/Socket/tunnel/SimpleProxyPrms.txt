@@ -1,25 +1,25 @@
-ï»¿; TCPæŽ¥ç¶šã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆ(ç§’)
+; TCPÚ‘±ƒ^ƒCƒ€ƒAƒEƒg(•b)
 //CT 2
 ;
-; DOSã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆ(ç§’)
+; DOSƒ^ƒCƒ€ƒAƒEƒg(•b)
 /DOSTO 5
 ;
-; CCç„¡é€šä¿¡ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆ(ç§’)
+; CC–³’ÊMƒ^ƒCƒ€ƒAƒEƒg(•b)
 /CCNDTO 5
 ;
-; Hostãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚’è¦‹ã¦å®›å…ˆã‚’å¤‰æ›´ã™ã‚‹ã€‚
+; HostƒtƒB[ƒ‹ƒh‚ðŒ©‚Äˆ¶æ‚ð•ÏX‚·‚éB
 /X
 ;
-; URLã‹ã‚‰ã‚¹ã‚­ãƒ¼ãƒ ãƒ»ãƒ‰ãƒ¡ã‚¤ãƒ³ã‚’å‰Šé™¤ã™ã‚‹ã€‚
+; URL‚©‚çƒXƒL[ƒ€EƒhƒƒCƒ“‚ðíœ‚·‚éB
 /-D
 ;
-; CONNECTãƒ¡ã‚½ãƒƒãƒ‰ã‚’è¨±å¯ã™ã‚‹ã€‚(httpsã‚’è¨±å¯ã™ã‚‹)
+; CONNECTƒƒ\ƒbƒh‚ð‹–‰Â‚·‚éB(https‚ð‹–‰Â‚·‚é)
 /+C
 ;
-; ãƒ«ãƒ¼ãƒ—ãƒãƒƒã‚¯ã‚’ç¦æ­¢ã™ã‚‹ã€‚
+; ƒ‹[ƒvƒoƒbƒN‚ð‹ÖŽ~‚·‚éB
 /-IP 127
 ;
-; ãƒ—ãƒ©ã‚¤ãƒ™ãƒ¼ãƒˆIPã‚’ç¦æ­¢ã™ã‚‹ã€‚
+; ƒvƒ‰ƒCƒx[ƒgIP‚ð‹ÖŽ~‚·‚éB
 /-IP 192.168
 /-IP 172.16.
 /-IP 172.17.
@@ -39,23 +39,23 @@
 /-IP 172.31.
 /-IP 10.
 ;
-; ãƒªãƒ³ã‚¯ãƒ­ãƒ¼ã‚«ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’ç¦æ­¢ã™ã‚‹ã€‚
+; ƒŠƒ“ƒNƒ[ƒJƒ‹ƒAƒhƒŒƒX‚ð‹ÖŽ~‚·‚éB
 /-IP 169.254
 ;
-; ãƒ†ã‚¹ãƒˆãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ç”¨ã‚¢ãƒ‰ãƒ¬ã‚¹ï¼Ÿã‚’ç¦æ­¢ã™ã‚‹ã€‚
+; ƒeƒXƒgƒlƒbƒgƒ[ƒN—pƒAƒhƒŒƒXH‚ð‹ÖŽ~‚·‚éB
 /-IP 192.0.2.
 ;
-; ãƒ™ãƒ³ãƒãƒžãƒ¼ã‚¯ãƒ†ã‚¹ãƒˆç”¨ã‚¢ãƒ‰ãƒ¬ã‚¹ï¼Ÿã‚’ç¦æ­¢ã™ã‚‹ã€‚
+; ƒxƒ“ƒ`ƒ}[ƒNƒeƒXƒg—pƒAƒhƒŒƒXH‚ð‹ÖŽ~‚·‚éB
 /-IP 198.18.
 /-IP 198.19.
 ;
-; ãƒ«ãƒ¼ãƒ—ãƒãƒƒã‚¯ï¼Ÿã‚’ç¦æ­¢ã™ã‚‹ã€‚
+; ƒ‹[ƒvƒoƒbƒNH‚ð‹ÖŽ~‚·‚éB
 /-IP 0.0.0.0
 ;
-; ãƒ–ãƒ­ãƒ¼ãƒ‰ã‚­ãƒ£ã‚¹ãƒˆã‚¢ãƒ‰ãƒ¬ã‚¹ï¼Ÿã‚’ç¦æ­¢ã™ã‚‹ã€‚
+; ƒuƒ[ƒhƒLƒƒƒXƒgƒAƒhƒŒƒXH‚ð‹ÖŽ~‚·‚éB
 /-IP 255.255.255.255
 ;
-; ãƒ˜ãƒƒãƒ€ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®ç½®ãæ›ãˆ
+; ƒwƒbƒ_ƒtƒB[ƒ‹ƒh‚Ì’u‚«Š·‚¦
 /HR Connection $HProxy-Connection
 /HK Proxy-Connection
 ;/HK Pragma

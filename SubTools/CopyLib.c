@@ -421,7 +421,7 @@ static void CheckAppSpecRangesPair(autoList_t *rRanges, autoList_t *wRanges)
 
 	LOGPOS();
 
-	errorCase_m(getCount(rRanges) != getCount(wRanges), "アプリ固有コードの数が合わないため上書き出来ません。");
+	errorCase_m(getCount(rRanges) != getCount(wRanges), "アプリ固有コードの数が合わないため上書きできません。");
 
 	errorCase(getCount(rRanges) % 2 != 1); // 2bs
 	errorCase(getCount(wRanges) % 2 != 1); // 2bs
@@ -508,7 +508,7 @@ static void DoCopyLib(char *rDir, char *wDir, int testMode)
 			WeldAllEmptyRange(ranges);
 			cout("Dr.2 %u\n", getCount(ranges));
 
-			errorCase_m(1 < getCount(ranges), "アプリ固有コードを含むため削除出来ません。\nファイルを手動で削除して下さい。");
+			errorCase_m(1 < getCount(ranges), "アプリ固有コードを含むため削除できません。\nファイルを手動で削除して下さい。");
 
 			releaseDim(ranges, 2);
 		}
@@ -575,7 +575,7 @@ static void DoCopyLib(char *rDir, char *wDir, int testMode)
 	}
 	foreach(wSubDirs, dir, index)
 		if(!testMode)
-			removeDirIfEmpty_x(combine(wDir, dir)); // .cpp の場合ファイルを削除しないのでDIRを削除出来ない場合もある。
+			removeDirIfEmpty_x(combine(wDir, dir)); // .cpp の場合ファイルを削除しないのでDIRを削除できない場合もある。
 
 	releaseDim(rSubDirs, 1);
 	releaseDim(wSubDirs, 1);

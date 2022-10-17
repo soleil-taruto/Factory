@@ -1,12 +1,12 @@
 /*
-	http.exe C:\tmp\wwwroot
+	http.exe C:\web\wwwroot
 		http://localhost/
-		http://localhost/index.html -> C:\tmp\wwwroot\index.html
+		http://localhost/index.html -> C:\web\wwwroot\index.html
 
 		http://localhost/sub
-		http://localhost/sub/index.html -> C:\tmp\wwwroot\sub\index.html
+		http://localhost/sub/index.html -> C:\web\wwwroot\sub\index.html
 
-		http://localhost/abc/123/def.jpg -> C:\tmp\wwwroot\abc\123\def.jpg
+		http://localhost/abc/123/def.jpg -> C:\web\wwwroot\abc\123\def.jpg
 
 	http.exe /p 59999 C:\HP
 		http://localhost:59999/image/abc.gif -> C:\HP\image\abc.gif

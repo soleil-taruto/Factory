@@ -57,7 +57,7 @@ int main(int argc, char **argv)
 
 		cout("\n");
 		cout("対象フォルダを変更します。\n");
-		cout("処理を開始してからはキャンセル出来ません。\n");
+		cout("処理を開始してからはキャンセルできません。\n");
 		cout("続行するにはエンターキーを押してね。\n");
 
 		if(clearGetKey() == 0x0d)

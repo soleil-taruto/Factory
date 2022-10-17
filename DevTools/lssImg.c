@@ -4,6 +4,8 @@
 
 	> lss . .bmp* .jpg* .jpeg* .png* .gif*
 	> lssImg
+
+	> lssImg /F    -- ファイル名付き
 */
 
 #include "C:\Factory\Common\all.h"
@@ -46,5 +48,6 @@ int main(int argc, char **argv)
 	writeLine(fp, "</html>");
 	fileClose(fp);
 
-	openOutDir();
+//	openOutDir(); // old
+	execute_x(xcout("START \"\" \"%s\"", outFile));
 }

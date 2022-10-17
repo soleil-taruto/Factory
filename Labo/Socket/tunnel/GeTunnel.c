@@ -332,7 +332,7 @@ static char *HE_Encode(autoBlock_t *buff)
 			}
 			else if(b_(buff)[index] == '=')
 			{
-				b_(buff)[index] = '\0'; // パディング ('=') が無くても decodeBase64 出来る。
+				b_(buff)[index] = '\0'; // パディング ('=') が無くても decodeBase64 できる。
 				return unbindBlock(buff);
 			}
 		}

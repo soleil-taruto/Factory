@@ -673,7 +673,7 @@ char *toFairFullPathFltr(char *path) // path ‚ª•s³‚Èê‡‚Í error();
 		char *wkcwd;
 
 		addCwd_x(xcout("%c:.", drvchr));
-		wkcwd = getCwd(); // drvchr ‚ª { ‘¶Ý‚µ‚È‚¢ || €”õo—ˆ‚Ä‚¢‚È‚¢ } -> ‚±‚±‚Å error();
+		wkcwd = getCwd(); // drvchr ‚ª { ‘¶Ý‚µ‚È‚¢ || €”õ‚Å‚«‚Ä‚¢‚È‚¢ } -> ‚±‚±‚Å error();
 		unaddCwd();
 
 		if(!isAbsRootDir(wkcwd))

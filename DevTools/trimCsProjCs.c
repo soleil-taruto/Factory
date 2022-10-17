@@ -117,7 +117,7 @@ static void ProcProj(int checkOnly)
 
 	ProjLines = readLines(ProjFile);
 
-	// check ProjLines ‚ğ‘‚«o‚µ‚Ä ProjFile ‚ğÄŒ»o—ˆ‚é‚©‚Ç‚¤‚© -- 2bs
+	// check ProjLines ‚ğ‘‚«o‚µ‚Ä ProjFile ‚ğÄŒ»‚Å‚«‚é‚©‚Ç‚¤‚© -- 2bs
 	{
 		char *wkFile = makeTempPath(NULL);
 

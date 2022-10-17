@@ -16,7 +16,7 @@ static void CompareDirPair(char *dir1, char *dir2, int ignoreCaseOfPath)
 		cout("+--------------------+\n");
 		cout("| 一致しませんでした |\n");
 		cout("+--------------------+\n");
-		cout("* 僅かな違いであれば dmd5 /c コマンドで特定出来るかもしれません\n");
+		cout("* 僅かな違いであれば dmd5 /c コマンドで特定できるかもしれません\n");
 	}
 }
 int main(int argc, char **argv)

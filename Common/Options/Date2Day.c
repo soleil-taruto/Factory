@@ -16,7 +16,7 @@ uint64 Date2Day(uint y, uint m, uint d)
 	uint64 y64;
 	uint64 day;
 
-	// ? ‘Î‰o—ˆ‚È‚¢“ú•t
+	// ? ‘Î‰‚Å‚«‚È‚¢“ú•t
 	if(y < 1 || m < 1 || d < 1)
 		return 0;
 

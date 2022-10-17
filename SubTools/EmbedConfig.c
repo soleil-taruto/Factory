@@ -58,7 +58,8 @@ static void ChangeEmbedConfig(uint cfgPos, int cfgVal)
 
 	ChangeEmbedConfig_File(file, cfgPos, cfgVal);
 
-	ChangePETimeDateStamp(file, 0x5aaaaaaa); // 2018/03/16 02:17:30
+	// del @ 2022.9.29
+//	ChangePETimeDateStamp(file, 0x5aaaaaaa); // 2018/03/16 02:17:30
 
 	memFree(file);
 }

@@ -1,4 +1,4 @@
-ï»¿<html>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
 <style>
@@ -45,11 +45,11 @@ a:hover {
 }
 
 </style>
-<title>ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰</title>
+<title>ƒ_ƒEƒ“ƒ[ƒh</title>
 </head>
 <body>
 
-ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰
+ƒ_ƒEƒ“ƒ[ƒh
 
 <table>
 

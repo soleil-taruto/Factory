@@ -38,7 +38,7 @@ static void DoSendBit(uint bit)
 	handleClose(evBit_0);
 	handleClose(evBit_1);
 
-	errorCase_m(!result, "送信タイムアウトしました。受信側の準備が出来ていません。");
+	errorCase_m(!result, "送信タイムアウトしました。受信側の準備ができていません。");
 }
 static void DoSend(char *message)
 {

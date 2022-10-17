@@ -1,3 +1,1 @@
-CALL ff
-Tools\RDMD.exe /RM tmp
-CALL mkt
+C:\Factory\Tools\RDMD.exe /RM C:\Factory\tmp

@@ -5,7 +5,7 @@ int main(int argc, char **argv)
 	char *file;
 	autoBlock_t *fileData;
 
-	errorCase(!argIs("MASK-GZ-DATA"));
+//	errorCase(!argIs("MASK-GZ-DATA")); // îpé~ @ 2022.2.21
 
 	file = nextArg();
 	cout("MaskGZData_file: %s\n", file);

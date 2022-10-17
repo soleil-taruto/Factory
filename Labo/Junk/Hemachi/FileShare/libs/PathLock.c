@@ -44,7 +44,7 @@ int HFS_NM_LockPath(char *path, int checkOnlyMode) // ? ロック可能 || ロックした
 	}
 	else if(LOCKED_NUMMAX <= getCount(lines)) // ? try lock mode + overflow (ロック不可)
 	{
-		cout("これ以上ロック出来ません。\n");
+		cout("これ以上ロックできません。\n");
 		retval = 0;
 	}
 	else // ? unlocked -> lock

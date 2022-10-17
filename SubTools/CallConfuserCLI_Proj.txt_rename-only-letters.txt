@@ -1,4 +1,4 @@
-<project outputDir="" baseDir="C:\tmp\ConfuserEx" xmlns="http://confuser.codeplex.com">
+<project outputDir="" baseDir="C:\temp\ConfuserEx" xmlns="http://confuser.codeplex.com">
 	<rule preset="none" pattern="true">
 		<protection id="rename">
 			<argument name="mode" value="letters" />

@@ -6,7 +6,7 @@ static int Perform(char *prmFile, char *ansFile)
 }
 static void ErrorFnlz(void)
 {
-	cout("指定されたポート番号は使用出来ません。ret=1\n");
+	cout("指定されたポート番号は使用できません。ret=1\n");
 
 	termination(1);
 }
@@ -27,7 +27,7 @@ int main(int argc, char **argv)
 	sockServer(Perform, portno, 1, 0, Idle);
 	unaddFinalizer(ErrorFnlz);
 
-	cout("指定されたポート番号は使用出来ます。ret=0\n");
+	cout("指定されたポート番号は使用できます。ret=0\n");
 
 	termination(0);
 }

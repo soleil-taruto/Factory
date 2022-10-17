@@ -489,7 +489,7 @@ static void DeepBuild(int shallowMode)
 	uint index;
 	uint beginRemCount = hasArgs(1) ? toValue(nextArg()) : UINTMAX;
 
-#if 1 // ”p~ @ 2017.12.26 // •œŠˆ @ 2020.8.20
+#if 0 // ”p~ @ 2017.12.26 // •œŠˆ @ 2020.8.20 // ”p~ @ 2022.1.22
 	// ì‹ÆŠÂ‹«‚Ì”z‰º‚Å‚ ‚é‚©ƒ`ƒFƒbƒN
 	{
 		char *curdirY = addChar(getCwd(), '\\');

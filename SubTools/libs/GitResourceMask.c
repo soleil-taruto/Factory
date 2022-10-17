@@ -6,7 +6,7 @@
 //#define WAV_HZ 44100
 #define MOVIE_FPS 30
 
-#define CACHE_DIR "C:\\tmp\\GitResourceMaskCache"
+#define CACHE_DIR "C:\\Factory\\tmp\\GitResourceMaskCache"
 
 static char *GetCachedFile(char *categoly, char *keyFile)
 {

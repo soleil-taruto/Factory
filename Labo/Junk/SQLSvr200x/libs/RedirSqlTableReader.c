@@ -1,5 +1,5 @@
 /*
-	改行とタブは処理出来ないので sqlcmd に -k オプションを付けてね。
+	改行とタブは処理できないので sqlcmd に -k オプションを付けてね。
 */
 
 #include "RedirSqlTableReader.h"

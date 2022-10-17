@@ -3,9 +3,9 @@
 	鯖名 homuhomu.net とすると http://homuhomu.net:59999/homura-chan/file.bin でファイルを落とせる。
 	file.bin の部分は自由、URL に URL-phrase である "homura-chan" が入っていれば良い。
 
-	fbSend.exe homuhomu.net:59999/homura-chan upfile.zip でアップロード出来る。
-	UL中にDL開始出来るし、DL中にUL開始出来るが、その時DLしたファイルの内容は保障しない。多分、ニコイチか尻切れ蜻蛉
-	複数同時にUL開始出来るが、その時ULしたファイルの内容は保障しない。多分、ごちゃ混ぜになっている。
+	fbSend.exe homuhomu.net:59999/homura-chan upfile.zip でアップロードできる。
+	UL中にDL開始できるし、DL中にUL開始できるが、その時DLしたファイルの内容は保障しない。多分、ニコイチか尻切れ蜻蛉
+	複数同時にUL開始できるが、その時ULしたファイルの内容は保障しない。多分、ごちゃ混ぜになっている。
 */
 
 #include "C:\Factory\Common\Options\SockServer.h"

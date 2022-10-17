@@ -140,7 +140,7 @@ static void SaveHistMessageList(uint index)
 	cout("Save-Hist: %u (%u)\n", index, HistCount);
 	errorCase(HistCount < index);
 
-	fp = fileOpen(HistFile, "r+b"); // "ab" だと fseek 出来ない。r+ の場合 HistFile は存在している必要がある。
+	fp = fileOpen(HistFile, "r+b"); // "ab" だと fseek できない。r+ の場合 HistFile は存在している必要がある。
 	fileSeek(fp, SEEK_SET, (sint64)index * sizeof(HistMessageList));
 	fileWrite(fp, gndBlockVar(HistMessageList, sizeof(HistMessageList), gab));
 	fileClose(fp);

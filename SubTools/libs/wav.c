@@ -69,7 +69,7 @@ autoList_t *readWAVFile(char *file)
 
 		if(!strcmp(name, "fmt "))
 		{
-			errorCase_m(Fmt.Loaded, "複数のフォーマットチャンクは処理出来ません。"); // ? 2回目のフォーマットチャンク
+			errorCase_m(Fmt.Loaded, "複数のフォーマットチャンクは処理できません。"); // ? 2回目のフォーマットチャンク
 			errorCase(size < 16);
 
 			Fmt.Loaded       = 1;
@@ -84,7 +84,7 @@ autoList_t *readWAVFile(char *file)
 		}
 		else if(!strcmp(name, "data"))
 		{
-			errorCase_m(RawData, "複数のデータチャンクは処理出来ません。"); // ? 2回目のデータチャンク
+			errorCase_m(RawData, "複数のデータチャンクは処理できません。"); // ? 2回目のデータチャンク
 
 			RawData = neReadBinaryBlock(fp, size);
 		}

@@ -42,7 +42,7 @@ static void S_UpdateDiskSpace(char *dir)
 	ULARGE_INTEGER t;
 
 	/*
-		ドライブが存在しない || 準備出来ていない || ディレクトリが存在しない -> 失敗する。
+		ドライブが存在しない || 準備できていない || ディレクトリが存在しない -> 失敗する。
 	*/
 	if (!(int)GetDiskFreeSpaceEx((LPCTSTR)dir, &a, &t, &f)) // ? 失敗
 	{

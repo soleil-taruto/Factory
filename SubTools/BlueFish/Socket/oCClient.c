@@ -73,6 +73,6 @@ int main(int argc, char **argv)
 	command = nextArg();
 
 	LOGPOS();
-	errorCase_m(!SClient(server, portNo, Perform, (uint)command), "接続出来なかった様です。");
+	errorCase_m(!SClient(server, portNo, Perform, (uint)command), "接続できなかったようです。");
 	LOGPOS();
 }

@@ -25,7 +25,7 @@
 #define EXTRA_OPENED "extramode_enable"
 #define NEW_LINE "\r\n"
 
-static char *GameDir = "C:\\etz\\ƒQ[ƒ€’u‚«ê\\g–‚é“`à";
+static char *GameDir = "C:\\home\\Game\\g–‚é“`à";
 
 static uint StageNo = 1;
 static uint HiScore = 0;

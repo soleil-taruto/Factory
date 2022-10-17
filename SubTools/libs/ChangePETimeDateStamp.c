@@ -2,6 +2,9 @@
 
 void ChangePETimeDateStamp(char *file, uint t)
 {
+#if 1
+	error_m("Modify PE Header is forbidden !!!"); // PEヘッダの書き換えは危険な香りがするので、禁止とする。@ 2022.5.1
+#else
 	FILE *fp = fileOpen(file, "r+b");
 	uint peHedPos;
 	uint optHedSize;
@@ -43,6 +46,7 @@ errorCase(optHedSize != 224); // HACK: これ以外のサイズに出会ったら、CheckSum の
 	fileClose(fp);
 
 	LOGPOS();
+#endif
 }
 void ChangeAllPETimeDateStamp(char *dir, uint t)
 {

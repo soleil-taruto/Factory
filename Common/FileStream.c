@@ -112,7 +112,7 @@ HANDLE getHandleByFilePointer(FILE *fp) // ret: CreateFile() によって得られる HA
 		SEEK_CUR 現在位置
 		SEEK_END 最後のバイトの次のバイト位置
 
-	SEEK_END より後の領域にもシーク出来るようだ。
+	SEEK_END より後の領域にもシークできるようだ。
 	シークしただけではファイルは拡張されず、書き込むと拡張され飛ばした部分は 0x00 で補填される。
 	読み込むと EOF を返す。
 

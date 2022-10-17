@@ -251,7 +251,7 @@ static time_t CheckAndAdjustCAWTime(time_t t, char *uiKind)
 	streamReader(uchar *block, uint size)
 		次の size バイトを block に書き込む。
 		要求されたサイズのデータは必ず返さなければならない。
-		ユーザーから中断の要求があったり、これ以上データを用意出来なくなるなど、中止したい場合は STD_ReadStop に !0 をセットする。
+		ユーザーから中断の要求があったり、これ以上データを用意できなくなるなど、中止したい場合は STD_ReadStop に !0 をセットする。
 */
 void StreamToDir(char *dir, void (*streamReader)(uchar *, uint))
 {
@@ -402,7 +402,7 @@ void StreamToDir(char *dir, void (*streamReader)(uchar *, uint))
 
 				if(infoRdy)
 				{
-					// 書き込み禁止にすると日時を設定出来なくなるので、先に！
+					// 書き込み禁止にすると日時を設定できなくなるので、先に！
 					setFileStamp(
 						path,
 						info.createTime,

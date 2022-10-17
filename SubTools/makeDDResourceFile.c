@@ -109,7 +109,8 @@ static void MaskFileData(autoBlock_t *fileData)
 
 	writeBinary(file, fileData);
 
-	coExecute_x(xcout("START \"\" /B /WAIT \"%s\" MASK-GZ-DATA \"%s\"", MaskingExeFile, file));
+	coExecute_x(xcout("START \"\" /B /WAIT \"%s\" \"%s\"", MaskingExeFile, file));
+//	coExecute_x(xcout("START \"\" /B /WAIT \"%s\" MASK-GZ-DATA \"%s\"", MaskingExeFile, file)); // îpé~ @ 2022.2.21
 
 	errorCase(!existFile(file)); // 2bs?
 

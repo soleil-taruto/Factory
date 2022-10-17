@@ -98,7 +98,8 @@
 //#define DELETABLE_COMMENT_01 "削除予定"
 //#define DELETABLE_COMMENT_02_START_PTN "削除予定, "
 
-#define AUTO_COMMENT_FILE "C:\\appdata\\rum-auto-comment.txt"
+#define AUTO_COMMENT_FILE "C:\\temp\\rum-auto-comment.txt"
+//#define AUTO_COMMENT_FILE "C:\\appdata\\rum-auto-comment.txt" // del @ 2022.1.23
 //#define AUTO_COMMENT_FILE "C:\\Factory\\tmp\\auto-comment.txt" // qrumall /D で消される。
 
 static uint ErrorLevel;
@@ -1140,7 +1141,7 @@ endNestingCheck:
 			else
 			{
 				/*
-					stockFile を中途半端に出力してエラーとかで落ちると、ハッシュと合わないファイルが出来てしまいマズいので、
+					stockFile を中途半端に出力してエラーとかで落ちると、ハッシュと合わないファイルができてしまいマズいので、
 					確実に読み込める midFile を中継する。
 				*/
 				char *midFile = makeTempPath("mid");

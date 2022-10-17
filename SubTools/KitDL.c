@@ -111,7 +111,7 @@ readArgs:
 
 			LOGPOS();
 
-			coSleep(2000); // 何か掴みっぱで HGet を削除出来ないと嫌なので、少し待つ。
+			coSleep(2000); // 何か掴みっぱで HGet を削除できないと嫌なので、少し待つ。
 
 			if(existDir(wDir))
 				semiRemovePath(wDir);

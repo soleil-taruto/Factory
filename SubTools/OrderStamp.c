@@ -1,6 +1,6 @@
 /*
 	タイムスタンプのソート順がファイル名のソート順になるようにタイムスタンプを変更する。
-	★元のタイムスタンプは失われる。
+	★更新日時のみ変更する。
 
 	OrderStamp.exe [/R] [/-I] [対象ディレクトリ]
 
@@ -40,7 +40,8 @@ static void DoOrderStamp(void)
 
 		cout("%I64u -> %s\n", stamp, file);
 
-		setFileStamp(file, stamp, stamp, stamp);
+		setFileStamp(file, 0, 0, stamp); // 更新日時のみ
+//		setFileStamp(file, stamp, stamp, stamp); // 全ての日時
 	}
 	releaseDim(files, 1);
 

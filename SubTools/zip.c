@@ -241,12 +241,28 @@ static void DestroyFindVersionPtn(autoBlock_t *text, uint startPos, uint count)
 		setByte(text, startPos + index, chr);
 	}
 }
+
+static int MakeRev_GameExeMode;
+static char *MakeRev_GameExeMode_GameExePath;
+
 static char *MakeRev(void)
 {
 	char *revFile = makeTempPath(NULL);
 	char *rev;
 
-	coExecute_x(xcout("C:\\Factory\\DevTools\\rev.exe //O \"%s\" /P", revFile));
+	if(MakeRev_GameExeMode) // add @ 2022.6.11
+	{
+		uint t;
+
+		errorCase(!MakeRev_GameExeMode_GameExePath);
+		errorCase(!existFile(MakeRev_GameExeMode_GameExePath));
+
+		t = GetPETimeDateStamp(MakeRev_GameExeMode_GameExePath);
+
+		coExecute_x(xcout("C:\\Factory\\DevTools\\rev.exe //O \"%s\" /P %u", revFile, t));
+	}
+	else
+		coExecute_x(xcout("C:\\Factory\\DevTools\\rev.exe //O \"%s\" /P", revFile));
 
 	rev = readFirstLine(revFile);
 	errorCase(!lineExp("<4,09>.<3,09>.<5,09>", rev)); // 2bs
@@ -254,12 +270,12 @@ static char *MakeRev(void)
 	errorCase(!lineExp("<14,09>", rev)); // 2bs
 	removeFile_x(revFile);
 
-	if(rev[13] == '0') // 最後の文字が '0' になるのが個人的に嫌なので...
-		rev[13] = '1';
+//	if(rev[13] == '0') // 最後の文字が '0' になるのが嫌なので... // del @ 2022.6.11
+//		rev[13] = '1';
 
 	cout("%s <- rev\n", rev);
 
-	coSleep(2000); // なるべく同じ rev が発行されないように...
+//	coSleep(2000); // なるべく同じ rev が発行されないように... // del @ 2022.6.11
 	return rev;
 }
 static char *GetRev(void) // c_
@@ -506,8 +522,8 @@ static char *x_ProjNameFilter(char *projName)
 		char *tmppn = getCwd();
 
 		eraseParent(tmppn);
-		errorCase(!lineExp("<1,AZaz><8,09>_<1,100,\x21\x7e>", tmppn)); // プロジェクトのフォルダ名
-		eraseLine(tmppn, 10);
+//		errorCase(!lineExp("<1,AZaz><8,09>_<1,100,\x21\x7e>", tmppn)); // プロジェクトのフォルダ名 // フォルダ名の規約を廃止した。@ 2022.1.4
+//		eraseLine(tmppn, 10);
 		cout("projName: %s -> %s\n", PROJNAME_AUTO, tmppn);
 		projName = strr(tmppn);
 	}
@@ -687,6 +703,8 @@ readArgs:
 		uint version = autoVersion ? autoVersion : InputVersion();
 
 		outDir = makeFullPath(nextArg());
+		MakeRev_GameExeMode = 1;
+		MakeRev_GameExeMode_GameExePath = combine(outDir, "Game.exe"); // HACK: 将来ファイル名が変更されたら修正が必要
 		projName = lineToFairLocalPath_x(x_ProjNameFilter(nextArg()), 100);
 		destZipFile = combine_cx(outDir, addExt(xcout("%s%s", projName, GetPathTailVer(version)), "zip"));
 		midZipFile = makeTempPath("zip");

@@ -1,7 +1,7 @@
 /*
 	WalkMap.exe [MAPBMP]
 
-		MAPBMP ... C:\\tmp\\A83Map.bmp など、Actor83のデバッグ出力
+		MAPBMP ... C:\\temp\\A83Map.bmp など、Actor83のデバッグ出力
 */
 
 #include "C:\Factory\Common\all.h"

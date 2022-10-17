@@ -82,7 +82,7 @@ static void ProcCSFile_Main(char *csFile)
 	int modified = 0;
 
 	errorCase(existPath(bkFile)); // バックアップ・ファイルが既に存在する。
-	errorCase(!TryBuild(csFile)); // ビルド出来ない。
+	errorCase(!TryBuild(csFile)); // ビルドできない。
 
 	moveFile(csFile, bkFile);
 

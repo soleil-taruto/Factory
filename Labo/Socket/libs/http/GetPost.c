@@ -249,7 +249,7 @@ void httpSendResponseText(SockStream_t *i, char *text, char *contentType)
 		<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS"/> (*1)
 		<form method="????" accept-charset="Shift_JIS" action="????">
 
-		(*1) 出来るだけ上の方に記述する。
+		(*1) できるだけ上の方に記述する。
 		     レスポンスヘッダに Content-Type: text/html; charset=Shift_JIS を記述しても良い。
 */
 void httpUrlDecoder(char *line)

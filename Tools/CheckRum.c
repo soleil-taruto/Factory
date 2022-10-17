@@ -41,7 +41,7 @@ static void CheckRevDirsRevFiles(void)
 				if(!mbs_stricmp(dir, getLine(RevDirs, j)))
 					break;
 
-			errorCase_m(j == i, "このツリーファイルは上から順に作成出来ません。");
+			errorCase_m(j == i, "このツリーファイルは上から順に作成できません。");
 		}
 	}
 	for(i = 1; i < getCount(RevFiles); i++)

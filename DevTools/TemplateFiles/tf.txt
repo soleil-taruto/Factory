@@ -1,4 +1,4 @@
-ï»¿/// ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆé–¢æ•°
+/// ƒeƒ“ƒvƒŒ[ƒgŠÖ”
 
 //template <class Var1_t, class Var2_t>
 //Var1_t $P(Var1_t prm, Var2_t subPrm)

@@ -9,7 +9,7 @@
 #include "libs\md5Cache.h"
 
 #define DEF_INDEXTEMPLATE "C:\\Factory\\Resource\\index.html_"
-#define INDEXTEMPLATE "_index.html_"
+//#define INDEXTEMPLATE "_index.html_" // 廃止 @ 2022.8.13
 #define HEADERFILE "_header.html_"
 #define FOOTERFILE "_footer.html_"
 #define INDEXFILE "index.html"
@@ -37,7 +37,7 @@ static int IsSimpleName(char *localPath)
 		!lineExp(".<>", localPath) &&
 		!lineExp("<>.", localPath);
 
-	// "<>." というローカル名は作成出来ないぽい。。。
+	// "<>." というローカル名は作成できないぽい。。。
 }
 static char *MkDivLine(char *href, char *lref, char *trailer)
 {
@@ -80,12 +80,15 @@ static sint S_DirFileComp(char *path1, char *path2)
 }
 static char *MakeDivList(uint depth, int noIndex)
 {
+	static uint funcEnteredCount;
 	autoList_t *paths = ls(".");
 	char *path;
 	uint index;
 	uint dircnt;
 	autoList_t *divs = newList();
 	char *divlist;
+
+	funcEnteredCount++;
 
 	dircnt = lastDirCount;
 
@@ -103,6 +106,8 @@ static char *MakeDivList(uint depth, int noIndex)
 		char *trailer;
 		uint64 size;
 
+		cmdTitle_x(xcout("SimpleIndex - %u (%u) %u PCT = %u / %u", funcEnteredCount, depth, (uint)(index * 100.0 / getCount(paths)), index, getCount(paths)));
+
 		if(!IsSimpleName(getLocal(path)))
 			cout("URLに適さない名前: %s\n", path);
 
@@ -115,20 +120,20 @@ static char *MakeDivList(uint depth, int noIndex)
 			MakeIndex(path, depth + 1, hiddenItem || noIndex);
 
 			if(hiddenItem)
-				goto next_path;
+				goto nextPath;
 
 			href = xcout("%s/" INDEXFILE, path);
 			lref = xcout("%s", path);
 			trailer = strx("");
 		}
 		else if(
-			!_stricmp(INDEXTEMPLATE, path) ||
+//			!_stricmp(INDEXTEMPLATE, path) || // 廃止 @ 2022.8.13
 			!_stricmp(HEADERFILE, path) ||
 			!_stricmp(FOOTERFILE, path) ||
 			!_stricmp(INDEXFILE, path)
 			)
 		{
-			goto next_path;
+			goto nextPath;
 		}
 		else // ? file
 		{
@@ -216,7 +221,9 @@ static char *MakeDivList(uint depth, int noIndex)
 		memFree(href);
 		memFree(lref);
 		memFree(trailer);
-	next_path:;
+
+	nextPath:
+		;
 	}
 	releaseDim(paths, 1);
 
@@ -247,7 +254,38 @@ static void MakeIndex(char *dir, uint depth, int noIndex)
 		return;
 
 	addCwd(dir);
-	lines = readLines(existFile(INDEXTEMPLATE) ? INDEXTEMPLATE : DEF_INDEXTEMPLATE);
+
+	// 追加 @ 2022.8.13
+	// indexファイル(index.html)が既に存在する場合、
+	// テンプレートの最初の行が一致しなければ
+	// ユーザーが作成したファイルと見なして更新しない。
+	//
+	if(existFile(INDEXFILE))
+	{
+		autoList_t *lines1 = readLines(INDEXFILE);
+		autoList_t *lines2 = readLines(DEF_INDEXTEMPLATE);
+		char *line1;
+		char *line2;
+
+		line1 = getLine(lines1, 0);
+		line2 = getLine(lines2, 0);
+
+		if(strcmp(line1, line2))
+		{
+			cout("インデックスファイルの最初の行が一致しないためユーザー作成と見なし更新しない。\n");
+			cout("dir: %s\n", dir);
+
+			releaseDim(lines1, 1);
+			releaseDim(lines2, 1);
+
+			goto endFunc;
+		}
+		releaseDim(lines1, 1);
+		releaseDim(lines2, 1);
+	}
+
+//	lines = readLines(existFile(INDEXTEMPLATE) ? INDEXTEMPLATE : DEF_INDEXTEMPLATE); // 廃止 @ 2022.8.13
+	lines = readLines(DEF_INDEXTEMPLATE);
 
 	lhtml = untokenize(lines, "\n");
 	lhtml = addChar(lhtml, '\n');
@@ -291,6 +329,7 @@ static void MakeIndex(char *dir, uint depth, int noIndex)
 	memFree(lhtml);
 	memFree(divlist);
 
+endFunc:
 	unaddCwd();
 }
 
@@ -353,4 +392,6 @@ readArgs:
 	errorCase_m(hasArgs(1), "不明なコマンド引数");
 
 	MakeIndex(dir, 0, noIndex);
+
+	cmdTitle("SimpleIndex");
 }

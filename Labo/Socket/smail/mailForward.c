@@ -449,7 +449,7 @@ static void RecvLoop(void)
 		if(getCount(mailList))
 		{
 			uint mailSize = getElement(mailList, 0);
-			int del = 1; // 存在するけど受信出来ないメールがあった場合それを削除するために、デフォルトで 1 (削除)
+			int del = 1; // 存在するけど受信できないメールがあった場合それを削除するために、デフォルトで 1 (削除)
 
 			if(mailSize <= MAILSIZEMAX)
 			{

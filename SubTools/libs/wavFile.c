@@ -107,7 +107,7 @@ void readWAVFileToCSVFile(char *rFile, char *wFile)
 
 		if(!strcmp(name, "fmt "))
 		{
-			errorCase_m(Fmt.Loaded, "複数のフォーマットチャンクは処理出来ません。"); // ? 2回目のフォーマットチャンク
+			errorCase_m(Fmt.Loaded, "複数のフォーマットチャンクは処理できません。"); // ? 2回目のフォーマットチャンク
 			errorCase(size < 16);
 
 			Fmt.Loaded       = 1;
@@ -122,7 +122,7 @@ void readWAVFileToCSVFile(char *rFile, char *wFile)
 		}
 		else if(!strcmp(name, "data"))
 		{
-			errorCase_m(RawData.Pos != 0, "複数のデータチャンクは処理出来ません。"); // ? 2回目のデータチャンク
+			errorCase_m(RawData.Pos != 0, "複数のデータチャンクは処理できません。"); // ? 2回目のデータチャンク
 
 			RawData.Pos = getSeekPos(rfp);
 			RawData.Size = size;

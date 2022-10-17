@@ -205,7 +205,7 @@ void UTF8ToUTF16File(char *rFile, char *wFile)
 			break;
 
 		default:
-			cout("Warning: UTF-8 処理出来ない有効ビット数\n");
+			cout("Warning: UTF-8 処理できない有効ビット数\n");
 			chr = 0xff1f; // "？"
 			break;
 		}

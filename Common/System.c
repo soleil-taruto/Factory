@@ -11,7 +11,7 @@ char *majorOutputLinePrefix = "";
 
 // ----
 
-int lastSystemRet; // ? ! コマンドが正常に実行出来て 0 を返した。
+int lastSystemRet; // ? ! コマンドが正常に実行できて 0 を返した。
 
 void execute(char *commandLine)
 {
@@ -836,10 +836,12 @@ char *LOGPOS_Time(int mode)
 
 void mkAppDataDir(void)
 {
-	createDirIfNotExist("C:\\appdata");
+//	createDirIfNotExist("C:\\appdata"); // del @ 2022.1.23
+	createDirIfNotExist("C:\\temp");
 }
 
-#define APPDATA_ENVSFILE "C:\\appdata\\env"
+//#define APPDATA_ENVSFILE "C:\\appdata\\env" // del @ 2022.1.23
+#define APPDATA_ENVSFILE "C:\\temp\\env"
 
 char *getAppDataEnv(char *name, char *defval)
 {

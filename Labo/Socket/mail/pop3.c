@@ -126,7 +126,7 @@ static void Perform(int sock)
 	{
 		autoList_t *mail = RecvMail(ss, mailno);
 
-		if(RecvAndDeleteMode) // 存在するけど受信出来ないメールがあった場合それを削除するために break; より前に DELE を実行する。
+		if(RecvAndDeleteMode) // 存在するけど受信できないメールがあった場合それを削除するために break; より前に DELE を実行する。
 		{
 			SendLineDisp_x(ss, xcout("DELE %u", mailno));
 			memFree(RecvLineDisp(ss)); // maybe +OK

@@ -1,9 +1,9 @@
-﻿@rem このバッチファイルは C:\Factory\Resource\AutoRelease.bat_template.txt と同じ内容でなければなりません。
-@rem 固有の記述はタブスペースで字下げして下さい。
-@rem 固有の記述行の直後にある１つ以上連続する空行は無視されます。
+@rem ���̃o�b�`�t�@�C���� C:\Factory\Resource\AutoRelease.bat_template.txt �Ɠ������e�łȂ���΂Ȃ�܂���B
+@rem �ŗL�̋L�q�̓^�u�X�y�[�X�Ŏ��������ĉ������B
+@rem �ŗL�̋L�q�s�̒���ɂ���P�ȏ�A�������s�͖�������܂��B
 
 CLS
-rem リリースして qrum します。
+rem �����[�X���� qrum ���܂��B
 IF NOT "%1" == "/-P" PAUSE
 
 CALL newcsrr
@@ -17,7 +17,7 @@ cx **
 
 CALL Release.bat /-P
 
-MOVE out\* S:\リリース物\.
+MOVE out\* S:\�����[�X��\.
 
 START "" /B /WAIT /DC:\home\bat syncRev
 
