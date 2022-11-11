@@ -10,9 +10,9 @@
 
 // del @ 2022.1.23
 /*
-#define LOG_FILE    "C:\\vaz\\PublicLog.txt"
-#define LOG_FILE_02 "C:\\vaz\\PublicLog2.txt"
-#define LOG_FILE_03 "C:\\vaz\\PublicLog3.txt"
+#define LOG_FILE    "C:\\temp\\PublicLog.txt"
+#define LOG_FILE_02 "C:\\temp\\PublicLog2.txt"
+#define LOG_FILE_03 "C:\\temp\\PublicLog3.txt"
 */
 
 #define LOG_FILE_SIZE_MAX 8000000

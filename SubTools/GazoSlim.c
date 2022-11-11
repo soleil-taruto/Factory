@@ -7,7 +7,7 @@
 
 	- - -
 
-	EtzSlim.exe [/D] [/R] [対象ディレクトリ]
+	GazoSlim.exe [/D] [/R] [対象ディレクトリ]
 
 		/D ... 階層の深い方を残す。
 		/R ... 辞書順で後の方を残す。
@@ -15,7 +15,7 @@
 	- - -
 	例
 
-	EtzSlim.exe /D C:\etz\画像
+	GazoSlim.exe /D C:\home\画像
 */
 
 #include "C:\Factory\Common\all.h"
@@ -74,7 +74,7 @@ static void DoDeleteFile(char *file)
 	cout("* %s\n", file);
 	semiRemovePath(file);
 }
-static void EtzSlim(char *dir)
+static void GazoSlim(char *dir)
 {
 	autoList_t *files = lssFiles(dir);
 	char *file;
@@ -149,13 +149,13 @@ readArgs:
 
 	if(hasArgs(1))
 	{
-		EtzSlim(nextArg());
+		GazoSlim(nextArg());
 		return;
 	}
 
 	for(; ; )
 	{
-		EtzSlim(c_dropDir());
+		GazoSlim(c_dropDir());
 		cout("\n");
 	}
 }

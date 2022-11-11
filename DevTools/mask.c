@@ -7,7 +7,7 @@
 	----
 	Žg—p—á
 
-	TYPE C:\vaz\Backup.log | Grape "ECHO ERRORLEVEL=" | mask 1 24 | TypeGroupBy
+	TYPE C:\temp\Backup.log | Grape "ECHO ERRORLEVEL=" | mask 1 24 | TypeGroupBy
 */
 
 #include "C:\Factory\Common\all.h"

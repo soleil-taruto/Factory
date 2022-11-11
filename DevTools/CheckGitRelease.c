@@ -48,7 +48,7 @@ static void CheckGitRelease(char *dir)
 				"IF NOT EXIST .\\GitRelease.bat GOTO END\r\n"
 				"CALL qq\r\n"
 				"C:\\Factory\\SubTools\\GitFactory.exe /ow . C:\\huge\\GitHub\\%s\r\n"
-				"rem CALL C:\\vaz\\go.bat\r\n"
+				"rem CALL C:\\temp\\go.bat\r\n"
 				":END\r\n"
 				,ProjectLocalDirToRepositoryName(getLocal(dir))
 				);

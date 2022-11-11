@@ -73,7 +73,7 @@ static void Main2(char *repositoryName, int manualMode)
 
 	addCwd(repositoryDir);
 	{
-		coExecute_x(xcout("C:\\vaz\\bat\\go log --name-status > " REDIR_FILE));
+		coExecute_x(xcout("C:\\temp\\bat\\go log --name-status > " REDIR_FILE));
 
 		{
 			autoList_t *lines = readLines(REDIR_FILE);
@@ -146,14 +146,14 @@ static void Main2(char *repositoryName, int manualMode)
 
 			// 念のためコミット
 
-			coExecute("C:\\vaz\\bat\\go add *");
-			coExecute("C:\\vaz\\bat\\go commit -m \"remove from history\"");
-			coExecute("C:\\vaz\\bat\\go push");
+			coExecute("C:\\temp\\bat\\go add *");
+			coExecute("C:\\temp\\bat\\go commit -m \"remove from history\"");
+			coExecute("C:\\temp\\bat\\go push");
 
 			// ----
 
-			coExecute_x(xcout("C:\\vaz\\bat\\go filter-branch -f --tree-filter \"rm -f '%s'\" HEAD", file));
-			coExecute("C:\\vaz\\bat\\go push -f");
+			coExecute_x(xcout("C:\\temp\\bat\\go filter-branch -f --tree-filter \"rm -f '%s'\" HEAD", file));
+			coExecute("C:\\temp\\bat\\go push -f");
 
 			LOGPOS();
 		}

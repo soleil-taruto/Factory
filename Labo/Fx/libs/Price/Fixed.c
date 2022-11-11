@@ -1,6 +1,6 @@
 #include "all.h"
 
-#define FIXED_DIR "C:\\vaz\\Fx"
+#define FIXED_DIR "C:\\temp\\Fx"
 
 // ---- Collect -----
 

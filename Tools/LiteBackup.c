@@ -10,8 +10,6 @@
 	š‹ó”’•s‰Â
 */
 #define BACKUP_DIR "C:\\temp\\Backup"
-//#define BACKUP_DIR "C:\\vaz\\Backup" // del @ 2022.1.23
-//#define BACKUP_DIR "C:\\tmp\\Backup"
 
 /*
 	rum.exe ‚Ö‚ÌƒpƒX
