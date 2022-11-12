@@ -124,10 +124,8 @@ static void DoTest_02(void)
 {
 	// Test01a ‚Æ“¯‚¶B
 
-#define DATA_SIZE    300000000
-#define S_DATA_SIZE "300000000"
-//#define DATA_SIZE    400000000
-//#define S_DATA_SIZE "400000000"
+#define DATA_SIZE    400000000
+#define S_DATA_SIZE "400000000"
 
 	uint testCnt;
 
@@ -141,15 +139,7 @@ static void DoTest_02(void)
 
 		LOGPOS();
 
-#if 1 // DATA_SIZE == 400000000 ‚¾‚Æƒƒ‚ƒŠ‘«‚ç‚ñB-> 300000000 ‚È‚ç OK @ 2022.11.12
-		{
-			autoBlock_t *data = makeCryptoRandBlock(DATA_SIZE * 2);
-
-			memcpy(tbl[0], directGetBuffer(data), DATA_SIZE * 2);
-
-			releaseAutoBlock(data);
-		}
-#else
+#if 1
 		for (index = 0; index < 2; index++)
 		{
 			autoBlock_t *data = makeCryptoRandBlock(DATA_SIZE);
@@ -158,7 +148,17 @@ static void DoTest_02(void)
 
 			releaseAutoBlock(data);
 		}
+
+#else // ƒƒ‚ƒŠ‘«‚ç‚ñB@ 2022.11.12
+		{
+			autoBlock_t *data = makeCryptoRandBlock(DATA_SIZE * 2);
+
+			memcpy(tbl[0], directGetBuffer(data), DATA_SIZE * 2);
+
+			releaseAutoBlock(data);
+		}
 #endif
+
 		LOGPOS();
 		rate = GetSameByteRate(tbl[0], tbl[1], DATA_SIZE);
 		errorCase(!m_isRange(rate, 0.0038, 0.004));

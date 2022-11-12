@@ -50,7 +50,7 @@ static int IsMember(autoList_t *lines, uint targLineIndex)
 	for (index = targLineIndex; index; index--)
 	{
 		line = getLine(lines, index - 1);
-		status = 
+		status =
 			startsWith(line, "\t\t[") ||
 			startsWith(line, "\t\t/// ");
 
@@ -128,7 +128,7 @@ static int IsMember_T3(autoList_t *lines, uint targLineIndex)
 	for (index = targLineIndex; index; index--)
 	{
 		line = getLine(lines, index - 1);
-		status = 
+		status =
 			startsWith(line, "\t\t\t[") ||
 			startsWith(line, "\t\t\t/// ");
 
