@@ -107,15 +107,15 @@ void createResourceCluster(autoList_t *files, char *rootDir, autoBlock_t *rawKey
 	files = copyAutoList(files);
 
 	addCwd(rootDir);
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		setElement(files, index, (uint)makeFullPath(file));
 	}
 	unaddCwd();
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
-		foreach(entFiles, eFile, eIndex)
+		foreach (entFiles, eFile, eIndex)
 		{
 			if (isSameFile(eFile, file))
 			{
@@ -130,11 +130,11 @@ void createResourceCluster(autoList_t *files, char *rootDir, autoBlock_t *rawKey
 	}
 	writeValue(fp, getCount(entIndexes));
 
-	foreach(entIndexes, eIndex, index)
+	foreach (entIndexes, eIndex, index)
 	{
 		writeValue(fp, eIndex);
 	}
-	foreach(entFiles, file, index)
+	foreach (entFiles, file, index)
 	{
 		writeValue(fp, 0); // dummy
 	}
@@ -143,7 +143,7 @@ void createResourceCluster(autoList_t *files, char *rootDir, autoBlock_t *rawKey
 	InitEncryptor(rawKey);
 	sumSize = (1 + getCount(entIndexes) + getCount(entFiles) + 1) * sizeof(uint);
 
-	foreach(entFiles, file, index)
+	foreach (entFiles, file, index)
 	{
 		autoBlock_t *resImage = readBinary(file);
 
@@ -160,7 +160,7 @@ void createResourceCluster(autoList_t *files, char *rootDir, autoBlock_t *rawKey
 
 	fileSeek(fp, SEEK_SET, (1 + getCount(entIndexes)) * sizeof(uint));
 
-	foreach(entAddresses, address, index)
+	foreach (entAddresses, address, index)
 	{
 		writeValue(fp, address);
 	}

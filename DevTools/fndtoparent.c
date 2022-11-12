@@ -35,7 +35,7 @@ static void Search(void)
 			char *file;
 			uint index;
 
-			foreach(files, file, index)
+			foreach (files, file, index)
 			{
 				if (FuncIsMatch(file))
 				{

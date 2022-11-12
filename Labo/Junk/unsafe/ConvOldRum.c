@@ -22,7 +22,7 @@ static void ConvOldRum(void)
 	paths = lsFiles(".");
 	eraseParents(paths);
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		errorCase(!lineExp("<32,09AZaz>-<1,19><0,,09>", path));
 
@@ -38,7 +38,7 @@ static void ConvOldRum(void)
 	paths = lsDirs(".");
 	eraseParents(paths);
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		autoList_t *lines;
 		char *line;
@@ -47,7 +47,7 @@ static void ConvOldRum(void)
 		addCwd(path);
 		lines = readLines(FILE_FILES);
 
-		foreach(lines, line, line_index)
+		foreach (lines, line, line_index)
 		{
 			errorCase(!lineExp("<32,09AZaz>-<1,19><0,,09> <>", line));
 			eraseLine(line + 32, 2);

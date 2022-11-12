@@ -28,7 +28,7 @@ static void DoAutoJavaDoc_File(char *file)
 
 	cout("%s\n", file);
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		if (
 			lineExp("<0,100,\t\t>public <>", line) ||
@@ -71,7 +71,7 @@ static void DoAutoJavaDoc_File(char *file)
 				if (index && *getLine(lines, index - 1))
 					insertElement(lines, index++, (uint)strx(""));
 
-				foreach(JavaDoc, javaDocLine, javaDocLineIndex)
+				foreach (JavaDoc, javaDocLine, javaDocLineIndex)
 					insertElement(lines, index++, (uint)xcout("%s%s", indentPtn, javaDocLine));
 			}
 
@@ -103,14 +103,14 @@ static void DoAutoJavaDoc_List(autoList_t *files)
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		cout("file: %s\n", file);
 
 	cout("files_count: %u\n", getCount(files));
 
 	Confirm();
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		DoAutoJavaDoc_File(file);
 
 	releaseDim(files, 1);
@@ -126,7 +126,7 @@ static void DoAutoJavaDoc(char *dir)
 
 	Confirm();
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		if (!_stricmp("java", getExt(file)))
 			DoAutoJavaDoc_File(file);
 

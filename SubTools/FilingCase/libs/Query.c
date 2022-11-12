@@ -224,13 +224,13 @@ static void ExecuteSelect(void)
 	}
 	rowIds = FC_GetStrRowIds(table, whereColumn, whereValue);
 
-	foreach(rowIds, rowId, rowidx)
+	foreach (rowIds, rowId, rowidx)
 	{
 		autoList_t *row = newList();
 		char *column;
 		uint colidx;
 
-		foreach(retColumns, column, colidx)
+		foreach (retColumns, column, colidx)
 		{
 			addElement(row, (uint)FC_GetStrValue(table, rowId, column));
 		}
@@ -274,7 +274,7 @@ static void ExecuteInsert(void)
 
 	rowId = FC_GetNewId();
 
-	foreach(insColumns, column, colidx)
+	foreach (insColumns, column, colidx)
 	{
 		FC_SetStrValue(table, rowId, column, getLine(insValues, colidx));
 	}
@@ -319,8 +319,8 @@ static void ExecuteUpdate(void)
 
 	rowIds = FC_GetStrRowIds(table, whereColumn, whereValue);
 
-	foreach(rowIds, rowId, rowidx)
-	foreach(updColumns, column, colidx)
+	foreach (rowIds, rowId, rowidx)
+	foreach (updColumns, column, colidx)
 	{
 		FC_SetStrValue(table, rowId, column, getLine(updValues, colidx));
 	}
@@ -350,7 +350,7 @@ static void ExecuteDelete(void)
 
 	rowIds = FC_GetStrRowIds(table, whereColumn, whereValue);
 
-	foreach(rowIds, rowId, rowidx)
+	foreach (rowIds, rowId, rowidx)
 	{
 		FC_DeleteRow(table, rowId);
 	}
@@ -508,7 +508,7 @@ static void ExecuteTbls(void)
 
 	tableIds = FC_GetAllTableId();
 
-	foreach(tableIds, tableId, index)
+	foreach (tableIds, tableId, index)
 	{
 		autoList_t *row = newList();
 
@@ -530,7 +530,7 @@ static void ExecuteCols(void)
 
 	columnIds = FC_GetAllColumnId(table);
 
-	foreach(columnIds, columnId, index)
+	foreach (columnIds, columnId, index)
 	{
 		autoList_t *row = newList();
 
@@ -553,7 +553,7 @@ static void ExecuteRows(void)
 
 	rowIds = FC_GetTableAllRowId(table);
 
-	foreach(rowIds, rowId, index)
+	foreach (rowIds, rowId, index)
 	{
 		autoList_t *row = newList();
 

@@ -131,7 +131,7 @@ static void MM_Battle(void)
 
 	shuffle(order);
 
-	foreach(order, pos, index)
+	foreach (order, pos, index)
 	{
 		uint x = pos / Map_H;
 		uint y = pos % Map_H;

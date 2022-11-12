@@ -16,7 +16,7 @@ static void CheckFiles(void)
 
 	eraseParents(files);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		char *hash = md5_makeHexHashFile(file);
 

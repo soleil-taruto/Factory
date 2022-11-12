@@ -49,7 +49,7 @@ static void InitFileInfos(void)
 	files = cmdDir_lssFiles(RootDir);
 	FileInfos = newList();
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		addElement(FileInfos, (uint)CreateFileInfo(file));
 
 	releaseDim(files, 1);
@@ -91,7 +91,7 @@ static void SlimFiles(void)
 
 	CurrTime = time(NULL);
 
-	foreach(FileInfos, i, index)
+	foreach (FileInfos, i, index)
 	{
 		SlimFile(i);
 	}

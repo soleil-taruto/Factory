@@ -79,7 +79,7 @@ static void CXN_Main(XNode_t *root, uint pTknIndex)
 		XNode_t *node;
 		uint index;
 
-		foreach(root->Children, node, index)
+		foreach (root->Children, node, index)
 			if (!strcmp(node->Name, getLine(CXN_PTkns, pTknIndex)))
 				CXN_Main(node, pTknIndex + 1);
 	}
@@ -101,7 +101,7 @@ autoList_t *CollectXNode(XNode_t *root, char *path)
 		char *pTkn;
 		uint index;
 
-		foreach(CXN_PTkns, pTkn, index)
+		foreach (CXN_PTkns, pTkn, index)
 			if (!*pTkn)
 				cout("Warning: XNodeパスに空のパストークンが含まれています。\n");
 	}

@@ -136,7 +136,7 @@ static void PerformTh(int sock, char *strip)
 		i->R = 1;
 	}
 
-	foreach(ConnectList, osi, index)
+	foreach (ConnectList, osi, index)
 	{
 		if (!_stricmp(i->Name, osi->Name))
 		{

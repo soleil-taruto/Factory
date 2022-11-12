@@ -42,7 +42,7 @@ static autoList_t *SelectAuto(autoList_t *files)
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (_stricmp(getExt(file), EXT_GIT_ESCAPE) && !IsSourceFile(file))
 		{
@@ -80,7 +80,7 @@ static void Main2(char *repositoryName, int manualMode)
 			char *line;
 			uint index;
 
-			foreach(lines, line, index)
+			foreach (lines, line, index)
 			{
 				if (strchr(line, '\t'))
 				{
@@ -107,7 +107,7 @@ static void Main2(char *repositoryName, int manualMode)
 		files = autoDistinctLines(files);
 		files = manualMode ? selectLines_x(files) : SelectAuto(files);
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 			cout("çÌèúëŒè€ ÅÀ %s\n", file);
 
 		if (manualMode)
@@ -122,7 +122,7 @@ static void Main2(char *repositoryName, int manualMode)
 		else
 			cout("ë±çsÇµÇ‹Ç∑ÅB(é©ìÆ)\n");
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 		{
 			cout("çÌèú ÅÀ %s\n", file);
 
@@ -172,7 +172,7 @@ int main(int argc, char **argv)
 		char *dir;
 		uint index;
 
-		foreach(dirs, dir, index)
+		foreach (dirs, dir, index)
 		{
 			Main2(getLocal(dir), 0);
 		}

@@ -94,7 +94,7 @@ static void ShootingStar(autoList_t *lines)
 		uint index;
 		uint sndxmax = 0;
 
-		foreach(lines, line, index)
+		foreach (lines, line, index)
 		{
 			char *p = strchr(line, '*');
 			uint sndx;
@@ -103,7 +103,7 @@ static void ShootingStar(autoList_t *lines)
 			sndx = (uint)p - (uint)line;
 			sndxmax = m_max(sndxmax, sndx);
 		}
-		foreach(lines, line, index)
+		foreach (lines, line, index)
 		{
 			uint sndx = (uint)strchr(line, '*') - (uint)line;
 
@@ -129,7 +129,7 @@ static void DispAngles(void)
 
 	addElement(lines, (uint)strx("RATE*ANGLE*SINE*COSINE"));
 
-	foreach(RateList, rate, index)
+	foreach (RateList, rate, index)
 	{
 		angle  = getLine(AngleList, index);
 		sine   = getLine(SineList, index);
@@ -139,7 +139,7 @@ static void DispAngles(void)
 	}
 	ShootingStar(lines);
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		cout("%s\n", line);
 	}

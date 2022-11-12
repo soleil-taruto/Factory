@@ -27,7 +27,7 @@ static void CsvToJson(char *rFile, char *wFile)
 
 		writeLine(wfp, "\t{");
 
-		foreach(row, cell, colidx)
+		foreach (row, cell, colidx)
 		{
 			writeLine_x(wfp, xcout("\t\t\"%s\": \"%s\",", getLine(head, colidx), getLine(row, colidx)));
 		}

@@ -29,7 +29,7 @@ int main(int argc, char **argv)
 		autoList_t *sRow;
 		uint srIndex;
 
-		foreach(schemaRec, sRow, srIndex)
+		foreach (schemaRec, sRow, srIndex)
 			if (!strcmp(getLine(tRow, 0), getLine(sRow, 0))) // ? schema_id ˆê’v
 				break;
 

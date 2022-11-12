@@ -163,7 +163,7 @@ static autoList_t *MakeRevisionList(char *storeDir)
 		char *stamp;
 		uint index;
 
-		foreach(revisions, stamp, index)
+		foreach (revisions, stamp, index)
 		{
 			char *comment;
 
@@ -199,7 +199,7 @@ static autoList_t *SelectStamps(char *storeDir)
 
 	stamps = selectLines(revisions);
 
-	foreach(stamps, stamp, index)
+	foreach (stamps, stamp, index)
 	{
 		p = strchr(stamp, '\x20');
 		errorCase(!p);
@@ -260,7 +260,7 @@ static void EditComment(char *storeDir)
 			break;
 	}
 
-	foreach(revisions, line, index)
+	foreach (revisions, line, index)
 	{
 		line2JLine(line, 1, 0, 0, 1);
 		trim(line, ' ');
@@ -311,7 +311,7 @@ static void EraseDeletableRevisions(char *storeDir, int quietFlag)
 	addCwd(DIR_REVISIONS);
 
 	revisions = ls(".");
-	foreach(revisions, stamp, index)
+	foreach (revisions, stamp, index)
 	{
 		char *comment;
 
@@ -356,7 +356,7 @@ static void EraseLostEntries(char *storeDir, int quietFlag)
 	addCwd(DIR_REVISIONS);
 
 	revisions = ls(".");
-	foreach(revisions, stamp, index)
+	foreach (revisions, stamp, index)
 	{
 		autoList_t *entries;
 		char *entry;
@@ -367,7 +367,7 @@ static void EraseLostEntries(char *storeDir, int quietFlag)
 		entries = readLines(FILE_REV_FILES);
 
 	entriesRestart:
-		foreach(entries, entry, entryIndex)
+		foreach (entries, entry, entryIndex)
 		{
 			char *p = strchr(entry, '\x20');
 			char *hash;
@@ -437,7 +437,7 @@ static void TrimStoreDir(char *storeDir, int quietFlag)
 
 	revisions = ls(DIR_REVISIONS);
 
-	foreach(revisions, stamp, index)
+	foreach (revisions, stamp, index)
 	{
 		char *filesFile = combine(stamp, FILE_REV_FILES);
 		autoList_t *stocks;
@@ -446,7 +446,7 @@ static void TrimStoreDir(char *storeDir, int quietFlag)
 
 		stocks = readLines(filesFile);
 
-		foreach(stocks, line, lineIndex)
+		foreach (stocks, line, lineIndex)
 		{
 			char *p = strchr(line, '\x20');
 			uint foundIndex;
@@ -474,7 +474,7 @@ static void TrimStoreDir(char *storeDir, int quietFlag)
 
 	if (getCount(stockFiles))
 	{
-		foreach(stockFiles, stockFile, index)
+		foreach (stockFiles, stockFile, index)
 		{
 			cout("* %s\n", stockFile);
 		}
@@ -484,7 +484,7 @@ static void TrimStoreDir(char *storeDir, int quietFlag)
 		{
 			cout("削除します。\n");
 
-			foreach(stockFiles, stockFile, index)
+			foreach (stockFiles, stockFile, index)
 			{
 				cout("! %s\n", stockFile);
 				semiRemovePath(stockFile);
@@ -529,7 +529,7 @@ static void FileHistory(char *storeDir, int fromLastRevisionFlag, int lastFileOn
 	if (lastFileOnly)
 		reverseElements(revisions);
 
-	foreach(srchRevisions, stamp, index)
+	foreach (srchRevisions, stamp, index)
 	{
 		char *filesFile = combine(stamp, FILE_REV_FILES);
 		autoList_t *stocks;
@@ -538,7 +538,7 @@ static void FileHistory(char *storeDir, int fromLastRevisionFlag, int lastFileOn
 
 		stocks = readLines(filesFile);
 
-		foreach(stocks, line, lineIndex)
+		foreach (stocks, line, lineIndex)
 		{
 			char *p = strchr(line, '\x20');
 
@@ -559,7 +559,7 @@ static void FileHistory(char *storeDir, int fromLastRevisionFlag, int lastFileOn
 
 	restoreRootDir = makeFreeDir();
 
-	foreach(selStocks, selStock, selStockIdx)
+	foreach (selStocks, selStock, selStockIdx)
 	{
 		autoList_t *histRevs = newList();
 		autoList_t *histHashes = newList();
@@ -572,7 +572,7 @@ static void FileHistory(char *storeDir, int fromLastRevisionFlag, int lastFileOn
 		createFile(outStock);
 		eraseParent(outStock);
 
-		foreach(revisions, stamp, index)
+		foreach (revisions, stamp, index)
 		{
 			char *filesFile = combine(stamp, FILE_REV_FILES);
 			autoList_t *stocks;
@@ -581,7 +581,7 @@ static void FileHistory(char *storeDir, int fromLastRevisionFlag, int lastFileOn
 
 			stocks = readLines(filesFile);
 
-			foreach(stocks, line, lineIndex)
+			foreach (stocks, line, lineIndex)
 			{
 				char *hash = line;
 				char *stock = strchr(line, '\x20');
@@ -615,7 +615,7 @@ static void FileHistory(char *storeDir, int fromLastRevisionFlag, int lastFileOn
 		}
 		addCwd(DIR_FILES);
 
-		foreach(histRevs, stamp, index)
+		foreach (histRevs, stamp, index)
 		{
 			char *restoreFile;
 
@@ -739,15 +739,15 @@ static void OneRestore(char *storeDir, char *targetStamp, char *restoreDir) // s
 	{
 		autoList_t *lines = newList();
 
-		foreach(dirs, line, index)
+		foreach (dirs, line, index)
 		{
 			addElement(lines, (uint)xcout("-------------------------------- %s", line));
 		}
-		foreach(stocks, line, index)
+		foreach (stocks, line, index)
 		{
 			addElement(lines, (uint)strx(line));
 		}
-		foreach(lines, line, index) // チェックのみ
+		foreach (lines, line, index) // チェックのみ
 		{
 			errorCase(
 				!lineExp("<32,--> <>", line) &&
@@ -761,13 +761,13 @@ static void OneRestore(char *storeDir, char *targetStamp, char *restoreDir) // s
 	{
 		addCwd(restoreDir);
 
-		foreach(dirs, line, index)
+		foreach (dirs, line, index)
 			createDir(line);
 
 		unaddCwd();
 		addCwd(DIR_FILES);
 
-		foreach(stocks, line, index)
+		foreach (stocks, line, index)
 		{
 			char *stockFile = line;
 			char *file;
@@ -807,7 +807,7 @@ static void MultiRestore(char *storeDir, autoList_t *stamps)
 
 	cout("復元先ルート: %s\n", restoreRootDir);
 
-	foreach(stamps, targetStamp, index)
+	foreach (stamps, targetStamp, index)
 	{
 		restoreDir = combine(restoreRootDir, targetStamp);
 		cout("スタンプと復元先: %u(%u), %s > %s\n", index, getCount(stamps), targetStamp, restoreDir);
@@ -980,7 +980,7 @@ static void Commit(char *dir) // dir: バックアップ元、存在するルートディレクトリ
 		char *subDir;
 		uint index;
 
-		foreach(subDirs, subDir, index)
+		foreach (subDirs, subDir, index)
 		{
 			if (!_stricmp(EXT_STOREDIR, getExt(subDir)))
 			{
@@ -1060,7 +1060,7 @@ endNestingCheck:
 		{
 			uint dirKilledNum = 0;
 
-			foreach(paths, file, index)
+			foreach (paths, file, index)
 			{
 #if 0
 				if (index < lastDirCount)
@@ -1113,7 +1113,7 @@ endNestingCheck:
 		{
 			cout("読み込みテスト中\n");
 
-			foreach(&files, file, index)
+			foreach (&files, file, index)
 			{
 				FILE *fp = fileOpen(file, "rb");
 
@@ -1127,7 +1127,7 @@ endNestingCheck:
 		}
 		addCwd(DIR_FILES);
 
-		foreach(&files, file, index)
+		foreach (&files, file, index)
 		{
 			char *stockFile = md5_makeHexHashFile(file);
 
@@ -1176,7 +1176,7 @@ endNestingCheck:
 		{
 			FILE *fp = fileOpen(FILE_REV_FILES, "wt");
 
-			foreach(&files, file, index)
+			foreach (&files, file, index)
 			{
 				writeToken(fp, getLine(stockFiles, index));
 				writeChar(fp, '\x20');

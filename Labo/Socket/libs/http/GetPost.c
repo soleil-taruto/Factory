@@ -302,7 +302,7 @@ void httpDecodeUrl(char *url, httpDecode_t *out)
 	dirList = tokenize(path, '/');
 	trimLines(dirList);
 
-	foreach(dirList, dir, index)
+	foreach (dirList, dir, index)
 		httpUrlDecoder(dir);
 
 	decPath = untokenize(dirList, "/");
@@ -321,7 +321,7 @@ void httpDecodeQuery(char *query, httpDecode_t *out)
 
 	parts = tokenize(query, '&');
 
-	foreach(parts, part, index)
+	foreach (parts, part, index)
 	{
 		char *p = strchr(part, '=');
 

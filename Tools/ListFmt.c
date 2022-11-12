@@ -82,19 +82,19 @@ static void ListFmt_0(void)
 	{
 		maxCount = UINTMAX;
 
-		foreach(Lists, list, list_index)
+		foreach (Lists, list, list_index)
 			m_minim(maxCount, getCount(list));
 	}
 	else
 	{
 		maxCount = 0;
 
-		foreach(Lists, list, list_index)
+		foreach (Lists, list, list_index)
 			m_maxim(maxCount, getCount(list));
 	}
 	for(index = 0; index < maxCount; index++)
 	{
-		foreach(Lists, list, list_index)
+		foreach (Lists, list, list_index)
 			setElement(CurrLines, list_index, (uint)getLine(list, index % getCount(list)));
 
 		ProcLine();
@@ -113,7 +113,7 @@ static void LFX_Next(uint list_index)
 	}
 	list = getList(Lists, list_index);
 
-	foreach(list, line, index)
+	foreach (list, line, index)
 	{
 		setElement(CurrLines, list_index, (uint)line);
 		LFX_Next(list_index + 1);
@@ -134,10 +134,10 @@ static void ListFmt(void)
 
 	Lists = newList();
 
-	foreach(ListFiles, file, index)
+	foreach (ListFiles, file, index)
 		addElement(Lists, (uint)readLines(file));
 
-	foreach(Lists, list, index)
+	foreach (Lists, list, index)
 		errorCase_m(!getCount(list), "空のファイルが指定されました。");
 
 	CurrLines = newList();
@@ -229,7 +229,7 @@ readArgs:
 		char *file;
 		uint index;
 
-		foreach(WorkFiles, file, index)
+		foreach (WorkFiles, file, index)
 			removeFile(file);
 	}
 }

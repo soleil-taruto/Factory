@@ -46,7 +46,7 @@ static void ShowHashDir(char *dir)
 	files = gndFollowElements(paths, lastDirCount);
 	dirFileSort(&files);
 
-	foreach(&files, file, index)
+	foreach (&files, file, index)
 	{
 		cout("%s %s\n", c_md5_makeHexHashFile(file), getLocal(file));
 	}
@@ -106,7 +106,7 @@ int main(int argc, char **argv)
 		char *file;
 		uint index;
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 			cout("%s %s\n", c_md5_makeHexHashFile(file), file);
 
 		releaseDim(files, 1);

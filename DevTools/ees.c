@@ -28,7 +28,7 @@ static void EditSame(char *baseFile, autoList_t *files)
 
 	cout("< %s\n", baseFile);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		cout("> %s\n", file);
 
 	copyFile(baseFile, escBaseFile);
@@ -48,7 +48,7 @@ static void EditSame(char *baseFile, autoList_t *files)
 
 		cout("続行します。\n");
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 		{
 			cout("< %s\n", baseFile);
 			cout("> %s\n", file);
@@ -77,11 +77,11 @@ static void EditSame_LSS(int userSelectMode)
 
 	errorCase(getCount(files) < 1);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		errorCase(!existFile(file));
 
-	foreach(files, file, index)
-	foreach(files, file_2, index_2)
+	foreach (files, file, index)
+	foreach (files, file_2, index_2)
 		errorCase(index < index_2 && !mbs_stricmp(file, file_2));
 
 	// ----
@@ -123,7 +123,7 @@ static void EditSame_LSS(int userSelectMode)
 	baseFile = (char *)desertElement(files, baseFileIndex);
 	cout("%s %s <編集対象>\n", c_md5_makeHexHashFile(baseFile), baseFile);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		cout("%s %s\n", c_md5_makeHexHashFile(file), file);
 
@@ -157,7 +157,7 @@ static void EditSame_File(char *baseFile)
 
 	errorCase_m(findJLineICase(files, baseFile) == getCount(files), "指定されたファイルはカレントディレクトリの配下に在りません。");
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		if (!mbs_stricmp(file, baseFile) || !isSameFile(file, baseFile)) // ? baseFile である || baseFile と内容が異なる。-> 除外
 			*file = '\0';
 

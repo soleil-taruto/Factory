@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 	writeLine(fp, "<html>");
 	writeLine(fp, "<body>");
 
-	foreach(imgFiles, imgFile, index)
+	foreach (imgFiles, imgFile, index)
 	{
 		switch(mode)
 		{

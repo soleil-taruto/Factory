@@ -125,7 +125,7 @@ static void PerformTh(int sock, char *strip)
 			memFree(p_name);
 		}
 
-		foreach(ServerList, i, index)
+		foreach (ServerList, i, index)
 			if (!strcmp(name, i->Name))
 				break;
 

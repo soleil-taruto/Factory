@@ -41,7 +41,7 @@ static void DispList(char *targetDir, autoList_t *searchPtns)
 	else
 		coPathBgnPos = 0;
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		int found;
 
@@ -53,7 +53,7 @@ static void DispList(char *targetDir, autoList_t *searchPtns)
 
 			found = 0;
 
-			foreach(searchPtns, searchPtn, ndx)
+			foreach (searchPtns, searchPtn, ndx)
 			{
 				if (mbs_stristr(path_a, searchPtn))
 				{

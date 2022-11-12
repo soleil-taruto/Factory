@@ -79,7 +79,7 @@ static void DispHexOp(autoList_t *op, uint bound, char *title)
 	reverseElements(op);
 	cout("%s: ", title);
 
-	foreach(op, value, index)
+	foreach (op, value, index)
 	{
 		if (index)
 		{

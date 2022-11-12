@@ -35,7 +35,7 @@ static FilterSourceFile(char *file)
 
 	cout("* %s\n", file);
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		char *p = strstr(line, COMMAND_PREFIX);
 		int onSecretLater = 0;
@@ -89,7 +89,7 @@ void GitSourceFilter(char *rootDir)
 
 	RemoveGitPaths(files);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		char *ext = getExt(file);
 

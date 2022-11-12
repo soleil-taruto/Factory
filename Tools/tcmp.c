@@ -14,7 +14,7 @@ static void CompareFiles(char *file1, char *file2, int ignoreCase)
 
 	report = getDiffLinesReport(lines1, lines2, ignoreCase);
 
-	foreach(report, line, index)
+	foreach (report, line, index)
 	{
 		cout("%s\n", line);
 	}

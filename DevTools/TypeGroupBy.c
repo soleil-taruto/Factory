@@ -53,7 +53,7 @@ readArgs:
 		lines = ReadLinesFromStdin();
 
 	if (ignoreCase)
-		foreach(lines, line, index)
+		foreach (lines, line, index)
 			toUpperLine(line);
 
 	rapidSortLines(lines);
@@ -76,14 +76,14 @@ readArgs:
 
 	for(; ; )
 	{
-		foreach(lines, line, index)
+		foreach (lines, line, index)
 			if (line[0] != ' ')
 				break;
 
 		if (line)
 			break;
 
-		foreach(lines, line, index)
+		foreach (lines, line, index)
 			eraseChar(line);
 	}
 	rapidSortLines(lines);
@@ -91,7 +91,7 @@ readArgs:
 	if (countMode)
 		cout("%u\n", getCount(lines));
 	else
-		foreach(lines, line, index)
+		foreach (lines, line, index)
 			cout("%s\n", line);
 
 	releaseDim(lines, 1);

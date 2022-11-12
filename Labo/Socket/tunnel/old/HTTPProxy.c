@@ -43,7 +43,7 @@ static int DoConnect(char *fwdHost, uint fwdPortNo) // ret: -1 == ê⁄ë±Ç≈Ç´Ç»Ç©Ç¡
 	}
 	if (getCount(OKIPPrfxList))
 	{
-		foreach(OKIPPrfxList, ipprfx, index)
+		foreach (OKIPPrfxList, ipprfx, index)
 		{
 			if (startsWith(strIp, ipprfx))
 				break;
@@ -54,7 +54,7 @@ static int DoConnect(char *fwdHost, uint fwdPortNo) // ret: -1 == ê⁄ë±Ç≈Ç´Ç»Ç©Ç¡
 			return -1;
 		}
 	}
-	foreach(NGIPPrfxList, ipprfx, index)
+	foreach (NGIPPrfxList, ipprfx, index)
 	{
 		if (startsWith(strIp, ipprfx))
 		{

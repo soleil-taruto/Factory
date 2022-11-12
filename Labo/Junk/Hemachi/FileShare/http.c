@@ -56,7 +56,7 @@ static void MakeEncUrlLabels(char *pathBase, autoList_t *subPaths, int dirMode, 
 	if (p_exts)
 		*p_exts = newList();
 
-	foreach(subPaths, subPath, index)
+	foreach (subPaths, subPath, index)
 	{
 		subPath = strx(subPath);
 
@@ -132,11 +132,11 @@ static autoBlock_t *MakeIndexBody(
 	if (strcmp(uiPath, "/") != 0) // ? not "/"
 		ab_addLine_x(result, xcout("<div><a href=\"%s\">(PARENT)</a></div>" HTTP_NEWLINE, encParent));
 
-	foreach(encDirUrls, url, index)
+	foreach (encDirUrls, url, index)
 	{
 		ab_addLine_x(result, xcout("<div><a href=\"%s\">%s</a>Å@(DIRECTORY)</div>" HTTP_NEWLINE, url, getLine(dirLabels, index)));
 	}
-	foreach(encFileUrls, url, index)
+	foreach (encFileUrls, url, index)
 	{
 		char *ext = getLine(encFileExts, index);
 
@@ -261,7 +261,7 @@ static void PerformTh(int sock, char *strip)
 
 			eraseParents(files);
 
-			foreach(files, file, index)
+			foreach (files, file, index)
 			{
 				if (mbsStartsWithICase(file, dlFile))
 				{

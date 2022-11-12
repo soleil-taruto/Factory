@@ -24,7 +24,7 @@ static void UploadCurrDir(char *dir)
 		char *ptkn;
 		uint index;
 
-		foreach(ptkns, ptkn, index)
+		foreach (ptkns, ptkn, index)
 		{
 			writeLine_x(fp, xcout("mkdir %s", ptkn));
 			writeLine_x(fp, xcout("cd %s", ptkn));
@@ -55,7 +55,7 @@ static void FtpUpdate(void)
 
 	UploadCurrDir(".");
 
-	foreach(dirs, dir, index)
+	foreach (dirs, dir, index)
 	{
 		UploadCurrDir(dir);
 	}

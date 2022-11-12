@@ -18,7 +18,7 @@ void ExecuteSnapshot(void)
 
 	files = lsFiles(SS_MID_DIR);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		char *wFile = combine(SS_DIR, getLocal(file));
 

@@ -96,10 +96,10 @@ static void UnloadFile(void)
 	if (!SendStamps) // ? ! loaded
 		return;
 
-	foreach(SendFiles, file, index)
+	foreach (SendFiles, file, index)
 		removeFile(file);
 
-	foreach(RecvFiles, file, index)
+	foreach (RecvFiles, file, index)
 		removeFile(file);
 
 	releaseDim(SendStamps, 1);
@@ -442,7 +442,7 @@ static void T2DiHTTP(char *dir)
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		ProcFile(file);
 	}

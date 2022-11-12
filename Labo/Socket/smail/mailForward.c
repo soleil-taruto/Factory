@@ -53,7 +53,7 @@ static void DoSendTextMail(char *mailAddressTo, char *subject, autoList_t *bodyL
 	writeLine(prmFp, "/T");
 	writeLine(prmFp, asLine(subject));
 
-	foreach(bodyLines, bodyLine, bodyLineIndex)
+	foreach (bodyLines, bodyLine, bodyLineIndex)
 	{
 		writeLine(prmFp, "/L");
 		writeLine(prmFp, asLine(bodyLine));
@@ -259,7 +259,7 @@ static void Distribute(autoList_t *memberList, char *groupName, char *mailFrom) 
 
 	cout("D.M %u bytes\n", getSize(c_MP_GetBody()));
 
-	foreach(memberList, member, index)
+	foreach (memberList, member, index)
 		cout("D.B [%s]\n", member);
 
 	cout("D.G [%s]\n", groupName);
@@ -270,7 +270,7 @@ static void Distribute(autoList_t *memberList, char *groupName, char *mailFrom) 
 #else // same
 	memberFrom = NULL;
 
-	foreach(memberList, member, index)
+	foreach (memberList, member, index)
 	{
 		if (!strcmp(mailFrom, member))
 		{
@@ -289,7 +289,7 @@ static void Distribute(autoList_t *memberList, char *groupName, char *mailFrom) 
 
 	DistributeOne_ErrorFlag = 0;
 
-	foreach(shuffledMemberList, member, index)
+	foreach (shuffledMemberList, member, index)
 	{
 		int sendonly = findLine(SendOnlyMemberList, member) < getCount(SendOnlyMemberList); // ? 'member' is sendonly member
 
@@ -375,12 +375,12 @@ static void RecvEvent(void)
 		uint index_index;
 		char *mail_myself = NULL;
 
-		foreach(GroupList, memberList, index)
+		foreach (GroupList, memberList, index)
 		{
 			char *member;
 			uint member_index;
 
-			foreach(memberList, member, member_index)
+			foreach (memberList, member, member_index)
 			{
 				if (!strcmp(mailFrom, member))
 				{
@@ -395,7 +395,7 @@ static void RecvEvent(void)
 
 			if (subject)
 			{
-				foreach(indexes, index, index_index)
+				foreach (indexes, index, index_index)
 				{
 					char *groupPtn = xcout("[%s]", getLine(GroupNameList, index));
 
@@ -426,7 +426,7 @@ static void RecvEvent(void)
 			memFree(subject);
 		}
 
-		foreach(indexes, index, index_index)
+		foreach (indexes, index, index_index)
 		{
 			Distribute(getList(GroupList, index), getLine(GroupNameList, index), mailFrom);
 		}
@@ -602,14 +602,14 @@ readArgs:
 		autoList_t *memberList;
 		uint memberList_index;
 
-		foreach(GroupList, memberList, memberList_index)
+		foreach (GroupList, memberList, memberList_index)
 		{
 			char *member;
 			uint index;
 
 			errorCase(getCount(memberList) < 2);
 
-			foreach(memberList, member, index)
+			foreach (memberList, member, index)
 			{
 				CheckMailAddress(member);
 			}
@@ -628,7 +628,7 @@ readArgs:
 		char *groupName;
 		uint index;
 
-		foreach(GroupNameList, groupName, index)
+		foreach (GroupNameList, groupName, index)
 		{
 			errorCase(!lineExp("<1,9,09AZaz>", groupName));
 		}
@@ -641,7 +641,7 @@ readArgs:
 		char *member;
 		uint index;
 
-		foreach(UnreturnMemberList, member, index)
+		foreach (UnreturnMemberList, member, index)
 		{
 			CheckMailAddress(member);
 		}
@@ -653,7 +653,7 @@ readArgs:
 		char *member;
 		uint index;
 
-		foreach(SendOnlyMemberList, member, index)
+		foreach (SendOnlyMemberList, member, index)
 		{
 			CheckMailAddress(member);
 		}

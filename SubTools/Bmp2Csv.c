@@ -14,11 +14,11 @@ static void Bmp2Csv(char *rFile, char *wFile)
 	uint colidx;
 	uint dot;
 
-	foreach(bmp, rRow, rowidx)
+	foreach (bmp, rRow, rowidx)
 	{
 		wRow = newList();
 
-		foreach(rRow, dot, colidx)
+		foreach (rRow, dot, colidx)
 		{
 			if (ThreeCellMode)
 			{
@@ -46,7 +46,7 @@ static void Csv2Bmp(char *rFile, char *wFile)
 	uint colidx;
 	char *cell;
 
-	foreach(csv, rRow, rowidx)
+	foreach (csv, rRow, rowidx)
 	{
 		wRow = newList();
 
@@ -64,7 +64,7 @@ static void Csv2Bmp(char *rFile, char *wFile)
 		}
 		else
 		{
-			foreach(rRow, cell, colidx)
+			foreach (rRow, cell, colidx)
 			{
 				addElement(wRow, toValueDigits(cell, hexadecimal));
 			}

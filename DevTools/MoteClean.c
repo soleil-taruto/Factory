@@ -17,7 +17,7 @@ static void MoteClean(char *dir)
 	uint index;
 	autoList_t *killPaths = newList();
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		int killFlag = 0;
 		char *chkPtn = strx(getLocal(path));
@@ -57,7 +57,7 @@ static void MoteClean(char *dir)
 
 		cout("íœ‚·‚éB\n");
 	}
-	foreach(killPaths, path, index)
+	foreach (killPaths, path, index)
 	{
 		cout("! %s\n", path);
 		recurRemovePathIfExist(path);

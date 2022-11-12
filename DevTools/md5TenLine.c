@@ -47,7 +47,7 @@ int main(int argc, char **argv)
 
 	cout("--------------------------------\n");
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		autoList_t *lines = readLines(file);
 		uint bgnLIdx;

@@ -45,7 +45,7 @@ static void MGZE_Swap(autoBlock_t *data, autoList_t *swapIdxLst)
 	uint swapIdx;
 	uint index;
 
-	foreach(swapIdxLst, swapIdx, index)
+	foreach (swapIdxLst, swapIdx, index)
 	{
 		swapByte(data, index, getSize(data) - swapIdx);
 	}

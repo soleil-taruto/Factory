@@ -19,7 +19,7 @@ static void CommitPart(
 		addElement(partFiles, (uint)partFile);
 		fp = fileOpen(partFile, wMode);
 
-		foreach(elements, element, index)
+		foreach (elements, element, index)
 			writeElement_x(fp, element);
 
 		fileClose(fp);

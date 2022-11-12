@@ -211,7 +211,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 		cout("TIME-LINE %s -> %s\n", bgnStmp, endStmp);
 
-		foreach(TimeLine, remark, remark_index)
+		foreach (TimeLine, remark, remark_index)
 		{
 			if (strcmp(bgnStmp, remark->Stamp) < 0 && strcmp(remark->Stamp, endStmp) < 0) // ? bgnStmp ` endStmp, (bgnStmp, endStmp) ‚ÍŠÜ‚Ü‚È‚¢B
 			{
@@ -238,7 +238,7 @@ static int Perform(char *prmFile, char *ansFile)
 		uint currTime = now();
 		autoBlock_t *buff = newBlock();
 
-		foreach(Members, member, index)
+		foreach (Members, member, index)
 			if (!strcmp(member->Ident, ident))
 				break;
 
@@ -274,7 +274,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 		// ---- timeout ----
 
-		foreach(Members, member, index)
+		foreach (Members, member, index)
 		{
 			if (member->LastTime + 300 < currTime) // ? timeout
 			{
@@ -295,7 +295,7 @@ static int Perform(char *prmFile, char *ansFile)
 			uint oldestPos = 0;
 			uint oldestTime = UINTMAX;
 
-			foreach(Members, member, index)
+			foreach (Members, member, index)
 			{
 				if (member->LastTime < oldestTime)
 				{
@@ -317,7 +317,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 		cout("MEMBER BEGIN\n");
 
-		foreach(Members, member, index)
+		foreach (Members, member, index)
 		{
 			cout("MEMBER [%s] T=%u\n", member->Ident, currTime - member->LastTime);
 
@@ -338,7 +338,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 		cout("LOGOUT MEMBER [%s]\n", ident);
 
-		foreach(Members, member, index)
+		foreach (Members, member, index)
 		{
 			if (!strcmp(member->Ident, ident))
 			{

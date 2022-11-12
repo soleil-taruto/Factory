@@ -251,7 +251,7 @@ void line2fsym(char *line)
 	trimLines(tokens);
 	errorCase(!getCount(tokens)); // "" "." ".." "..." etc. ïsâ¬
 
-	foreach(tokens, token, index)
+	foreach (tokens, token, index)
 		line2csym_ext(token, "-");
 
 	newLine = untokenize(tokens, ".");
@@ -417,7 +417,7 @@ char *lineToJDoc(char *line, int okRet)
 	line2JLine(line, 1, 1, 1, 1);
 	lines = tokenize_x(line, '\n');
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 //		line = replaceLine(line, "Å@", " ", 0); // ëSäpSPC -> îºäpSPC // îpé~
 //		replaceChar(line, '\r', ' '); // CR ÇÕ line2JLine() Ç™âΩÇ∆Ç©ÇµÇƒÇ≠ÇÍÇΩÇÕÇ∏ÅB
@@ -519,7 +519,7 @@ char *lineToFairLocalPath(char *line, uint dirSize)
 	nodes = tokenize(line, '.');
 	memFree(line);
 
-	foreach(nodes, node, index)
+	foreach (nodes, node, index)
 	{
 		trimEdge(node, ' ');
 
@@ -580,7 +580,7 @@ char *lineToFairRelPath(char *line, uint dirSize)
 	memFree(line);
 	trimLines(tokens);
 
-	foreach(tokens, token, index)
+	foreach (tokens, token, index)
 		setElement(tokens, index, (uint)lineToFairLocalPath_x(token, 0));
 
 	line = untokenize(tokens, "\\");
@@ -632,7 +632,7 @@ int isFairHrefPath(char *path, int pathDelim) // pathDelim: "/\\"
 	else
 		error();
 
-	foreach(tokens, token, index)
+	foreach (tokens, token, index)
 		if (strcmp(token, ".") && strcmp(token, "..") && !isFairLocalPath(token, 0))
 			break;
 
@@ -714,7 +714,7 @@ char *toFairFullPathFltr(char *path) // path Ç™ïsê≥Ç»èÍçáÇÕ error();
 		else
 			ptknidx++;
 	}
-	foreach(ptkns, ptkn, ptknidx)
+	foreach (ptkns, ptkn, ptknidx)
 	{
 		if (!isFairLocalPath(ptkn, 0))
 		{
@@ -748,7 +748,7 @@ void autoIndent(autoList_t *lines)
 
 	for(; ; )
 	{
-		foreach(lines, line, index)
+		foreach (lines, line, index)
 			if (strchr(line, '\t'))
 				break;
 
@@ -757,7 +757,7 @@ void autoIndent(autoList_t *lines)
 
 		maxTabIndent = 0;
 
-		foreach(lines, line, index)
+		foreach (lines, line, index)
 		{
 			p = strchr(line, '\t');
 
@@ -767,7 +767,7 @@ void autoIndent(autoList_t *lines)
 				maxTabIndent = m_max(maxTabIndent, tabIndent);
 			}
 		}
-		foreach(lines, line, index)
+		foreach (lines, line, index)
 		{
 			p = strchr(line, '\t');
 
@@ -792,7 +792,7 @@ void autoLeftIndent(autoList_t *lines, uint span)
 	uint tabnum;
 	uint insIndex;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		for(p = line; *p; p++)
 			if (*p != '\t')

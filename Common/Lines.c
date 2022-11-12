@@ -28,7 +28,7 @@ autoList_t *copyLines(autoList_t *lines)
 
 	lines = copyAutoList(lines);
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		setElement(lines, index, (uint)strx(getLine(lines, index)));
 	}
@@ -39,7 +39,7 @@ void addLines(autoList_t *lines, autoList_t *subLines)
 	char *line;
 	uint index;
 
-	foreach(subLines, line, index)
+	foreach (subLines, line, index)
 	{
 		addElement(lines, (uint)strx(line));
 	}
@@ -112,7 +112,7 @@ char *untokenize(autoList_t *tokens, char *separator)
 	uint index;
 	autoBlock_t tmpBlock;
 
-	foreach(tokens, token, index)
+	foreach (tokens, token, index)
 	{
 		if (index)
 			addBytes(buffLine, gndBlockLineVar(separator, tmpBlock));
@@ -131,7 +131,7 @@ void trimLines(autoList_t *lines)
 	char *line;
 	uint index;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		if (!*line) // ? line == ""
 		{
@@ -187,7 +187,7 @@ void shootingStarLines_CSP(autoList_t *lines, uint count, int starChr, int padCh
 		uint index;
 		sint farthest = -1;
 
-		foreach(lines, line, index)
+		foreach (lines, line, index)
 		{
 			char *p = strchr(line, starChr);
 
@@ -201,7 +201,7 @@ void shootingStarLines_CSP(autoList_t *lines, uint count, int starChr, int padCh
 		if (farthest == -1)
 			break;
 
-		foreach(lines, line, index)
+		foreach (lines, line, index)
 		{
 			char *p = strchr(line, starChr);
 
@@ -227,7 +227,7 @@ void spacingStarLines_SP(autoList_t *lines, uint lenmin, int starChr, int padChr
 	char *line;
 	uint index;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		char *p = strchr(line, starChr);
 

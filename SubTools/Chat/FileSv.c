@@ -284,7 +284,7 @@ static void Perform_FindPtn(ConnInfo_t *i, char *ttlPath, char *findPtn)
 
 		if (getCount(list))
 		{
-			foreach(list, name, index)
+			foreach (list, name, index)
 			{
 				char *element = GetFileListElementTemplateHtml();
 				char *info = getLine(TGFL_InfoList, index);

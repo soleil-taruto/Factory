@@ -96,7 +96,7 @@ static void FindBrokenUUID_File(char *file)
 	char *line;
 	uint index;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		char *nj_line = strx(line);
 
@@ -142,7 +142,7 @@ static void FindBrokenUUID(char *dir)
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		if (IsTargetFile(file))
 			FindBrokenUUID_File(file);
 

@@ -102,7 +102,7 @@ static autoList_t *CheckAndReadLines(char *file, char *errorMessage)
 
 	memFree((char *)unaddElement(lines));
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		errorCase_m(line[0] == '\0', errorMessage); // 空行は無いはず。
 		errorCase_m(!isJLine(line, 1, 0, 0, 1), errorMessage);
@@ -131,7 +131,7 @@ static void Check_FilesTxt(void)
 	char *line;
 	uint index;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		char *errorMessage = xcout("ファイルリストの %u 行目に問題があります。", index + 1);
 		char *file;
@@ -152,7 +152,7 @@ static void Check_TreeTxt(void)
 	char *line;
 	uint index;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		char *errorMessage = xcout("ツリーファイルの %u 行目に問題があります。", index + 1);
 
@@ -201,7 +201,7 @@ static void CheckRum(char *rumDir)
 
 		sortJLinesICase(files);
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 		{
 			char *localFile;
 			char *md5;
@@ -233,7 +233,7 @@ static void CheckRum(char *rumDir)
 
 		sortJLinesICase(dirs);
 
-		foreach(dirs, dir, index)
+		foreach (dirs, dir, index)
 		{
 			char *localDir;
 

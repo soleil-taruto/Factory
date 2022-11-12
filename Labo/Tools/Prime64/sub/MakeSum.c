@@ -7,7 +7,7 @@ static void Summary(char *rDir, char *outFile)
 	uint index;
 	uint64 total = 0;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		total += toValue64_x(readFirstLine(file));
 
 	writeOneLine_cx(outFile, xcout("%I64u", total));

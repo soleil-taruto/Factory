@@ -56,7 +56,7 @@ static void EditOrder(autoList_t *fileInfos)
 	uint index;
 	uint index2;
 
-	foreach(fileInfos, i, index)
+	foreach (fileInfos, i, index)
 		addElement(files, (uint)i->File);
 
 	filesTmp = editLines(files);
@@ -65,13 +65,13 @@ static void EditOrder(autoList_t *fileInfos)
 	trimLines(files); // 空行除去
 	errorCase_m(getCount(files) != getCount(fileInfos), "編集エラー：ファイル数が増減した。");
 
-	foreach(fileInfos, i, index)
+	foreach (fileInfos, i, index)
 	{
 		i->EO_Index = findLine(files, i->File);
 		errorCase_m(i->EO_Index == getCount(fileInfos), "編集エラー：ファイル消失");
 	}
-	foreach(fileInfos, i,  index)
-	foreach(fileInfos, i2, index2)
+	foreach (fileInfos, i,  index)
+	foreach (fileInfos, i2, index2)
 	if (index < index2)
 	{
 		errorCase_m(i->EO_Index == i2->EO_Index, "編集エラー：ファイル重複");
@@ -154,7 +154,7 @@ static void ChangeStamps(autoList_t *fileInfos)
 	FileInfo_t *i;
 	uint index;
 
-	foreach(fileInfos, i, index)
+	foreach (fileInfos, i, index)
 	if (index)
 	{
 		FileInfo_t *i1;
@@ -186,7 +186,7 @@ static void DoOrderStampEdit(void)
 
 	LOGPOS();
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		FileInfo_t *i = nb_(FileInfo_t);
 		uint64 stamp;
@@ -210,7 +210,7 @@ static void DoOrderStampEdit(void)
 	{
 		FileInfo_t *i;
 
-		foreach(fileInfos, i, index)
+		foreach (fileInfos, i, index)
 		if (index)
 		{
 			FileInfo_t *i1 = (FileInfo_t *)getElement(fileInfos, index - 1);
@@ -224,7 +224,7 @@ static void DoOrderStampEdit(void)
 		FileInfo_t *i;
 		int changing = 0;
 
-		foreach(fileInfos, i, index)
+		foreach (fileInfos, i, index)
 		{
 			if (i->OldStamp != i->Stamp)
 			{
@@ -254,7 +254,7 @@ static void DoOrderStampEdit(void)
 	{
 		FileInfo_t *i;
 
-		foreach(fileInfos, i, index)
+		foreach (fileInfos, i, index)
 		{
 			uint64 stamp = getFileStampByTime(i->Stamp);
 

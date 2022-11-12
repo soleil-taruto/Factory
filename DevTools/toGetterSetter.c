@@ -62,7 +62,7 @@ readArgs:
 
 	lines = inputLines();
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		char *p = strchr(line, ';');
 

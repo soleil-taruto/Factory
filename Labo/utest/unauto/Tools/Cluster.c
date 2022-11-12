@@ -22,7 +22,7 @@ static void MakeReportFile(char *dir, char *repFile)
 	paths = lss(dir);
 	sortJLinesICase(paths);
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		char *line;
 

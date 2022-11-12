@@ -19,7 +19,7 @@ static char *GetFairServerPath(char *svrPath)
 
 	trimLines(sPTkns);
 
-	foreach(sPTkns, sPTkn, index)
+	foreach (sPTkns, sPTkn, index)
 	{
 		setElement(sPTkns, index, (uint)lineToFairLocalPath(sPTkn, 0));
 		memFree(sPTkn);
@@ -55,7 +55,7 @@ static autoList_t *ReadServerPathList(char *file)
 	char *line;
 	uint index;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		setElement(lines, index, (uint)GetFairServerPath_x(line));
 	}
@@ -78,7 +78,7 @@ static void TryCreateParent(char *dir, char *relFile)
 
 	addCwd(dir);
 
-	foreach(rFTkns, rFTkn, index)
+	foreach (rFTkns, rFTkn, index)
 	{
 		cout("rFTkn: %s\n", rFTkn);
 
@@ -141,7 +141,7 @@ static void MakeUploadScript(char *path, char *svrPath, int intoSubDirMode, char
 		char *file;
 		uint index;
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 		{
 			char *relFile = strx(eraseRoot(file, path));
 			char *svrFile;
@@ -194,7 +194,7 @@ static void MakeDownloadScript(char *path, char *svrPath, int intoSubDirMode, in
 
 	OpenScript(destFile);
 
-	foreach(svrFileList, svrFile, index)
+	foreach (svrFileList, svrFile, index)
 	{
 		if (mbsStartsWithICase(svrFile, svrPath))
 		{
@@ -252,7 +252,7 @@ static void MakeMoveScript(char *svrPath, char *newSvrPath, char *svrFileListFil
 
 	OpenScript(destFile);
 
-	foreach(svrFileList, svrFile, index)
+	foreach (svrFileList, svrFile, index)
 	{
 		if (mbsStartsWithICase(svrFile, svrPath))
 		{
@@ -290,7 +290,7 @@ static void MakeRemoveScript(char *svrPath, int intoSubDirMode, char *svrFileLis
 
 	OpenScript(destFile);
 
-	foreach(svrFileList, svrFile, index)
+	foreach (svrFileList, svrFile, index)
 	{
 		if (mbsStartsWithICase(svrFile, svrPath))
 		{
@@ -322,7 +322,7 @@ static void MakeNormalizeScript(char *svrFileListFile, char *destFile)
 
 	OpenScript(destFile);
 
-	foreach(svrFileList, svrFile, index)
+	foreach (svrFileList, svrFile, index)
 	{
 		char *realSvrFile = lineToFairLocalPath(svrFile, 0); // サーバー上で FiarLocalPath ではあるはず。
 		char *trueSvrFile = GetFairServerPath(svrFile);

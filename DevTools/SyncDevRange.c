@@ -79,7 +79,7 @@ static char *LinesToText(autoList_t *lines)
 	char *line;
 	uint index;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		text = addLine(text, line);
 		text = addChar(text, '\n');
@@ -112,7 +112,7 @@ static void Search_File(char *file)
 	uint index;
 	Range_t *range = NULL;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		int kind = GetLineKind(line);
 
@@ -158,12 +158,12 @@ static void Search(void)
 	char *file;
 	uint index;
 
-	foreach(RootDirs, dir, index)
+	foreach (RootDirs, dir, index)
 		addElements_x(files, lssFiles(dir));
 
 	sortJLinesICase(files);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	if (findLineCase(TargetExts, getExt(file), 1) < getCount(TargetExts))
 	{
 		cout("file: %s\n", file);
@@ -195,7 +195,7 @@ static void DispAllRange_GroupByName(void)
 	}
 //	errorCase_m(!getCount(Ranges), "// sync > ～ // sync < が１つも無い。"); // old
 
-	foreach(Ranges, range, index)
+	foreach (Ranges, range, index)
 		if (findLine(names, range->Name) == getCount(names))
 			addElement(names, (uint)range->Name);
 
@@ -203,11 +203,11 @@ static void DispAllRange_GroupByName(void)
 
 	cout("====\n");
 
-	foreach(names, name, index)
+	foreach (names, name, index)
 	{
 		uint count = 0;
 
-		foreach(Ranges, range, idx)
+		foreach (Ranges, range, idx)
 		if (!strcmp(range->Name, name))
 		{
 			count++;
@@ -217,12 +217,12 @@ static void DispAllRange_GroupByName(void)
 	}
 	cout("====\n");
 
-	foreach(names, name, index)
+	foreach (names, name, index)
 	{
 		autoList_t *md5s = newList();
 		int needSync;
 
-		foreach(Ranges, range, idx)
+		foreach (Ranges, range, idx)
 		if (!strcmp(range->Name, name))
 		{
 			if (findLine(md5s, range->TextMD5) == getCount(md5s))
@@ -245,7 +245,7 @@ static void DispAllRange_GroupByName(void)
 
 				addCwd(name);
 				{
-					foreach(Ranges, range, idx)
+					foreach (Ranges, range, idx)
 					if (!strcmp(range->Name, name))
 					{
 						writeOneLineNoRet(range->TextMD5, range->Text);
@@ -268,7 +268,7 @@ static void Confirm(void)
 	Range_t *range;
 	uint index;
 
-	foreach(Ranges, range, index)
+	foreach (Ranges, range, index)
 	{
 		cout("----\n");
 
@@ -282,7 +282,7 @@ static void Confirm(void)
 		cout("----\n");
 	}
 
-	foreach(Ranges, range, index)
+	foreach (Ranges, range, index)
 		cout("%s %s\n", range->TextMD5, range->Name);
 
 	DispAllRange_GroupByName();
@@ -381,7 +381,7 @@ static void SyncRangeGroup(autoList_t *rangeGroup)
 
 			cout("< %s (%u)\n", masterRange->File, masterRange->StartSymLineIndex);
 
-			foreach(rangeGroup, range, range_index)
+			foreach (rangeGroup, range, range_index)
 			{
 				cout("> %s (%u)\n", range->File, range->StartSymLineIndex);
 			}
@@ -395,7 +395,7 @@ static void SyncRangeGroup(autoList_t *rangeGroup)
 		cout("続行します。\n");
 	}
 
-	foreach(rangeGroup, targetRange, index)
+	foreach (rangeGroup, targetRange, index)
 	{
 		if (!strcmp(masterRange->TextMD5, targetRange->TextMD5)) // ? 同じ -> 更新不要
 		{
@@ -440,7 +440,7 @@ static void DispRangeGroup(autoList_t *rangeGroup)
 	Range_t *range;
 	uint index;
 
-	foreach(rangeGroup, range, index)
+	foreach (rangeGroup, range, index)
 	{
 		cout("----\n");
 
@@ -451,13 +451,13 @@ static void DispRangeGroup(autoList_t *rangeGroup)
 		cout("----\n");
 	}
 
-	foreach(rangeGroup, range, index)
+	foreach (rangeGroup, range, index)
 	{
 		cout("%s (%u)\n", range->File, range->StartSymLineIndex);
 	}
 	cout("====\n");
 
-	foreach(rangeGroup, range, index)
+	foreach (rangeGroup, range, index)
 	{
 		cout("%s %c %I64u %u\n", range->TextMD5, IsRangeEmptyText(range) ? '-' : '+', range->Stamp, strlen(range->Text));
 	}
@@ -470,7 +470,7 @@ static void DispRangeGroup(autoList_t *rangeGroup)
 
 		rapidSort(tmp_rangeGroup, Comp_RangeTextMD5);
 
-		foreach(tmp_rangeGroup, range, index)
+		foreach (tmp_rangeGroup, range, index)
 		if (!index || strcmp(range->TextMD5, ((Range_t *)getElement(tmp_rangeGroup, index - 1))->TextMD5))
 		{
 			cout("%s %s\n", range->TextMD5, range->File);
@@ -579,14 +579,14 @@ static void ProcAllRange(void)
 	char *name;
 	uint index;
 
-	foreach(NeedSyncRangeNames, name, index)
+	foreach (NeedSyncRangeNames, name, index)
 	{
 		Range_t *range;
 		uint range_index;
 
 		setCount(rangeGroup, 0);
 
-		foreach(Ranges, range, range_index)
+		foreach (Ranges, range, range_index)
 			if (!strcmp(range->Name, name))
 				addElement(rangeGroup, (uint)range);
 
@@ -624,7 +624,7 @@ readArgs:
 		addElement(RootDirs, (uint)DEF_ROOT_DIR_01);
 		addElement(RootDirs, (uint)DEF_ROOT_DIR_02);
 	}
-	foreach(RootDirs, dir, index)
+	foreach (RootDirs, dir, index)
 		errorCase(!existDir(dir));
 
 	TargetExts = tokenize(S_TargetExts, '.');

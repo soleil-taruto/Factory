@@ -322,7 +322,7 @@ void removeElement(autoList_t *i, uint target)
 	uint index;
 	uint element;
 
-	foreach(i, element, index)
+	foreach (i, element, index)
 	{
 		if (element == target)
 		{
@@ -475,7 +475,7 @@ void releaseDim_BR(void *block, uint depth, void (*blockReleaser)(void *))
 		autoList_t *i = (autoList_t *)block;
 		uint index;
 
-		foreach(i, block, index)
+		foreach (i, block, index)
 		{
 			releaseDim_BR(block, depth - 1, blockReleaser);
 		}
@@ -495,7 +495,7 @@ void addElements(autoList_t *i, autoList_t *j)
 	uint element;
 	uint index;
 
-	foreach(j, element, index)
+	foreach (j, element, index)
 	{
 		addElement(i, element);
 	}
@@ -505,7 +505,7 @@ uint findElement(autoList_t *i, uint target, sint (*funcComp)(uint, uint))
 	uint element;
 	uint index;
 
-	foreach(i, element, index)
+	foreach (i, element, index)
 	{
 		if (!funcComp(element, target))
 		{
@@ -520,7 +520,7 @@ uint getCountElement(autoList_t *i, uint target, sint (*funcComp)(uint, uint))
 	uint index;
 	uint count = 0;
 
-	foreach(i, element, index)
+	foreach (i, element, index)
 	{
 		if (!funcComp(element, target))
 		{
@@ -541,7 +541,7 @@ uint findPair(autoList_t *list, sint (*funcComp)(uint, uint))
 	foundPairIndexes[0] = 0;
 	foundPairIndexes[1] = 0;
 
-	foreach(list, element, index)
+	foreach (list, element, index)
 	{
 		for(faridx = index + 1; faridx < getCount(list); faridx++)
 		{
@@ -603,7 +603,7 @@ void callAllElement(autoList_t *i, void (*callFunc)(uint))
 	uint element;
 	uint index;
 
-	foreach(i, element, index)
+	foreach (i, element, index)
 	{
 		callFunc(element);
 	}

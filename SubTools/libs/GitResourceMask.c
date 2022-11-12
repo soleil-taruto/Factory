@@ -46,7 +46,7 @@ static MediaInfo_t GetMediaInfo(char *file)
 
 	lines = readLines(repFile);
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		char *p;
 		char *q;
@@ -371,7 +371,7 @@ void GitResourceMask(char *rootDir)
 
 	RemoveGitPaths(files);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (!_stricmp(FLAG_FILE, getLocal(file)))
 		{
@@ -379,7 +379,7 @@ void GitResourceMask(char *rootDir)
 			char *subfile;
 			uint subfile_index;
 
-			foreach(files, subfile, subfile_index)
+			foreach (files, subfile, subfile_index)
 				if (startsWithICase(subfile, prefix))
 					addElement(targets, (uint)subfile);
 
@@ -388,7 +388,7 @@ void GitResourceMask(char *rootDir)
 			distinct2(targets, simpleComp, noop_u);
 		}
 	}
-	foreach(targets, file, index)
+	foreach (targets, file, index)
 	{
 		MaskResourceFile(file);
 	}

@@ -21,7 +21,7 @@ static void Do_T(char *dir)
 	LOGPOS();
 	reverseElements(files);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		uint64 fTime = toValue64(c_makeCompactStamp(getStampDataTime(tCount))) * 1000;
 
@@ -55,7 +55,7 @@ static void FSqDiv(char *srcdir, uint divnum)
 	progCyc = getCount(files) / 79;
 	m_maxim(progCyc, 1);
 
-	foreach(files ,file, index)
+	foreach (files ,file, index)
 	{
 		char *wDir = getLine(destDirs, index % getCount(destDirs));
 		char *wFile;

@@ -16,7 +16,7 @@ static char *GetContentType(void)
 	char *key;
 	uint index;
 
-	foreach(HttpDat.H_Keys, key, index)
+	foreach (HttpDat.H_Keys, key, index)
 	{
 		if (!_stricmp(key, "Content-Type"))
 		{
@@ -61,7 +61,7 @@ static void FileParse(char *rFile, char *wDir)
 
 	writeLine(wFp, HttpDat.H_Request);
 
-	foreach(HttpDat.H_Keys, key, index)
+	foreach (HttpDat.H_Keys, key, index)
 	{
 		char *value = getLine(HttpDat.H_Values, index);
 
@@ -88,7 +88,7 @@ static void HTTPMonParse(char *rDir, char *wDir)
 
 //	createDirIfNotExist(wDir);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		FileParse(file, wDir);
 	}

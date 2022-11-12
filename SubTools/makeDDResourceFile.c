@@ -41,7 +41,7 @@ static int FF_FindStartPtn(autoList_t *startPtns, char *file)
 	char *stPtn;
 	uint stPtn_index;
 
-	foreach(startPtns, stPtn, stPtn_index)
+	foreach (startPtns, stPtn, stPtn_index)
 		if (startsWithICase(file, stPtn))
 			return 1;
 
@@ -52,7 +52,7 @@ static void FilesFilter(autoList_t *files)
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (mbs_strstr(file, "\\_")) // '_' で始まる「ファイル・サブフォルダの配下」は DDResFile に含めない。
 //		if (*getLocal(file) == '_')  // '_' で始まる「ファイル」は DDResFile に含めない。// old
@@ -73,7 +73,7 @@ static void FilesFilter(autoList_t *files)
 
 		cout("サブディレクトリの指定有り.1\n");
 
-		foreach(ResSubDirs, subDir, subDir_index)
+		foreach (ResSubDirs, subDir, subDir_index)
 		{
 			char *stPtn = xcout("%s\\%s\\", RootDir, subDir);
 
@@ -81,7 +81,7 @@ static void FilesFilter(autoList_t *files)
 			cout("stPtn: %s\n", stPtn);
 			addElement(startPtns, (uint)stPtn);
 		}
-		foreach(files, file, index)
+		foreach (files, file, index)
 		{
 			if (FF_FindStartPtn(startPtns, file))
 			{
@@ -156,7 +156,7 @@ static void MakeDDResFile(void)
 
 	AddToDDResFile(indexFile);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		AddToDDResFile(file);
 
 	fileClose(DDResFp);

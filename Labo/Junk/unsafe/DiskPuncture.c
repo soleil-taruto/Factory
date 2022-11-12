@@ -41,7 +41,7 @@ static void CopyGarbageFiles(void)
 
 	createDir(outDir);
 
-	foreach(GarbageFiles, file, index)
+	foreach (GarbageFiles, file, index)
 	{
 		while(CheckBorderSize(getFileSize(file)))
 		{
@@ -110,7 +110,7 @@ static DeleteGarbageFiles(void)
 	uint index;
 	uint sameDrv = c2upper(getLine(GarbageFiles, 0)[0]) == c2upper(TargetDrive);
 
-	foreach(GarbageFiles, file, index)
+	foreach (GarbageFiles, file, index)
 	{
 		if (sameDrv)
 		{

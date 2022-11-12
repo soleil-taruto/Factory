@@ -184,7 +184,7 @@ static void DoConv(autoList_t *files)
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		cout("(%u) %s\n", index, file);
 
 	cout("文字コード変換: %s -> %s\n", GetSEnc(REnc), GetSEnc(WEnc));
@@ -199,14 +199,14 @@ static void DoConv(autoList_t *files)
 		cout("続行します。\n");
 	}
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		cout("[%u] %s\n", index, file);
 
 		errorCase(!existFile(file));
 		writeBinary_cx(file, readBinary(file)); // I/O Test
 	}
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		char *midFile = makeTempPath("UTF2SJIS.tmp");
 

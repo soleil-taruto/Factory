@@ -88,7 +88,7 @@ static void StrmCharFltr(FltrInfo_t *i, autoBlock_t *dest, int chr)
 		uint size = getSize(i->Buff) - sPos;
 		autoBlock_t *srcPtn;
 
-		foreach(i->SrcPtns, srcPtn, ptnndx)
+		foreach (i->SrcPtns, srcPtn, ptnndx)
 		{
 			if (size <= getSize(srcPtn))
 			{

@@ -19,7 +19,7 @@ static void ShowSettingOutputToHilight(char *rFile, char *wFile)
 	uint index;
 	autoList_t *dest = newList();
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		if (lineExp("‘å•¶š¬•¶š‹æ•Ê:<1,NNYY> ’PŒê‚ÌŒŸõ:<1,NNYY> ³‹K•\Œ»:<1,NNYY> ‹­’²•\¦<1,18> <1,,>", line))
 		{

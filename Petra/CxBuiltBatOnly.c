@@ -6,7 +6,7 @@ int main(int argc, char **argv)
 	char *dir;
 	uint index;
 
-	foreach(dirs, dir, index)
+	foreach (dirs, dir, index)
 	{
 		addCwd(dir);
 		{

@@ -53,7 +53,7 @@ static void DoSearch(void)
 
 	sortJLinesICase(files);
 
-	foreach(files, rFile, index)
+	foreach (files, rFile, index)
 	{
 		char *wFile = changeRoot(strx(rFile), RDir, WDir);
 
@@ -78,7 +78,7 @@ static double DC_FilePairingRate(char *iDir, char *oDir)
 
 	d = getCount(files);
 
-	foreach(files, iFile, index)
+	foreach (files, iFile, index)
 	{
 		char *oFile = changeRoot(strx(iFile), iDir, oDir);
 
@@ -96,7 +96,7 @@ static void DC_DispRWFiles(void)
 	char *file;
 	uint index;
 
-	foreach(RWFiles, file, index)
+	foreach (RWFiles, file, index)
 	{
 		cout("[%u] %s\n", index + 1, file);
 
@@ -136,7 +136,7 @@ static void DC_OutputDiff(int keepTree)
 	createDir(dir1);
 	createDir(dir2);
 
-	foreach(RWFiles, file, index)
+	foreach (RWFiles, file, index)
 	{
 		char *rFile = combine(RDir, file);
 		char *wFile = combine(WDir, file);
@@ -190,7 +190,7 @@ static void EraseRWFiles(char *target)
 	char *file;
 	uint index;
 
-	foreach(RWFiles, file, index)
+	foreach (RWFiles, file, index)
 		if (!_stricmp(file, target))
 			file[0] = '\0';
 
@@ -265,7 +265,7 @@ static void DoMerge(void)
 	char *file;
 	uint index;
 
-	foreach(RWFiles, file, index)
+	foreach (RWFiles, file, index)
 	{
 		char *rFile = combine(RDir, file);
 		char *wFile = combine(WDir, file);

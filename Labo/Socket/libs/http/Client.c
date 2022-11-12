@@ -79,7 +79,7 @@ static void Perform(int sock)
 
 	if (httpExtraHeader)
 	{
-		foreach(httpExtraHeader, header, index)
+		foreach (httpExtraHeader, header, index)
 		{
 			if (startsWithICase(header, "Content-Type:"))
 				ctflag = 1;

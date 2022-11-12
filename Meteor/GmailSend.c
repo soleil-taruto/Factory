@@ -174,22 +174,22 @@ int GS_TrySend(void) // ret: ? 成功
 	prmFile = makeTempPath("gsPrm.tmp");
 	prmFp = fileOpen(prmFile, "wt");
 
-	foreach(ToList, line, index)
+	foreach (ToList, line, index)
 	{
 		writeLine(prmFp, "/To");
 		writeLine(prmFp, line);
 	}
-	foreach(CCList, line, index)
+	foreach (CCList, line, index)
 	{
 		writeLine(prmFp, "/CC");
 		writeLine(prmFp, line);
 	}
-	foreach(BCCList, line, index)
+	foreach (BCCList, line, index)
 	{
 		writeLine(prmFp, "/BCC");
 		writeLine(prmFp, line);
 	}
-	foreach(Attachments, line, index)
+	foreach (Attachments, line, index)
 	{
 		writeLine(prmFp, "/A");
 		writeLine(prmFp, line);
@@ -245,16 +245,16 @@ int GS_TrySend(void) // ret: ? 成功
 	removeFile(prmFile);
 	memFree(prmFile);
 #else // コマンド引数に指定する版 -- 問題有り -> コマンドラインの長さ青天井。(")のエスケープをしていない。
-	foreach(ToList, line, index)
+	foreach (ToList, line, index)
 		cmdLine = addLine_x(cmdLine, xcout(" /To \"%s\"", line));
 
-	foreach(CCList, line, index)
+	foreach (CCList, line, index)
 		cmdLine = addLine_x(cmdLine, xcout(" /CC \"%s\"", line));
 
-	foreach(BCCList, line, index)
+	foreach (BCCList, line, index)
 		cmdLine = addLine_x(cmdLine, xcout(" /BCC \"%s\"", line));
 
-	foreach(Attachments, line, index)
+	foreach (Attachments, line, index)
 		cmdLine = addLine_x(cmdLine, xcout(" /A \"%s\"", line));
 
 	if (From)

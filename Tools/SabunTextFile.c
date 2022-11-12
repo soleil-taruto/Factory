@@ -23,7 +23,7 @@ static void Main2(char *file1, char *file2)
 	else
 		report = getDiffLinesReport(lines1, lines2, IgnoreCaseFlag);
 
-	foreach(report, line, index)
+	foreach (report, line, index)
 		cout("%s\n", line);
 
 	releaseDim(report, 1);

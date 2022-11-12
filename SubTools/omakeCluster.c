@@ -32,7 +32,7 @@ static void MakeCluster(char *dir, char *outFile)
 	pos = 1 + getCount(files) * 2;
 	pos *= sizeof(uint);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		uint size = getFileSize(file);
 
@@ -41,7 +41,7 @@ static void MakeCluster(char *dir, char *outFile)
 		pos += size;
 		pos += strlen(ExtFltr(getExt(file))) + 1;
 	}
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		writeBinaryBlock_x(fp, readBinary(file));
 		writeLine(fp, ExtFltr(getExt(file)));

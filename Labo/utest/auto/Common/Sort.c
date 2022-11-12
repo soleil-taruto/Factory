@@ -174,7 +174,7 @@ static void FB_Test(autoList_t *list, uint target, uint bound[2])
 	uint index;
 
 #if 0
-	foreach(list, element, index)
+	foreach (list, element, index)
 		if (target <= element)
 			break;
 
@@ -182,12 +182,12 @@ static void FB_Test(autoList_t *list, uint target, uint bound[2])
 #else
 	bound[0] = 0;
 
-	foreach(list, element, index)
+	foreach (list, element, index)
 		if (element < target)
 			bound[0] = index + 1;
 #endif
 
-	foreach(list, element, index)
+	foreach (list, element, index)
 		if (target < element)
 			break;
 

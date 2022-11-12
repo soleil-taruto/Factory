@@ -61,7 +61,7 @@ char *URLToPath(char *url) // ret: 表示可能, NULL == 不正なパス
 	tokens = tokenize(url, '/');
 	memFree(url);
 
-	foreach(tokens, token, index)
+	foreach (tokens, token, index)
 	{
 		token = lineToFairLocalPath_x(token, 0);
 

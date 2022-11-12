@@ -25,7 +25,7 @@ static void Touch(char *path)
 		char *file;
 		uint index;
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 			Touch_File(file);
 
 		releaseDim(files, 1);

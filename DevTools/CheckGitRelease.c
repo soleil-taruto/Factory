@@ -133,7 +133,7 @@ static void FindProjectDir(char *rootDir)
 	char *dir;
 	uint index;
 
-	foreach(dirs, dir, index)
+	foreach (dirs, dir, index)
 	{
 		CheckDir(dir);
 	}

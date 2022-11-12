@@ -95,7 +95,7 @@ static void SolveJpnPath(char *rootDir, char *realRootDir)
 
 	sortJLinesICase(paths);
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		char *localPath = getLocal(path);
 
@@ -127,7 +127,7 @@ static void SolveJpnPath(char *rootDir, char *realRootDir)
 
 	sortJLinesICase(paths);
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		SolveJpnPath(path, realRootDir);
 	}

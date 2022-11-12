@@ -161,7 +161,7 @@ static void ParseHeader(autoBlock_t *header)
 
 	firstLine = strx(getLine(lines, 0));
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		if (!index)
 			continue;
@@ -206,7 +206,7 @@ static void ParseHeader(autoBlock_t *header)
 	ab_addLine(HeaderBuff, "\r\n");
 	*/
 
-	foreach(names, name, index)
+	foreach (names, name, index)
 	{
 		value = getLine(values, index);
 

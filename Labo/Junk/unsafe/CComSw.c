@@ -6,7 +6,7 @@ static void CComSw(char *source, char *incPtn, uint lineno) // lineno: (1, 2, 3.
 	char *line;
 	uint index;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		if (lineExp("<>//**//", line) && strstr(line, incPtn))
 		{

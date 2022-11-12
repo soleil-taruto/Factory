@@ -17,7 +17,7 @@ static void CheckColNames(autoList_t *colNames)
 	errorCase(!colNames);
 	errorCase(getCount(colNames) < 1);
 
-	foreach(colNames, colName, colidx)
+	foreach (colNames, colName, colidx)
 	{
 		errorCase(isEmptyJTkn(colName));
 	}
@@ -30,7 +30,7 @@ static void CheckColValues(autoList_t *colValues, uint colcnt)
 	errorCase(!colValues);
 	errorCase(getCount(colValues) != colcnt);
 
-	foreach(colValues, colValue, colidx)
+	foreach (colValues, colValue, colidx)
 	{
 		errorCase(!colValue);
 		errorCase(!isJLine(colValue, 1, 0, 0, 1));
@@ -41,7 +41,7 @@ static void CheckColNames_2(autoList_t *colNames, autoList_t *tableColNames)
 	char *colName;
 	uint colidx;
 
-	foreach(colNames, colName, colidx)
+	foreach (colNames, colName, colidx)
 	{
 		errorCase(
 			findJLineICase(tableColNames, colName) == getCount(tableColNames) &&
@@ -55,7 +55,7 @@ static autoList_t *GetIndexList(autoList_t *colNames, autoList_t *tableColNames)
 	char *colName;
 	uint colidx;
 
-	foreach(colNames, colName, colidx)
+	foreach (colNames, colName, colidx)
 	{
 		addElement(result, findJLineICase(tableColNames, colName));
 	}
@@ -104,7 +104,7 @@ autoList_t *TR_SelectTop1WhereAnd(char *csvFile, autoList_t *whereColNames, auto
 
 	while(row = CSVStreamToRow(fp))
 	{
-		foreach(whereIndexes, colidx, index)
+		foreach (whereIndexes, colidx, index)
 			if (strcmp(refLine(row, colidx), getLine(whereColValues, index))) // ? not match
 				break;
 
@@ -119,7 +119,7 @@ autoList_t *TR_SelectTop1WhereAnd(char *csvFile, autoList_t *whereColNames, auto
 	{
 		autoList_t *row2 = newList();
 
-		foreach(retIndexes, colidx, index)
+		foreach (retIndexes, colidx, index)
 			addElement(row2, (uint)strx(refLine(row, colidx)));
 
 		releaseDim(row, 1);
@@ -159,13 +159,13 @@ uint64 TR_SelectWhereAnd(char *csvFile, autoList_t *whereColNames, autoList_t *w
 
 	while(row = CSVStreamToRow(fp))
 	{
-		foreach(whereIndexes, colidx, index)
+		foreach (whereIndexes, colidx, index)
 			if (strcmp(refLine(row, colidx), getLine(whereColValues, index))) // ? not match
 				break;
 
 		if (index == getCount(whereIndexes)) // ? match
 		{
-			foreach(destIndexes, colidx, index)
+			foreach (destIndexes, colidx, index)
 				writeLine(destfp, refLine(row, colidx));
 
 			fndnum++;
@@ -206,7 +206,7 @@ uint64 TR_DeleteWhereAnd(char *csvFile, autoList_t *whereColNames, autoList_t *w
 
 	while(row = CSVStreamToRow(fp))
 	{
-		foreach(whereIndexes, colidx, index)
+		foreach (whereIndexes, colidx, index)
 			if (strcmp(refLine(row, colidx), getLine(whereColValues, index))) // ? not match
 				break;
 
@@ -257,13 +257,13 @@ void TR_InsertInto(char *csvFile, autoList_t *colNames, autoList_t *colValueTabl
 	}
 	fileClose(fp);
 
-	foreach(colValueTable, row, rowidx)
+	foreach (colValueTable, row, rowidx)
 	{
 		autoList_t *row2 = newList();
 
 		CheckColValues(row, getCount(colNames));
 
-		foreach(destIndexes, colidx, index)
+		foreach (destIndexes, colidx, index)
 			addElement(row2, (uint)refLine(row, colidx));
 
 		RowToCSVStream(destfp, row2);

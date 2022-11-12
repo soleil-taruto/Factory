@@ -24,7 +24,7 @@ static void FindSame(char *targFile, char *searchDir)
 	targSize = getFileSize(targFile);
 	targHash = md5Cache_makeHexHashFile(targFile);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		uint64 size = getFileSize(file);
 

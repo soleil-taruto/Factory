@@ -87,7 +87,7 @@ static void CascMergeSort(autoList_t *divfiles, char *outputfile) // Cascade? Me
 		char *file;
 		uint index;
 
-		foreach(divfiles, file, index)
+		foreach (divfiles, file, index)
 		{
 			Stream_t *i = (Stream_t *)memCalloc(sizeof(Stream_t));
 
@@ -200,10 +200,10 @@ int main(int argc, char **argv)
 		/*
 			divdir を直接書き換えるので安全のため、全てファイルで ".div" であること前提。
 		*/
-		foreach(files, file, index)
+		foreach (files, file, index)
 			errorCase(_stricmp("div", getExt(file)));
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 		{
 			cout("file: %s\n", file);
 

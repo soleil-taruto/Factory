@@ -56,7 +56,7 @@ int main(int argc, char **argv)
 			reverseElements(midDirs);
 		}
 
-		foreach(midDirs, midDir, index)
+		foreach (midDirs, midDir, index)
 		{
 			if (lineExp(midDirFormat, midDir))
 			{

@@ -39,7 +39,7 @@ static void DelDirs(char *rootDir, autoList_t *dirs)
 	sortJLinesICase(dirs);
 	reverseElements(dirs);
 
-	foreach(dirs, dir, index)
+	foreach (dirs, dir, index)
 	{
 		dir = combine(rootDir, dir);
 		cout("DD: %s\n", dir);
@@ -57,7 +57,7 @@ static void MkDirs(char *rootDir, autoList_t *dirs)
 	// çÏê¨ -> è∏èá
 	sortJLinesICase(dirs);
 
-	foreach(dirs, dir, index)
+	foreach (dirs, dir, index)
 	{
 		dir = combine(rootDir, dir);
 		cout("MD: %s\n", dir);
@@ -76,7 +76,7 @@ static void DelFiles(char *rootDir, autoList_t *files)
 	sortJLinesICase(files);
 	reverseElements(files);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		file = combine(rootDir, file);
 		cout("DF: %s\n", file);
@@ -91,7 +91,7 @@ static void CpFiles(char *rRootDir, char *wRootDir, autoList_t *files)
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		char *rFile = combine(rRootDir, file);
 		char *wFile = combine(wRootDir, file);
@@ -117,7 +117,7 @@ static void EraseNoChangeFiles(char *rRootDir, char *wRootDir, autoList_t *files
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		char *rFile = combine(rRootDir, file);
 		char *wFile = combine(wRootDir, file);

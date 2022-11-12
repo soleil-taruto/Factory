@@ -58,7 +58,7 @@ static void AutoCSCommentPara(char *targetDir)
 
 	files = lssFiles(targetDir);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		if (_stricmp(getExt(file), "cs") || endsWithICase(file, ".Designer.cs") || !_stricmp(getLocal(file), "AssemblyInfo.cs")) // ? .cs ファイルではない || .Designer.cs ファイル || AssemblyInfo.cs ファイル
 			*file = '\0';
 
@@ -67,7 +67,7 @@ static void AutoCSCommentPara(char *targetDir)
 
 	cout("C %u\n", getCount(files));
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		/*
 		if (30 <= index)
@@ -90,7 +90,7 @@ static void AutoCSCommentPara(char *targetDir)
 
 	LOGPOS();
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		autoList_t *lines = readLines(file);
 		char *line;
@@ -100,7 +100,7 @@ static void AutoCSCommentPara(char *targetDir)
 
 		cout("< %s\n", file);
 
-		foreach(lines, line, line_index)
+		foreach (lines, line, line_index)
 		{
 			if (lineExp("<1,,\t\t>////// /<//<1,,>>", line)) // ? コメント・タグの終了
 			{

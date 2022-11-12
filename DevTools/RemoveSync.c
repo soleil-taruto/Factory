@@ -16,7 +16,7 @@ static void SZTEL_ZeroToEmptyLine(autoList_t *lines)
 	char *line;
 	uint index;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 		if (!line)
 			setElement(lines, index, (uint)strx(""));
 }
@@ -26,7 +26,7 @@ static void SZTEL_RemoveZeroBracket(autoList_t *lines)
 	uint index;
 
 restart:
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	if (!line)
 	{
 		int removeFlag = 0;
@@ -93,7 +93,7 @@ static void RemoveAroundEmptyLines(autoList_t *lines)
 	uint index;
 
 restart:
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		if (line && !*line) // ? ‹ós
 		if (
@@ -144,7 +144,7 @@ static void RemoveSync_File(char *file)
 
 //	cout("%s\n", file);
 
-	foreach(lines, line, index) // SyncDevRange -- // sync > @ xxx ‚Æ // < sync
+	foreach (lines, line, index) // SyncDevRange -- // sync > @ xxx ‚Æ // < sync
 	{
 		char *tLine = strx(line);
 		uint tabIndent = 0;
@@ -173,7 +173,7 @@ static void RemoveSync_File(char *file)
 		memFree(tLine);
 		memFree(targTLine);
 	}
-	foreach(lines, line, index) // SyncDevUsing -- // ^ sync @ xxx
+	foreach (lines, line, index) // SyncDevUsing -- // ^ sync @ xxx
 	if (line)
 	{
 		char *tLine = strx(line);
@@ -221,7 +221,7 @@ static void RemoveSync(void)
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	if (findLineCase(TargetExts, getExt(file), 1) < getCount(TargetExts))
 	{
 		RemoveSync_File(file);

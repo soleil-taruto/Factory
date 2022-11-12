@@ -26,7 +26,7 @@ static void DispLongest_Lines_x(autoList_t *lines)
 	minlen = UINTMAX;
 	maxlen = 0;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		uint clen = strlen(line);
 

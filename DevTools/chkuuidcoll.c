@@ -76,7 +76,7 @@ static void CollectUUIDByFile(char *file)
 	char *line;
 	uint index;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		char *fmt = strx(line);
 		char *p;
@@ -156,7 +156,7 @@ static void CollectUUIDByPath(char *path)
 		char *file;
 		uint index;
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 			if (IsTargetFile(file))
 				CollectUUIDByFile(file);
 
@@ -189,7 +189,7 @@ static void DispAllProject(void)
 
 	cout("---- Projects\n");
 
-	foreach(UUIDList, i, index)
+	foreach (UUIDList, i, index)
 	{
 		cout("[%s] %s (%u)\n", i->Project, i->File, i->LineNo);
 	}
@@ -217,7 +217,7 @@ static void DispAllUUID_2(char *title)
 
 	cout("---- %s\n", title);
 
-	foreach(UUIDList, i, index)
+	foreach (UUIDList, i, index)
 	{
 		char *sflg;
 
@@ -262,7 +262,7 @@ static uint GetProjectCountUUID(char *target)
 	autoList_t *prjs = newList();
 	uint count;
 
-	foreach(UUIDList, i, index)
+	foreach (UUIDList, i, index)
 		if (!_stricmp(i->UUID, target)) // ‘å•¶Žš¬•¶Žš‚¾‚¯ˆá‚¤UUID -> “¯‚¶‚ÆŒ©‚È‚·B
 			addElement(prjs, (uint)strx(i->Project));
 
@@ -277,7 +277,7 @@ static uint GetUUIDCount(char *target)
 	uint index;
 	uint count = 0;
 
-	foreach(UUIDList, i, index)
+	foreach (UUIDList, i, index)
 		if (!_stricmp(i->UUID, target)) // ‘å•¶Žš¬•¶Žš‚¾‚¯ˆá‚¤UUID -> “¯‚¶‚ÆŒ©‚È‚·B
 			count++;
 
@@ -288,7 +288,7 @@ static void DispAllWarning(void)
 	UUID_t *i;
 	uint index;
 
-	foreach(UUIDList, i, index)
+	foreach (UUIDList, i, index)
 	{
 		if (i->SharedFlag && GetUUIDCount(i->UUID) < 2)
 		{
@@ -305,8 +305,8 @@ static void DispAllUUIDError(void)
 	uint index_i;
 	uint index_j;
 
-	foreach(UUIDList, i, index_i)
-	foreach(UUIDList, j, index_j)
+	foreach (UUIDList, i, index_i)
+	foreach (UUIDList, j, index_j)
 	{
 		if (
 			index_i != index_j &&
@@ -329,7 +329,7 @@ static void DispAllSharedNumError(void)
 	UUID_t *i;
 	uint index;
 
-	foreach(UUIDList, i, index)
+	foreach (UUIDList, i, index)
 	{
 		if (i->SharedFlag && i->SharedNum && i->SharedNum != GetUUIDCount(i->UUID))
 		{
@@ -348,7 +348,7 @@ static void DispAllCollisionInterProject(void)
 	UUID_t *i;
 	uint index;
 
-	foreach(UUIDList, i, index)
+	foreach (UUIDList, i, index)
 	{
 		if (!i->GlobalFlag && 2 <= GetProjectCountUUID(i->UUID))
 		{
@@ -365,7 +365,7 @@ static void DispAllCollision(void)
 	UUID_t *i;
 	uint index;
 
-	foreach(UUIDList, i, index)
+	foreach (UUIDList, i, index)
 	{
 		if (!i->SharedFlag && 2 <= GetUUIDCount(i->UUID))
 		{

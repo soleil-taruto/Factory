@@ -128,7 +128,7 @@ static autoBlock_t *TextToBin(autoList_t *lines)
 
 	TTB_HasonCount = 0;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		line = strx(line);
 		strchrEnd(line, TEXT_SEP_CHAR)[0] = '\0'; // @ AppendTextMode
@@ -174,7 +174,7 @@ static void CompareBinFile(char *file1, char *file2)
 		cout("| ˆê’v‚µ‚Ü‚¹‚ñ‚Å‚µ‚½ |\n");
 		cout("+--------------------+\n");
 
-		foreach(report, line, index)
+		foreach (report, line, index)
 		{
 			cout("%s\n", line);
 		}
@@ -238,7 +238,7 @@ static void DumpBinFile(char *file) // file == NULL ‚Ì‚Æ‚«‚Í stdin ‚©‚ç
 
 	lines = BinToText(block);
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 		cout("%s\n", line);
 
 	releaseAutoBlock(block);

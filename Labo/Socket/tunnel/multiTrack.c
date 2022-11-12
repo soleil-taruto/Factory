@@ -127,7 +127,7 @@ static void PerformTh(int sock, char *strip)
 				trackName = strx(buff);
 				strchr(trackName, '\0')[-2] = '\0';
 
-				foreach(TrackInfoList, i, index)
+				foreach (TrackInfoList, i, index)
 				{
 					if (!_stricmp(i->TrackName, trackName))
 					{
@@ -203,7 +203,7 @@ static int ReadArgs(void)
 		char *line;
 		uint index;
 
-		foreach(lines, line, index)
+		foreach (lines, line, index)
 		{
 			autoList_t *tokens = ucTokenize(line);
 

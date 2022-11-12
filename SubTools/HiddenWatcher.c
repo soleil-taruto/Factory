@@ -20,7 +20,7 @@ static void GR_MoveTo(char *repositoryName)
 	LOGPOS();
 	dirCount = lastDirCount;
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		cout("* %s\n", path);
 
@@ -54,7 +54,7 @@ static void GR_MoveTo(char *repositoryName)
 	LOGPOS();
 	dirCount = lastDirCount;
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		cout("< %s\n", path);
 
@@ -159,7 +159,7 @@ static void Main2(void)
 
 	sortJLinesICase(files);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		char *ext = getExt(file);
 

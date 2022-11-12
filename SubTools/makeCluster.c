@@ -22,7 +22,7 @@ static void ReadFileList(char *fileListFile, char *rootDir)
 
 	addCwd(rootDir);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		file = makeFullPath(file);
 		cout("file: %s\n", file);
@@ -86,7 +86,7 @@ static void MakeEncDataFiles(char *strRawKey, uint firstTweek)
 
 	EncDataFileList = newList();
 
-	foreach(DataFileList, file, index)
+	foreach (DataFileList, file, index)
 	{
 		char *encFile = makeTempFile(NULL);
 		autoBlock_t *fileData;
@@ -111,12 +111,12 @@ static void MakeClusterFile(char *clusterFile)
 
 	writeValue(fp, getCount(EncDataFileList));
 
-	foreach(EncDataFileList, file, index)
+	foreach (EncDataFileList, file, index)
 	{
 		cout("file/I: %s\n", file);
 		writeValue(fp, (uint)getFileSize(file));
 	}
-	foreach(EncDataFileList, file, index)
+	foreach (EncDataFileList, file, index)
 	{
 		cout("file/W: %s\n", file);
 		writeBinaryBlock_x(fp, readBinary(file));
@@ -128,7 +128,7 @@ static void ClearEncDataFiles(void)
 	char *file;
 	uint index;
 
-	foreach(EncDataFileList, file, index)
+	foreach (EncDataFileList, file, index)
 	{
 		cout("remove: %s\n", file);
 		removeFile(file);

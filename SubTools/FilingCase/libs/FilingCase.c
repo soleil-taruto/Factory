@@ -18,7 +18,7 @@ static int IsIds(autoList_t *lines)
 	char *line;
 	uint index;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 		if (!IsId(line))
 			return 0;
 
@@ -32,7 +32,7 @@ static void Paths2Ids(autoList_t *lines)
 	eraseParents(lines);
 	errorCase(!IsIds(lines));
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 		toLowerLine(line);
 
 	rapidSortLines(lines);
@@ -636,7 +636,7 @@ autoList_t *FC_GetTableAllRowId(char *tableNameOrId)
 
 	columnIds = FC_GetAllColumnId(tableNameOrId);
 
-	foreach(columnIds, columnId, index)
+	foreach (columnIds, columnId, index)
 	{
 		autoList_t *rowIds = FC_GetAllRowId(tableNameOrId, columnId);
 		autoList_t *mIds;
@@ -663,7 +663,7 @@ void FC_SwapRow(char *tableNameOrId, char *rowNameOrId1, char *rowNameOrId2)
 
 	columnIds = FC_GetAllColumnId(tableNameOrId);
 
-	foreach(columnIds, columnId, index)
+	foreach (columnIds, columnId, index)
 	{
 		autoBlock_t *value1 = FC_GetValue(tableNameOrId, rowNameOrId1, columnId);
 		autoBlock_t *value2 = FC_GetValue(tableNameOrId, rowNameOrId2, columnId);
@@ -687,7 +687,7 @@ void FC_DeleteRow(char *tableNameOrId, char *rowNameOrId)
 
 	columnIds = FC_GetAllColumnId(tableNameOrId);
 
-	foreach(columnIds, columnId, index)
+	foreach (columnIds, columnId, index)
 	{
 		FC_SetStrValue(tableNameOrId, rowNameOrId, columnId, "");
 	}

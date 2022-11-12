@@ -134,7 +134,7 @@ readArgs:
 			if (!batchMode)
 				tblnms = selectLines_x(tblnms);
 
-			foreach(tblnms, tblnm, tblnmidx)
+			foreach (tblnms, tblnm, tblnmidx)
 			{
 				cmdTitle_x(xcout("ta - BACKUP %u / %u", tblnmidx, getCount(tblnms)));
 				BackupTable(dir, tblnm);
@@ -155,7 +155,7 @@ readArgs:
 		char *file;
 		uint index;
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 		{
 			cmdTitle_x(xcout("ta - RESTORE %u / %u", index, getCount(files)));
 
@@ -202,7 +202,7 @@ readArgs:
 
 		createFile(schFile); // 2bs?
 
-		foreach(tblnms, tblnm, tblnmidx)
+		foreach (tblnms, tblnm, tblnmidx)
 		{
 			cmdTitle_x(xcout("ta - SCHEMA %u / %u", tblnmidx, getCount(tblnms)));
 
@@ -232,7 +232,7 @@ readArgs:
 
 			writeLine(outfp, tblnm);
 
-			foreach(lines, line, colidx)
+			foreach (lines, line, colidx)
 				writeLine_x(outfp, xcout("\t%s", line));
 
 			writeChar(outfp, '\n');

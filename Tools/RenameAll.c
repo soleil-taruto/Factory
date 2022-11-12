@@ -12,7 +12,7 @@ static void MovePubFiles(void)
 	char *path;
 	uint index;
 
-	foreach(PubFiles1, path, index)
+	foreach (PubFiles1, path, index)
 	{
 		cout("- %s\n", path);
 		cout("+ %s\n", getLine(PubFiles2, index));
@@ -28,7 +28,7 @@ static int RenumberPaths(autoList_t *paths)
 	uint index;
 	uint rencnt = 0;
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		char *snum = xcout("%010u", index + 1);
 		char *p;
@@ -65,7 +65,7 @@ static int AntiSamePaths(autoList_t *paths)
 	autoList_t gal;
 	uint inccnt = 0;
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		while(findJLineICase(gndSubElementsVar(paths, 0, index, gal), path) < index) // ? found same path
 		{
@@ -134,7 +134,7 @@ static void RenameEx(void)
 			break;
 		}
 	}
-	foreach(paths, path, index) // 変更しないファイルを排除
+	foreach (paths, path, index) // 変更しないファイルを排除
 	{
 		if (!strcmp(path, getLine(newPaths, index))) // ? 完全に一致
 		{
@@ -145,7 +145,7 @@ static void RenameEx(void)
 	trimLines(paths);
 	trimLines(newPaths);
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		cout("< %s\n", path);
 		cout("> %s\n", getLine(newPaths, index));
@@ -156,18 +156,18 @@ static void RenameEx(void)
 
 	tmpPaths = createAutoList(getCount(paths));
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		addElement(tmpPaths, (uint)xcout("%05u" MIDFILE_PREF "%s", index + 1, path));
 	}
-	foreach(paths, path, index) // 試し移動
+	foreach (paths, path, index) // 試し移動
 	{
 		cout("< %s\n", path);
 		cout("? %s\n", getLine(tmpPaths, index));
 		moveFile(path, getLine(tmpPaths, index));
 		moveFile(getLine(tmpPaths, index), path); // 戻す
 	}
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		cout("< %s\n", path);
 		cout("* %s\n", getLine(tmpPaths, index));
@@ -180,7 +180,7 @@ static void RenameEx(void)
 		PubFiles2 = paths;
 		addFinalizer(MovePubFiles);
 
-		foreach(tmpPaths, path, index)
+		foreach (tmpPaths, path, index)
 		{
 			cout("* %s\n", path);
 			cout("? %s\n", getLine(newPaths, index));
@@ -192,7 +192,7 @@ static void RenameEx(void)
 		PubFiles2 = NULL;
 	}
 
-	foreach(tmpPaths, path, index)
+	foreach (tmpPaths, path, index)
 	{
 		cout("* %s\n", path);
 		cout("> %s\n", getLine(newPaths, index));

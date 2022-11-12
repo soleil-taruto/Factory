@@ -12,7 +12,7 @@ static void NormalizeMemRepoDir(char *memRepoDir)
 
 	LOGPOS();
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		char *wPath = strx(path);
 		char *wLocalPath;
@@ -43,7 +43,7 @@ static void NormalizeMemDir(char *memDir)
 
 	LOGPOS();
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		if (existFile(path))
 		{
@@ -82,7 +82,7 @@ static void MemoryToPublic(void)
 
 	sortJLinesICase(memDirs);
 
-	foreach(memDirs, memDir, memDir_index)
+	foreach (memDirs, memDir, memDir_index)
 	{
 		char *pubFile = combine(PUB_ROOTDIR, getLocal(memDir));
 
@@ -109,7 +109,7 @@ static void PublicToMemory(void)
 
 	sortJLinesICase(pubFiles);
 
-	foreach(pubFiles, pubFile, pubFile_index)
+	foreach (pubFiles, pubFile, pubFile_index)
 	{
 		char *memDir = combine(MEM_ROOTDIR, getLocal(pubFile));
 

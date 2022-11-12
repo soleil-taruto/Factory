@@ -48,7 +48,7 @@ static void CommitPart(
 		uint element;
 		uint index;
 
-		foreach(elements, element, index)
+		foreach (elements, element, index)
 			writeElement_x(fp, element);
 
 		fileClose(fp);

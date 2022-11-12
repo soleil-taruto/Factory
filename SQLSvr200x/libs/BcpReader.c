@@ -61,11 +61,11 @@ autoList_t *SqlBcpReader(char *bcpFile, int chrT, int chrR)
 
 			errorCase(colcnt < 1); // ? —ñ‚ª‚P‚Â‚à–³‚¢B
 
-			foreach(table, row, rowidx)
+			foreach (table, row, rowidx)
 			{
 				errorCase(getCount(row) != colcnt); // ? —ñ”‚ªˆê’è‚Å‚Í‚È‚¢B
 
-				foreach(row, cell, colidx)
+				foreach (row, cell, colidx)
 				{
 					errorCase(cell == NULL); // ? cell == NULL
 				}

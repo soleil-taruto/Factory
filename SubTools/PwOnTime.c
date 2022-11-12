@@ -68,7 +68,7 @@ static void ShowPwOnTime(void)
 
 	lines = readLines(file);
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		errorCase(!lineExp("<14,09>,<>", line));
 

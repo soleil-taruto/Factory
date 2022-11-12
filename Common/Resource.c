@@ -95,7 +95,7 @@ autoList_t *ucTokenizeDs(char *line, char *delims)
 	char *token;
 	uint index;
 
-	foreach(tokens, token, index)
+	foreach (tokens, token, index)
 		ucTrimEdge(token);
 
 	trimLines(tokens);
@@ -130,7 +130,7 @@ autoList_t *readResourceLines(char *file)
 	char *line;
 	uint index;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		ucTrimEdge(line);
 
@@ -141,7 +141,7 @@ autoList_t *readResourceLines(char *file)
 	}
 	trimLines(lines);
 
-	foreach(lines, line, index) // 先頭と終端の '"' を除去する。空文字列が指定可能になる。'"' で始まる・終わる行を指定したい場合は '"' を２つ重ねる。
+	foreach (lines, line, index) // 先頭と終端の '"' を除去する。空文字列が指定可能になる。'"' で始まる・終わる行を指定したい場合は '"' を２つ重ねる。
 	{
 		char *p = strchr(line, '\0') - 1; // line == "" は有り得ない。
 
@@ -164,7 +164,7 @@ autoList_t *readResourcePaths(char *pathListFile)
 
 	addCwd_x(getParent(pathListFile));
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		setElement(paths, index, (uint)makeFullPath(path));
 		memFree(path);
@@ -180,7 +180,7 @@ autoList_t *readResourceFilesLines(char *fileListFile)
 	uint index;
 	autoList_t *linesList = newList();
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		addElement(linesList, (uint)readResourceLines(file));
 	}
@@ -195,7 +195,7 @@ autoList_t *readResourceLinesList(char *file)
 	char *line;
 	uint index;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		if (!strcmp(line, SEPARATOR_LINE))
 		{
@@ -209,7 +209,7 @@ autoList_t *readResourceLinesList(char *file)
 	addElement(linesList, (uint)store);
 	releaseAutoList(lines);
 
-	foreach(linesList, lines, index)
+	foreach (linesList, lines, index)
 	{
 		if (getCount(lines) == 0)
 		{
@@ -226,7 +226,7 @@ autoList_t *discerpHeaders(autoList_t *linesList)
 	autoList_t *lines;
 	uint index;
 
-	foreach(linesList, lines, index)
+	foreach (linesList, lines, index)
 	{
 		addElement(headers, desertElement(lines, 0));
 	}

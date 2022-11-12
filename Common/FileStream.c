@@ -34,7 +34,7 @@ void termination_fileCloseAll(void)
 		FILE *fp;
 		uint index;
 
-		foreach(OpenedFPList, fp, index)
+		foreach (OpenedFPList, fp, index)
 		{
 			LOGPOS();
 			fclose(fp);
@@ -459,7 +459,7 @@ void writeLines2Stream(FILE *fp, autoList_t *lines)
 	char *line;
 	uint index;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		writeLine(fp, line);
 	}

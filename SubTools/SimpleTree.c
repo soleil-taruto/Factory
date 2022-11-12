@@ -42,7 +42,7 @@ static void Search(char *rootDir, uint depth, char *pathPrefix)
 
 	sortJLinesICase(paths);
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		char *localPath = getLocal(path);
 

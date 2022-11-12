@@ -10,7 +10,7 @@ static int IsIgnoreRelFile(char *relFile)
 	uint index;
 	int ret = 0;
 
-	foreach(pTkns, pTkn, index)
+	foreach (pTkns, pTkn, index)
 	{
 		if (pTkn[0] == '_')
 		{
@@ -29,7 +29,7 @@ static autoList_t *GetContents(char *rootDir)
 
 	changeRoots(files, rootDir, NULL);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		if (IsIgnoreRelFile(file))
 			file[0] = '\0';
 
@@ -45,7 +45,7 @@ static autoList_t *GetFileList(char *rootDir, autoList_t *contents, char *conten
 
 	addElement(files, (uint)strx(contentsFile));
 
-	foreach(contents, content, index)
+	foreach (contents, content, index)
 		addElement(files, (uint)combine(rootDir, content));
 
 	return files;

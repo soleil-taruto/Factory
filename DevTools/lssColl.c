@@ -20,7 +20,7 @@ static void Collect(int keepHierarchy)
 	uint index;
 	char *outDir = makeFreeDir();
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		char *outPath;
 

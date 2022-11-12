@@ -17,7 +17,7 @@ static void ListType(autoList_t *files, char *wFile)
 	}
 	fp = fileOpen(wFile, "wt");
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		writeLine(fp, "================================================================================");
 		writeLine_x(fp, xcout("Å°%s", file));

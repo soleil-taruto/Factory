@@ -98,7 +98,7 @@ static uint64 GetTotalFileSize(autoList_t *files)
 	uint index;
 	uint64 totalSize = 0;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		totalSize += getFileSize(file);
 	}
@@ -111,7 +111,7 @@ static autoList_t *GetUploadFiles(void)
 	uint index;
 	autoList_t *lines = newList();
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		updateFindData(file);
 		addElement(lines, (uint)xcout("%20I64u%s", lastFindData.time_write, file));
@@ -121,7 +121,7 @@ static autoList_t *GetUploadFiles(void)
 	rapidSortLines(lines);
 	reverseElements(lines); // êVÇµÇ¢èá
 
-	foreach(lines, file, index)
+	foreach (lines, file, index)
 		copyLine(file, file + 20);
 
 	files = lines;
@@ -150,7 +150,7 @@ static void UpdateUploadDirStatus(void)
 	UDS_FileCount = getCount(files);
 	UDS_DirSize = 0;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		UDS_DirSize += getFileSize(file);
 
 	releaseDim(files, 1);
@@ -163,7 +163,7 @@ static char *GetLineDivList(void)
 	autoList_t *divList = newList();
 	char *sDivList;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		char *strStamp;
 		char *strSize;

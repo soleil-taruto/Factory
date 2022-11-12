@@ -50,7 +50,7 @@ readArgs:
 
 		lines = readLines(indexFile);
 
-		foreach(lines, line, index)
+		foreach (lines, line, index)
 		{
 			if (startsWith(line, "<div><a href=\""))
 			{
@@ -93,7 +93,7 @@ readArgs:
 		char *appName;
 		uint index;
 
-		foreach(AppNames, appName, index)
+		foreach (AppNames, appName, index)
 		{
 			char *appUrl = getLine(AppUrls, index);
 			char *appFile = makeTempPath("KitDL.app.zip");

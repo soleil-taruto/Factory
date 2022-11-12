@@ -174,7 +174,7 @@ void writeWAVFile(char *file, autoList_t *wavData, uint hz)
 	writeToken(fp, "data");
 	writeValue(fp, getCount(wavData) * 4);
 
-	foreach(wavData, value, index)
+	foreach (wavData, value, index)
 	{
 		uint v1 = value >> 16;
 		uint v2 = value & 0xffff;

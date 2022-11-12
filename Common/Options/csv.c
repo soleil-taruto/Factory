@@ -133,7 +133,7 @@ void csvTrim(autoList_t *table)
 	autoList_t *row;
 	uint rowidx;
 
-	foreach(table, row, rowidx)
+	foreach (table, row, rowidx)
 	{
 		while(getCount(row))
 		{
@@ -165,11 +165,11 @@ void csvRect(autoList_t *table)
 	uint rowidx;
 	uint maxcolcnt = 0;
 
-	foreach(table, row, rowidx)
+	foreach (table, row, rowidx)
 	{
 		maxcolcnt = m_max(maxcolcnt, getCount(row));
 	}
-	foreach(table, row, rowidx)
+	foreach (table, row, rowidx)
 	{
 		while(getCount(row) < maxcolcnt)
 		{
@@ -207,7 +207,7 @@ void csvSquare(autoList_t *table)
 		autoList_t *row;
 		uint rowidx;
 
-		foreach(table, row, rowidx)
+		foreach (table, row, rowidx)
 		{
 			while(getCount(row) < rowcnt)
 			{
@@ -278,7 +278,7 @@ char *LSrchComp(autoList_t *table, uint colidxFind, uint retColidx, char *cellFi
 	autoList_t *row;
 	uint rowidx;
 
-	foreach(table, row, rowidx)
+	foreach (table, row, rowidx)
 	{
 		if (!funcComp(cellFind, refLine(row, colidxFind)))
 		{

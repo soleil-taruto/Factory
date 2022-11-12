@@ -18,7 +18,7 @@ char *RowToCSVLine(autoList_t *row)
 	char *cell;
 	uint index;
 
-	foreach(row, cell, index)
+	foreach (row, cell, index)
 	{
 		if (index)
 			buffer = addChar(buffer, ',');
@@ -32,7 +32,7 @@ void RowToCSVStream(FILE *fp, autoList_t *row)
 	char *cell;
 	uint index;
 
-	foreach(row, cell, index)
+	foreach (row, cell, index)
 	{
 		if (index)
 			writeChar(fp, ',');

@@ -76,7 +76,7 @@ static void GetMessageRange(Frtwv_t *i)
 			uint firstNo = UINTMAX;
 			uint lastNo = 0;
 
-			foreach(files, file, index)
+			foreach (files, file, index)
 			{
 				uint no = toValue(getLocal(file));
 

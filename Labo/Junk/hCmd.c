@@ -109,7 +109,7 @@ static int Perform(int sock, uint userInfo)
 			char *line;
 			uint index;
 
-			foreach(TextBuffer, line, index)
+			foreach (TextBuffer, line, index)
 			{
 				line = HtmlFltr(strx(line));
 

@@ -18,7 +18,7 @@ static char *GetProjFile_Dir(char *dir)
 	uint index;
 	char *projFile;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		if (!_stricmp("csproj", getExt(file)))
 			break;
 
@@ -52,7 +52,7 @@ static char *GetProjRootNamespace(char *projFile)
 	uint index;
 	char *ret = NULL;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		ucTrim(line);
 
@@ -133,7 +133,7 @@ static void AdjustNamespace(char *targetDir)
 	}
 	files = lssFiles(targetDir);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (!_stricmp("cs", getExt(file)))
 		{
@@ -143,7 +143,7 @@ static void AdjustNamespace(char *targetDir)
 			int modified = 0;
 			char *relFile = changeRoot(strx(file), rootDir, NULL);
 
-			foreach(lines, line, index)
+			foreach (lines, line, index)
 			{
 				if (lineExp("namespace <1,,>", line))
 				{

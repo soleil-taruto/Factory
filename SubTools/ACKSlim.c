@@ -6,7 +6,7 @@ static void DoSlim(char *rootDir)
 	char *path;
 	uint index;
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		if (existDir(path))
 		{

@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 
 	setCount(files, lmt);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		copyFile_cx(file, combine(wDir, getLocal(file)));
 
 	// gomi

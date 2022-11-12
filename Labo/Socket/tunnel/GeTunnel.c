@@ -244,7 +244,7 @@ static int HTTPDecode(autoBlock_t *rBuff, autoBlock_t *wBuff)
 		char *key;
 		uint index;
 
-		foreach(HttpDat.H_Keys, key, index)
+		foreach (HttpDat.H_Keys, key, index)
 		{
 			if (!_stricmp(key, "Cookie") || !_stricmp(key, "Set-Cookie"))
 			{
@@ -424,7 +424,7 @@ static void AddExtraHeaderLines(autoBlock_t *wBuff)
 		char *line;
 		uint index;
 
-		foreach(ExtraHeaderLines, line, index)
+		foreach (ExtraHeaderLines, line, index)
 		{
 			if (*line)
 			{

@@ -8,7 +8,7 @@ static char *GetCommonPathPrefixWithStar(autoList_t *paths, char *exceptPath)
 	int star = 0;
 	uint index;
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		if (!mbs_stricmp(path, exceptPath))
 			continue;
@@ -55,7 +55,7 @@ static void SyncLss(void)
 
 isJChar(0); // res: C:\Factory\Resource\JIS0208.txt ëŒçÙ
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		addElement(lines, (uint)xcout("%s %s", md5_makeHexHashFile(file), file));
 
 	selLine = selectLine(lines);
@@ -89,7 +89,7 @@ isJChar(0); // res: C:\Factory\Resource\JIS0208.txt ëŒçÙ
 		memFree(cfmInput);
 	}
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (!mbs_stricmp(file, selFile))
 			continue;

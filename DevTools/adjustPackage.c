@@ -54,7 +54,7 @@ static void AdjustPackage(char *packageRootDir, char *srcDir)
 	}
 	files = lssFiles(srcDir);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (!_stricmp("java", getExt(file)))
 		{
@@ -63,7 +63,7 @@ static void AdjustPackage(char *packageRootDir, char *srcDir)
 			uint index;
 			int modified = 0;
 
-			foreach(lines, line, index)
+			foreach (lines, line, index)
 			{
 				if (startsWith(line, "package "))
 				{

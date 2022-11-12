@@ -58,7 +58,7 @@ static void JavaJPConvFile(char *file)
 	WkFile_A = makeTempPath(NULL);
 	WkFile_B = makeTempPath(NULL);
 
-	foreach(lines, line, line_index)
+	foreach (lines, line, line_index)
 	{
 		autoBlock_t *u16Line = Prv_UTF8ToUTF16Line(line);
 		uint index;
@@ -148,7 +148,7 @@ static void JavaJPConv(char *rootDir)
 	files = lssFiles(rootDir);
 	findAcceptName = NULL; // restore
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		if (!_stricmp(getExt(file), "java"))
 			JavaJPConvFile(file);
 

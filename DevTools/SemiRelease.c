@@ -7,7 +7,7 @@ static void SemiRelease(char *resFile, char *destResFile, char *outPrefix, char 
 	uint index;
 	autoList_t *outFiles = newList();
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		char *outFile = xcout("%08u.%s", index, getExt(file));
 

@@ -95,7 +95,7 @@ static int FindBmpOnScreen(void)
 	uint index;
 	int ret = 0;
 
-	foreach(bmps, bmp, index)
+	foreach (bmps, bmp, index)
 	{
 		if (FindBmp_Screen(bmp))
 		{

@@ -63,7 +63,7 @@ static char *LinesToText(autoList_t *lines)
 	char *line;
 	uint index;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		text = addLine(text, line);
 		text = addChar(text, '\n');
@@ -77,10 +77,10 @@ static void Search(void)
 	char *file;
 	uint index;
 
-	foreach(RootDirs, dir, index)
+	foreach (RootDirs, dir, index)
 		addElements_x(files, lssFiles(dir));
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	if (findLineCase(TargetExts, getExt(file), 1) < getCount(TargetExts))
 	{
 		autoList_t *lines = readLines(file);
@@ -90,7 +90,7 @@ static void Search(void)
 
 		cout("file: %s\n", file);
 
-		foreach(lines, line, line_index)
+		foreach (lines, line, line_index)
 		{
 			if (IsSymLine(line))
 			{
@@ -130,18 +130,18 @@ static void Confirm(void)
 	uint index;
 	uint idx;
 
-	foreach(Headers, header, index)
+	foreach (Headers, header, index)
 		if (findLine(names, header->Name) == getCount(names))
 			addElement(names, (uint)header->Name);
 
 	rapidSortLines(names);
 
-	foreach(names, name, index)
+	foreach (names, name, index)
 	{
 		autoList_t *md5s = newList();
 		int needSync;
 
-		foreach(Headers, header, idx)
+		foreach (Headers, header, idx)
 		if (!strcmp(header->Name, name))
 		{
 			if (findLine(md5s, header->TextMD5) == getCount(md5s))
@@ -241,7 +241,7 @@ static void ProcHeaderGroup(autoList_t *headerGroup)
 	{
 		cout("---- 更新順確認 ----\n");
 
-		foreach(headerGroup, header, index)
+		foreach (headerGroup, header, index)
 			cout("%c %s (%u)\n", index ? '>' : '<', header->File, header->SymLineIndex);
 
 		cout("続行？\n");
@@ -252,7 +252,7 @@ static void ProcHeaderGroup(autoList_t *headerGroup)
 		cout("続行します。\n");
 	}
 
-	foreach(headerGroup, header, index)
+	foreach (headerGroup, header, index)
 	if (index)
 	{
 		SyncHeader((Header_t *)getElement(headerGroup, 0), header);
@@ -264,14 +264,14 @@ static void ProcAllHeaders(void)
 	char *name;
 	uint index;
 
-	foreach(NeedSyncHeaderNames, name, index)
+	foreach (NeedSyncHeaderNames, name, index)
 	{
 		Header_t *header;
 		uint header_index;
 
 		setCount(headerGroup, 0);
 
-		foreach(Headers, header, header_index)
+		foreach (Headers, header, header_index)
 			if (!strcmp(header->Name, name))
 				addElement(headerGroup, (uint)header);
 
@@ -309,7 +309,7 @@ readArgs:
 		addElement(RootDirs, (uint)DEF_ROOT_DIR_01);
 		addElement(RootDirs, (uint)DEF_ROOT_DIR_02);
 	}
-	foreach(RootDirs, dir, index)
+	foreach (RootDirs, dir, index)
 		errorCase(!existDir(dir));
 
 	TargetExts = tokenize(S_TargetExts, '.');

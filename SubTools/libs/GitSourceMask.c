@@ -15,7 +15,7 @@ static void MskSrcFile(char *file, int eurpFlag)
 
 	LOGPOS();
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		for(p = line; *p; p++)
 			if (' ' < *p)
@@ -72,7 +72,7 @@ static void MaskSourceByResFile(autoList_t *files)
 
 	LOGPOS();
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		cout("* %s\n", file);
 
@@ -88,7 +88,7 @@ static void MaskSourceByResFile(autoList_t *files)
 
 			LOGPOS();
 
-			foreach(mskfiles, mskfile, mskfile_index)
+			foreach (mskfiles, mskfile, mskfile_index)
 			{
 				cout("** %s\n", mskfile);
 
@@ -112,7 +112,7 @@ static void MaskSourceByResFile(autoList_t *files)
 
 			LOGPOS();
 
-			foreach(ignfiles, ignfile, ignfile_index)
+			foreach (ignfiles, ignfile, ignfile_index)
 			{
 				cout("*!F %s\n", ignfile);
 
@@ -137,7 +137,7 @@ static void MaskSourceByResFile(autoList_t *files)
 
 			LOGPOS();
 
-			foreach(igndirs, igndir, igndir_index)
+			foreach (igndirs, igndir, igndir_index)
 			{
 				cout("*!D %s\n", igndir);
 
@@ -169,7 +169,7 @@ static void GitSourceMask_Sub(autoList_t *files, char *flagFile, void (*maskFunc
 	uint index;
 	autoList_t *targets = newList();
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (!_stricmp(flagFile, getLocal(file)))
 		{
@@ -177,7 +177,7 @@ static void GitSourceMask_Sub(autoList_t *files, char *flagFile, void (*maskFunc
 			char *subfile;
 			uint subfile_index;
 
-			foreach(files, subfile, subfile_index)
+			foreach (files, subfile, subfile_index)
 				if (startsWithICase(subfile, prefix))
 					addElement(targets, (uint)subfile);
 
@@ -186,7 +186,7 @@ static void GitSourceMask_Sub(autoList_t *files, char *flagFile, void (*maskFunc
 			distinct2(targets, simpleComp, noop_u);
 		}
 	}
-	foreach(targets, file, index)
+	foreach (targets, file, index)
 	{
 		maskFunc(file);
 	}

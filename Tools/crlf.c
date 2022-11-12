@@ -162,7 +162,7 @@ readArgs:
 		char *file;
 		uint index;
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 			FileAction(file);
 
 		releaseDim(files, 1);

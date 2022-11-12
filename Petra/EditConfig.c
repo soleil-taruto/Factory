@@ -26,7 +26,7 @@ int main(int argc, char **argv)
 
 	lines = readLines(file);
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		if (!strcmp(line, mLine))
 		{

@@ -39,7 +39,7 @@ void PrintScreen_Dir(char *dir)
 
 	errorCase(!existDir(dir));
 
-	foreach(bmps, bmp, index)
+	foreach (bmps, bmp, index)
 	{
 		char *file = combine_cx(dir, xcout("Screen_%02u.bmp", (index + 1)));
 

@@ -292,7 +292,7 @@ void httpReleaseParts(autoList_t *parts)
 	httpPart_t *part;
 	uint index;
 
-	foreach(parts, part, index)
+	foreach (parts, part, index)
 	{
 		removeFile(part->BodyFile);
 
@@ -308,7 +308,7 @@ httpPart_t *httpGetPart(autoList_t *parts, char *name)
 	httpPart_t *part;
 	uint index;
 
-	foreach(parts, part, index)
+	foreach (parts, part, index)
 	{
 		if (!_stricmp(part->Name, name))
 		{

@@ -255,7 +255,7 @@ static int Conv932216(int mbchr, uint cset1, uint cset2)
 		}
 		lines = readLines(file);
 
-		foreach(lines, line, index)
+		foreach (lines, line, index)
 		{
 			if (line[0] == '0')
 			{
@@ -294,7 +294,7 @@ static int Conv932216(int mbchr, uint cset1, uint cset2)
 		}
 		rapidSort(dict[1], pSimpleComp2); // CP932 ‚ÆƒAƒhƒŒƒX‚Í¸‡ -> “¯‚¶ UTF-16 ‚Å‚Í CP932 ‚Ì¸‡
 
-		foreach(dict[1], p, index)
+		foreach (dict[1], p, index)
 		{
 			if (index && *p == *(uint *)getElement(dict[1], index - 1))
 			{

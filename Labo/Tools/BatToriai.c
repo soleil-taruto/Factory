@@ -25,7 +25,7 @@ static char *GetNextBatFile(void)
 
 		sortJLinesICase(files);
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 			if (!_stricmp(EXT_UNDONE, getExt(file)))
 				break;
 
@@ -82,7 +82,7 @@ static void BatToriai_Stop(void)
 
 		sortJLinesICase(files); // 2bs
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 		{
 			if (!_stricmp(EXT_UNDONE, getExt(file)))
 			{

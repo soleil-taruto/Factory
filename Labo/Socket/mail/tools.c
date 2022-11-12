@@ -38,7 +38,7 @@ char *GetMailHeader(autoList_t *mail, char *key)
 	char *line;
 	uint index;
 
-	foreach(mail, line, index)
+	foreach (mail, line, index)
 	{
 		char *p = strchr(line, ':');
 
@@ -94,7 +94,7 @@ autoList_t *GetMailBody(autoList_t *mail)
 	uint index;
 	int enterBody = 0;
 
-	foreach(mail, line, index)
+	foreach (mail, line, index)
 	{
 		if (enterBody)
 		{

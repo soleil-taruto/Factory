@@ -41,7 +41,7 @@ static void FindCleanJava(autoList_t *files)
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (!_stricmp(getLocal(file), ".project"))
 		{
@@ -91,7 +91,7 @@ static void FindCleanProjects(char *dir) // dir - ソリューションのルートDIR
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (
 			!_stricmp("vbproj", getExt(file)) || // vb2008, vb2010
@@ -168,7 +168,7 @@ static void FindClean(char *dir) // dir - 検索ルートDIR
 
 	files = lssFiles(dir);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (!_stricmp("sln", getExt(file))) // ? ソリューションファイル
 		{

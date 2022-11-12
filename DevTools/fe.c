@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 
 	selfiles = selectLines(files);
 
-	foreach(selfiles, file, index)
+	foreach (selfiles, file, index)
 	{
 		while(hasKey())
 		{

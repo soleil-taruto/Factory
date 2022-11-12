@@ -65,12 +65,12 @@ static void RecvEvent(autoList_t *mail)
 	if (!from)
 		return;
 
-	foreach(FromPatternsList, ptns, index)
+	foreach (FromPatternsList, ptns, index)
 	{
 		autoList_t *ptnList = ucTokenize(ptns);
 		uint ptnndx;
 
-		foreach(ptnList, ptn, ptnndx)
+		foreach (ptnList, ptn, ptnndx)
 		{
 			cout("ptn: %s\n", ptn);
 
@@ -91,7 +91,7 @@ static void RecvEvent(autoList_t *mail)
 	mailAddrList = (autoList_t *)getElement(ForwardTable, index);
 	cout("forward num: %u\n", getCount(mailAddrList));
 
-	foreach(mailAddrList, mailAddr, index)
+	foreach (mailAddrList, mailAddr, index)
 	{
 		autoList_t *mail2;
 
@@ -114,7 +114,7 @@ static void RecvLoop(void)
 			autoList_t *mails = mailRecv(PopServer, PopPortno, PopUserName, PopPassphrase, 3, 1024 * 1024 * 64, 1);
 			autoList_t *mail;
 
-			foreach(mails, mail, index)
+			foreach (mails, mail, index)
 			{
 				/*
 					ë¶ï‘êMÇ∑ÇÈÇ∆îjä¸Ç≥ÇÍÇÈÇ±Ç∆Ç™Ç†ÇÈÅH

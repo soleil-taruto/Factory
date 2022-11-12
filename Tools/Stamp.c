@@ -49,7 +49,7 @@ static void MakeStampList(char *dir, char *stampListFile, int subDirEnabled)
 
 	addCwd(dir);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		uint64 createTime;
 		uint64 accessTime;
@@ -87,7 +87,7 @@ static void ApplyStampList(char *stampListFile, char *dir)
 
 	addCwd(dir);
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		autoList_t *tokens = tokenizeMinMax(line, '\x20', 4, 4, "*");
 		uint64 createTime;

@@ -139,7 +139,7 @@ static char *GetValueList(autoList_t *values, char *kakko)
 	char *value;
 	uint colidx;
 
-	foreach(values, value, colidx)
+	foreach (values, value, colidx)
 	{
 		if (colidx)
 			result = addLine(result, ", ");
@@ -156,7 +156,7 @@ static char *GetKeyEqValueAndList(autoList_t *keys, autoList_t *values)
 	char *value;
 	uint colidx;
 
-	foreach(values, value, colidx)
+	foreach (values, value, colidx)
 	{
 		if (colidx)
 			result = addLine(result, " AND ");
@@ -184,7 +184,7 @@ static void CheckTableInput(char *tableName, autoList_t *colNames, autoList_t *r
 		errorCase(!colNames);
 		errorCase(getCount(colNames) < 1);
 
-		foreach(colNames, colName, colidx)
+		foreach (colNames, colName, colidx)
 		{
 			errorCase(!colName);
 			errorCase(*colName == '\0');
@@ -200,7 +200,7 @@ static void CheckTableInput(char *tableName, autoList_t *colNames, autoList_t *r
 
 		errorCase(!rows);
 
-		foreach(rows, row, rowidx)
+		foreach (rows, row, rowidx)
 		{
 			char *cell;
 			uint colidx;
@@ -208,7 +208,7 @@ static void CheckTableInput(char *tableName, autoList_t *colNames, autoList_t *r
 			errorCase(!row);
 			errorCase(getCount(row) != getCount(colNames));
 
-			foreach(row, cell, colidx)
+			foreach (row, cell, colidx)
 			{
 				errorCase(!cell);
 				errorCase(!isJLine(cell, 1, 0, 0, 1));
@@ -238,7 +238,7 @@ void TA_InsertMultiRow(char *tableName, autoList_t *colNames, autoList_t *rows)
 	insh = addLine_x(insh, GetValueList(colNames, "[]"));
 	insh = addLine(insh, ") VALUES (");
 
-	foreach(rows, row, rowidx)
+	foreach (rows, row, rowidx)
 	{
 		sql = strx(insh);
 		sql = addLine_x(sql, GetValueList(row, "''"));
@@ -273,7 +273,7 @@ void TA_DeleteMultiRow(char *tableName, autoList_t *colNames, autoList_t *rows)
 
 	insh = xcout("DELETE FROM [%s] WHERE ", tableName);
 
-	foreach(rows, row, rowidx)
+	foreach (rows, row, rowidx)
 	{
 		sql = strx(insh);
 		sql = addLine_x(sql, GetKeyEqValueAndList(colNames, row));
@@ -326,7 +326,7 @@ static void BulkInsert(char *tableName, autoList_t *colNames, autoList_t *rows)
 
 	fp = fileOpen(csvFile, "wt");
 
-	foreach(rows, row, rowidx)
+	foreach (rows, row, rowidx)
 	{
 		RowToCSVStream(fp, row);
 	}
@@ -345,7 +345,7 @@ static void BulkInsert(char *tableName, autoList_t *colNames, autoList_t *rows)
 	writeLine(fp, "\tORDER");
 	writeLine(fp, "\t(");
 
-	foreach(colNames, colName, colidx)
+	foreach (colNames, colName, colidx)
 	{
 		writeLine_x(fp, xcout("\t\t[%s]%s", colName, colidx + 1 < getCount(colNames) ? "," : ""));
 	}
@@ -462,7 +462,7 @@ void TA_TableDataFltr(char *csvFile, autoList_t *colNames, char *outCsvFile)
 	row = CSVStreamToRow(fp);
 	errorCase(!row);
 
-	foreach(colNames, colName, colidx)
+	foreach (colNames, colName, colidx)
 	{
 		addElement(colodr, findJLineICase(row, colName));
 	}
@@ -470,7 +470,7 @@ void TA_TableDataFltr(char *csvFile, autoList_t *colNames, char *outCsvFile)
 
 	while(row = CSVStreamToRow(fp))
 	{
-		foreach(colodr, colidx2, colidx)
+		foreach (colodr, colidx2, colidx)
 		{
 			addElement(row2, (uint)refLine(row, colidx2));
 		}

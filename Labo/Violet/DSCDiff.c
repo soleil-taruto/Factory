@@ -109,13 +109,13 @@ LOGPOS();
 
 		mDirs = mergeLines(dirs1, dirs2);
 
-		foreach(dirs1, dir, index)
+		foreach (dirs1, dir, index)
 			Report(dir, "Left only directory");
 
-		foreach(dirs2, dir, index)
+		foreach (dirs2, dir, index)
 			Report(dir, "Right only directory");
 
-		foreach(mDirs, dir, index)
+		foreach (mDirs, dir, index)
 			Report(dir, "");
 
 LOGPOS();
@@ -137,13 +137,13 @@ LOGPOS();
 
 		mFiles = mergeLines(files1, files2);
 
-		foreach(files1, file, index)
+		foreach (files1, file, index)
 			Report(file, "Left only file");
 
-		foreach(files2, file, index)
+		foreach (files2, file, index)
 			Report(file, "Right only file");
 
-		foreach(mFiles, file, index)
+		foreach (mFiles, file, index)
 		{
 			char *file1 = combine(rootDir1, file);
 			char *file2 = combine(rootDir2, file);

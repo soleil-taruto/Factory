@@ -73,7 +73,7 @@ int main(int argc, char **argv)
 		char *line;
 		uint index;
 
-		foreach(codeLines, line, index)
+		foreach (codeLines, line, index)
 		{
 			{
 				char *rFile = makeTempPath(NULL);
@@ -96,7 +96,7 @@ int main(int argc, char **argv)
 		char *file;
 		uint index;
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 		{
 			char *ext = getExt(file);
 

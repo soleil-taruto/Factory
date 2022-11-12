@@ -6,7 +6,7 @@ static int IsSavedFile(char *saveDir, char *loadedFile)
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		if (isSameFile(file, loadedFile))
 			break;
 

@@ -30,7 +30,7 @@ void sockMonitor(
 		uint nicIp;
 		uint index;
 
-		foreach(nicIpList, nicIp, index)
+		foreach (nicIpList, nicIp, index)
 			addElement(strNicIpList, (uint)strx(SockIp2Line((uchar *)&nicIp)));
 
 		index = selectNicProc(strNicIpList);

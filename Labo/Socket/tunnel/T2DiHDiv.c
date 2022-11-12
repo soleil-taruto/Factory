@@ -86,7 +86,7 @@ static void T2DiHDiv(char *dir)
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		ProcFile(file);
 	}

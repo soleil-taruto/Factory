@@ -10,7 +10,7 @@ static void WrPath(FILE *wfp)
 	char *node;
 	uint index;
 
-	foreach(NodeStk, node, index)
+	foreach (NodeStk, node, index)
 	{
 		if (index)
 			writeToken(wfp, Separator);

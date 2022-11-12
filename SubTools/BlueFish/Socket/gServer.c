@@ -22,7 +22,7 @@ static uint64 GetTotalSize(void)
 	files = lssFiles(ROOTDIR);
 	LOGPOS();
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		totalSize += getFileSize(file);
 
 	LOGPOS();
@@ -161,7 +161,7 @@ static void Download(SockStream_t *ss, char *laneDir)
 	sortJLinesICase(files);
 	LOGPOS();
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		uint64 fileSize = getFileSize(file);
 		FILE *fp;

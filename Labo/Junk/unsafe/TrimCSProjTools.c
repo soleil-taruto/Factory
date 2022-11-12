@@ -59,7 +59,7 @@ LOGPOS();
 	deletedFlag = 0;
 
 LOGPOS();
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (!_stricmp("cs", getExt(file)))
 		{
@@ -89,7 +89,7 @@ LOGPOS();
 		goto restart;
 
 LOGPOS();
-	foreach(deletableCsFiles, file, index)
+	foreach (deletableCsFiles, file, index)
 	{
 		removeFile(file);
 	}
@@ -120,7 +120,7 @@ static void Main2_Solution(void)
 	char *slnFile = NULL;
 	char *projName;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (!_stricmp("sln", getExt(file)))
 		{

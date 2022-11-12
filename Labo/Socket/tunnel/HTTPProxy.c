@@ -290,7 +290,7 @@ static void HeaderRepKill(autoList_t *r_keys, autoList_t *r_values, autoList_t *
 	char *key;
 	uint index;
 
-	foreach(r_keys, key, index)
+	foreach (r_keys, key, index)
 	{
 		uint hPos = findLineCase(HttpDat.H_Keys, key, 1);
 		char *r_value = getLine(r_values, index);
@@ -312,7 +312,7 @@ static void HeaderRepKill(autoList_t *r_keys, autoList_t *r_values, autoList_t *
 
 		strzp_x((char **)directGetPoint(HttpDat.H_Values, hPos), r_value);
 	}
-	foreach(k_keys, key, index)
+	foreach (k_keys, key, index)
 	{
 		uint hPos = findLineCase(HttpDat.H_Keys, key, 1);
 
@@ -355,7 +355,7 @@ static int DoConnect(char *fwdHost, uint fwdPortNo) // ret: -1 == ê⁄ë±Ç≈Ç´Ç»Ç©Ç¡
 	}
 	if (getCount(OKIPPrfxList))
 	{
-		foreach(OKIPPrfxList, ipprfx, index)
+		foreach (OKIPPrfxList, ipprfx, index)
 		{
 			if (startsWith(strIp, ipprfx))
 				break;
@@ -366,7 +366,7 @@ static int DoConnect(char *fwdHost, uint fwdPortNo) // ret: -1 == ê⁄ë±Ç≈Ç´Ç»Ç©Ç¡
 			return -1;
 		}
 	}
-	foreach(NGIPPrfxList, ipprfx, index)
+	foreach (NGIPPrfxList, ipprfx, index)
 	{
 		if (startsWith(strIp, ipprfx))
 		{

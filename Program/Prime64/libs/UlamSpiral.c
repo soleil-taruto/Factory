@@ -22,7 +22,7 @@ static int IsMulNumb(uint64 numb)
 		uint index;
 		uint mulNumb;
 
-		foreach(US_MulNumbs, mulNumb, index)
+		foreach (US_MulNumbs, mulNumb, index)
 			if (numb % mulNumb == 0)
 				break;
 
@@ -158,7 +158,7 @@ void MakeUlamSpiral(
 
 		errorCase(!US_MulColors);
 
-		foreach(US_MulNumbs, mulNumb, index)
+		foreach (US_MulNumbs, mulNumb, index)
 			errorCase(!mulNumb);
 	}
 

@@ -20,7 +20,7 @@ void MultiRun_Programs_Mode(autoList_t *progFiles, uint mode)
 	addElement(args, (uint)strx("/MULTI-RUN"));
 	addElement(args, (uint)xcout("%u", mode));
 
-	foreach(progFiles, progFile, index)
+	foreach (progFiles, progFile, index)
 	{
 		errorCase(!isLine(progFile));
 
@@ -49,7 +49,7 @@ void MultiRun_Commands_Mode(autoList_t *commandTable, uint mode)
 
 	errorCase(!commandTable);
 
-	foreach(commandTable, commands, index)
+	foreach (commandTable, commands, index)
 	{
 		char *batFile = makeTempPath("bat");
 
@@ -59,7 +59,7 @@ void MultiRun_Commands_Mode(autoList_t *commandTable, uint mode)
 			char *line;
 			uint line_index;
 
-			foreach(commands, line, line_index)
+			foreach (commands, line, line_index)
 				errorCase(!line); // ãÛçsÇÕok
 //				errorCase(m_isEmpty(line));
 		}
@@ -80,7 +80,7 @@ void MultiRun_Commands_Mode(autoList_t *commandTable, uint mode)
 	{
 		char *batFile;
 
-		foreach(batFiles, batFile, index)
+		foreach (batFiles, batFile, index)
 			removeFile(batFile);
 	}
 

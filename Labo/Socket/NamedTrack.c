@@ -280,7 +280,7 @@ static void PerformTh(int sock, char *strip)
 		{
 			WaitInfo_t *wi;
 
-			foreach(WaitInfos, wi, index)
+			foreach (WaitInfos, wi, index)
 				if (!strcmp(wi->Name, name))
 					break;
 
@@ -305,7 +305,7 @@ static void PerformTh(int sock, char *strip)
 			}
 			goto endConnect;
 		}
-		foreach(TrackInfos, i, index)
+		foreach (TrackInfos, i, index)
 			if (!strcmp(name, i->Name))
 				break;
 

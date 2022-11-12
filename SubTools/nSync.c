@@ -175,7 +175,7 @@ static int Perform(int sock, uint dummyPrm)
 
 	addCwd(ActiveDir); // ここから ActiveDir に入るので、相対パスでファイル・ディレクトリ操作OK!
 
-	foreach(ClientDirs, dir, index)
+	foreach (ClientDirs, dir, index)
 	{
 		cout("CD %s\n", dir);
 
@@ -194,7 +194,7 @@ static int Perform(int sock, uint dummyPrm)
 			}
 		}
 	}
-	foreach(ServerDirs, dir, index)
+	foreach (ServerDirs, dir, index)
 	{
 		cout("SD %s\n", dir);
 
@@ -214,11 +214,11 @@ static int Perform(int sock, uint dummyPrm)
 			createDir(dir);
 		}
 	}
-	foreach(BothDirs, dir, index)
+	foreach (BothDirs, dir, index)
 	{
 		cout("BD %s\n", dir);
 	}
-	foreach(ClientFiles, file, index)
+	foreach (ClientFiles, file, index)
 	{
 		cout("CF %s\n", file);
 
@@ -235,7 +235,7 @@ static int Perform(int sock, uint dummyPrm)
 			}
 		}
 	}
-	foreach(ServerFiles, file, index)
+	foreach (ServerFiles, file, index)
 	{
 		cout("SF %s\n", file);
 
@@ -253,7 +253,7 @@ static int Perform(int sock, uint dummyPrm)
 			NSC_RecvFile(ss, file);
 		}
 	}
-	foreach(BothFiles, file, index)
+	foreach (BothFiles, file, index)
 	{
 		uint64 serverCreateStamp;
 		uint64 serverWriteStamp;

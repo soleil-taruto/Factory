@@ -30,7 +30,7 @@ static void TypeAll(autoList_t *files)
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		DoType(file);
 	}

@@ -33,7 +33,7 @@ autoList_t *GetMailList(char *popServer, uint portno, char *user, char *pass)
 	lines = readLines(outFile);
 	trimLines(lines);
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		uint mailno;
 		uint64 size;

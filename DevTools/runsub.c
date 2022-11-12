@@ -110,7 +110,7 @@ readArgs:
 	else
 		dirs = createOneElement((uint)strx(rootDir));
 
-	foreach(dirs, dir, index)
+	foreach (dirs, dir, index)
 	{
 		if (!existDir(dir)) // ‚±‚ê‚Ü‚Å‚Ì Run() ‚É‚æ‚Á‚Äíœ‚³‚ê‚é‚±‚Æ‚à‚ ‚éB
 			continue;
@@ -129,7 +129,7 @@ readArgs:
 			eraseParents(files);
 			sortJLinesICase(files);
 
-			foreach(files, file, file_index)
+			foreach (files, file, file_index)
 			{
 				if (
 					!_stricmp("bat", getExt(file)) ||

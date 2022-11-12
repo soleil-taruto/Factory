@@ -19,7 +19,7 @@ static void SaveCsv(char *file, autoList_t *rows)
 	autoList_t *row;
 	uint rowidx;
 
-	foreach(rows, row, rowidx)
+	foreach (rows, row, rowidx)
 		writeCSVRow(fp, row);
 
 	fileClose(fp);
@@ -33,8 +33,8 @@ int main(int argc, char **argv)
 	char *cell;
 	uint colidx;
 
-	foreach(rows, row, rowidx)
-	foreach(row, cell, colidx)
+	foreach (rows, row, rowidx)
+	foreach (row, cell, colidx)
 		cout("%5uçs%5uóÒñ⁄=%s\n", rowidx, colidx, cell);
 
 	if (hasArgs(1))

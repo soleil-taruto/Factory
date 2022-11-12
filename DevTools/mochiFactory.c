@@ -22,7 +22,7 @@ static void Main2(void)
 	wRootDir = combine(wRootDir_P, "Factory_mochi");
 	createDir(wRootDir);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (IsTargetFile(file))
 		{

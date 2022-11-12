@@ -159,7 +159,7 @@ static char *ReplaceAllDefine(char *str)
 	char *def_key;
 	uint index;
 
-	foreach(DefineKeys, def_key, index)
+	foreach (DefineKeys, def_key, index)
 	{
 		char *def_value = getLine(DefineValues, index);
 
@@ -206,7 +206,7 @@ static void LoadRevInfos(char *rootDir, autoList_t *riList)
 	char *dir;
 	uint index;
 
-	foreach(revDirs, dir, index)
+	foreach (revDirs, dir, index)
 	{
 		RevInfo_t *ri = nb_(RevInfo_t);
 
@@ -289,7 +289,7 @@ static void LoadAppInfos(char *rootDir)
 
 	// 除外すべきフォルダを除去
 	{
-		foreach(appDirs, dir, index)
+		foreach (appDirs, dir, index)
 		{
 			if (getLocal(dir)[0] == '_') // ? APP が '_' で始まる。
 			{
@@ -302,7 +302,7 @@ static void LoadAppInfos(char *rootDir)
 
 	AppInfos = newList();
 
-	foreach(appDirs, dir, index)
+	foreach (appDirs, dir, index)
 	{
 		AppInfo_t *ai = nb_(AppInfo_t);
 
@@ -369,7 +369,7 @@ static void MakeRootIndex(char *rootDir, char *rootIndexFmt)
 		AppInfo_t *ai;
 		uint index;
 
-		foreach(AppInfos, ai, index)
+		foreach (AppInfos, ai, index)
 		{
 			char *description = strx(ai->Description);
 
@@ -409,7 +409,7 @@ static void MakeAppIndex(char *rootDir, AppInfo_t *ai, char *appIndexFmt, char *
 	rapidSort(ai->RevInfos, (sint (*)(uint, uint))CompRevInfo);
 	reverseElements(ai->RevInfos); // 新 -> 旧
 
-	foreach(ai->RevInfos, ri, index)
+	foreach (ai->RevInfos, ri, index)
 	{
 		addElement(dlLinkList, (uint)xcout("%s/%s", ri->Rev, ri->DLFile));
 	}
@@ -479,7 +479,7 @@ static void MakeAppIndex(char *rootDir, AppInfo_t *ai, char *appIndexFmt, char *
 		AppInfo_t *dlLink;
 		uint index;
 
-		foreach(dlLinkList, dlLink, index)
+		foreach (dlLinkList, dlLink, index)
 		{
 			RevInfo_t *ri = (RevInfo_t *)getElement(ai->RevInfos, index);
 
@@ -518,7 +518,7 @@ static void MakeNewestIndex(char *rootDir)
 	AppInfo_t *ai;
 	uint index;
 
-	foreach(AppInfos, ai, index)
+	foreach (AppInfos, ai, index)
 	{
 		RevInfo_t *ri = (RevInfo_t *)getElement(ai->RevInfos, 0);
 
@@ -552,7 +552,7 @@ void MakeDLIndex(char *rootDir)
 		AppInfo_t *ai;
 		uint index;
 
-		foreach(AppInfos, ai, index)
+		foreach (AppInfos, ai, index)
 		{
 			MakeAppIndex(rootDir, ai, appIndexFmt, appAllVerFmt);
 		}

@@ -79,8 +79,8 @@ static void AutoComment(autoList_t *ranges)
 
 	DCE_Start();
 
-	foreach(ranges, range, range_index)
-	foreach(range, line, index)
+	foreach (ranges, range, range_index)
+	foreach (range, line, index)
 	{
 		int insCmt;
 
@@ -153,7 +153,7 @@ static void AutoComment(autoList_t *ranges)
 			char *comment;
 			uint comment_index;
 
-			foreach(ResAutoComment, comment, comment_index)
+			foreach (ResAutoComment, comment, comment_index)
 			{
 				insertElement(range, index++, (uint)xcout("%s%s", classEntered ? "\t" : "", comment));
 			}
@@ -197,8 +197,8 @@ static void AutoComment_CS(autoList_t *ranges)
 
 	DCE_Start();
 
-	foreach(ranges, range, range_index)
-	foreach(range, line, index)
+	foreach (ranges, range, range_index)
+	foreach (range, line, index)
 	{
 		char *prevLine = index ? getLine(range, index - 1) : "";
 		char *insCmtIndent = NULL;
@@ -232,7 +232,7 @@ static void AutoComment_CS(autoList_t *ranges)
 			char *comment;
 			uint comment_index;
 
-			foreach(ResAutoComment_CS, comment, comment_index)
+			foreach (ResAutoComment_CS, comment, comment_index)
 			{
 				insertElement(range, index++, (uint)xcout("%s%s", insCmtIndent, comment));
 			}
@@ -309,7 +309,7 @@ static int IsEmptyRange(autoList_t *ranges, uint rangeIndex)
 
 	range = getList(ranges, rangeIndex);
 
-	foreach(range, line, index)
+	foreach (range, line, index)
 	{
 		if (!lineExp("<\t\t  >", line)) // ? ! (空行 || 空白のみの行)
 		{
@@ -476,11 +476,11 @@ static void DoCopyLib(char *rDir, char *wDir, int testMode)
 
 	DCL_ExistNewFile = 1 <= getCount(rFiles);
 
-	foreach(rSubDirs, dir, index)
+	foreach (rSubDirs, dir, index)
 		if (!testMode)
 			createPath_x(combine(wDir, dir), 'D');
 
-	foreach(rFiles, file, index)
+	foreach (rFiles, file, index)
 	{
 		char *rFile = combine(rDir, file);
 		char *wFile = combine(wDir, file);
@@ -494,7 +494,7 @@ static void DoCopyLib(char *rDir, char *wDir, int testMode)
 		memFree(rFile);
 		memFree(wFile);
 	}
-	foreach(wFiles, file, index)
+	foreach (wFiles, file, index)
 	{
 		int csMode = IsCSharpFile(file);
 		char *wFile = combine(wDir, file);
@@ -522,7 +522,7 @@ static void DoCopyLib(char *rDir, char *wDir, int testMode)
 		}
 		memFree(wFile);
 	}
-	foreach(owFiles, file, index)
+	foreach (owFiles, file, index)
 	{
 		int csMode = IsCSharpFile(file);
 		char *rFile = combine(rDir, file);
@@ -573,7 +573,7 @@ static void DoCopyLib(char *rDir, char *wDir, int testMode)
 		releaseDim(rRanges, 2);
 		releaseDim(wRanges, 2);
 	}
-	foreach(wSubDirs, dir, index)
+	foreach (wSubDirs, dir, index)
 		if (!testMode)
 			removeDirIfEmpty_x(combine(wDir, dir)); // .cpp の場合ファイルを削除しないのでDIRを削除できない場合もある。
 

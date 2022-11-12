@@ -35,7 +35,7 @@ static int CheckFairRelPath(char *path)
 
 	errorCase(getCount(ptkns) < 1); // 2bs
 
-	foreach(ptkns, ptkn, index)
+	foreach (ptkns, ptkn, index)
 	{
 		if (!isFairLocalPath(ptkn, 0))
 		{
@@ -60,7 +60,7 @@ static void CreateParent(char *path)
 	uint index;
 	char *homeDir = getCwd();
 
-	foreach(ptkns, ptkn, index)
+	foreach (ptkns, ptkn, index)
 	{
 		if (index + 1 < getCount(ptkns))
 		{
@@ -340,7 +340,7 @@ static int Perform(char *prmFile, char *ansFile)
 		}
 		changeRoots(paths, c_getCwd(), NULL);
 
-		foreach(paths, path, index)
+		foreach (paths, path, index)
 		{
 			if (index < lastDirCount)
 			{

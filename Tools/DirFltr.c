@@ -27,7 +27,7 @@ static void Main2(char *dir)
 
 	reverseElements(paths);
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		if (ExtFltrMode)
 		{

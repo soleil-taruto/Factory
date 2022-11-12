@@ -9,7 +9,7 @@ static void ShowCDList(autoList_t *lines, int chrFlg)
 	char *line;
 	uint index;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		cout("%s %c %s\n", c_makeCompactStamp(NULL), chrFlg, line);
 
@@ -78,7 +78,7 @@ static void DirCDMon(void)
 		}
 	endKeyLoop:
 
-		foreach(MonDirs, monDir, monDir_index)
+		foreach (MonDirs, monDir, monDir_index)
 		{
 			autoList_t *list;
 

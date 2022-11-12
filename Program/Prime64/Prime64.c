@@ -290,7 +290,7 @@ static void DoBatch(int mode, char *rFile, char *wFile) // mode: "PFC"
 
 	errorCase_m(!overwritable(wFile), "出力ファイルを作成できません。"); // テスト
 
-	foreach(rCsv, rRow, rowidx)
+	foreach (rCsv, rRow, rowidx)
 	{
 		autoList_t *wRow = newList();
 

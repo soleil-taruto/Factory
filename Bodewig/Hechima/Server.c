@@ -62,7 +62,7 @@ static void SaveRemarks(void)
 	Remark_t *i;
 	uint index;
 
-	foreach(Remarks, i, index)
+	foreach (Remarks, i, index)
 	{
 		writeLine_x(fp, xcout("%I64u", i->Stamp));
 		writeLine(fp, i->Ident);
@@ -196,7 +196,7 @@ static void UpdateMember(char *ident)
 	Member_t *i;
 	uint index;
 
-	foreach(Members, i, index)
+	foreach (Members, i, index)
 		if (!strcmp(i->Ident, ident))
 			break;
 
@@ -264,7 +264,7 @@ static void PerformTh(int sock, char *ip)
 
 		// Remarks 読み込み中にスレッドが切り替わらないように、全て読み込んでから SockSend* する。
 
-		foreach(lines, line, index)
+		foreach (lines, line, index)
 		{
 			if (line)
 				SockSendLine_NF(ss, line);
@@ -333,12 +333,12 @@ static void PerformTh(int sock, char *ip)
 
 		cout("GET-MEMBERS.1\n");
 
-		foreach(Members, i, index)
+		foreach (Members, i, index)
 			addElement(lines, (uint)xcout("%u %s", nowTime - i->LastAccessTime, i->Ident));
 
 		// Members 読み込み中にスレッドが切り替わらないように、全て読み込んでから SockSend* する。
 
-		foreach(lines, line, index)
+		foreach (lines, line, index)
 			SockSendLine_NF(ss, line);
 
 		SockSendLine_NF(ss, ""); // Ender

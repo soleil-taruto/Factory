@@ -288,7 +288,7 @@ retry:
 
 			cout("★受信ヘッダここから\n");
 
-			foreach(httpRecvedHeader, rh_line, rh_index)
+			foreach (httpRecvedHeader, rh_line, rh_index)
 				cout("%s\n", rh_line);
 
 			cout("★受信ヘッダここまで\n");

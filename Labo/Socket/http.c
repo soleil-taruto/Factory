@@ -32,7 +32,7 @@ static char *PTknsToFile(char *rootDir, autoList_t *ptkns) // ret == NULL: not f
 
 	addCwd(rootDir);
 
-	foreach(ptkns, ptkn, index)
+	foreach (ptkns, ptkn, index)
 	{
 		cout("ptkn[%u]: %s\n", index, ptkn);
 
@@ -196,7 +196,7 @@ static int Perform(int sock, uint dummy)
 			char *field;
 			uint index;
 
-			foreach(ExtraHeader, field, index)
+			foreach (ExtraHeader, field, index)
 				ab_addLine(buffer, xcout("%s" HTTP_NEWLINE, field));
 		}
 		ab_addLine(buffer, HTTP_NEWLINE);
@@ -272,7 +272,7 @@ readArgs:
 
 			cout("拡張フィールド\n");
 
-			foreach(ExtraHeader, field, index)
+			foreach (ExtraHeader, field, index)
 				cout("[%02u]:[%s]\n", index, field);
 		}
 		goto readArgs;

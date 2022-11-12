@@ -36,7 +36,7 @@ static void DoJoin(char *rDir, char *outFile)
 
 	fp = fileOpen(outFile, "wb");
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		cout("< %s\n", file);
 

@@ -12,7 +12,7 @@ static void RemoveUnwantedFiles(autoList_t *files)
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		if (!_stricmp("log", getExt(file)))
 			*file = '\0';
 
@@ -46,7 +46,7 @@ static void PickOutDx(char *dir)
 
 	copyFlags = newBitList_A(getCount(files));
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (IsDx(file))
 		{
@@ -69,7 +69,7 @@ static void PickOutDx(char *dir)
 			}
 		}
 	}
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (refBit(copyFlags, index))
 		{

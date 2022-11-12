@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 	uchar ip[4];
 	uint index;
 
-	foreach(ips, ip, index)
+	foreach (ips, ip, index)
 	{
 		cout("%s\n", SockIp2Line(ip));
 	}

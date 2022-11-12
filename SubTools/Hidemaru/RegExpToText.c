@@ -177,7 +177,7 @@ static void Main3(char *rFile, char *wFile)
 
 			errorCase(getCount(ptkns) < 2); // HKxx だけってことは無いだろう。
 
-			foreach(ptkns, ptkn, ptkn_index)
+			foreach (ptkns, ptkn, ptkn_index)
 				errorCase(!lineExp("<1,,09AZaz__%%..>", ptkn)); // パストークンの書式チェック
 
 			ptkn = getLine(ptkns, 0);

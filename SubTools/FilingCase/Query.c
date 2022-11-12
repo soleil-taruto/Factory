@@ -28,14 +28,14 @@ static void ExecuteQuery(char *query)
 
 		insertElement(rows, 0, (uint)row);
 
-		foreach(rows, row, index)
+		foreach (rows, row, index)
 		{
 			// 2bs ?
 			{
 				char *cell;
 				uint cell_index;
 
-				foreach(row, cell, cell_index)
+				foreach (row, cell, cell_index)
 				{
 #if 1
 					cell = FC_Retoken_x(cell);
@@ -55,7 +55,7 @@ static void ExecuteQuery(char *query)
 	{
 		uint longest = 0;
 
-		foreach(lines, line, index)
+		foreach (lines, line, index)
 		{
 			uint len = strlen(line);
 
@@ -64,7 +64,7 @@ static void ExecuteQuery(char *query)
 		insertElement(lines, 1, (uint)repeatChar('-', longest));
 	}
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 		cout("%s\n", line);
 
 	releaseDim(lines, 1);

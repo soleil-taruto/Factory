@@ -108,7 +108,7 @@ static void Pack7z_Dir(char *dir)
 		char *subPath;
 		uint index;
 
-		foreach(subPaths, subPath, index)
+		foreach (subPaths, subPath, index)
 		{
 			coExecute_x(xcout("%s a%s \"%s\" \"%s\"", Get7zExeFile(), GetSwitches(), file7z, subPath));
 		}

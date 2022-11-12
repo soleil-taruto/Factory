@@ -54,7 +54,7 @@ void ChangeAllPETimeDateStamp(char *dir, uint t)
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (
 			!_stricmp("EXE", getExt(file)) //||

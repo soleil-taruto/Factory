@@ -13,7 +13,7 @@ int main(int argc, char **argv)
 
 	sortJLinesICase(files);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	if (!_stricmp("AutoRelease.bat", getLocal(file)))
 	{
 		writeLine_x(fp, xcout("CD /D \"%s\"", c_getParent(file)));

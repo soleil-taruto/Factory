@@ -86,7 +86,7 @@ static void CommentOutFunc_WriteFile(char *file)
 	char *line;
 	uint index;
 
-	foreach(Lines, line, index)
+	foreach (Lines, line, index)
 	{
 		if (m_isRange(index, FuncRangeBgn, FuncRangeEnd))
 		{
@@ -104,7 +104,7 @@ static void CommentOutFunc_Lines(void)
 	char *line;
 	uint index;
 
-	foreach(Lines, line, index)
+	foreach (Lines, line, index)
 	{
 		if (m_isRange(index, FuncRangeBgn, FuncRangeEnd))
 		{
@@ -181,7 +181,7 @@ static void PrintResult(void)
 
 	cout("RESULT >>>\n");
 
-	foreach(UnusedFuncFirstLines, line, index)
+	foreach (UnusedFuncFirstLines, line, index)
 		cout("%s\n", line);
 
 	cout("<<< RESULT\n");
@@ -202,7 +202,7 @@ static void Main3(char *slnFile)
 		errorCase(IsSuccessful());
 	}
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (!_stricmp("cpp", getExt(file)))
 		{
@@ -226,7 +226,7 @@ static void Main2(void)
 	uint index;
 	char *slnFile = NULL;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (!_stricmp("sln", getExt(file)))
 		{

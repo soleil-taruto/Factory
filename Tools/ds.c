@@ -21,7 +21,7 @@ static void DirSize(char *dir)
 
 	dircnt = lastDirCount;
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		cmdTitle_x(xcout("ds - %s (%u / %u)", path, index, getCount(paths)));
 
@@ -33,7 +33,7 @@ static void DirSize(char *dir)
 	cmdTitle("ds");
 	rapidSortLines(lines);
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		sSize = strxl(line, 20);
 		localFile = strx(line + 20);
@@ -52,7 +52,7 @@ static void DirSize(char *dir)
 	}
 	spacingStarLines(lines, 79);
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 		cout("%s\n", line);
 
 	line = xcout("%I64u", totalSize);

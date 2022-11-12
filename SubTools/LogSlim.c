@@ -80,7 +80,7 @@ static void InitDirInfos(void)
 	DirInfos = newList();
 	AddDirInfo(RootDir);
 
-	foreach(dirs, dir, index)
+	foreach (dirs, dir, index)
 	{
 		cout("[%.4f] %s\n", (double)index / getCount(dirs), dir);
 
@@ -114,7 +114,7 @@ static void SlimDir(DirInfo_t *i)
 
 	size = 0;
 
-	foreach(i->FileInfos, fi, index)
+	foreach (i->FileInfos, fi, index)
 		size += fi->Size;
 
 	for(index = 0; index < getCount(i->FileInfos) && DirSizeMax < size; index++)
@@ -136,7 +136,7 @@ static void SlimDirs(void)
 	DirInfo_t *i;
 	uint index;
 
-	foreach(DirInfos, i, index)
+	foreach (DirInfos, i, index)
 	{
 		SlimDir(i);
 	}
@@ -149,19 +149,19 @@ static void SlimByTotal(void)
 
 	size = 0;
 
-	foreach(DirInfos, i, index)
+	foreach (DirInfos, i, index)
 	{
 		FileInfo_t *fi;
 		uint fi_index;
 
-		foreach(i->FileInfos, fi, fi_index)
+		foreach (i->FileInfos, fi, fi_index)
 			size += fi->Size;
 	}
 	while(TotalSizeMax < size)
 	{
 		LOGPOS();
 
-		foreach(DirInfos, i, index)
+		foreach (DirInfos, i, index)
 		{
 			if (1 <= getCount(i->FileInfos))
 			{

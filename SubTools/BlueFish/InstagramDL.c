@@ -37,7 +37,7 @@ static int IsKnownUrl(char *url)
 	char *knownUrl;
 	uint index;
 
-	foreach(knownUrls, knownUrl, index)
+	foreach (knownUrls, knownUrl, index)
 		if (!strcmp(url, knownUrl))
 			break;
 
@@ -79,7 +79,7 @@ static int IsKnownHash(char *hash)
 	char *knownHash;
 	uint index;
 
-	foreach(knownHashes, knownHash, index)
+	foreach (knownHashes, knownHash, index)
 		if (!strcmp(hash, knownHash))
 			break;
 
@@ -349,7 +349,7 @@ static void Main2(void)
 
 		LOGPOS();
 
-		foreach(urls, url, index)
+		foreach (urls, url, index)
 			if (IsKnownUrl(url))
 				break;
 

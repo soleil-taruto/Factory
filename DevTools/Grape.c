@@ -60,7 +60,7 @@ readArgs:
 	{
 		int fnd = 0;
 
-		foreach(patterns, pattern, index)
+		foreach (patterns, pattern, index)
 		{
 			if (mbs_strstrCase(line, pattern, ignoreCase))
 			{

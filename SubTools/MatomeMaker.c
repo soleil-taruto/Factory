@@ -57,7 +57,7 @@ static void TrmRum(char *rumDir)
 
 		revs = lsDirs(revsDir);
 
-		foreach(revs, rev, rev_index)
+		foreach (revs, rev, rev_index)
 		{
 			if (strcmp(getLocal(rev), lastExecDateTime) < 0) // ? rev < lastExecDateTime
 			{
@@ -79,7 +79,7 @@ static void TrmRum(char *rumDir)
 
 	revs = lsDirs(revsDir);
 
-	foreach(revs, rev, rev_index)
+	foreach (revs, rev, rev_index)
 	{
 		char *filesFile = combine(rev, "files.txt");
 		autoList_t *lines;
@@ -90,7 +90,7 @@ static void TrmRum(char *rumDir)
 
 		lines = readLines(filesFile);
 
-		foreach(lines, line, line_index)
+		foreach (lines, line, line_index)
 		{
 			char *entFile;
 			char *relFile;
@@ -136,7 +136,7 @@ static void CpRums(void)
 
 	LOGPOS();
 
-	foreach(dirs, dir, index)
+	foreach (dirs, dir, index)
 	{
 		if (!_stricmp("rum", getExt(dir)))
 		{

@@ -93,7 +93,7 @@ static void ProcDir(char *dir)
 	char *trgFile;
 	uint index;
 
-	foreach(files, trgFile, index)
+	foreach (files, trgFile, index)
 	{
 		if (_stricmp(SUM_EXT, getExt(trgFile))) // != SUM_EXT
 		{

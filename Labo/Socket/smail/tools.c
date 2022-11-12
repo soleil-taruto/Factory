@@ -139,7 +139,7 @@ char *MP_GetHeaderValue(char *targKey) // ret: strx(), NULL == Œ©‚Â‚©‚ç‚È‚¢B
 	errorCase(!MP_HeaderKeys);
 	errorCase(!MP_HeaderValues); // 2bs
 
-	foreach(MP_HeaderKeys, key, index)
+	foreach (MP_HeaderKeys, key, index)
 		if (!_stricmp(key, targKey))
 			return strx(getLine(MP_HeaderValues, index));
 

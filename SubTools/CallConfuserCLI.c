@@ -18,7 +18,7 @@ static void CopyDLL(char *rExeFile, char *wDir)
 
 	files = lsFiles(rDir);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (!_stricmp("DLL", getExt(file)))
 		{

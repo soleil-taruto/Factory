@@ -10,9 +10,9 @@ static void Bmp2Csv(char *rFile, char *wFile)
 	uint cell;
 	uint colidx;
 
-	foreach(table, row, rowidx)
+	foreach (table, row, rowidx)
 	{
-		foreach(row, cell, colidx)
+		foreach (row, cell, colidx)
 		{
 			setElement(row, colidx, (uint)xcout("%06x", cell));
 		}
@@ -27,9 +27,9 @@ static void Csv2Bmp(char *rFile, char *wFile)
 	char *cell;
 	uint colidx;
 
-	foreach(table, row, rowidx)
+	foreach (table, row, rowidx)
 	{
-		foreach(row, cell, colidx)
+		foreach (row, cell, colidx)
 		{
 			setElement(row, colidx, toValueDigits_xc(cell, hexadecimal));
 		}

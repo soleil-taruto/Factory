@@ -155,7 +155,7 @@ static void DoTest2(uint num, uint valmax)
 		uint value;
 		uint index;
 
-		foreach(list, value, index)
+		foreach (list, value, index)
 			if (value == targetVal)
 				break;
 

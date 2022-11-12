@@ -10,7 +10,7 @@ static void RemoveEx(autoList_t *paths)
 
 	if (!ForceMode)
 	{
-		foreach(paths, path, index)
+		foreach (paths, path, index)
 		{
 			cout("* %s\n", path);
 		}
@@ -21,7 +21,7 @@ static void RemoveEx(autoList_t *paths)
 	}
 	destDir = makeFreeDir();
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		char *destPath = combine(destDir, getLocal(path));
 

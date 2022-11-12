@@ -7,7 +7,7 @@ static char *GetHeaderValue(char *targetKey)
 {
 	char *key;
 
-	foreach(HttpDat.H_Keys, key, GHV_Index)
+	foreach (HttpDat.H_Keys, key, GHV_Index)
 		if (!_stricmp(key, targetKey))
 			return getLine(HttpDat.H_Values, GHV_Index);
 

@@ -293,7 +293,7 @@ static uint GetNicIndex(autoList_t *strNicIpList)
 		char *strIp;
 		uint index;
 
-		foreach(strNicIpList, strIp, index)
+		foreach (strNicIpList, strIp, index)
 			if (!strcmp(strIp, TargetNicIP))
 				nicIndex = index;
 	}

@@ -50,7 +50,7 @@ static void MakeTemplate(char *templateName, char *userParam)
 		}
 		while(getCount(lines) && !*getLine(lines, 0));
 	}
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		line = replaceLine(line, "$$", ESCAPE_PTN, 0);
 		line = replaceLine(line, "$I", initial, 1);
@@ -75,12 +75,12 @@ int main(int argc, char **argv)
 
 		//eraseParents(files); // del
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 			toUpperLine(file);
 
 		rapidSortLines(files);
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 		{
 			if (!_stricmp("txt", getExt(file)))
 			{

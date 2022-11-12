@@ -85,7 +85,7 @@ enterDir:
 		char *path;
 		uint index;
 
-		foreach(paths, path, index)
+		foreach (paths, path, index)
 		{
 			path = strrm(path, 4);
 			setElement(paths, index, (uint)path);
@@ -93,7 +93,7 @@ enterDir:
 		}
 		rapidSortLines(paths);
 
-		foreach(paths, path, index)
+		foreach (paths, path, index)
 		{
 			setElement(infos, index, blockToValue(strchr(path, '\0') + 1));
 		}

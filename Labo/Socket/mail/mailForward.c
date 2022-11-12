@@ -291,7 +291,7 @@ static void Distribute(autoList_t *mail, autoList_t *memberList, char *groupName
 
 	cout("D.M %u lines\n", getCount(mail));
 
-	foreach(memberList, member, index)
+	foreach (memberList, member, index)
 		cout("D.B [%s]\n", member);
 
 	cout("D.G [%s]\n", groupName);
@@ -302,7 +302,7 @@ static void Distribute(autoList_t *mail, autoList_t *memberList, char *groupName
 #else // same
 	memberFrom = NULL;
 
-	foreach(memberList, member, index)
+	foreach (memberList, member, index)
 	{
 		if (!strcmp(mailFrom, member))
 		{
@@ -319,7 +319,7 @@ static void Distribute(autoList_t *mail, autoList_t *memberList, char *groupName
 	shuffledMemberList = copyAutoList(memberList);
 	shuffle(shuffledMemberList);
 
-	foreach(shuffledMemberList, member, index)
+	foreach (shuffledMemberList, member, index)
 	{
 		int sendonly = findLine(SendOnlyMemberList, member) < getCount(SendOnlyMemberList); // ? 'member' is sendonly member
 
@@ -364,12 +364,12 @@ static void RecvEvent(autoList_t *mail)
 		uint index_index;
 		char *mail_myself = NULL;
 
-		foreach(GroupList, memberList, index)
+		foreach (GroupList, memberList, index)
 		{
 			char *member;
 			uint member_index;
 
-			foreach(memberList, member, member_index)
+			foreach (memberList, member, member_index)
 			{
 				if (!strcmp(mailFrom, member))
 				{
@@ -384,7 +384,7 @@ static void RecvEvent(autoList_t *mail)
 
 			if (subject)
 			{
-				foreach(indexes, index, index_index)
+				foreach (indexes, index, index_index)
 				{
 					char *groupPtn = xcout("[%s]", getLine(GroupNameList, index));
 
@@ -414,7 +414,7 @@ static void RecvEvent(autoList_t *mail)
 			memFree(subject);
 		}
 
-		foreach(indexes, index, index_index)
+		foreach (indexes, index, index_index)
 		{
 			Distribute(mail, getList(GroupList, index), getLine(GroupNameList, index), mailFrom);
 		}
@@ -434,7 +434,7 @@ static void RecvLoop(void)
 		autoList_t *mail;
 		uint index;
 
-		foreach(mails, mail, index)
+		foreach (mails, mail, index)
 		{
 			/*
 				‘¦•ÔM‚·‚é‚Æ”jŠü‚³‚ê‚é‚±‚Æ‚ª‚ ‚éH
@@ -570,7 +570,7 @@ readArgs:
 		autoList_t *memberList;
 		uint memberList_index;
 
-		foreach(GroupList, memberList, memberList_index)
+		foreach (GroupList, memberList, memberList_index)
 		{
 			errorCase(getCount(memberList) < 2);
 		}

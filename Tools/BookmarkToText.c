@@ -62,7 +62,7 @@ static void BookmarkToText(char *file)
 
 	textLines = createAutoList(getCount(lines));
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		char *p = strstr(line, "<DT><A");
 		char *q;
@@ -171,7 +171,7 @@ static void BookmarkToText(char *file)
 	}
 	rapidSortLines(textLines);
 
-	foreach(textLines, line, index)
+	foreach (textLines, line, index)
 	{
 		char *p = strchr(line, '\n');
 		errorCase(!p);

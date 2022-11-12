@@ -40,7 +40,7 @@ static void RemoveOldZip(char *wDir)
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		if (!_stricmp(getExt(file), "zip"))
 			removeFile(file);
 
@@ -52,7 +52,7 @@ static char *GetFirstZipFile(char *rDir)
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		if (!_stricmp(getExt(file), "zip"))
 			break;
 

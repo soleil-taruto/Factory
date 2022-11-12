@@ -232,7 +232,7 @@ static char *GetAttr(char *name)
 
 	Reset_RLine();
 
-	foreach(RAttrNames, rAName, index)
+	foreach (RAttrNames, rAName, index)
 		if (!_stricmp(rAName, name))
 			break;
 
@@ -461,7 +461,7 @@ static void WriteNode(XNode_t *node, uint indent)
 			XNode_t *child;
 			uint index;
 
-			foreach(node->Children, child, index)
+			foreach (node->Children, child, index)
 				WriteNode(child, indent + 1);
 		}
 

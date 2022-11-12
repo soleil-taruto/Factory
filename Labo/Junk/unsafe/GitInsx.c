@@ -6,13 +6,13 @@ int main(int argc, char **argv)
 	char *dir;
 	uint dir_index;
 
-	foreach(dirs, dir, dir_index)
+	foreach (dirs, dir, dir_index)
 	{
 		autoList_t *files = lssFiles(dir);
 		char *file;
 		uint file_index;
 
-		foreach(files, file, file_index)
+		foreach (files, file, file_index)
 		{
 			if (mbs_stristr(file, "\\.git"))
 				continue;

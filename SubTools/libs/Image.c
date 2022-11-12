@@ -63,8 +63,8 @@ void LoadImageFile(char *rFile)
 	csvTable = readCSVFile(csvFile);
 	resizeTable(GetImage(), getCount(getList(csvTable, 0)), getCount(csvTable));
 
-	foreach(csvTable, row, rowidx)
-	foreach(row, cell, colidx)
+	foreach (csvTable, row, rowidx)
+	foreach (row, cell, colidx)
 	{
 		setTableCell(GetImage(), colidx, rowidx, toValueDigits(cell, hexadecimal));
 	}

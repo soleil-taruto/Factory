@@ -57,7 +57,7 @@ static void DoFRenum(void)
 	if (ReverseMode)
 		reverseElements(files);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		char *dest;
 

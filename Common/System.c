@@ -862,7 +862,7 @@ char *getAppDataEnv(char *name, char *defval)
 	name = xcout("%s=", name);
 	nameLen = strlen(name);
 
-	foreach(envs, env, index)
+	foreach (envs, env, index)
 		if (startsWith(env, name))
 			break;
 

@@ -22,7 +22,7 @@ static int IsMatch(char *relPath, autoList_t *searchPtns)
 
 	if (getCount(searchPtns))
 	{
-		foreach(searchPtns, searchPtn, index)
+		foreach (searchPtns, searchPtn, index)
 		{
 			if (mbs_stristr(path_a, searchPtn))
 			{
@@ -57,7 +57,7 @@ static void DispList_RumDir(char *rumDir, autoList_t *searchPtns)
 	revDirs = lsDirs(revsDir);
 	sortJLinesICase(revDirs);
 
-	foreach(revDirs, revDir, index)
+	foreach (revDirs, revDir, index)
 	{
 		char *revision = getLocal(revDir);
 
@@ -70,7 +70,7 @@ static void DispList_RumDir(char *rumDir, autoList_t *searchPtns)
 
 			lines = readLines(treeFile);
 
-			foreach(lines, line, index)
+			foreach (lines, line, index)
 				DispList_RelPath(rumDir, revision, line, searchPtns);
 
 			releaseDim(lines, 1);
@@ -85,7 +85,7 @@ static void DispList_RumDir(char *rumDir, autoList_t *searchPtns)
 
 			lines = readLines(filesFile);
 
-			foreach(lines, line, index)
+			foreach (lines, line, index)
 			{
 				errorCase(!lineExp("<32,09AFaf> <>", line));
 				DispList_RelPath(rumDir, revision, line + 33, searchPtns);
@@ -114,7 +114,7 @@ static void DispList(char *targetDir, autoList_t *searchPtns)
 		char *dir;
 		uint index;
 
-		foreach(dirs, dir, index)
+		foreach (dirs, dir, index)
 			if (!_stricmp(RUM_DIR_EXT, getExt(dir)))
 				DispList_RumDir(dir, searchPtns);
 

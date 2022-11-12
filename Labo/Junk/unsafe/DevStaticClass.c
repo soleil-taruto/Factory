@@ -7,7 +7,7 @@ static char *GetSlnFile_Dir(char *dir)
 	uint index;
 	char *slnFile;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		if (!_stricmp("sln", getExt(file)))
 			break;
 
@@ -45,7 +45,7 @@ static int IsCS2010_SlnFile(char *slnFile)
 	char *line;
 	uint index;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 		if (!strcmp(line, "# Visual C# Express 2010"))
 			break;
 
@@ -86,7 +86,7 @@ static void ProcCSFile_Main(char *csFile)
 
 	moveFile(csFile, bkFile);
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		if (
 			lineExp("\tpublic class <1,,09AZaz__>", line) ||
@@ -162,7 +162,7 @@ static void Main2(char *rootDir)
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (
 			!_stricmp("cs", getExt(file)) &&

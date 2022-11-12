@@ -48,7 +48,7 @@ static uint64 GetTotalSize_Paths(autoList_t *paths)
 	LOGPOS();
 	paths = copyLines(paths);
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		if (existDir(path))
 			addElements_x(paths, ls(path));
@@ -87,7 +87,7 @@ static void TrimVer(char *appDir)
 
 	LOGPOS();
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		if (!lineExpICase("<>_v<3,09>.zip", file))
 			*file = '\0';
 
@@ -95,7 +95,7 @@ static void TrimVer(char *appDir)
 	sortJLinesICase(files);
 	reverseElements(files); // 終端 == 最も旧いリビジョン
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		cout("[VER] %s\n", file); // test-out
 
 	while(VER_MIN < getCount(files) && (VER_MAX < getCount(files) || VER_TOTAL_SIZE_MAX < GetTotalSize_Paths(files)))
@@ -124,7 +124,7 @@ static void TrimBeta(char *appDir)
 
 	LOGPOS();
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		if (!lineExpICase("<>_BETA_<14,09>.zip", file))
 			*file = '\0';
 
@@ -132,7 +132,7 @@ static void TrimBeta(char *appDir)
 	sortJLinesICase(files);
 	reverseElements(files); // 終端 == 最も旧いリビジョン
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		cout("[BETA] %s\n", file); // test-out
 
 	while(BETA_MIN < getCount(files) && (BETA_MAX < getCount(files) || BETA_TOTAL_SIZE_MAX < GetTotalSize_Paths(files)))
@@ -311,7 +311,7 @@ static void AddRev(char *rDir, char *wDir, char *gameWDir, char *extCluWDir)
 		char *file;
 		uint index;
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 		{
 			if (!existFile(file)) // .md5 ファイルなど、消失する場合がある。
 				continue;

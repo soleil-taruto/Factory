@@ -99,7 +99,7 @@ static char *MakeDivList(uint depth, int noIndex)
 
 	rapidSort(paths, (sint (*)(uint, uint))S_DirFileComp);
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		char *href;
 		char *lref;

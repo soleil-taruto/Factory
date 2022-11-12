@@ -43,7 +43,7 @@ static void DispSabunList_V(autoList_t *lDiff, autoList_t *rDiff)
 
 	WL("<Sabun-Pair-List>\n");
 
-	foreach(lDiff, s, index)
+	foreach (lDiff, s, index)
 	{
 		WL("<Sabun-Pair>\n");
 
@@ -64,7 +64,7 @@ static void DispSabunList(autoList_t *diff, char *tag)
 
 	WL("<%s>\n", tag);
 
-	foreach(diff, s, index)
+	foreach (diff, s, index)
 		if (s->Length)
 			DispSabun(s);
 
@@ -78,7 +78,7 @@ static void DispDirSabunList(autoList_t *diff)
 	WL("<?xml version=\"1.0\" encoding=\"shift_jis\"?>\n");
 	WL("<Dir-Sabun-List>\n");
 
-	foreach(diff, ds, index)
+	foreach (diff, ds, index)
 	{
 		if (VerboseMode || ds->Kind < 6 || (ds->LDiff && getCount(ds->LDiff)))
 		{

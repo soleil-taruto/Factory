@@ -41,7 +41,7 @@ static ShowHashDir(char *dir)
 	files = gndFollowElements(paths, lastDirCount);
 	dirFileSort(&files);
 
-	foreach(&files, file, index)
+	foreach (&files, file, index)
 	{
 		sha512_makeHashFile(file);
 		sha512_makeHexHash();

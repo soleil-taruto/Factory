@@ -9,7 +9,7 @@ static void ClearRepoDir(char *dir)
 	char *path;
 	uint index;
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 		if (!startsWithICase(getLocal(path), ".git"))
 			recurRemovePath(path);
 
@@ -21,7 +21,7 @@ static void CopyToRepoDir(char *rDir, char *wDir)
 	char *rPath;
 	uint index;
 
-	foreach(rPaths, rPath, index)
+	foreach (rPaths, rPath, index)
 	{
 		char *wPath = changeRoot(strx(rPath), rDir, wDir);
 
@@ -39,7 +39,7 @@ static void RemoveNotNeedFiles(char *dir)
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		char *ext = getExt(file);
 

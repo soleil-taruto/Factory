@@ -17,7 +17,7 @@ static char *GetProjFile(void)
 
 	eraseParents(files);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		if (!_stricmp("vcproj", getExt(file)))
 			break;
 

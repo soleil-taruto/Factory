@@ -120,7 +120,7 @@ static void Synchronize(autoList_t *files, uint modindex)
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (index != modindex)
 		{
@@ -145,7 +145,7 @@ static void SyncFile(autoList_t *dirs, char *sharedFile)
 	uint index;
 	uint modindex;
 
-	foreach(dirs, dir, index)
+	foreach (dirs, dir, index)
 	{
 		file = combine(dir, sharedFile);
 		hash = makeHexLine(pab = md5_makeHashFile(file));
@@ -191,7 +191,7 @@ static void SyncFiles(autoList_t *dirs)
 
 	errorCase(getCount(dirs) < 3);
 
-	foreach(dirs, dir, index)
+	foreach (dirs, dir, index)
 	{
 		cout("%s\n", dir);
 		errorCase(!existDir(dir));
@@ -202,7 +202,7 @@ static void SyncFiles(autoList_t *dirs)
 	files = GetSharedFiles(dirs);
 
 	SFModCount = 0;
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		SyncFile(dirs, file);
 	}
@@ -235,13 +235,13 @@ static void SyncFiles(autoList_t *dirs)
 			eraseParents(files);
 			delFiles = selectLines(files);
 
-			foreach(dirs, dir, index)
+			foreach (dirs, dir, index)
 			{
 				uint fIndex;
 
 				addCwd(dir);
 
-				foreach(delFiles, file, fIndex)
+				foreach (delFiles, file, fIndex)
 					removeFile(file);
 
 				unaddCwd();
@@ -277,7 +277,7 @@ readArgs:
 		char *dir;
 		uint index;
 
-		foreach(lines, dir, index)
+		foreach (lines, dir, index)
 		{
 			addElement(dirs, (uint)makeFullPath(dir));
 		}

@@ -102,7 +102,7 @@ static void HeaderParse(void)
 	HttpDat.H_Keys = newList();
 	HttpDat.H_Values = newList();
 
-	foreach(HttpDat.Header, line, index)
+	foreach (HttpDat.Header, line, index)
 	{
 		line = strx(line);
 		line2JLine(line, 1, 0, 1, 1);
@@ -161,7 +161,7 @@ static void CheckHeader(void)
 	char *key;
 	uint index;
 
-	foreach(HttpDat.H_Keys, key, index)
+	foreach (HttpDat.H_Keys, key, index)
 	{
 		char *value = getLine(HttpDat.H_Values, index);
 
@@ -277,7 +277,7 @@ void SaveHttpDat(char *file)
 	writeToken(fp, HttpDat.H_Request);
 	writeToken(fp, "\r\n");
 
-	foreach(HttpDat.H_Keys, key, index)
+	foreach (HttpDat.H_Keys, key, index)
 	{
 		writeToken(fp, key);
 		writeToken(fp, ": ");

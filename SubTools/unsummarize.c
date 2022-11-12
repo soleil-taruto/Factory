@@ -74,7 +74,7 @@ static int ProcOneRemFile(char *remFile, autoList_t *outFiles) // ret: ? ’Ç‰Á‚µ‚
 	addElement(tokens, (uint)strx(token));
 	ez = p + 1;
 
-	foreach(tokens, token, index)
+	foreach (tokens, token, index)
 	{
 		char *outFile = GetTmpPath();
 		FILE *fp;
@@ -118,7 +118,7 @@ static void StoreCmpltFiles(void)
 	char *file;
 	uint index;
 
-	foreach(CmpltFiles, file, index)
+	foreach (CmpltFiles, file, index)
 	{
 		char *outFile = GetOutPath();
 
@@ -181,7 +181,7 @@ readArgs:
 				addElement(files, (uint)strx(path));
 			}
 		}
-		foreach(files, file, index)
+		foreach (files, file, index)
 		{
 			char *remFile = GetTmpPath();
 

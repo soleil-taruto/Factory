@@ -20,7 +20,7 @@ static void DispHugest_Files_x(autoList_t *files)
 	minsz = UINT64MAX;
 	maxsz = 0;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		uint64 csz = getFileSize(file);
 

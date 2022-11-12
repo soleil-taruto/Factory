@@ -43,7 +43,7 @@ static void SerializerMain(void *data, uint depth)
 		addByte(WBuff, KIND_LIST);
 		AddInt(getCount(subDataList));
 
-		foreach(subDataList, subData, index)
+		foreach (subDataList, subData, index)
 		{
 			SerializerMain(subData, depth - 1);
 		}

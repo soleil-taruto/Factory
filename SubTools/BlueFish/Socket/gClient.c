@@ -45,7 +45,7 @@ static void Upload(SockStream_t *ss)
 	sortJLinesICase(files);
 	LOGPOS();
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		uint64 fileSize;
 		FILE *fp;

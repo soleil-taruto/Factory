@@ -26,8 +26,8 @@ static void *RC_GetKey(void) // ret: c_
 
 	gndBlockVar(tmp, 1, gab);
 
-	foreach(Table, row, rowidx)
-	foreach(row, value, colidx)
+	foreach (Table, row, rowidx)
+	foreach (row, value, colidx)
 	{
 		tmp[0] = value;
 		sha512_update(ctx, &gab);
@@ -169,7 +169,7 @@ static uint GetMax(autoList_t *list)
 	uint value;
 //LOGPOS();
 
-	foreach(list, value, index)
+	foreach (list, value, index)
 	{
 		m_maxim(valmax, value);
 	}
@@ -253,7 +253,7 @@ static void CheckTable(void)
 	errorCase(!XSize);
 //	errorCase(!YSize);
 
-	foreach(Table, row, rowidx)
+	foreach (Table, row, rowidx)
 	{
 		errorCase(getCount(row) != XSize);
 	}
@@ -300,7 +300,7 @@ readArgs:
 		uint index;
 		uint value;
 
-		foreach(result, value, index)
+		foreach (result, value, index)
 		{
 			cout("%u\n", value);
 		}

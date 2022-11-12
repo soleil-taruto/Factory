@@ -85,7 +85,7 @@ static void DoFRenumStmp(void)
 
 	FStampsDir = makeTempDir(NULL);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		char *dest;
 

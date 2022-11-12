@@ -31,7 +31,7 @@ static void DoTrepStream(FILE *rfp, FILE *wfp, autoList_t *sections)
 
 	rapidSort(sections, CompSection);
 
-	foreach(sections, section ,index)
+	foreach (sections, section ,index)
 	{
 		errorCase(section[1] < section[0]);
 		errorCase(fileSize < section[1]);
@@ -81,7 +81,7 @@ static void DoTrep(void)
 	rbTree_t *f2SectTree = rbCreateTree((uint (*)(uint))strx, (sint (*)(uint, uint))mbs_stricmp, (void (*)(uint))memFree);
 	uint count;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		autoList_t *tokens = tokenize(line, '\t');
 		char *file;
@@ -151,7 +151,7 @@ readArgs:
 
 		errorCase_m(!getCount(lines), "対象ファイルが１つもありません。");
 
-		foreach(lines, line, index)
+		foreach (lines, line, index)
 		{
 			autoList_t *tokens = tokenize(line, '\t');
 			char *file;

@@ -70,7 +70,7 @@ static void ClassToJava(char *classFile, char *javaFile)
 			writeLine(fp, "失敗しました。");
 			writeLine_x(fp, xcout("クラスファイル=%s", classFile));
 
-			foreach(files, file, index)
+			foreach (files, file, index)
 				writeLine_x(fp, xcout("出力ファイル=%s", file));
 
 			fileClose(fp);

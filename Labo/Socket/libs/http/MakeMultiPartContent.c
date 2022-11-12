@@ -53,7 +53,7 @@ static int IsIncludeBoundary(char *boundary) // boundary: [0] ÇÕ [1] à»ç~Ç…ë∂ç›Ç
 	autoBlock_t *body;
 	uint body_index;
 
-	foreach(BodyList, body, body_index)
+	foreach (BodyList, body, body_index)
 	{
 		char *p_bdr = boundary;
 		uint index;

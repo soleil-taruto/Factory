@@ -34,7 +34,7 @@ static void DoOrderStamp(void)
 
 	t = time(NULL) - getCount(files);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		uint64 stamp = getFileStampByTime(t++);
 

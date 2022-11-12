@@ -54,7 +54,7 @@ void cphrReleaseKeyTableList(autoList_t *keyTableList)
 
 	errorCase(!keyTableList);
 
-	foreach(keyTableList, keyTable, index)
+	foreach (keyTableList, keyTable, index)
 	{
 		errorCase(!keyTable);
 		camellia_releaseKeyTable(keyTable);
@@ -72,7 +72,7 @@ autoBlock_t *cphrLoadKeyBundle(autoList_t *lines)
 
 	errorCase(!lines);
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		errorCase(!line);
 		errorCase(!lineExp("<09AFaf>", line));
@@ -284,7 +284,7 @@ uchar *cphrEncryptBlock(uchar *block, autoList_t *keyTableList, uchar *iv)
 
 	XorBlock(block, iv);
 
-	foreach(keyTableList, keyTable, index)
+	foreach (keyTableList, keyTable, index)
 	{
 		camellia_encrypt(keyTable, block, block, 1);
 	}

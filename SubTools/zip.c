@@ -340,7 +340,7 @@ static void ReplaceVersion(char *dir, uint version) // version: 1 Å` 999, VER_CA
 		exeVersion = xcout("%u.%02u", version / 100, version % 100);
 	}
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (
 			!_stricmp("Readme.txt", getLocal(file)) ||
@@ -488,7 +488,7 @@ static void RepackAllZipFile(char *rootDir)
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (!_stricmp("ZIP", getExt(file)))
 		{

@@ -70,7 +70,7 @@ static void RemoveComments(autoList_t *lines)
 	uint index;
 	int onComment = 0;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		char *p = line;
 
@@ -115,7 +115,7 @@ static void AdjustIndent(autoList_t *lines)
 	uint index;
 	int onBlock = 0;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		if (!strcmp(line, "{"))
 		{
@@ -200,7 +200,7 @@ static void CheckTagTypedef(autoList_t *lines, char *srcFile)
 	uint index;
 	uint tdPhase = 0;
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		switch(tdPhase)
 		{
@@ -247,7 +247,7 @@ static void FindTagsByFile(char *file)
 	ucTrimSqTrailAllLine(lines);
 	AdjustIndent(lines);
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		CheckTagLine(line, file, index + 1);
 	}
@@ -267,7 +267,7 @@ static void FindTagsByJSFile(char *file)
 	RemoveComments(lines);
 	ucTrimSqTrailAllLine(lines);
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		if (lineExp("var <>;<>", line))
 		{
@@ -313,7 +313,7 @@ static void FindTags(char *rootDir)
 
 	sortJLinesICase(files);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		char *ext = getExt(file);
 

@@ -21,7 +21,7 @@ static void CollectRumDirs(char *rootDir, autoList_t *dest)
 	char *dir;
 	uint index;
 
-	foreach(dirs, dir, index)
+	foreach (dirs, dir, index)
 	{
 		if (!_stricmp("rum", getExt(dir)))
 		{
@@ -61,7 +61,7 @@ static void CheckRumInDir(char *rootDir)
 	errorCase(!existDir(rootDir));
 	CollectRumDirs(rootDir, dirs);
 
-	foreach(dirs, dir, index)
+	foreach (dirs, dir, index)
 		CheckRum(dir);
 
 	memFree(rootDir);

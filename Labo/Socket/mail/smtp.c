@@ -94,7 +94,7 @@ static void Perform(int sock)
 	if (RecvStatus(ss) != 354)
 		goto endfunc;
 
-	foreach(MailData, line, index)
+	foreach (MailData, line, index)
 		SendLineDisp(ss, line);
 
 	SendLineDisp(ss, ".");

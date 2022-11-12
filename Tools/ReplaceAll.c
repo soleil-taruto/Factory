@@ -8,7 +8,7 @@ static int AntiInvalidPaths(autoList_t *paths)
 	uint index;
 	uint inccnt = 0;
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		autoList_t *ptkns;
 		char *ptkn;
@@ -19,7 +19,7 @@ static int AntiInvalidPaths(autoList_t *paths)
 		ptkns = tokenize(path, '/');
 		restoreYen(path);
 
-		foreach(ptkns, ptkn, tndx)
+		foreach (ptkns, ptkn, tndx)
 		{
 			ptkn = lineToFairLocalPath_x(ptkn, 0);
 			setElement(ptkns, tndx, (uint)ptkn);
@@ -76,7 +76,7 @@ static int FindTooLongPaths(autoList_t *paths, uint rootLen)
 	uint index;
 	uint fndcnt = 0;
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		if (PATH_SIZE < rootLen + 1 + strlen(path))
 		{
@@ -125,7 +125,7 @@ static void CreatePathCascade(char *path)
 	memFree((void *)unaddElement(ptkns));
 
 	addCwd(".");
-	foreach(ptkns, ptkn, index)
+	foreach (ptkns, ptkn, index)
 	{
 		mkdirEx(ptkn);
 		changeCwd(ptkn);
@@ -182,7 +182,7 @@ static void ReplaceEx(void)
 	writeLines(FILE_LASTREPLACELIST, newPaths);
 	cout("save path-list ok!\n");
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		newPath = getLine(newPaths, index);
 
@@ -196,7 +196,7 @@ static void ReplaceEx(void)
 		goto endfunc;
 
 	addCwd(midDir);
-	foreach(paths, path, index) // 移動テスト
+	foreach (paths, path, index) // 移動テスト
 	{
 		newPath = getLine(newPaths, index);
 
@@ -222,7 +222,7 @@ static void ReplaceEx(void)
 	cout("clean-up dir ok.\n");
 
 	addCwd(midDir);
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		newPath = getLine(newPaths, index);
 

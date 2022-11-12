@@ -19,7 +19,7 @@ static char *ToPrms(autoList_t *args)
 	char *arg;
 	uint index;
 
-	foreach(args, arg, index)
+	foreach (args, arg, index)
 	{
 		buff = addChar(buff, ' ');
 
@@ -62,7 +62,7 @@ static void FindProgram_Main(char *trgDir)
 
 	FindProgram_Collect(trgDir);
 
-	foreach(dirs, dir, dir_index)
+	foreach (dirs, dir, dir_index)
 	{
 		char *localDir = getLocal(dir);
 
@@ -91,7 +91,7 @@ static char *FindProgram(char *program)
 		char *found;
 		uint found_index;
 
-		foreach(FP_Founds, found, found_index)
+		foreach (FP_Founds, found, found_index)
 		{
 			cout("Œ©‚Â‚©‚Á‚½ƒvƒƒOƒ‰ƒ€F%s\n", found);
 		}

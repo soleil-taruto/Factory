@@ -45,7 +45,7 @@ static void MGZE_Transpose_seed(autoBlock_t *data, uint seed)
 	MGZE_X = seed;
 	MGZE_Shuffle(swapIdxLst);
 
-	foreach(swapIdxLst, swapIdx, index)
+	foreach (swapIdxLst, swapIdx, index)
 	{
 		swapByte(data, index, getSize(data) - swapIdx);
 	}

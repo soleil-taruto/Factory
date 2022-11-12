@@ -22,7 +22,7 @@ static void CleanupGitDir(char *dir)
 	paths = ls(".");
 	eraseParents(paths);
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		if (
 			!_stricmp(path, ".git") ||
@@ -49,7 +49,7 @@ static void FoundIgnoreFile(autoList_t *files, char *ignFile)
 	ignPtn = changeLocal(ignFile, "");
 	ignPtnYen = addChar(strx(ignPtn), '\\');
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (
 #if 0 // フォルダごと消す。
@@ -74,7 +74,7 @@ static void RemoveIgnoreFiles(autoList_t *files)
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		if (!_stricmp(getLocal(file), IGNORE_FILE))
 			FoundIgnoreFile(files, file);
 
@@ -109,7 +109,7 @@ static void SolveEncoding(char *rootDir)
 
 	RemoveGitPaths(files);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		char *localFile = getLocal(file);
 
@@ -139,7 +139,7 @@ static void SolveEmptyDir(char *rootDir)
 
 	RemoveGitPaths(dirs);
 
-	foreach(dirs, dir, index)
+	foreach (dirs, dir, index)
 	{
 		if (!lsCount(dir)) // ? 空のDIR
 		{
@@ -183,13 +183,13 @@ static void GitFactory(char *rDir, char *wDir, int allowOverwrite)
 	files = lss(rDir);
 	changeRoots(files, rDir, NULL);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		errorCase_m(startsWithICase(file, ".git"), ".gitで始まる何かがあります。");
 
 	RemoveIgnoreFiles(files);
 	sortJLinesICase(files);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		char *rFile = combine(rDir, file);
 		char *wFile = combine(wDir, file);

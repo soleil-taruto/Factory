@@ -211,7 +211,7 @@ LOGPOS();
 	deletedFlag = 0;
 
 LOGPOS();
-//	foreach(files, file, index)
+//	foreach (files, file, index)
 	{
 
 file = makeFullPath("SimpleWebServer.cs"); // g
@@ -222,7 +222,7 @@ file = makeFullPath("SimpleWebServer.cs"); // g
 			char *line;
 			uint line_index;
 
-			foreach(lines, line, line_index)
+			foreach (lines, line, line_index)
 			{
 				if (
 					IsMember(lines, line_index) ||
@@ -268,7 +268,7 @@ LOGPOS();
 		goto restart;
 
 LOGPOS();
-	foreach(deletableCsFiles, file, index)
+	foreach (deletableCsFiles, file, index)
 	{
 		removeFile(file);
 	}
@@ -299,7 +299,7 @@ static void Main2_Solution(void)
 	char *slnFile = NULL;
 	char *projName;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (!_stricmp("sln", getExt(file)))
 		{

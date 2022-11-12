@@ -226,7 +226,7 @@ static void Transmission(void)
 	Transmission_t *t;
 	uint index;
 
-	foreach(Transmissions, t, index)
+	foreach (Transmissions, t, index)
 	{
 		if (FuncTransmit)
 		{
@@ -412,7 +412,7 @@ void sockServerEx(int (*funcPerform)(char *, char *),
 		}
 	}
 
-	foreach(Transmissions, t, index)
+	foreach (Transmissions, t, index)
 		ReleaseTransmission(t);
 
 	releaseAutoList(Transmissions);

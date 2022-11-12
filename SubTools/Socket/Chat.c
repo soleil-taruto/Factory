@@ -194,7 +194,7 @@ static void ChatMain(void)
 
 				GetTLPeriod = 0;
 
-				foreach(timeLine, line, index)
+				foreach (timeLine, line, index)
 				{
 					autoList_t *tokens = tokenize(line, '\t');
 					char *stamp;
@@ -312,7 +312,7 @@ readArgs:
 			}
 			else
 			{
-				foreach(timeLine, line, index)
+				foreach (timeLine, line, index)
 					cout("%s\n", line);
 			}
 			releaseDim(timeLine, 1);
@@ -344,7 +344,7 @@ readArgs:
 			}
 			else
 			{
-				foreach(members, member, index)
+				foreach (members, member, index)
 					cout("[%s]\n", member);
 			}
 			releaseDim(members, 1);

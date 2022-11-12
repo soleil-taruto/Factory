@@ -22,7 +22,7 @@ autoList_t *GetReferenceSolutions(char *source)
 
 		projDirs = lsDirs(projRootDir);
 
-		foreach(projDirs, projDir, projDir_index)
+		foreach (projDirs, projDir, projDir_index)
 		{
 			char *projName = changeExt(getLocal(projDir), "");
 			char *projFile;
@@ -40,7 +40,7 @@ autoList_t *GetReferenceSolutions(char *source)
 
 				ucTrimEdgeAllLine(lines);
 
-				foreach(lines, line, index)
+				foreach (lines, line, index)
 				{
 					if (lineExpICase("/<HintPath><1,,>\\<1,,>\\bin\\Release\\<1,,>.dll/<//HintPath>", line))
 					//                                 ~~~~~                ~~~~~
@@ -109,7 +109,7 @@ void SolutionOrder(autoList_t *sources) // sources: 全てフルパスであることを想定
 
 	LOGPOS();
 
-	foreach(sources, source, index)
+	foreach (sources, source, index)
 	{
 		SourceInfo_t *info = nb_(SourceInfo_t);
 

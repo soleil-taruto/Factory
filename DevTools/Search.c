@@ -80,7 +80,7 @@ static void SearchFile(char *file)
 
 	if (SpecExts)
 	{
-		foreach(SpecExts, ext, extndx)
+		foreach (SpecExts, ext, extndx)
 			if (!_stricmp(ext, getExt(file)))
 				break;
 
@@ -245,7 +245,7 @@ readArgs:
 
 	rapidSort(&files, (sint (*)(uint, uint))mbs_stricmp);
 
-	foreach(&files, file, index)
+	foreach (&files, file, index)
 	{
 		SearchFile(file);
 	}

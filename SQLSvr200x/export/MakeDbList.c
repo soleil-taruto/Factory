@@ -15,7 +15,7 @@ int main(int argc, char **argv)
 
 	dbRec = SqlRecReader(dbRecFile); // db
 
-	foreach(dbRec, row, index)
+	foreach (dbRec, row, index)
 	{
 		char *db;
 

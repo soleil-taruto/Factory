@@ -30,7 +30,7 @@ static void InitHashTable(autoList_t *lines)
 	for(index = 0; index < 0x10000; index++)
 		addElement(HashTable, (uint)newList());
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		uchar *hash;
 		uint segment;
@@ -78,7 +78,7 @@ static void Check(uchar *msg, uint msgLen, uchar msgHash[HASH_SIZE])
 
 	hashes = (autoList_t *)getElement(HashTable, segment);
 
-	foreach(hashes, hash, index)
+	foreach (hashes, hash, index)
 	{
 		if (!memcmp(hash, msgHash, HASH_SIZE))
 		{

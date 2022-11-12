@@ -102,7 +102,7 @@ static void CheckDirFormat(char *dir)
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (index)
 			cout("\n");

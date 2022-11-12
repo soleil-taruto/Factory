@@ -9,7 +9,7 @@ void RemoveGitPaths(autoList_t *paths)
 	char *path;
 	uint index;
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 		if (IsGitPath(path))
 			path[0] = '\0';
 

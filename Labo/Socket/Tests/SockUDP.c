@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 
 		sock = sockUDPOpenSend();
 
-		foreach(lines, line, index)
+		foreach (lines, line, index)
 			sockUDPSendBlock(sock, ip, domain, portno, line, strlen(line));
 
 		sockUDPClose(sock);

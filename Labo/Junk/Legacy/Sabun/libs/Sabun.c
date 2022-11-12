@@ -90,7 +90,7 @@ void makeSabun(char *sabunFile, char *beforeDir, char *afterDir, int correctAddD
 	rapidSortLines(files2);
 
 	addCwd(dir1);
-	foreach(files1, file, index) // 更新前のファイルとハッシュ、確認用
+	foreach (files1, file, index) // 更新前のファイルとハッシュ、確認用
 	{
 		writeLine(fp, file);
 		writeLine_x(fp, md5_makeHexHashFile(file));
@@ -99,7 +99,7 @@ void makeSabun(char *sabunFile, char *beforeDir, char *afterDir, int correctAddD
 	unaddCwd();
 
 	addCwd(dir2);
-	foreach(files2, file, index) // 更新後のファイルとハッシュ、確認用
+	foreach (files2, file, index) // 更新後のファイルとハッシュ、確認用
 	{
 		addElement(trailLines, (uint)strx(file));
 		addElement(trailLines, (uint)md5_makeHexHashFile(file));
@@ -118,13 +118,13 @@ void makeSabun(char *sabunFile, char *beforeDir, char *afterDir, int correctAddD
 		}
 	}
 
-	foreach(files1, file, index) // 削除するファイル
+	foreach (files1, file, index) // 削除するファイル
 	{
 		writeChar(fp, 'D');
 		writeLine(fp, file);
 	}
 	addCwd(dir2);
-	foreach(files2, file, index) // 追加するファイル
+	foreach (files2, file, index) // 追加するファイル
 	{
 		writeChar(fp, 'A');
 		writeLine(fp, file);
@@ -134,7 +134,7 @@ void makeSabun(char *sabunFile, char *beforeDir, char *afterDir, int correctAddD
 	}
 	unaddCwd();
 
-	foreach(mfiles, file, index) // 更新するファイル
+	foreach (mfiles, file, index) // 更新するファイル
 	{
 		char *file1 = combine(dir1, file);
 		char *file2 = combine(dir2, file);
@@ -163,7 +163,7 @@ void makeSabun(char *sabunFile, char *beforeDir, char *afterDir, int correctAddD
 	}
 	writeChar(fp, 'Z'); // 終了
 
-	foreach(trailLines, line, index)
+	foreach (trailLines, line, index)
 	{
 		writeLine(fp, line);
 	}

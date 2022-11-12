@@ -38,7 +38,7 @@ static void ClearDir(char *dir)
 	paths = lss(dir);
 	reverseElements(paths);
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		cout("rm: %s\n", path);
 		( existDir(path) ? removeDir : removeFile )(path);
@@ -63,7 +63,7 @@ static char *NormalizePathCase(char *path, char *dir)
 	restoreYen(path);
 
 	addCwd(dir);
-	foreach(ptkns, ptkn, index)
+	foreach (ptkns, ptkn, index)
 	{
 		char *newPTkn;
 
@@ -111,7 +111,7 @@ static void ExecCopy(char *path, char *dir1, char *dir2) // (dir1, dir2) == absD
 	memFree((void *)unaddElement(ptkns));
 
 	addCwd(dir2);
-	foreach(ptkns, ptkn, index)
+	foreach (ptkns, ptkn, index)
 	{
 		mkdirEx(ptkn);
 		changeCwd(ptkn);
@@ -148,7 +148,7 @@ static void ProcCopy(void)
 	cout("[R] %s\n", RootDir);
 	cout("[D] %s\n", DestDir);
 
-	foreach(PathList, path, index)
+	foreach (PathList, path, index)
 	{
 		addCwd(RootDir);
 		path = makeFullPath_x(path);
@@ -164,7 +164,7 @@ static void ProcCopy(void)
 	}
 	if (!NoNormalizePathCase)
 	{
-		foreach(PathList, path, index)
+		foreach (PathList, path, index)
 		{
 			char *newPath = NormalizePathCase(path, RootDir);
 
@@ -181,7 +181,7 @@ static void ProcCopy(void)
 	{
 		ClearDir(DestDir);
 	}
-	foreach(PathList, path, index)
+	foreach (PathList, path, index)
 	{
 		ExecCopy(path, RootDir, DestDir);
 	}

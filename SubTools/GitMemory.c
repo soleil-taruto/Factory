@@ -20,7 +20,7 @@ static void MemoryMain_MD(char *memDir)
 
 	sortJLinesICase(repoDirs);
 
-	foreach(repoDirs, repoDir, repoDir_index)
+	foreach (repoDirs, repoDir, repoDir_index)
 	{
 		char *memRepoDir = combine(memDir, getLocal(repoDir));
 		autoList_t *paths;
@@ -34,7 +34,7 @@ static void MemoryMain_MD(char *memDir)
 		paths = ls(repoDir);
 		sortJLinesICase(paths);
 
-		foreach(paths, path, index)
+		foreach (paths, path, index)
 		{
 			char *wPath = combine(memRepoDir, getLocal(path));
 
@@ -112,7 +112,7 @@ static void FlushMain(void)
 		memRepoDirs = lsDirs(memDir);
 		sortJLinesICase(memRepoDirs);
 
-		foreach(memRepoDirs, memRepoDir, memRepoDir_index)
+		foreach (memRepoDirs, memRepoDir, memRepoDir_index)
 		{
 			char *repoDir = combine(GIT_ROOTDIR, getLocal(memRepoDir));
 			autoList_t *paths;
@@ -127,7 +127,7 @@ static void FlushMain(void)
 			paths = ls(repoDir);
 			sortJLinesICase(paths);
 
-			foreach(paths, path, index)
+			foreach (paths, path, index)
 			{
 				cout("! %s\n", path);
 
@@ -148,7 +148,7 @@ static void FlushMain(void)
 			paths = ls(memRepoDir);
 			sortJLinesICase(paths);
 
-			foreach(paths, path, index)
+			foreach (paths, path, index)
 			{
 				char *wPath = combine(repoDir, getLocal(path));
 
@@ -211,7 +211,7 @@ static void TrimMain(void)
 		}
 	}
 	LOGPOS();
-	foreach(deletableDirs, dir, index)
+	foreach (deletableDirs, dir, index)
 	{
 		cout("* %s\n", dir);
 		recurRemoveDir(dir);

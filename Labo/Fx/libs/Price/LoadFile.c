@@ -5,7 +5,7 @@ static int IsAllZero(autoList_t *list)
 	Price_t *i;
 	uint index;
 
-	foreach(list, i, index)
+	foreach (list, i, index)
 		if (i != NULL)
 			return 0;
 
@@ -171,7 +171,7 @@ autoList_t *LoadPriceDay(char *file) // ret: { Price_t *, ... }
 
 	setCount(list, 43200);
 
-	foreach(rows, row, index)
+	foreach (rows, row, index)
 	{
 		char *sTime = getLine(row, 0);
 		char *sBid  = getLine(row, 1);

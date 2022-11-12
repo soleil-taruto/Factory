@@ -23,7 +23,7 @@ static void Search(char *rootDir)
 	char *dir;
 	uint index;
 
-	foreach(dirs, dir, index)
+	foreach (dirs, dir, index)
 	{
 		if (!_stricmp("rum", getExt(dir)))
 		{
@@ -34,7 +34,7 @@ static void Search(char *rootDir)
 
 			revDirs = lsDirs(revRootDir);
 
-			foreach(revDirs, revDir, revDir_index)
+			foreach (revDirs, revDir, revDir_index)
 			{
 				char *commentFile = combine(revDir, "comment.txt");
 				char *comment;
@@ -63,7 +63,7 @@ static void Main2(char *rootDir)
 	Search(rootDir);
 	rapidSortLines(Revisions);
 
-	foreach(Revisions, revision, index)
+	foreach (Revisions, revision, index)
 		cout("%s\n", revision);
 }
 static void MultiSetComment(char *commentNew)
@@ -78,7 +78,7 @@ static void MultiSetComment(char *commentNew)
 	{
 		cout("ššššš‚±‚±‚©‚çššššš\n");
 
-		foreach(selRevisions, line, index)
+		foreach (selRevisions, line, index)
 			cout("%s\n", line);
 
 		cout("ššššš‚±‚±‚Ü‚Åššššš\n");
@@ -93,7 +93,7 @@ static void MultiSetComment(char *commentNew)
 		cout("‘±s‚µ‚Ü‚·B\n");
 	}
 
-	foreach(selRevisions, line, index)
+	foreach (selRevisions, line, index)
 	{
 		char *revision;
 		char *rumDir;

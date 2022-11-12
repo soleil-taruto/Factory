@@ -11,7 +11,7 @@ static autoList_t *MakeProtoList(char *file)
 	uint index;
 	autoList_t *protos = newList();
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		if (line[0] &&
 			line[0] != '\t' &&

@@ -48,7 +48,7 @@ static void ShowBuildTime(char *trgPath)
 
 		sortJLinesICase(paths);
 
-		foreach(paths, path, index)
+		foreach (paths, path, index)
 		{
 			char *relPath = changeRoot(strx(path), trgPath, NULL);
 

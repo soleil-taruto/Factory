@@ -39,7 +39,7 @@ static void AddBothExist(autoList_t *dest, autoList_t *paths, char *lParent, cha
 	char *path;
 	uint index;
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		char *lPath = combine(lParent, path);
 		char *rPath = combine(rParent, path);
@@ -94,7 +94,7 @@ static void AddOnlyExist(autoList_t *dest, autoList_t *paths, char *parent, int 
 
 	addCwd(parent);
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		DirSabunKind_t kind;
 

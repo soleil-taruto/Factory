@@ -70,7 +70,7 @@ void ReleasePriceDay(autoList_t *list)
 	Price_t *i;
 	uint index;
 
-	foreach(list, i, index)
+	foreach (list, i, index)
 		ReleasePrice(i);
 
 	releaseAutoList(list);

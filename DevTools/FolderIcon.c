@@ -22,7 +22,7 @@ static void LoadFolderIconPairs(void)
 	FIP_Dirs = newList();
 	FIP_IconFiles = newList();
 
-	foreach(linesList, lines, lines_index)
+	foreach (linesList, lines, lines_index)
 	{
 		char *iconFile = getLine(lines, 0);
 
@@ -30,7 +30,7 @@ static void LoadFolderIconPairs(void)
 		errorCase(_stricmp(getExt(iconFile), "ico"));
 		errorCase(!existFile(iconFile));
 
-		foreach(lines, line, index)
+		foreach (lines, line, index)
 		if (index)
 		{
 			char *dir = line;
@@ -86,7 +86,7 @@ static void ChangeFolderIcons(void)
 
 	eraseParents(dirs);
 
-	foreach(dirs, dir, index)
+	foreach (dirs, dir, index)
 	{
 		uint fipIndex = findLineCase(FIP_Dirs, dir, 1);
 

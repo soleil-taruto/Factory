@@ -256,7 +256,7 @@ static int Perform(int method) // method: "HGP"
 	writeLine(fp, "/V");
 	writeLine_x(fp, xcout("%u", HTTPVersion));
 
-	foreach(Header, pair, index)
+	foreach (Header, pair, index)
 	{
 		writeLine(fp, "/H");
 		writeLine(fp, asLine(getLine(pair, 0)));

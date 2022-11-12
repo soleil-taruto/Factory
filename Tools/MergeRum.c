@@ -41,7 +41,7 @@ static void PathsFltr(autoList_t *paths, char *format)
 
 	LOGPOS();
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		toLowerLine(path);
 		cout("%s\n", path);
@@ -76,7 +76,7 @@ static void MergeRum(char *masterDir, char *slaveDir)
 		char *rev;
 		uint index;
 
-		foreach(slaveRevs, rev, index)
+		foreach (slaveRevs, rev, index)
 		{
 			char *sRev = combine_xc(combine(slaveDir, DIR_REVISIONS), rev);
 			char *mRev = combine_xc(combine(masterDir, DIR_REVISIONS), rev);
@@ -99,7 +99,7 @@ static void MergeRum(char *masterDir, char *slaveDir)
 		char *file;
 		uint index;
 
-		foreach(slaveFiles, file, index)
+		foreach (slaveFiles, file, index)
 		{
 			char *sFile = combine_xc(combine(slaveDir, DIR_FILES), file);
 			char *mFile = combine_xc(combine(masterDir, DIR_FILES), file);
@@ -122,7 +122,7 @@ static void MergeRum(char *masterDir, char *slaveDir)
 		char *rev;
 		uint index;
 
-		foreach(duplFiles, file, index)
+		foreach (duplFiles, file, index)
 		{
 			char *sFile = combine_xc(combine(slaveDir, DIR_FILES), file);
 			char *wFile = combine(wDir, file);
@@ -136,7 +136,7 @@ static void MergeRum(char *masterDir, char *slaveDir)
 			memFree(sFile);
 			memFree(wFile);
 		}
-		foreach(duplRevs, rev, index)
+		foreach (duplRevs, rev, index)
 		{
 			char *s_dir = combine_xc(combine(slaveDir, DIR_REVISIONS), rev);
 			char *w_dir = combine(wDir, rev);

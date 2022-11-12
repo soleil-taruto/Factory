@@ -74,11 +74,11 @@ static autoList_t *GetHashes(char *targetDir)
 	sortJLinesICase(&dirs);
 	sortJLinesICase(&files);
 
-	foreach(&dirs, dir, index)
+	foreach (&dirs, dir, index)
 	{
 		addElement(hashes, (uint)xcout("-------------------------------- %s", dir));
 	}
-	foreach(&files, file, index)
+	foreach (&files, file, index)
 	{
 		cmdTitle_x(xcout("dmd5 - %u / %u", index, getCount(&files)));
 		addElement(hashes, (uint)xcout("%s %s", c_md5_makeHexHashFile(file), file));
@@ -107,7 +107,7 @@ static void DispHashesDiff(autoList_t *hashes1, autoList_t *hashes2)
 		cout("| ˆê’v‚µ‚Ü‚¹‚ñ‚Å‚µ‚½ |\n");
 		cout("+--------------------+\n");
 
-		foreach(report, line, index)
+		foreach (report, line, index)
 		{
 			cout("%s\n", line);
 		}
@@ -119,7 +119,7 @@ static void DispHashes(autoList_t *hashes)
 	char *hash;
 	uint index;
 
-	foreach(hashes, hash, index)
+	foreach (hashes, hash, index)
 	{
 		cout("%s\n", hash);
 	}

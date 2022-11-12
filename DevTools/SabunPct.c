@@ -83,13 +83,13 @@ static void SabunPct(char *dir1, char *dir2)
 	sortJLinesICase(paths2);
 	mergeLines2ICase(paths1, paths2, only1Paths, bothPaths, only2Paths);
 
-	foreach(only1Paths, line, index)
+	foreach (only1Paths, line, index)
 		addElement(lines, (uint)xcout("Left Only*%s", line));
 
-	foreach(only2Paths, line, index)
+	foreach (only2Paths, line, index)
 		addElement(lines, (uint)xcout("Right Only*%s", line));
 
-	foreach(bothPaths, line, index)
+	foreach (bothPaths, line, index)
 	{
 		char *path1 = combine(dir1, line);
 		char *path2 = combine(dir2, line);
@@ -127,7 +127,7 @@ static void SabunPct(char *dir1, char *dir2)
 	SortWLines(lines);
 	shootingStarLines(lines);
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 		cout("%s\n", line);
 
 	memFree(dir1);

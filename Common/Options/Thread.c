@@ -94,7 +94,7 @@ void collectDeadThreads(autoList_t *hdls)
 	uint hdl;
 	uint n;
 
-	foreach(hdls, hdl, n)
+	foreach (hdls, hdl, n)
 	{
 		if (waitThreadEx(hdl, 0))
 		{

@@ -25,7 +25,7 @@ static void CreateRiotComponent(char *name)
 		char *file;
 		uint index;
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 		{
 			char *localName = strx(getLocal(file));
 			char *dot;
@@ -49,7 +49,7 @@ static void CreateRiotComponent(char *name)
 		char *file;
 		uint index;
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 		{
 			CopyResFile(file, name);
 		}

@@ -364,7 +364,7 @@ static void F_Encrypt(char *file, autoList_t *keyTableList)
 	camellia_keyTable_t *keyTable;
 	uint index;
 
-	foreach(keyTableList, keyTable, index)
+	foreach (keyTableList, keyTable, index)
 	{
 		F_EncryptMain(file, keyTable);
 	}

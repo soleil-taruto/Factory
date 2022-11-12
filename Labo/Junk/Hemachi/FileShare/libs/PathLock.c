@@ -30,7 +30,7 @@ int HFS_NM_LockPath(char *path, int checkOnlyMode) // ? ロック可能 || ロックした
 	lines = readLines(LOCKED_FILE);
 	cout("lines_num: %u\n", getCount(lines));
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 		if (!mbs_stricmp(line, path))
 			break;
 
@@ -69,7 +69,7 @@ void HFS_NM_UnlockPath(char *path)
 	lines = readLines(LOCKED_FILE);
 	cout("lines_num: %u\n", getCount(lines));
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		if (!mbs_stricmp(line, path))
 		{

@@ -27,7 +27,7 @@ static void AntiSVN(char *targetDir)
 		uint index;
 		int found = 0;
 
-		foreach(dirs, dir, index)
+		foreach (dirs, dir, index)
 		{
 			if (
 				!_stricmp(".svn", getLocal(dir)) ||

@@ -496,7 +496,7 @@ void recurClearDir(char *dir)
 
 	reverseElements(paths);
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 	{
 		removePath(path);
 	}
@@ -663,7 +663,7 @@ void eraseRoots(autoList_t *pathList, char *root)
 	char *path;
 	uint index;
 
-	foreach(pathList, path, index)
+	foreach (pathList, path, index)
 	{
 		setElement(pathList, index, (uint)eraseRoot(path, root));
 	}
@@ -688,7 +688,7 @@ void changeRoots(autoList_t *pathList, char *root, char *newRoot)
 	char *path;
 	uint index;
 
-	foreach(pathList, path, index)
+	foreach (pathList, path, index)
 	{
 		setElement(pathList, index, (uint)changeRoot(path, root, newRoot));
 	}
@@ -733,7 +733,7 @@ void eraseParents(autoList_t *pathList)
 	char *path;
 	uint index;
 
-	foreach(pathList, path, index)
+	foreach (pathList, path, index)
 	{
 		eraseParent(path);
 	}
@@ -1104,7 +1104,7 @@ void termination_scheduledRemoveFile(void)
 
 		LOGPOS();
 
-		foreach(RFAT_Files, file, index)
+		foreach (RFAT_Files, file, index)
 		{
 			cout("### %s\n", file);
 			removeFile(file);

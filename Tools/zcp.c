@@ -153,7 +153,7 @@ readArgs:
 
 			reverseElements(paths);
 
-			foreach(paths, path, index)
+			foreach (paths, path, index)
 			{
 				E_Fltr(path);
 			}

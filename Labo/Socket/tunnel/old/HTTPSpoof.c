@@ -41,7 +41,7 @@ static void SpoofHeader(void)
 		char *r_key;
 		uint r_ndx;
 
-		foreach(R_Keys, r_key, r_ndx)
+		foreach (R_Keys, r_key, r_ndx)
 		{
 			uint h_ndx = findLineCase(HttpDat.H_Keys, r_key, 1);
 			char *h_key;

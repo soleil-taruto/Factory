@@ -8,7 +8,7 @@ int main(int argc, char **argv)
 
 	LOGPOS();
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		LOGPOS();
 
@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 
 			LOGPOS();
 
-			foreach(lines, line, line_index)
+			foreach (lines, line, line_index)
 			{
 				if (lineExp("//// #### DELETED ==== <7,09> $$$$ ////\t<>", line))
 				{

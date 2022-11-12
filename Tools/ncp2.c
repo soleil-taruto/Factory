@@ -89,7 +89,7 @@ static autoList_t *GetServerPaths(char *serverDir)
 
 		serverPaths = readLines(outFile);
 
-		foreach(serverPaths, line, index)
+		foreach (serverPaths, line, index)
 		{
 			if (startsWith(line, molp))
 				eraseLine(line, strlen(molp));
@@ -140,7 +140,7 @@ static int MirrorDirMain(char *clientDir, char *serverDir, int direction)
 		char *serverPath;
 		uint index;
 
-		foreach(serverPaths, serverPath, index)
+		foreach (serverPaths, serverPath, index)
 		{
 			int dirFlag = 0;
 
@@ -192,7 +192,7 @@ static int MirrorDirMain(char *clientDir, char *serverDir, int direction)
 
 		bothExistDirs = mergeConstLinesICase(dirs, serverDirs);
 
-		foreach(bothExistDirs, dir, index)
+		foreach (bothExistDirs, dir, index)
 		{
 			char *clientSubDir = combine(clientDir, dir);
 			char *serverSubDir = combine(serverDir, dir);
@@ -210,7 +210,7 @@ static int MirrorDirMain(char *clientDir, char *serverDir, int direction)
 		if (!retval)
 			goto endClientOnlyDirs;
 
-		foreach(dirs, dir, index)
+		foreach (dirs, dir, index)
 		{
 			char *clientSubDir = combine(clientDir, dir);
 			char *serverSubDir = combine(serverDir, dir);
@@ -235,7 +235,7 @@ static int MirrorDirMain(char *clientDir, char *serverDir, int direction)
 		if (!retval)
 			goto freeVars;
 
-		foreach(serverDirs, dir, index)
+		foreach (serverDirs, dir, index)
 		{
 			char *clientSubDir = combine(clientDir, dir);
 			char *serverSubDir = combine(serverDir, dir);
@@ -268,7 +268,7 @@ static int MirrorDirMain(char *clientDir, char *serverDir, int direction)
 
 		releaseDim(mergeConstLinesICase(files, serverFiles), 1);
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 		{
 			char *clientFile = combine(clientDir, file);
 			char *serverFile = combine(serverDir, file);
@@ -292,7 +292,7 @@ static int MirrorDirMain(char *clientDir, char *serverDir, int direction)
 		if (!retval)
 			goto freeVars;
 
-		foreach(serverFiles, file, index)
+		foreach (serverFiles, file, index)
 		{
 			char *clientFile = combine(clientDir, file);
 			char *serverFile = combine(serverDir, file);

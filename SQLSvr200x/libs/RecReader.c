@@ -99,7 +99,7 @@ autoList_t *SqlRecReader(char *recFile)
 
 	cwList = GetColumnWidthList(getLine(recLines, 1));
 
-	foreach(recLines, recLine, rowidx)
+	foreach (recLines, recLine, rowidx)
 	{
 		if (rowidx == 1) // ? ボーダーラインの行
 			continue;
@@ -113,7 +113,7 @@ autoList_t *SqlRecReader(char *recFile)
 		line2JLine(recLine, 1, 0, 0, 1);
 		row = SplitRow(recLine, cwList);
 
-		foreach(row, column, colidx)
+		foreach (row, column, colidx)
 			trimEdge(column, ' ');
 
 		addElement(table, (uint)row);

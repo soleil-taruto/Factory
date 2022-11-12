@@ -84,7 +84,7 @@ static void GazoSlim(char *dir)
 
 	ProgressBegin();
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		ProgressRate((double)index / getCount(files));
 
@@ -94,7 +94,7 @@ static void GazoSlim(char *dir)
 
 	rapidSort(lines, LineComp);
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		if (!index || _strnicmp(getLine(lines, index - 1) + MD5_BGN, line + MD5_BGN, MD5_LEN))
 			line[0] = 'K'; // Keep
@@ -103,19 +103,19 @@ static void GazoSlim(char *dir)
 	}
 	cout("---- file list ----\n");
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 		cout("%s\n", line);
 
 	rapidSort(lines, LineComp_File);
 
 	cout("---- order by file ----\n");
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 		cout("%s\n", line);
 
 	cout("---- delete only ----\n");
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 		if (line[0] == 'D')
 			cout("%s\n", line);
 
@@ -126,7 +126,7 @@ static void GazoSlim(char *dir)
 
 	cout("ë±çsÇµÇ‹Ç∑ÅB\n");
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 		if (line[0] == 'D')
 			DoDeleteFile(line + MD5_BGN + MD5_LEN);
 

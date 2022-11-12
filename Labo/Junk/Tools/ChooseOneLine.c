@@ -57,7 +57,7 @@ int main(int argc, char **argv)
 
 		writeLines(RecentlyLinesFile, rcntLines);
 
-		foreach(Lines, line, index)
+		foreach (Lines, line, index)
 			if (findLine(rcntLines, line) < getCount(rcntLines))
 				*line = '\0';
 
@@ -72,7 +72,7 @@ int main(int argc, char **argv)
 		char *line;
 		uint index;
 
-		foreach(Lines, line, index)
+		foreach (Lines, line, index)
 			cout("%s\n", line);
 
 		return;

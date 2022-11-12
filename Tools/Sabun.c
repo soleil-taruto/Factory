@@ -110,14 +110,14 @@ static void Sabun(char *lDir, char *rDir, char *outDir)
 	LOGPOS();
 
 	if (OutputLeftOnly)
-		foreach(lOnlyFiles, file, index)
+		foreach (lOnlyFiles, file, index)
 			DoOutput(outDir, lDir, file);
 
 	LOGPOS();
 
 	if (OutputSame || OutputDiff)
 	{
-		foreach(bothFiles, file, index)
+		foreach (bothFiles, file, index)
 		{
 			if (OutputSame && OutputDiff)
 			{
@@ -151,7 +151,7 @@ static void Sabun(char *lDir, char *rDir, char *outDir)
 	LOGPOS();
 
 	if (OutputRightOnly)
-		foreach(rOnlyFiles, file, index)
+		foreach (rOnlyFiles, file, index)
 			DoOutput(outDir, rDir, file);
 
 	LOGPOS();

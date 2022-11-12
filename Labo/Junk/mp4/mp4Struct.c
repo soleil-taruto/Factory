@@ -75,7 +75,7 @@ static void PrintMp4Struct(char *path)
 		char *file;
 		uint index;
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 			PrintMp4Struct_File(file);
 
 		releaseDim(files, 1);

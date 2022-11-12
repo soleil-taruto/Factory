@@ -205,7 +205,7 @@ static Member_t *FindMember(char *name)
 	Member_t *member;
 	uint index;
 
-	foreach(MemberList, member, index)
+	foreach (MemberList, member, index)
 		if (!strcmp(name, member->Name))
 			break;
 
@@ -399,7 +399,7 @@ static int Perform(char *prmFile, char *ansFile)
 				char *trail;
 				uint trail_index;
 
-				foreach(trails, trail, trail_index)
+				foreach (trails, trail, trail_index)
 				{
 					if (!*trail)
 						trail = "(T0)";
@@ -414,7 +414,7 @@ static int Perform(char *prmFile, char *ansFile)
 			uint64 currTime = GetTime();
 			Member_t *member;
 
-			foreach(MemberList, member, index)
+			foreach (MemberList, member, index)
 			{
 				if (GetSecond(currTime) < GetSecond(member->LastAccessTime) + 60) // ? 過去１分未満にアクセス有り
 				{
@@ -496,7 +496,7 @@ static void OutputDump(void)
 
 	cout("OutputDump Start...\n");
 
-	foreach(TweetList, tw, index)
+	foreach (TweetList, tw, index)
 	{
 		uiMessage = strx(tw->Message);
 		KanaMask(uiMessage);
@@ -510,7 +510,7 @@ static void OutputDump(void)
 
 		memFree(uiMessage);
 	}
-	foreach(MemberList, member, index)
+	foreach (MemberList, member, index)
 	{
 		writeLine(fp, "[Member]");
 		writeLine_x(fp, xcout("Name=%s", member->Name));

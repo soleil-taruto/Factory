@@ -19,7 +19,7 @@ static void FoundCfgFile(char *cfgFile)
 
 	cout("C %s\n", cfgFile);
 
-	foreach(lines, line, index)
+	foreach (lines, line, index)
 	{
 		char *tmpLine = strx(line);
 		char *key;
@@ -97,7 +97,7 @@ static void Search(char *currDir, uint remDeep)
 		char *dir;
 		uint index;
 
-		foreach(dirs, dir, index)
+		foreach (dirs, dir, index)
 			Search(dir, remDeep - 1);
 
 		releaseDim(dirs, 1);

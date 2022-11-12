@@ -59,7 +59,7 @@ static void ShowExitMessages(void)
 	char *message;
 	uint index;
 
-	foreach(ExitMessages, message, index)
+	foreach (ExitMessages, message, index)
 	{
 		cout("%s\n", message);
 	}
@@ -90,7 +90,7 @@ static autoList_t *GetResponse(char *source, int buildFlag)
 	ClearNewestFile();
 	UpdateNewestFile(source);
 
-	foreach(remFiles, file, index)
+	foreach (remFiles, file, index)
 	{
 		autoList_t *lines = readLines(file);
 		char *line;
@@ -99,7 +99,7 @@ static autoList_t *GetResponse(char *source, int buildFlag)
 
 		addCwd(dir);
 
-		foreach(lines, line, line_index)
+		foreach (lines, line, line_index)
 		{
 			if (lineExp("<\t\t  >#<\t\t  >include<\t\t  >\"<>\"<>", line))
 			{
@@ -137,7 +137,7 @@ static autoList_t *GetResponse(char *source, int buildFlag)
 
 	if (buildFlag)
 	{
-		foreach(includes, file, index)
+		foreach (includes, file, index)
 		{
 			char *objfile = changeExt(file, "obj");
 
@@ -164,14 +164,14 @@ static autoList_t *GetResponse(char *source, int buildFlag)
 				memFree(objfile);
 		}
 	}
-	foreach(includes, file, index)
+	foreach (includes, file, index)
 	{
 		if (existFile(file))
 		{
 			UpdateNewestFile(file);
 		}
 	}
-	foreach(response, file, index)
+	foreach (response, file, index)
 	{
 		UpdateNewestFile(file);
 	}
@@ -391,7 +391,7 @@ static void Build(char *module, uint remCount) // remCount: 0 == –³Œø
 
 		addLines_x(lines, readLines(CLSTDOUT));
 
-		foreach(lines, line, index)
+		foreach (lines, line, index)
 		{
 			cout("%s\n", line);
 		}
@@ -510,7 +510,7 @@ static void DeepBuild(int shallowMode)
 	objSources = newList();
 	exeSources = newList();
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		if (!_stricmp("c", getExt(file)))
 //		if (!_stricmp("c", getExt(file)) || !_stricmp("cpp", getExt(file)))
@@ -548,7 +548,7 @@ static void DeepBuild(int shallowMode)
 	{
 		BeforeDeepBuild(shallowMode);
 	}
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		uint remCount = getCount(files) - index;
 

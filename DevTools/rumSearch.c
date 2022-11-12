@@ -88,7 +88,7 @@ static void SearchEntFile(char *entFile, char *file, char *revision, char *rumDi
 		char *ext;
 		uint index;
 
-		foreach(SpecExts, ext, index)
+		foreach (SpecExts, ext, index)
 			if (!_stricmp(ext, fileExt))
 				break;
 
@@ -198,7 +198,7 @@ static void SearchRumDir(char *rumDir)
 	dirs = lsDirs(revisionsDir);
 	rapidSortLines(dirs);
 
-	foreach(dirs, dir, index)
+	foreach (dirs, dir, index)
 	{
 		char *filesFile = combine(dir, FILE_FILES);
 		char *revision = getLocal(dir);
@@ -208,7 +208,7 @@ static void SearchRumDir(char *rumDir)
 
 		lines = readLines(filesFile);
 
-		foreach(lines, line, line_index)
+		foreach (lines, line, line_index)
 		{
 			char *hash;
 			char *file;
@@ -280,7 +280,7 @@ readArgs:
 
 		RumDirs = newList();
 
-		foreach(dirs, dir, index)
+		foreach (dirs, dir, index)
 			if (!_stricmp(RUM_DIR_EXT, getExt(dir)))
 				addElement(RumDirs, (uint)strx(dir));
 
@@ -295,7 +295,7 @@ readArgs:
 		char *dir;
 		uint index;
 
-		foreach(RumDirs, dir, index)
+		foreach (RumDirs, dir, index)
 			SearchRumDir(dir);
 	}
 

@@ -70,7 +70,7 @@ static void MakeIndex(char *indexDir, char *templateDir)
 
 	LOGPOS();
 
-	foreach(names, name, name_index)
+	foreach (names, name, name_index)
 	{
 		char *gameDir = combine(rootDir, name);
 		char *titleFile;
@@ -110,7 +110,7 @@ static void MakeIndex(char *indexDir, char *templateDir)
 
 		newestPassed = 0;
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 		{
 			LOGPOS();
 
@@ -157,7 +157,7 @@ static void MakeIndex(char *indexDir, char *templateDir)
 
 		newestPassed = 0;
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 		{
 			LOGPOS();
 

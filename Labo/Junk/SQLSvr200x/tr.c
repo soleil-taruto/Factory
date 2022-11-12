@@ -48,7 +48,7 @@ int main(int argc, char **argv)
 		char *colnm;
 		uint colidx;
 
-		foreach(colnms, colnm, colidx)
+		foreach (colnms, colnm, colidx)
 			cout("%s\n", colnm);
 
 		releaseDim(colnms, 1);
@@ -64,7 +64,7 @@ int main(int argc, char **argv)
 		ReadColArgs();
 		values = TR_SelectTop1WhereAnd_cxxx(csvFile, WhereColNames, WhereColValues, ResultColNames);
 
-		foreach(values, value, index)
+		foreach (values, value, index)
 			cout("%s\n", value);
 
 		releaseDim(values, 1);

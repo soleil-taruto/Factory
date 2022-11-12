@@ -41,7 +41,7 @@ static int TrimProjLines(void)
 	uint index;
 	int trimmed = 0;
 
-	foreach(ProjLines, line, index)
+	foreach (ProjLines, line, index)
 	{
 		if (startsWith(line, "    <Compile Include=\"") && endsWith(line, "\" />"))
 		{
@@ -101,7 +101,7 @@ static int ConfirmDeleteCsFiles(void)
 
 	cout("\n----\n");
 
-	foreach(DeletableCsFiles, file, index)
+	foreach (DeletableCsFiles, file, index)
 		cout("削除対象：%s\n", file);
 
 	cout("削除するには 'D' を入力してね。\n");
@@ -142,7 +142,7 @@ static void ProcProj(int checkOnly)
 		uint index;
 		char *p;
 
-		foreach(ProjLines, line, index)
+		foreach (ProjLines, line, index)
 			if (startsWith(line, "    <AssemblyName>") && endsWith(line, "</AssemblyName>"))
 				break;
 
@@ -173,7 +173,7 @@ static void ProcProj(int checkOnly)
 		char *file;
 		uint index;
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 		{
 			if (
 				!mbs_stristr(file, "\\bin\\Release\\") ||
@@ -221,7 +221,7 @@ static void ProcProj(int checkOnly)
 		LOGPOS();
 		WriteProjFile(ProjFile, ProjLines);
 
-		foreach(DeletableCsFiles, file, index)
+		foreach (DeletableCsFiles, file, index)
 			semiRemovePath(file);
 
 		semiRemovePath(ProjBackupFile);
@@ -257,7 +257,7 @@ static void TrimCsProjCs(void)
 		char *file;
 		uint index;
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 			if (_stricmp(getExt(file), "sln"))
 				file[0] = '\0';
 
@@ -288,7 +288,7 @@ static void TrimCsProjCs(void)
 		char *file;
 		uint index;
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 			if (_stricmp(getExt(file), "csproj"))
 				file[0] = '\0';
 
@@ -296,13 +296,13 @@ static void TrimCsProjCs(void)
 
 		errorCase_m(!getCount(files), "プロジェクトが１つも有りません。");
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 		{
 			ProjFile = file;
 			ProcProj(1);
 			ProjFile = NULL;
 		}
-		foreach(files, file, index)
+		foreach (files, file, index)
 		{
 			ProjFile = file;
 			ProcProj(0);
@@ -325,7 +325,7 @@ static void Main2(void)
 		char *file;
 		uint index;
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 			if (_stricmp(getExt(file), "sln"))
 				file[0] = '\0';
 
@@ -333,7 +333,7 @@ static void Main2(void)
 
 		files = selectLines_x(files);
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 		{
 			char *dir = getParent(file);
 

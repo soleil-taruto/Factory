@@ -244,7 +244,7 @@ void rapidSortSubColumns(autoList_t *list, sint (*funcComp)(uint, uint), autoLis
 	autoList_t *sc;
 	uint sc_index;
 
-	foreach(list, element, index)
+	foreach (list, element, index)
 	{
 		we = (uint *)memAlloc(weCount * sizeof(uint));
 		wei = 0;
@@ -255,7 +255,7 @@ void rapidSortSubColumns(autoList_t *list, sint (*funcComp)(uint, uint), autoLis
 			we[wei++] = getElement(subColumn, index);
 
 		if (subColumns)
-			foreach(subColumns, sc, sc_index)
+			foreach (subColumns, sc, sc_index)
 				we[wei++] = getElement(sc, index);
 
 		addElement(wList, (uint)we);
@@ -264,7 +264,7 @@ void rapidSortSubColumns(autoList_t *list, sint (*funcComp)(uint, uint), autoLis
 	rapidSort(wList, RSWSC_Comp);
 	RSWSC_FuncComp = NULL;
 
-	foreach(wList, we, index)
+	foreach (wList, we, index)
 	{
 		wei = 0;
 
@@ -274,7 +274,7 @@ void rapidSortSubColumns(autoList_t *list, sint (*funcComp)(uint, uint), autoLis
 			setElement(subColumn, index, we[wei++]);
 
 		if (subColumns)
-			foreach(subColumns, sc, sc_index)
+			foreach (subColumns, sc, sc_index)
 				setElement(sc, index, we[wei++]);
 
 		memFree(we);

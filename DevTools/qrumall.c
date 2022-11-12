@@ -60,7 +60,7 @@ int main(int argc, char **argv)
 		}
 	}
 
-	foreach(dirs, dir, index)
+	foreach (dirs, dir, index)
 	{
 		char *rumDir = addExt(strx(dir), "rum");
 

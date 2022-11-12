@@ -68,7 +68,7 @@ static char *ReadXText(char *name) // ret: xml_text
 	XNode_t *node;
 	uint index;
 
-	foreach(KRoot->Children, node, index)
+	foreach (KRoot->Children, node, index)
 		if (!strcmp(node->Name, name))
 			return node->Text;
 

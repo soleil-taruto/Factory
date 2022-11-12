@@ -187,7 +187,7 @@ static void ExtractAllJava(char *rDir, char *wDir)
 
 	sortJLinesICase(files);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		if (!_stricmp("java", getExt(file)))
 			ExtractJava(file, wDir);
 
@@ -201,7 +201,7 @@ static void ExtractAllClass(char *rDir, char *wDir)
 
 	sortJLinesICase(files);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		if (!_stricmp("class", getExt(file)) && !strchr(getLocal(file), '$'))
 			ExtractClass(file, wDir);
 
@@ -237,7 +237,7 @@ static void ExtractAllJar(char *rDir, char *wDir, char *target_ext)
 
 	sortJLinesICase(files);
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 		if (!_stricmp(target_ext, getExt(file)))
 			ExtractJar(file, wDir);
 

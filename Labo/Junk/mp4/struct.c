@@ -98,7 +98,7 @@ static void ShowBox(Box_t *root, uint indent)
 
 	cout("[%s] %u\n", root->Name, getSize(root->Image));
 
-	foreach(root->SubBoxes, box, index)
+	foreach (root->SubBoxes, box, index)
 		ShowBox(box, indent + 1);
 }
 
@@ -109,7 +109,7 @@ static Box_t *FindBox(Box_t *root, char *name)
 	Box_t *box;
 	uint index;
 
-	foreach(root->SubBoxes, box, index)
+	foreach (root->SubBoxes, box, index)
 		if (!strcmp(box->Name, name))
 			return box;
 
@@ -130,7 +130,7 @@ static void ToDir_2(autoList_t *boxes)
 	Box_t *box;
 	uint index;
 
-	foreach(boxes, box, index)
+	foreach (boxes, box, index)
 	{
 		char *wDir = box->Name;
 

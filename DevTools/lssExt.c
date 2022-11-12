@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 	char *file;
 	uint index;
 
-	foreach(files, file, index)
+	foreach (files, file, index)
 	{
 		cout("%s\n", getExt(file));
 	}

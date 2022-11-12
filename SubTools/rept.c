@@ -15,7 +15,7 @@ static void RepText_Main(char *rFile, char *wFile)
 	char *findPtn;
 	uint index;
 
-	foreach(FindPtns, findPtn, index)
+	foreach (FindPtns, findPtn, index)
 	{
 		char *destPtn = getLine(DestPtns, index);
 

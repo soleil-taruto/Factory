@@ -51,7 +51,7 @@ static void SendDirsAndFiles(SockStream_t *ss, char *dir)
 
 	insertElement(paths, lastDirCount, (uint)strx(""));
 
-	foreach(paths, path, index)
+	foreach (paths, path, index)
 		SockSendLine(ss, path);
 
 	releaseDim(paths, 1);

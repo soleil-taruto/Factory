@@ -135,7 +135,7 @@ void KeepStoreDirSize(uint64 writeSize)
 		uint index;
 		uint64 dirSize = 0ui64;
 
-		foreach(files, file, index)
+		foreach (files, file, index)
 			dirSize += getFileSize(file);
 
 		releaseDim(files, 1);

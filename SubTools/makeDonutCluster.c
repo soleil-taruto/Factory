@@ -54,7 +54,7 @@ static void WriteResFiles(void)
 	char *file;
 	uint index;
 
-	foreach(FileList, file, index)
+	foreach (FileList, file, index)
 	{
 		WriteResFile(file, index);
 	}

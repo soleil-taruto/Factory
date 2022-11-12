@@ -48,7 +48,7 @@ autoList_t *RSTR_LineToValues(char *line, autoList_t *colSpans, int asColName) /
 		line2JLine(line, 1, 0, 0, 1);
 		cout("文字コードの補正を行いました。\n");
 	}
-	foreach(colSpans, cs, index)
+	foreach (colSpans, cs, index)
 	{
 		char *q = p;
 
