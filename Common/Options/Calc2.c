@@ -522,7 +522,7 @@ char *calc(char *str1, int op, char *str2)
 	co1 = calcFromString(str1);
 	co2 = calcFromString(str2);
 
-	switch(op)
+	switch (op)
 	{
 	case '+':
 		ans = calcAdd(co1, co2);

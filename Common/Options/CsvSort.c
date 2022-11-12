@@ -77,7 +77,7 @@ void CsvSort(char *srcFile, char *destFile, uint sortColumnIndex, int sortDirect
 {
 	sint (*funcComp)(char *, char *);
 
-	switch(compareMode)
+	switch (compareMode)
 	{
 	case 'S': funcComp = strcmp; break;
 	case 'I': funcComp = mbs_stricmp; break;
@@ -87,7 +87,7 @@ void CsvSort(char *srcFile, char *destFile, uint sortColumnIndex, int sortDirect
 		error();
 	}
 
-	switch(sortDirection)
+	switch (sortDirection)
 	{
 	case 'A': break;
 	case 'D':

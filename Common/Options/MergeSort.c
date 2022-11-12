@@ -241,7 +241,7 @@ void MergeSort(
 	}
 	fileClose(fp);
 
-	switch(partCount)
+	switch (partCount)
 	{
 	default: // 2-
 		MergePart(partsDir, partCount, destFile, rMode, wMode, readElement, writeElement_x, compElement);

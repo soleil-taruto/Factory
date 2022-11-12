@@ -6,7 +6,7 @@ camellia_keyTable_t *camellia_createKeyTable(autoBlock_t *rawKey)
 
 	errorCase(!rawKey);
 
-	switch(getSize(rawKey))
+	switch (getSize(rawKey))
 	{
 	case 16: // 128bits
 	case 24: // 192bits

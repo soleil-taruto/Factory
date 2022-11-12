@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 	{
 		cout("[%u]\n", getCount(blockList));
 
-		switch(getKey())
+		switch (getKey())
 		{
 		case '0':
 			releaseDim(blockList, 1);

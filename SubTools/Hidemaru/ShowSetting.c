@@ -39,7 +39,7 @@ static void ShowColor(char *title, autoBlock_t *bVal, uint baseIdx)
 
 	ext = getByte(bVal, baseIdx + 3);
 
-	switch(ext)
+	switch (ext)
 	{
 	case 0x00: sExt = strx("•s“§–¾"); break;
 	case 0x02: sExt = strx("“§–¾"); break;
@@ -120,7 +120,7 @@ static void Main2(char *regTextFile)
 
 				hh &= 0x1f;
 
-				switch(hh)
+				switch (hh)
 				{
 				case 0x04: shh = strx("‹­’²•\Ž¦1"); break;
 				case 0x05: shh = strx("‹­’²•\Ž¦2"); break;

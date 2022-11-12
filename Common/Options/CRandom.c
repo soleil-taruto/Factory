@@ -11,7 +11,7 @@ char *MakeUUID(int bracket)
 	}
 	for(p = "HHHH-HH-4H-8H-HHHHHH"; *p; p++)
 	{
-		switch(*p)
+		switch (*p)
 		{
 		case 'H':
 			buff = addLine_x(buff, xcout("%02x", getCryptoByte()));

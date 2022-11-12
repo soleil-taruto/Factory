@@ -199,7 +199,7 @@ void MergeSort(
 
 		insertElement(partFiles, 0, (uint)partFile3);
 	}
-	switch(getCount(partFiles))
+	switch (getCount(partFiles))
 	{
 	case 2:
 		MergePart(getLine(partFiles, 0), getLine(partFiles, 1), destFile, rMode, wMode, readElement, writeElement_x, compElement);

@@ -1397,7 +1397,7 @@ void Camellia_Ekeygen(const int keyBitLength,
 		      const unsigned char *rawKey,
 		      KEY_TABLE_TYPE keyTable)
 {
-    switch(keyBitLength) {
+    switch (keyBitLength) {
     case 128:
 	camellia_setup128(rawKey, keyTable);
 	break;

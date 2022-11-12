@@ -202,7 +202,7 @@ static void CheckTagTypedef(autoList_t *lines, char *srcFile)
 
 	foreach (lines, line, index)
 	{
-		switch(tdPhase)
+		switch (tdPhase)
 		{
 		case 0:
 			if (lineExp("typedef<1,  ><>", line) && !lineExp("<>;", line)) tdPhase++;

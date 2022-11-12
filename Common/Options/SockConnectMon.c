@@ -31,7 +31,7 @@ void sockConnectMonUpdated(void)
 
 			if (lastChanged + 2 < nowTime)
 			{
-				switch(level)
+				switch (level)
 				{
 				case 2: setEmgConsoleColor(0x4f); break;
 				case 1: setEmgConsoleColor(0x1f); break;

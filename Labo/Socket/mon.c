@@ -73,7 +73,7 @@ int main(int argc, char **argv)
 			{
 				while (hasKey())
 				{
-					switch(getKey())
+					switch (getKey())
 					{
 					case '1':
 						cout("*RESET PEAK\n");

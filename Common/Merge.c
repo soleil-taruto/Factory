@@ -111,7 +111,7 @@ reedit:
 	cout("-------------------------------------------------------------------------------\n");
 
 reinput:
-	switch(clearGetKey())
+	switch (clearGetKey())
 	{
 	case 'R':
 		cout("R\n");

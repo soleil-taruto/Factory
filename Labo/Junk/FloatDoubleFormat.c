@@ -18,7 +18,7 @@ static autoBlock_t *BinStrToBlock(char *str)
 
 		for(bit = 1; bit < 0x100; bit <<= 1)
 		{
-			switch(*p++)
+			switch (*p++)
 			{
 			case '0':
 				break;
@@ -133,7 +133,7 @@ static void ShowDouble(double value)
 #endif
 static void ShowFloat_Block(autoBlock_t *block)
 {
-	switch(getSize(block))
+	switch (getSize(block))
 	{
 	case 4:
 		ShowFloat(*(float *)b_(block));

@@ -56,7 +56,7 @@ static void MixBmp(char *rFile1, char *rFile2, char *wFile)
 		cG2 = c2 >> 8 & 0xff;
 		cB2 = c2 & 0xff;
 
-		switch(MixMode)
+		switch (MixMode)
 		{
 		case 'A':
 			cR3 = (cR1 + cR2) / 2;

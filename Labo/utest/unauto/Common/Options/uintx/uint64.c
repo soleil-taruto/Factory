@@ -4,7 +4,7 @@
 
 static uint64 GetTestValue(void)
 {
-	switch(mt19937_rnd(4))
+	switch (mt19937_rnd(4))
 	{
 	case 0: return mt19937_rnd64Mod((uint64)30000);
 	case 1: return mt19937_rnd64Mod((uint64)IMAX);

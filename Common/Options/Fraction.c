@@ -217,7 +217,7 @@ Fraction_t *Frct_Calc(Fraction_t *a, int operator, Fraction_t *b)
 	CheckFraction(a);
 	CheckFraction(b);
 
-	switch(operator)
+	switch (operator)
 	{
 	case '+':
 		return Frct_Add(a, b);

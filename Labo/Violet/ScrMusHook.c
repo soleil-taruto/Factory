@@ -47,7 +47,7 @@ LOGPOS();
 	wParam  = info->wParam;
 	lParam  = info->lParam;
 
-	switch(message)
+	switch (message)
 	{
 	case WM_NCPAINT:
 	case WM_NCACTIVATE:

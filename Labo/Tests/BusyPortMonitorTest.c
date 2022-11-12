@@ -121,7 +121,7 @@ int main(int argc, char **argv)
 
 			cout("sel: %d\n", sel);
 
-			switch(sel)
+			switch (sel)
 			{
 			case 0:
 				PreConnectClient();
@@ -143,7 +143,7 @@ int main(int argc, char **argv)
 
 	for(; ; )
 	{
-		switch(getKey())
+		switch (getKey())
 		{
 		case 0x1b:
 			termination(0);

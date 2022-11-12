@@ -32,7 +32,7 @@ static int Idle(void)
 
 	while (hasKey())
 	{
-		switch(getKey())
+		switch (getKey())
 		{
 		case 0x1b:
 			cout("Exit Proc!\n");

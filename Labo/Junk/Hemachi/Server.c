@@ -17,7 +17,7 @@ static void KanaMask(char *str)
 
 	for(p = str; *p; p = mbsNext(p))
 	{
-		switch(*p)
+		switch (*p)
 		{
 		case 0x82: p[1] = 0xa0; break;
 		case 0x83: p[1] = 0x41; break;
@@ -529,7 +529,7 @@ static int Idle(void)
 {
 	while (hasKey())
 	{
-		switch(getKey())
+		switch (getKey())
 		{
 		/*
 		case '1':

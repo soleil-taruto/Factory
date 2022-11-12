@@ -191,7 +191,7 @@ void UTF8ToUTF16File(char *rFile, char *wFile)
 			chr <<= 8;
 			chr |= readChar(rfp);
 		}
-		switch(size)
+		switch (size)
 		{
 		case 3:
 			chr = (chr & 0xf0000) >> 4 | (chr & 0x3f00) >> 2 | chr & 0x3f;

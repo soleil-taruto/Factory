@@ -316,7 +316,7 @@ static int Perform(char *prmFile, char *ansFile)
 //		char *path;
 		uint index;
 
-		switch(command)
+		switch (command)
 		{
 		case 'J':
 			if (existDir(path)) {

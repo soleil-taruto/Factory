@@ -40,7 +40,7 @@ static char *GetFStamp(char *file) // ret: c_
 
 	xTime = m_max(cTime, wTime);
 
-	switch(TimeKind)
+	switch (TimeKind)
 	{
 	case 'C': t = cTime; break;
 	case 'W': t = wTime; break;

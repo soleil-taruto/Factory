@@ -463,7 +463,7 @@ char *calcLine(char *line1, int operator, char *line2, uint radix, uint basement
 	op1 = makeCalcOperand(line1);
 	op2 = makeCalcOperand(line2);
 
-	switch(operator)
+	switch (operator)
 	{
 	case '+': ans = addCalc(op1, op2); break;
 	case '-': ans = subCalc(op1, op2); break;

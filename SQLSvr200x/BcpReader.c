@@ -4,7 +4,7 @@
 
 static int ArgToChar(char *arg)
 {
-	switch(strlen(arg))
+	switch (strlen(arg))
 	{
 	case 1:
 		return arg[0];

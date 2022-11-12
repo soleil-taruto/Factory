@@ -273,7 +273,7 @@ void MakeUlamSpiral_Csv(sint64 l, sint64 t, sint64 r, sint64 b, int mode, char *
 			{
 				cout("ulam_csv %u %u now...\n", x, y);
 			}
-			switch(mode)
+			switch (mode)
 			{
 			case 'N':
 				addElement(row, (uint)xcout("%I64u", XYToNumb(l + x, t + y)));

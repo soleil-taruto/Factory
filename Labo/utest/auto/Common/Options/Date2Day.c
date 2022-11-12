@@ -7,7 +7,7 @@ static uint IsUruu(uint year)
 }
 static uint GetDayNum(uint y, uint m)
 {
-	switch(m)
+	switch (m)
 	{
 	case  1: return 31;
 	case  2: return IsUruu(y) ? 29 : 28;

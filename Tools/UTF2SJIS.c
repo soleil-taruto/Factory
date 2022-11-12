@@ -63,7 +63,7 @@ static Enc_t GetEnc(char *str)
 }
 static char *GetSEnc(Enc_t enc)
 {
-	switch(enc)
+	switch (enc)
 	{
 	case ENC_SJIS:          return "SJIS";
 	case ENC_UTF16:         return "UTF16";
@@ -82,7 +82,7 @@ static void DoConv3(char *rFile, char *wFile)
 
 	if (REnc == ENC_SJIS)
 	{
-		switch(WEnc)
+		switch (WEnc)
 		{
 		case ENC_SJIS:
 			copyFile(rFile, wFile);
@@ -115,7 +115,7 @@ static void DoConv3(char *rFile, char *wFile)
 	}
 	else
 	{
-		switch(REnc)
+		switch (REnc)
 		{
 		case ENC_UTF16:
 			UTF16ToSJISFile(rFile, wFile);

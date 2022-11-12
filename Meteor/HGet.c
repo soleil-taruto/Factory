@@ -214,7 +214,7 @@ static int Perform(int method) // method: "HGP"
 
 	writeLine(fp, "/P");
 
-	switch(ProxyMode)
+	switch (ProxyMode)
 	{
 	case 'D':
 		writeLine(fp, "DIRECT");
@@ -241,7 +241,7 @@ static int Perform(int method) // method: "HGP"
 	writeLine_x(fp, xcout("%u", NoTrafficTimeoutMillis));
 	writeLine(fp, "/M");
 
-	switch(method)
+	switch (method)
 	{
 	case 'H': p = "HEAD"; break;
 	case 'G': p = "GET";  break;

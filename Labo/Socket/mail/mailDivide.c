@@ -134,7 +134,7 @@ static void RecvLoop(void)
 
 			while (hasKey())
 			{
-				switch(getKey())
+				switch (getKey())
 				{
 				case 0x1b:
 					goto endLoop;

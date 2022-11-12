@@ -119,7 +119,7 @@ readArgs:
 
 		while (hasKey())
 		{
-			switch(getKey())
+			switch (getKey())
 			{
 			case 0x1b:
 				errorLevel = 1;

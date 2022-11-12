@@ -17,7 +17,7 @@ static void CheckColorMinMax(char *file, int mode, int rgb)
 	cout("mode: %c\n", mode);
 	cout("rgb: %c\n", rgb);
 
-	switch(mode)
+	switch (mode)
 	{
 	case 'X': retcol = 0; break;
 	case 'N': retcol = 255; break;
@@ -31,7 +31,7 @@ static void CheckColorMinMax(char *file, int mode, int rgb)
 	{
 		uint color = getTableCell(bmp, x, y);
 
-		switch(rgb)
+		switch (rgb)
 		{
 		case 'R': color = color >> 16 & 0xff; break;
 		case 'G': color = color >>  8 & 0xff; break;
@@ -40,7 +40,7 @@ static void CheckColorMinMax(char *file, int mode, int rgb)
 		default:
 			error();
 		}
-		switch(mode)
+		switch (mode)
 		{
 		case 'X': m_maxim(retcol, color); break;
 		case 'N': m_minim(retcol, color); break;

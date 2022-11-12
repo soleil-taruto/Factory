@@ -55,7 +55,7 @@ static char *GetWFile(char *path)
 
 	cout("< %s\n", path);
 
-	switch(WFileType)
+	switch (WFileType)
 	{
 	case '7': ext = "7z";  break;
 	case 'Z': ext = "zip"; break;

@@ -59,7 +59,7 @@ static void DirCDMon(void)
 	{
 		for(; ; )
 		{
-			switch(waitKey(2000))
+			switch (waitKey(2000))
 			{
 			case 0x00:
 				goto endKeyLoop;

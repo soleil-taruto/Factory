@@ -86,7 +86,7 @@ static void RecvDataParse(void)
 
 		protocol = NextValue(8); // IP_PROTOCOL
 
-		switch(protocol)
+		switch (protocol)
 		{
 		case 6:
 			addElement(Row, (uint)strx("TCP"));

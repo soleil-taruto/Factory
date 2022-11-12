@@ -296,7 +296,7 @@ static void DoBatch(int mode, char *rFile, char *wFile) // mode: "PFC"
 
 		cout("%u s–Ú‚ğˆ—‚µ‚Ä‚¢‚Ü‚·...\n", rowidx + 1);
 
-		switch(mode)
+		switch (mode)
 		{
 		case 'P': // Prime
 			{

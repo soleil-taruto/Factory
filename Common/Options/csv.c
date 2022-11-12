@@ -246,7 +246,7 @@ void csvTwist(autoList_t *table)
 }
 void csvRot(autoList_t *table, sint degree)
 {
-	switch((degree % 360 + 360) % 360)
+	switch ((degree % 360 + 360) % 360)
 	{
 	case   0:                   break;
 	case  90: csvRot90(table);  break;

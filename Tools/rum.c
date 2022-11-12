@@ -848,7 +848,7 @@ static void Checkout(char *dir) // dir: バックアップ先、存在するルートディレクト
 	{
 		autoList_t *stamps = SelectStamps(dir);
 
-		switch(getCount(stamps))
+		switch (getCount(stamps))
 		{
 		case 0:
 			releaseDim(stamps, 1);

@@ -117,7 +117,7 @@ static void HexKeisan(void)
 		DispHexOp(op1, bound, "OP-001");
 		DispHexOp(op2, bound, "OP-002");
 
-		switch(m_tolower(op))
+		switch (m_tolower(op))
 		{
 		case '+': ans = addBigInt(op1, op2); break;
 		case '-':
@@ -256,7 +256,7 @@ readArgs:
 			op2 = ans;
 		}
 	reopration:
-		switch(m_tolower(*pop))
+		switch (m_tolower(*pop))
 		{
 		case '!':
 			{

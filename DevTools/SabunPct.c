@@ -102,7 +102,7 @@ static void SabunPct(char *dir1, char *dir2)
 		dirFlag |= existDir(path1) ? 1 : 0;
 		dirFlag |= existDir(path2) ? 2 : 0;
 
-		switch(dirFlag)
+		switch (dirFlag)
 		{
 		case 0:
 			wLine = GetWLine_File_File(path1, path2, line);

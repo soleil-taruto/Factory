@@ -82,7 +82,7 @@ static char *TryNextQryToken(void)
 			{
 				chr = *++QryRdr;
 
-				switch(chr)
+				switch (chr)
 				{
 				case '\0':
 					error();

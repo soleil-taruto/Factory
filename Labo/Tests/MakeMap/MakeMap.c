@@ -353,7 +353,7 @@ static void MM_ResetGround(void)
 	for(x = 0; x < Map_W; x++)
 	for(y = 0; y < Map_H; y++)
 	{
-		switch(getTableCell(Map, x, y))
+		switch (getTableCell(Map, x, y))
 		{
 		case COLOR_GROUND_MAXIM:
 		case COLOR_GROUND_MAXIM2ND:

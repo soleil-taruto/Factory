@@ -559,7 +559,7 @@ void createPath(char *path, int mode)
 
 		createDirIfNotExist(path);
 	}
-	switch(mode)
+	switch (mode)
 	{
 	case 'D':
 		createDir(path);

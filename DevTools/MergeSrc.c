@@ -216,7 +216,7 @@ restart:
 	cout("OTHER = ’†Ž~\n");
 	cout("------------\n");
 
-	switch(getKey())
+	switch (getKey())
 	{
 	case 0x0d:
 		break;

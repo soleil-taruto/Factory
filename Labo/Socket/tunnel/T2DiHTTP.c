@@ -128,7 +128,7 @@ static void LoadFile(char *rFile)
 		else
 			ConId = Id;
 
-		switch(Kind)
+		switch (Kind)
 		{
 		case 'S':
 			addElement(SendStamps, (uint)MkUI64(Stamp));

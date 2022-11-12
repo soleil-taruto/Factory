@@ -330,7 +330,7 @@ static void SetField(char *rawData) // rawData: ‰º -> ã, ¶ -> ‰E
 	for(y = 0; y < Field_H; y++)
 	for(x = 0; x < Field_W; x++)
 	{
-		switch(*p)
+		switch (*p)
 		{
 		case '0':
 		case '1':

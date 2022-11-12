@@ -39,7 +39,7 @@ char *TelnetServerPerform(char *inputLine, uint prm)
 {
 	Info_t *i = (Info_t *)prm;
 
-	switch(i->Status)
+	switch (i->Status)
 	{
 	case CONNECTED:
 		i->Status = INPUT_USER;

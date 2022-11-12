@@ -37,7 +37,7 @@ static char *MakeTestHexValue(void)
 	}
 	else // 25%
 	{
-		switch(mt19937_rnd(2))
+		switch (mt19937_rnd(2))
 		{
 		case 0: scale = mt19937_range(0, 10); break;
 		case 1: scale = mt19937_range(1014, 1024); break;

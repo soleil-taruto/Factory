@@ -100,7 +100,7 @@ static void RPCPerform(char *program)
 
 		while (hasKey())
 		{
-			switch(getKey())
+			switch (getKey())
 			{
 			case 0x1b:
 				cout("nrun_CANCELLED\n");

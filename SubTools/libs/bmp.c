@@ -72,7 +72,7 @@ autoList_t *readBMPFile(char *file)
 	errorCase(!Bfi.Height);
 	errorCase(PIXNUMMAX / Bfi.Width < Bfi.Height); // HACK: ‚±‚ê•K—v‚©H
 
-	switch(Bfi.BitCount)
+	switch (Bfi.BitCount)
 	{
 	case 1: colPalCnt = 2; break;
 	case 4: colPalCnt = 16; break;

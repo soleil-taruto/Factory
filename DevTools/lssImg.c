@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 
 	foreach (imgFiles, imgFile, index)
 	{
-		switch(mode)
+		switch (mode)
 		{
 		case 'F':
 			writeLine_x(fp, xcout("%s<br/>", imgFile));

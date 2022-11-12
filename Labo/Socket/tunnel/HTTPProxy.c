@@ -272,7 +272,7 @@ static char *HeaderRepValueFltr(char *value) // ret: strx()
 {
 	if (*value == '$')
 	{
-		switch(c2upper(value[1]))
+		switch (c2upper(value[1]))
 		{
 		case '$':
 			value += 2;

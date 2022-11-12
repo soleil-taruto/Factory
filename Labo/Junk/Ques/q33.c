@@ -48,7 +48,7 @@ static void Analysis(Numb_t *s, int snum)
 			int n;
 			int d;
 
-			switch(e)
+			switch (e)
 			{
 			case 0: // +
 				n = sa->Numer * sb->Denom + sb->Numer * sa->Denom;

@@ -261,7 +261,7 @@ static char *EncEntity(char *text)
 
 	for(p = text; *p; p++)
 	{
-		switch(*p)
+		switch (*p)
 		{
 		case '<': ab_addLine(buff, "&lt;"); break;
 		case '>': ab_addLine(buff, "&gt;"); break;

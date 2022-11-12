@@ -117,7 +117,7 @@ static void WebMon(char *url)
 			{
 				while (hasKey())
 				{
-					switch(getKey())
+					switch (getKey())
 					{
 					case 'R':
 					case 'r':

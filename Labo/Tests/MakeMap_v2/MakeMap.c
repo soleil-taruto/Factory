@@ -28,7 +28,7 @@ static void LoadMap(void)
 		int color = getElement(getList(bmp, y), x);
 		int flag;
 
-		switch(color)
+		switch (color)
 		{
 		case COLOR_0: flag = 0; break;
 		case COLOR_1: flag = 1; break;

@@ -15,7 +15,7 @@ static int CheckPw(char *pw, uint pwChrNum)
 	int lwr = 1;
 	char *p;
 
-	switch(pwChrNum)
+	switch (pwChrNum)
 	{
 	case 62: lwr = 0; // fall throught
 	case 36: upr = 0; // fall throught
