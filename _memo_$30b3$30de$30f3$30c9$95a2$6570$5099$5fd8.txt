@@ -2,6 +2,8 @@
 まだ使っている定番
 
 	Rebuild
+	Release
+	GitRelease
 
 	cx
 	qq
@@ -10,6 +12,9 @@
 
 	7z
 	z7
+
+	ees /lss
+	ees /lss /e
 
 ----
 
@@ -94,7 +99,7 @@ StringTools.Enclosed
 
 フォルダ配下のファイル重複を解消する。
 
-	EtzSlim
+	GazoSlim
 
 ----
 
