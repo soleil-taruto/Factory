@@ -179,7 +179,7 @@ uint64 TR_SelectWhereAnd(char *csvFile, autoList_t *whereColNames, autoList_t *w
 }
 uint64 TR_DeleteWhereAnd(char *csvFile, autoList_t *whereColNames, autoList_t *whereColValues, char *destCsvFile) // ret: çÌèúÇµÇΩçsêî
 {
- 	FILE *fp;
+	FILE *fp;
 	FILE *destfp;
 	autoList_t *colNames;
 	autoList_t *whereIndexes;
@@ -224,7 +224,7 @@ uint64 TR_DeleteWhereAnd(char *csvFile, autoList_t *whereColNames, autoList_t *w
 }
 void TR_InsertInto(char *csvFile, autoList_t *colNames, autoList_t *colValueTable, char *destCsvFile)
 {
- 	FILE *fp;
+	FILE *fp;
 	FILE *destfp;
 	autoList_t *tableColNames;
 	autoList_t *destIndexes;

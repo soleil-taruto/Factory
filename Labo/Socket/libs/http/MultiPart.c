@@ -270,7 +270,7 @@ autoList_t *httpDivideContent(char *contentFile) // ret: 1 <= getCount(ret)
 		httpPart_t *part;
 
 		if (PART_NUMMAX <= getCount(parts)) // ? Overflow
- 			break;
+			break;
 
 		RNP_ReadHeader(fp);
 		ReadNextPart(fp);
