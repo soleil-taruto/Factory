@@ -6,7 +6,7 @@ static void Test_camellia_cbc(void)
 {
 	uint testcnt;
 
-	for(testcnt = 0; testcnt < 1000; testcnt++)
+	for (testcnt = 0; testcnt < 1000; testcnt++)
 	{
 		uint size = 16 + 16 * mt19937_rnd(100);
 		uint keySize = 8 * mt19937_range(2, 4);
@@ -50,7 +50,7 @@ static void Test_camellia_cbcRing(void)
 {
 	uint testcnt;
 
-	for(testcnt = 0; testcnt < 1000; testcnt++)
+	for (testcnt = 0; testcnt < 1000; testcnt++)
 	{
 		uint size = 32 + 16 * mt19937_rnd(100);
 		uint keySize = 8 * mt19937_range(2, 4);

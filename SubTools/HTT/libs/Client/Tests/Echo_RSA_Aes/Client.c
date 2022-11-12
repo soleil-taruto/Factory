@@ -62,7 +62,7 @@ int main(int argc, char **argv)
 
 		SockStartup();
 
-		for(count = 0; count < max; count++)
+		for (count = 0; count < max; count++)
 		{
 			char *message = MakeRandLineRange(0, 10000);
 

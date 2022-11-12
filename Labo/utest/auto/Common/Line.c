@@ -84,7 +84,7 @@ static void Test_trimSequ_LU(int low, int upper)
 	MRLChrLow = low;
 	MRLChrUpper = upper;
 
-	for(c = 0; c < 1000; c++)
+	for (c = 0; c < 1000; c++)
 	{
 		char *str = MakeRandLineRange(0, 70);
 		char *ext = MakeRandLineRange(0, 70);

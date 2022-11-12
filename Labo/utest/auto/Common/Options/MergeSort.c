@@ -47,11 +47,11 @@ static void Test_MergeSort(void)
 	DoTest(0, 0, 0, 0);
 	DoTest(1, 0, 0, 0);
 
-	for(c = 0; c < 100; c++)
+	for (c = 0; c < 100; c++)
 	{
 		DoTest(mt19937_rnd(100), 1, 0, 100);
 	}
-	for(c = 0; c < 100; c++)
+	for (c = 0; c < 100; c++)
 	{
 		uint partSize = mt19937_rnd(500) + 1;
 
@@ -68,7 +68,7 @@ static void Test_MergeSort(void)
 		DoTest(10000,    mt19937_rnd(100), 1, 1);
 	}
 
-	for(c = 0; c < 100; c++)
+	for (c = 0; c < 100; c++)
 	{
 		DoTest(mt19937_rnd(128 * 1024), mt19937_rnd(1024), 0, 1024);
 	}
@@ -182,16 +182,16 @@ static void Test_MergeFile(void)
 	uint s2;
 	uint c;
 
-	for(d1 = 0; d1 <= 1; d1++)
-	for(d2 = 0; d2 <= 1; d2++)
-	for(db = 0; db <= 1; db++)
-	for(s1 = 0; s1 <= 1; s1++)
-	for(s2 = 0; s2 <= 1; s2++)
-	for(c = 0; c < 10; c++)
+	for (d1 = 0; d1 <= 1; d1++)
+	for (d2 = 0; d2 <= 1; d2++)
+	for (db = 0; db <= 1; db++)
+	for (s1 = 0; s1 <= 1; s1++)
+	for (s2 = 0; s2 <= 1; s2++)
+	for (c = 0; c < 10; c++)
 	{
 		DoTest2(d1, d2, db, s1, s2, 100, 100, 0, 100);
 	}
-	for(c = 0; c < 100; c++)
+	for (c = 0; c < 100; c++)
 	{
 		DoTest2(1, 1, 1, 0, 0, mt19937_rnd(100), mt19937_rnd(100), 0, 100);
 		DoTest2(1, 1, 1, 0, 0, mt19937_rnd(100), mt19937_rnd(100), 0, 2);

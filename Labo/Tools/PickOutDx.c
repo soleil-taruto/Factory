@@ -58,7 +58,7 @@ static void PickOutDx(char *dir)
 			s = center - MARGIN;
 			e = center + MARGIN;
 
-			for(i = s; i <= e; i++)
+			for (i = s; i <= e; i++)
 			{
 				if (0 <= i && i < (sint)getCount(files))
 				{

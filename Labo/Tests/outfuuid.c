@@ -27,14 +27,14 @@ readArgs:
 
 	if (dataflag)
 	{
-		for(count = 0; count < filecnt; count++)
+		for (count = 0; count < filecnt; count++)
 		{
 			writeOneLineNoRet_b_xx(combine_cx(dir, MakeUUID(1)), MakeUUID(1));
 		}
 	}
 	else
 	{
-		for(count = 0; count < filecnt; count++)
+		for (count = 0; count < filecnt; count++)
 		{
 			createFile_x(combine_cx(dir, MakeUUID(1)));
 		}

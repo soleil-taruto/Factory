@@ -23,7 +23,7 @@ static uint RecvEhlo(SockStream_t *ss)
 {
 	uint index;
 
-	for(index = 0; index < 10000; index++)
+	for (index = 0; index < 10000; index++)
 	{
 		char *line = RecvLineDisp(ss);
 
@@ -143,7 +143,7 @@ int sendMailEx(char *smtpServer, uint portno, char *sendFrom, char *sendTo, auto
 {
 	cout("sendMailEx()\n");
 
-	for(; ; retrycnt--)
+	for (; ; retrycnt--)
 	{
 		if (sendMail(smtpServer, portno, sendFrom, sendTo, mail))
 		{

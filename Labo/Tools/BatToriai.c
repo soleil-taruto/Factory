@@ -58,7 +58,7 @@ static void BatFile_Done(char *batFile)
 }
 static void BatToriai(void)
 {
-	for(; ; )
+	for (; ; )
 	{
 		char *batFile = GetNextBatFile();
 

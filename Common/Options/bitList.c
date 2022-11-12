@@ -57,7 +57,7 @@ void putBits(bitList_t *i, uint64 index, uint64 size, uint value) // size: 0 ok
 
 		value = value ? 0xffffffff : 0;
 
-		for(; index < indexEnd; index++)
+		for (; index < indexEnd; index++)
 			putElement(i->Buffer, index, value);
 	}
 }
@@ -90,7 +90,7 @@ void invBits(bitList_t *i, uint64 index, uint64 size) // size: 0 ok
 		uint index    = (uint)(bgn >> 5);
 		uint indexEnd = (uint)(end >> 5);
 
-		for(; index < indexEnd; index++)
+		for (; index < indexEnd; index++)
 			putElement(i->Buffer, index, refElement(i->Buffer, index) ^ 0xffffffff);
 	}
 }

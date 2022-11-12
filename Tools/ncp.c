@@ -131,7 +131,7 @@ static void ClientRequest(void)
 	memset(ip, 0, 4);
 	SockStartup();
 
-	for(; ; )
+	for (; ; )
 	{
 		AnsFile = sockClient(ip, ServerDomain, ServerPort, PrmFile, Idle);
 

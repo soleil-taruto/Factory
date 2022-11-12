@@ -19,8 +19,8 @@ static void MkFldMap(uint mapW, uint mapH, uint noChgMax)
 		uint x;
 		uint y;
 
-		for(x = 0; x < mapW; x++)
-		for(y = 0; y < mapH; y++)
+		for (x = 0; x < mapW; x++)
+		for (y = 0; y < mapH; y++)
 		{
 			setTableCell(map, x, y, mt19937_rnd(2) ? CELL_BLACK : CELL_WHITE);
 		}
@@ -35,8 +35,8 @@ static void MkFldMap(uint mapW, uint mapH, uint noChgMax)
 		uint black = 0;
 		uint cell;
 
-		for(sx = -1; sx <= 1; sx++)
-		for(sy = -1; sy <= 1; sy++)
+		for (sx = -1; sx <= 1; sx++)
+		for (sy = -1; sy <= 1; sy++)
 		{
 			int xx = x + sx;
 			int yy = y + sy;

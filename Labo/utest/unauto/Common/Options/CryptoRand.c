@@ -5,7 +5,7 @@ static void Test_01(void)
 {
 	uint c;
 
-	for(c = 0; c < 1000; c++)
+	for (c = 0; c < 1000; c++)
 	{
 		cout("%08x %08x %08x %016I64x\n"
 			,getCryptoRand16()
@@ -19,7 +19,7 @@ static void Test_02(void)
 {
 	uint c;
 
-	for(c = 0; c < 1000; c++)
+	for (c = 0; c < 1000; c++)
 	{
 		cout("%I64u %I64u %I64u %I64u\n"
 			,getCryptoRand64Mod(1)
@@ -33,7 +33,7 @@ static void Test_03(void)
 {
 	uint c;
 
-	for(c = 0; c < 1000; c++)
+	for (c = 0; c < 1000; c++)
 	{
 		cout("%I64u %I64u %I64u %I64u\n"
 			,getCryptoRand64Range(10, 10)

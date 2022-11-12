@@ -48,7 +48,7 @@ void httpRecvRequestHeader(SockStream_t *i, char **pHeader, int *pChunked, uint 
 	if (httpRecvedHeader)
 		addElement(httpRecvedHeader, (uint)lineToPrintLine(header, 0));
 
-	for(; ; )
+	for (; ; )
 	{
 		if (backedLine)
 			line = backedLine;
@@ -60,7 +60,7 @@ void httpRecvRequestHeader(SockStream_t *i, char **pHeader, int *pChunked, uint 
 			memFree(line);
 			break;
 		}
-		for(; ; )
+		for (; ; )
 		{
 			char *trail = SockRecvLine(i, HEADERLENMAX);
 			char *p;
@@ -70,7 +70,7 @@ void httpRecvRequestHeader(SockStream_t *i, char **pHeader, int *pChunked, uint 
 				backedLine = trail;
 				break;
 			}
-			for(p = trail; *p; p++)
+			for (p = trail; *p; p++)
 				if (' ' < *p)
 					break;
 
@@ -171,7 +171,7 @@ void httpRecvRequestMax(SockStream_t *i, char **pHeader, uchar **pContent, uint 
 		content = (uchar *)memAlloc(1); // ÅŒã‚É '\0' ‚Å•Â‚¶‚é‚Ì‚Å +1
 		cSize = 0;
 
-		for(; ; )
+		for (; ; )
 		{
 			autoBlock_t *block = httpRecvChunked(cr);
 
@@ -256,7 +256,7 @@ void httpUrlDecoder(char *line)
 {
 	char *p;
 
-	for(p = line; *p; p++)
+	for (p = line; *p; p++)
 	{
 		if (*p == '%')
 		{
@@ -277,7 +277,7 @@ char *httpUrlEncoder(char *line)
 	char *encLine = strx("");
 	char *p;
 
-	for(p = line; *p; p++)
+	for (p = line; *p; p++)
 	{
 		encLine = addLine_x(encLine, xcout("%%%02x", *p));
 	}

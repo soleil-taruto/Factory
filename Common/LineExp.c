@@ -50,7 +50,7 @@ static int IsMatch(int chr, char *rngs)
 	if (*rngs == '\0') // rngs == "" -> 全マッチ
 		return 1;
 
-	for(p = rngs; *p; )
+	for (p = rngs; *p; )
 	{
 		int min;
 		int max;
@@ -80,7 +80,7 @@ int lineExp(char *format, char *line) // ret: ? マッチした。
 	uint i;
 	int retval = 0;
 
-	for(; ; fp++, lp++)
+	for (; ; fp++, lp++)
 	{
 		if (*fp == '\0')
 		{
@@ -130,7 +130,7 @@ int lineExp(char *format, char *line) // ret: ? マッチした。
 
 			fp = p + 1;
 
-			for(i = 0; ; i++)
+			for (i = 0; ; i++)
 			{
 				if (nummin <= i)
 					if (lineExp(fp, lp))

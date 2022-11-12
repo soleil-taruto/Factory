@@ -7,7 +7,7 @@ static uint GetHeaderPos(autoBlock_t *fileData, uint startPos)
 {
 	uint index;
 
-	for(index = startPos; index + strlen(HEADER) <= getSize(fileData); index++)
+	for (index = startPos; index + strlen(HEADER) <= getSize(fileData); index++)
 	{
 		if (!memcmp((uchar *)directGetBuffer(fileData) + index, HEADER, strlen(HEADER)))
 		{
@@ -31,7 +31,7 @@ static void ChangeEmbedConfig_File(char *file, uint cfgPos, int cfgVal)
 	{
 		uint index;
 
-		for(index = 0; ; index++)
+		for (index = 0; ; index++)
 			if (getByte(fileData, embPos + index) == 0x00)
 				break;
 

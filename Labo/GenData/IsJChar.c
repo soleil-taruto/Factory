@@ -8,7 +8,7 @@ static void MakeEdges(void)
 
 	Edges = newList();
 
-	for(chr = 0x100; chr <= 0xffff; chr++)
+	for (chr = 0x100; chr <= 0xffff; chr++)
 	{
 		if (!isJChar(chr - 1) && isJChar(chr))
 		{
@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 
 	MakeEdges();
 
-	for(index = 0; index < getCount(Edges); index += 2)
+	for (index = 0; index < getCount(Edges); index += 2)
 	{
 		int bgn = (int)getElement(Edges, index);
 		int end = (int)getElement(Edges, index + 1);

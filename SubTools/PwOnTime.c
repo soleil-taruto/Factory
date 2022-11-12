@@ -79,7 +79,7 @@ static void ShowPwOnTime(void)
 
 	rapidSortLines(lines);
 
-	for(index = 0; index + 1 < getCount(lines); index++)
+	for (index = 0; index + 1 < getCount(lines); index++)
 	{
 		char *sDt1 = getLine(lines, index + 0);
 		char *sDt2 = getLine(lines, index + 1);
@@ -103,7 +103,7 @@ static void ShowPwOnTime(void)
 	}
 	cout("----\n");
 
-	for(index = 0; index < getCount(pwOffSpans); index += 2)
+	for (index = 0; index < getCount(pwOffSpans); index += 2)
 	{
 		cout("%s から %s まで電源オフでした。\n",
 			getLine(pwOffSpans, index + 0),
@@ -116,7 +116,7 @@ static void ShowPwOnTime(void)
 	unaddElement(pwOnSpans);
 	desertElement(pwOnSpans, 0);
 
-	for(index = 0; index < getCount(pwOnSpans); index += 2)
+	for (index = 0; index < getCount(pwOnSpans); index += 2)
 	{
 		cout("%s から %s まで電源オンでした。\n",
 			getLine(pwOnSpans, index + 0),
@@ -125,7 +125,7 @@ static void ShowPwOnTime(void)
 	}
 	cout("----\n");
 
-	for(index = 0; index < getCount(pwOnSpans); index += 2)
+	for (index = 0; index < getCount(pwOnSpans); index += 2)
 	{
 		cout(
 			"\n"

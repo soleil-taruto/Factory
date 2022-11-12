@@ -34,7 +34,7 @@ static int Perform(int sock, uint prm)
 
 		wroteByteCount = 0;
 
-		for(; ; )
+		for (; ; )
 		{
 			int chr = SockRecvChar(ss);
 

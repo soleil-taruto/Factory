@@ -61,7 +61,7 @@ static uint GetHeaderEndPos(autoBlock_t *buff, uint startPos)
 {
 	uint index;
 
-	for(index = startPos; index + 4 <= getSize(buff); index++)
+	for (index = startPos; index + 4 <= getSize(buff); index++)
 		if (!memcmp((uchar *)directGetBuffer(buff) + index, "\r\n\r\n", 4))
 			return index + 4;
 
@@ -94,7 +94,7 @@ static uint ReadChunkedBody(autoBlock_t *buff, uint startPos, autoBlock_t *messa
 	RCB_Block = buff;
 	RCB_RPos = startPos;
 
-	for(; ; )
+	for (; ; )
 	{
 		char *line = RCB_ReadLineTo('\n');
 		char *p;

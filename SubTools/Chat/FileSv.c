@@ -220,7 +220,7 @@ static char *GetRandColor(uint hexlow, uint hexhi)
 	char *str = strx("#999999");
 	char *p;
 
-	for(p = str + 1; *p; p++)
+	for (p = str + 1; *p; p++)
 		*p = hexadecimal[mt19937_range(hexlow, hexhi)];
 
 	return str;

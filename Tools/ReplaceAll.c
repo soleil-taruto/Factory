@@ -138,7 +138,7 @@ static int Confirm(void)
 {
 	cout("Press P to continue.\n");
 
-	for(; ; )
+	for (; ; )
 	{
 		int key = getKey();
 
@@ -162,7 +162,7 @@ static void ReplaceEx(void)
 	sortJLinesICase(paths);
 	newPaths = copyLines(paths);
 
-	for(; ; )
+	for (; ; )
 	{
 		tmpPaths = editTextLines(newPaths);
 		releaseDim(newPaths, 1);

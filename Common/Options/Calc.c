@@ -52,7 +52,7 @@ static uint CheckOp(calcOperand_t *op)
 	if (!op)
 		return 0;
 
-	for(index = 0; index < getSize(op->Figures); index++)
+	for (index = 0; index < getSize(op->Figures); index++)
 	{
 		if (calcRadix <= getByte(op->Figures, index))
 			return 0;
@@ -90,7 +90,7 @@ static void ToSameDecIndex(calcOperand_t *op1, calcOperand_t *op2)
 }
 static void AddInt(calcOperand_t *op, uint index, uint value)
 {
-	for(; ; )
+	for (; ; )
 	{
 		value += refByte(op->Figures, index);
 		putByte(op->Figures, index, value % calcRadix);
@@ -137,7 +137,7 @@ calcOperand_t *addCalc(calcOperand_t *op1, calcOperand_t *op2)
 	opSize = m_max(getSize(op1->Figures), getSize(op2->Figures));
 	ans = makeCalcOperand("0");
 
-	for(index = 0; index < opSize; index++)
+	for (index = 0; index < opSize; index++)
 	{
 		AddInt(ans, index, refByte(op1->Figures, index) + refByte(op2->Figures, index));
 	}
@@ -182,7 +182,7 @@ calcOperand_t *subCalc(calcOperand_t *op1, calcOperand_t *op2)
 	opSize = m_max(opSize, 1);
 	ans = makeCalcOperand("0");
 
-	for(index = 0; index < opSize; index++)
+	for (index = 0; index < opSize; index++)
 	{
 		AddInt(ans, index, refByte(op1->Figures, index) + calcRadix - refByte(op2->Figures, index) - (index ? 1 : 0));
 	}
@@ -214,8 +214,8 @@ calcOperand_t *mulCalc(calcOperand_t *op1, calcOperand_t *op2)
 	TrimOp(op1);
 	TrimOp(op2);
 
-	for(index1 = 0; index1 < getSize(op1->Figures); index1++)
-	for(index2 = 0; index2 < getSize(op2->Figures); index2++)
+	for (index1 = 0; index1 < getSize(op1->Figures); index1++)
+	for (index2 = 0; index2 < getSize(op2->Figures); index2++)
 	{
 		AddInt(ans, index1 + index2, refByte(op1->Figures, index1) * refByte(op2->Figures, index2));
 	}
@@ -259,10 +259,10 @@ calcOperand_t *divCalc(calcOperand_t *op1, calcOperand_t *op2) // set calcLastMa
 
 	shiftCnt = getSize(op2->Figures) < getSize(op1->Figures) ? getSize(op1->Figures) - getSize(op2->Figures) : 0;
 
-	for(index = 0; index < shiftCnt; index++)
+	for (index = 0; index < shiftCnt; index++)
 		insertByte(op2->Figures, 0, 0);
 
-	for(; ; )
+	for (; ; )
 	{
 		calcOperand_t *tmpans = subCalc(op1, op2);
 
@@ -327,7 +327,7 @@ calcOperand_t *makeCalcOperand(char *line)
 
 	errorCase(!line);
 
-	for(p = line; *p; p++)
+	for (p = line; *p; p++)
 	{
 		uint d = *p;
 
@@ -392,7 +392,7 @@ char *makeLineCalcOperand(calcOperand_t *op)
 
 	opSize = m_max(op->DecIndex + 1, getSize(op->Figures));
 
-	for(index = 0; index < opSize; index++)
+	for (index = 0; index < opSize; index++)
 	{
 		uint d;
 
@@ -543,7 +543,7 @@ char *changeRadixCalcLine(char *line, uint radix, uint newRadix, uint basement) 
 	newSign = op->Sign;
 	op->Sign = 1;
 
-	for(index = 0; index < basement; index++)
+	for (index = 0; index < basement; index++)
 	{
 		calcOperand_t *tmpOp;
 		op = mulCalc(tmpOp = op, newRdxOp); releaseCalcOperand(tmpOp);
@@ -580,7 +580,7 @@ char *changeRadixCalcLine(char *line, uint radix, uint newRadix, uint basement) 
 
 		value = 0;
 
-		for(index = 7; ; index--)
+		for (index = 7; ; index--)
 		{
 			value *= radix;
 			value += refByte(wop3->Figures, index);
@@ -654,7 +654,7 @@ char *calcRootPower(char *line, uint exponent, uint radix, uint basement) // set
 	{
 		expLine = strx("1");
 
-		for(; ; )
+		for (; ; )
 		{
 			tmpLine = addChar(strx(expLine), '0');
 
@@ -798,7 +798,7 @@ char *calcLineToMarume(char *line, uint basement)
 		line = addChar(line, '.');
 		p = strchr(line, '.');
 	}
-	for(bLen = strlen(p + 1); bLen < basement; bLen++)
+	for (bLen = strlen(p + 1); bLen < basement; bLen++)
 		line = addChar(line, '0');
 
 	line = addChar(line, '*');

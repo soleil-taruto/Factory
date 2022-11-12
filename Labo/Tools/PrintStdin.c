@@ -4,7 +4,7 @@ int main(int argc, char **argv)
 {
 	hasArgs(0); // for //x options
 
-	for(; ; )
+	for (; ; )
 	{
 		int chr = readChar(stdin);
 

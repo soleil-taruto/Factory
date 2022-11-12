@@ -109,7 +109,7 @@ static void DoTrep(void)
 
 	rbtJumpToLastAccess(f2SectTree);
 
-	for(; count; count--)
+	for (; count; count--)
 	{
 		char *file = (char *)rbtGetCurrKey(f2SectTree);
 		autoList_t *sections = (autoList_t *)rbtGetCurrValue(f2SectTree);

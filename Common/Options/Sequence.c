@@ -4,7 +4,7 @@ void makeSq(autoList_t *list, uint start, sint step)
 {
 	uint index;
 
-	for(index = 0; index < getCount(list); index++)
+	for (index = 0; index < getCount(list); index++)
 	{
 		setElement(list, index, start);
 		start += step;
@@ -21,7 +21,7 @@ void shuffle(autoList_t *list)
 {
 	uint index;
 
-	for(index = 0; index + 1 < getCount(list); index++)
+	for (index = 0; index + 1 < getCount(list); index++)
 	{
 		swapElement(list, index, mt19937_range(index, getCount(list) - 1));
 	}

@@ -83,7 +83,7 @@ void UTF16ToSJISFile(char *rFile, char *wFile)
 	FILE *rfp = fileOpen(rFile, "rb");
 	FILE *wfp = fileOpen(wFile, "wb");
 
-	for(; ; )
+	for (; ; )
 	{
 		int chr = ReadUTF16Char(rfp);
 
@@ -130,7 +130,7 @@ void SJISToUTF16File(char *rFile, char *wFile)
 	{
 		WriteUTF16Char(wfp, 0xff, 0xfe);
 	}
-	for(; ; )
+	for (; ; )
 	{
 		int chr = readChar(rfp);
 
@@ -175,7 +175,7 @@ void UTF8ToUTF16File(char *rFile, char *wFile)
 	{
 		WriteUTF16Char(wfp, 0xff, 0xfe);
 	}
-	for(; ; )
+	for (; ; )
 	{
 		int chr = readChar(rfp);
 		uint size;
@@ -186,7 +186,7 @@ void UTF8ToUTF16File(char *rFile, char *wFile)
 
 		size = GetUTF8Size(chr);
 
-		for(c = 1; c < size; c++)
+		for (c = 1; c < size; c++)
 		{
 			chr <<= 8;
 			chr |= readChar(rfp);
@@ -219,7 +219,7 @@ void UTF16ToUTF8File(char *rFile, char *wFile)
 	FILE *rfp = fileOpen(rFile, "rb");
 	FILE *wfp = fileOpen(wFile, "wb");
 
-	for(; ; )
+	for (; ; )
 	{
 		int chr = ReadUTF16Char(rfp);
 

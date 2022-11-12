@@ -15,7 +15,7 @@ static void Test_encodeBase64_decodeBase64(void)
 {
 	uint testcnt;
 
-	for(testcnt = 0; testcnt < 1000; testcnt++)
+	for (testcnt = 0; testcnt < 1000; testcnt++)
 	{
 		autoBlock_t *src = MakeRandBinaryBlock(mt19937_rnd(100000));
 		autoBlock_t *enc;
@@ -26,7 +26,7 @@ static void Test_encodeBase64_decodeBase64(void)
 		enc = encodeBase64(src);
 		cout("enc: %u\n", getSize(enc));
 
-		for(index = 0; index < getSize(enc); index++)
+		for (index = 0; index < getSize(enc); index++)
 			errorCase(!IsBase64Char(getByte(enc, index)));
 
 		dec = decodeBase64(enc);
@@ -61,7 +61,7 @@ static void Test_encodeBase64_decodeBase64_02(void)
 
 	LOGPOS();
 
-	for(index = 0; index < lengthof(TEST_VECTOR); index += 2)
+	for (index = 0; index < lengthof(TEST_VECTOR); index += 2)
 	{
 		char *plain   = TEST_VECTOR[index + 0];
 		char *encoded = TEST_VECTOR[index + 1];

@@ -129,7 +129,7 @@ char *LiteUrlEncoder(char *name)
 	autoBlock_t *buff = newBlock();
 	char *p;
 
-	for(p = name; *p; p++)
+	for (p = name; *p; p++)
 	{
 		if (isMbc(p))
 		{

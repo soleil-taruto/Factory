@@ -11,7 +11,7 @@ uint64 toValue64Digits(char *line, char *digits)
 	char *p;
 	uint64 value = 0;
 
-	for(p = line; *p; p++)
+	for (p = line; *p; p++)
 	{
 		int d = *p;
 		char *dp;
@@ -80,7 +80,7 @@ char *toLineValue64Digits(uint64 value, char *digits)
 
 	errorCase(radix < 2);
 
-	for(p = buff; 0ui64 < value; p++)
+	for (p = buff; 0ui64 < value; p++)
 	{
 		*p = digits[(uint)(value % (uint64)radix)];
 		value /= (uint64)radix;
@@ -110,7 +110,7 @@ uint iSqrt64(uint64 value)
 	uint ret = 0;
 	uint nBit;
 
-	for(nBit = 1u << 31; nBit; nBit >>= 1)
+	for (nBit = 1u << 31; nBit; nBit >>= 1)
 	{
 		uint tRet = ret | nBit;
 
@@ -130,7 +130,7 @@ uint iRoot64(uint64 value, uint extend)
 
 	errorCase(!extend);
 
-	for(nBit = 1u << 31; nBit; nBit >>= 1)
+	for (nBit = 1u << 31; nBit; nBit >>= 1)
 	{
 		uint tRet = ret | nBit;
 		uint64 p;
@@ -138,7 +138,7 @@ uint iRoot64(uint64 value, uint extend)
 
 		p = tRet;
 
-		for(e = extend - 1; e; e--)
+		for (e = extend - 1; e; e--)
 		{
 			if (UINT64MAX / p < tRet)
 			{

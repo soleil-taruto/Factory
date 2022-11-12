@@ -130,9 +130,9 @@ static void ChannelTh(uint prm)
 		autoBlock_t *buffBlock = i->SendBuffer ? i->SendBuffer : newBlock();
 		uint index;
 
-		for(; ; )
+		for (; ; )
 		{
-			for(index = 0; ; )
+			for (index = 0; ; )
 			{
 				if (!KeepTheServer)
 					goto endLoop;
@@ -201,7 +201,7 @@ static void WaitClient(int sock, char *name, autoBlock_t *blockSend)
 
 	addElement(WaitInfos, (uint)i);
 
-	for(waitcnt = 1; waitcnt <= 2; waitcnt++)
+	for (waitcnt = 1; waitcnt <= 2; waitcnt++)
 	{
 		cout("C");
 		inner_uncritical();
@@ -393,7 +393,7 @@ static void RefluxPerform(uint connectmax)
 
 	critical();
 	{
-		for(; ; )
+		for (; ; )
 		{
 			if (getCount(thhdls) < connectmax)
 			{

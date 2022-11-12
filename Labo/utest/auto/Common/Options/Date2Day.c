@@ -53,12 +53,12 @@ static void Test_Date2Day(void)
 	uint64 day = 0;
 	uint64 rDay;
 
-	for(y = 1; y <= 3000; y++)
-	for(m = 1; m <= 12; m++)
+	for (y = 1; y <= 3000; y++)
+	for (m = 1; m <= 12; m++)
 	{
 		dnum = GetDayNum(y, m);
 
-		for(d = 1; d <= dnum; d++)
+		for (d = 1; d <= dnum; d++)
 		{
 			cout("%04u/%02u/%02u %I64u > ", y, m, d, day);
 			rDay = Date2Day(y, m, d);
@@ -97,9 +97,9 @@ static void Test_CheckDate(void)
 	uint m;
 	uint d;
 
-	for(y = 0; y <= 3000; y++)
-	for(m = 0; m <= 13; m++)
-	for(d = 0; d <= 32; d++)
+	for (y = 0; y <= 3000; y++)
+	for (m = 0; m <= 13; m++)
+	for (d = 0; d <= 32; d++)
 	{
 		uint tc = CheckDate4Test(y, m, d);
 		uint rc = CheckDate(y, m, d);
@@ -121,8 +121,8 @@ static void Test_GetEndOfMonth(void)
 
 	LOGPOS();
 
-	for(y = 1; y <= 3000; y++)
-	for(m = 1; m <= 12; m++)
+	for (y = 1; y <= 3000; y++)
+	for (m = 1; m <= 12; m++)
 	{
 		uint d = GetEndOfMonth(y, m);
 

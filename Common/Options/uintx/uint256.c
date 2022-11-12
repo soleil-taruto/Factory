@@ -106,7 +106,7 @@ UI256_t UI256_Mul(UI256_t a, UI256_t b, UI256_t ans[2])
 	m[2][mc[2]++] = f[0];
 	m[3][mc[3]++] = f[1];
 
-	for(i = 1; i < 4; i++)
+	for (i = 1; i < 4; i++)
 	while (2 <= mc[i])
 	{
 		UI128_t t = m[i][--mc[i]];
@@ -177,7 +177,7 @@ static UI256_t DivSub(UI256_t a, UI256_t b, UI256_t ans[2], uint reti)
 		{
 			UI128_t c = UI128_Add(b.H, UI128_x(1), NULL);
 
-			for(; ; )
+			for (; ; )
 			{
 				UI128_t d = UI128_Div(a.H, c, NULL);
 				UI256_t dd;

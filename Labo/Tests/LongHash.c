@@ -16,7 +16,7 @@ static void LongHash(int chr, uint blockSize, uint blockNum)
 		memset(block, chr, blockSize);
 		gBlock = gndBlock(block, blockSize);
 
-		for(count = blockNum; count; count--)
+		for (count = blockNum; count; count--)
 		{
 			sha512_update(i, &gBlock);
 		}

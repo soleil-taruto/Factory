@@ -94,7 +94,7 @@ static void ParseValue(char *value)
 
 		w = value;
 
-		for(r = value + 1; *r != '"'; r++)
+		for (r = value + 1; *r != '"'; r++)
 		{
 			errorCase(!*r);
 
@@ -134,7 +134,7 @@ static void ParseValue(char *value)
 
 		w = value;
 
-		for(r = value; *r; r++)
+		for (r = value; *r; r++)
 			if (m_ishexadecimal(*r))
 				*w++ = *r;
 

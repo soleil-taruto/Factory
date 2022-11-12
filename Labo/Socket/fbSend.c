@@ -38,7 +38,7 @@ static void SendUpFile(int sock)
 
 	fp = fileOpen(UpFile, "rb");
 
-	for(; ; )
+	for (; ; )
 	{
 		if (getSize(buffer) < UFBUFF_SIZE)
 			ab_addBytes_x(buffer, readBinaryBlock(fp, UFBUFF_SIZE));

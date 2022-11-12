@@ -74,7 +74,7 @@ autoBlock_t *md5_makeHashFileBuffSize(char *file, uint buffSize)
 
 	errorCase(buffSize < 1);
 
-	for(; ; )
+	for (; ; )
 	{
 		autoBlock_t *buff = readBinaryStream(fp, buffSize);
 

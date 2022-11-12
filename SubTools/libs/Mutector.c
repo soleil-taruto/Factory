@@ -36,7 +36,7 @@ Mutector_t *CreateMutector(char *name)
 	}
 	sha512_unlocalize();
 
-	for(index = 0; index < MUTECTOR_MTX_MAX; index++)
+	for (index = 0; index < MUTECTOR_MTX_MAX; index++)
 	{
 		i->Mtxs[index] = mutexOpen_x(xcout(COMMON_ID "_%s_%u", ident, index));
 		i->Statuses[index] = 0;
@@ -49,7 +49,7 @@ void ReleaseMutector(Mutector_t *i)
 {
 	uint index;
 
-	for(index = 0; index < MUTECTOR_MTX_MAX; index++)
+	for (index = 0; index < MUTECTOR_MTX_MAX; index++)
 	{
 		if (i->Statuses[index])
 			mutexRelease(i->Mtxs[index]);
@@ -77,7 +77,7 @@ static void Clear(Mutector_t *i, int status)
 {
 	uint index;
 
-	for(index = MUTECTOR_MTX_MAX; index; index--) // 排他用を最後に解放したい。
+	for (index = MUTECTOR_MTX_MAX; index; index--) // 排他用を最後に解放したい。
 	{
 		Set(i, index - 1, status);
 	}
@@ -145,11 +145,11 @@ void MutectorSend(Mutector_t *i, autoBlock_t *message)
 
 	SendBit(i, 1, 1);
 
-	for(index = 0; index < getSize(message); index++)
+	for (index = 0; index < getSize(message); index++)
 	{
 		int chr = getByte(message, index);
 
-		for(bit = 1 << 7; bit; bit >>= 1)
+		for (bit = 1 << 7; bit; bit >>= 1)
 		{
 			if (chr & bit)
 				SendBit(i, 0, 1);
@@ -275,7 +275,7 @@ static void Recv(void)
 	}
 	Set(R_I, M_Sync_0, 1);
 
-	for(; ; )
+	for (; ; )
 	{
 		RecvBit(0, 1, 2);
 		RecvBit(1, 2, 0);

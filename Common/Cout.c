@@ -145,7 +145,7 @@ char *vxcout(char *format, va_list marker)
 	char *buffer;
 	uint size;
 
-	for(size = strlen(format) + 100; ; size *= 2)
+	for (size = strlen(format) + 100; ; size *= 2)
 	{
 		sint ret;
 
@@ -203,11 +203,11 @@ void coutLongText(char *text)
 	uint d;
 	int needFlush = 0;
 
-	for(p = text; *p; p = q)
+	for (p = text; *p; p = q)
 	{
 #define PRINT_LMT 98
 
-		for(q = p; *q && (uint)q - (uint)p < PRINT_LMT; q = mbsNext(q))
+		for (q = p; *q && (uint)q - (uint)p < PRINT_LMT; q = mbsNext(q))
 			if (*q == '\r' || *q == '\n')
 				needFlush = 1;
 

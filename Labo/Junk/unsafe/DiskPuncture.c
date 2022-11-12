@@ -26,7 +26,7 @@ static char *GetOutputFile(char *dir)
 	char *lclfile = strx("");
 	uint count;
 
-	for(count = 0; count < 16; count++)
+	for (count = 0; count < 16; count++)
 	{
 		lclfile = addLine_x(lclfile, xcout("%02x", getCryptoByte()));
 	}
@@ -75,7 +75,7 @@ static void MakeGarbageFiles(void)
 
 	createDir(GarbageFilesDir);
 
-	for(index = 0; index < 20; index++)
+	for (index = 0; index < 20; index++)
 	{
 		char *file = combine_cx(GarbageFilesDir, xcout("%02u.pad", index));
 
@@ -94,7 +94,7 @@ static void MakeGarbageFiles(void)
 			FILE *fp = fileOpen(file, "wb");
 			uint count;
 
-			for(count = 4096; count; count--)
+			for (count = 4096; count; count--)
 			{
 				writeChar(fp, 0xaa);
 			}

@@ -25,7 +25,7 @@ static int CheckPw(char *pw, uint pwChrNum)
 	default:
 		error();
 	}
-	for(p = pw; *p; p++)
+	for (p = pw; *p; p++)
 	{
 		   if (m_isdecimal(*p)) dig = 1;
 		else if (m_isupper(*p)) upr = 1;
@@ -83,15 +83,15 @@ int main(int argc, char **argv)
 
 	pwChrs = strx("");
 
-	for(chr = '0'; chr <= '9'; chr++) pwChrs = addChar(pwChrs, chr);
-	for(chr = 'A'; chr <= 'Z'; chr++) pwChrs = addChar(pwChrs, chr);
-	for(chr = 'a'; chr <= 'z'; chr++) pwChrs = addChar(pwChrs, chr);
+	for (chr = '0'; chr <= '9'; chr++) pwChrs = addChar(pwChrs, chr);
+	for (chr = 'A'; chr <= 'Z'; chr++) pwChrs = addChar(pwChrs, chr);
+	for (chr = 'a'; chr <= 'z'; chr++) pwChrs = addChar(pwChrs, chr);
 
 	errorCase(strlen(pwChrs) != 62); // 2bs
 
 	pw = strx("");
 
-	for(; ; )
+	for (; ; )
 	{
 		while (strlen(pw) < pwLen)
 		{

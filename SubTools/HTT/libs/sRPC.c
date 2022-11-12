@@ -103,7 +103,7 @@ static void DeleteServiceNameFromHttRecvFile(void)
 
 	cout("DEL_SERVICE_NAME:[");
 
-	for(count = 1; ; count++)
+	for (count = 1; ; count++)
 	{
 		int chr = readChar(fp);
 

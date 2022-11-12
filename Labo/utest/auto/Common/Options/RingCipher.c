@@ -6,7 +6,7 @@ static void Test_rcphrEncryptor(void)
 {
 	uint testcnt;
 
-	for(testcnt = 0; testcnt < 1000; testcnt++)
+	for (testcnt = 0; testcnt < 1000; testcnt++)
 	{
 		uint kw;
 		uint ks;
@@ -53,7 +53,7 @@ static void Test_rcphrEncryptorBlock_rcphrDecryptorBlock(void)
 {
 	uint testcnt;
 
-	for(testcnt = 0; testcnt < 1000; testcnt++)
+	for (testcnt = 0; testcnt < 1000; testcnt++)
 	{
 		uint kw;
 		uint ks;

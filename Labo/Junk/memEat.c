@@ -6,7 +6,7 @@ static void *MakeBlock(uint size)
 	uchar *block = memAlloc(size);
 	uint index;
 
-	for(index = 0; index < size; index += 100)
+	for (index = 0; index < size; index += 100)
 	{
 		memset(block +index, mt19937_range(1, 255), 100);
 	}
@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 {
 	autoList_t *blockList = newList();
 
-	for(; ; )
+	for (; ; )
 	{
 		cout("[%u]\n", getCount(blockList));
 

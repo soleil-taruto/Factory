@@ -25,7 +25,7 @@ static void MoteClean(char *dir)
 
 		chkPtn = replaceLine(chkPtn, " - コピー.", ".", 1);
 
-		for(numb = 1; numb < 300; numb++)
+		for (numb = 1; numb < 300; numb++)
 			chkPtn = replaceLine_xc(chkPtn, xcout(" - コピー (%u).", numb), ".", 1);
 
 		if (

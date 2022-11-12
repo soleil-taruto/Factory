@@ -16,7 +16,7 @@ static void DoTestOnce(uint n)
 	{
 		uint c;
 
-		for(c = 0; c < n; c++)
+		for (c = 0; c < n; c++)
 			if (!mt19937_rnd(n))
 				break;
 
@@ -33,7 +33,7 @@ static void DoTest(uint n)
 
 	cout("%u回に1回起こる現象が%u回の試行で1回も起こらない確率は...\n", n, n);
 
-	for(c = 1; c <= 10; c++)
+	for (c = 1; c <= 10; c++)
 	{
 		DoTestOnce(n);
 	}
@@ -45,15 +45,15 @@ int main(int argc, char **argv)
 
 	mt19937_initCRnd();
 
-	for(n = 1; n <= 30; n++)
+	for (n = 1; n <= 30; n++)
 	{
 		DoTest(n);
 	}
-	for(n = 35; n <= 100; n += 5)
+	for (n = 35; n <= 100; n += 5)
 	{
 		DoTest(n);
 	}
-	for(n = 200; n <= 500; n += 50)
+	for (n = 200; n <= 500; n += 50)
 	{
 		DoTest(n);
 	}

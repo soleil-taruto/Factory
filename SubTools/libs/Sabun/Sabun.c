@@ -47,13 +47,13 @@ static void FindSameArea(void)
 
 	errorCase(UINTMAX - SPos < BPos); // 2bs
 
-	for(sndx = 0; sndx + bound < getSize(&SBlock); sndx += bound)
-	for(bndx = 0; bndx + bound < getSize(&BBlock); bndx++)
+	for (sndx = 0; sndx + bound < getSize(&SBlock); sndx += bound)
+	for (bndx = 0; bndx + bound < getSize(&BBlock); bndx++)
 	{
 		if (SPos + BPos <= sndx + bndx) // ? Šù’m‚Ì·•ª‚æ‚è‘å‚«‚¢‚©“¯‚¶‚É‚È‚éB-> next sndx
 			break;
 
-		for(index = 0; index < bound; index++)
+		for (index = 0; index < bound; index++)
 			if (getByte(&SBlock, sndx) != getByte(&BBlock, bndx)) // ? •sˆê’v
 				break;
 

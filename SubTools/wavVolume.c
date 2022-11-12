@@ -42,7 +42,7 @@ static void WavVolume_D(void)
 
 	cout("VolumePct: %u\n", VolumePct);
 
-	for(index = 0; index < getCount(WavData); index++)
+	for (index = 0; index < getCount(WavData); index++)
 	{
 		uint value = getElement(WavData, index);
 		uint v1;
@@ -101,7 +101,7 @@ int main(int argc, char **argv)
 		return;
 	}
 
-	for(; ; )
+	for (; ; )
 	{
 		char *file = c_dropFile();
 

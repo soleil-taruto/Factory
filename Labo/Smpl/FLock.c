@@ -14,7 +14,7 @@ static void LockMain(char *file, int retrymax)
 
 	cout("ƒƒbƒN‚µ‚Ü‚·...\n");
 
-	for(retrycnt = 0; ; retrycnt++)
+	for (retrycnt = 0; ; retrycnt++)
 	{
 		fp = FLock(file);
 

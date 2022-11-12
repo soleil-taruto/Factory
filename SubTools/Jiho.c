@@ -24,7 +24,7 @@ static void InsertTopMuon(char *rFile, char *wFile)
 
 	wavTop = getElement(wavData, 0);
 
-	for(count = 0; count < lastWAV_Hz * MUON_SEC; count++)
+	for (count = 0; count < lastWAV_Hz * MUON_SEC; count++)
 		addElement(dest, wavTop);
 
 	addElements(dest, wavData);
@@ -64,7 +64,7 @@ int main(int argc, char **argv)
 
 	LOGPOS();
 
-	for(; ; )
+	for (; ; )
 	{
 		uint rem = (3600 - (uint)((time(NULL) + MUON_SEC + JIHO_DELAY_SEC) % 3600)) % 3600;
 		uint millis;

@@ -49,7 +49,7 @@ static char *DoRequest(char *prmText)
 	uint trycnt;
 	char *ansText;
 
-	for(trycnt = 1; trycnt <= 3; trycnt++)
+	for (trycnt = 1; trycnt <= 3; trycnt++)
 	{
 		ansText = Request(prmText);
 
@@ -174,7 +174,7 @@ static void ChatMain(void)
 	}
 	LastStamp = strx("0");
 
-	for(; ; )
+	for (; ; )
 	{
 		uint c;
 
@@ -222,7 +222,7 @@ static void ChatMain(void)
 					GetTLPeriod++;
 			}
 		}
-		for(c = 5; c; c--)
+		for (c = 5; c; c--)
 		{
 			if (hasKey())
 			{

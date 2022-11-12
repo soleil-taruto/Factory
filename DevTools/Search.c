@@ -28,7 +28,7 @@ static void DispRange(FILE *fp, sint64 start, sint64 end, sint64 fileSize)
 	int chr;
 	int disped = 0;
 
-	for(index = start; index <= end; index++)
+	for (index = start; index <= end; index++)
 	{
 		if (0 <= index && index < fileSize)
 		{

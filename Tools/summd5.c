@@ -145,7 +145,7 @@ readArgs:
 	}
 	else
 	{
-		for(; ; )
+		for (; ; )
 		{
 			ProcMain(c_dropDirFile());
 			cout("\n");

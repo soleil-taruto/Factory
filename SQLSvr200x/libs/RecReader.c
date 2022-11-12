@@ -20,7 +20,7 @@ static autoList_t *GetColumnWidthList(char *bdrLine)
 		lineExp("<>  <>", bdrLine)
 		);
 
-	for(p = bdrLine; *p; p++)
+	for (p = bdrLine; *p; p++)
 	{
 		if (*p == ' ')
 		{
@@ -38,7 +38,7 @@ static autoList_t *GetColumnWidthList(char *bdrLine)
 
 		errorCase(getCount(cwList) < 1); // ? —ñ‚ª‚P‚Â‚à–³‚¢B
 
-		for(colidx = 0; colidx < getCount(cwList); colidx++)
+		for (colidx = 0; colidx < getCount(cwList); colidx++)
 		{
 			errorCase(getElement(cwList, colidx) < 1); // ? —ñ•‚ª‚P•¶Žš‚à–³‚¢B
 		}
@@ -52,7 +52,7 @@ static autoList_t *SplitRow(char *recLine, autoList_t *cwList)
 	char *column = strx("");
 	char *p = recLine;
 
-	for(; ; )
+	for (; ; )
 	{
 		if (!c)
 		{
@@ -135,11 +135,11 @@ autoList_t *SqlRecReader(char *recFile)
 
 		errorCase(colcnt < 1); // ? —ñ‚ª‚P‚Â‚à–³‚¢B
 
-		for(rowidx = 1; rowidx < getCount(table); rowidx++)
+		for (rowidx = 1; rowidx < getCount(table); rowidx++)
 		{
 			errorCase(getCount(getList(table, rowidx)) != colcnt); // ? —ñ”‚ªˆê’è‚Å‚Í‚È‚¢B
 
-			for(colidx = 0; colidx < colcnt; colidx++)
+			for (colidx = 0; colidx < colcnt; colidx++)
 			{
 				errorCase(getLine(getList(table, rowidx), colidx) == NULL); // ? cell == NULL
 			}

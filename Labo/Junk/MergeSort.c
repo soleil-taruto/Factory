@@ -113,7 +113,7 @@ static void CascMergeSort(autoList_t *divfiles, char *outputfile) // Cascade? Me
 		char *line;
 		uint64 linecnt;
 
-		for(linecnt = 0; ; linecnt++)
+		for (linecnt = 0; ; linecnt++)
 		{
 			if (eqIntPulseSec(2, NULL))
 				cout("linecnt: %I64u\n", linecnt);
@@ -155,13 +155,13 @@ int main(int argc, char **argv)
 
 		rfp = fileOpen(inputfile, "rt");
 
-		for(divcnt = 0; ; divcnt++)
+		for (divcnt = 0; ; divcnt++)
 		{
 			divfile = combine_cx(divdir, xcout("%010u.div", divcnt));
 			cout("divfile: %s\n", divfile);
 			wfp = fileOpen(divfile, "wt");
 
-			for(linecnt = 0; linecnt < linenummax; linecnt++)
+			for (linecnt = 0; linecnt < linenummax; linecnt++)
 			{
 				line = readLine(rfp);
 
@@ -236,7 +236,7 @@ int main(int argc, char **argv)
 
 		fp = fileOpen(inputfile, "rt");
 
-		for(divcnt = 0; ; divcnt++)
+		for (divcnt = 0; ; divcnt++)
 		{
 			charcnt = 0;
 			lines = newList();

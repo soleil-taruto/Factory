@@ -51,7 +51,7 @@ static void AddPadding(autoBlock_t *block)
 	}
 	while (size + padSize < 0xff);
 
-	for(count = padSize; count; count--)
+	for (count = padSize; count; count--)
 	{
 		addByte(block, getCryptoByte());
 	}
@@ -80,7 +80,7 @@ static void AddRandPart(autoBlock_t *block)
 {
 	uint count;
 
-	for(count = RANDPARTSIZE; count; count--)
+	for (count = RANDPARTSIZE; count; count--)
 	{
 		addByte(block, getCryptoRand());
 	}
@@ -135,7 +135,7 @@ static void CipherMain(autoBlock_t *block, autoList_t *keyTableList, int doEncry
 	if (getCount(keyTableList) < 2)
 		cout("Warning: Œ®‚ª2‚Â–¢–ž @ RingCipher2.c\n");
 
-	for(index = 0; index < getCount(keyTableList); index++)
+	for (index = 0; index < getCount(keyTableList); index++)
 	{
 		camellia_cbcRing(
 			(camellia_keyTable_t *)getElement(keyTableList, doEncrypt ? index : getCount(keyTableList) - 1 - index),
@@ -217,7 +217,7 @@ static void F_AddPadding(char *file)
 
 	fp = fileOpen(file, "ab");
 
-	for(count = padSize; count; count--)
+	for (count = padSize; count; count--)
 	{
 		writeChar(fp, getCryptoByte());
 	}
@@ -254,7 +254,7 @@ static void F_AddRandPart(char *file)
 	FILE *fp = fileOpen(file, "ab");
 	uint index;
 
-	for(index = 0; index < RANDPARTSIZE; index++)
+	for (index = 0; index < RANDPARTSIZE; index++)
 		writeChar(fp, getCryptoByte());
 
 	fileClose(fp);
@@ -347,7 +347,7 @@ static void F_EncryptMain(char *file, camellia_keyTable_t *keyTable)
 	fileRead(rfp, gndBlockVar(prevBlock, 16, gab));
 	fileSeek(rfp, SEEK_SET, 0);
 
-	for(index = 0; index < size; index += 16)
+	for (index = 0; index < size; index += 16)
 	{
 		fileRead(rfp, gndBlockVar(currBlock, 16, gab));
 		XorBlock(currBlock, prevBlock);
@@ -378,7 +378,7 @@ static void F_DecryptPart(FILE *fp, uint64 fpPos, uint size, camellia_keyTable_t
 	fileSeek(fp, SEEK_SET, fpPos - size);
 	fileRead(fp, gndBlockVar(buff, size, gab));
 
-	for(index = size; 32 <= index; index -= 16)
+	for (index = size; 32 <= index; index -= 16)
 	{
 		uchar *prevBlock = buff + index - 32;
 		uchar *currBlock = buff + index - 16;
@@ -410,7 +410,7 @@ static void F_DecryptMain(char *file, camellia_keyTable_t *keyTable)
 	errorCase(size < 32); // 2bs
 	errorCase(size % 16 != 0); // 2bs
 
-	for(index = size; 16 <= index; )
+	for (index = size; 16 <= index; )
 	{
 		const uint H_PART = 32000000;
 		const uint M_PART = 320000;
@@ -468,7 +468,7 @@ static int F_Decrypt(char *file, autoList_t *keyTableList)
 		)
 		return 0;
 
-	for(index = getCount(keyTableList); index; )
+	for (index = getCount(keyTableList); index; )
 	{
 		index--;
 		keyTable = (camellia_keyTable_t *)getElement(keyTableList, index);

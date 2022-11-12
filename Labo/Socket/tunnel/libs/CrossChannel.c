@@ -32,7 +32,7 @@ static void ChannelTransmit(uint prm)
 
 		i->DataFltr(wBuff, i->FltrData);
 
-		for(; ; )
+		for (; ; )
 		{
 			int ioOccurred = 0;
 
@@ -150,7 +150,7 @@ static void ChannelTransmit(uint prm)
 		{
 			uint abortTime = GetTimeoutTime(DOSTimeoutSec);
 
-			for(; ; )
+			for (; ; )
 			{
 				if (ProcDeadFlag)
 					break;

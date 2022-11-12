@@ -35,7 +35,7 @@ void NS_SendFile(SockStream_t *ss, char *file)
 
 	fp = fileOpen(file, "rb");
 
-	for(; ; )
+	for (; ; )
 	{
 		autoBlock_t *buff = readBinaryStream(fp, 20000000); // 20 MB
 
@@ -91,7 +91,7 @@ void NS_RecvFile(SockStream_t *ss, char *file)
 	repSpan = fileSize / 10;
 	m_minim(repSpan, 30000000); // 30 MB
 
-	for(count = 0; count < fileSize; count++)
+	for (count = 0; count < fileSize; count++)
 	{
 		if (eqIntPulseSec(1, NULL))
 		{

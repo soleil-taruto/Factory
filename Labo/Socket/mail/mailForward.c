@@ -428,7 +428,7 @@ static void RecvLoop(void)
 	uint stopEv = eventOpen(STOP_EV_NAME);
 	uint waitSec = IMAX;
 
-	for(; ; )
+	for (; ; )
 	{
 		autoList_t *mails = mailRecv(PopServer, PopPortno, PopUserName, PopPassphrase, 3, 1024 * 1024 * 64, RecvAndDeleteMode);
 		autoList_t *mail;
@@ -454,7 +454,7 @@ static void RecvLoop(void)
 
 		cout("waitSec: %u\n", waitSec);
 
-		for(index = 0; index < waitSec; index += 3)
+		for (index = 0; index < waitSec; index += 3)
 			if (checkKey(0x1b) || handleWaitForMillis(stopEv, 3000))
 				goto endLoop;
 

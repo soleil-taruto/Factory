@@ -58,9 +58,9 @@ readArgs:
 
 	rapidSortLines(lines);
 
-	for(index = 0; index < getCount(lines); index += count)
+	for (index = 0; index < getCount(lines); index += count)
 	{
-		for(count = 0; index + count < getCount(lines); count++)
+		for (count = 0; index + count < getCount(lines); count++)
 			if (strcmp(getLine(lines, index), getLine(lines, index + count)))
 				break;
 
@@ -74,7 +74,7 @@ readArgs:
 	releaseDim(lines, 1);
 	lines = outLines;
 
-	for(; ; )
+	for (; ; )
 	{
 		foreach (lines, line, index)
 			if (line[0] != ' ')

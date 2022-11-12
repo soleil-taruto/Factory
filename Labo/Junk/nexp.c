@@ -23,8 +23,8 @@ static void MulN(int n) {
 	int index;
 	__int64 v = 0;
 
-	for(; ; ) {
-		for(index = 0; index < BLOCKSZ; index++) {
+	for (; ; ) {
+		for (index = 0; index < BLOCKSZ; index++) {
 			v += (__int64)b->Vals[index] * n;
 			b->Vals[index] = (int)(v % VALSZ);
 			v /= VALSZ;
@@ -54,7 +54,7 @@ static void DoPrint(int n, int exp) {
 
 	printf("%d^%d=", n, exp);
 
-	for(index = BLOCKSZ - 1; !b->Vals[index]; index--);
+	for (index = BLOCKSZ - 1; !b->Vals[index]; index--);
 
 	printf("%d", b->Vals[index]);
 
@@ -62,7 +62,7 @@ static void DoPrint(int n, int exp) {
 		printf("%09d", b->Vals[index]);
 	}
 	while (b = b->Prev) {
-		for(index = BLOCKSZ - 1; 0 <= index; index--) {
+		for (index = BLOCKSZ - 1; 0 <= index; index--) {
 			printf("%09d", b->Vals[index]);
 		}
 	}
@@ -77,7 +77,7 @@ int main(void) {
 
 	DoPrint(N, 0);
 
-	for(exp = 1; exp <= EXP_MAX; exp++) {
+	for (exp = 1; exp <= EXP_MAX; exp++) {
 		MulN(N);
 		DoPrint(N, exp);
 	}

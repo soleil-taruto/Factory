@@ -53,7 +53,7 @@ static uchar *RefSwap8Table(void)
 	{
 		table = (uchar *)memAlloc(0x100);
 
-		for(counter = 0x00; counter <= 0xff; counter++)
+		for (counter = 0x00; counter <= 0xff; counter++)
 		{
 			table[counter] = Swap8(counter);
 		}
@@ -79,7 +79,7 @@ uint crc8UpdateBlock(uint counter, void *block, uint blockSize)
 
 	errorCase(0x100 <= counter);
 
-	for(p = (uchar *)block; p < (uchar *)block + blockSize; p++)
+	for (p = (uchar *)block; p < (uchar *)block + blockSize; p++)
 	{
 		counter = table[counter ^ *p];
 	}
@@ -124,12 +124,12 @@ static uint16 *RefSwap16Table(void)
 	{
 		table = (uint16 *)memAlloc(256 * sizeof(uint16));
 
-		for(i = 0; i < 256; i++)
+		for (i = 0; i < 256; i++)
 		{
 			uint crc = i;
 			uint c;
 
-			for(c = 0; c < 8; c++)
+			for (c = 0; c < 8; c++)
 			{
 				if (crc & 1)
 				{
@@ -156,7 +156,7 @@ uint crc16UpdateBlock(uint counter, void *block, uint blockSize)
 	uint16 *table = RefSwap16Table();
 	uint index;
 
-	for(index = 0; index < blockSize; index++)
+	for (index = 0; index < blockSize; index++)
 	{
 		counter = table[(counter ^ ((uchar *)block)[index]) & 0xff] ^ counter >> 8;
 //		counter = crc16Update(counter, ((uchar *)block)[index]); // old_same
@@ -198,12 +198,12 @@ static uint *MakeCRC32Table(void)
 
 	table = (uint *)memAlloc(256 * sizeof(uint));
 
-	for(index = 0; index < 256; index++)
+	for (index = 0; index < 256; index++)
 	{
 		uint c = index;
 		uint j;
 
-		for(j = 0; j < 8; j++)
+		for (j = 0; j < 8; j++)
 		{
 			c = c & 1 ? 0xEDB88320 ^ c >> 1 : c >> 1;
 		}
@@ -230,7 +230,7 @@ uint crc32UpdateBlock(uint counter, void *block, uint blockSize)
 	if (!CRC32Table)
 		CRC32Table = MakeCRC32Table();
 
-	for(index = 0; index < blockSize; index++)
+	for (index = 0; index < blockSize; index++)
 	{
 		counter = CRC32Table[(counter ^ ((uchar *)block)[index]) & 0xFF] ^ counter >> 8;
 	}

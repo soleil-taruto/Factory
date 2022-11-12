@@ -76,11 +76,11 @@ static void Send(Nectar_t *i, autoBlock_t *message)
 	}
 	SendBit(i, 0, 1);
 
-	for(index = 0; index < getSize(message); index++)
+	for (index = 0; index < getSize(message); index++)
 	{
 		int chr = getByte(message, index);
 
-		for(bit = 1 << 7; bit; bit >>= 1)
+		for (bit = 1 << 7; bit; bit >>= 1)
 			if (!SendBit(i, chr & bit, 0))
 				return;
 	}
@@ -110,7 +110,7 @@ static autoBlock_t *Recv(Nectar_t *i) // ret: NULL == 受信タイムアウト || サイズ
 	static uint chr;
 	static uint bit;
 
-	for(; ; )
+	for (; ; )
 	{
 		uint ret;
 
@@ -187,7 +187,7 @@ autoBlock_t *NectarRecv(Nectar_t *i)
 	autoBlock_t *message;
 	uint c;
 
-	for(c = 0; c < 60; c += 2) // 60 秒 -- 相手側の処理時間 + 応答が必ずあることが前提なので、長め。
+	for (c = 0; c < 60; c += 2) // 60 秒 -- 相手側の処理時間 + 応答が必ずあることが前提なので、長め。
 	{
 		message = Recv(i);
 

@@ -9,7 +9,7 @@ char *MakeUUID(int bracket)
 	{
 		buff = addChar(buff, '{');
 	}
-	for(p = "HHHH-HH-4H-8H-HHHHHH"; *p; p++)
+	for (p = "HHHH-HH-4H-8H-HHHHHH"; *p; p++)
 	{
 		switch (*p)
 		{
@@ -59,7 +59,7 @@ char *MakeRandID(void)
 	char *buff = strx("");
 	uint index;
 
-	for(index = 0; index < 25; index++)
+	for (index = 0; index < 25; index++)
 		buff = addChar(buff, GetRandIDChar());
 
 	return buff;
@@ -69,7 +69,7 @@ char *MakeRandHexID(void)
 	char *buff = strx("");
 	uint index;
 
-	for(index = 0; index < 16; index++)
+	for (index = 0; index < 16; index++)
 		buff = addLine_x(buff, xcout("%02x", getCryptoByte()));
 
 	return buff;

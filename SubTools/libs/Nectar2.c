@@ -25,7 +25,7 @@ Nectar2_t *CreateNectar2(char *ident) // ident: 名前付きイベント名に使うので注意
 	Nectar2_t *i = (Nectar2_t *)memAlloc(sizeof(Nectar2_t));
 	uint index;
 
-	for(index = 0; index < E_MAX; index++)
+	for (index = 0; index < E_MAX; index++)
 	{
 		i->Handles[index] = eventOpen_x(xcout("Nectar2_" COMMON_ID "_%s_%u", ident, index));
 	}
@@ -36,7 +36,7 @@ void ReleaseNectar2(Nectar2_t *i)
 {
 	uint index;
 
-	for(index = 0; index < E_MAX; index++)
+	for (index = 0; index < E_MAX; index++)
 	{
 		handleClose(i->Handles[index]);
 	}
@@ -63,7 +63,7 @@ static int SendChar(Nectar2_t *i, int chr) // ret: ? 成功
 {
 	uint bit;
 
-	for(bit = 0; bit < 8; bit++)
+	for (bit = 0; bit < 8; bit++)
 		if (chr & 1 << bit)
 			Set(i, E_BIT_0 + bit);
 
@@ -76,7 +76,7 @@ void Nectar2Send(Nectar2_t *i, autoBlock_t *message)
 {
 	uint index;
 
-	for(index = 0; index < getSize(message); index++)
+	for (index = 0; index < getSize(message); index++)
 	{
 		if (!SendChar(i, getByte(message, index)))
 		{
@@ -119,7 +119,7 @@ static int RecvChar(Nectar2_t *i) // ret: -1 == 失敗 || タイムアウト
 	if (!Get(i, E_SEND, 2000)) // 受信タイムアウト
 		return -1;
 
-	for(bit = 0; bit < 8; bit++)
+	for (bit = 0; bit < 8; bit++)
 		if (Get(i, E_BIT_0 + bit, 0))
 			chr |= 1 << bit;
 
@@ -133,7 +133,7 @@ autoBlock_t *Nectar2Recv(Nectar2_t *i, int delimiter)
 	if (!i->RecvBuff)
 		i->RecvBuff = newBlock();
 
-	for(; ; )
+	for (; ; )
 	{
 		int chr = RecvChar(i);
 

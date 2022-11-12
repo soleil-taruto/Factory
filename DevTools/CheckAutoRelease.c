@@ -32,7 +32,7 @@ static void RemoveIndentedLines(autoList_t *lines)
 {
 	uint index;
 
-	for(index = getCount(lines); index; )
+	for (index = getCount(lines); index; )
 	{
 		index--;
 

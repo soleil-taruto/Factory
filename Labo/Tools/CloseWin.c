@@ -216,7 +216,7 @@ int main(int argc, char **argv)
 
 	if (waitOpenMode)
 	{
-		for(loopCnt = 1; ; loopCnt++)
+		for (loopCnt = 1; ; loopCnt++)
 		{
 			FoundFlag = 0;
 			SearchProcByExeName(exeName, FindPE);
@@ -242,7 +242,7 @@ int main(int argc, char **argv)
 
 	if (waitOpenTitleMode)
 	{
-		for(loopCnt = 1; ; loopCnt++)
+		for (loopCnt = 1; ; loopCnt++)
 		{
 			FoundFlag = 0;
 			FindWinTitle(winTitle);
@@ -268,7 +268,7 @@ int main(int argc, char **argv)
 
 	if (waitCloseMode)
 	{
-		for(loopCnt = 1; ; loopCnt++)
+		for (loopCnt = 1; ; loopCnt++)
 		{
 			FoundFlag = 0;
 			SearchProcByExeName(exeName, FindPE);
@@ -303,7 +303,7 @@ int main(int argc, char **argv)
 
 	if (waitCloseTitleMode)
 	{
-		for(loopCnt = 1; ; loopCnt++)
+		for (loopCnt = 1; ; loopCnt++)
 		{
 			FoundFlag = 0;
 			FindWinTitle(winTitle);
@@ -339,7 +339,7 @@ int main(int argc, char **argv)
 	exeName = nextArg();
 
 	{
-		for(loopCnt = 1; ; loopCnt++)
+		for (loopCnt = 1; ; loopCnt++)
 		{
 			WinClosedFlag = 0;
 			SearchProcByExeName(exeName, DoCloseWin);

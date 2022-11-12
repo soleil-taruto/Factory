@@ -4,12 +4,12 @@ static void Sort0326(autoList_t *lines)
 {
 	uint start;
 
-	for(start = 0; start + 18 <= getCount(lines); start += 18)
+	for (start = 0; start + 18 <= getCount(lines); start += 18)
 	{
 		autoList_t *entries = newList();
 		uint index;
 
-		for(index = 0; index < 18; index++)
+		for (index = 0; index < 18; index++)
 		{
 			addElement(entries, getElement(lines, start + index));
 		}
@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 {
 	autoList_t *lines = newList();
 
-	for(; ; )
+	for (; ; )
 	{
 		lines = editTextLines_x(lines);
 

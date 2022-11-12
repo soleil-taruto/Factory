@@ -112,7 +112,7 @@ void sockServerTh(void (*funcTransmit)(int, char *), uint portno, uint connectma
 	TransInfoStock = (TransInfo_t **)memAlloc(connectmax * sizeof(TransInfo_t *));
 	TransInfoDead  = (TransInfo_t **)memAlloc(connectmax * sizeof(TransInfo_t *));
 
-	for(index = 0; index < connectmax; index++)
+	for (index = 0; index < connectmax; index++)
 	{
 		TransInfoStock[index] = TransInfos + index;
 	}
@@ -130,7 +130,7 @@ void sockServerTh(void (*funcTransmit)(int, char *), uint portno, uint connectma
 
 	critical();
 	{
-		for(; ; )
+		for (; ; )
 		{
 //			SockCurrTime = time(NULL);
 
@@ -207,7 +207,7 @@ void sockServerTh(void (*funcTransmit)(int, char *), uint portno, uint connectma
 			}
 			collectEvents(transmitEndEvent, 0); // cleanup
 
-			for(index = 0; index < TransInfoDeadCount; index++)
+			for (index = 0; index < TransInfoDeadCount; index++)
 			{
 				i = TransInfoDead[index];
 

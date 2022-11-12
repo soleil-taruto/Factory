@@ -6,7 +6,7 @@ int main(int argc, char **argv)
 #if 1
 	uint c;
 
-	for(c = toValue(nextArg()); c; c--)
+	for (c = toValue(nextArg()); c; c--)
 	{
 		getCryptoByte();
 	}

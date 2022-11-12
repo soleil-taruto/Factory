@@ -47,7 +47,7 @@ int main(int argc, char **argv)
 		goto initkb;
 	}
 
-	for(; ; )
+	for (; ; )
 	{
 		int batchmode;
 
@@ -66,7 +66,7 @@ int main(int argc, char **argv)
 
 		batchmode = hasArgs(1);
 
-		for(; ; )
+		for (; ; )
 		{
 			char *infile;
 			char *outfile;

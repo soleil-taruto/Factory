@@ -66,9 +66,9 @@ static void ChannelTh(uint prm)
 		autoBlock_t *buffBlock = i->SendBuffer ? i->SendBuffer : newBlock();
 		uint index;
 
-		for(; ; )
+		for (; ; )
 		{
-			for(index = 0; ; )
+			for (index = 0; ; )
 			{
 				if (!KeepTheServer)
 					goto endLoop;

@@ -33,7 +33,7 @@ static uint GetYenCount(char *str)
 	uint count = 0;
 	char *p;
 
-	for(p = str; *p; p = mbsNext(p))
+	for (p = str; *p; p = mbsNext(p))
 		if (*p == '\\')
 			count++;
 
@@ -153,7 +153,7 @@ readArgs:
 		return;
 	}
 
-	for(; ; )
+	for (; ; )
 	{
 		GazoSlim(c_dropDir());
 		cout("\n");

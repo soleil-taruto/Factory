@@ -14,7 +14,7 @@ static void T2DivId(char *rFile)
 	rbTree_t *id2OutFile = rbCreateTree(echo_u, simpleComp, noop_u);
 	FILE *rfp = fileOpen(rFile, "rt");
 
-	for(; ; )
+	for (; ; )
 	{
 		char *line = readLine(rfp);
 		char *p;

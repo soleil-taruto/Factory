@@ -7,7 +7,7 @@ int main(int argc, char **argv)
 
 	fixBytes(b);
 
-	for(
+	for (
 		s = 0;
 		s <= 1000000;
 		s += 1000

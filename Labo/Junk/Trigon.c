@@ -77,7 +77,7 @@ static void Expand(uint prn_accur)
 {
 	uint index;
 
-	for(index = getCount(RateList) - 1; index; index--)
+	for (index = getCount(RateList) - 1; index; index--)
 	{
 		if (eqIntPulseSec(2, NULL))
 		{

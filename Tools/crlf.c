@@ -19,7 +19,7 @@ static void CheckFile(char *file)
 
 	cout("%s\n", file);
 
-	for(; ; )
+	for (; ; )
 	{
 		if (backed)
 		{
@@ -81,7 +81,7 @@ static void ConvFile(char *file)
 	rfp = fileOpen(file, "rb");
 	wfp = fileOpen(midFile, "wb");
 
-	for(; ; )
+	for (; ; )
 	{
 		if (backed)
 		{

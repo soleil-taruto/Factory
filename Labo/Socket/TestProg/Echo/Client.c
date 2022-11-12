@@ -50,7 +50,7 @@ int main(int argc, char **argv)
 
 	batchMode = hasArgs(1);
 
-	for(; ; )
+	for (; ; )
 	{
 		char *file = batchMode ? nextArg() : c_dropFile();
 		char *retFile;

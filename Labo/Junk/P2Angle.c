@@ -18,7 +18,7 @@ static double GetAngle(double x, double y)
 
 	t = y / x;
 
-	for(count = 10; ; count--)
+	for (count = 10; ; count--)
 	{
 		rm = (r1 + r2) / 2.0;
 
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 {
 	double r;
 
-	for(r = -0.1; r <= 2.0 * PI + 0.1; r += 0.0001)
+	for (r = -0.1; r <= 2.0 * PI + 0.1; r += 0.0001)
 	{
 		double x = cos(r);
 		double y = sin(r);

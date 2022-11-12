@@ -32,7 +32,7 @@ static void PrimeRange(uint64 minval, uint64 maxval)
 	errorCase(maxval < minval);
 	errorCase(maxval == UINT64MAX);
 
-	for(count = minval; count <= maxval; count++)
+	for (count = minval; count <= maxval; count++)
 	{
 		PrintIsPrime(count);
 	}

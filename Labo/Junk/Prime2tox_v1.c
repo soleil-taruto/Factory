@@ -15,7 +15,7 @@ static int IsSosu(uint64 value)
 
 	fileSeek(SosuFp, SEEK_SET, 0);
 
-	for(count = 0; count < SosuCnt; count++)
+	for (count = 0; count < SosuCnt; count++)
 	{
 		uint64 sosu = readValue64(SosuFp);
 
@@ -47,7 +47,7 @@ static void DispSosu(void)
 
 	fileSeek(SosuFp, SEEK_SET, 0);
 
-	for(count = 0; count < SosuCnt; count++)
+	for (count = 0; count < SosuCnt; count++)
 	{
 		cout("%I64u\n", readValue64(SosuFp));
 	}
@@ -64,7 +64,7 @@ int main(int argc, char **argv)
 	SosuFp = fileOpen(sosuFile, "a+b");
 	SosuCnt = 0;
 
-	for(value = 11; value <= max; value += 2)
+	for (value = 11; value <= max; value += 2)
 	{
 		if ((value & 0x3ffe) == 0)
 			cmdTitle_x(xcout("Prime2tox - %I64u", value));

@@ -12,8 +12,8 @@ static void MakeCircle(void)
 
 	resizeTable(Circle, 1000, 1000);
 
-	for(x = 0; x < 1000; x++)
-	for(y = 0; y < 1000; y++)
+	for (x = 0; x < 1000; x++)
+	for (y = 0; y < 1000; y++)
 	{
 		double dx = x - 500.0;
 		double dy = y - 500.0;

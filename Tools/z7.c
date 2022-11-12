@@ -199,7 +199,7 @@ readArgs:
 		return;
 	}
 
-	for(; ; )
+	for (; ; )
 	{
 		Pack7z(c_dropDirFile());
 

@@ -51,7 +51,7 @@ static void DispRange(sint64 start, sint64 end, sint64 fileSize)
 	sint64 index;
 	int chr;
 
-	for(index = start; index <= end; index++)
+	for (index = start; index <= end; index++)
 	{
 		if (0 <= index && index < fileSize)
 		{
@@ -102,11 +102,11 @@ static void SearchEntFile(char *entFile, char *file, char *revision, char *rumDi
 	RFp = fileOpen(entFile, "rb");
 	RIndex = 0;
 
-	for(index = 0; index + fndPtnSize <= fileSize; )
+	for (index = 0; index + fndPtnSize <= fileSize; )
 	{
 		int newLineFlag = 0;
 
-		for(matchcnt = 0; matchcnt < fndPtnSize; matchcnt++)
+		for (matchcnt = 0; matchcnt < fndPtnSize; matchcnt++)
 		{
 			int chr = ReadChar(index + matchcnt);
 

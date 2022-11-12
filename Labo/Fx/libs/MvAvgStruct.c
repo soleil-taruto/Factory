@@ -55,7 +55,7 @@ static void DoShift(MvAvg_t *i, uint fxTime)
 		i->CurrFxTime = fxTime;
 		i->CurrTotal = 0.0;
 
-		for(count = 0; count < i->Span; count += 2)
+		for (count = 0; count < i->Span; count += 2)
 		{
 			i->CurrTotal += GetMid(GetPrice(fxTime - count, i->Pair));
 		}

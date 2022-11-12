@@ -37,11 +37,11 @@ int main(int argc, char **argv)
 {
 	uint v;
 
-	for(v = 0x0000; v <= 0xffff; v++)
+	for (v = 0x0000; v <= 0xffff; v++)
 	{
 		PutV(v);
 	}
-	for(v = 0x0000; v <= 0xffff; v++)
+	for (v = 0x0000; v <= 0xffff; v++)
 	{
 		cout("0x%04x <- %u\n", v, Counters[v]);
 	}

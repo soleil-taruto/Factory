@@ -15,8 +15,8 @@ static void MakeImage(void)
 
 	resizeTable(Image, XSIZE, YSIZE);
 
-	for(x = 0; x < XSIZE; x++)
-	for(y = 0; y < YSIZE; y++)
+	for (x = 0; x < XSIZE; x++)
+	for (y = 0; y < YSIZE; y++)
 	{
 		int color = 0;
 

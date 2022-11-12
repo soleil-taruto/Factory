@@ -185,7 +185,7 @@ static int DoLockPath(char *path)
 {
 	uint count;
 
-	for(count = 60; ; count--)
+	for (count = 60; ; count--)
 	{
 		cout("DoLockPath_count: %u\n", count);
 

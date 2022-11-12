@@ -68,7 +68,7 @@ static void SZTEL_SqZeroToZero(autoList_t *lines)
 	uint index;
 
 restart:
-	for(index = 1; index < getCount(lines); index++)
+	for (index = 1; index < getCount(lines); index++)
 	{
 		if (
 			!getElement(lines, index - 1) &&
@@ -110,7 +110,7 @@ restart:
 }
 static uint FindEnd(autoList_t *lines, uint index, uint startTabIndent)
 {
-	for(; index < getCount(lines); index++)
+	for (; index < getCount(lines); index++)
 	{
 		char *line = getLine(lines, index);
 		char *tLine;

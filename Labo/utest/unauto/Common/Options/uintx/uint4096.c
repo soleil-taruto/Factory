@@ -10,7 +10,7 @@ static char *TrimValueString(char *str)
 	if (!*str)
 		return addChar(str, '0');
 
-	for(p = str; *p == '0' && p[1]; )
+	for (p = str; *p == '0' && p[1]; )
 		p++;
 
 	copyLine(str, p);
@@ -22,7 +22,7 @@ static char *MakeTestHexValue_Scale(uint scale)
 	autoBlock_t *buff = newBlock();
 	uint index;
 
-	for(index = 0; index < scale; index++)
+	for (index = 0; index < scale; index++)
 		addByte(buff, hexadecimal[mt19937_rnd(16)]);
 
 	return TrimValueString(unbindBlock2Line(buff));
@@ -54,7 +54,7 @@ static UI4096_t FromString(char *str)
 	uint index;
 	uint sLen = strlen(str);
 
-	for(index = 0; index < sLen; index++)
+	for (index = 0; index < sLen; index++)
 		arr[index / 8] |= m_c2i(str[sLen - 1 - index]) << index % 8 * 4;
 
 	return ToUI4096(arr);
@@ -67,7 +67,7 @@ static char *ToString(UI4096_t value)
 
 	FromUI4096(value, arr);
 
-	for(index = 128; index; index--)
+	for (index = 128; index; index--)
 		ab_addLine_x(buff, xcout("%08x", arr[index - 1]));
 
 	return TrimValueString(unbindBlock2Line(buff));

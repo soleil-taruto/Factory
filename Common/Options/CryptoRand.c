@@ -25,7 +25,7 @@ void getCryptoBytes(uchar *buff, uint size)
 {
 	uint index;
 
-	for(index = 0; index < size; index++)
+	for (index = 0; index < size; index++)
 	{
 		buff[index] = getCryptoByte();
 	}

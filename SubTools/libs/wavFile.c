@@ -86,7 +86,7 @@ void readWAVFileToCSVFile(char *rFile, char *wFile)
 	errorCase(strcmp(Header.Riff, "RIFF"));
 	errorCase(strcmp(Header.Wave, "WAVE"));
 
-	for(; ; )
+	for (; ; )
 	{
 		int chr = readChar(rfp);
 		char name[5];
@@ -148,7 +148,7 @@ void readWAVFileToCSVFile(char *rFile, char *wFile)
 
 	if (Fmt.BitPerSample == 8)
 	{
-		for(index = 0; index < RawData.Size; index++)
+		for (index = 0; index < RawData.Size; index++)
 		{
 			AddValue(wfp, (uint)readChar(rfp) * 0x0100); // 8ƒrƒbƒg‚Ìê‡‚Í•„†‚È‚µ®”
 		}
@@ -157,7 +157,7 @@ void readWAVFileToCSVFile(char *rFile, char *wFile)
 	{
 		errorCase(RawData.Size & 1);
 
-		for(index = 0; index < RawData.Size; index += 2)
+		for (index = 0; index < RawData.Size; index += 2)
 		{
 			uint v1;
 			uint v2;
@@ -198,7 +198,7 @@ void writeWAVFileFromCSVFile(char *rFile, char *wFile, uint hz)
 	writeToken(wfp, "data");
 	writeValue(wfp, 0); // dummy
 
-	for(; ; )
+	for (; ; )
 	{
 		autoList_t *row = readCSVRow(rfp);
 		uint v1;

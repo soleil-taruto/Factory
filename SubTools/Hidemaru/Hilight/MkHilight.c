@@ -48,10 +48,10 @@ static void MkTestData(char *wFile)
 	uint kyouchouHyoujiNo;
 	autoList_t *dest = newList();
 
-	for(oomojiKomojiKubetsu = 0; oomojiKomojiKubetsu <= 1; oomojiKomojiKubetsu++)
-	for(tangoNoKensaku      = 0; tangoNoKensaku      <= 1; tangoNoKensaku++)
-	for(seikihyougen        = 0; seikihyougen        <= 1; seikihyougen++)
-	for(kyouchouHyoujiNo    = 1; kyouchouHyoujiNo    <= 8; kyouchouHyoujiNo++)
+	for (oomojiKomojiKubetsu = 0; oomojiKomojiKubetsu <= 1; oomojiKomojiKubetsu++)
+	for (tangoNoKensaku      = 0; tangoNoKensaku      <= 1; tangoNoKensaku++)
+	for (seikihyougen        = 0; seikihyougen        <= 1; seikihyougen++)
+	for (kyouchouHyoujiNo    = 1; kyouchouHyoujiNo    <= 8; kyouchouHyoujiNo++)
 	{
 		addElement(dest, (uint)xcout("%u,_%d%d%d%u",
 			HLSettingToValue(oomojiKomojiKubetsu, tangoNoKensaku, seikihyougen, kyouchouHyoujiNo),

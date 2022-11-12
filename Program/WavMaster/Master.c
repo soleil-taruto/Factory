@@ -57,7 +57,7 @@ static void PutLv(uint low, uint hi)
 	Lvs[low] += weight / 2.0;
 	Lvs[hi]  += weight / 2.0;
 
-	for(index = low + 1; index < hi; index++)
+	for (index = low + 1; index < hi; index++)
 		Lvs[index] += weight;
 }
 static void DoConv(char *rFile, char *wFile, char *reportFile)
@@ -82,7 +82,7 @@ static void DoConv(char *rFile, char *wFile, char *reportFile)
 
 	LOGPOS();
 
-	for(; ; ) // 読み込みチェック & 行数カウント
+	for (; ; ) // 読み込みチェック & 行数カウント
 	{
 		autoList_t *row = readCSVRow(rfp);
 		sint v1;
@@ -110,7 +110,7 @@ static void DoConv(char *rFile, char *wFile, char *reportFile)
 
 	fileSeek(rfp, SEEK_SET, 0);
 
-	for(count = 0; ; count++)
+	for (count = 0; ; count++)
 	{
 		autoList_t *row = readCSVRow(rfp);
 		sint v1;
@@ -153,7 +153,7 @@ static void DoConv(char *rFile, char *wFile, char *reportFile)
 	ProgressEnd(0);
 	LOGPOS();
 
-	for(index = 0; index <= LV_RANGE; index++)
+	for (index = 0; index <= LV_RANGE; index++)
 		totalLv += Lvs[index];
 
 	borderLv = totalLv * BORDER_RATE;
@@ -161,7 +161,7 @@ static void DoConv(char *rFile, char *wFile, char *reportFile)
 	cout("totalLv: %f\n", totalLv);
 	cout("borderLv: %f\n", borderLv);
 
-	for(index = 0; index < LV_RANGE; index++)
+	for (index = 0; index < LV_RANGE; index++)
 	{
 		countLv += Lvs[index];
 
@@ -189,7 +189,7 @@ static void DoConv(char *rFile, char *wFile, char *reportFile)
 	fileSeek(rfp, SEEK_SET, 0);
 	wfp = fileOpen(wFile, "wb");
 
-	for(count = 0; ; count++)
+	for (count = 0; ; count++)
 	{
 		autoList_t *row = readCSVRow(rfp);
 		sint v1;
@@ -268,7 +268,7 @@ outputReport:
 	writeLine_x(wfp, xcout("OutputCancelled,%d", OutputCancelled));
 
 	if (!NoReportLvs)
-		for(index = 0; index < LV_RANGE; index++)
+		for (index = 0; index < LV_RANGE; index++)
 			writeLine_x(wfp, xcout("Lvs,%u,%f", index, Lvs[index]));
 
 	fileClose(rfp);

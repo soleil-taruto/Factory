@@ -8,7 +8,7 @@ static void HeavyProc(void)
 {
 	uint c;
 
-	for(c = 10000000; c; c--)
+	for (c = 10000000; c; c--)
 	{
 		noop();
 	}
@@ -18,7 +18,7 @@ static void HeavyProc(void)
 	static void funcname(uint dummy) { \
 		uint c, d; \
 		EnterCriticalSection(&CrSec); \
-		for(c = 1000; c && KeepTh; c--) { \
+		for (c = 1000; c && KeepTh; c--) { \
 			cout("."); \
 			HeavyProc(); \
 			LeaveCriticalSection(&CrSec); \
@@ -46,7 +46,7 @@ static void Test01(void (*funcTh)(uint))
 	}
 	LeaveCriticalSection(&CrSec);
 
-	for(c = 0; c < 30; c++)
+	for (c = 0; c < 30; c++)
 	{
 		Sleep(1); // switch to Th_0x
 

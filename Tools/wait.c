@@ -110,7 +110,7 @@ readArgs:
 
 	errorCase_m(hasArgs(1), "不正なコマンド引数");
 
-	for(; ; )
+	for (; ; )
 	{
 		if (simpleMode)
 			cout("\r%u ", remain);

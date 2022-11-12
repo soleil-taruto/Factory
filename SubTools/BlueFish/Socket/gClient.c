@@ -117,7 +117,7 @@ static void Download(SockStream_t *ss)
 {
 	LOGPOS();
 
-	for(; ; )
+	for (; ; )
 	{
 		uint64 fileSize;
 		char *name;

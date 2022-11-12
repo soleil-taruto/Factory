@@ -49,7 +49,7 @@ autoList_t *readWAVFile(char *file)
 	errorCase(strcmp(Header.Riff, "RIFF"));
 	errorCase(strcmp(Header.Wave, "WAVE"));
 
-	for(; ; )
+	for (; ; )
 	{
 		int chr = readChar(fp);
 		char name[5];
@@ -113,7 +113,7 @@ autoList_t *readWAVFile(char *file)
 	{
 		setAllocCount(wavData, getSize(RawData));
 
-		for(index = 0; index < getSize(RawData); index++)
+		for (index = 0; index < getSize(RawData); index++)
 		{
 			addElement(wavData, getByte(RawData, index) * 0x0100); // 8ビットの場合は符号なし整数
 		}
@@ -124,14 +124,14 @@ autoList_t *readWAVFile(char *file)
 
 		setAllocCount(wavData, getSize(RawData) / 2);
 
-		for(index = 0; index < getSize(RawData); index += 2)
+		for (index = 0; index < getSize(RawData); index += 2)
 		{
 			addElement(wavData, (getByte(RawData, index) | getByte(RawData, index + 1) << 8) ^ 0x8000); // 16ビットの場合は符号あり整数
 		}
 	}
 	if (Fmt.ChannelNum == 1) // monoral
 	{
-		for(index = 0; index < getCount(wavData); index++)
+		for (index = 0; index < getCount(wavData); index++)
 		{
 			*directGetPoint(wavData, index) *= 0x00010001;
 		}
@@ -140,7 +140,7 @@ autoList_t *readWAVFile(char *file)
 	{
 		errorCase(getCount(wavData) & 1);
 
-		for(index = 0; index * 2 < getCount(wavData); index++)
+		for (index = 0; index * 2 < getCount(wavData); index++)
 		{
 			*directGetPoint(wavData, index) = getElement(wavData, index * 2) << 16 | getElement(wavData, index * 2 + 1); // { 上位16ビット, 下位16ビット } == { 左側の波形値, 右側の波形値 }
 		}

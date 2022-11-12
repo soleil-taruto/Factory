@@ -79,7 +79,7 @@ static int IsAsciiStr(char *str)
 {
 	char *p;
 
-	for(p = str; *p; p++)
+	for (p = str; *p; p++)
 	{
 		if (!m_isRange(*p, '\x21', '\x7e'))
 		{
@@ -92,7 +92,7 @@ static int IsHexStr(char *str)
 {
 	char *p;
 
-	for(p = str; *p; p++)
+	for (p = str; *p; p++)
 	{
 		if (
 			!m_isRange(*p, '0', '9') &&
@@ -147,7 +147,7 @@ static void LoadDefineFile(void)
 	DefineKeys = newList();
 	DefineValues = newList();
 
-	for(index = 0; index < getCount(lines); )
+	for (index = 0; index < getCount(lines); )
 	{
 		addElement(DefineKeys,   getElement(lines, index++));
 		addElement(DefineValues, getElement(lines, index++));
@@ -444,7 +444,7 @@ static void MakeAppIndex(char *rootDir, AppInfo_t *ai, char *appIndexFmt, char *
 		char *fmt = LoadFmtFile(EXTRA_SOURCECODELINK_FMTFILE);
 		char *buff = strx("");
 
-		for(index = 1; index < getCount(ai->SourceCodeLinks); index++)
+		for (index = 1; index < getCount(ai->SourceCodeLinks); index++)
 		{
 			char *tmp = strx(fmt);
 			char *title = xcout("#%u", index + 1);

@@ -101,7 +101,7 @@ static void DoWait(uint hdl, void (*interrupt)(void))
 	}
 	ProgressBegin();
 
-	for(; ; )
+	for (; ; )
 	{
 		Progress();
 		interrupt();
@@ -165,7 +165,7 @@ static void LockClient(void)
 
 	ProgressBegin();
 
-	for(; ; )
+	for (; ; )
 	{
 		Progress();
 

@@ -102,7 +102,7 @@ autoList_t *readBMPFile(char *file)
 
 		colPalCnt--;
 	}
-	for(y = 0; y < Bfi.Height; y++)
+	for (y = 0; y < Bfi.Height; y++)
 	{
 		autoList_t *row = newList();
 
@@ -117,20 +117,20 @@ autoList_t *readBMPFile(char *file)
 			{
 				uchar c8 = readChar(fp);
 
-				for(bit = bitMax; bit && x < Bfi.Width; bit--, x++)
+				for (bit = bitMax; bit && x < Bfi.Width; bit--, x++)
 				{
 					addElement(row, getElement(colorPallet, c8 & (1 << Bfi.BitCount) - 1));
 					c8 >>= Bfi.BitCount;
 				}
 			}
-			for(x = (4 - ((Bfi.Width + bitMax - 1) / bitMax) % 4) % 4; x; x--)
+			for (x = (4 - ((Bfi.Width + bitMax - 1) / bitMax) % 4) % 4; x; x--)
 			{
 				readChar(fp);
 			}
 		}
 		else if (Bfi.BitCount == 24)
 		{
-			for(x = 0; x < Bfi.Width; x++)
+			for (x = 0; x < Bfi.Width; x++)
 			{
 				uchar cR;
 				uchar cG;
@@ -143,14 +143,14 @@ autoList_t *readBMPFile(char *file)
 
 				addElement(row, cR << 16 | cG << 8 | cB);
 			}
-			for(x = Bfi.Width % 4; x; x--)
+			for (x = Bfi.Width % 4; x; x--)
 			{
 				readChar(fp);
 			}
 		}
 		else // ? Bfi.BitCount == 32
 		{
-			for(x = 0; x < Bfi.Width; x++)
+			for (x = 0; x < Bfi.Width; x++)
 			{
 				uchar cR;
 				uchar cG;
@@ -213,11 +213,11 @@ void writeBMPFile(char *file, autoList_t *table)
 	writeValue(fp, 0);
 	writeValue(fp, 0);
 
-	for(y = ySize; y; y--)
+	for (y = ySize; y; y--)
 	{
 		autoList_t *row = (autoList_t *)getElement(table, y - 1);
 
-		for(x = 0; x < xSize; x++)
+		for (x = 0; x < xSize; x++)
 		{
 			uint color = getElement(row, x);
 			uchar cR;
@@ -233,7 +233,7 @@ void writeBMPFile(char *file, autoList_t *table)
 			writeChar(fp, cG);
 			writeChar(fp, cR);
 		}
-		for(x = xSize % 4; x; x--)
+		for (x = xSize % 4; x; x--)
 		{
 			writeChar(fp, 0x00);
 		}

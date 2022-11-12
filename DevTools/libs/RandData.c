@@ -24,7 +24,7 @@ char *MakeRandLine(uint count)
 	char *line = (char *)memAlloc(count + 1);
 	uint index;
 
-	for(index = 0; index < count; index++)
+	for (index = 0; index < count; index++)
 	{
 		line[index] = MRLGetChar();
 	}
@@ -41,7 +41,7 @@ autoList_t *MakeRandTextLinesRange(uint row, uint lenmin, uint lenmax)
 	char *line;
 	uint index;
 
-	for(index = 0; index < row; index++)
+	for (index = 0; index < row; index++)
 	{
 		addElement(lines, (uint)MakeRandLineRange(lenmin, lenmax));
 	}
@@ -56,7 +56,7 @@ void MakeRandTextFileRange(char *file, uint64 rowCounter, uint lenmin, uint lenm
 	FILE *fp = fileOpen(file, "wt");
 	char *line;
 
-	for(; 0ui64 < rowCounter; rowCounter--)
+	for (; 0ui64 < rowCounter; rowCounter--)
 	{
 		line = MakeRandLineRange(lenmin, lenmax);
 		writeLine(fp, line);
@@ -74,7 +74,7 @@ autoBlock_t *MakeRandBinaryBlock(uint size)
 	uchar *block = (uchar *)memAlloc(size + sizeof(uint) - 1);
 	uint index;
 
-	for(index = 0; index < size; index += sizeof(uint))
+	for (index = 0; index < size; index += sizeof(uint))
 	{
 		*(uint *)(block + index) = mt19937_rnd32();
 	}
@@ -119,7 +119,7 @@ void RandXorOneBitFile_RW(char *rFile, char *wFile)
 	rfp = fileOpen(rFile, "rb");
 	wfp = fileOpen(wFile, "wb");
 
-	for(count = 0; count < fileSize; count++)
+	for (count = 0; count < fileSize; count++)
 	{
 		int chr = readChar(rfp);
 

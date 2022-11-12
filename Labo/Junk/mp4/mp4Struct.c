@@ -6,7 +6,7 @@ static void PrintIndent(uint indent)
 {
 	uint c;
 
-	for(c = 0; c < indent; c++)
+	for (c = 0; c < indent; c++)
 		cout("\t");
 }
 static void PrintSubStruct(uint startPos, uint endPos, uint indent)
@@ -91,7 +91,7 @@ int main(int argc, char **argv)
 		return;
 	}
 
-	for(; ; )
+	for (; ; )
 	{
 		char *path = c_dropDirFile();
 

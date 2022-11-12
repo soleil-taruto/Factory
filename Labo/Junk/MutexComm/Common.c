@@ -13,7 +13,7 @@ void M_Init(void)
 
 	errorCase(Mtxs[0]); // ? already inited
 
-	for(index = 0; index < M_NUM; index++)
+	for (index = 0; index < M_NUM; index++)
 		Mtxs[index] = mutexOpen_x(xcout("%s_%u", COMMON_ID, index));
 
 	LOGPOS();
@@ -26,7 +26,7 @@ void M_Fnlz(void)
 
 	errorCase(!Mtxs[0]); // ? already fnlzed
 
-	for(index = 0; index < M_NUM; index++)
+	for (index = 0; index < M_NUM; index++)
 	{
 		M_Set(index, 0);
 		handleClose(Mtxs[index]);

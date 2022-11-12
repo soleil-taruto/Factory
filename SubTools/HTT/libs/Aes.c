@@ -22,7 +22,7 @@ autoBlock_t *MakeEncCounter(autoBlock_t *clSeed, autoBlock_t *svSeed)
 
 	AES128_EncryptBlock(keyTable, clSeed, encCounter);
 
-	for(index = 0; index < 16; index++)
+	for (index = 0; index < 16; index++)
 		b_(encCounter)[index] ^= b_(svSeed)[index];
 
 	AES128_EncryptBlock(keyTable, encCounter, encCounter);
@@ -45,7 +45,7 @@ static void AddCounter(autoBlock_t *counter)
 {
 	uint index;
 
-	for(index = 0; index < 16; index++)
+	for (index = 0; index < 16; index++)
 	{
 		if (b_(counter)[index] < 0xff)
 		{
@@ -61,7 +61,7 @@ void Crypt(autoBlock_t *data, autoBlock_t *rawKey, autoBlock_t *encCounter)
 	autoBlock_t *mask = nobCreateBlock(16);
 	uint index;
 
-	for(index = 0; index < getSize(data); index++)
+	for (index = 0; index < getSize(data); index++)
 	{
 		uint subPos = index % 16;
 
@@ -118,7 +118,7 @@ void Add_RandPart_Padding(autoBlock_t *block)
 	uint size = ~getSize(block) & 0x0f | 0x10 | getCryptoByte() & 0xe0;
 	uint index;
 
-	for(index = 0; index < size; index++)
+	for (index = 0; index < size; index++)
 		addByte(block, getCryptoByte());
 
 	addByte(block, size);
@@ -166,7 +166,7 @@ void RCBCEncrypt(autoBlock_t *block, autoBlock_t *rawKey)
 	keyTable = AES128_CreateKeyTable(rawKey, 1);
 	prevPos = getSize(block) - 16;
 
-	for(currPos = 0; currPos < getSize(block); currPos += 16)
+	for (currPos = 0; currPos < getSize(block); currPos += 16)
 	{
 		XorBlock(b_(block) + currPos, b_(block) + prevPos);
 		AES128_Encrypt(keyTable, b_(block) + currPos, b_(block) + currPos);
@@ -192,7 +192,7 @@ int RCBCDecrypt(autoBlock_t *block, autoBlock_t *rawKey) // ret: ? ¬Œ÷
 
 	keyTable = AES128_CreateKeyTable(rawKey, 0);
 
-	for(currPos = getSize(block) - 16; currPos; currPos -= 16)
+	for (currPos = getSize(block) - 16; currPos; currPos -= 16)
 	{
 		prevPos = currPos - 16;
 		AES128_Encrypt(keyTable, b_(block) + currPos, b_(block) + currPos);

@@ -30,9 +30,9 @@ static char *GetAutoName(void)
 		char *line;
 		uint index;
 
-		for(; ; )
+		for (; ; )
 		{
-			for(index = 0; index < getCount(lines); index += 2)
+			for (index = 0; index < getCount(lines); index += 2)
 				if (!_stricmp(sno, getLine(lines, index)))
 					break;
 
@@ -76,12 +76,12 @@ static void SortSaveData(autoList_t *lines)
 {
 	uint index;
 
-	for(index = 0; index < getCount(lines); index++)
+	for (index = 0; index < getCount(lines); index++)
 		setElement(lines, index, (uint)addLine_x(getLine(lines, index), addLine_x(strx("\n"), (char *)desertElement(lines, index + 1))));
 
 	rapidSort(lines, SSD_Comp);
 
-	for(index = getCount(lines); index; index--)
+	for (index = getCount(lines); index; index--)
 	{
 		char *p = ne_strchr(getLine(lines, index - 1), '\n');
 
@@ -117,7 +117,7 @@ int main(int argc, char **argv)
 		char *line;
 		uint index;
 
-		for(index = 0; index < getCount(lines); index += 2)
+		for (index = 0; index < getCount(lines); index += 2)
 			if (!_stricmp(name, getLine(lines, index)))
 				break;
 

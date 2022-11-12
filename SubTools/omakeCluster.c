@@ -91,7 +91,7 @@ static void AddSHA512(char *file)
 	fp = fileOpen(file, "r+b");
 	fileSeek(fp, SEEK_END, 0);
 
-	for(index = 0; index < 64; index++)
+	for (index = 0; index < 64; index++)
 		writeChar(fp, sha512_hash[index]);
 
 	fileClose(fp);
@@ -100,7 +100,7 @@ static void DoBlockMask(autoBlock_t *b1, autoBlock_t *b2, autoBlock_t *out)
 {
 	uint index;
 
-	for(index = 0; index < getSize(out); index++)
+	for (index = 0; index < getSize(out); index++)
 	{
 		setByte(out, index, getByte(b1, index) ^ getByte(b2, index));
 	}
@@ -109,7 +109,7 @@ static void CounterIncrement(autoBlock_t *counter)
 {
 	uint index;
 
-	for(index = 0; index < getSize(counter); index++)
+	for (index = 0; index < getSize(counter); index++)
 	{
 		uchar *p = (uchar *)directGetBuffer(counter) + index;
 
@@ -144,7 +144,7 @@ static void EncryptCluster(char *file, AES128_KeyTable_t *keys[4], autoBlock_t *
 
 	ProgressBegin();
 
-	for(count = 0; count < size; count += 16)
+	for (count = 0; count < size; count += 16)
 	{
 		autoBlock_t *block = readBinaryBlock(rfp, 16);
 
@@ -237,12 +237,12 @@ static void UnmakeCluster(char *file, char *outDir)
 
 	filenum = readValue(fp);
 
-	for(index = 0; index < filenum; index++)
+	for (index = 0; index < filenum; index++)
 	{
 		addElement(startPosList, readValue(fp));
 		addElement(sizeList, readValue(fp));
 	}
-	for(index = 0; index < filenum; index++)
+	for (index = 0; index < filenum; index++)
 	{
 		autoBlock_t *fileImage = nobCreateBlock(getElement(sizeList, index));
 		char *ext;

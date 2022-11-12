@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 
 	rFile = dropFile();
 
-	for(; ; )
+	for (; ; )
 	{
 		char *wFile = dropFile();
 

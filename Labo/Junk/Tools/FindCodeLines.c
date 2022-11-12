@@ -23,7 +23,7 @@ static int IsMatchCodeLines(autoList_t *lines, uint line_index, autoList_t *code
 
 	indent = lineLen - codeLineLen;
 
-	for(index = 0; index < getCount(codeLines); index++)
+	for (index = 0; index < getCount(codeLines); index++)
 	{
 		line     = getLine(lines, line_index + index);
 		codeLine = getLine(codeLines, index);
@@ -33,7 +33,7 @@ static int IsMatchCodeLines(autoList_t *lines, uint line_index, autoList_t *code
 			if (strlen(line) != indent + strlen(codeLine))
 				return 0;
 
-			for(i = 0; i < indent; i++)
+			for (i = 0; i < indent; i++)
 				if (line[i] != '\t')
 					return 0;
 
@@ -110,7 +110,7 @@ int main(int argc, char **argv)
 				autoList_t *lines = readLines(file);
 				uint line_index;
 
-				for(line_index = 0; line_index + getCount(codeLines) <= getCount(lines); line_index++)
+				for (line_index = 0; line_index + getCount(codeLines) <= getCount(lines); line_index++)
 				{
 					if (
 						IsMatchCodeLines(lines, line_index, codeLines) ||

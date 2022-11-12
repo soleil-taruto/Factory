@@ -76,7 +76,7 @@ static uint GetIndexOf(autoBlock_t *buff, int chr)
 {
 	uint index;
 
-	for(index = 0; index < getSize(buff); index++)
+	for (index = 0; index < getSize(buff); index++)
 		if (getByte(buff, index) == chr)
 			break;
 

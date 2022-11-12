@@ -20,7 +20,7 @@ static void MGZE_Shuffle(autoList_t *values)
 {
 	uint index;
 
-	for(index = getCount(values); 2 <= index; index--)
+	for (index = getCount(values); 2 <= index; index--)
 	{
 		swapElement(values, index - 1, MGZE_Rand() % index);
 	}
@@ -35,7 +35,7 @@ static void MGZE_Mask(autoBlock_t *data)
 	uint size = MGZE_GetMaskSize(getSize(data));
 	uint index;
 
-	for(index = 0; index < size; index++)
+	for (index = 0; index < size; index++)
 	{
 		b_(data)[index] ^= 0xf5;
 	}

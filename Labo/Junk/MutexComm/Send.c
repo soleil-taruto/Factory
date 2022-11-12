@@ -36,11 +36,11 @@ static void DoSend(char *message)
 
 	LOGPOS();
 
-	for(p = message; *p; p++)
+	for (p = message; *p; p++)
 	{
 		uint bit;
 
-		for(bit = 1 << 7; bit; bit >>= 1)
+		for (bit = 1 << 7; bit; bit >>= 1)
 		{
 			if (*p & bit)
 				DoSendBit(0, 1);
@@ -80,7 +80,7 @@ static void Main2(void)
 		return;
 	}
 
-	for(; ; )
+	for (; ; )
 	{
 		char *text = readText(c_dropFile());
 

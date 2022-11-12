@@ -23,7 +23,7 @@ static char *GetSlnFile(char *csFile)
 {
 	char *dir = getParent(csFile);
 
-	for(; ; )
+	for (; ; )
 	{
 		char *slnFile = GetSlnFile_Dir(dir);
 

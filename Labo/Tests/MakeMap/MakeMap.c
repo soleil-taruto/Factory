@@ -49,8 +49,8 @@ static uint MapGetCount(autoTable_t *map, uint target)
 	uint x;
 	uint y;
 
-	for(x = 0; x < getTableWidth(map); x++)
-	for(y = 0; y < getTableHeight(map); y++)
+	for (x = 0; x < getTableWidth(map); x++)
+	for (y = 0; y < getTableHeight(map); y++)
 	{
 		if (getTableCell(map, x, y) == target)
 		{
@@ -81,8 +81,8 @@ static void MM_Randomize(void)
 	uint x;
 	uint y;
 
-	for(x = 0; x < Map_W; x++)
-	for(y = 0; y < Map_H; y++)
+	for (x = 0; x < Map_W; x++)
+	for (y = 0; y < Map_H; y++)
 	{
 		setTableCell(Map, x, y, mt19937_rnd(RndWlRtDenom) < RndWlRtNumer ? COLOR_WALL : COLOR_GROUND);
 	}
@@ -93,8 +93,8 @@ static void MM_BattlePos(int x, int y)
 	int yc;
 	uint wallcnt = 0;
 
-	for(xc = -1; xc <= 1; xc++)
-	for(yc = -1; yc <= 1; yc++)
+	for (xc = -1; xc <= 1; xc++)
+	for (yc = -1; yc <= 1; yc++)
 	{
 		int sx = x + xc;
 		int sy = y + yc;
@@ -156,12 +156,12 @@ static void MM_Around(void)
 	uint x;
 	uint y;
 
-	for(x = 0; x < Map_W; x++)
+	for (x = 0; x < Map_W; x++)
 	{
 		MM_AroundPos(x, 0);
 		MM_AroundPos(x, Map_H - 1);
 	}
-	for(y = 0; y < Map_H; y++)
+	for (y = 0; y < Map_H; y++)
 	{
 		MM_AroundPos(0, y);
 		MM_AroundPos(Map_W - 1, y);
@@ -185,8 +185,8 @@ static void MM_FindMaximum(void)
 
 	resizeTable(szMap, Map_W, Map_H);
 
-	for(x = 0; x < Map_W; x++)
-	for(y = 0; y < Map_H; y++)
+	for (x = 0; x < Map_W; x++)
+	for (y = 0; y < Map_H; y++)
 	{
 		setTableCell(szMap, x, y, getTableCell(Map, x, y) == COLOR_GROUND ? 1 : 0);
 	}
@@ -199,8 +199,8 @@ static void MM_FindMaximum(void)
 	Maxim2nd_Y = 0;
 	Maxim2ndSize = 0;
 
-	for(x = 0; x < Map_W; x++)
-	for(y = 0; y < Map_H; y++)
+	for (x = 0; x < Map_W; x++)
+	for (y = 0; y < Map_H; y++)
 	{
 		if (getTableCell(szMap, x, y) == 1)
 		{
@@ -253,8 +253,8 @@ static void MM_FindNearestFrom(int fx, int fy, uint target)
 
 	NF_Sqr = UINT64MAX;
 
-	for(x = 0; x < Map_W; x++)
-	for(y = 0; y < Map_H; y++)
+	for (x = 0; x < Map_W; x++)
+	for (y = 0; y < Map_H; y++)
 	{
 		if (getTableCell(Map, x, y) == target)
 		{
@@ -287,8 +287,8 @@ static void MM_FindNearest(void)
 	Nrst1_X = Maxim_X;
 	Nrst1_Y = Maxim_Y;
 
-	for(c = 10; c; c--)
-//	for(c = 2; c; c--)
+	for (c = 10; c; c--)
+//	for (c = 2; c; c--)
 	{
 		MM_FindNearestFrom(Nrst1_X, Nrst1_Y, COLOR_GROUND_MAXIM2ND);
 		Nrst2_X = NF_X;
@@ -317,8 +317,8 @@ static void MM_JoinNearest(void)
 		int x;
 		int y;
 
-		for(x = x1; x <= x2; x++)
-		for(y = y1; y <= y2; y++)
+		for (x = x1; x <= x2; x++)
+		for (y = y1; y <= y2; y++)
 		{
 			if (x == x1 || x == x2 || y == y1 || y == y2)
 			{
@@ -350,8 +350,8 @@ static void MM_ResetGround(void)
 	uint x;
 	uint y;
 
-	for(x = 0; x < Map_W; x++)
-	for(y = 0; y < Map_H; y++)
+	for (x = 0; x < Map_W; x++)
+	for (y = 0; y < Map_H; y++)
 	{
 		switch (getTableCell(Map, x, y))
 		{
@@ -373,8 +373,8 @@ static void MakeBmp(void)
 
 	Bmp = makeTable(Map_W, Map_H, 0);
 
-	for(x = 0; x < Map_W; x++)
-	for(y = 0; y < Map_H; y++)
+	for (x = 0; x < Map_W; x++)
+	for (y = 0; y < Map_H; y++)
 	{
 		*getTablePoint(Bmp, x, y) = getTableCell(Map, x, y);
 	}
@@ -410,7 +410,7 @@ int main(int argc, char **argv)
 	MM_Around();
 	LOGPOS();
 
-	for(c = 10; c; c--)
+	for (c = 10; c; c--)
 	{
 		cout("[%u]\n", c);
 

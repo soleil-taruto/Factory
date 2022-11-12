@@ -48,7 +48,7 @@ void $PMain(void)
 
 //	MusicPlay(MUS_XXX);
 
-	for(; ; )
+	for (; ; )
 	{
 		if (GetPound(INP_PAUSE))
 		{

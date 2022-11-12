@@ -34,7 +34,7 @@ static void AAKMove(char *srcFile, char *destPath)
 
 	removeFileIfExist(destFile);
 
-	for(retrycnt = 0; ; retrycnt++)
+	for (retrycnt = 0; ; retrycnt++)
 	{
 		coExecute_x(xcout("MOVE \"%s\" \"%s\"", srcFile, destFile));
 

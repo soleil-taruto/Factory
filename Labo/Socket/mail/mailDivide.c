@@ -105,7 +105,7 @@ static void RecvEvent(autoList_t *mail)
 }
 static void RecvLoop(void)
 {
-	for(; ; )
+	for (; ; )
 	{
 		uint index;
 
@@ -127,7 +127,7 @@ static void RecvLoop(void)
 		}
 		while (index);
 
-		for(index = 9; index; index--)
+		for (index = 9; index; index--)
 		{
 			cout("%u\n", index);
 			coSleep(3000);

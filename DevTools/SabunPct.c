@@ -39,7 +39,7 @@ static char *GetWLine_File_File(char *file1, char *file2, char *wPath)
 		uint64 count;
 		uint64 diffCount = 0;
 
-		for(count = 0; count < size1; count++)
+		for (count = 0; count < size1; count++)
 		{
 			int chr1 = readChar(fp1);
 			int chr2 = readChar(fp2);

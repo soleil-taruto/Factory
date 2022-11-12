@@ -75,7 +75,7 @@ static int HdlWaitForMillisEx(int hdl, uint millis)
 {
 	uint elapse = 0;
 
-	for(; ; )
+	for (; ; )
 	{
 		if (millis == INFINITE)
 		{
@@ -306,7 +306,7 @@ int main(int argc, char **argv)
 			Frtwv_t *i = Frtwv_CreateIH(identHash);
 			uint index;
 
-			for(index = 0; ; index++)
+			for (index = 0; ; index++)
 			{
 				char *file = combine_cx(dir, xcout("%04u", index));
 				autoBlock_t *sendData;
@@ -346,7 +346,7 @@ int main(int argc, char **argv)
 			uint index;
 			uint totalSize = 0;
 
-			for(index = 0; index < recvLimit && totalSize < recvLimitSize; index++)
+			for (index = 0; index < recvLimit && totalSize < recvLimitSize; index++)
 			{
 				autoBlock_t *recvData = Frtwv_Recv(i, index ? 0 : millis);
 				char *file;
@@ -405,7 +405,7 @@ int main(int argc, char **argv)
 				{
 					FILE *fp = fileOpen(delayFile, "rt");
 
-					for(; ; )
+					for (; ; )
 					{
 						char *targetPath = readLine(fp);
 

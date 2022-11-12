@@ -54,7 +54,7 @@ static void Search(char *rootDir, uint depth, char *pathPrefix)
 			writeChar(OutFp, '\n'); // ãÛçs
 			empLnSw = 0;
 		}
-		for(ndx = 0; ndx < depth; ndx++)
+		for (ndx = 0; ndx < depth; ndx++)
 			writeChar(OutFp, '\t');
 
 		if (IsNoLinkPath(path))

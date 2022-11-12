@@ -20,7 +20,7 @@ static sint DefCompRow(autoList_t *row1, autoList_t *row2)
 
 	colcnt = m_min(colcnt1, colcnt2);
 
-	for(colidx = 0; colidx < colcnt; colidx++)
+	for (colidx = 0; colidx < colcnt; colidx++)
 	{
 		sint ret = strcmp(getLine(row1, colidx), getLine(row2, colidx));
 

@@ -116,7 +116,7 @@ static void *DeserializerMain(uint depth)
 		count = ReadInt();
 		wList = createAutoList(count);
 
-		for(index = 0; index < count; index++)
+		for (index = 0; index < count; index++)
 		{
 			addElement(wList, (uint)DeserializerMain(depth - 1));
 		}

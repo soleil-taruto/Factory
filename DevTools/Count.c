@@ -13,7 +13,7 @@ static uint CountLineFromStdin(void)
 	int entFlg = 0;
 	uint count = 0;
 
-	for(; ; )
+	for (; ; )
 	{
 		int chr = readChar(stdin);
 

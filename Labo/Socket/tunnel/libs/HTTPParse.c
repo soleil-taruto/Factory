@@ -192,7 +192,7 @@ LOGPOS();
 	{
 		HttpDat.Body = newBlock();
 
-		for(; ; )
+		for (; ; )
 		{
 			char *line = ReadLine();
 			char *p;
@@ -293,7 +293,7 @@ static autoBlock_t *ReadToEnd(FILE *fp)
 {
 	autoBlock_t *buff = newBlock();
 
-	for(; ; )
+	for (; ; )
 	{
 		int chr = readChar(fp);
 
@@ -312,7 +312,7 @@ void LoadHttpDat(char *file)
 
 	HttpDat.Header = newList();
 
-	for(; ; )
+	for (; ; )
 	{
 		char *line = readLine(fp);
 

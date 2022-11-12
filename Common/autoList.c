@@ -278,7 +278,7 @@ void insertElement(autoList_t *i, uint index, uint element)
 
 	addElement(i, 0); // Dummy
 
-	for(n = i->Count - 1; index < n; n--)
+	for (n = i->Count - 1; index < n; n--)
 	{
 		i->Elements[n] = i->Elements[n - 1];
 	}
@@ -296,7 +296,7 @@ uint desertElement(autoList_t *i, uint index)
 
 	i->Count--;
 
-	for(n = index; n < i->Count; n++)
+	for (n = index; n < i->Count; n++)
 	{
 		i->Elements[n] = i->Elements[n + 1];
 	}
@@ -420,7 +420,7 @@ void reverseElements(autoList_t *i)
 
 	if (i->Count)
 	{
-		for(n = 0, f = i->Count - 1; n < f; n++, f--)
+		for (n = 0, f = i->Count - 1; n < f; n++, f--)
 		{
 			swap = i->Elements[n];
 			i->Elements[n] = i->Elements[f];
@@ -434,7 +434,7 @@ void removeZero(autoList_t *i)
 
 	errorCase(!i);
 
-	for(n = 0; ; n++)
+	for (n = 0; ; n++)
 	{
 		if (i->Count <= n)
 		{
@@ -445,7 +445,7 @@ void removeZero(autoList_t *i)
 			break;
 		}
 	}
-	for(f = n + 1; f < i->Count; f++)
+	for (f = n + 1; f < i->Count; f++)
 	{
 		if (i->Elements[f])
 		{
@@ -459,7 +459,7 @@ void removeTrailZero(autoList_t *i)
 {
 	uint index;
 
-	for(index = getCount(i); index; index--)
+	for (index = getCount(i); index; index--)
 	{
 		if (1 <= getElement(i, index - 1))
 		{
@@ -543,7 +543,7 @@ uint findPair(autoList_t *list, sint (*funcComp)(uint, uint))
 
 	foreach (list, element, index)
 	{
-		for(faridx = index + 1; faridx < getCount(list); faridx++)
+		for (faridx = index + 1; faridx < getCount(list); faridx++)
 		{
 			if (funcComp(element, getElement(list, faridx)) == 0)
 			{
@@ -581,11 +581,11 @@ autoList_t *makeTable(uint rowcnt, uint colcnt, uint initValue)
 	uint rowidx;
 	uint colidx;
 
-	for(rowidx = 0; rowidx < rowcnt; rowidx++)
+	for (rowidx = 0; rowidx < rowcnt; rowidx++)
 	{
 		autoList_t *row = newList();
 
-		for(colidx = 0; colidx < colcnt; colidx++)
+		for (colidx = 0; colidx < colcnt; colidx++)
 		{
 			addElement(row, initValue);
 		}

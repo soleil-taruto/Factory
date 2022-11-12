@@ -14,7 +14,7 @@ static void ShowBuildTime_File(char *file, char *file4Prn)
 	uint index;
 	time_t buildTime;
 
-	for(index = 0; ; index++)
+	for (index = 0; ; index++)
 	{
 		if (
 			getByte(fileData, index + 0) == 'P' &&
@@ -130,7 +130,7 @@ int main(int argc, char **argv)
 		return;
 	}
 
-	for(; ; )
+	for (; ; )
 	{
 		ShowBuildTime(c_dropDirFile());
 		cout("\n");

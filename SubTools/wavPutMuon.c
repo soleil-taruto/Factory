@@ -54,7 +54,7 @@ static void AddEndMuon_Millis(uint millis)
 	uint sampleCount = (uint)(((uint64)millis * HZ) / 1000);
 	uint index;
 
-	for(index = 0; index < sampleCount; index++)
+	for (index = 0; index < sampleCount; index++)
 		addElement(WavData, (MUON_LEVEL << 16) | MUON_LEVEL);
 }
 static void AddFrontMuon(void)
@@ -78,7 +78,7 @@ static void SetEndFadeOut(void)
 
 	errorCase(getCount(WavData) < FADE_SZ);
 
-	for(index = 1; index < FADE_SZ; index++)
+	for (index = 1; index < FADE_SZ; index++)
 	{
 		pos = getCount(WavData) - index;
 		row = getElement(WavData, pos);
@@ -158,7 +158,7 @@ int main(int argc, char **argv)
 		return;
 	}
 
-	for(; ; )
+	for (; ; )
 	{
 		char *file = c_dropFile();
 

@@ -35,7 +35,7 @@ static int RenumberPaths(autoList_t *paths)
 		reverseLine(snum);
 		q = snum;
 
-		for(p = path; *p; p++)
+		for (p = path; *p; p++)
 		{
 			if (*p == '*') // ”š‚É’u‚«Š·‚¦‚éB
 			{
@@ -77,7 +77,7 @@ static int Confirm(void)
 {
 	cout("Press R to continue.\n");
 
-	for(; ; )
+	for (; ; )
 	{
 		int key = getKey();
 
@@ -97,7 +97,7 @@ static void RenameEx(void)
 	rapidSort(paths, (sint (*)(uint, uint))mbs_stricmp);
 	newPaths = copyLines(paths);
 
-	for(; ; )
+	for (; ; )
 	{
 		tmpPaths = editTextLines(newPaths);
 		releaseDim(newPaths, 1);
@@ -109,7 +109,7 @@ static void RenameEx(void)
 		}
 		if (getCount(newPaths) < getCount(paths))
 		{
-			for(index = 0; getCount(newPaths) < getCount(paths); index++)
+			for (index = 0; getCount(newPaths) < getCount(paths); index++)
 				addElement(newPaths, (uint)strx(getLine(newPaths, index)));
 		}
 		else if (getCount(paths) < getCount(newPaths))

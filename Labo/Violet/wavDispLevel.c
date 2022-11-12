@@ -17,13 +17,13 @@ static void DispLevel(void)
 	uint index;
 	uint ndx;
 
-	for(deciSec = 0; ; deciSec++)
+	for (deciSec = 0; ; deciSec++)
 	{
 		uint hi = 0;
 		uint lw = IMAX;
 		uint lv;
 
-		for(index = 0; index < HZ_PER_DECISEC; index++)
+		for (index = 0; index < HZ_PER_DECISEC; index++)
 		{
 			ndx = deciSec * HZ_PER_DECISEC + index;
 
@@ -70,7 +70,7 @@ int main(int argc, char **argv)
 		return;
 	}
 
-	for(; ; )
+	for (; ; )
 	{
 		char *file = c_dropFile();
 

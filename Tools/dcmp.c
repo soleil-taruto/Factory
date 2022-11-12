@@ -39,7 +39,7 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		for(; ; )
+		for (; ; )
 		{
 			dir1 = dropDir();
 			dir2 = dropDir();

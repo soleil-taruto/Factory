@@ -44,7 +44,7 @@ static void ReadTimeTable(void)
 	else
 		lines = newList();
 
-	for(index = 0; index < getCount(lines); index += 2)
+	for (index = 0; index < getCount(lines); index += 2)
 	{
 		char *id = getLine(lines, index);
 

@@ -15,7 +15,7 @@ static void KanaMask(char *str)
 {
 	char *p;
 
-	for(p = str; *p; p = mbsNext(p))
+	for (p = str; *p; p = mbsNext(p))
 	{
 		switch (*p)
 		{
@@ -332,7 +332,7 @@ static int Perform(char *prmFile, char *ansFile)
 		message = ReadParam();
 		knownTimeLineTime = toValue64_x(ReadParam());
 
-		for(; ; )
+		for (; ; )
 		{
 			char *trail = ReadParam_Eof2Null();
 
@@ -367,7 +367,7 @@ static int Perform(char *prmFile, char *ansFile)
 				reverseElements(TweetList); // •œŒ³
 			}
 		}
-		for(index = getCount(TweetList); index; index--)
+		for (index = getCount(TweetList); index; index--)
 		{
 			Tweet_t *tw = (Tweet_t *)getElement(TweetList, index - 1);
 
@@ -385,7 +385,7 @@ static int Perform(char *prmFile, char *ansFile)
 				index = getCount(TweetList) - firstTweetMax;
 			}
 		}
-		for(count = 0; index < getCount(TweetList) && count < RETTWEETMAX; index++, count++)
+		for (count = 0; index < getCount(TweetList) && count < RETTWEETMAX; index++, count++)
 		{
 			Tweet_t *tw = (Tweet_t *)getElement(TweetList, index);
 

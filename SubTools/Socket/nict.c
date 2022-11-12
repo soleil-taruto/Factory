@@ -23,7 +23,7 @@ static int NictPerform(int sock, uint prm_dummy)
 	SockSendLine_NF(ss, "Host: " NICT_DOMAIN);
 	SockSendLine(ss, "");
 
-	for(; ; ) // ヘッダ読み込み
+	for (; ; ) // ヘッダ読み込み
 	{
 		char *line = SockRecvLine(ss, 2000);
 

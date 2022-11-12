@@ -61,7 +61,7 @@ static char *DoRequest(char *prmText)
 	uint trycnt;
 	char *ansText;
 
-	for(trycnt = 1; trycnt <= 3; trycnt++)
+	for (trycnt = 1; trycnt <= 3; trycnt++)
 	{
 		ansText = Request(prmText);
 

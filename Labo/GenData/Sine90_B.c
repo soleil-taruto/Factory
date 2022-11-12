@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 	autoList_t *lines = newList();
 	uint angle;
 
-	for(angle = 0; angle <= ANGLEMAX; angle++)
+	for (angle = 0; angle <= ANGLEMAX; angle++)
 	{
 		addElement(lines, (uint)xcout("%u", m_d2i(RETSCALE * sin(angle * PI / 2 / ANGLEMAX))));
 	}

@@ -136,7 +136,7 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		for(; ; )
+		for (; ; )
 		{
 			CheckFormat(c_dropDirFile());
 			cout("\n");

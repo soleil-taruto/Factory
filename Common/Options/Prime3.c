@@ -45,7 +45,7 @@ static uint64 ModPow(uint64 value, uint64 exponent, uint64 modulo)
 {
 	uint64 ret = 1;
 
-	for(; ; )
+	for (; ; )
 	{
 		if (exponent % 2 == 1)
 			ret = ModMul(ret, value, modulo);
@@ -73,7 +73,7 @@ int IsPrime_M(uint64 value)
 
 	if (value <= 37)
 	{
-		for(t = 0; t < lengthof(a); t++)
+		for (t = 0; t < lengthof(a); t++)
 			if (a[t] == value)
 				return 1;
 
@@ -85,15 +85,15 @@ int IsPrime_M(uint64 value)
 	d = value;
 //	d = value - 1; // ‚Ç‚¤‚¹ /= 2 ‚·‚é‚Ì‚Å
 
-	for(r = 0; (d /= 2) % 2 == 0; r++);
+	for (r = 0; (d /= 2) % 2 == 0; r++);
 
-	for(t = 0; t < lengthof(a); t++)
+	for (t = 0; t < lengthof(a); t++)
 	{
 		x = ModPow(a[t], d, value);
 
 		if (x != 1 && x != value - 1)
 		{
-			for(c = r; ; c--)
+			for (c = r; ; c--)
 			{
 				if (!c)
 					return 0;

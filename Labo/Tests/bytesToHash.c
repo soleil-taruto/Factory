@@ -33,15 +33,15 @@ int main(int argc, char **argv)
 
 	mt19937_initRnd((uint)time(NULL));
 
-	for(c = 0; c < W; c++)
+	for (c = 0; c < W; c++)
 	{
 		cout("%f,", I2Rate(c));
 	}
 	cout("\n");
 
-	for(r = 0; r < H; r++)
+	for (r = 0; r < H; r++)
 	{
-		for(c = 0; c < W; c++)
+		for (c = 0; c < W; c++)
 		{
 			uint m = mt19937_rnd(MAPMAX) + 1;
 			uint t;
@@ -52,13 +52,13 @@ int main(int argc, char **argv)
 
 			t = m_d2i(m * I2Rate(c));
 
-			for(i = 0; i < t; i++)
+			for (i = 0; i < t; i++)
 			{
 				map[mt19937_rnd(m)] = 1;
 			}
 			d = 0;
 
-			for(i = 0; i < m; i++)
+			for (i = 0; i < m; i++)
 			{
 				if (map[i]) d++;
 			}

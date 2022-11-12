@@ -320,7 +320,7 @@ static char *HE_Encode(autoBlock_t *buff)
 		uint size = getSize(buff);
 		uint index;
 
-		for(index = 0; index < size; index++)
+		for (index = 0; index < size; index++)
 		{
 			if (b_(buff)[index] == '+')
 			{
@@ -682,7 +682,7 @@ static void DataFltr(autoBlock_t *buff, uint prm)
 
 						buff = strx("");
 
-						for(index = 0; index < 3; index++)
+						for (index = 0; index < 3; index++)
 						{
 							buff = addLine(buff, getLine(parts1, index));
 							buff = addLine(buff, getLine(parts2, index));

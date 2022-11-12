@@ -65,7 +65,7 @@ static void PollingMain(void)
 {
 	critical();
 	{
-		for(; ; )
+		for (; ; )
 		{
 			int sock;
 

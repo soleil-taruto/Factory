@@ -288,7 +288,7 @@ static void JamEncrypt(autoBlock_t *data)
 		uint size = (~getSize(data) & 0x0f) + 1;
 		uint index;
 
-		for(index = 0; index < size; index++)
+		for (index = 0; index < size; index++)
 			addByte(data, size);
 	}
 	// += RandPart

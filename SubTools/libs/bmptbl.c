@@ -16,8 +16,8 @@ autoTable_t *tReadBMPFile(char *file)
 
 	resizeTable(bmp, w, h);
 
-	for(x = 0; x < w; x++)
-	for(y = 0; y < h; y++)
+	for (x = 0; x < w; x++)
+	for (y = 0; y < h; y++)
 	{
 		setTableCell(bmp, x, y, getElement(getList(table, y), x));
 	}
@@ -35,8 +35,8 @@ void tWriteBMPFile(char *file, autoTable_t *bmp)
 	w = getTableWidth(bmp);
 	h = getTableHeight(bmp);
 
-	for(x = 0; x < w; x++)
-	for(y = 0; y < h; y++)
+	for (x = 0; x < w; x++)
+	for (y = 0; y < h; y++)
 	{
 		putElement(refList(table, y), x, getTableCell(bmp, x, y));
 	}

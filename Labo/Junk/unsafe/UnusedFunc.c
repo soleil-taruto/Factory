@@ -35,7 +35,7 @@ static int GetFuncRange(uint index, int headerFlag)
 	}
 	FuncRangeBgn = index;
 
-	for(; ; )
+	for (; ; )
 	{
 		index++;
 
@@ -57,7 +57,7 @@ static int GetFuncRange(uint index, int headerFlag)
 		if (!line[0]) // ? ãÛçs
 			return 0;
 	}
-	for(; ; )
+	for (; ; )
 	{
 		index++;
 
@@ -144,7 +144,7 @@ static void ProcCppFile(char *file, int headerFlag)
 
 	Lines = readLines(escFile);
 
-	for(index = 0; index < getCount(Lines); index++)
+	for (index = 0; index < getCount(Lines); index++)
 	{
 		if (GetFuncRange(index, headerFlag))
 		{

@@ -22,7 +22,7 @@ static void WriteDummyResSizes(void)
 {
 	uint index;
 
-	for(index = 0; index < getCount(FileList); index++)
+	for (index = 0; index < getCount(FileList); index++)
 	{
 		writeValue(WFp, 0);
 	}

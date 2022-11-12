@@ -19,7 +19,7 @@ static void Fadeout(uint startPos, uint count)
 {
 	uint index;
 
-	for(index = 0; index < count; index++)
+	for (index = 0; index < count; index++)
 	{
 		double rate = (double)(count - index) / count;
 		uint value = getElement(WavData, startPos + index);
@@ -47,10 +47,10 @@ static void TrimBgn(void)
 	uint rPos;
 	uint wPos;
 
-	for(rPos = 0; getElement(WavData, rPos) == 0x80008000; rPos++)
+	for (rPos = 0; getElement(WavData, rPos) == 0x80008000; rPos++)
 		noop();
 
-	for(wPos = 0; rPos < getCount(WavData); wPos++, rPos++)
+	for (wPos = 0; rPos < getCount(WavData); wPos++, rPos++)
 		setElement(WavData, wPos, getElement(WavData, rPos));
 
 	setCount(WavData, wPos);

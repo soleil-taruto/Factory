@@ -51,7 +51,7 @@ static FltrInfo_t *GetFltrInfo(char *path, char *header)
 	else
 		lines = readLines(path);
 
-	for(index = 0; index < getCount(lines); index += 2)
+	for (index = 0; index < getCount(lines); index += 2)
 	{
 		char *file1 = getLine(lines, index);
 		char *file2 = getLine(lines, index + 1);
@@ -82,7 +82,7 @@ static void StrmCharFltr(FltrInfo_t *i, autoBlock_t *dest, int chr)
 	addByte(i->Buff, chr);
 	minPos = getSize(i->Buff);
 
-	for(sPos = getSize(i->Buff) - 1; ; sPos--)
+	for (sPos = getSize(i->Buff) - 1; ; sPos--)
 	{
 		void *p = ((uchar *)directGetBuffer(i->Buff)) + sPos;
 		uint size = getSize(i->Buff) - sPos;
@@ -145,7 +145,7 @@ static void StrmFltr(autoBlock_t *buff, uint prm)
 	autoBlock_t *dest = newBlock();
 	uint index;
 
-	for(index = 0; index < getSize(buff); index++)
+	for (index = 0; index < getSize(buff); index++)
 		StrmCharFltr(i, dest, getByte(buff, index));
 
 	ab_swap(buff, dest);

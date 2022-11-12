@@ -57,7 +57,7 @@ static char *TryNextQryToken(void)
 
 	Quoted = 0;
 
-	for(; IsBlank(*QryRdr); QryRdr++)
+	for (; IsBlank(*QryRdr); QryRdr++)
 		if (*QryRdr == '\0')
 			return NULL;
 
@@ -67,7 +67,7 @@ static char *TryNextQryToken(void)
 	{
 		Quoted = 1;
 
-		for(; ; )
+		for (; ; )
 		{
 			int chr = *++QryRdr;
 
@@ -120,7 +120,7 @@ static char *TryNextQryToken(void)
 	}
 	else
 	{
-		for(; !IsBlank(*QryRdr); QryRdr++)
+		for (; !IsBlank(*QryRdr); QryRdr++)
 			addByte(buff, *QryRdr);
 	}
 	return unbindBlock2Line(buff);
@@ -130,7 +130,7 @@ char *FC_Retoken(char *token) // ret: strx()
 	autoBlock_t *buff = newBlock();
 	char *p;
 
-	for(p = token; *p; p++)
+	for (p = token; *p; p++)
 	{
 		if (isJCharP(p))
 		{
@@ -191,7 +191,7 @@ static void ExecuteSelect(void)
 	char *rowId;
 	uint rowidx;
 
-	for(; ; )
+	for (; ; )
 	{
 		char *column = NextQryToken();
 
@@ -253,7 +253,7 @@ static void ExecuteInsert(void)
 	errorCase(!NextQryTokenIs("INTO"));
 	table = NextQryToken();
 
-	for(; ; )
+	for (; ; )
 	{
 		column = NextQryToken();
 
@@ -264,7 +264,7 @@ static void ExecuteInsert(void)
 		}
 		addElement(insColumns, (uint)column);
 	}
-	for(colidx = 0; colidx < getCount(insColumns); colidx++)
+	for (colidx = 0; colidx < getCount(insColumns); colidx++)
 	{
 		char *value = NextQryToken();
 
@@ -299,7 +299,7 @@ static void ExecuteUpdate(void)
 	table = NextQryToken();
 	errorCase(!NextQryTokenIs("SET"));
 
-	for(; ; )
+	for (; ; )
 	{
 		char *column = NextQryToken();
 

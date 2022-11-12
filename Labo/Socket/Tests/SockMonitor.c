@@ -35,7 +35,7 @@ static uint NextValue(uint bitSize, char *name) // bitSize: 1-
 	uint value = 0;
 	uint c;
 
-	for(c = 0; c < bitSize; c++)
+	for (c = 0; c < bitSize; c++)
 		if (NextBit())
 			value |= 1 << bitSize - 1 - c;
 
@@ -91,7 +91,7 @@ static void RecvDataProc(uchar *recvData, uint recvSize)
 		NextValue(8, "IP_DESTINATION_IP_ADDRESS_3");
 		NextValue(8, "IP_DESTINATION_IP_ADDRESS_4");
 
-		for(c = 0; c + 5 < ihl; c++)
+		for (c = 0; c + 5 < ihl; c++)
 		{
 			char *name = xcout("IP_OPTIONS(%u)", c);
 			NextValue(32, name);
@@ -120,7 +120,7 @@ static void RecvDataProc(uchar *recvData, uint recvSize)
 			NextValue(16, "TCP_CHECKSUM");
 			NextValue(16, "TCP_URGENT_POINTER");
 
-			for(c = 0; c + 5 < dataOffset; c++)
+			for (c = 0; c + 5 < dataOffset; c++)
 			{
 				char *name = xcout("TCP_OPTIONS(%u)", c);
 				NextValue(32, name);
@@ -143,7 +143,7 @@ static void RecvDataProc(uchar *recvData, uint recvSize)
 
 	cout("[DATA]\n");
 
-	for(c = RIndex; c < RSize; c++)
+	for (c = RIndex; c < RSize; c++)
 	{
 		cout("%02x", RData[c]);
 	}

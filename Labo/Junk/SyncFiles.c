@@ -39,7 +39,7 @@ static autoList_t *GetFiles(char *dir)
 	char *file;
 	uint index;
 
-	for(index = lastDirCount; index < getCount(paths); index++)
+	for (index = lastDirCount; index < getCount(paths); index++)
 	{
 		file = (char *)getElement(paths, index);
 		file = strx(getLocal(file));
@@ -52,7 +52,7 @@ static autoList_t *GetSharedFiles(autoList_t *dirs)
 	autoList_t *files = GetFiles((char *)getElement(dirs, 0));
 	uint index;
 
-	for(index = 1; index < getCount(dirs); index++)
+	for (index = 1; index < getCount(dirs); index++)
 	{
 		autoList_t *nextFiles = GetFiles((char *)getElement(dirs, index));
 		autoList_t *commFiles;
@@ -78,7 +78,7 @@ static uint GetModify(autoList_t *hashes) // ret == getCount(hashes): (conflict 
 	errorCase(getCount(hashes) < 3);
 	Conflicted = 0;
 
-	for(index = 1; index < getCount(hashes); index++)
+	for (index = 1; index < getCount(hashes); index++)
 	{
 		if (_stricmp(getLine(hashes, 0), getLine(hashes, index))) // ? •sˆê’v
 		{
@@ -212,7 +212,7 @@ static void SyncFiles(autoList_t *dirs)
 	{
 		cout("\n");
 
-		for(index = 1; index < getCount(dirs); index++)
+		for (index = 1; index < getCount(dirs); index++)
 		{
 			char *dir1 = getLine(dirs, 0);
 			char *dir2 = getLine(dirs, index);

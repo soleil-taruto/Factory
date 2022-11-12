@@ -46,7 +46,7 @@ static void Upload(SockStream_t *ss, char *laneDir)
 	}
 	LOGPOS();
 
-	for(; ; )
+	for (; ; )
 	{
 		uint64 fileSize;
 		char *name;

@@ -28,7 +28,7 @@ void DeleteFileDataPart(char *file, uint64 beginPos, uint64 delSize)
 
 	buffer = memAlloc(DFDP_BUFFER_SIZE);
 
-	for(remain = size - (beginPos + delSize); remain; )
+	for (remain = size - (beginPos + delSize); remain; )
 	{
 		uint rwSize = (uint)m_min(remain, (uint64)DFDP_BUFFER_SIZE);
 		autoBlock_t gab;

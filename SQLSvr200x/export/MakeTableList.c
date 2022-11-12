@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 	releaseDim((autoList_t *)desertElement(tableRec, 0), 1); // ヘッダー行除去
 	releaseDim((autoList_t *)desertElement(schemaRec, 0), 1); // ヘッダー行除去
 
-	for(index = 0; index < getCount(tableRec); index++)
+	for (index = 0; index < getCount(tableRec); index++)
 	{
 		autoList_t *tRow = getList(tableRec, index);
 		autoList_t *sRow;

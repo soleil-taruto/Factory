@@ -19,7 +19,7 @@ static int IsAsciiStr(char *str)
 {
 	char *p;
 
-	for(p = str; *p; p++)
+	for (p = str; *p; p++)
 		if (!m_isRange(*p, '\x21', '\x7e'))
 			return 0;
 

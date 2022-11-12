@@ -38,7 +38,7 @@ static char *GetPackage(char *javaFile)
 
 	cout("*P %s\n", javaFile);
 
-	for(; ; )
+	for (; ; )
 	{
 		char *line = readLine(fp);
 
@@ -77,7 +77,7 @@ static char *GetJavaClassName(char *javaFile)
 
 	cout("*C %s\n", javaFile);
 
-	for(; ; )
+	for (; ; )
 	{
 		char *line = readLine(fp);
 		char *p;

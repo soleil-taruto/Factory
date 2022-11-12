@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 {
 	uint c;
 
-	for(c = toValue(nextArg()); c; c--)
+	for (c = toValue(nextArg()); c; c--)
 	{
 		GetCrByte();
 	}
@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 	static uchar buffer[BUFFERSIZE];
 	uint c;
 
-	for(c = toValue(nextArg()); c; )
+	for (c = toValue(nextArg()); c; )
 	{
 		uint size = m_min(c, BUFFERSIZE);
 

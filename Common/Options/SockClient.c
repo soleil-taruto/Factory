@@ -40,7 +40,7 @@ autoList_t *sockLookupList(char *domain)
 
 	if (host)
 	{
-		for(index = 0; host->h_addr_list[index]; index++)
+		for (index = 0; host->h_addr_list[index]; index++)
 		{
 			addr.s_addr = *(u_long *)host->h_addr_list[index];
 			SockLine2Ip((uchar *)&ip, inet_ntoa(addr));

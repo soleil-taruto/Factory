@@ -43,7 +43,7 @@ static void MEDF_MakeEncDataFile(autoBlock_t *fileData, autoBlock_t *rawKey, uin
 		uint padSize = 16 - getSize(fileData) % 16;
 		uint count;
 
-		for(count = padSize; count; count--)
+		for (count = padSize; count; count--)
 		{
 			addByte(fileData, padSize);
 		}
@@ -67,7 +67,7 @@ static void MEDF_MakeEncDataFile(autoBlock_t *fileData, autoBlock_t *rawKey, uin
 		XorBlock(dataBuff, dataBuff + dataSize - 16);
 		camellia_encrypt(key, dataBuff, dataBuff, 1);
 
-		for(index = 16; index < dataSize; index += 16)
+		for (index = 16; index < dataSize; index += 16)
 		{
 			XorBlock(dataBuff + index, dataBuff + index - 16);
 			camellia_encrypt(key, dataBuff + index, dataBuff + index, 1);

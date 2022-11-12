@@ -79,7 +79,7 @@ static void Expand(calcOperand_t *co, uint count)
 }
 static void AddInt(calcOperand_t *co, uint index, uint value)
 {
-	for(; ; )
+	for (; ; )
 	{
 		value += refByte(co->F, index);
 		putByte(co->F, index, value % calcRadix);
@@ -114,7 +114,7 @@ calcOperand_t *calcFromSmplString(char *str)
 	co = CreateOperand();
 	fndPrd = 0;
 
-	for(p = str; *p; p++)
+	for (p = str; *p; p++)
 	{
 		int chr = *p;
 
@@ -236,13 +236,13 @@ char *calcGetSmplString_EM(calcOperand_t *co, uint effectMin)
 		}
 #endif
 	}
-	for(index = (uint)m_max(0, -co->E); index; index--)
+	for (index = (uint)m_max(0, -co->E); index; index--)
 	{
 		addByte(buff, '0');
 	}
 	iEnd = (uint)m_max(co->E + 1, (sint)getSize(co->F));
 
-	for(index = 0; index < iEnd; index++)
+	for (index = 0; index < iEnd; index++)
 	{
 		if (index && index == co->E)
 		{
@@ -276,7 +276,7 @@ char *calcGetString(calcOperand_t *co)
 	{
 		uint iEnd = getSize(co->F) - calcEffect;
 
-		for(index = 0; index < iEnd; index++)
+		for (index = 0; index < iEnd; index++)
 		{
 			if (calcRndOff && index == iEnd - 1 && calcRadix / 2 <= getByte(co->F, index))
 			{
@@ -368,7 +368,7 @@ calcOperand_t *calcAdd(calcOperand_t *co1, calcOperand_t *co2)
 	ans = CreateOperand();
 	iEnd = m_max(getSize(co1->F), getSize(co2->F));
 
-	for(index = 0; index < iEnd; index++)
+	for (index = 0; index < iEnd; index++)
 	{
 		AddInt(ans, index, refByte(co1->F, index) + refByte(co2->F, index));
 	}
@@ -412,7 +412,7 @@ calcOperand_t *calcSub(calcOperand_t *co1, calcOperand_t *co2)
 	iEnd = m_max(getSize(co1->F) , getSize(co2->F));
 	m_maxim(iEnd, 1);
 
-	for(index = 0; index < iEnd; index++)
+	for (index = 0; index < iEnd; index++)
 	{
 		AddInt(ans, index, refByte(co1->F, index) + calcRadix - refByte(co2->F, index) - (index ? 1 : 0));
 	}
@@ -443,8 +443,8 @@ calcOperand_t *calcMul(calcOperand_t *co1, calcOperand_t *co2)
 	Trim(co2);
 	ans = CreateOperand();
 
-	for(index1 = 0; index1 < getSize(co1->F); index1++)
-	for(index2 = 0; index2 < getSize(co2->F); index2++)
+	for (index1 = 0; index1 < getSize(co1->F); index1++)
+	for (index2 = 0; index2 < getSize(co2->F); index2++)
 	{
 		AddInt(ans, index1 + index2, getByte(co1->F, index1) * getByte(co2->F, index2));
 	}
@@ -674,11 +674,11 @@ static sint Root_GetShiftCntMin(calcOperand_t *co, uint exponent)
 	sint shiftCnt;
 	sint ss;
 
-	for(shiftCnt = -1; Root_TryShiftCnt(co, shiftCnt, exponent); shiftCnt *= 2);
+	for (shiftCnt = -1; Root_TryShiftCnt(co, shiftCnt, exponent); shiftCnt *= 2);
 
 	shiftCnt /= 2;
 
-	for(ss = shiftCnt; ss /= 2; )
+	for (ss = shiftCnt; ss /= 2; )
 		if (Root_TryShiftCnt(co, shiftCnt + ss, exponent))
 			shiftCnt += ss;
 
@@ -698,9 +698,9 @@ calcOperand_t *calcRoot(calcOperand_t *co, uint exponent)
 	Trim(co);
 	ans = CreateOperand();
 
-	for(shiftCnt = Root_GetShiftCntMin(co, exponent); shiftCnt <= calcBasement; shiftCnt++)
+	for (shiftCnt = Root_GetShiftCntMin(co, exponent); shiftCnt <= calcBasement; shiftCnt++)
 	{
-		for(; ; )
+		for (; ; )
 		{
 			calcOperand_t *tmpAdd;
 			calcOperand_t *ansTmp;

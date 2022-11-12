@@ -46,31 +46,31 @@ static void DoTest(void)
 {
 	uint64 count;
 
-	for(count = 1; count <= 10000; count++)
+	for (count = 1; count <= 10000; count++)
 	{
 		DoTest_01(count);
 	}
-	for(count = SINT16MAX - 10000; count <= (uint64)SINT16MAX + 10000; count++)
+	for (count = SINT16MAX - 10000; count <= (uint64)SINT16MAX + 10000; count++)
 	{
 		DoTest_01(count);
 	}
-	for(count = UINT16MAX - 10000; count <= (uint64)UINT16MAX + 10000; count++)
+	for (count = UINT16MAX - 10000; count <= (uint64)UINT16MAX + 10000; count++)
 	{
 		DoTest_01(count);
 	}
-	for(count = SINTMAX - 10000; count <= (uint64)SINTMAX + 10000; count++)
+	for (count = SINTMAX - 10000; count <= (uint64)SINTMAX + 10000; count++)
 	{
 		DoTest_01(count);
 	}
-	for(count = UINTMAX - 10000; count <= (uint64)UINTMAX + 10000; count++)
+	for (count = UINTMAX - 10000; count <= (uint64)UINTMAX + 10000; count++)
 	{
 		DoTest_01(count);
 	}
-	for(count = SINT64MAX - 10000; count <= SINT64MAX + 10000; count++)
+	for (count = SINT64MAX - 10000; count <= SINT64MAX + 10000; count++)
 	{
 		DoTest_01(count);
 	}
-	for(count = UINT64MAX - 10000; count < UINT64MAX; count++)
+	for (count = UINT64MAX - 10000; count < UINT64MAX; count++)
 	{
 		DoTest_01(count);
 	}

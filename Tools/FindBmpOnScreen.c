@@ -44,12 +44,12 @@ static int IsMatchBmpArea(autoTable_t *bmp, uint l, uint t)
 	uint x;
 	uint y;
 
-	for(i = 0; i < FCDNum; i++)
+	for (i = 0; i < FCDNum; i++)
 		if (!IsSameDot(getTableCell(bmp, l + FCDXs[i], t + FCDYs[i]), getTableCell(TrgBmp, FCDXs[i], FCDYs[i])))
 			return 0;
 
-	for(x = 0; x < TrgBmp_W; x++)
-	for(y = 0; y < TrgBmp_H; y++)
+	for (x = 0; x < TrgBmp_W; x++)
+	for (y = 0; y < TrgBmp_H; y++)
 	{
 		if (!IsSameDot(getTableCell(bmp, l + x, t + y), getTableCell(TrgBmp, x, y)))
 			return 0;
@@ -63,8 +63,8 @@ static int FindBmp_Bmp(autoTable_t *bmp)
 	uint x;
 	uint y;
 
-	for(x = 0; x + TrgBmp_W <= w; x++)
-	for(y = 0; y + TrgBmp_H <= h; y++)
+	for (x = 0; x + TrgBmp_W <= w; x++)
+	for (y = 0; y + TrgBmp_H <= h; y++)
 	{
 		if (IsMatchBmpArea(bmp, x, y))
 			return 1;
@@ -115,12 +115,12 @@ static void InitFCD(void)
 	FCDYs[0] = 0;
 	FCDNum = 1;
 
-	for(x = 0; x < TrgBmp_W; x++)
-	for(y = 0; y < TrgBmp_H; y++)
+	for (x = 0; x < TrgBmp_W; x++)
+	for (y = 0; y < TrgBmp_H; y++)
 	{
 		uint i;
 
-		for(i = 0; i < FCDNum; i++)
+		for (i = 0; i < FCDNum; i++)
 			if (IsSameDot(getTableCell(TrgBmp, FCDXs[i], FCDYs[i]), getTableCell(TrgBmp, x, y)))
 				goto nextLoop;
 

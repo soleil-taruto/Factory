@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 	{
 		char drive[] = "_:\\";
 
-		for(drive[0] = 'A'; drive[0] <= 'Z'; drive[0]++)
+		for (drive[0] = 'A'; drive[0] <= 'Z'; drive[0]++)
 			if (existDir(drive))
 				DispDiskFree(drive[0], NULL);
 

@@ -12,10 +12,10 @@ static void DoShuffle(void)
 	uint index;
 	uint mode;
 
-	for(index = 0; index < N; index++)
+	for (index = 0; index < N; index++)
 		Sq[index] = index;
 
-	for(index = 0; index < N; index++)
+	for (index = 0; index < N; index++)
 	{
 		uint r = Rnds[index];
 		uint tmp = Sq[index];
@@ -23,13 +23,13 @@ static void DoShuffle(void)
 		Sq[index] = Sq[r];
 		Sq[r] = tmp;
 	}
-	for(index = 0; index < N; index++)
+	for (index = 0; index < N; index++)
 		if (Rnds[index] < index)
 			break;
 
-	for(mode = index == N ? 0 : 1; mode < 2; mode++)
+	for (mode = index == N ? 0 : 1; mode < 2; mode++)
 	{
-		for(index = 0; index < N; index++)
+		for (index = 0; index < N; index++)
 			SumTbl[mode][index][Sq[index]]++;
 
 		Totals[mode]++;
@@ -42,9 +42,9 @@ static void ShowResult(uint mode, int rateMode)
 
 	cout("%u\n", mode);
 
-	for(index = 0; index < N; index++)
+	for (index = 0; index < N; index++)
 	{
-		for(val = 0; val < N; val++)
+		for (val = 0; val < N; val++)
 		{
 			if (val)
 				cout(", ");
@@ -65,11 +65,11 @@ static void DoTest(void)
 {
 	uint index;
 
-	for(; ; )
+	for (; ; )
 	{
 		DoShuffle();
 
-		for(index = 0; index < N; index++)
+		for (index = 0; index < N; index++)
 		{
 			if (Rnds[index] + 1 < N)
 			{

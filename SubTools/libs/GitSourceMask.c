@@ -17,7 +17,7 @@ static void MskSrcFile(char *file, int eurpFlag)
 
 	foreach (lines, line, index)
 	{
-		for(p = line; *p; p++)
+		for (p = line; *p; p++)
 			if (' ' < *p)
 				*p = '/';
 

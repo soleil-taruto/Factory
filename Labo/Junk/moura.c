@@ -11,10 +11,10 @@ static double Moura(uint num, double rate)
 
 	setSize(map, num);
 
-	for(index = 0; index < end; index++)
+	for (index = 0; index < end; index++)
 		setByte(map, mt19937_rnd(num), 1);
 
-	for(index = 0; index < num; index++)
+	for (index = 0; index < num; index++)
 		if (getByte(map, index))
 			count++;
 
@@ -52,12 +52,12 @@ int main(int argc, char **argv)
 	{
 		uint num;
 
-		for(num = 10; num <= 10000; num *= 10)
+		for (num = 10; num <= 10000; num *= 10)
 		{
 			uint numer;
 			uint denom = 10;
 
-			for(numer = denom; numer < denom * 70; numer++)
+			for (numer = denom; numer < denom * 70; numer++)
 			{
 				MouraTest(num, (double)numer / denom);
 			}

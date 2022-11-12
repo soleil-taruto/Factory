@@ -27,7 +27,7 @@ static void InitHashTable(autoList_t *lines)
 
 	HashTable = newList();
 
-	for(index = 0; index < 0x10000; index++)
+	for (index = 0; index < 0x10000; index++)
 		addElement(HashTable, (uint)newList());
 
 	foreach (lines, line, index)
@@ -99,7 +99,7 @@ static void Search(uint msgLen)
 
 	md5_Init(ctxs);
 
-	for(; ; )
+	for (; ; )
 	{
 		if (ahead)
 		{
@@ -151,7 +151,7 @@ static void MD5Crack_Main(void)
 {
 	uint msgLen;
 
-	for(msgLen = 0; ; msgLen++)
+	for (msgLen = 0; ; msgLen++)
 	{
 		cout("msgLen: %u\n", msgLen);
 
@@ -165,7 +165,7 @@ static void Search(uchar *msg, uint msgLen, uint index, md5_CTX *baseCtx)
 	{
 		uint bChr;
 
-		for(bChr = BChrMin; bChr <= BChrMax; bChr++)
+		for (bChr = BChrMin; bChr <= BChrMax; bChr++)
 		{
 			md5_CTX ctx = *baseCtx;
 
@@ -189,7 +189,7 @@ static void MD5Crack_Main(void)
 	uchar msg[100];
 	uint msgLen;
 
-	for(msgLen = 0; ; msgLen++)
+	for (msgLen = 0; ; msgLen++)
 	{
 		md5_CTX ctx;
 

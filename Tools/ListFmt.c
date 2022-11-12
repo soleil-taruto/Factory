@@ -92,7 +92,7 @@ static void ListFmt_0(void)
 		foreach (Lists, list, list_index)
 			m_maxim(maxCount, getCount(list));
 	}
-	for(index = 0; index < maxCount; index++)
+	for (index = 0; index < maxCount; index++)
 	{
 		foreach (Lists, list, list_index)
 			setElement(CurrLines, list_index, (uint)getLine(list, index % getCount(list)));
@@ -191,7 +191,7 @@ readArgs:
 		m_range(step, 1, IMAX);
 		m_range(zpminlen, 0, IMAX);
 
-		for(; count <= maxCount; count += step)
+		for (; count <= maxCount; count += step)
 		{
 			addElement(list, (uint)ZeroPad(count, zpminlen));
 		}

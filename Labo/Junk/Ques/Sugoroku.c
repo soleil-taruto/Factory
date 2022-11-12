@@ -27,7 +27,7 @@ int main(int argc, char **argv)
 		d++;
 	}
 
-	for(c = 0; c < SUGO_LEN; c++)
+	for (c = 0; c < SUGO_LEN; c++)
 	{
 		cout("[%02u] %f = %u / %u\n", c, (double)sugo_n[c] / d, sugo_n[c], d);
 	}

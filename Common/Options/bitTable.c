@@ -41,8 +41,8 @@ void resizeBitTable(bitTable_t *i, uint w, uint h)
 	mir_w = m_min(i->W, w);
 	mir_h = m_min(i->H, h);
 
-	for(x = 0; x < mir_w; x++)
-	for(y = 0; y < mir_h; y++)
+	for (x = 0; x < mir_w; x++)
+	for (y = 0; y < mir_h; y++)
 	{
 		SET_BIT(buffNew, w, h, x, y, GET_BIT(i->Buffer, i->W, i->H, x, y));
 	}
@@ -83,7 +83,7 @@ void setTableBits(bitTable_t *i, uint l, uint t, uint w, uint h, uint value) // 
 	errorCase(i->W - l < w);
 	errorCase(i->H - t < h);
 
-	for(y = 0; y < h; y++)
+	for (y = 0; y < h; y++)
 	{
 		putBits(i->Buffer, l + (uint64)(t + y) * i->W, (uint64)w, value);
 	}
@@ -105,7 +105,7 @@ void invTableBits(bitTable_t *i, uint l, uint t, uint w, uint h) // w, h: 0 ok
 	errorCase(i->W - l < w);
 	errorCase(i->H - t < h);
 
-	for(y = 0; y < h; y++)
+	for (y = 0; y < h; y++)
 	{
 		invBits(i->Buffer, l + (uint64)(t + y) * i->W, (uint64)w);
 	}

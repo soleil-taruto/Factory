@@ -311,7 +311,7 @@ static int Perform(int method) // method: "HGP"
 	}
 	fp = fileOpen(ResHeaderFile, "rt");
 
-	for(; ; )
+	for (; ; )
 	{
 		line = readLine(fp);
 

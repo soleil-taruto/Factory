@@ -6,7 +6,7 @@ static void ST_DispList(autoList_t *list)
 {
 	uint index;
 
-	for(index = 0; index < getCount(list); index++)
+	for (index = 0; index < getCount(list); index++)
 	{
 		cout("[%u]: %u\n", index, getElement(list, index));
 	}
@@ -16,7 +16,7 @@ static autoList_t *ST_MakeList(uint start, uint count, uint step)
 	autoList_t *list = newList();
 	uint index;
 
-	for(index = 0; index < count; index++)
+	for (index = 0; index < count; index++)
 		addElement(list, start + index * step);
 
 	shuffle(list);
@@ -37,7 +37,7 @@ static void ST_DoTest(void (*funcSort)(autoList_t *, sint (*)(uint, uint)), uint
 
 	errorCase(getCount(list) != count);
 
-	for(index = 0; index < count; index++)
+	for (index = 0; index < count; index++)
 	{
 		errorCase(getElement(list, index) != start + index * step);
 	}
@@ -71,8 +71,8 @@ static autoList_t *ST2_GetSource(uint grp, uint grpSz)
 	uint no;
 	uint c;
 
-	for(no = 1; no <= grp; no++)
-	for(c = mt19937_range(0, grpSz); c; c--)
+	for (no = 1; no <= grp; no++)
+	for (c = mt19937_range(0, grpSz); c; c--)
 		addElement(src, no);
 
 	return src;
@@ -96,7 +96,7 @@ static void ST2_DoTest(void (*funcSort)(autoList_t *, sint (*)(uint, uint)), uin
 
 	errorCase(getCount(list) != count);
 
-	for(index = 0; index < count; index++)
+	for (index = 0; index < count; index++)
 	{
 		errorCase(getElement(src, index) != getElement(list, index));
 	}
@@ -202,7 +202,7 @@ static void FB_DoTest(uint count, uint minval, uint maxval) // 1 <= minval <= ma
 
 	cout("FB_DoTest: %u %u %u\n", count, minval, maxval);
 
-	for(target = minval - 1; target <= maxval + 1; target++)
+	for (target = minval - 1; target <= maxval + 1; target++)
 	{
 		cout("target: %u\n", target);
 
@@ -220,7 +220,7 @@ static void Test_findBound(void)
 {
 	uint testcnt;
 
-	for(testcnt = 0; testcnt < 1000; testcnt++)
+	for (testcnt = 0; testcnt < 1000; testcnt++)
 	{
 		{
 			uint c = mt19937_rnd(100);
@@ -259,7 +259,7 @@ static int GB_Test(autoList_t *list, uint target, uint bound[2])
 {
 	uint index;
 
-	for(index = 0; index < getCount(list); index++)
+	for (index = 0; index < getCount(list); index++)
 		if (getElement(list, index) == target)
 			break;
 
@@ -286,7 +286,7 @@ static void GB_DoTest(uint count, uint minval, uint maxval) // 1 <= minval <= ma
 
 	cout("GB_DoTest: %u %u %u\n", count, minval, maxval);
 
-	for(target = minval - 1; target <= maxval + 1; target++)
+	for (target = minval - 1; target <= maxval + 1; target++)
 	{
 		uint bnd2Dmy1 = mt19937_rnd(256);
 		uint bnd2Dmy2 = mt19937_rnd(256);
@@ -325,7 +325,7 @@ static void Test_getBound(void)
 {
 	uint testcnt;
 
-	for(testcnt = 0; testcnt < 1000; testcnt++)
+	for (testcnt = 0; testcnt < 1000; testcnt++)
 	{
 		{
 			uint c = mt19937_rnd(100);

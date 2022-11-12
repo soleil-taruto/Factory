@@ -210,7 +210,7 @@ readArgs:
 
 	if (argIs("/C")) // drop and Compare
 	{
-		for(; ; )
+		for (; ; )
 		{
 			char *dir1;
 			char *dir2;
@@ -224,7 +224,7 @@ readArgs:
 	}
 	if (argIs("/D")) // Drop
 	{
-		for(; ; )
+		for (; ; )
 		{
 			CheckDir(dropDir());
 			cout("\n");
@@ -242,7 +242,7 @@ readArgs:
 			MakeCredentials(nextArg());
 			return;
 		}
-		for(; ; )
+		for (; ; )
 		{
 			MakeCredentials(c_dropDir());
 			cout("\n");

@@ -56,7 +56,7 @@ static void Test_unaddBytes(void)
 
 	LOGPOS();
 
-	for(count = 10; count; count--)
+	for (count = 10; count; count--)
 		addBytes(a, gndBlockLineVar("AAABBBCCCDDDEEE", gab));
 
 	line = unbindBlock2Line(copyAutoBlock(a));

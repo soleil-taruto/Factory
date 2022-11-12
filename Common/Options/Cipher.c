@@ -38,7 +38,7 @@ autoList_t *cphrCreateKeyTableList(autoBlock_t *keyBundle, uint keySize)
 	errorCase(getSize(keyBundle) == 0); // 鍵は１つ以上あること。
 	errorCase(getSize(keyBundle) % keySize != 0);
 
-	for(index = 0; (index + 1) * keySize <= getSize(keyBundle); index++)
+	for (index = 0; (index + 1) * keySize <= getSize(keyBundle); index++)
 	{
 		addElement(
 			keyTableList,
@@ -145,7 +145,7 @@ static autoBlock_t *InputPassphrase2KeyBundle(char *passEx)
 		xExp -= 10;
 #endif
 
-		for(xNum = 1; xExp; xExp--)
+		for (xNum = 1; xExp; xExp--)
 			xNum *= 2;
 
 		// ハッシュ生成
@@ -160,7 +160,7 @@ static autoBlock_t *InputPassphrase2KeyBundle(char *passEx)
 			cout("passphrase expanding...\n");
 			ProgressBegin();
 
-			for(count = 0; count < xNum; count++)
+			for (count = 0; count < xNum; count++)
 			{
 				if (count % 8 == 0)
 					ProgressRate((double)count / xNum);
@@ -244,7 +244,7 @@ void cphrAddPadding(autoBlock_t *block) // 少なくとも block は BLOCK_SIZE バイト
 
 	if (size < BLOCK_SIZE) size += BLOCK_SIZE; // @ 2015.1.25
 
-	for(index = 0; index < size; index++)
+	for (index = 0; index < size; index++)
 	{
 		addByte(block, getCryptoByte());
 	}
@@ -301,7 +301,7 @@ uchar *cphrDecryptBlock(uchar *block, autoList_t *keyTableList, uchar *iv)
 	nii = BLOCK_SIZE - nii;
 	memcpy(niv + nii, block, BLOCK_SIZE);
 
-	for(count = getCount(keyTableList); count; count--)
+	for (count = getCount(keyTableList); count; count--)
 	{
 		camellia_encrypt(
 			(camellia_keyTable_t *)getElement(keyTableList, count - 1),
@@ -328,7 +328,7 @@ void cphrEncryptor(autoBlock_t *block, autoList_t *keyTableList, autoBlock_t *iv
 
 	biv = (uchar *)directGetBuffer(iv);
 
-	for(index = 0; index < getSize(block); index += BLOCK_SIZE)
+	for (index = 0; index < getSize(block); index += BLOCK_SIZE)
 	{
 		biv = (doEncrypt ? cphrEncryptBlock : cphrDecryptBlock)((uchar *)directGetBuffer(block) + index, keyTableList, biv);
 	}
@@ -428,7 +428,7 @@ void cphrEncryptorFile(char *srcFile, char *destFile, autoList_t *keyTableList, 
 
 	G_DivBlockSize = 0;
 
-	for(; ; )
+	for (; ; )
 	{
 		uint divBlockSize = GetDivBlockSize();
 		autoBlock_t *block;
@@ -500,7 +500,7 @@ int cphrDecryptorFile(char *srcFile, char *destFile, autoList_t *keyTableList, v
 	md5 = md5_create();
 	G_DivBlockSize = 0;
 
-	for(; ; )
+	for (; ; )
 	{
 		uint divBlockSize = GetDivBlockSize();
 		int endblock;

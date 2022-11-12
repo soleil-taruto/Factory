@@ -17,12 +17,12 @@ int main(int argc, char **argv)
 	FILE *fp = fileOpen(c_getOutFile("JChar.bin"), "wb");
 	int chr;
 
-	for(chr = 0; chr <= 0xffff; chr += 8)
+	for (chr = 0; chr <= 0xffff; chr += 8)
 	{
 		int bits = 0;
 		int bit;
 
-		for(bit = 0; bit < 8; bit++)
+		for (bit = 0; bit < 8; bit++)
 		{
 			if (My_IsJChar(chr + bit))
 			{

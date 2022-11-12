@@ -147,7 +147,7 @@ void MergeSort(
 	}
 	fp = fileOpen(srcFile, rMode);
 
-	for(; ; )
+	for (; ; )
 	{
 		uint element = readElement(fp);
 		uint64 currPos;

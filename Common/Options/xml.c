@@ -13,7 +13,7 @@ static int IsSpaceOnly(char *text)
 {
 	char *p;
 
-	for(p = text; *p; p++)
+	for (p = text; *p; p++)
 		if (!m_isspace(*p))
 			return 0;
 
@@ -23,13 +23,13 @@ static void TrimSpace(char *text)
 {
 	char *p = strchr(text, '\0');
 
-	for(; text < p; p--)
+	for (; text < p; p--)
 		if (!m_isspace(p[-1]))
 			break;
 
 	*p = '\0';
 
-	for(p = text; *p; p++)
+	for (p = text; *p; p++)
 		if (!m_isspace(*p))
 			break;
 
@@ -129,7 +129,7 @@ static char *ReadLine(uint count)
 {
 	Reset_RLine();
 
-	for(; count; count--)
+	for (; count; count--)
 		RLine = addChar(RLine, ReadChar());
 
 	return RLine;
@@ -138,7 +138,7 @@ static char *ReadTo(char *endChrs, int spcEnd)
 {
 	Reset_RLine();
 
-	for(; ; )
+	for (; ; )
 	{
 		ReadChar();
 
@@ -160,7 +160,7 @@ static char *ReadLiteral(int quot)
 {
 	Reset_RLine();
 
-	for(; ; )
+	for (; ; )
 	{
 		ReadChar();
 
@@ -193,7 +193,7 @@ static void ReadAttributes(char *endChrs)
 	RAttrNames  = newList();
 	RAttrValues = newList();
 
-	for(; ; )
+	for (; ; )
 	{
 		SkipSpace();
 
@@ -259,7 +259,7 @@ static char *EncEntity(char *text)
 	autoBlock_t *buff = newBlock();
 	char *p;
 
-	for(p = text; *p; p++)
+	for (p = text; *p; p++)
 	{
 		switch (*p)
 		{
@@ -330,7 +330,7 @@ static void ReadXML(char *file)
 		errorCase_m(RChr != '>', "XML:éŒ¾‚ª•Â‚¶‚Ä‚¢‚È‚¢‚æ‚¤‚ÉŒ©‚¦‚Ü‚·B");
 	}
 
-	for(; ; )
+	for (; ; )
 	{
 		int tagClosed = 0;
 
@@ -375,7 +375,7 @@ static void ReadXML(char *file)
 			{
 				uint index;
 
-				for(index = 0; index < getCount(RAttrNames); index++)
+				for (index = 0; index < getCount(RAttrNames); index++)
 				{
 					char *name  = getLine(RAttrNames,  index);
 					char *value = getLine(RAttrValues, index);
@@ -446,7 +446,7 @@ static FILE *Fp;
 
 static void WrIndent(uint count)
 {
-	for(; count; count--)
+	for (; count; count--)
 		writeChar(Fp, '\t');
 }
 static void WriteNode(XNode_t *node, uint indent)

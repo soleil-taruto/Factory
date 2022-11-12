@@ -12,7 +12,7 @@ static double GetSameByteRate(uchar *a, uchar *b, uint size)
 
 	cout("GSBR: %p, %p, %u\n", a, b, size);
 
-	for(index = 0; index < size; index++)
+	for (index = 0; index < size; index++)
 		if (a[index] == b[index])
 			sameCnt++;
 
@@ -35,7 +35,7 @@ static void DoTest_01(void)
 
 	LOGPOS();
 
-	for(index = 0; index < TEST_NUM; index++)
+	for (index = 0; index < TEST_NUM; index++)
 	{
 		autoBlock_t *data;
 
@@ -50,14 +50,14 @@ static void DoTest_01(void)
 		removeFile(TMPOUT_FILE);
 	}
 	LOGPOS();
-	for(index = 1; index < TEST_NUM; index++)
-	for(ndx = 0; ndx < index; ndx++)
+	for (index = 1; index < TEST_NUM; index++)
+	for (ndx = 0; ndx < index; ndx++)
 	{
 		errorCase(!memcmp(tbl[ndx], tbl[index], DATA_SIZE));
 	}
 	LOGPOS();
-	for(index = 1; index < TEST_NUM; index++)
-	for(ndx = 0; ndx < index; ndx++)
+	for (index = 1; index < TEST_NUM; index++)
+	for (ndx = 0; ndx < index; ndx++)
 	{
 		errorCase(0.1 < GetSameByteRate(tbl[ndx], tbl[index], DATA_SIZE)); // 各バイトが一致する確率は 1/256  -->  1/10 超えはおかしい。
 	}
@@ -80,7 +80,7 @@ static void DoTest_01a(void)
 
 	LOGPOS();
 
-	for(testCnt = 0; testCnt < 10; testCnt++)
+	for (testCnt = 0; testCnt < 10; testCnt++)
 	{
 		uchar (*tbl)[DATA_SIZE] = (uchar (*)[DATA_SIZE])memAlloc(DATA_SIZE * 2);
 		uint index;
@@ -88,7 +88,7 @@ static void DoTest_01a(void)
 
 		LOGPOS();
 
-		for(index = 0; index < 2; index++)
+		for (index = 0; index < 2; index++)
 		{
 			autoBlock_t *data;
 
@@ -131,7 +131,7 @@ static void DoTest_02(void)
 
 	LOGPOS();
 
-	for(testCnt = 0; testCnt < 10; testCnt++)
+	for (testCnt = 0; testCnt < 10; testCnt++)
 	{
 		uchar (*tbl)[DATA_SIZE] = (uchar (*)[DATA_SIZE])memAlloc(DATA_SIZE * 2);
 		uint index;
@@ -148,7 +148,7 @@ static void DoTest_02(void)
 			releaseAutoBlock(data);
 		}
 #else
-		for(index = 0; index < 2; index++)
+		for (index = 0; index < 2; index++)
 		{
 			autoBlock_t *data = makeCryptoRandBlock(DATA_SIZE);
 

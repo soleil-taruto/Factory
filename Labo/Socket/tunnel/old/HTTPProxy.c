@@ -89,7 +89,7 @@ static void PerformTh(int sock, char *strip)
 
 	cout("Ú‘± %d\n", sock);
 
-	for(; ; )
+	for (; ; )
 	{
 		int chr = SockRecvChar(ss);
 		uint endPos;

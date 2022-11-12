@@ -5,7 +5,7 @@ static void DispRawKey(uchar rawKey[32])
 {
 	uint index;
 
-	for(index = 0; index < 32; index++)
+	for (index = 0; index < 32; index++)
 	{
 		cout("%02x", rawKey[index]);
 	}

@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 		FileOnlyMode = 1;
 	}
 
-	for(; ; )
+	for (; ; )
 	{
 		char *path = dropPath();
 

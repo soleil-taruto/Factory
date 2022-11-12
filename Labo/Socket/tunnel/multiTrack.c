@@ -102,7 +102,7 @@ static void PerformTh(int sock, char *strip)
 	uint abortTime = now() + (IsTight() ? 2 : 60);
 	char *trackName = NULL;
 
-	for(; ; )
+	for (; ; )
 	{
 		char cBuff[1];
 		int retval;

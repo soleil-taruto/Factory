@@ -12,8 +12,8 @@ static void MakeBmp(void)
 
 	resizeTable(Bmp, 256, 256);
 
-	for(c1 = 0; c1 < 256; c1++)
-	for(c2 = 0; c2 < 256; c2++)
+	for (c1 = 0; c1 < 256; c1++)
+	for (c2 = 0; c2 < 256; c2++)
 	{
 		int chr = c1 * 256 + c2;
 		uint color;

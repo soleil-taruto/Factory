@@ -50,7 +50,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 	releaseAutoBlock(prmData);
 
-	for(; ; )
+	for (; ; )
 	{
 		ansData = Frtwv_Recv(RecvPipe, 2000);
 

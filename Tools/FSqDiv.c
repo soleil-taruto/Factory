@@ -43,7 +43,7 @@ static void FSqDiv(char *srcdir, uint divnum)
 	uint index;
 	uint progCyc;
 
-	for(index = 0; index < divnum; index++)
+	for (index = 0; index < divnum; index++)
 	{
 		char *wDir = combine_cx(destRootDir, xcout("%05u", index + 1));
 

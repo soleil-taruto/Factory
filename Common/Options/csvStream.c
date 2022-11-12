@@ -7,7 +7,7 @@ char *readCSVCell(FILE *fp, int *p_termChr)
 
 	if (chr == '\"')
 	{
-		for(; ; )
+		for (; ; )
 		{
 			chr = readChar(fp);
 
@@ -26,7 +26,7 @@ char *readCSVCell(FILE *fp, int *p_termChr)
 	}
 	else
 	{
-		for(; ; )
+		for (; ; )
 		{
 			if (chr == ',' || chr == '\n' || chr == EOF)
 				break;
@@ -67,7 +67,7 @@ void writeCSVCell(FILE *fp, char *cell)
 
 		writeChar(fp, '"');
 
-		for(p = cell; *p; p++)
+		for (p = cell; *p; p++)
 		{
 			if (*p == '"')
 			{

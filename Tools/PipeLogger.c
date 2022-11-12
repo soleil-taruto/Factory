@@ -69,7 +69,7 @@ static void PipeLogger(void)
 
 	WrLog("ÉçÉOäJén");
 
-	for(; ; )
+	for (; ; )
 	{
 		int chr = fgetc(stdin);
 

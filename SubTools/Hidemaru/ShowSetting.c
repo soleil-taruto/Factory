@@ -21,7 +21,7 @@ static char *GetValue(char *path)
 {
 	uint index;
 
-	for(index = 0; index < getCount(RTLines); index += RTL_SIZE)
+	for (index = 0; index < getCount(RTLines); index += RTL_SIZE)
 		if (!strcmp(path, getLine(RTLines, index + RTL_PATH)))
 			return getLine(RTLines, index + RTL_VALUE);
 
@@ -99,7 +99,7 @@ static void Main2(char *regTextFile)
 			autoBlock_t *bVal = ab_fromHexLine(value);
 			uint r;
 
-			for(r = 0; r < getSize(bVal); )
+			for (r = 0; r < getSize(bVal); )
 			{
 				uint len = getByte(bVal, r++);
 				uint hh;
@@ -109,7 +109,7 @@ static void Main2(char *regTextFile)
 
 				hh = getByte(bVal, r++);
 
-				for(c = 0; c < len; c++)
+				for (c = 0; c < len; c++)
 					word = addChar(word, getByte(bVal, r++));
 
 				hh = ((hh << 2) & 0xff) | (hh >> 6); // ROT: << 2

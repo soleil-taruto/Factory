@@ -30,7 +30,7 @@ static void PrintSq(char *line)
 		count    = toValue(nextArg());
 		stepVal  = toValue(nextArg());
 
-		for(index = 0; index < count; index++)
+		for (index = 0; index < count; index++)
 		{
 			uint value = startVal + index * stepVal;
 			char *sVal;

@@ -16,8 +16,8 @@ static int MarumeCell(autoTable_t *map, int x, int y)
 	int xc;
 	int yc;
 
-	for(xc = -1; xc <= 1; xc++)
-	for(yc = -1; yc <= 1; yc++)
+	for (xc = -1; xc <= 1; xc++)
+	for (yc = -1; yc <= 1; yc++)
 	{
 		int sx = x + xc;
 		int sy = y + yc;
@@ -52,8 +52,8 @@ static void MakeMap(int w, int h, int seed, int count)
 
 	resizeTable(map, w, h);
 
-	for(x = 0; x < w; x++)
-	for(y = 0; y < h; y++)
+	for (x = 0; x < w; x++)
+	for (y = 0; y < h; y++)
 	{
 		setTableCell(map, x, y, mt19937_rnd(w) <= x ? 1 : 0);
 	}
@@ -71,11 +71,11 @@ static void MakeMap(int w, int h, int seed, int count)
 	{
 		int c;
 
-		for(c = 10; c; c--)
+		for (c = 10; c; c--)
 		{
 LOGPOS();
-			for(x = 0; x < w; x++)
-			for(y = 0; y < h; y++)
+			for (x = 0; x < w; x++)
+			for (y = 0; y < h; y++)
 			{
 				MarumeCell(map, x, y);
 			}
@@ -86,11 +86,11 @@ LOGPOS();
 	{
 		autoList_t *bmp = newList();
 
-		for(y = 0; y < h; y++)
+		for (y = 0; y < h; y++)
 		{
 			autoList_t *row = newList();
 
-			for(x = 0; x < w; x++)
+			for (x = 0; x < w; x++)
 			{
 				addElement(row, getTableCell(map, x, y) ? 0x445599 : 0xaabbff);
 			}

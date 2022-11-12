@@ -24,7 +24,7 @@ static void Monitor(void)
 	cout("モニター開始 @ %s\n", c_makeJStamp(NULL, 0));
 	SetTitle();
 
-	for(loopCount = 0; ; loopCount++)
+	for (loopCount = 0; ; loopCount++)
 	{
 		int key = waitKey(waitMillis);
 		uint64 diskFree;

@@ -163,7 +163,7 @@ static void MRS_MakeWavFile(char *file, uint length)
 	LOGPOS();
 	fp = fileOpen(csvFile, "wt");
 
-	for(count = 0; count < length; count++)
+	for (count = 0; count < length; count++)
 	{
 		writeLine(fp, "32768,32768"); // –³‰¹
 	}
@@ -256,7 +256,7 @@ static void MRM_GenKoma(char *komaDir, char *file)
 	removeFile(komaFile_0);
 	moveFile(komaFile_1, komaFile_0);
 
-	for(index = 1; index < length; index++)
+	for (index = 1; index < length; index++)
 	{
 		char *komaFile_index = MRM_GetKomaFile(komaDir, index);
 

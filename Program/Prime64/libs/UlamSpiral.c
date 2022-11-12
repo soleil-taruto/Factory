@@ -173,21 +173,21 @@ void MakeUlamSpiral(
 
 	bmp = createAutoList(h);
 
-	for(y = 0; y < h; y++)
+	for (y = 0; y < h; y++)
 	{
 		autoList_t *row = createAutoList(w);
 
-		for(x = 0; x < w; x++)
+		for (x = 0; x < w; x++)
 		{
 			addElement(row, notPrimeColor);
 		}
 		addElement(bmp, (uint)row);
 	}
-	for(y = 0; y < h; y++)
+	for (y = 0; y < h; y++)
 	{
 		autoList_t *row = getList(bmp, y);
 
-		for(x = 0; x < w; x++)
+		for (x = 0; x < w; x++)
 		{
 			sint64 rx = l + x;
 			sint64 ry = t + y;
@@ -261,11 +261,11 @@ void MakeUlamSpiral_Csv(sint64 l, sint64 t, sint64 r, sint64 b, int mode, char *
 
 	csv = newList();
 
-	for(y = 0; y < h; y++)
+	for (y = 0; y < h; y++)
 	{
 		autoList_t *row = newList();
 
-		for(x = 0; x < w; x++)
+		for (x = 0; x < w; x++)
 		{
 			static uint ps_nextSec;
 

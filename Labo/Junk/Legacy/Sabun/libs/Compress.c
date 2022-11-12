@@ -6,7 +6,7 @@ static void AddSqList(autoBlock_t *block)
 {
 	uint index;
 
-	for(index = getCount(SqList); index; index--)
+	for (index = getCount(SqList); index; index--)
 	{
 		ab_addValue(block, getElement(SqList, index - 1));
 	}
@@ -17,7 +17,7 @@ static void UnaddSqList(autoBlock_t *block)
 	uint count = ab_unaddValue(block);
 	uint index;
 
-	for(index = 0; index < count; index++)
+	for (index = 0; index < count; index++)
 	{
 		addElement(SqList, ab_unaddValue(block));
 	}
@@ -29,11 +29,11 @@ void SBN_CompressSabun(autoBlock_t *sabun)
 
 	SqList = newList();
 
-	for(index = 0; index < getSize(sabun); index++)
+	for (index = 0; index < getSize(sabun); index++)
 	{
 		uint zcnt = 0;
 
-		for(zcnt = 0; index + zcnt < getSize(sabun); zcnt++)
+		for (zcnt = 0; index + zcnt < getSize(sabun); zcnt++)
 		{
 			if (getByte(sabun, index + zcnt) != 0x00)
 			{
@@ -58,7 +58,7 @@ void SBN_DecompressSabun(autoBlock_t *sabun)
 	SqList = newList();
 	UnaddSqList(sabun);
 
-	for(index = 0; index < getCount(SqList); index += 2)
+	for (index = 0; index < getCount(SqList); index += 2)
 	{
 		uint zIndex = getElement(SqList, index);
 		uint zCount = getElement(SqList, index + 1);
@@ -76,7 +76,7 @@ void SBN_KaisaDown(autoBlock_t *block)
 		uint index;
 		uint sa;
 
-		for(index = getSize(block) - 1; index; index--)
+		for (index = getSize(block) - 1; index; index--)
 		{
 			sa = getByte(block, index) + 256 - getByte(block, index - 1);
 			sa &= 0xff;
@@ -89,7 +89,7 @@ void SBN_KaisaUp(autoBlock_t *block)
 	uint index;
 	uint sa;
 
-	for(index = 1; index < getSize(block); index++)
+	for (index = 1; index < getSize(block); index++)
 	{
 		sa = getByte(block, index) + getByte(block, index - 1);
 		sa &= 0xff;

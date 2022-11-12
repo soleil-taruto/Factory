@@ -10,7 +10,7 @@ int main(int argc, char **argv)
 
 	if (argIs("/U"))
 	{
-		for(; ; )
+		for (; ; )
 		{
 			cout("+----------+\n");
 			cout("| à≥èkâèú |\n");
@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 	}
 
 	{
-		for(; ; )
+		for (; ; )
 		{
 			cout("+------+\n");
 			cout("| à≥èk |\n");

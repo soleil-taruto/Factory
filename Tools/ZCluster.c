@@ -185,7 +185,7 @@ static void AutoAction(char *rPath, autoBlock_t *rawKey)
 
 			errorCase(!wPath);
 
-			for(; ; )
+			for (; ; )
 			{
 				char *nextWPath = AA_Restore(wPath, rawKey, 1);
 
@@ -522,7 +522,7 @@ readArgs:
 		AutoAction(nextArg(), rawKey);
 		return;
 	}
-	for(; ; )
+	for (; ; )
 	{
 		char *path = dropDirFile();
 

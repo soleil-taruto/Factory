@@ -40,7 +40,7 @@ static void ShowList(void)
 	char *line;
 	uint index;
 
-	for(index = 0; index < getCount(lines); index += 2)
+	for (index = 0; index < getCount(lines); index += 2)
 		cout("%s %s\n", getLine(lines, index), getLine(lines, index + 1));
 
 	releaseDim(lines, 1);
@@ -50,7 +50,7 @@ static void LoadDir(char *name)
 	autoList_t *lines = readLines(SAVE_FILE);
 	uint index;
 
-	for(index = 0; index < getCount(lines); index += 2)
+	for (index = 0; index < getCount(lines); index += 2)
 		if (!_stricmp(name, getLine(lines, index)))
 			break;
 
@@ -69,7 +69,7 @@ static void OpenDir(char *name)
 	autoList_t *lines = readLines(SAVE_FILE);
 	uint index;
 
-	for(index = 0; index < getCount(lines); index += 2)
+	for (index = 0; index < getCount(lines); index += 2)
 		if (!_stricmp(name, getLine(lines, index)))
 			break;
 
@@ -88,7 +88,7 @@ static void ForgetDir(char *name)
 	autoList_t *lines = readLines(SAVE_FILE);
 	uint index;
 
-	for(index = 0; index < getCount(lines); index += 2)
+	for (index = 0; index < getCount(lines); index += 2)
 		if (!_stricmp(name, getLine(lines, index)))
 			break;
 
@@ -148,7 +148,7 @@ int main(int argc, char **argv)
 	{
 		uint n;
 
-		for(n = 0; n <= 999; n++)
+		for (n = 0; n <= 999; n++)
 		{
 			char sn[4];
 

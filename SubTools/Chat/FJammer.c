@@ -137,7 +137,7 @@ readArgs:
 		return;
 	}
 
-	for(; ; )
+	for (; ; )
 	{
 		char *rFile = c_dropFile();
 

@@ -23,7 +23,7 @@ static void ExecuteQuery(char *query)
 	{
 		autoList_t *row = newList();
 
-		for(index = 0; index < getCount(getList(rows, 0)); index++)
+		for (index = 0; index < getCount(getList(rows, 0)); index++)
 			addElement(row, (uint)xcout("#%u", index + 1));
 
 		insertElement(rows, 0, (uint)row);
@@ -84,7 +84,7 @@ int main(int argc, char **argv)
 		return;
 	}
 
-	for(; ; )
+	for (; ; )
 	{
 		char *query = coInputLine();
 

@@ -23,7 +23,7 @@ static void DoTest(uint64 minval, uint64 maxval)
 
 	errorCase(maxval < minval);
 
-	for(value = minval; value < maxval; value++)
+	for (value = minval; value < maxval; value++)
 	{
 		DoTest_One(value);
 	}

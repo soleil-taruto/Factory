@@ -10,7 +10,7 @@ static void IncrementSeed(autoBlock_t *seed)
 	uint val = 1;
 	uint index;
 
-	for(index = 0; index < getSize(seed); index++)
+	for (index = 0; index < getSize(seed); index++)
 	{
 		val += getByte(seed, index);
 		setByte(seed, index, val & 0xff);
@@ -70,7 +70,7 @@ static void DoTest_01(void)
 
 	LOGPOS();
 
-	for(c = 0; c < 550; c++)
+	for (c = 0; c < 550; c++)
 	{
 		cout("%u\n", c);
 
@@ -90,7 +90,7 @@ static void AddToCr2_Ca(autoBlock_t *cr2_ca, uint val, uint hiVal, char *seedFil
 	rawKey = recreateBlock(sha512_hash, 32);
 	kt = camellia_createKeyTable(rawKey);
 
-	for(index = 0; index < 15; index++)
+	for (index = 0; index < 15; index++)
 	{
 		buff[index] = val & 0xff;
 		val >>= 8;
@@ -108,7 +108,7 @@ static autoBlock_t *GetCr2_Ca(uint hiVal, char *seedFile)
 	autoBlock_t *cr2_ca = newBlock();
 	uint val;
 
-	for(val = 0; getSize(cr2_ca) < 16640; val++)
+	for (val = 0; getSize(cr2_ca) < 16640; val++)
 	{
 		AddToCr2_Ca(cr2_ca, val, hiVal, seedFile);
 	}
@@ -120,7 +120,7 @@ static void MaskCr2(autoBlock_t *cr2, autoBlock_t *cr2_ca)
 
 	errorCase(getSize(cr2) != getSize(cr2_ca));
 
-	for(index = 0; index < getSize(cr2); index++)
+	for (index = 0; index < getSize(cr2); index++)
 	{
 		b_(cr2)[index] ^= b_(cr2_ca)[index];
 	}
@@ -183,7 +183,7 @@ static void DoTest_02(void)
 
 	LOGPOS();
 
-	for(c = 0; c < 10; c++)
+	for (c = 0; c < 10; c++)
 	{
 		cout("%u\n", c);
 

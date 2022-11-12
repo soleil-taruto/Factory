@@ -34,7 +34,7 @@ static void MkBatUndone(void)
 
 	count = MinValue;
 
-	for(bat_no = 1; ; bat_no++)
+	for (bat_no = 1; ; bat_no++)
 	{
 		uint64 end;
 

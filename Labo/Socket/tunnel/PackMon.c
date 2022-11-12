@@ -55,7 +55,7 @@ static uint NextValue(uint bitSize)
 	uint value = 0;
 	uint c;
 
-	for(c = 0; c < bitSize; c++)
+	for (c = 0; c < bitSize; c++)
 		if (NextBit())
 			value |= 1 << bitSize - 1 - c;
 
@@ -121,7 +121,7 @@ static void RecvDataParse(void)
 		{
 			char *buff = strx("");
 
-			for(c = 0; c + 5 < ihl; c++)
+			for (c = 0; c + 5 < ihl; c++)
 			{
 				buff = addLine_x(buff, xcout("%08x", NextValue(32)));
 			}
@@ -158,7 +158,7 @@ static void RecvDataParse(void)
 			{
 				char *buff = strx("");
 
-				for(c = 0; c + 5 < dataOffset; c++)
+				for (c = 0; c + 5 < dataOffset; c++)
 				{
 					buff = addLine_x(buff, xcout("%08x", NextValue(32)));
 				}
@@ -182,7 +182,7 @@ static void RecvDataParse(void)
 	{
 		char *buff = strx("");
 
-		for(c = RIndex; c < RSize; c++)
+		for (c = RIndex; c < RSize; c++)
 		{
 			buff = addLine_x(buff, xcout("%02x", RData[c]));
 		}

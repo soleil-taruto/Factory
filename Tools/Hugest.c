@@ -76,7 +76,7 @@ readArgs:
 		DispHugest(nextArg(), ignoreSubDir);
 		return;
 	}
-	for(; ; )
+	for (; ; )
 	{
 		DispHugest(c_dropDir(), ignoreSubDir);
 		cout("\n");

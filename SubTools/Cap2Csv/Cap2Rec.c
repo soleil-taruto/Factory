@@ -22,7 +22,7 @@ static void Cap2Rec(char *rFile, char *wFile)
 
 	fileSeek(rfp, SEEK_SET, FirstRecPos);
 
-	for(; ; )
+	for (; ; )
 	{
 		uint64 frame;
 		uint size;

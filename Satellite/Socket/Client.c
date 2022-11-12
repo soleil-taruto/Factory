@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 
 	removeFileIfExist(wFile);
 
-	for(tryCount = 1; ; tryCount++)
+	for (tryCount = 1; ; tryCount++)
 	{
 		LOGPOS();
 		ansFile = sockClient(ip, domain, portno, rFile, Idle);

@@ -89,7 +89,7 @@ void httpRecvRequestFile(SockStream_t *i, char **pHeader, char *contentFile)
 
 		cSize = 0;
 
-		for(; ; )
+		for (; ; )
 		{
 			autoBlock_t *subBlock = httpRecvChunked(cr);
 
@@ -132,7 +132,7 @@ static void RNP_ReadBoundary(FILE *conFp)
 
 	ab_addLine(boundary, "\r\n"); // CR-LF
 
-	for(; ; )
+	for (; ; )
 	{
 		int chr = readChar(conFp);
 
@@ -176,7 +176,7 @@ static void RNP_ReadHeader(FILE *conFp)
 	char *name      = NULL;
 	char *localFile = NULL;
 
-	for(; ; )
+	for (; ; )
 	{
 		char *line = readLineLenMax(conFp, PARTLINE_LENMAX); // CR-LF Ç‹Ç≈ì«Ç›çûÇﬁ
 
@@ -214,7 +214,7 @@ static void ReadNextPart(FILE *conFp)
 
 	fp = fileOpen(file, "wb");
 
-	for(; ; )
+	for (; ; )
 	{
 		int chr = buffReadChar(conBp);
 

@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 	uint64 endTSec = TimeData2TSec(Stamp2TimeData(END_STAMP));
 	uint64 tSec;
 
-	for(tSec = bgnTSec; tSec <= endTSec; tSec += 2)
+	for (tSec = bgnTSec; tSec <= endTSec; tSec += 2)
 	{
 		cout("%I64u,%f\n", TimeData2Stamp(TSec2TimeData(tSec)), GetMid(GetPrice_TSec(tSec, PAIR)));
 	}

@@ -106,7 +106,7 @@ UI$BIT_t UI$BIT_Mul(UI$BIT_t a, UI$BIT_t b, UI$BIT_t ans[2])
 	m[2][mc[2]++] = f[0];
 	m[3][mc[3]++] = f[1];
 
-	for(i = 1; i < 4; i++)
+	for (i = 1; i < 4; i++)
 	while (2 <= mc[i])
 	{
 		UI$hBIT_t t = m[i][--mc[i]];
@@ -177,7 +177,7 @@ static UI$BIT_t DivSub(UI$BIT_t a, UI$BIT_t b, UI$BIT_t ans[2], uint reti)
 		{
 			UI$hBIT_t c = UI$hBIT_Add(b.H, UI$hBIT_x(1), NULL);
 
-			for(; ; )
+			for (; ; )
 			{
 				UI$hBIT_t d = UI$hBIT_Div(a.H, c, NULL);
 				UI$BIT_t dd;

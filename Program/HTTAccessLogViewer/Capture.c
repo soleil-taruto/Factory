@@ -170,7 +170,7 @@ static void CaptureMain(void)
 	}
 	unaddCwd();
 
-	for(index = 0; index < getCount(lines); index++)
+	for (index = 0; index < getCount(lines); index++)
 	{
 		char *line = getLine(lines, index);
 

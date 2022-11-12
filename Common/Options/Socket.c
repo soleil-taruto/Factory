@@ -81,7 +81,7 @@ void SockLine2Ip(uchar ip[4], char *strip)
 	if (getCount(tokens) != 4)
 		goto broken;
 
-	for(index = 0; index < 4; index++)
+	for (index = 0; index < 4; index++)
 	{
 		uint n = toValue(getLine(tokens, index));
 
@@ -392,7 +392,7 @@ char *SockNextLine(autoBlock_t *messageQueue) // ret: NULL == ‚Ü‚¾ŽŸ‚Ìs‚ª–³‚¢B
 {
 	uint index;
 
-	for(index = 0; index < getSize(messageQueue); index++)
+	for (index = 0; index < getSize(messageQueue); index++)
 	{
 		if (getByte(messageQueue, index) == '\n') // ? LF
 		{

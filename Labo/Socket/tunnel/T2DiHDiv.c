@@ -44,7 +44,7 @@ static void ParseHTTPHdrBody(char *rFile)
 
 	strzp(&ContentType, "");
 
-	for(; ; )
+	for (; ; )
 	{
 		char *line = readLine(rfp);
 

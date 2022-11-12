@@ -19,8 +19,8 @@ static void Bokashi(char *file)
 
 	resizeTable(nBmp,w, h);
 
-	for(x = 0; x < w; x++)
-	for(y = 0; y < h; y++)
+	for (x = 0; x < w; x++)
+	for (y = 0; y < h; y++)
 	{
 		int col;
 		int colR = 0;
@@ -30,8 +30,8 @@ static void Bokashi(char *file)
 		int sx;
 		int sy;
 
-		for(sx = -BokaWidth; sx <= BokaWidth; sx++)
-		for(sy = -BokaWidth; sy <= BokaWidth; sy++)
+		for (sx = -BokaWidth; sx <= BokaWidth; sx++)
+		for (sy = -BokaWidth; sy <= BokaWidth; sy++)
 		{
 			int rx = x + sx;
 			int ry = y + sy;
@@ -77,7 +77,7 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		for(; ; )
+		for (; ; )
 		{
 			Bokashi(c_dropFile());
 			cout("\n");

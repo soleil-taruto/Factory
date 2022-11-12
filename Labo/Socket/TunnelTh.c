@@ -46,7 +46,7 @@ static void ChannelTh(uint prm)
 		uint index;
 		uint connectedTime = SessionTimeout ? now() : 0;
 
-		for(; ; )
+		for (; ; )
 		{
 			if (SockRecvSequ(i->RecvSock, buffBlock, 1000) == -1)
 			{
@@ -57,7 +57,7 @@ static void ChannelTh(uint prm)
 			{
 				DispData(buffBlock, i->RecvSock, i->SendSock, i->StrDirect);
 			}
-			for(index = 0; ; )
+			for (index = 0; ; )
 			{
 				if (!KeepTheServer)
 				{

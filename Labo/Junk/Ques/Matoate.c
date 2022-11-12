@@ -13,11 +13,11 @@ static void DoTest(uint n)
 	uint numer = 0;
 	uint denom = n;
 
-	for(c = 0; c < n; c++)
+	for (c = 0; c < n; c++)
 	{
 		mato[mt19937_rnd(n)] = 1;
 	}
-	for(c = 0; c < n; c++)
+	for (c = 0; c < n; c++)
 	{
 		if (mato[c])
 		{
@@ -34,8 +34,8 @@ int main(int argc, char **argv)
 
 	mt19937_initRnd(time(NULL));
 
-	for(n = 10; n <= 1000000; n *= 10)
-	for(c = 0; c < 10; c++)
+	for (n = 10; n <= 1000000; n *= 10)
+	for (c = 0; c < 10; c++)
 	{
 		DoTest(n);
 	}

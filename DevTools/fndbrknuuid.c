@@ -10,7 +10,7 @@ static uint ExitCode = 0;
 
 static void ToFormat(char *p)
 {
-	for(; *p; p++)
+	for (; *p; p++)
 		if (strchr("012345678abcdef", *p))
 			*p = '9';
 }

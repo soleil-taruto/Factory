@@ -6,12 +6,12 @@ static void PostInit(void)
 	uint count;
 
 //	                                          ‘ª’è @ 2020.8.20
-//	for(count = 1000000; count; count--)   // ‚¾‚¢‚½‚¢    3 millis
-	for(count = 3000000; count; count--)   // ‚¾‚¢‚½‚¢   10 millis
-//	for(count = 10000000; count; count--)  // ‚¾‚¢‚½‚¢   30 millis
-//	for(count = 30000000; count; count--)  // ‚¾‚¢‚½‚¢  100 millis
-//	for(count = 100000000; count; count--) // ‚¾‚¢‚½‚¢  300 millis
-//	for(count = 300000000; count; count--) // ‚¾‚¢‚½‚¢ 1000 millis
+//	for (count = 1000000; count; count--)   // ‚¾‚¢‚½‚¢    3 millis
+	for (count = 3000000; count; count--)   // ‚¾‚¢‚½‚¢   10 millis
+//	for (count = 10000000; count; count--)  // ‚¾‚¢‚½‚¢   30 millis
+//	for (count = 30000000; count; count--)  // ‚¾‚¢‚½‚¢  100 millis
+//	for (count = 100000000; count; count--) // ‚¾‚¢‚½‚¢  300 millis
+//	for (count = 300000000; count; count--) // ‚¾‚¢‚½‚¢ 1000 millis
 	{
 		mt19937_genrand_int32();
 	}
@@ -114,7 +114,7 @@ void mt19937_rndBlock(void *block, uint size)
 {
 	uint index;
 
-	for(index = 0; index < size / sizeof(uint); index++)
+	for (index = 0; index < size / sizeof(uint); index++)
 	{
 		((uint *)block)[index] = mt19937_rnd32();
 	}

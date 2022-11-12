@@ -131,7 +131,7 @@ static void GetCryptoSeed(uchar *seed, uint seed_size, char *seed_file)
 			fileRead(fp, gndBlockVar(seed, seed_size, gab));
 			fileClose(fp);
 
-			for(index = 0; index < seed_size; index++)
+			for (index = 0; index < seed_size; index++)
 			{
 				if (seed[index] < 0xff)
 				{
@@ -182,7 +182,7 @@ static void GetCryptoBlock(uchar *buffer)
 		{
 			uint index;
 
-			for(index = 0; index < getSize(tremor); index++)
+			for (index = 0; index < getSize(tremor); index++)
 			{
 				uint byteVal = getByte(tremor, index);
 
@@ -248,7 +248,7 @@ static uchar *Ca_GetCryptoBlock(void)
 	{
 		uint index;
 
-		for(index = 0; index < 16; index++)
+		for (index = 0; index < 16; index++)
 		{
 			if (counter[index] < 0xff)
 			{

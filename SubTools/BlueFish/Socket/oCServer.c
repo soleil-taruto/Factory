@@ -30,7 +30,7 @@ static void Perform_o(SockStream_t *ss)
 			FILE *fp = fileOpen("oto.clu", "rb");
 //			FILE *fp = fileOpen("oto.clu.gz.enc", "rb");
 
-			for(; ; )
+			for (; ; )
 			{
 				autoBlock_t *block = readBinaryStream(fp, 4 * 1024 * 1024);
 

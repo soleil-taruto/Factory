@@ -85,7 +85,7 @@ static int Perform(int sock, uint dummyPrm)
 		}
 		memFree(recvHPw);
 	}
-	for(; ; )
+	for (; ; )
 	{
 		command = SockRecvLine(ss, RECV_LINE_LENMAX);
 

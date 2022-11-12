@@ -21,8 +21,8 @@ static void MakeMap(int w, int h, int seed, int permil, int count)
 
 	resizeTable(map, w, h);
 
-	for(x = 0; x < w; x++)
-	for(y = 0; y < h; y++)
+	for (x = 0; x < w; x++)
+	for (y = 0; y < h; y++)
 	{
 		setTableCell(map, x, y, mt19937_rnd(1000) < permil ? 1 : 0);
 	}
@@ -35,8 +35,8 @@ static void MakeMap(int w, int h, int seed, int permil, int count)
 		x = mt19937_rnd(w);
 		y = mt19937_rnd(h);
 
-		for(xc = -1; xc <= 1; xc++)
-		for(yc = -1; yc <= 1; yc++)
+		for (xc = -1; xc <= 1; xc++)
+		for (yc = -1; yc <= 1; yc++)
 		{
 			int sx = x + xc;
 			int sy = y + yc;
@@ -64,14 +64,14 @@ static void MakeMap(int w, int h, int seed, int permil, int count)
 	{
 		resizeTable(map, w * 3, h * 3);
 
-		for(x = 0; x < w; x++)
-		for(y = 0; y < h; y++)
+		for (x = 0; x < w; x++)
+		for (y = 0; y < h; y++)
 		{
 			int xc;
 			int yc;
 
-			for(xc = 0; xc < 3; xc++)
-			for(yc = 0; yc < 3; yc++)
+			for (xc = 0; xc < 3; xc++)
+			for (yc = 0; yc < 3; yc++)
 			{
 				if (xc || yc)
 					setTableCell(map, w * xc + x, h * yc + y, getTableCell(map, x, y));
@@ -85,11 +85,11 @@ static void MakeMap(int w, int h, int seed, int permil, int count)
 	{
 		autoList_t *bmp = newList();
 
-		for(y = 0; y < h; y++)
+		for (y = 0; y < h; y++)
 		{
 			autoList_t *row = newList();
 
-			for(x = 0; x < w; x++)
+			for (x = 0; x < w; x++)
 			{
 				addElement(row, getTableCell(map, x, y) ? 0x445599 : 0xaabbff);
 			}

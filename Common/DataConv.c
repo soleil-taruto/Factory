@@ -49,7 +49,7 @@ char *incrementColumnDigits(char *column, char *digits) // ret: strr(column)
 	}
 	column = addChar(column, digits[0]);
 
-	for(p = strchr(column, '\0') - 1; column < p; p--)
+	for (p = strchr(column, '\0') - 1; column < p; p--)
 		if (p[-1] != digits[0])
 			break;
 
@@ -133,7 +133,7 @@ char *makeHexLine(autoBlock_t *block)
 	char *line = (char *)memAlloc(getSize(block) * 2 + 1);
 	uint index;
 
-	for(index = 0; index < getSize(block); index++)
+	for (index = 0; index < getSize(block); index++)
 	{
 		uint byte = getByte(block, index);
 
@@ -168,7 +168,7 @@ autoBlock_t *makeBlockHexLine(char *line)
 	char *p;
 	uint byte;
 
-	for(p = line; *p; )
+	for (p = line; *p; )
 	{
 		byte = m_c2i(*p) & 0x0f;
 		p++;
@@ -214,16 +214,16 @@ void line2csym_ext(char *line, char *extra)
 	{
 		altchrs = strx("");
 
-		for(chr = '0'; chr <= '9'; chr++) { altchrs = addChar(altchrs, chr); }
-		for(chr = 'A'; chr <= 'Z'; chr++) { altchrs = addChar(altchrs, chr); }
-		for(chr = 'a'; chr <= 'z'; chr++) { altchrs = addChar(altchrs, chr); }
+		for (chr = '0'; chr <= '9'; chr++) { altchrs = addChar(altchrs, chr); }
+		for (chr = 'A'; chr <= 'Z'; chr++) { altchrs = addChar(altchrs, chr); }
+		for (chr = 'a'; chr <= 'z'; chr++) { altchrs = addChar(altchrs, chr); }
 
 		altchrs = addLine(altchrs, "__");
 
 		errorCase(strlen(altchrs) != 64); // 2bs
 	}
 
-	for(p = line; *p; p++)
+	for (p = line; *p; p++)
 	{
 		chr = *p;
 
@@ -270,7 +270,7 @@ char *toPrintLine(autoBlock_t *block, int insRet)
 	autoBlock_t *lineBuff = createBlock(getSize(block));
 	uint index;
 
-	for(index = 0; index < getSize(block); index++)
+	for (index = 0; index < getSize(block); index++)
 	{
 		int chr = getByte(block, index);
 		int doInsRet;
@@ -321,7 +321,7 @@ void line2JLine(char *line, int okJpn, int okRet, int okTab, int okSpc)
 {
 	char *p;
 
-	for(p = line; *p; p++)
+	for (p = line; *p; p++)
 	{
 //LOGPOS(); // test
 //cout("%02x%02x\n", p[0], p[1]); // test
@@ -472,7 +472,7 @@ static autoList_t *GetWindowsReservedNodeList(void)
 	addElement(nodes, (uint)"NUL");
 	addElement(nodes, (uint)"PRN");
 
-	for(i = 1; i <= 9; i++)
+	for (i = 1; i <= 9; i++)
 	{
 		addElement(nodes, (uint)xcout("COM%u", i));
 		addElement(nodes, (uint)xcout("LPT%u", i));
@@ -527,7 +527,7 @@ char *lineToFairLocalPath(char *line, uint dirSize)
 		{
 			*node = L2FLP_DEFCHR;
 		}
-		for(p = node; *p; p = mbsNext(p))
+		for (p = node; *p; p = mbsNext(p))
 		{
 			if (strchr(L2FLP_NGCHRS, *p))
 			{
@@ -694,7 +694,7 @@ char *toFairFullPathFltr(char *path) // path ‚ª•s³‚Èê‡‚Í error();
 	else
 		ptkns = newList();
 
-	for(ptknidx = 0; ptknidx < getCount(ptkns); )
+	for (ptknidx = 0; ptknidx < getCount(ptkns); )
 	{
 		ptkn = getLine(ptkns, ptknidx);
 
@@ -746,7 +746,7 @@ void autoIndent(autoList_t *lines)
 	uint tabIndent;
 	uint maxTabIndent;
 
-	for(; ; )
+	for (; ; )
 	{
 		foreach (lines, line, index)
 			if (strchr(line, '\t'))
@@ -775,7 +775,7 @@ void autoIndent(autoList_t *lines)
 			{
 				*p = ' ';
 
-				for(tabIndent = (uint)p - (uint)line; tabIndent < maxTabIndent; tabIndent++)
+				for (tabIndent = (uint)p - (uint)line; tabIndent < maxTabIndent; tabIndent++)
 				{
 					line = insertChar(line, tabIndent, ' ');
 				}
@@ -794,7 +794,7 @@ void autoLeftIndent(autoList_t *lines, uint span)
 
 	foreach (lines, line, index)
 	{
-		for(p = line; *p; p++)
+		for (p = line; *p; p++)
 			if (*p != '\t')
 				break;
 
@@ -877,7 +877,7 @@ autoBlock_t *encodeBase64(autoBlock_t *src)
 	uint value;
 	uint remaining;
 
-	for(index = 0; index + 3 <= getSize(src); index += 3)
+	for (index = 0; index + 3 <= getSize(src); index += 3)
 	{
 		value =
 			getByte(src, index + 0) << 16 |
@@ -939,7 +939,7 @@ autoBlock_t *decodeBase64(autoBlock_t *src)
 	while (src_size && getByte(src, src_size - 1) == BASE64_PAD)
 		src_size--;
 
-	for(index = 0; index + 4 <= src_size; index += 4)
+	for (index = 0; index + 4 <= src_size; index += 4)
 	{
 		b1 = getByte(src, index + 0);
 		b2 = getByte(src, index + 1);

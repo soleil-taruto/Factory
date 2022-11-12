@@ -15,7 +15,7 @@ static void ApplyPara(autoList_t *lines, uint openTagLineIndex, uint closeTagLin
 
 	oneLineComment = closeTagLineIndex - openTagLineIndex < 3;
 
-	for(index = openTagLineIndex + 1; index < closeTagLineIndex; index++)
+	for (index = openTagLineIndex + 1; index < closeTagLineIndex; index++)
 	{
 		char *line = getLine(lines, index);
 

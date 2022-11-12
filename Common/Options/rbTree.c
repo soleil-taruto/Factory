@@ -220,7 +220,7 @@ void rbtCallAllValue(rbTree_t *tree, void (*funcOfValue)(uint))
 		rbtSeekRoot(tree);
 		rbtJumpToLastAccess(tree);
 
-		for(cnt = rbtGetCount(tree); cnt; cnt--)
+		for (cnt = rbtGetCount(tree); cnt; cnt--)
 		{
 			funcOfValue(rbtGetCurrValue(tree));
 			rbtJumpForLeft(tree);

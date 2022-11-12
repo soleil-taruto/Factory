@@ -18,7 +18,7 @@ static void FileBinCount(char *file)
 	FILE *fp = fileOpen(file, "rb");
 	uint64 count = 0;
 
-	for(; ; )
+	for (; ; )
 	{
 		int chr = readChar(fp);
 
@@ -29,7 +29,7 @@ static void FileBinCount(char *file)
 		{
 			uint index;
 
-			for(index = 1; index < getSize(TargetPtn); index++)
+			for (index = 1; index < getSize(TargetPtn); index++)
 			{
 				chr = readChar(fp);
 
@@ -74,7 +74,7 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		for(; ; )
+		for (; ; )
 		{
 			FileBinCount(c_dropFile());
 			cout("\n");

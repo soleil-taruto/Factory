@@ -21,7 +21,7 @@ static char *GetCommonPathPrefixWithStar(autoList_t *paths, char *exceptPath)
 		{
 			uint i;
 
-			for(i = 0; pfx[i] && m_toupper(pfx[i]) == m_toupper(path[i]); i++);
+			for (i = 0; pfx[i] && m_toupper(pfx[i]) == m_toupper(path[i]); i++);
 
 			if (!pfx[i])
 			{
@@ -68,7 +68,7 @@ isJChar(0); // res: C:\Factory\Resource\JIS0208.txt ëŒçÙ
 	cout("< %s\n", selFile);
 	cout("> %s\n", GetCommonPathPrefixWithStar(files, selFile)); // g
 
-	for(; ; )
+	for (; ; )
 	{
 		const char *CFM_PTN = "SYNC LSS";
 		char *cfmInput;

@@ -95,10 +95,10 @@ int main(int argc, char **argv)
 
 	mt19937_init();
 
-	for(testcnt = 0; testcnt < 100; testcnt++) Test01(10);
-	for(testcnt = 0; testcnt < 100; testcnt++) Test01(100);
-	for(testcnt = 0; testcnt < 100; testcnt++) Test01(1000);
-	for(testcnt = 0; testcnt <  30; testcnt++) Test01(10000);
-	for(testcnt = 0; testcnt <  30; testcnt++) Test01(100000);
-	for(testcnt = 0; testcnt <  30; testcnt++) Test01(1000000);
+	for (testcnt = 0; testcnt < 100; testcnt++) Test01(10);
+	for (testcnt = 0; testcnt < 100; testcnt++) Test01(100);
+	for (testcnt = 0; testcnt < 100; testcnt++) Test01(1000);
+	for (testcnt = 0; testcnt <  30; testcnt++) Test01(10000);
+	for (testcnt = 0; testcnt <  30; testcnt++) Test01(100000);
+	for (testcnt = 0; testcnt <  30; testcnt++) Test01(1000000);
 }

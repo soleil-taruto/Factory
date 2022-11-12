@@ -33,8 +33,8 @@ static void MixBmp(char *rFile1, char *rFile2, char *wFile)
 	resizeTable(bmp2, w, h);
 	resizeTable(wBmp, w, h);
 
-	for(x = 0; x < w; x++)
-	for(y = 0; y < h; y++)
+	for (x = 0; x < w; x++)
+	for (y = 0; y < h; y++)
 	{
 		uint c1 = getTableCell(bmp1, x, y);
 		uint c2 = getTableCell(bmp2, x, y);

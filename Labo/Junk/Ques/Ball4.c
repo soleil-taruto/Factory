@@ -34,7 +34,7 @@ static int IsNaranderu(int x, int y, int xAdd, int yAdd, uint kind, uint num)
 	uint count = 0;
 	uint i;
 
-	for(i = 0; i < NARABI_RANGE; i++)
+	for (i = 0; i < NARABI_RANGE; i++)
 	{
 		uint cell = Field[x][y];
 
@@ -57,8 +57,8 @@ static uint GetNarabiCount(uint kind, uint num)
 	uint x;
 	uint y;
 
-	for(x = 0; x < Field_W; x++)
-	for(y = 0; y < Field_H; y++)
+	for (x = 0; x < Field_W; x++)
+	for (y = 0; y < Field_H; y++)
 	{
 		if (x + NARABI_RANGE <= Field_W) // 右方向
 		{
@@ -98,8 +98,8 @@ static int IsTaboo(void)
 	uint x;
 	uint y;
 
-	for(x = 0; x + 5 <= Field_W; x++)
-	for(y = 0; y + 1 <= Field_H; y++)
+	for (x = 0; x + 5 <= Field_W; x++)
+	for (y = 0; y + 1 <= Field_H; y++)
 	{
 		if (
 			Field[x + 0][y + 0] == 0 &&
@@ -112,8 +112,8 @@ static int IsTaboo(void)
 	}
 	// old
 	/*
-	for(x = 0; x + 5 <= Field_W; x++)
-	for(y = 0; y + 2 <= Field_H; y++)
+	for (x = 0; x + 5 <= Field_W; x++)
+	for (y = 0; y + 2 <= Field_H; y++)
 	{
 		if (
 			// 上段
@@ -161,7 +161,7 @@ static int PutStone(uint x, uint kind) // ret: ? 石を置けた。
 {
 	uint y;
 
-	for(y = 0; y < Field_H; y++)
+	for (y = 0; y < Field_H; y++)
 	{
 		if (!Field[x][y]) // ? 空き
 		{
@@ -175,7 +175,7 @@ static void EraseStone(uint x)
 {
 	uint y;
 
-	for(y = Field_H - 1; y; y--)
+	for (y = Field_H - 1; y; y--)
 		if (Field[x][y]) // ? ! 空き
 			break;
 
@@ -195,8 +195,8 @@ static void *GetFieldHash(void) // ret: c_
 
 	p = stock;
 
-	for(x = 0; x < Field_W; x++)
-	for(y = 0; y < Field_H; y++)
+	for (x = 0; x < Field_W; x++)
+	for (y = 0; y < Field_H; y++)
 	{
 		*p = Field[x][y] + '0';
 		p++;
@@ -236,7 +236,7 @@ static void GetNextEvals(uint *dest) // 次手の評価リスト -> dest
 
 	Depth++; // 次の手番にする。
 
-	for(x = 0; x < Field_W; x++)
+	for (x = 0; x < Field_W; x++)
 	{
 		if (PutStone(x, kind))
 		{
@@ -273,7 +273,7 @@ static uint Real_GetEval(void) // ret: この局面の評価, 0 は返さない。
 
 	GetNextEvals(evals);
 
-	for(index = 0; index < Field_W; index++)
+	for (index = 0; index < Field_W; index++)
 		if (evals[index])
 			break;
 
@@ -285,7 +285,7 @@ static uint Real_GetEval(void) // ret: この局面の評価, 0 は返さない。
 	{
 		ret = UINTMAX;
 
-		for(index = 0; index < Field_W; index++)
+		for (index = 0; index < Field_W; index++)
 			if (evals[index])
 				ret = m_min(ret, evals[index]);
 	}
@@ -293,7 +293,7 @@ static uint Real_GetEval(void) // ret: この局面の評価, 0 は返さない。
 	{
 		ret = 0;
 
-		for(index = 0; index < Field_W; index++)
+		for (index = 0; index < Field_W; index++)
 			if (evals[index])
 				ret = m_max(ret, evals[index]);
 	}
@@ -327,8 +327,8 @@ static void SetField(char *rawData) // rawData: 下 -> 上, 左 -> 右
 	uint x;
 	uint y;
 
-	for(y = 0; y < Field_H; y++)
-	for(x = 0; x < Field_W; x++)
+	for (y = 0; y < Field_H; y++)
+	for (x = 0; x < Field_W; x++)
 	{
 		switch (*p)
 		{
@@ -385,7 +385,7 @@ readCmds:
 
 		GetNextEvals(evals);
 
-		for(index = 0; index < Field_W; index++)
+		for (index = 0; index < Field_W; index++)
 			cout("%u\n", evals[index]);
 
 		goto readCmds;

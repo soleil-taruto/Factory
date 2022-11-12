@@ -245,7 +245,7 @@ static void EditComment(char *storeDir)
 
 	revisions = editLines_x(revisions);
 
-	for(; ; )
+	for (; ; )
 	{
 		int key;
 
@@ -947,7 +947,7 @@ static void Commit(char *dir) // dir: バックアップ元、存在するルートディレクトリ
 	{
 		char *parentDir = strx(dir);
 
-		for(; ; )
+		for (; ; )
 		{
 			parentDir = changeLocal_xc(parentDir, "");
 

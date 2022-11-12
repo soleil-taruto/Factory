@@ -63,7 +63,7 @@ static void RPCPerform(char *program)
 	memset(ip, 0, 4);
 	SockStartup();
 
-	for(; ; )
+	for (; ; )
 	{
 		char *ansFile = sockClient(ip, ServerHost, ServerPort, prmFile, Idle);
 

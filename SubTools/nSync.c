@@ -81,7 +81,7 @@ static autoList_t *RecvLines(SockStream_t *ss)
 {
 	autoList_t *lines = newList();
 
-	for(; ; )
+	for (; ; )
 	{
 		char *line = SockRecvLine(ss, RECV_LINE_LENMAX);
 

@@ -12,11 +12,11 @@ int main(int argc, char **argv)
 
 	mt19937_initCRnd();
 
-	for(madokami_sai = 1; madokami_sai <= 7; madokami_sai++)
+	for (madokami_sai = 1; madokami_sai <= 7; madokami_sai++)
 	{
 		cout("madokami_sai: %d\n", madokami_sai); // 7 == 次のワープを選ぶ -> 必ずワープ
 
-		for(c = 1; c <= 10; c++)
+		for (c = 1; c <= 10; c++)
 		{
 			int n = 0;
 			int d = 0;
@@ -26,7 +26,7 @@ int main(int argc, char **argv)
 				char *fld = "f---*-*----*";
 				int pos = 0;
 
-				for(; ; )
+				for (; ; )
 				{
 					int sai = mt19937_range(1, 6);
 

@@ -44,7 +44,7 @@ static uint SearchBlock(uchar *block)
 {
 	uint index;
 
-	for(index = BlockCount; index; )
+	for (index = BlockCount; index; )
 	{
 		index--;
 
@@ -61,9 +61,9 @@ static void CheckAround(void)
 	uint index;
 	uint bPos;
 
-	for(index = 0; index < BlockCount; index++)
+	for (index = 0; index < BlockCount; index++)
 	{
-		for(bPos = 0; bPos < AROUNDSIZE; bPos++)
+		for (bPos = 0; bPos < AROUNDSIZE; bPos++)
 		{
 			errorCase(!CheckAroundChar(Blocks[index] + bPos - AROUNDSIZE));
 			errorCase(!CheckAroundChar(Blocks[index] + bPos + BlockSizes[index]));
@@ -82,7 +82,7 @@ static void *Inner_memAlloc(uint size)
 
 	block = (uchar *)REAL_memAlloc(AROUNDSIZE + size + AROUNDSIZE);
 
-	for(index = 0; index < AROUNDSIZE; index++)
+	for (index = 0; index < AROUNDSIZE; index++)
 	{
 		SetAroundChar(block + index);
 		SetAroundChar(block + index + size + AROUNDSIZE);
@@ -143,11 +143,11 @@ static void DebugOutputBlocks(void) // •W€ŠÖ”‚Ì‚Ý‚ÅAA
 	if (!fp)
 		return;
 
-	for(index = 0; index < BlockCount; index++)
+	for (index = 0; index < BlockCount; index++)
 	{
 		fprintf(fp, "[%u] %p(%u): ", index, Blocks[index], BlockSizes[index]);
 
-		for(bPos = 0; bPos < BlockSizes[index]; bPos++)
+		for (bPos = 0; bPos < BlockSizes[index]; bPos++)
 			fprintf(fp, "%02x", Blocks[index][bPos]);
 
 		fprintf(fp, "\n");

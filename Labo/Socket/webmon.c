@@ -71,11 +71,11 @@ static void WebMon(char *url)
 
 	ParseUrl(url);
 
-	for(; ; )
+	for (; ; )
 	{
 		uint c;
 
-		for(c = 3; c; )
+		for (c = 3; c; )
 		{
 			uint st;
 			uint et;
@@ -113,7 +113,7 @@ static void WebMon(char *url)
 		{
 			uint sec;
 
-			for(sec = 0; sec < PeriodSec; sec++)
+			for (sec = 0; sec < PeriodSec; sec++)
 			{
 				while (hasKey())
 				{

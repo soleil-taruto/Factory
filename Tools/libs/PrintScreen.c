@@ -13,7 +13,7 @@ autoList_t *PrintScreen(void)
 
 	coExecute_x(xcout(FILE_TOOLKIT_EXE " /PRINT-SCREEN %s", fileBase));
 
-	for(screenNo = 1; ; screenNo++)
+	for (screenNo = 1; ; screenNo++)
 	{
 		char *file = xcout("%s%02u.bmp", fileBase, screenNo);
 

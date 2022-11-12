@@ -21,7 +21,7 @@ static autoBlock_t *GetSabun(autoBlock_t *fileImage1, autoBlock_t *fileImage2)
 	autoBlock_t *sabun = newBlock();
 	uint index;
 
-	for(index = 0; index < getSize(fileImage2); index++)
+	for (index = 0; index < getSize(fileImage2); index++)
 	{
 		int chr1 = refByte(fileImage1, index);
 		int chr2 = getByte(fileImage2, index);
@@ -36,7 +36,7 @@ static void ApplySabun(autoBlock_t *fileImage, autoBlock_t *sabun)
 
 	setSize(fileImage, getSize(sabun));
 
-	for(index = 0; index < getSize(sabun); index++)
+	for (index = 0; index < getSize(sabun); index++)
 	{
 		setByte(fileImage, index, getByte(fileImage, index) ^ getByte(sabun, index));
 	}
@@ -190,7 +190,7 @@ int sabunUpdate(char *sabunFile, char *targetDir) // ret: ? アップデートした。対
 	}
 	addCwd(targetDir);
 
-	for(; ; ) // アップデート対象であるか確認
+	for (; ; ) // アップデート対象であるか確認
 	{
 		char *file = readLine(fp);
 		char *hash;
@@ -221,7 +221,7 @@ int sabunUpdate(char *sabunFile, char *targetDir) // ret: ? アップデートした。対
 	}
 	retval = 1;
 
-	for(; ; ) // アップデート処理
+	for (; ; ) // アップデート処理
 	{
 		int chr = readChar(fp);
 		char *file;
@@ -260,7 +260,7 @@ int sabunUpdate(char *sabunFile, char *targetDir) // ret: ? アップデートした。対
 		memFree(file);
 	}
 
-	for(; ; ) // アップデートが正しく適用されたか確認
+	for (; ; ) // アップデートが正しく適用されたか確認
 	{
 		char *file = readLine(fp);
 		char *hash;

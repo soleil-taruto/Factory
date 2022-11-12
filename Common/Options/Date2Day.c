@@ -137,7 +137,7 @@ uint GetEndOfMonth(uint y, uint m)
 #else // same, old
 	uint d;
 
-	for(d = 31; 28 < d ; d--)
+	for (d = 31; 28 < d ; d--)
 		if (CheckDate(y, m, d))
 			break;
 

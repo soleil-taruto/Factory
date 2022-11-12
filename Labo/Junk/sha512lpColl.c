@@ -33,7 +33,7 @@ static void DoTest_H(uchar *hash)
 	uint count = 0;
 	autoBlock_t gab;
 
-	for(; ; )
+	for (; ; )
 	{
 		if (count < 10000 || count % 10000 == 0)
 			cout("[%u] %s\n", count, c_makeHexLine(gndBlockVar(hash, 64, gab)));

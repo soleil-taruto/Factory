@@ -29,7 +29,7 @@ static void MGZE_Shuffle(autoList_t *values)
 {
 	uint index;
 
-	for(index = getCount(values); 2 <= index; index--)
+	for (index = getCount(values); 2 <= index; index--)
 	{
 		swapElement(values, index - 1, MGZE_Rand() % index);
 	}

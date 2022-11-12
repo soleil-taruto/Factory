@@ -2,7 +2,7 @@
 
 static void AddInt(autoList_t *out, uint index, uint64 value)
 {
-	for(; ; )
+	for (; ; )
 	{
 		value += refElement(out, index);
 		putElement(out, index, (uint)value);
@@ -24,7 +24,7 @@ autoList_t *addBigInt(autoList_t *i, autoList_t *j)
 
 	out = createAutoList(bound + 1);
 
-	for(index = 0; index < bound; index++)
+	for (index = 0; index < bound; index++)
 	{
 		AddInt(out, index, (uint64)refElement(i, index) + refElement(j, index));
 	}
@@ -39,7 +39,7 @@ autoList_t *subBigInt(autoList_t *i, autoList_t *j) // i < j ‚Ì‚Æ‚« NULL ‚ð•Ô‚·
 
 	out = createAutoList(bound + 1);
 
-	for(index = 0; index < bound; index++)
+	for (index = 0; index < bound; index++)
 	{
 		AddInt(out, index, ((uint64)1 << 32) + refElement(i, index) - refElement(j, index) - (index ? 1 : 0));
 	}
@@ -75,8 +75,8 @@ autoList_t *mulBigInt(autoList_t *i, autoList_t *j)
 	uint indx;
 	uint jndx;
 
-	for(indx = 0; indx < getCount(i); indx++)
-	for(jndx = 0; jndx < getCount(j); jndx++)
+	for (indx = 0; indx < getCount(i); indx++)
+	for (jndx = 0; jndx < getCount(j); jndx++)
 	{
 		AddInt(out, indx + jndx, (uint64)getElement(i, indx) * getElement(j, jndx));
 	}
@@ -93,7 +93,7 @@ autoList_t *idivBigInt(autoList_t *i, uint j, uint *remain) // remain == NULL: –
 
 	if (getCount(i))
 	{
-		for(index = getCount(i) - 1; ; index--)
+		for (index = getCount(i) - 1; ; index--)
 		{
 			mixer += getElement(i, index);
 			putElement(out, index, (uint)(mixer / j));
@@ -127,7 +127,7 @@ autoList_t *divBigInt(autoList_t *i, autoList_t *j, autoList_t **remain)
 
 	count = getCount(i) < getCount(j) ? 0 : getCount(i) - getCount(j) + 1;
 
-	for(index = 0; index < count; index++)
+	for (index = 0; index < count; index++)
 		insertElement(j, 0, 0);
 
 	count *= 32;
@@ -180,11 +180,11 @@ autoList_t *modPowerBigInt(autoList_t *i, autoList_t *j, autoList_t *mod) // mod
 	uint index;
 	uint bit;
 
-	for(index = getCount(j); ; )
+	for (index = getCount(j); ; )
 	{
 		index--;
 
-		for(bit = 32; bit; )
+		for (bit = 32; bit; )
 		{
 			bit--;
 

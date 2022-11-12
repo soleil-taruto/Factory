@@ -23,7 +23,7 @@ static char *GetAllUpper(char *userParam)
 	char *ret = strx("");
 	char *p;
 
-	for(p = userParam; *p; p++)
+	for (p = userParam; *p; p++)
 		if (m_isupper(*p))
 			ret = addChar(ret, *p);
 

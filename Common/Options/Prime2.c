@@ -73,7 +73,7 @@ static void PutP13(uint prime)
 {
 	uint64 count;
 
-	for(count = prime; count < P13_P_NUM; count += prime * 2)
+	for (count = prime; count < P13_P_NUM; count += prime * 2)
 	{
 		SetPBit(count, 1);
 	}
@@ -83,13 +83,13 @@ static void PutPrimeTo13(void)
 	uint primes[] = { 3, 5, 7, 11, 13 };
 	uint index;
 
-	for(index = 0; index < P13_LEN; index++)
+	for (index = 0; index < P13_LEN; index++)
 		PBits[index] = 0;
 
-	for(index = 0; index < lengthof(primes); index++)
+	for (index = 0; index < lengthof(primes); index++)
 		PutP13(primes[index]);
 
-	for(index = P13_LEN; index < PBIT_LEN; index++)
+	for (index = P13_LEN; index < PBIT_LEN; index++)
 		PBits[index] = PBits[index - P13_LEN];
 }
 static void PutPrime(uint prime)
@@ -115,7 +115,7 @@ static void PutPrime(uint prime)
 		200‰­      13291.578
 	*/
 
-	for(; count < PBIT_P_NUM; count += (uint64)prime * 2)
+	for (; count < PBIT_P_NUM; count += (uint64)prime * 2)
 	{
 		SetPBit(count, 1);
 	}
@@ -141,7 +141,7 @@ static void PutPrimeFrom17(void)
 
 	cout("maxPrime: %u\n", maxPrime);
 
-	for(prime = 17; prime <= maxPrime; prime += 2)
+	for (prime = 17; prime <= maxPrime; prime += 2)
 		if (IsPrime(prime))
 			PutPrime(prime);
 }

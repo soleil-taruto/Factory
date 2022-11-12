@@ -47,7 +47,7 @@ static void IncrementCounter(uchar counter[COUNTER_SIZE])
 {
 	uint index;
 
-	for(index = 0; index < COUNTER_SIZE; index++)
+	for (index = 0; index < COUNTER_SIZE; index++)
 	{
 		if (counter[index] < 0xff)
 		{
@@ -93,7 +93,7 @@ static void EncryptFltr(autoBlock_t *buff, uint encCounter)
 		uint rPos;
 		uint buffSize = getSize(buff);
 
-		for(rPos = 0; rPos < buffSize; )
+		for (rPos = 0; rPos < buffSize; )
 		{
 			uint size = buffSize - rPos;
 			autoBlock_t *tmp;

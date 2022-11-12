@@ -47,7 +47,7 @@ static autoList_t *RecvMail(SockStream_t *ss, uint mailno)
 	SendLineDisp_x(ss, xcout("RETR %u", mailno));
 	memFree(RecvLineDisp(ss)); // maybe +OK <size> octets
 
-	for(; ; )
+	for (; ; )
 	{
 		if (IsEOFSockStream(ss))
 		{
@@ -122,7 +122,7 @@ static void Perform(int sock)
 
 	cout("mailnum: %u\n", mailnum);
 
-	for(mailno = 1; mailno <= mailnum; mailno++)
+	for (mailno = 1; mailno <= mailnum; mailno++)
 	{
 		autoList_t *mail = RecvMail(ss, mailno);
 

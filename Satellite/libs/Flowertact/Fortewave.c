@@ -102,7 +102,7 @@ static void Renumber(Frtwv_t *i)
 {
 	uint no;
 
-	for(no = GMR_FirstNo; no < GMR_NextNo; no++)
+	for (no = GMR_FirstNo; no < GMR_NextNo; no++)
 	{
 		char *rFile = combine_cx(i->MessageDir, xcout("%04u", no));
 		char *wFile = combine_cx(i->MessageDir, xcout("%04u", no - GMR_FirstNo));

@@ -27,7 +27,7 @@ static void Tree2PathList(char *rFile, char *wFile)
 	NodeStk = newList();
 	DeepStk = newList();
 
-	for(; ; )
+	for (; ; )
 	{
 		char *line = readLine(rfp);
 		char *p;
@@ -35,7 +35,7 @@ static void Tree2PathList(char *rFile, char *wFile)
 		if (!line)
 			break;
 
-		for(p = line; *p && *p <= ' '; p++);
+		for (p = line; *p && *p <= ' '; p++);
 
 		if (*p)
 		{

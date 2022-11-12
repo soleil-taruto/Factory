@@ -33,7 +33,7 @@ static BinMD5MergeCounter(char *file1, char *file2, char *outFile)
 
 	goto readBoth;
 
-	for(; ; )
+	for (; ; )
 	{
 		int ret = memcmp(buff1, buff2, RecordSize);
 

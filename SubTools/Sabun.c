@@ -23,7 +23,7 @@ static void DispSabun(Sabun_t *s)
 
 		WL("<Data>");
 
-		for(index = 0; index < s->Length; index++)
+		for (index = 0; index < s->Length; index++)
 			WL("%02x", s->Data[index]);
 
 		WL("</Data>\n");

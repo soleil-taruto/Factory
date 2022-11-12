@@ -10,9 +10,9 @@ int main(int argc, char **argv)
 	int b;
 	int c;
 
-	for(a = 1; a < 100; a++)
-	for(b = 1; b < a; b++)
-	for(c = 1; c < b; c++)
+	for (a = 1; a < 100; a++)
+	for (b = 1; b < a; b++)
+	for (c = 1; c < b; c++)
 	{
 		int n = a * b + b * c + c * a;
 		int d = a * b * c;

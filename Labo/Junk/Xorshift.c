@@ -66,7 +66,7 @@ int main(int argc, char **argv)
 {
 	uint c;
 
-	for(c = 1000; c; c--)
+	for (c = 1000; c; c--)
 	{
 		cout("%08x %08x %08x %08x\n", Xorshift32(), Xorshift64(), Xorshift96(), Xorshift128());
 	}

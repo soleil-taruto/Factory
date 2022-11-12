@@ -14,7 +14,7 @@ void Progress(void)
 
 		cout("\r");
 
-		for(index = 0; index < 79; index++)
+		for (index = 0; index < 79; index++)
 		{
 			cout("%c", (StarCount - index / 20) & 2 ? '*' : '-');
 		}

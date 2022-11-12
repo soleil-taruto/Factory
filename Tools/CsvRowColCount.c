@@ -17,7 +17,7 @@ static void CsvRowColCount(char *csvFile)
 
 	ColCounts = na_(uint64, COLCOUNT_MAX);
 
-	for(; ; )
+	for (; ; )
 	{
 		autoList_t *row = readCSVRow(fp);
 
@@ -35,7 +35,7 @@ static void CsvRowColCount(char *csvFile)
 	}
 	fileClose(fp);
 
-	for(index = 0; index < COLCOUNT_MAX; index++)
+	for (index = 0; index < COLCOUNT_MAX; index++)
 		if (0 < ColCounts[index])
 			cout("%06u %I64u\n", index + 1, ColCounts[index]);
 
@@ -53,7 +53,7 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		for(; ; )
+		for (; ; )
 		{
 			CsvRowColCount(c_dropFile());
 			cout("\n");

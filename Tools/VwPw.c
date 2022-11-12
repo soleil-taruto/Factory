@@ -16,7 +16,7 @@ static void ViewPassword(char *pw)
 
 	cout("\n");
 
-	for(index = 0; index < pwLen; index++)
+	for (index = 0; index < pwLen; index++)
 	{
 		if (index && index % 4 == 0)
 			cout(" ");
@@ -25,7 +25,7 @@ static void ViewPassword(char *pw)
 	}
 	cout("\n");
 
-	for(index = 0; index < pwLen; index++)
+	for (index = 0; index < pwLen; index++)
 	{
 		uint c = index % 8 / 4;
 		uint d = index / 8 % 2;
@@ -37,7 +37,7 @@ static void ViewPassword(char *pw)
 	}
 	cout("\n");
 
-	for(index = 0; index < pwLen; index++)
+	for (index = 0; index < pwLen; index++)
 	{
 		uint c = index % 16 / 12;
 

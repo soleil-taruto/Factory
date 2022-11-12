@@ -329,7 +329,7 @@ int GS_Send(void) // ret: ? ¬Œ÷
 {
 	uint retry;
 
-	for(retry = 0; retry < 3; retry++)
+	for (retry = 0; retry < 3; retry++)
 	{
 		cout("GS_Send_retry: %d\n", retry);
 

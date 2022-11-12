@@ -106,7 +106,7 @@ UI8192_t UI8192_Mul(UI8192_t a, UI8192_t b, UI8192_t ans[2])
 	m[2][mc[2]++] = f[0];
 	m[3][mc[3]++] = f[1];
 
-	for(i = 1; i < 4; i++)
+	for (i = 1; i < 4; i++)
 	while (2 <= mc[i])
 	{
 		UI4096_t t = m[i][--mc[i]];
@@ -177,7 +177,7 @@ static UI8192_t DivSub(UI8192_t a, UI8192_t b, UI8192_t ans[2], uint reti)
 		{
 			UI4096_t c = UI4096_Add(b.H, UI4096_x(1), NULL);
 
-			for(; ; )
+			for (; ; )
 			{
 				UI4096_t d = UI4096_Div(a.H, c, NULL);
 				UI8192_t dd;

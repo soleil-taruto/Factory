@@ -206,7 +206,7 @@ void insertBytes(autoBlock_t *i, uint index, autoBlock_t *bytes)
 			);
 		memcpy(i->Block + index, bytes->Block, bytes->Size);
 #else // old_same
-		for(n = i->Size - 1; index + bytes->Size <= n; n--)
+		for (n = i->Size - 1; index + bytes->Size <= n; n--)
 		{
 			i->Block[n] = i->Block[n - bytes->Size];
 		}
@@ -239,7 +239,7 @@ void insertByteRepeat(autoBlock_t *i, uint index, uint byte, uint count)
 			);
 		memset(i->Block + index, byte, count);
 #else // old_same
-		for(n = i->Size - 1; index + count <= n; n--)
+		for (n = i->Size - 1; index + count <= n; n--)
 		{
 			i->Block[n] = i->Block[n - count];
 		}
@@ -275,7 +275,7 @@ autoBlock_t *desertBytes(autoBlock_t *i, uint index, uint count)
 		i->Size - (index + count)
 		);
 #else // old_same
-	for(n = index; n < i->Size - count; n++)
+	for (n = index; n < i->Size - count; n++)
 	{
 		i->Block[n] = i->Block[n + count];
 	}
@@ -450,7 +450,7 @@ void reverseBytes(autoBlock_t *i)
 
 	if (i->Size)
 	{
-		for(n = 0, f = i->Size - 1; n < f; n++, f--)
+		for (n = 0, f = i->Size - 1; n < f; n++, f--)
 		{
 			swap = i->Block[n];
 			i->Block[n] = i->Block[f];
@@ -473,7 +473,7 @@ void addBytes(autoBlock_t *i, autoBlock_t *bytes)
 	errorCase(!i);
 	errorCase(!bytes);
 
-	for(index = 0; index < getSize(bytes); index++)
+	for (index = 0; index < getSize(bytes); index++)
 	{
 		addByte(i, getByte(bytes, index));
 	}
@@ -550,7 +550,7 @@ uint findByteMatch(autoBlock_t *i, int (*match)(uint))
 {
 	uint index;
 
-	for(index = 0; index < i->Size; index++)
+	for (index = 0; index < i->Size; index++)
 		if (match(i->Block[index]))
 			break;
 

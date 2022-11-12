@@ -88,7 +88,7 @@ static void RecoverDiskFreeSpace(void)
 	cout("fileCount: %u\n", fileCount);
 	cout("removeCount: %u\n", removeCount);
 
-	for(index = 0; removeCount && index < fileCount; index++)
+	for (index = 0; removeCount && index < fileCount; index++)
 	{
 		char *file = getLine(files, index);
 
@@ -111,7 +111,7 @@ void HFS_KeepDiskFreeSpace(void)
 
 	HFS_MutexEnter();
 	{
-		for(rem = 100; rem && !CheckDiskFreeSpace(); rem--)
+		for (rem = 100; rem && !CheckDiskFreeSpace(); rem--)
 //		if (!CheckDiskFreeSpace()) // old
 		{
 			RecoverDiskFreeSpace();
@@ -229,7 +229,7 @@ static void UploadPart(char *realPath, FILE *rfp, uint64 startPos)
 	wfp = fileOpen(realPath, "ab"); // ‘¶Ý‚µ‚È‚¢‚Æ‚«‚Íì¬‚·‚éB
 	writeSize = 0ui64;
 
-	for(; ; )
+	for (; ; )
 	{
 		autoBlock_t *block = readBinaryStream(rfp, 512 * 1024);
 

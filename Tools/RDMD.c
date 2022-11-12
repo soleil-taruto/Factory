@@ -12,7 +12,7 @@ static int CompactMode;
 
 static void DoRD(char *dir)
 {
-	for(; ; )
+	for (; ; )
 	{
 		coExecute_x(xcout("RD /S /Q \"%s\"", dir));
 
@@ -24,7 +24,7 @@ static void DoRD(char *dir)
 }
 static void DoMD(char *dir)
 {
-	for(; ; )
+	for (; ; )
 	{
 		coExecute_x(xcout("MD \"%s\"", dir));
 

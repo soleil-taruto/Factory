@@ -26,7 +26,7 @@ static int Jammer(autoBlock_t *block, int doEncode)
 	}
 	else if (doEncode)
 	{
-		for(index = 0; index < getSize(block) || value; index++)
+		for (index = 0; index < getSize(block) || value; index++)
 		{
 			value += refByte(block, index) * MULTIVAL;
 			putByte(block, index, value & 0xff);
@@ -35,7 +35,7 @@ static int Jammer(autoBlock_t *block, int doEncode)
 	}
 	else
 	{
-		for(index = getSize(block); index; )
+		for (index = getSize(block); index; )
 		{
 			index--;
 			value |= getByte(block, index);
@@ -55,7 +55,7 @@ static int PowerJammer(autoBlock_t *block, int doEncode)
 {
 	uint count;
 
-	for(count = POWERVAL; count; count--)
+	for (count = POWERVAL; count; count--)
 		if (!Jammer(block, doEncode))
 			return 0;
 
@@ -130,7 +130,7 @@ int main(int argc, char **argv)
 
 		mt19937_init();
 
-		for(c = 0; c < 1000; c++)
+		for (c = 0; c < 1000; c++)
 		{
 			DoTest(c / 100);
 			DoTest(c / 10);

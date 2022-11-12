@@ -94,7 +94,7 @@ static char *EscapeIndentRangeLine(char *line, uint indentLen) // ret: strx()
 {
 	uint index;
 
-	for(index = 0; index < indentLen; index++)
+	for (index = 0; index < indentLen; index++)
 		if (line[index] != '\t')
 			break;
 
@@ -301,7 +301,7 @@ static void SRG_AddIndent(autoBlock_t *buff, uint indentLen)
 {
 	uint index;
 
-	for(index = 0; index < indentLen; index++)
+	for (index = 0; index < indentLen; index++)
 		addByte(buff, '\t');
 }
 static char *SRG_UnescapeIndentRangeText(char *text, uint indentLen)
@@ -309,7 +309,7 @@ static char *SRG_UnescapeIndentRangeText(char *text, uint indentLen)
 	autoBlock_t *buff = newBlock();
 	char *p;
 
-	for(p = text; *p; p++)
+	for (p = text; *p; p++)
 	{
 		if (*p == CHR_ESC_RANGE_INDENT)
 			SRG_AddIndent(buff, indentLen);
@@ -330,7 +330,7 @@ static void SRG_SyncFile(Range_t *masterRange, Range_t *targetRange)
 
 	fp = fileOpen(targetRange->File, "wt");
 
-	for(index = 0; index <= targetRange->StartSymLineIndex; index++)
+	for (index = 0; index <= targetRange->StartSymLineIndex; index++)
 		writeLine(fp, getLine(lines, index));
 
 	{
@@ -341,7 +341,7 @@ static void SRG_SyncFile(Range_t *masterRange, Range_t *targetRange)
 		writeToken_x(fp, wkText);
 	}
 
-	for(index = targetRange->EndSymLineIndex; index < getCount(lines); index++)
+	for (index = targetRange->EndSymLineIndex; index < getCount(lines); index++)
 		writeLine(fp, getLine(lines, index));
 
 	fileClose(fp);
@@ -513,7 +513,7 @@ static int IsRangeGroupExpectedCond_Case1(autoList_t *rangeGroup) // 1ƒ–Š‚¾‚¯C
 {
 	uint index;
 
-	for(index = 1; index < getCount(rangeGroup); index++)
+	for (index = 1; index < getCount(rangeGroup); index++)
 	{
 		Range_t *r1 = (Range_t *)getElement(rangeGroup, index - 1);
 		Range_t *r2 = (Range_t *)getElement(rangeGroup, index - 0);
@@ -535,7 +535,7 @@ static int IsRangeGroupExpectedCond_Case2(autoList_t *rangeGroup) // 1ƒ–ŠˆÈãA
 {
 	uint index;
 
-	for(index = 1; index < getCount(rangeGroup); index++)
+	for (index = 1; index < getCount(rangeGroup); index++)
 	{
 		Range_t *r1 = (Range_t *)getElement(rangeGroup, index - 1);
 		Range_t *r2 = (Range_t *)getElement(rangeGroup, index - 0);

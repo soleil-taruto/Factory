@@ -34,7 +34,7 @@ static void DoTest(char *wavFile)
 }
 int main(int argc, char **argv)
 {
-	for(; ; )
+	for (; ; )
 	{
 		char *wavFile = c_dropFile();
 

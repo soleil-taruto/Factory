@@ -7,7 +7,7 @@ static void MiddleJam(autoBlock_t *block)
 {
 	uint index;
 
-	for(index = 0; index < getSize(block); index++)
+	for (index = 0; index < getSize(block); index++)
 	{
 		setByte(block, index, getByte(block, index) ^ 0xff);
 	}
@@ -18,14 +18,14 @@ static void Jammer3(autoBlock_t *block, uint mode)
 
 	if (mode)
 	{
-		for(index = 1; index < getSize(block); index++)
+		for (index = 1; index < getSize(block); index++)
 		{
 			setByte(block, index, (getByte(block, index) + 256 - getByte(block, index - 1)) % 256);
 		}
 	}
 	else
 	{
-		for(index = getSize(block) - 1; index; index--)
+		for (index = getSize(block) - 1; index; index--)
 		{
 			setByte(block, index, (getByte(block, index) + getByte(block, index - 1)) % 256);
 		}
@@ -35,7 +35,7 @@ static void Jammer2(autoBlock_t *block, uint mode, uint j_num)
 {
 	uint count;
 
-	for(count = 0; count < j_num; count++)
+	for (count = 0; count < j_num; count++)
 	{
 		if (count)
 			reverseBytes(block);
@@ -90,7 +90,7 @@ int main(int argc, char **argv)
 	DoTest(3);
 	DoTest(3);
 
-	for(c = 1; c < 1000; c++)
+	for (c = 1; c < 1000; c++)
 	{
 		DoTest(c);
 	}

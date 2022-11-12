@@ -20,7 +20,7 @@ static void AntiSVN(char *targetDir)
 
 		cout("GO!\n");
 	}
-	for(; ; )
+	for (; ; )
 	{
 		autoList_t *dirs = lssDirs(targetDir);
 		char *dir;

@@ -30,7 +30,7 @@ static int IsNumbered(char *file)
 {
 	char *p;
 
-	for(p = file; *p; p++)
+	for (p = file; *p; p++)
 	{
 		if (*p == '.' || *p == '_')
 			break;
@@ -94,7 +94,7 @@ static void DoFRenum(void)
 
 	LOGPOS();
 
-	for(index = 0; index < getCount(files); index++) // 移動テスト(1)
+	for (index = 0; index < getCount(files); index++) // 移動テスト(1)
 	{
 		char *rFile = getLine(files, index);
 		char *wFile = getLine(midFiles, index);
@@ -115,7 +115,7 @@ static void DoFRenum(void)
 
 	LOGPOS();
 
-	for(index = 0; index < getCount(files); index++)
+	for (index = 0; index < getCount(files); index++)
 		moveFile(
 			getLine(files, index),
 			getLine(midFiles, index)
@@ -127,7 +127,7 @@ static void DoFRenum(void)
 	{
 		int errorFlag = 0;
 
-		for(index = 0; index < getCount(files); index++)
+		for (index = 0; index < getCount(files); index++)
 		{
 			char *wFile = getLine(destFiles, index);
 
@@ -147,7 +147,7 @@ static void DoFRenum(void)
 
 		if (errorFlag)
 		{
-			for(index = 0; index < getCount(files); index++) // 復元
+			for (index = 0; index < getCount(files); index++) // 復元
 				moveFile(
 					getLine(midFiles, index),
 					getLine(files, index)
@@ -159,7 +159,7 @@ static void DoFRenum(void)
 
 	LOGPOS();
 
-	for(index = 0; index < getCount(files); index++)
+	for (index = 0; index < getCount(files); index++)
 		moveFile(
 			getLine(midFiles, index),
 			getLine(destFiles, index)

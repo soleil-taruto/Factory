@@ -5,7 +5,7 @@ static int DeadFlag;
 
 static void SleepTh(uint millis)
 {
-	for(; ; )
+	for (; ; )
 	{
 		IntSleep(millis);
 
@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 	}
 	uncritical();
 
-	for(; ; )
+	for (; ; )
 	{
 		int key = getKey();
 

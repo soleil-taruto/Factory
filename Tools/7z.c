@@ -219,7 +219,7 @@ readArgs:
 		return;
 	}
 
-	for(; ; )
+	for (; ; )
 	{
 		Extract7z(c_dropFile());
 

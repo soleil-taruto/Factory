@@ -50,7 +50,7 @@ int main(int argc, char **argv)
 
 	cout("TEST START\n");
 
-	for(; ; )
+	for (; ; )
 	{
 		char *file = dropPath();
 		int stopLoop = 0;

@@ -106,7 +106,7 @@ static void EditSame_LSS(int userSelectMode)
 	//
 	else if (3 <= getCount(files))
 	{
-		for(index = 1; index < getCount(files); index++)
+		for (index = 1; index < getCount(files); index++)
 			if (!isSameFile(getLine(files, 0), getLine(files, index)))
 				break;
 

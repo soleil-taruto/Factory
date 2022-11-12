@@ -350,7 +350,7 @@ char *makeTempPath(char *ext) // ext: NULL ok
 		else
 			pbase = "C:\\Factory\\tmp\\";
 	}
-	for(; ; )
+	for (; ; )
 	{
 		path = xcout("%s%s", pbase, c_GetTempSuffix());
 
@@ -482,7 +482,7 @@ autoList_t *tokenizeArgs(char *str)
 	char *p;
 	int literalMode = 0;
 
-	for(p = str; *p; p++)
+	for (p = str; *p; p++)
 	{
 		if (literalMode)
 		{
@@ -532,7 +532,7 @@ static void ReadSysArgs(void)
 {
 	uint argi;
 
-	for(argi = 0; argi < getCount(Args); )
+	for (argi = 0; argi < getCount(Args); )
 	{
 		char *arg = getLine(Args, argi);
 
@@ -652,7 +652,7 @@ static autoList_t *GetArgs(void)
 
 		Args = newList();
 
-		for(argi = 1; argi < __argc; argi++)
+		for (argi = 1; argi < __argc; argi++)
 		{
 			addElement(Args, (uint)__argv[argi]);
 		}
@@ -701,7 +701,7 @@ char *nnNextArg(void)
 
 void skipArg(uint count)
 {
-	for(; count; count--) nextArg();
+	for (; count; count--) nextArg();
 }
 /*
 	ret: 残りのコマンド引数の index 番目以降全てを返す。
@@ -742,7 +742,7 @@ static char *FPP_Path;
 
 static int FindPathParent(char *dir, char *localPath) // dir: abs_dir
 {
-	for(; ; )
+	for (; ; )
 	{
 		FPP_Path = combine(dir, localPath);
 //cout("FPP.1:%s\n", dir); // test

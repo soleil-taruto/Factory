@@ -10,7 +10,7 @@ void CRLF_CheckFile(char *file, uint *p_num_cr, uint *p_num_crlf, uint *p_num_lf
 	uint num_crlf = 0;
 	uint num_lf = 0;
 
-	for(; ; )
+	for (; ; )
 	{
 		if (backed)
 		{
@@ -76,7 +76,7 @@ void CRLF_ConvFile(char *rFile, char *wFile, char *newLine) // newLine: "\r", "\
 	int backedChr;
 	int chr;
 
-	for(; ; )
+	for (; ; )
 	{
 		if (backed)
 		{

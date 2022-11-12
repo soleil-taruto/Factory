@@ -20,28 +20,28 @@ static void DoTest(uint n, uint testNum)
 	writeToken_x(Fp, xcout("%u,", n));
 	writeToken_x(FpN, xcout("%u,", n));
 
-	for(c = 0; c < n; c++)
+	for (c = 0; c < n; c++)
 	{
 		mato[c] = mt19937_rnd(n);
 		inha[c] = 1;
 	}
-	for(i = 0; i < testNum; i++)
+	for (i = 0; i < testNum; i++)
 	{
-		for(c = 0; c < n; c++)
+		for (c = 0; c < n; c++)
 		{
 			if (inha[c] & 1)
 			{
 				inha[mato[c]] |= 2;
 			}
 		}
-		for(c = 0; c < n; c++)
+		for (c = 0; c < n; c++)
 		{
 			inha[c] >>= 1;
 		}
 		numer = 0;
 		denom = n;
 
-		for(c = 0; c < n; c++)
+		for (c = 0; c < n; c++)
 		{
 			if (inha[c])
 			{
@@ -69,8 +69,8 @@ int main(int argc, char **argv)
 	Fp = fileOpen(getOutFile("rate.csv"), "wt");
 	FpN = fileOpen(getOutFile("numer.csv"), "wt");
 
-	for(n = 10; n <= 1000000; n *= 10)
-	for(c = 0; c < 10; c++)
+	for (n = 10; n <= 1000000; n *= 10)
+	for (c = 0; c < 10; c++)
 	{
 		DoTest(n, 1000);
 	}

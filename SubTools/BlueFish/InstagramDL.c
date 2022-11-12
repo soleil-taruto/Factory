@@ -149,7 +149,7 @@ static autoList_t *ParseUrls(char *resBodyFile)
 
 	p = resBody;
 
-	for(; ; )
+	for (; ; )
 	{
 		char *q;
 		char *q2;

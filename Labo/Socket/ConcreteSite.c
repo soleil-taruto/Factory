@@ -17,7 +17,7 @@ static autoBlock_t *ResData;
 
 static void RecvHTTPHeader(SockStream_t *ss)
 {
-	for(; ; )
+	for (; ; )
 	{
 		char *line = SockRecvLine(ss, 65536);
 

@@ -5,7 +5,7 @@ static uint GetPtnCount(char *text, char *ptn)
 	char *p = text;
 	uint count = 0;
 
-	for(; ; )
+	for (; ; )
 	{
 		p = mbs_strstr(p, ptn);
 
@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 
 	hasArgs(0); // for ReadSysArgs()
 
-	for(loopcnt = 0; ; loopcnt++)
+	for (loopcnt = 0; ; loopcnt++)
 	{
 		char *outText;
 		uint establishedNum;
@@ -69,7 +69,7 @@ int main(int argc, char **argv)
 		{
 			uint sec;
 
-			for(sec = 0; sec < 5; sec++)
+			for (sec = 0; sec < 5; sec++)
 			{
 				while (hasKey())
 				{

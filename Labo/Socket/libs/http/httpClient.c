@@ -56,7 +56,7 @@ int httpGetOrPostFile(char *url, autoBlock_t *sendBody, char *recvBodyFile) // s
 
 	SockStartup();
 
-	for(retry = 0; retry <= httpGetOrPostRetryMax; retry++)
+	for (retry = 0; retry <= httpGetOrPostRetryMax; retry++)
 	{
 		ret = httpSendRequestFile(
 			domain,

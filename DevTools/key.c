@@ -4,7 +4,7 @@ int main(int argc, char **argv)
 {
 	int crtMode = argIs("/CRT");
 
-	for(; ; )
+	for (; ; )
 	{
 		int chr = crtMode ? _getch() : getKey();
 

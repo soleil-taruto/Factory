@@ -17,7 +17,7 @@ void httpReleaseChunkedRecver(httpChunkedRecver_t *i)
 }
 static void RecvChunkedTrailer(httpChunkedRecver_t *i)
 {
-	for(; ; )
+	for (; ; )
 	{
 		char *line = SockRecvLine(i->Stream, 1000);
 

@@ -28,7 +28,7 @@ char *LComSendLine(char *line, uint id)
 		writeOneLine(CombineEx(PREF_FILE_REQUEST, id), line);
 		remove(CombineEx(PREF_FILE_RESPONSE, id));
 
-		for(; ; )
+		for (; ; )
 		{
 			int eq;
 			int es;
@@ -77,7 +77,7 @@ void LComRecvLoop(char *(*funcRecvEvent)(char *), uint id)
 
 	cout("Press ESCAPE key to exit LComRecvLoop().\n");
 
-	for(; ; )
+	for (; ; )
 	{
 		while (hasKey())
 			if (getKey() == 0x1b)

@@ -21,7 +21,7 @@ static void DoTest_Rev(uint64 minval, uint64 maxval)
 
 	errorCase(maxval < minval);
 
-	for(value = maxval; minval < value; value--)
+	for (value = maxval; minval < value; value--)
 	{
 		DoTest_One(value);
 	}

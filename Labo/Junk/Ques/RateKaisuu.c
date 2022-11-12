@@ -16,7 +16,7 @@ static void DoTestOnce(uint n)
 	{
 		uint c;
 
-		for(c = 1; ; c++)
+		for (c = 1; ; c++)
 		{
 			if (!mt19937_rnd(n))
 				break;
@@ -36,7 +36,7 @@ static void DoTest(uint n)
 
 	cout("%u‰ñ‚É1‰ñ‹N‚±‚éŒ»Û‚ª•½‹Ï‰½‰ñ‚Ìs‚Å‹N‚±‚é‚©...\n", n);
 
-	for(c = 1; c <= 10; c++)
+	for (c = 1; c <= 10; c++)
 	{
 		DoTestOnce(n);
 	}
@@ -48,7 +48,7 @@ int main(int argc, char **argv)
 
 	mt19937_initCRnd();
 
-	for(n = 1; n <= 10; n++)
+	for (n = 1; n <= 10; n++)
 	{
 		DoTest(n);
 	}

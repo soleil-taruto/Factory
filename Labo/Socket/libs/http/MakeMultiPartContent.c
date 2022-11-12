@@ -58,7 +58,7 @@ static int IsIncludeBoundary(char *boundary) // boundary: [0] ÇÕ [1] à»ç~Ç…ë∂ç›Ç
 		char *p_bdr = boundary;
 		uint index;
 
-		for(index = 0; index < getSize(body); index++)
+		for (index = 0; index < getSize(body); index++)
 		{
 			int chr = getByte(body, index);
 
@@ -84,7 +84,7 @@ static char *MakeBoundary(void)
 	char *boundary = strx(CRLF "--");
 	uint count;
 
-	for(count = 16; count; count--)
+	for (count = 16; count; count--)
 	{
 		boundary = addLine_x(boundary, xcout("%02x", getCryptoByte()));
 	}
@@ -106,7 +106,7 @@ autoBlock_t *makeMultiPartContent(void)
 	content = newBlock();
 	ab_addLine(content, boundary + 2);
 
-	for(index = 0; index < getCount(TextList); index++)
+	for (index = 0; index < getCount(TextList); index++)
 	{
 		ab_addLine(content, "\r\nContent-Disposition: form-data; name=\"");
 		ab_addLine(content, getLine(TextList, index));

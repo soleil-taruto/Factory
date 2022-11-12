@@ -92,7 +92,7 @@ readArgs:
 		DispLongest(nextArg(), ignoreSubDir);
 		return;
 	}
-	for(; ; )
+	for (; ; )
 	{
 		char *path = dropPath();
 

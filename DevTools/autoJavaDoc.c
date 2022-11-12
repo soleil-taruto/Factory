@@ -13,7 +13,7 @@ static uint GetIndexFromPtn2(autoList_t *lines, uint index, char *ptn1, char *pt
 {
 	char *ptn = xcout("%s%s", ptn1, ptn2);
 
-	for(; index < getCount(lines); index++)
+	for (; index < getCount(lines); index++)
 		if (!strcmp(ptn, getLine(lines, index)))
 			break;
 
@@ -166,7 +166,7 @@ readArgs:
 		return;
 	}
 
-	for(; ; )
+	for (; ; )
 	{
 		DoAutoJavaDoc(c_dropDirFile());
 		cout("\n");

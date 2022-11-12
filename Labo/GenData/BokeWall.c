@@ -13,8 +13,8 @@ int main(int argc, char **argv)
 
 	resizeTable(bmp, SCREEN_W + BOKE_RANGE * 2, SCREEN_H + BOKE_RANGE * 2);
 
-	for(x = 0; x < getTableWidth(bmp); x++)
-	for(y = 0; y < getTableHeight(bmp); y++)
+	for (x = 0; x < getTableWidth(bmp); x++)
+	for (y = 0; y < getTableHeight(bmp); y++)
 	{
 		uint farBdr = x + 1;
 		uint color;

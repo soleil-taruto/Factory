@@ -20,7 +20,7 @@ static void ImageEditor(void)
 	SetImageId(0);
 	LoadImageFile(ImgFile);
 
-	for(; ; )
+	for (; ; )
 	{
 		char *command = coInputLinePrn(CommandPrint);
 

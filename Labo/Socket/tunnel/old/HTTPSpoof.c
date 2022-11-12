@@ -107,7 +107,7 @@ static void RemakeHeader(autoBlock_t *buff)
 	ab_addLine(buff, HttpDat.H_Request);
 	ab_addLine(buff, "\r\n");
 
-	for(index = 0; index < getCount(HttpDat.H_Keys); index++)
+	for (index = 0; index < getCount(HttpDat.H_Keys); index++)
 	{
 		char *key = getLine(HttpDat.H_Keys, index);
 		char *value = getLine(HttpDat.H_Values, index);
@@ -152,7 +152,7 @@ static void PerformTh(int sock, char *strip)
 
 	cout("Ú‘± %d\n", sock);
 
-	for(; ; )
+	for (; ; )
 	{
 		int chr = SockRecvChar(ss);
 		uint endPos;

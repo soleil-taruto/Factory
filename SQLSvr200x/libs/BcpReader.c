@@ -15,7 +15,7 @@ autoList_t *SqlBcpReader(char *bcpFile, int chrT, int chrR)
 		autoList_t *row = newList();
 		autoBlock_t *buff = newBlock();
 
-		for(; ; )
+		for (; ; )
 		{
 			int chr = readChar(fp);
 

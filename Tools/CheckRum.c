@@ -26,36 +26,36 @@ static void CheckRevDirsRevFiles(void)
 	uint i;
 	uint j;
 
-	for(i = 1; i < getCount(RevDirs); i++)
-	for(j = 0; j < i; j++)
+	for (i = 1; i < getCount(RevDirs); i++)
+	for (j = 0; j < i; j++)
 	{
 		errorCase_m(!mbs_stricmp(getLine(RevDirs, i), getLine(RevDirs, j)), "ツリーファイルに重複があります。");
 	}
-	for(i = 0; i < getCount(RevDirs); i++)
+	for (i = 0; i < getCount(RevDirs); i++)
 	{
 		char *dir = changeLocal(getLine(RevDirs, i), "");
 
 		if (*dir) // ? ローカル名じゃない。
 		{
-			for(j = 0; j < i; j++)
+			for (j = 0; j < i; j++)
 				if (!mbs_stricmp(dir, getLine(RevDirs, j)))
 					break;
 
 			errorCase_m(j == i, "このツリーファイルは上から順に作成できません。");
 		}
 	}
-	for(i = 1; i < getCount(RevFiles); i++)
-	for(j = 0; j < i; j++)
+	for (i = 1; i < getCount(RevFiles); i++)
+	for (j = 0; j < i; j++)
 	{
 		errorCase_m(!mbs_stricmp(getLine(RevFiles, i), getLine(RevFiles, j)), "ファイルリストに重複があります。");
 	}
-	for(i = 1; i < getCount(RevFiles); i++)
+	for (i = 1; i < getCount(RevFiles); i++)
 	{
 		char *dir = changeLocal(getLine(RevFiles, i), "");
 
 		if (*dir) // ? ローカル名じゃない。
 		{
-			for(j = 0; j < getCount(RevDirs); j++)
+			for (j = 0; j < getCount(RevDirs); j++)
 				if (!mbs_stricmp(dir, getLine(RevDirs, j)))
 					break;
 
@@ -72,7 +72,7 @@ static autoList_t *CheckAndReadLines(char *file, char *errorMessage)
 	autoList_t *lines;
 	char *line;
 
-	for(index = 0; index < getSize(fileData); index++)
+	for (index = 0; index < getSize(fileData); index++)
 	{
 		int chr = getByte(fileData, index);
 
@@ -309,7 +309,7 @@ termination(0); // test
 		return;
 	}
 
-	for(; ; )
+	for (; ; )
 	{
 		CheckRum(c_dropDir());
 		cout("\n");

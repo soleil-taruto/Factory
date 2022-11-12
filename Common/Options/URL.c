@@ -41,7 +41,7 @@ char *urlEncoder(char *url)
 	url = strx(url);
 	url = ChgEnc_SJISToUTF8_x(url, 0);
 
-	for(p = url; *p; p++)
+	for (p = url; *p; p++)
 	{
 		if (IsNoPctChar(*p))
 			addByte(buff, *p);
@@ -57,7 +57,7 @@ char *urlDecoder(char *url)
 	autoBlock_t *buff = newBlock();
 	char *p;
 
-	for(p = url; *p; p++)
+	for (p = url; *p; p++)
 	{
 		if (*p == '%' && m_ishexadecimal(p[1]) && m_ishexadecimal(p[2]))
 		{

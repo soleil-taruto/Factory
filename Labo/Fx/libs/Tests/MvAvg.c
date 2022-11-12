@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 	uint endFxTime = TSec2FxTime(TimeData2TSec(Stamp2TimeData(END_STAMP)));
 	uint fxTime;
 
-	for(fxTime = bgnFxTime; fxTime <= endFxTime; fxTime += 2)
+	for (fxTime = bgnFxTime; fxTime <= endFxTime; fxTime += 2)
 	{
 		cout("%I64u,%f,%f\n"
 			,TimeData2Stamp(TSec2TimeData(FxTime2TSec(fxTime)))

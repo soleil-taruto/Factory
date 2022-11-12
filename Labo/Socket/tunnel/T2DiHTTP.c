@@ -57,7 +57,7 @@ static int ReadLine(FILE *rfp)
 
 	RawData = newBlock();
 
-	for(p += 4; *p != '"'; p++)
+	for (p += 4; *p != '"'; p++)
 	{
 		int chr;
 
@@ -169,7 +169,7 @@ static int R_ReadChar(void)
 {
 	int chr;
 
-	for(; ; )
+	for (; ; )
 	{
 		if (!R_Fp)
 		{
@@ -247,7 +247,7 @@ static char *W_ReadLine(void)
 {
 	autoBlock_t *buff = newBlock();
 
-	for(; ; )
+	for (; ; )
 	{
 		int chr = W_ReadChar();
 
@@ -315,7 +315,7 @@ static void PHRR_Parse(void)
 	uint64 contentLength = 0;
 	int chunked = 0;
 
-	for(; ; )
+	for (; ; )
 	{
 		char *line = W_ReadLine();
 		char *p;
@@ -356,7 +356,7 @@ static void PHRR_Parse(void)
 	}
 	if (chunked)
 	{
-		for(; ; )
+		for (; ; )
 		{
 			char *line = W_ReadLine();
 			uint size;
@@ -372,14 +372,14 @@ static void PHRR_Parse(void)
 			if (!size)
 				break;
 
-			for(count = 0; count < size; count++)
+			for (count = 0; count < size; count++)
 				if (W_ReadChar() == EOF)
 					break;
 
 			W_ReadChar(); // CR
 			W_ReadChar(); // LF
 		}
-		for(; ; ) // chunk-trailer “Ç‚Ý”ò‚Î‚µ
+		for (; ; ) // chunk-trailer “Ç‚Ý”ò‚Î‚µ
 		{
 			char *line = W_ReadLine();
 
@@ -398,7 +398,7 @@ static void PHRR_Parse(void)
 	{
 		uint64 count;
 
-		for(count = 0; count < contentLength; count++)
+		for (count = 0; count < contentLength; count++)
 			if (W_ReadChar() == EOF)
 				break;
 	}
@@ -407,7 +407,7 @@ static void PHRR_Main(char *direction)
 {
 	ResetRawDataWriter(direction);
 
-	for(; ; )
+	for (; ; )
 	{
 		W_Start();
 

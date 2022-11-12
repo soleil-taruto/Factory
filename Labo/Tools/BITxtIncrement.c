@@ -7,7 +7,7 @@ static void BITxtIncrement_File(char *file)
 	{
 		FILE *fp = fileOpen(file, "rt");
 
-		for(; ; )
+		for (; ; )
 		{
 			int chr = readChar(fp);
 
@@ -26,7 +26,7 @@ static void BITxtIncrement_File(char *file)
 		uint value = 1;
 		uint index;
 
-		for(index = 0; value; index++)
+		for (index = 0; value; index++)
 		{
 			value += refByte(data, index);
 			putByte(data, index, value % 10);
@@ -43,7 +43,7 @@ static void BITxtIncrement_File(char *file)
 		FILE *fp = fileOpen(file, "wt");
 		uint index;
 
-		for(index = 0; index < getSize(data); index++)
+		for (index = 0; index < getSize(data); index++)
 			writeChar(fp, (int)getByte(data, index) + '0');
 
 		fileClose(fp);

@@ -20,7 +20,7 @@ static void RLFS_LineAction(char *line)
 	uint lineLen = strlen(line);
 	uint count;
 
-	for(count = 0; count < MaskLen; count++)
+	for (count = 0; count < MaskLen; count++)
 	{
 		uint index = MaskStartIndex + count;
 

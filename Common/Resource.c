@@ -26,7 +26,7 @@ void disctrl(char *line)
 {
 	char *p;
 
-	for(p = line; *p; )
+	for (p = line; *p; )
 	{
 		if (*p < ' ')
 			eraseChar(p);
@@ -38,7 +38,7 @@ void unctrl(char *line)
 {
 	char *p;
 
-	for(p = line; *p; p++)
+	for (p = line; *p; p++)
 	{
 		if (*p < ' ')
 		{

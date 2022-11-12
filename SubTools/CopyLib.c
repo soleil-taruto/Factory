@@ -344,7 +344,7 @@ static void WeldAllEmptyRange(autoList_t *ranges)
 
 	errorCase(getCount(ranges) % 2 != 1); // 2bs
 
-	for(index = 2; index < getCount(ranges); )
+	for (index = 2; index < getCount(ranges); )
 	{
 		char *h = (char *)getLastElement(getList(ranges, index - 2));
 
@@ -374,7 +374,7 @@ static void WeldAllNewlyAddedRange(autoList_t *rRanges, autoList_t *wRanges)
 	errorCase(getCount(rRanges) % 2 != 1); // 2bs
 	errorCase(getCount(wRanges) % 2 != 1); // 2bs
 
-	for(index = 2; index < getCount(rRanges); )
+	for (index = 2; index < getCount(rRanges); )
 	{
 		cout("index: %u\n", index);
 
@@ -426,7 +426,7 @@ static void CheckAppSpecRangesPair(autoList_t *rRanges, autoList_t *wRanges)
 	errorCase(getCount(rRanges) % 2 != 1); // 2bs
 	errorCase(getCount(wRanges) % 2 != 1); // 2bs
 
-	for(index = 2; index < getCount(rRanges); index += 2)
+	for (index = 2; index < getCount(rRanges); index += 2)
 	{
 		{
 			char *r = (char *)getLastElement(getList(rRanges, index - 2));
@@ -557,7 +557,7 @@ static void DoCopyLib(char *rDir, char *wDir, int testMode)
 			autoList_t *lines = newList();
 			uint index;
 
-			for(index = 0; index < getCount(rRanges); index++)
+			for (index = 0; index < getCount(rRanges); index++)
 				addElements(lines, getList(index % 2 ? wRanges : rRanges, index));
 
 			if (!testMode)

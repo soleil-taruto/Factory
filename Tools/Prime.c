@@ -29,7 +29,7 @@ int main(int argc, char **argv)
 
 		cout("%I64u factors are:\n", value);
 
-		for(index = 0; factors[index] != 0; index++)
+		for (index = 0; factors[index] != 0; index++)
 			cout("%I64u\n", factors[index]);
 
 		return;
@@ -44,11 +44,11 @@ int main(int argc, char **argv)
 
 		cout("%I64u factors are:\n", value);
 
-		for(index = 0; factors[index] != 0; )
+		for (index = 0; factors[index] != 0; )
 		{
 			uint x;
 
-			for(x = 1; factors[index] == factors[index + x]; x++);
+			for (x = 1; factors[index] == factors[index + x]; x++);
 
 			cout("%I64u\t%u\n", factors[index], x);
 
@@ -71,7 +71,7 @@ int main(int argc, char **argv)
 
 		errorCase(maxval < minval);
 
-		for(value = minval; ; value++)
+		for (value = minval; ; value++)
 		{
 			if (IsPrime(value))
 				count++;
@@ -100,7 +100,7 @@ int main(int argc, char **argv)
 
 		errorCase(maxval < minval);
 
-		for(value = minval; ; value++)
+		for (value = minval; ; value++)
 		{
 			if (eqIntPulseSec(2, NULL))
 			{

@@ -22,8 +22,8 @@ autoTable_t *tReadCSVFile(char *file)
 		{
 			resizeTable(csv, w, h);
 
-			for(x = 0; x < w; x++)
-			for(y = 0; y < h; y++)
+			for (x = 0; x < w; x++)
+			for (y = 0; y < h; y++)
 			{
 				setTableCell(csv, x, y, getElement(getList(table, y), x));
 			}
@@ -43,11 +43,11 @@ void tWriteCSVFile(char *file, autoTable_t *csv)
 	w = getTableWidth(csv);
 	h = getTableHeight(csv);
 
-	for(y = 0; y < h; y++)
+	for (y = 0; y < h; y++)
 	{
 		autoList_t *row = newList();
 
-		for(x = 0; x < w; x++)
+		for (x = 0; x < w; x++)
 		{
 			char *cell = (char *)getTableCell(csv, x, y);
 

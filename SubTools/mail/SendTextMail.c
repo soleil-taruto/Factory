@@ -62,7 +62,7 @@ static char *ToQuotedPrintable(char *line)
 
 		ab_addLine(buff, "=?UTF-8?Q?");
 
-		for(index = 0; index < getSize(text_u); index++)
+		for (index = 0; index < getSize(text_u); index++)
 		{
 			ab_addChar(buff, '=');
 			ab_addLine_x(buff, xcout("%02X", b_(text_u)[index]));

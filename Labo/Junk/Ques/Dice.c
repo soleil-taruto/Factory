@@ -16,7 +16,7 @@ static uint PlayDice(uint diceNum)
 	uint sum = 0;
 	uint c;
 
-	for(c = 0; c < diceNum; c++)
+	for (c = 0; c < diceNum; c++)
 	{
 		sum += mt19937_rnd(6) + 1;
 	}
@@ -29,7 +29,7 @@ static double GetDiceWinRate(uint myDiceNum, uint osDiceNum)
 
 	cout("%u %u\n", myDiceNum, osDiceNum);
 
-	for(testcnt = 0; testcnt < TEST_MAX; testcnt++)
+	for (testcnt = 0; testcnt < TEST_MAX; testcnt++)
 	{
 		uint mySum = PlayDice(myDiceNum);
 		uint osSum = PlayDice(osDiceNum);
@@ -56,17 +56,17 @@ int main(int argc, char **argv)
 	row = newList();
 	addElement(row, (uint)strx("Ž©•ª‚ÌŒÂ”_‘ŠŽè‚ÌŒÂ”"));
 
-	for(colidx = 0; colidx < DICE_MAX; colidx++)
+	for (colidx = 0; colidx < DICE_MAX; colidx++)
 		addElement(row, (uint)xcout("%u", colidx + 1));
 
 	addElement(csv, (uint)row);
 
-	for(rowidx = 0; rowidx < DICE_MAX; rowidx++)
+	for (rowidx = 0; rowidx < DICE_MAX; rowidx++)
 	{
 		row = newList();
 		addElement(row, (uint)xcout("%u", rowidx + 1));
 
-		for(colidx = 0; colidx < DICE_MAX; colidx++)
+		for (colidx = 0; colidx < DICE_MAX; colidx++)
 		{
 			addElement(row, (uint)xcout("%f", GetDiceWinRate(rowidx + 1, colidx + 1)));
 		}

@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 		cout("ƒƒbƒN‚µ‚Ä‚¢‚Ü‚·...\n");
 		LOGPOS_T();
 
-		for(; ; )
+		for (; ; )
 		{
 			int locked = 0;
 

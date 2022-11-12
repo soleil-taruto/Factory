@@ -32,7 +32,7 @@ static int RecvPrmData(SockStream_t *ss, char *dataFile, uint64 dataSize) // ret
 	{
 		FILE *fp = fileOpen(dataFile, "wb");
 
-		for(count = 0; count < dataSize; count++)
+		for (count = 0; count < dataSize; count++)
 		{
 			int chr = SockRecvChar(ss);
 
@@ -118,7 +118,7 @@ static void SendResFile(SockStream_t *ss, char *relPath)
 
 			SockSendValue64(ss, getFileSizeFPSS(fp));
 
-			for(; ; )
+			for (; ; )
 			{
 				autoBlock_t *buff = readBinaryStream(fp, 2000000); // 2 MB
 
@@ -337,7 +337,7 @@ static int HasOtherRootDirParent(char *dir)
 {
 	dir = getParent(dir);
 
-	for(; ; )
+	for (; ; )
 	{
 		char *file = combine(dir, getLocal(SigFile));
 

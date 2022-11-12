@@ -113,7 +113,7 @@ static char *IntoIfOneDir(char *dir)
 {
 	cout("dir1: %s\n", dir);
 
-	for(; ; )
+	for (; ; )
 	{
 		autoList_t *paths = ls(dir);
 
@@ -200,7 +200,7 @@ static uint FindStringInExe(autoBlock_t *text, char *ptnString) // ret: UINTMAX 
 	uint index;
 	uint rPos = 0;
 
-	for(index = 0; index < getSize(text); index++)
+	for (index = 0; index < getSize(text); index++)
 	{
 	recheck:
 		if (getByte(text, index) == ptnString[rPos]) // ÅŒã‚Ì '\0' ‚Ü‚Åˆê’v‚·‚é‚©”»’è‚·‚éB
@@ -222,7 +222,7 @@ static void DestroyFindVersionPtn(autoBlock_t *text, uint startPos, uint count)
 {
 	uint index;
 
-	for(index = 0; index < count; index++)
+	for (index = 0; index < count; index++)
 	{
 		int chr;
 

@@ -60,7 +60,7 @@ static void AddDirInfo(char *dir)
 		/*
 			最後のファイル (最新のファイル) は更新中かもしれないので除外する。
 		*/
-		for(index = 0; index + 1 < getCount(files); index++)
+		for (index = 0; index + 1 < getCount(files); index++)
 		{
 			addElement(i->FileInfos, (uint)CreateFileInfo(getLine(files, index)));
 		}
@@ -99,7 +99,7 @@ static void SlimDir(DirInfo_t *i)
 	uint index;
 	uint64 size;
 
-	for(index = 0; index + DirFileCountMax < getCount(i->FileInfos); index++)
+	for (index = 0; index + DirFileCountMax < getCount(i->FileInfos); index++)
 	{
 		LOGPOS();
 
@@ -117,7 +117,7 @@ static void SlimDir(DirInfo_t *i)
 	foreach (i->FileInfos, fi, index)
 		size += fi->Size;
 
-	for(index = 0; index < getCount(i->FileInfos) && DirSizeMax < size; index++)
+	for (index = 0; index < getCount(i->FileInfos) && DirSizeMax < size; index++)
 	{
 		LOGPOS();
 

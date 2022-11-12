@@ -47,7 +47,7 @@ static int ProcOneRemFile(char *remFile, autoList_t *outFiles) // ret: ? ’Ç‰Á‚µ‚
 	token = p;
 	tokens = newList();
 
-	for(; ; p = mbsNext(p))
+	for (; ; p = mbsNext(p))
 	{
 		errorCase(!*p);
 
@@ -99,7 +99,7 @@ static void ProcRemFiles(void)
 {
 	uint index;
 
-	for(index = 0; index < getCount(RemFiles); index++)
+	for (index = 0; index < getCount(RemFiles); index++)
 	{
 		char *remFile = getLine(RemFiles, index);
 

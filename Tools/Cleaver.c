@@ -31,7 +31,7 @@ static void Divide(char *file)
 	cout("file: %s\n", file);
 	cout("divsz: %I64u\n", DivSize);
 
-	for(dividx = 0; ; dividx++)
+	for (dividx = 0; ; dividx++)
 	{
 		char *divfile = GetDivFile(file, dividx);
 		FILE *divfp;
@@ -40,7 +40,7 @@ static void Divide(char *file)
 		cout("divfile: %s\n", divfile);
 		divfp = fileOpen(divfile, "wb");
 
-		for(szcnt = 0; szcnt < DivSize; )
+		for (szcnt = 0; szcnt < DivSize; )
 		{
 			uint readsize = (uint)m_min((uint64)BUFFSIZE, DivSize - szcnt);
 			autoBlock_t *divblock;
@@ -82,7 +82,7 @@ static void Restore(char *file)
 	cout("•œŒ³‚µ‚Ü‚·B\n");
 	cout("file: %s\n", file);
 
-	for(dividx = 0; ; dividx++)
+	for (dividx = 0; ; dividx++)
 	{
 		char *divfile = GetDivFile(file, dividx);
 		FILE *divfp;
@@ -96,7 +96,7 @@ static void Restore(char *file)
 		}
 		divfp = fileOpen(divfile, "rb");
 
-		for(; ; )
+		for (; ; )
 		{
 			autoBlock_t *divblock = readBinaryStream(divfp, BUFFSIZE);
 

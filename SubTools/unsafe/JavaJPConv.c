@@ -40,7 +40,7 @@ static void U16Line_AddAsciiLine(autoBlock_t *u16Line, char *line)
 {
 	char *p;
 
-	for(p = line; *p; p++)
+	for (p = line; *p; p++)
 	{
 		addByte(u16Line, *p);
 		addByte(u16Line, 0x00);
@@ -65,7 +65,7 @@ static void JavaJPConvFile(char *file)
 		int line_modified = 0;
 		autoBlock_t *dest = newBlock();
 
-		for(index = 0; index + 2 <= getSize(u16Line); index += 2)
+		for (index = 0; index + 2 <= getSize(u16Line); index += 2)
 		{
 			if (
 				index + 4 <= getSize(u16Line) &&

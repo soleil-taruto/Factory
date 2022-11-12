@@ -97,11 +97,11 @@ int main(int argc, char **argv)
 
 		RowToCSVStream(wfp, ResultColNames);
 
-		for(rowidx = 0; rowidx < rowcnt; rowidx++)
+		for (rowidx = 0; rowidx < rowcnt; rowidx++)
 		{
 			autoList_t *row = newList();
 
-			for(colidx = 0; colidx < getCount(ResultColNames); colidx++)
+			for (colidx = 0; colidx < getCount(ResultColNames); colidx++)
 			{
 				addElement(row, (uint)neReadLine(rfp));
 			}

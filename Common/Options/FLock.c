@@ -6,7 +6,7 @@ FILE *FLockLoop(char *file)
 
 	LOGPOS();
 
-	for(; ; )
+	for (; ; )
 	{
 		FILE *fp = FLock(file);
 

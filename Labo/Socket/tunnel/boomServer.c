@@ -348,7 +348,7 @@ static int Idle(void)
 		rbtSeekRoot(SessionTree);
 		rbtJumpToLastAccess(SessionTree);
 
-		for(remain = rbtGetCount(SessionTree); remain; remain--)
+		for (remain = rbtGetCount(SessionTree); remain; remain--)
 		{
 			uint currKey = rbtGetCurrKey(SessionTree);
 			Session_t *session = (Session_t *)rbtGetCurrValue(SessionTree);

@@ -53,7 +53,7 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		for(; ; )
+		for (; ; )
 		{
 			Touch(c_dropDirFile());
 			cout("\n");

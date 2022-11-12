@@ -20,7 +20,7 @@ void rcphrEncryptor(autoBlock_t *block, autoList_t *keyTableList, int doEncrypt)
 
 	if (getCount(keyTableList) == 1)
 	{
-		for(index = 0; index < 2; index++)
+		for (index = 0; index < 2; index++)
 		{
 			camellia_cbcRing(
 				(camellia_keyTable_t *)getElement(keyTableList, 0),
@@ -32,7 +32,7 @@ void rcphrEncryptor(autoBlock_t *block, autoList_t *keyTableList, int doEncrypt)
 	}
 	else
 	{
-		for(index = 0; index < getCount(keyTableList); index++)
+		for (index = 0; index < getCount(keyTableList); index++)
 		{
 			camellia_cbcRing(
 				(camellia_keyTable_t *)getElement(keyTableList, doEncrypt ? index : getCount(keyTableList) - 1 - index),

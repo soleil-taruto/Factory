@@ -97,7 +97,7 @@ static int TryPut(int x)
 	int y;
 //LOGPOS();
 
-	for(y = YSize - 1; 0 <= y; y--)
+	for (y = YSize - 1; 0 <= y; y--)
 	{
 		if (GetBall(x, y) == 0)
 		{
@@ -112,7 +112,7 @@ static void Unput(int x)
 	int y;
 //LOGPOS();
 
-	for(y = 0; y < YSize; y++)
+	for (y = 0; y < YSize; y++)
 	{
 		if (1 <= GetBall(x, y))
 		{
@@ -130,7 +130,7 @@ static int IsGameSet_XY(int x, int y, int ax, int ay)
 	if (ball < 1)
 		return 0;
 
-	for(count = 1; count < WinCount; count++)
+	for (count = 1; count < WinCount; count++)
 	{
 		x += ax;
 		y += ay;
@@ -146,8 +146,8 @@ static int IsGameSet(void)
 	int y;
 //LOGPOS();
 
-	for(x = 0; x < XSize; x++)
-	for(y = 0; y < YSize; y++)
+	for (x = 0; x < XSize; x++)
+	for (y = 0; y < YSize; y++)
 	{
 		if (
 			IsGameSet_XY(x, y, 1, 0) ||
@@ -193,7 +193,7 @@ static autoList_t *Simmulate(void)
 	}
 	result = newList();
 
-	for(colidx = 0; colidx < XSize; colidx++)
+	for (colidx = 0; colidx < XSize; colidx++)
 	{
 		uint value = 1;
 
@@ -234,7 +234,7 @@ static void AddRow(char *line)
 	autoList_t *row = newList();
 	char *p;
 
-	for(p = line; *p; p++)
+	for (p = line; *p; p++)
 	{
 		errorCase(!strchr("012", *p));
 

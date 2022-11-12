@@ -22,8 +22,8 @@ static void LoadMap(void)
 
 	resizeTable(Map, w, h);
 
-	for(x = 0; x < w; x++)
-	for(y = 0; y < h; y++)
+	for (x = 0; x < w; x++)
+	for (y = 0; y < h; y++)
 	{
 		int color = getElement(getList(bmp, y), x);
 		int flag;
@@ -48,11 +48,11 @@ static void SaveMap(void)
 	int w = getTableWidth(Map);
 	int h = getTableHeight(Map);
 
-	for(y = 0; y < h; y++)
+	for (y = 0; y < h; y++)
 	{
 		autoList_t *row = newList();
 
-		for(x = 0; x < w; x++)
+		for (x = 0; x < w; x++)
 		{
 			addElement(row, getTableCell(Map, x, y) ? COLOR_1 : COLOR_0);
 		}
@@ -71,8 +71,8 @@ static void InitMap(int w, int h, int flag)
 
 	resizeTable(Map, w, h);
 
-	for(x = 0; x < w; x++)
-	for(y = 0; y < h; y++)
+	for (x = 0; x < w; x++)
+	for (y = 0; y < h; y++)
 	{
 		setTableCell(Map, x, y, flag);
 	}
@@ -94,8 +94,8 @@ static void ExpandMap(int expand)
 
 	resizeTable(Map, w, h);
 
-	for(x = w - 1; 0 <= x; x--)
-	for(y = h - 1; 0 <= y; y--)
+	for (x = w - 1; 0 <= x; x--)
+	for (y = h - 1; 0 <= y; y--)
 	{
 		setTableCell(Map, x, y, getTableCell(Map, x / expand, y / expand));
 	}
@@ -113,8 +113,8 @@ static void RandomizeMap(int permil_0, int permil_1)
 	errorCase(permil_0 < 0 || 1000 < permil_0);
 	errorCase(permil_1 < 0 || 1000 < permil_1);
 
-	for(x = 0; x < w; x++)
-	for(y = 0; y < h; y++)
+	for (x = 0; x < w; x++)
+	for (y = 0; y < h; y++)
 	{
 		setTableCell(
 			Map,
@@ -131,8 +131,8 @@ static void MarumeDot(int x, int y, int w, int h)
 	int xc;
 	int yc;
 
-	for(xc = -1; xc <= 1; xc++)
-	for(yc = -1; yc <= 1; yc++)
+	for (xc = -1; xc <= 1; xc++)
+	for (yc = -1; yc <= 1; yc++)
 	{
 		int sx = x + xc;
 		int sy = y + yc;
@@ -181,8 +181,8 @@ static void WipeMarumeMap(int count, int mode) // mode: 0 - 7
 
 	while (0 < count)
 	{
-		for(x = 0; x < w; x++)
-		for(y = 0; y < h; y++)
+		for (x = 0; x < w; x++)
+		for (y = 0; y < h; y++)
 		{
 			int xc = x;
 			int yc = y;
@@ -219,25 +219,25 @@ static void FrameMap(
 	errorCase(w < 1);
 	errorCase(h < 1);
 
-	for(c = 0; c < atsusa; c++)
+	for (c = 0; c < atsusa; c++)
 	{
-		for(i = 0; i < w; i++)
+		for (i = 0; i < w; i++)
 		{
 			setTableCell(Map, i, c, 1);
 			setTableCell(Map, i, h - 1 - c, 1);
 		}
-		for(i = 0; i < h; i++)
+		for (i = 0; i < h; i++)
 		{
 			setTableCell(Map, c, i, 1);
 			setTableCell(Map, w - 1 - c, i, 1);
 		}
 	}
-	for(c = 0; c < atsusa; c++)
+	for (c = 0; c < atsusa; c++)
 	{
-		for(i = 0; i < nc; i++) setTableCell(Map, ns + i, c, 0);
-		for(i = 0; i < sc; i++) setTableCell(Map, ss + i, h - 1 - c, 0);
-		for(i = 0; i < wc; i++) setTableCell(Map, c, ws + i, 0);
-		for(i = 0; i < ec; i++) setTableCell(Map, w - 1 - c, es + i, 0);
+		for (i = 0; i < nc; i++) setTableCell(Map, ns + i, c, 0);
+		for (i = 0; i < sc; i++) setTableCell(Map, ss + i, h - 1 - c, 0);
+		for (i = 0; i < wc; i++) setTableCell(Map, c, ws + i, 0);
+		for (i = 0; i < ec; i++) setTableCell(Map, w - 1 - c, es + i, 0);
 	}
 	SaveMap();
 }
@@ -254,8 +254,8 @@ static void BoxMap(int x, int y, int boxW, int boxH, int flag)
 
 	flag = flag ? 1 : 0;
 
-	for(xc = 0; xc < boxW; xc++)
-	for(yc = 0; yc < boxH; yc++)
+	for (xc = 0; xc < boxW; xc++)
+	for (yc = 0; yc < boxH; yc++)
 	{
 		int sx = x + xc;
 		int sy = y + yc;
@@ -277,20 +277,20 @@ static void FM_Put2x2Tree(autoTable_t *newMap, int origX, int origY)
 	w = getTableWidth(Map);
 	h = getTableHeight(Map);
 
-	for(x = origX; x < w - 1; x += 2)
-	for(y = origY; y < h - 1; y += 2)
+	for (x = origX; x < w - 1; x += 2)
+	for (y = origY; y < h - 1; y += 2)
 	{
 		int flag = 0;
 		int xc;
 		int yc;
 
-		for(xc = 0; xc < 2; xc++)
-		for(yc = 0; yc < 2; yc++)
+		for (xc = 0; xc < 2; xc++)
+		for (yc = 0; yc < 2; yc++)
 		{
 			if (getTableCell(Map, x + xc, y + yc)) flag = 1;
 		}
-		for(xc = 0; xc < 2; xc++)
-		for(yc = 0; yc < 2; yc++)
+		for (xc = 0; xc < 2; xc++)
+		for (yc = 0; yc < 2; yc++)
 		{
 			setTableCell(
 				newMap,

@@ -127,7 +127,7 @@ static void DoFRenumStmp(void)
 
 	LOGPOS();
 
-	for(index = 0; index < getCount(files); index++) // 移動テスト①
+	for (index = 0; index < getCount(files); index++) // 移動テスト①
 	{
 		char *rFile = getLine(files, index);
 		char *wFile = getLine(midFiles, index);
@@ -148,7 +148,7 @@ static void DoFRenumStmp(void)
 
 	LOGPOS();
 
-	for(index = 0; index < getCount(files); index++)
+	for (index = 0; index < getCount(files); index++)
 		moveFile(
 			getLine(files, index),
 			getLine(midFiles, index)
@@ -160,7 +160,7 @@ static void DoFRenumStmp(void)
 	{
 		int errorFlag = 0;
 
-		for(index = 0; index < getCount(files); index++)
+		for (index = 0; index < getCount(files); index++)
 		{
 			char *wFile = getLine(destFiles, index);
 
@@ -180,7 +180,7 @@ static void DoFRenumStmp(void)
 
 		if (errorFlag)
 		{
-			for(index = 0; index < getCount(files); index++) // 復元
+			for (index = 0; index < getCount(files); index++) // 復元
 				moveFile(
 					getLine(midFiles, index),
 					getLine(files, index)
@@ -192,7 +192,7 @@ static void DoFRenumStmp(void)
 
 	LOGPOS();
 
-	for(index = 0; index < getCount(files); index++)
+	for (index = 0; index < getCount(files); index++)
 		moveFile(
 			getLine(midFiles, index),
 			getLine(destFiles, index)

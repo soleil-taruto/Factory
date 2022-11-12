@@ -36,9 +36,9 @@ static void Analysis(Numb_t *s, int snum)
 		return;
 	}
 
-	for(e = 0; e < 4; e++)
-	for(b = 0; b < snum; b++)
-	for(a = 0; a < snum; a++)
+	for (e = 0; e < 4; e++)
+	for (b = 0; b < snum; b++)
+	for (a = 0; a < snum; a++)
 	{
 		if (a != b)
 		{
@@ -81,7 +81,7 @@ static void Analysis(Numb_t *s, int snum)
 				int si;
 				int ti = 0;
 
-				for(si = 0; si < snum; si++)
+				for (si = 0; si < snum; si++)
 				{
 					if (si != a && si != b)
 					{
@@ -103,10 +103,10 @@ int main(int argc, char **argv)
 	int c;
 	int d;
 
-	for(d = 1; d <= 9; d++)
-	for(c = 1; c <= d; c++)
-	for(b = 1; b <= c; b++)
-	for(a = 1; a <= b; a++)
+	for (d = 1; d <= 9; d++)
+	for (c = 1; c <= d; c++)
+	for (b = 1; b <= c; b++)
+	for (a = 1; a <= b; a++)
 	{
 		Numb_t s[4];
 

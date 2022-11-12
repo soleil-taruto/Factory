@@ -39,7 +39,7 @@ static void Test_DirToStream(char *dir)
 }
 int main(int argc, char **argv)
 {
-	for(; ; )
+	for (; ; )
 	{
 		Test_DirToStream(dropDir());
 	}

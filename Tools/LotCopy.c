@@ -69,7 +69,7 @@ int main(int argc, char **argv)
 			wDir = dropDir();
 		}
 
-		for(; ; )
+		for (; ; )
 		{
 			cout("コピー元ディレクトリ:\n");
 			rDir = dropDir();
@@ -89,7 +89,7 @@ int main(int argc, char **argv)
 		return;
 	}
 
-	for(; ; )
+	for (; ; )
 	{
 		char *rDir;
 		char *wDir;

@@ -21,7 +21,7 @@ autoList_t *readCSVFile(char *file)
 
 		if (chr == '"')
 		{
-			for(; ; )
+			for (; ; )
 			{
 				chr = readChar(fp);
 
@@ -43,7 +43,7 @@ autoList_t *readCSVFile(char *file)
 		}
 		else
 		{
-			for(; ; )
+			for (; ; )
 			{
 				if (chr == CSVCellDelimiter || chr == '\n')
 					break;
@@ -91,11 +91,11 @@ void writeCSVFile(char *file, autoList_t *table)
 	uint rowidx;
 	uint colidx;
 
-	for(rowidx = 0; rowidx < getCount(table); rowidx++)
+	for (rowidx = 0; rowidx < getCount(table); rowidx++)
 	{
 		autoList_t *row = (autoList_t *)getElement(table, rowidx);
 
-		for(colidx = 0; colidx < getCount(row); colidx++)
+		for (colidx = 0; colidx < getCount(row); colidx++)
 		{
 			char *cell = (char *)getElement(row, colidx);
 
@@ -108,7 +108,7 @@ void writeCSVFile(char *file, autoList_t *table)
 
 				writeChar(fp, '"');
 
-				for(p = cell; *p; p++)
+				for (p = cell; *p; p++)
 				{
 					if (*p == '"')
 					{
@@ -194,7 +194,7 @@ void csvSquare(autoList_t *table)
 			autoList_t *row = newList();
 			uint colidx;
 
-			for(colidx = 0; colidx < colcnt; colidx++)
+			for (colidx = 0; colidx < colcnt; colidx++)
 			{
 				addElement(row, (uint)strx(""));
 			}
@@ -227,8 +227,8 @@ void csvTwist(autoList_t *table)
 
 	count = getCount(table);
 
-	for(rowidx = 0; rowidx < count; rowidx++)
-	for(colidx = rowidx + 1; colidx < count; colidx++)
+	for (rowidx = 0; rowidx < count; rowidx++)
+	for (colidx = rowidx + 1; colidx < count; colidx++)
 	{
 		autoList_t *r = (autoList_t *)getElement(table, rowidx);
 		autoList_t *c = (autoList_t *)getElement(table, colidx);

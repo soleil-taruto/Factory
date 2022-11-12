@@ -48,7 +48,7 @@ static void WriteLog(uint conId, int direction, autoBlock_t *rawData)
 	}
 	writeToken_x(OutputFp, xcout("%I64u,%u,%c,\"", stamp, conId, direction));
 
-	for(index = 0; index < getSize(rawData); index++)
+	for (index = 0; index < getSize(rawData); index++)
 	{
 		int chr = getByte(rawData, index);
 

@@ -19,11 +19,11 @@ static void CompletionLead(autoList_t *list)
 	uint index;
 	uint rIndex;
 
-	for(rIndex = 0; ; rIndex++)
+	for (rIndex = 0; ; rIndex++)
 		if (getElement(list, rIndex))
 			break;
 
-	for(index = 0; index < rIndex; index++)
+	for (index = 0; index < rIndex; index++)
 		setElement(list, index, (uint)CopyPrice((Price_t *)getElement(list, rIndex)));
 }
 static void CompletionTrail(autoList_t *list)
@@ -31,11 +31,11 @@ static void CompletionTrail(autoList_t *list)
 	uint index;
 	uint rIndex;
 
-	for(rIndex = getCount(list) - 1; ; rIndex--)
+	for (rIndex = getCount(list) - 1; ; rIndex--)
 		if (getElement(list, rIndex))
 			break;
 
-	for(index = getCount(list) - 1; rIndex < index; index--)
+	for (index = getCount(list) - 1; rIndex < index; index--)
 		setElement(list, index, (uint)CopyPrice((Price_t *)getElement(list, rIndex)));
 }
 static void CompletionMid(autoList_t *list)
@@ -43,7 +43,7 @@ static void CompletionMid(autoList_t *list)
 	uint index;
 	uint rIndex;
 
-	for(rIndex = 1; rIndex + 1 < getCount(list); rIndex++)
+	for (rIndex = 1; rIndex + 1 < getCount(list); rIndex++)
 	{
 		if (!getElement(list, rIndex))
 		{
@@ -51,13 +51,13 @@ static void CompletionMid(autoList_t *list)
 			uint endidx;
 			uint count;
 
-			for(endidx = rIndex + 1; ; endidx++)
+			for (endidx = rIndex + 1; ; endidx++)
 				if (getElement(list, endidx))
 					break;
 
 			count = endidx - bgnidx;
 
-			for(index = 1; index < count; index++)
+			for (index = 1; index < count; index++)
 			{
 				double bid =
 					GetBid((Price_t *)getElement(list, bgnidx)) + (
@@ -86,7 +86,7 @@ static void Completion(autoList_t *list)
 		１回以上連続する失敗の直後に取得されたデータは何時のデータか分からないので捨てる。
 		但し、その直後も失敗していたら捨てない。
 	*/
-	for(index = 0; index + 2 < getCount(list); index++)
+	for (index = 0; index + 2 < getCount(list); index++)
 	{
 		Price_t *b = (Price_t *)getElement(list, index);
 		Price_t *c = (Price_t *)getElement(list, index + 1);
@@ -144,7 +144,7 @@ static double ToDouble(char *str)
 	int readDot = 0;
 	char *p;
 
-	for(p = str; *p; p++)
+	for (p = str; *p; p++)
 	{
 		if (m_isdecimal(*p))
 		{
@@ -196,7 +196,7 @@ autoList_t *LoadDummyPriceDay(void) // ret: { Price_t *, ... }
 	autoList_t *list = newList();
 	uint index;
 
-	for(index = 0; index < 43200; index++)
+	for (index = 0; index < 43200; index++)
 		addElement(list, (uint)CreatePrice(0.0, 0.0));
 
 	return list;

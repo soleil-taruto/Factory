@@ -26,13 +26,13 @@ int main(int argc, char **argv)
 	mt19937_init();
 
 #if 0
-	for(d = 0; d < 10; d++)
+	for (d = 0; d < 10; d++)
 	{
 		int testcnt = 300000;
 		int enactcnt = 0;
 		int c;
 
-		for(c = 0; c < testcnt; c++)
+		for (c = 0; c < testcnt; c++)
 		{
 			if (c % 1000 == 0)
 				cmdTitle_x(xcout("Sugoroku - %d", c));
@@ -48,13 +48,13 @@ int main(int argc, char **argv)
 			);
 	}
 #else
-	for(d = 0; d < 30; d++)
+	for (d = 0; d < 30; d++)
 	{
 		int testcnt = 300000;
 		int enactcnt = 0;
 		int c;
 
-		for(c = 0; c < testcnt; c++)
+		for (c = 0; c < testcnt; c++)
 		{
 			if (c % 1000 == 0)
 				cmdTitle_x(xcout("Sugoroku - %d", c));

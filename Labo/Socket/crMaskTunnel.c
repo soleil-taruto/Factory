@@ -30,7 +30,7 @@ static void Fltr(autoBlock_t *buff, uint prm)
 	data = directGetBuffer(buff);
 	dataSize = getSize(buff);
 
-	for(index = 0; index < dataSize; index++)
+	for (index = 0; index < dataSize; index++)
 	{
 		data[index] ^= getByte(i->MaskPtn, i->RPos);
 

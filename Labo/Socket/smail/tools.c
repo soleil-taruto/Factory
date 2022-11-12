@@ -50,13 +50,13 @@ void MailParser(autoBlock_t *mail)
 	MP_HeaderKeys = newList();
 	MP_HeaderValues = newList();
 
-	for(rPos = 0; ; )
+	for (rPos = 0; ; )
 	{
 		uint i = rPos;
 		char *headerLine;
 		int folding;
 
-		for(; i < getSize(mail); i++)
+		for (; i < getSize(mail); i++)
 			if (b_(mail)[i] == '\n')
 				break;
 

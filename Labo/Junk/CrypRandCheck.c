@@ -14,7 +14,7 @@ static void LoadCBytes(void)
 
 	CBytes = newBlock();
 
-	for(index = 0; index < CPART_NUM; index++)
+	for (index = 0; index < CPART_NUM; index++)
 	{
 		if (eqIntPulseSec(2, NULL))
 			cout("LOAD %u\n", index);
@@ -34,8 +34,8 @@ static void CheckCBytes(void)
 	uint lPos;
 	uint rPos;
 
-	for(lPos = 0;        lPos + CHK_SZ + 1 <= getSize(CBytes); lPos++)
-	for(rPos = lPos + 1; rPos + CHK_SZ     <= getSize(CBytes); rPos++)
+	for (lPos = 0;        lPos + CHK_SZ + 1 <= getSize(CBytes); lPos++)
+	for (rPos = lPos + 1; rPos + CHK_SZ     <= getSize(CBytes); rPos++)
 	{
 		if (eqIntPulseSec(2, NULL))
 			cout("CHECK %u %u\n", lPos, rPos);
@@ -61,7 +61,7 @@ int main(int argc, char **argv)
 		outFile = nextArg();
 		outFp = fileOpen(outFile, "wb");
 
-		for(index = 0; index < size; index++)
+		for (index = 0; index < size; index++)
 			writeChar(outFp, getCryptoByte());
 
 		fileClose(outFp);

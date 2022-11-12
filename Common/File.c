@@ -343,7 +343,7 @@ int mkdirEx(char *dir) // ret: ? 失敗
 
 		cout("CreateDirectory() failed \"%s\" %u\n", dir, GetLastError());
 
-		for(c = 0; ; c++)
+		for (c = 0; ; c++)
 		{
 			sleep(100);
 			LOGPOS();
@@ -427,7 +427,7 @@ void removeDir(char *dir)
 {
 	uint c;
 
-	for(c = 1; ; c++)
+	for (c = 1; ; c++)
 	{
 		if (!_rmdir(dir)) // ? 成功
 			break;
@@ -441,7 +441,7 @@ void removeFile(char *file)
 {
 	uint c;
 
-	for(c = 1; ; c++)
+	for (c = 1; ; c++)
 	{
 		if (!remove(file)) // ? 成功
 			break;
@@ -549,7 +549,7 @@ void createPath(char *path, int mode)
 	memFree(path);
 	path = strx(getLine(ptkns, 0));
 
-	for(index = 1; ; index++)
+	for (index = 1; ; index++)
 	{
 		path = addChar(path, '\\');
 		path = addLine(path, getLine(ptkns, index));
@@ -752,7 +752,7 @@ static void CopyFile_DM(char *srcFile, char *destFile, char *destMode)
 
 	if (buffSize)
 	{
-		for(; ; )
+		for (; ; )
 		{
 			autoBlock_t *block = readBinaryStream(rfp, buffSize);
 
@@ -783,14 +783,14 @@ static void CopyDir_Abs(char *srcDir, char *destDir) // destDir は作成されている
 	destPaths = copyLines(srcPaths);
 	changeRoots(destPaths, srcDir, destDir); // <- srcDir, destDir 共に絶対パスであること。
 
-	for(index = 0; index < lastDirCount; index++)
+	for (index = 0; index < lastDirCount; index++)
 	{
 		char *dir = getLine(destPaths, index);
 
 		if (!existDir(dir)) // 上書きに対応してみる。
 			createDir(dir);
 	}
-	for(; index < getCount(srcPaths); index++)
+	for (; index < getCount(srcPaths); index++)
 	{
 		copyFile(getLine(srcPaths, index), getLine(destPaths, index));
 	}
@@ -844,7 +844,7 @@ void moveFile(char *srcFile, char *destFile)
 {
 	uint c;
 
-	for(c = 1; ; c++)
+	for (c = 1; ; c++)
 	{
 #if 0 // rename(), MOVE 共に LastError=5 で常に失敗してしまう。PC再起動したら直った。何だったんだ... @ 2020.12.15
 		if (DoCmdMove(srcFile, destFile)) // ? 成功
@@ -868,14 +868,14 @@ static void MoveDir_Abs(char *srcDir, char *destDir) // destDir は作成されている
 	destPaths = copyLines(srcPaths);
 	changeRoots(destPaths, srcDir, destDir); // <- srcDir, destDir 共に絶対パスであること。
 
-	for(index = 0; index < lastDirCount; index++)
+	for (index = 0; index < lastDirCount; index++)
 	{
 		char *dir = getLine(destPaths, index);
 
 		if (!existDir(dir)) // 上書きに対応してみる。
 			createDir(dir);
 	}
-	for(; index < getCount(srcPaths); index++)
+	for (; index < getCount(srcPaths); index++)
 	{
 		char *srcFile = getLine(srcPaths, index);
 		char *destFile = getLine(destPaths, index);
@@ -885,7 +885,7 @@ static void MoveDir_Abs(char *srcDir, char *destDir) // destDir は作成されている
 
 		moveFile(srcFile, destFile);
 	}
-	for(index = lastDirCount; index; )
+	for (index = lastDirCount; index; )
 	{
 		index--;
 		removeDir(getLine(srcPaths, index));
@@ -1005,7 +1005,7 @@ uint64 getDirSize(char *dir)
 	uint index;
 	uint64 size = 0;
 
-	for(index = lastDirCount; index < getCount(files); index++)
+	for (index = lastDirCount; index < getCount(files); index++)
 	{
 		size += getFileSize(getLine(files, index));
 	}

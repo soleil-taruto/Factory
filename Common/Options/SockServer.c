@@ -386,7 +386,7 @@ void sockServerEx(int (*funcPerform)(char *, char *),
 
 	sockServerMode = 1;
 
-	for(; ; )
+	for (; ; )
 	{
 		static uint xcRchd;
 

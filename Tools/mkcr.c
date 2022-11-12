@@ -25,9 +25,9 @@ static void MakeCryptoRand(uint rowcnt, uint colcnt)
 
 	block = makeCryptoRandBlock(rowcnt * colcnt);
 
-	for(rowidx = 0; rowidx < rowcnt; rowidx++)
+	for (rowidx = 0; rowidx < rowcnt; rowidx++)
 	{
-		for(colidx = 0; colidx < colcnt; colidx++)
+		for (colidx = 0; colidx < colcnt; colidx++)
 		{
 			writeToken(fp, swrk = xcout("%02x", getByte(block, i++))); memFree(swrk);
 		}

@@ -135,13 +135,13 @@ static void PrimeRange(uint64 minval, uint64 maxval, char *outFile, char *cancel
 
 	if (IsShortRange(minval, maxval))
 	{
-		for(value = minval; value <= maxval; value += 2)
+		for (value = minval; value <= maxval; value += 2)
 			if (A_IsPrime(value))
 				WrUI64(fp, value);
 	}
 	else
 	{
-		for(value = minval; value <= maxval; value += 2)
+		for (value = minval; value <= maxval; value += 2)
 		{
 			if (value % 0x08000000 == 1)
 			{
@@ -224,13 +224,13 @@ static void PrimeCount(uint64 minval, uint64 maxval, char *outFile, char *cancel
 
 	if (IsShortRange(minval, maxval))
 	{
-		for(value = minval; value <= maxval; value += 2)
+		for (value = minval; value <= maxval; value += 2)
 			if (A_IsPrime(value))
 				count++;
 	}
 	else
 	{
-		for(value = minval; value <= maxval; value += 2)
+		for (value = minval; value <= maxval; value += 2)
 		{
 			if (value % 0x10000000 == 1)
 			{
@@ -327,11 +327,11 @@ static void DoBatch(int mode, char *rFile, char *wFile) // mode: "PFC"
 				addElement(wRow, (uint)xcout("%I64u", value));
 				Factorization(value, factors);
 
-				for(count = 0; factors[count] != 0; count++);
+				for (count = 0; factors[count] != 0; count++);
 
 				addElement(wRow, (uint)xcout("%u", count));
 
-				for(fp = factors; *fp; fp++)
+				for (fp = factors; *fp; fp++)
 				{
 					cout(" %I64u", *fp);
 					addElement(wRow, (uint)xcout("%I64u", *fp));
@@ -421,7 +421,7 @@ readArgs:
 
 		Factorization(value, dest);
 
-		for(index = 0; dest[index] != 0; index++)
+		for (index = 0; dest[index] != 0; index++)
 		{
 			cout("%s%I64u\n", majorOutputLinePrefix, dest[index]);
 		}

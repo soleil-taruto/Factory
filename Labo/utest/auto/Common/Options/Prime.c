@@ -24,7 +24,7 @@ static int Test_IsPrime(uint64 value)
 		if (UINT64MAX - 100 <= value) return 0;
 	}
 
-	for(denom = 3; denom <= UINTMAX; denom += 2)
+	for (denom = 3; denom <= UINTMAX; denom += 2)
 	{
 		if (value < denom * denom)
 			break;
@@ -57,31 +57,31 @@ int main(int argc, char **argv)
 
 	mt19937_initRnd(time(NULL));
 
-	for(c = 0; c <= 1000; c++)
+	for (c = 0; c <= 1000; c++)
 	{
 		DoTest(c);
 	}
-	for(c = UINTMAX - 100; c <= (uint64)UINTMAX + 100; c++)
+	for (c = UINTMAX - 100; c <= (uint64)UINTMAX + 100; c++)
 	{
 		DoTest(c);
 	}
-	for(c = UINT64MAX; UINT64MAX - 100 <= c; c--)
+	for (c = UINT64MAX; UINT64MAX - 100 <= c; c--)
 	{
 		DoTest(c);
 	}
-	for(c = 0; c < 100000; c++)
+	for (c = 0; c < 100000; c++)
 	{
 		DoTest(mt19937_rnd64Mod((uint64)UINTMAX * 256));
 	}
-	for(c = 0; c < 10000; c++)
+	for (c = 0; c < 10000; c++)
 	{
 		DoTest(mt19937_rnd64Mod((uint64)UINTMAX * 65536));
 	}
-	for(c = 0; c < 1000; c++)
+	for (c = 0; c < 1000; c++)
 	{
 		DoTest(mt19937_rnd64Mod((uint64)UINTMAX * 65536 * 256));
 	}
-	for(c = 0; c < 100; c++)
+	for (c = 0; c < 100; c++)
 	{
 		DoTest(mt19937_rnd64());
 	}

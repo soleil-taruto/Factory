@@ -6,7 +6,7 @@ int main(int argc, char **argv)
 	char *numb = repeatChar('9', hasArgs(1) ? toValue(nextArg()) : 50);
 //	char *numb = repeatChar('9', 50);
 
-	for(; ; )
+	for (; ; )
 	{
 		cout("%s\n", numb);
 

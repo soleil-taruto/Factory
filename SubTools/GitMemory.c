@@ -196,7 +196,7 @@ static void TrimMain(void)
 
 	LOGPOS();
 
-	for(index = 1; index < getCount(memDirs); index++)
+	for (index = 1; index < getCount(memDirs); index++)
 	{
 		char *memDir1 = getLine(memDirs, index - 1);
 		char *memDir2 = getLine(memDirs, index - 0);

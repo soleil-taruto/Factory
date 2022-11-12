@@ -5,7 +5,7 @@ static uint GetDiffStart(autoBlock_t *block1, autoBlock_t *block2)
 	uint size = m_min(getSize(block1), getSize(block2));
 	uint index;
 
-	for(index = 0; index < size; index++)
+	for (index = 0; index < size; index++)
 	{
 		if (getByte(block1, index) != getByte(block2, index))
 		{

@@ -7,7 +7,7 @@ static void Print(autoBlock_t *a, char *title)
 
 	cout("%s=", title);
 
-	for(index = getSize(a); index; index--)
+	for (index = getSize(a); index; index--)
 		cout("%02x", getByte(a, index - 1));
 
 	cout("\n");
@@ -35,7 +35,7 @@ static int Comp(autoBlock_t *a, autoBlock_t *b)
 	if (getSize(b) < getSize(a))
 		return 1;
 
-	for(index = getSize(a); index; index--)
+	for (index = getSize(a); index; index--)
 	{
 		if (getByte(a, index - 1) < getByte(b, index - 1))
 			return -1;
@@ -73,7 +73,7 @@ static void DD_Mul(uint64 b)
 
 	setSize(Dml, 0);
 
-	for(index = 0; index < getSize(Denom); index++)
+	for (index = 0; index < getSize(Denom); index++)
 	{
 		uint64 val = getByte(Denom, index) * b;
 		uint c = index;
@@ -94,7 +94,7 @@ static void DD_Red(uint aPos)
 
 	errorCase(Comp(Rem, Dml) < 0);
 
-	for(index = 0; index < getSize(Dml); index++)
+	for (index = 0; index < getSize(Dml); index++)
 	{
 		val += getByte(Rem, index + aPos);
 		val += 0xff - getByte(Dml, index);
@@ -198,7 +198,7 @@ static void DT_Init(autoBlock_t *dest, uint scale)
 
 	setSize(dest, 0);
 
-	for(c = 0; c < scale; c++)
+	for (c = 0; c < scale; c++)
 		addByte(dest, mt19937_rnd(256));
 
 	addByte(dest, mt19937_rnd(255) + 1);
@@ -210,8 +210,8 @@ static void DT_Mul(void)
 
 	setSize(Tml, 0);
 
-	for(ai = 0; ai < getSize(Ans); ai++)
-	for(bi = 0; bi < getSize(Denom); bi++)
+	for (ai = 0; ai < getSize(Ans); ai++)
+	for (bi = 0; bi < getSize(Denom); bi++)
 	{
 		uint val = getByte(Ans, ai) * getByte(Denom, bi);
 		uint index = ai + bi;
@@ -229,7 +229,7 @@ static void DT_Add(void)
 {
 	uint index;
 
-	for(index = 0; index < getSize(Rem); index++)
+	for (index = 0; index < getSize(Rem); index++)
 	{
 		uint val = getByte(Rem, index);
 		uint c = index;

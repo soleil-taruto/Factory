@@ -14,7 +14,7 @@ void VTreeToStream(VTree_t *vt, void (*streamWriter)(uchar *, uint))
 	uint index;
 	uchar buffer[9];
 
-	for(index = 0; index < count; index++)
+	for (index = 0; index < count; index++)
 	{
 		char *file = vt->GetLocal(index);
 
@@ -40,7 +40,7 @@ void VTreeToStream(VTree_t *vt, void (*streamWriter)(uchar *, uint))
 			value64ToBlock(buffer + 1, size);
 			streamWriter(buffer, 9);
 
-			for(readPos = 0; readPos < size; readPos += readSize)
+			for (readPos = 0; readPos < size; readPos += readSize)
 			{
 				readSize = m_min(WRITER_BUFFSIZE, (uint)(size - readPos));
 				vt->GetEntity(index, readPos, readSize, block);
@@ -101,7 +101,7 @@ enterDir:
 	else
 		rapidSortLines(paths);
 
-	for(; ; )
+	for (; ; )
 	{
 		uchar buffer[26];
 //		uchar buffer[9]; // old
@@ -264,12 +264,12 @@ void StreamToDir(char *dir, void (*streamReader)(uchar *, uint))
 
 	addCwd(dir);
 
-	for(; ; )
+	for (; ; )
 	{
 		char *path = strx("");
 		uchar buffer[8];
 
-		for(; ; )
+		for (; ; )
 		{
 			STD_ReadStream(buffer, 1);
 

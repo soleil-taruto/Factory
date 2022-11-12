@@ -6,7 +6,7 @@ static uint BitKazoe_Test(uint64 value)
 	uint64 bit;
 	uint count = 0;
 
-	for(bit = 1ui64 << 63; bit != 0; bit /= 2)
+	for (bit = 1ui64 << 63; bit != 0; bit /= 2)
 		if ((value & bit) != 0)
 			count++;
 
@@ -56,12 +56,12 @@ static void MakeMap(void)
 
 	Map = memAlloc(256);
 
-	for(index = 0; index < 256; index++)
+	for (index = 0; index < 256; index++)
 	{
 		uint count = 0;
 		uint bit;
 
-		for(bit = 1 << 7; bit; bit /= 2)
+		for (bit = 1 << 7; bit; bit /= 2)
 			if (index & bit)
 				count++;
 
@@ -91,12 +91,12 @@ static void MakeMap16(void)
 
 	Map16 = memAlloc(65536);
 
-	for(index = 0; index < 65536; index++)
+	for (index = 0; index < 65536; index++)
 	{
 		uint count = 0;
 		uint bit;
 
-		for(bit = 1 << 15; bit; bit /= 2)
+		for (bit = 1 << 15; bit; bit /= 2)
 			if (index & bit)
 				count++;
 
@@ -174,7 +174,7 @@ static void Test02(void) // speed
 
 	LOGPOS();
 
-	for(c = 4100000000; c; c -= 41)
+	for (c = 4100000000; c; c -= 41)
 	{
 		uint64 value = (uint64)c << 32 | c;
 

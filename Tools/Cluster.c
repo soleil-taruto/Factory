@@ -145,7 +145,7 @@ static void BackupFile(char *file)
 	// ñ≥Ç¢èÍçáÇ‡Ç†ÇÈÇÊÅB@ 2017.7.2
 	if (existFile(file))
 	{
-		for(; ; )
+		for (; ; )
 		{
 			coExecute_x(xcout("DEL \"%s\"", oldFile));
 
@@ -154,7 +154,7 @@ static void BackupFile(char *file)
 
 			coSleep(2000);
 		}
-		for(; ; )
+		for (; ; )
 		{
 			coExecute_x(xcout("REN \"%s\" \"%s\"", file, getLocal(oldFile)));
 
@@ -506,7 +506,7 @@ readArgs:
 		return;
 	}
 
-	for(; ; )
+	for (; ; )
 	{
 		char *path = dropPath();
 

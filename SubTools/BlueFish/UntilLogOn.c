@@ -13,7 +13,7 @@ static int IsSingleColor_First100Px_BmpRow(autoList_t *bmpRow)
 {
 	uint x;
 
-	for(x = 1; x < 100; x++)
+	for (x = 1; x < 100; x++)
 		if (refElement(bmpRow, 0) != refElement(bmpRow, x))
 			return 0;
 

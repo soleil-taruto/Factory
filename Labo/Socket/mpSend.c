@@ -12,7 +12,7 @@ static char *EncodeUrlMessage(char *message)
 	autoBlock_t *lineBuff = newBlock();
 	char *p;
 
-	for(p = message; *p; p++)
+	for (p = message; *p; p++)
 	{
 		if (*p == ' ')
 		{

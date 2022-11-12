@@ -167,7 +167,7 @@ char *selectLine(autoList_t *lines) // ret == NULL: ƒLƒƒƒ“ƒZƒ‹‚µ‚½B
 {
 	char *retLine;
 
-	for(; ; )
+	for (; ; )
 	{
 		autoList_t *selLines = selectLines(lines);
 
@@ -199,7 +199,7 @@ void merge2(autoList_t *list1, autoList_t *list2, sint (*funcComp)(uint, uint), 
 	uint p = 0;
 	uint q = 0;
 
-	for(; ; )
+	for (; ; )
 	{
 		uint e1 = p == getCount(list1);
 		uint e2 = q == getCount(list2);
@@ -276,7 +276,7 @@ void distinct(autoList_t *list, sint (*funcComp)(uint, uint), autoList_t *result
 {
 	uint index;
 
-	for(index = 0; index < getCount(list); index++)
+	for (index = 0; index < getCount(list); index++)
 	{
 		if (index == 0 || funcComp(getElement(list, index), getElement(list, index - 1)))
 		{
@@ -339,7 +339,7 @@ void distinct2(autoList_t *list, sint (*funcComp)(uint, uint), void (*funcReleas
 
 	rapidSort(list, funcComp);
 
-	for(index = 1; index < getCount(list); index++)
+	for (index = 1; index < getCount(list); index++)
 	{
 		if (!funcComp(getElement(list, wi - 1), getElement(list, index)))
 			funcRelease(getElement(list, index));

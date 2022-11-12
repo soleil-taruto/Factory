@@ -84,12 +84,12 @@ static uint FindLastReference(autoList_t *infos, SourceInfo_t *targInfo, uint in
 {
 	uint lastRefIndex = 0;
 
-	for(; index < getCount(infos); index++)
+	for (; index < getCount(infos); index++)
 	{
 		SourceInfo_t *info = (SourceInfo_t *)getElement(infos, index);
 		uint i;
 
-		for(i = 0; i < getCount(targInfo->RefSolutions); i++)
+		for (i = 0; i < getCount(targInfo->RefSolutions); i++)
 		{
 			if (!_stricmp(info->Source, getLine(targInfo->RefSolutions, i)))
 			{
@@ -120,7 +120,7 @@ void SolutionOrder(autoList_t *sources) // sources: 全てフルパスであることを想定
 	}
 	LOGPOS();
 
-	for(index = getCount(infos); index; index--)
+	for (index = getCount(infos); index; index--)
 	{
 		SourceInfo_t *info = (SourceInfo_t *)getElement(infos, index - 1);
 		uint lastRefIndex;
@@ -135,7 +135,7 @@ void SolutionOrder(autoList_t *sources) // sources: 全てフルパスであることを想定
 	}
 	LOGPOS();
 
-	for(index = 0; index < getCount(infos); index++)
+	for (index = 0; index < getCount(infos); index++)
 	{
 		SourceInfo_t *info = (SourceInfo_t *)getElement(infos, index);
 

@@ -19,7 +19,7 @@ static void CsvToJson(char *rFile, char *wFile)
 	wfp = fileOpen(wFile, "wt");
 	writeLine(wfp, "[");
 
-	for(rowidx = 1; rowidx < getCount(csv); rowidx++)
+	for (rowidx = 1; rowidx < getCount(csv); rowidx++)
 	{
 		autoList_t *row = getList(csv, rowidx);
 		char *cell;

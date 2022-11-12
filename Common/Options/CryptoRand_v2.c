@@ -117,7 +117,7 @@ static void GetCryptoSeed(uchar *seed, uint seed_size, char *seed_file)
 			fileRead(fp, gndBlockVar(seed, seed_size, gab));
 			fileClose(fp);
 
-			for(index = 0; index < seed_size; index++)
+			for (index = 0; index < seed_size; index++)
 			{
 				if (seed[index] < 0xff)
 				{
@@ -165,7 +165,7 @@ static void GetCryptoBlock(uchar *buffer)
 
 		sha512_localize();
 
-		for(index = 0; index < 4; index++)
+		for (index = 0; index < 4; index++)
 		{
 			sha512_makeHashBlock(gndBlockVar(cam_seed[index], SEEDSIZE, gab));
 			memcpy(cam_seed[index], sha512_hash, 32);
@@ -177,8 +177,8 @@ static void GetCryptoBlock(uchar *buffer)
 	}
 	else // カウンタ更新
 	{
-		for(index = 0; ; index++)
-//		for(index = 0; index < 16; index++)
+		for (index = 0; ; index++)
+//		for (index = 0; index < 16; index++)
 		{
 			if (counter[index] < 0xff)
 			{

@@ -9,7 +9,7 @@ static void TestFunc(uint prm) // ts_
 	{
 //		Sleep(100); // ‘Sˆõ‚±‚±‚Ü‚Å—ˆ‚é‚Ì‚ğ‘Ò‚ÂB
 
-		for(c = 0; c < 100; c++)
+		for (c = 0; c < 100; c++)
 		{
 			cout("%s:%u\n", prm, c);
 

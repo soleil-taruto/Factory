@@ -13,9 +13,9 @@ void gnomeSort(autoList_t *list, sint (*funcComp)(uint, uint)) // 安定ソート
 	uint nearidx;
 	uint faridx;
 
-	for(faridx = 1; faridx < getCount(list); faridx++)
+	for (faridx = 1; faridx < getCount(list); faridx++)
 	{
-		for(nearidx = faridx; nearidx && 0 < funcComp(getElement(list, nearidx - 1), getElement(list, nearidx)); nearidx--)
+		for (nearidx = faridx; nearidx && 0 < funcComp(getElement(list, nearidx - 1), getElement(list, nearidx)); nearidx--)
 		{
 			swapElement(list, nearidx - 1, nearidx);
 		}
@@ -28,7 +28,7 @@ void combSort(autoList_t *list, sint (*funcComp)(uint, uint))
 	uint faridx;
 //cout("* %u\n", getCount(list)); // test test test
 
-	for(; ; )
+	for (; ; )
 	{
 		span = (uint)(((uint64)span * 10) / 13); //(uint)(span / 1.3);
 
@@ -38,7 +38,7 @@ void combSort(autoList_t *list, sint (*funcComp)(uint, uint))
 		if (span == 9 || span == 10)
 			span = 11;
 
-		for(nearidx = 0, faridx = span; faridx < getCount(list); nearidx++, faridx++)
+		for (nearidx = 0, faridx = span; faridx < getCount(list); nearidx++, faridx++)
 		{
 			if (0 < funcComp(getElement(list, nearidx), getElement(list, faridx)))
 			{
@@ -54,11 +54,11 @@ void selectionSort(autoList_t *list, sint (*funcComp)(uint, uint)) // 安定ソート
 	uint faridx;
 	uint minidx;
 
-	for(nearidx = 0; nearidx + 1 < getCount(list); nearidx++)
+	for (nearidx = 0; nearidx + 1 < getCount(list); nearidx++)
 	{
 		minidx = nearidx;
 
-		for(faridx = nearidx + 1; faridx < getCount(list); faridx++)
+		for (faridx = nearidx + 1; faridx < getCount(list); faridx++)
 		{
 			if (0 < funcComp(getElement(list, minidx), getElement(list, faridx)))
 			{
@@ -143,7 +143,7 @@ void rapidSort(autoList_t *list, sint (*funcComp)(uint, uint))
 		pivotidx = (startidx + endnextidx) / 2;
 		faridx = endnextidx - 1;
 
-		for(; ; )
+		for (; ; )
 		{
 			pivot = getElement(list, pivotidx);
 

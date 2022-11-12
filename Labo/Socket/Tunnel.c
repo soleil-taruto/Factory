@@ -13,7 +13,7 @@ static void DispData(autoBlock_t *block, int sock, char *title)
 		{
 			uint index;
 
-			for(index = 0; index < getSize(block); index++)
+			for (index = 0; index < getSize(block); index++)
 			{
 				cout("%02x", getByte(block, index));
 			}

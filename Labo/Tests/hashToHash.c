@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 
 	mt19937_initRnd((uint)time(NULL));
 
-	for(r = H; r; r--)
+	for (r = H; r; r--)
 	{
 		uint m = mt19937_rnd(MAPMAX) + 1;
 		uint t;
@@ -27,17 +27,17 @@ int main(int argc, char **argv)
 		cmdTitle_x(xcout("hashToHash - %u", r));
 		t = m;
 
-		for(c = W; c; c--)
+		for (c = W; c; c--)
 		{
 			memset(map, 0x00, m);
 
-			for(i = 0; i < t; i++)
+			for (i = 0; i < t; i++)
 			{
 				map[mt19937_rnd(m)] = 1;
 			}
 			d = 0;
 
-			for(i = 0; i < m; i++)
+			for (i = 0; i < m; i++)
 			{
 				if (map[i]) d++;
 			}

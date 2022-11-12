@@ -81,13 +81,13 @@ static autoList_t *BinToText(autoBlock_t *block)
 	uint index;
 	char text[BYTE_PER_LINE + 1];
 
-	for(index = 0; index < getSize(block); index += BYTE_PER_LINE)
+	for (index = 0; index < getSize(block); index += BYTE_PER_LINE)
 	{
 		char *line = xcout("%08x", index);
 		uint bidx;
 		char *text_p = text;
 
-		for(bidx = 0; bidx < BYTE_PER_LINE && index + bidx < getSize(block); bidx++)
+		for (bidx = 0; bidx < BYTE_PER_LINE && index + bidx < getSize(block); bidx++)
 		{
 			int chr = getByte(block, index + bidx);
 
@@ -250,7 +250,7 @@ static void SimpleConvToText(char *file, char *outFile)
 	FILE *fp = fileOpen(file, "rb");
 	FILE *outFp = outFile ? fileOpen(outFile, "wt") : stdout;
 
-	for(; ; )
+	for (; ; )
 	{
 		int chr = readChar(fp);
 
@@ -271,7 +271,7 @@ static void SimpleConvToBinary(char *file, char *outFile)
 	int stockLead = 0;
 	uint stockValue;
 
-	for(; ; )
+	for (; ; )
 	{
 		int chr = readChar(fp);
 
@@ -319,7 +319,7 @@ static void DoMid(char *rFile, uint64 start, uint64 size, char *wFile) // wFile:
 
 		wfp = fileOpen(wFile, "wb");
 
-		for(count = 0; count < size; count++)
+		for (count = 0; count < size; count++)
 		{
 			writeChar(wfp, readChar(rfp));
 		}
@@ -327,7 +327,7 @@ static void DoMid(char *rFile, uint64 start, uint64 size, char *wFile) // wFile:
 	}
 	else
 	{
-		for(count = 0; count < size; count++)
+		for (count = 0; count < size; count++)
 		{
 			int chr = readChar(rfp);
 			int lf;
@@ -365,7 +365,7 @@ readArgs:
 		char *file1;
 		char *file2;
 
-		for(; ; )
+		for (; ; )
 		{
 			file1 = dropFile();
 			file2 = dropFile();
@@ -439,7 +439,7 @@ readArgs:
 
 		fileSeek(rfp, SEEK_SET, start);
 
-		for(count = 0; count < size; count++)
+		for (count = 0; count < size; count++)
 		{
 			int chr = readChar(rfp);
 
@@ -520,7 +520,7 @@ readArgs:
 		fp = fileOpen(file, "rb");
 		fileSeek(fp, SEEK_SET, start);
 
-		for(count = 0; count < size; count++)
+		for (count = 0; count < size; count++)
 		{
 			int chr = readChar(fp);
 

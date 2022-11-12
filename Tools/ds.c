@@ -84,7 +84,7 @@ int main(int argc, char **argv)
 		cout("\\e\n");
 		return;
 	}
-	for(; ; )
+	for (; ; )
 	{
 		char *dir = dropDir();
 

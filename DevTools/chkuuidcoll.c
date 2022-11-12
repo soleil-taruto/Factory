@@ -32,7 +32,7 @@ static void Line2Fmt(char *line)
 {
 	char *p;
 
-	for(p = line; *p; p++)
+	for (p = line; *p; p++)
 	{
 		if (isMbc(p))
 		{
@@ -52,7 +52,7 @@ static char *GetProject(char *file)
 
 	path = makeFullPath(file); // 2bs
 
-	for(; ; )
+	for (; ; )
 	{
 		path = getParent_x(path);
 
@@ -83,7 +83,7 @@ static void CollectUUIDByFile(char *file)
 
 		Line2Fmt(fmt);
 
-		for(p = fmt; p = strstr(p, UUID_FMT); p += strlen(UUID_FMT))
+		for (p = fmt; p = strstr(p, UUID_FMT); p += strlen(UUID_FMT))
 		{
 			char *uuidP = line + ((uint)p - (uint)fmt);
 
@@ -118,7 +118,7 @@ static void CollectUUIDByFile(char *file)
 
 						pp++;
 
-						for(q = pp; *q; q++)
+						for (q = pp; *q; q++)
 							if (!m_isdecimal(*q))
 								break;
 

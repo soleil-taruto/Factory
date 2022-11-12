@@ -23,7 +23,7 @@ static int InputJTextMode;
 
 	main()
 	{
-		for(; ; )
+		for (; ; )
 			printf("%02x", _getch());
 	}
 
@@ -40,7 +40,7 @@ static int InputJTextMode;
 
 	main()
 	{
-		for(; ; )
+		for (; ; )
 			while (_kbhit())
 				printf("%02x", _getch());
 	}
@@ -203,7 +203,7 @@ int waitKey(uint millis)
 {
 	uint ms;
 
-	for(; ; )
+	for (; ; )
 	{
 		if (hasKey())
 		{
@@ -226,7 +226,7 @@ int coWaitKey(uint millis)
 
 	cout("%uÉ~ÉäïbÉLÅ[ì¸óÕÇë“ÇøÇ‹Ç∑...\n", millis);
 
-	for(; ; )
+	for (; ; )
 	{
 		if (hasKey())
 		{
@@ -361,7 +361,7 @@ char *coInputLinePrn(void (*printFunc)(char *jbuffer))
 	coil_esc = 0;
 	InputJTextMode = 1;
 
-	for(; ; )
+	for (; ; )
 	{
 		jbuffer = strx(buffer);
 		line2JLine(jbuffer, 1, 0, 0, 1);
@@ -401,7 +401,7 @@ char *coInputLinePrn(void (*printFunc)(char *jbuffer))
 				char *mp = buffer;
 				char *p;
 
-				for(p = buffer; *p; p = mbsNext(p))
+				for (p = buffer; *p; p = mbsNext(p))
 				{
 					mp = p;
 				}

@@ -39,7 +39,7 @@ static void Test_lss_lss2File(char *dir)
 
 int main(int argc, char **argv)
 {
-	for(; ; )
+	for (; ; )
 	{
 		Test_lss_lss2File(dropDir());
 	}

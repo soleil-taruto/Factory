@@ -145,7 +145,7 @@ static void DoTest2(uint num, uint valmax)
 
 	cout("%u %u\n", num, valmax);
 
-	for(count = num; count; count--)
+	for (count = num; count; count--)
 		addElement(list, mt19937_range(0, valmax));
 
 	rapidSort(list, simpleComp);

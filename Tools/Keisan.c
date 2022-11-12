@@ -61,7 +61,7 @@ static autoList_t *MakeHexOp(char *line)
 
 	reverseBytes(bop);
 
-	for(index = 0; index < (getSize(bop) + 3) / 4; index++)
+	for (index = 0; index < (getSize(bop) + 3) / 4; index++)
 	{
 		value = refByte(bop, index * 4) +
 			refByte(bop, index * 4 + 1) * 0x100 +
@@ -197,10 +197,10 @@ static char *InsSepOp(char *line, uint ranks)
 		uint decpidx = (uint)strchrEnd(line, '.') - (uint)line;
 		uint index;
 
-		for(index = decpidx + ranks + 1; index < strlen(line); index += ranks + 1)
+		for (index = decpidx + ranks + 1; index < strlen(line); index += ranks + 1)
 			line = insertChar(line, index, ',');
 
-		for(index = decpidx; ranks < index; )
+		for (index = decpidx; ranks < index; )
 		{
 			index -= ranks;
 			line = insertChar(line, index, ',');
@@ -224,7 +224,7 @@ static char *Permutation(uint v1, uint v2, uint radix)
 	errorCase(!m_isRange(v1, 1, UINTMAX));
 	errorCase(!m_isRange(v2, 1, v1));
 
-	for(count = v1 - v2 + 1; ; count++)
+	for (count = v1 - v2 + 1; ; count++)
 	{
 		ans = calcLine_xx(ans, '*', changeRadixCalcLine_x(xcout("%u", count), 10, radix, 0), radix, 0);
 

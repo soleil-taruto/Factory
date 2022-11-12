@@ -61,7 +61,7 @@ static void RemoveLiteralString(char *entity)
 	}
 	q = p;
 
-	for(p = entity - 1; p < q; p++)
+	for (p = entity - 1; p < q; p++)
 		*p = 'L';
 }
 static void RemoveComments(autoList_t *lines)
@@ -81,7 +81,7 @@ static void RemoveComments(autoList_t *lines)
 			if (q)
 				*q = '\0';
 		}
-		for(; ; )
+		for (; ; )
 		{
 			char *q = strstr(p, onComment ? "*/" : "/*");
 
@@ -147,7 +147,7 @@ static void CheckTagLine(char *line, char *srcFile, uint srcLineNo)
 
 	tmpl = strx(line);
 
-	for(p = tmpl; *p; p++)
+	for (p = tmpl; *p; p++)
 		if (!__iscsym(*p))
 			*p = ' ';
 
@@ -221,7 +221,7 @@ static void CheckTagTypedef(autoList_t *lines, char *srcFile)
 				char *typnm = strx(line);
 				char *p;
 
-				for(p = typnm; *p; p++)
+				for (p = typnm; *p; p++)
 					if (!__iscsym(*p))
 						*p = ' ';
 

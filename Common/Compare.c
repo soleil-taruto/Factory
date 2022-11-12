@@ -28,7 +28,7 @@ int isSameFile(char *file1, char *file2)
 	bp1 = buffOpen(file1, "rb", 32 * 1024 * 1024);
 	bp2 = buffOpen(file2, "rb", 32 * 1024 * 1024);
 
-	for(bcnt = 0; bcnt < fsize1; bcnt++)
+	for (bcnt = 0; bcnt < fsize1; bcnt++)
 	{
 		int chr1 = buffReadChar(bp1);
 		int chr2 = buffReadChar(bp2);
@@ -78,7 +78,7 @@ int isSameDir(char *dir1, char *dir2, int ignoreCaseOfPath)
 		int (*funcPathComp)(char *, char *) = ignoreCaseOfPath ? mbs_stricmp : strcmp;
 		uint index;
 
-		for(index = 0; index < getCount(paths1); index++)
+		for (index = 0; index < getCount(paths1); index++)
 		{
 			char *rp1 = getLine(paths1, index);
 			char *rp2 = getLine(paths2, index);
@@ -93,7 +93,7 @@ int isSameDir(char *dir1, char *dir2, int ignoreCaseOfPath)
 		}
 	}
 
-	for(index = dcnt1; index < getCount(paths1); index++) // ファイルサイズの比較
+	for (index = dcnt1; index < getCount(paths1); index++) // ファイルサイズの比較
 	{
 		char *file1 = getLine(paths1, index);
 		char *file2 = getLine(paths2, index);
@@ -103,7 +103,7 @@ int isSameDir(char *dir1, char *dir2, int ignoreCaseOfPath)
 			goto endfunc;
 		}
 	}
-	for(index = dcnt1; index < getCount(paths1); index++) // ファイルの内容の比較
+	for (index = dcnt1; index < getCount(paths1); index++) // ファイルの内容の比較
 	{
 		char *file1 = getLine(paths1, index);
 		char *file2 = getLine(paths2, index);
@@ -133,7 +133,7 @@ int isSameLines(autoList_t *lines1, autoList_t *lines2, int ignoreCase)
 		int (*funcCompLine)(char *, char *) = ignoreCase ? mbs_stricmp : strcmp;
 		uint index;
 
-		for(index = 0; index < getCount(lines1); index++)
+		for (index = 0; index < getCount(lines1); index++)
 		{
 			char *line1 = getLine(lines1, index);
 			char *line2 = getLine(lines2, index);
@@ -157,7 +157,7 @@ int isSameLinesList(autoList_t *table1, autoList_t *table2, int ignoreCase)
 	{
 		uint index;
 
-		for(index = 0; index < getCount(table1); index++)
+		for (index = 0; index < getCount(table1); index++)
 		{
 			autoList_t *lines1 = (autoList_t *)getElement(table1, index);
 			autoList_t *lines2 = (autoList_t *)getElement(table2, index);
@@ -207,15 +207,15 @@ static void FDE_FindSameArea(void)
 	if (!bound)
 		return;
 
-	for(ndx1 = 0; ndx1 + bound <= getCount(FDE.SLines); ndx1 += bound)
-	for(ndx2 = 0; ndx2 + bound <= getCount(FDE.LLines); ndx2++)
+	for (ndx1 = 0; ndx1 + bound <= getCount(FDE.SLines); ndx1 += bound)
+	for (ndx2 = 0; ndx2 + bound <= getCount(FDE.LLines); ndx2++)
 	{
 		uint index;
 
 		if (FDE.SIndex + FDE.LIndex <= ndx1 + ndx2) // ? 既知の差分より大きいか同じになる。-> next ndx1
 			break;
 
-		for(index = 0; index < bound; index++)
+		for (index = 0; index < bound; index++)
 			if (FD.LineComp(getLine(FDE.SLines, ndx1 + index), getLine(FDE.LLines, ndx2 + index))) // ? not same
 				break;
 
@@ -310,7 +310,7 @@ autoList_t *getDiffLinesReport(autoList_t *lines1, autoList_t *lines2, int ignor
 		end1 = FD.Index1;
 		end2 = FD.Index2;
 
-		for(index = 0; begin1 + index < end1 && begin2 + index < end2; index++)
+		for (index = 0; begin1 + index < end1 && begin2 + index < end2; index++)
 		{
 			if (FD.LineComp(getLine(lines1, begin1 + index), getLine(lines2, begin2 + index)))
 			{
@@ -318,8 +318,8 @@ autoList_t *getDiffLinesReport(autoList_t *lines1, autoList_t *lines2, int ignor
 				addElement(report, (uint)xcout("%u > %s", begin2 + index + 1, getElement(lines2, begin2 + index)));
 			}
 		}
-		for(; begin1 + index < end1; index++) addElement(report, (uint)xcout("%u < %s", begin1 + index + 1, getElement(lines1, begin1 + index)));
-		for(; begin2 + index < end2; index++) addElement(report, (uint)xcout("%u > %s", begin2 + index + 1, getElement(lines2, begin2 + index)));
+		for (; begin1 + index < end1; index++) addElement(report, (uint)xcout("%u < %s", begin1 + index + 1, getElement(lines1, begin1 + index)));
+		for (; begin2 + index < end2; index++) addElement(report, (uint)xcout("%u > %s", begin2 + index + 1, getElement(lines2, begin2 + index)));
 	}
 	// output
 	{

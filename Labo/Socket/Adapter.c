@@ -46,7 +46,7 @@ static int DoLock(void)
 {
 	uint trycnt;
 
-	for(trycnt = 0; ; trycnt++)
+	for (trycnt = 0; ; trycnt++)
 	{
 		while (hasKey())
 		{
@@ -85,7 +85,7 @@ static int Perform(char *prmFile, char *ansFile)
 	removeFileIfExist(AnswerFile); // Cleanup
 	mutexRelease(MutexHandle);
 
-	for(; ; )
+	for (; ; )
 	{
 		eventSet(StartEventHandle); // 受信側に通知・再通知
 		collectEvents(AnswerEventHandle, 3000); // 応答待ち

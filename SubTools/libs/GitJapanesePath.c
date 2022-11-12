@@ -13,7 +13,7 @@ static int HasJpn(char *str)
 {
 	char *p;
 
-	for(p = str; *p; p++)
+	for (p = str; *p; p++)
 		if (_ismbblead(*p))
 			return 1;
 

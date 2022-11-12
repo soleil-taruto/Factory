@@ -18,7 +18,7 @@ static char *GetBoundary(void)
 {
 	uint index;
 
-	for(index = 2; index < getSize(Content); index++) // Å‰‚Ì‚Q•¶Žš‚Í "--"
+	for (index = 2; index < getSize(Content); index++) // Å‰‚Ì‚Q•¶Žš‚Í "--"
 	{
 		int chr;
 

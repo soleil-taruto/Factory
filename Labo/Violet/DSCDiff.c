@@ -19,7 +19,7 @@ static char *B_ReadLine(FILE *fp)
 {
 	autoBlock_t *buff = newBlock();
 
-	for(; ; )
+	for (; ; )
 	{
 		int chr = readChar(fp);
 
@@ -62,7 +62,7 @@ static void CheckDiffFile(char *file1, char *file2, char *cmnRelPath)
 
 	Report_Ent_x(xcout("%s", cmnRelPath));
 
-	for(index = 0; index < getCount(lines1) || index < getCount(lines2); index++)
+	for (index = 0; index < getCount(lines1) || index < getCount(lines2); index++)
 	{
 		char *line1 = (char *)refElement(lines1, index);
 		char *line2 = (char *)refElement(lines2, index);

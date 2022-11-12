@@ -81,12 +81,12 @@ void SaveImageFile(char *wFile)
 
 	LOGPOS();
 
-	for(rowidx = 0; rowidx < getTableHeight(GetImage()); rowidx++)
+	for (rowidx = 0; rowidx < getTableHeight(GetImage()); rowidx++)
 	{
 		autoList_t *row = newList();
 		uint colidx;
 
-		for(colidx = 0; colidx < getTableWidth(GetImage()); colidx++)
+		for (colidx = 0; colidx < getTableWidth(GetImage()); colidx++)
 		{
 			char *cell = xcout("%08x", getTableCell(GetImage(), colidx, rowidx));
 			addElement(row, (uint)cell);

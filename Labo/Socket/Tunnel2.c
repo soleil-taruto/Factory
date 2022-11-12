@@ -28,7 +28,7 @@ static void TransmitProc(SockStream_t *rss, SockStream_t *wss, char *header)
 	uint c;
 	char *pLine = strx("");
 
-	for(c = 0; c < 65000; c++)
+	for (c = 0; c < 65000; c++)
 	{
 		int chr;
 		int pchr;

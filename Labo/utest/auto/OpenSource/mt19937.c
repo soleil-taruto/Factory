@@ -9,16 +9,16 @@ static void Test_mt19937_range_Range(uint minval, uint maxval)
 
 	cout("Test_mt19937_range_Range: %u, %u\n", minval, maxval);
 
-	for(count = 1000; count; count--)
+	for (count = 1000; count; count--)
 	{
 		r = mt19937_range(minval, maxval);
 
 		errorCase(r < minval);
 		errorCase(maxval < r);
 	}
-	for(count = minval; count <= maxval; count++)
+	for (count = minval; count <= maxval; count++)
 	{
-		for(trycnt = 1; ; trycnt++)
+		for (trycnt = 1; ; trycnt++)
 		{
 			r = mt19937_range(minval, maxval);
 
@@ -42,8 +42,8 @@ static void Test_mt19937_range(void)
 #define VALBEGIN 0
 #define VALEND 100
 
-	for(minval = VALBEGIN; minval <= VALEND; minval++)
-	for(maxval = minval;   maxval <= VALEND; maxval++)
+	for (minval = VALBEGIN; minval <= VALEND; minval++)
+	for (maxval = minval;   maxval <= VALEND; maxval++)
 	{
 		Test_mt19937_range_Range(minval, maxval);
 	}

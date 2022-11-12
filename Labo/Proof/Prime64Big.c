@@ -13,7 +13,7 @@ static int Test_IsPrime(uint64 value)
 	if (value % 2 == 0)
 		return 0;
 
-	for(denom = 3; denom <= UINTMAX; denom += 2)
+	for (denom = 3; denom <= UINTMAX; denom += 2)
 	{
 		if (value < denom * denom)
 			break;
@@ -27,7 +27,7 @@ int main(int argc, char **argv)
 {
 	uint64 value;
 
-	for(value = UINT64MAX; UINT64MAX - 100 <= value; value--)
+	for (value = UINT64MAX; UINT64MAX - 100 <= value; value--)
 	{
 		if (Test_IsPrime(value))
 		{

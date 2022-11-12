@@ -14,7 +14,7 @@ static void TryNext(uint startNum, uint currSum)
 		return;
 	}
 
-	for(count = startNum; currSum + count <= SUM_MAX; count++)
+	for (count = startNum; currSum + count <= SUM_MAX; count++)
 	{
 		TryNext(count + 1, currSum + count);
 	}

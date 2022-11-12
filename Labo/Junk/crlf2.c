@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	rfp = fileOpen(nextArg(), "rb");
 	wfp = fileOpen(nextArg(), "wb");
 
-	for(; ; )
+	for (; ; )
 	{
 		int chr = readChar(rfp);
 

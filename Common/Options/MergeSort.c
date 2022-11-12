@@ -82,12 +82,12 @@ static void MergePart(
 
 	CR_Comp = compElement;
 
-	for(; ; )
+	for (; ; )
 	{
 		readerCount = m_min(READER_MAX, wIndex - rIndex);
 		readers = newList();
 
-		for(index = 0; index < readerCount; index++)
+		for (index = 0; index < readerCount; index++)
 		{
 			FILE *fp = fileOpen(GetPartFile(partsDir, rIndex + index), rMode);
 
@@ -101,7 +101,7 @@ static void MergePart(
 		rIndex += readerCount;
 		wfp = fileOpen(rIndex == wIndex ? destFile : GetPartFile(partsDir, wIndex), wMode);
 
-		for(; ; )
+		for (; ; )
 		{
 			Reader_t *r = (Reader_t *)getElement(readers, 0);
 
@@ -111,7 +111,7 @@ static void MergePart(
 			writeElement_x(wfp, r->Element);
 			r->Element = readElement(r->FP);
 
-			for(index = 1; index < readerCount; index++)
+			for (index = 1; index < readerCount; index++)
 			{
 				if (CompReader(getElement(readers, index - 1), getElement(readers, index)) <= 0)
 					break;
@@ -121,7 +121,7 @@ static void MergePart(
 		}
 		fileClose(wfp);
 
-		for(index = 0; index < readerCount; index++)
+		for (index = 0; index < readerCount; index++)
 		{
 			fileClose(readerList[index].FP);
 			removeFile(GetPartFile(partsDir, rIndex - readerCount + index));
@@ -201,7 +201,7 @@ void MergeSort(
 	fp = fileOpen(srcFile, rMode);
 	createDir(partsDir);
 
-	for(; ; )
+	for (; ; )
 	{
 		uint element = readElement(fp);
 		uint64 currPos;

@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 		portno = toValue(nextArg());
 	}
 
-	for(trycnt = 3; trycnt; trycnt--)
+	for (trycnt = 3; trycnt; trycnt--)
 	{
 		cout("connect...\n");
 

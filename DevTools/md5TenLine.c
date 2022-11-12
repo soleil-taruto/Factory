@@ -16,7 +16,7 @@ static char *GetPartHash(autoList_t *lines, uint bgnLIdx, uint endLIdx)
 		FILE *fp = fileOpen(file, "wt");
 		uint index;
 
-		for(index = bgnLIdx; index <= endLIdx; index++)
+		for (index = bgnLIdx; index <= endLIdx; index++)
 			writeLine(fp, getLine(lines, index));
 
 		fileClose(fp);
@@ -54,7 +54,7 @@ int main(int argc, char **argv)
 
 		cout("%s %s\n", c_md5_makeHexHashFile(file), getLocal(file));
 
-		for(bgnLIdx = 0; bgnLIdx < getCount(lines); bgnLIdx += PART_LNUM)
+		for (bgnLIdx = 0; bgnLIdx < getCount(lines); bgnLIdx += PART_LNUM)
 		{
 			uint endLIdx = bgnLIdx + PART_LNUM;
 

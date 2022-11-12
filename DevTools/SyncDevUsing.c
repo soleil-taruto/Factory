@@ -180,7 +180,7 @@ static void SH_Main(Header_t *masterHeader, Header_t *targetHeader)
 
 	writeToken(fp, masterHeader->Text);
 
-	for(index = targetHeader->SymLineIndex; index < getCount(lines); index++)
+	for (index = targetHeader->SymLineIndex; index < getCount(lines); index++)
 		writeLine(fp, getLine(lines, index));
 
 	fileClose(fp);

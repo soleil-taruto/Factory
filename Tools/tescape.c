@@ -33,7 +33,7 @@ static void DoEscape(char *rFile, char *wFile)
 	RFp = fileOpen(rFile, "rb");
 	WFp = fileOpen(wFile, "wb");
 
-	for(; ; )
+	for (; ; )
 	{
 		int chr = NextChar();
 		int chr2;
@@ -85,7 +85,7 @@ static void DoUnescape(char *rFile, char *wFile)
 	RFp = fileOpen(rFile, "rb");
 	WFp = fileOpen(wFile, "wb");
 
-	for(; ; )
+	for (; ; )
 	{
 		int chr = NextChar();
 

@@ -70,7 +70,7 @@ autoList_t *tokenizeMinMax(char *line, int delimiter, uint nummin, uint nummax, 
 
 	errorCase(!nummin); // reserved
 
-	for(p = line; *p && (!nummax || getCount(tokens) < nummax - 1); p++)
+	for (p = line; *p && (!nummax || getCount(tokens) < nummax - 1); p++)
 	{
 		if (*p == delimiter)
 		{
@@ -156,7 +156,7 @@ void emptizeSubLines(autoList_t *lines, uint start, uint count)
 	errorCase(getCount(lines) < start);
 	errorCase(getCount(lines) - start < count);
 
-	for(index = start; index < start + count; index++)
+	for (index = start; index < start + count; index++)
 	{
 		getLine(lines, index)[0] = '\0';
 	}
@@ -181,7 +181,7 @@ void shootingStarLines_CSP(autoList_t *lines, uint count, int starChr, int padCh
 	if (!count)
 		count = UINTMAX;
 
-	for(; count; count--)
+	for (; count; count--)
 	{
 		char *line;
 		uint index;

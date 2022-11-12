@@ -217,7 +217,7 @@ static int IsGitMaskedSource(char *source)
 
 	while (line = readLine(fp))
 	{
-		for(p = line; *p && *p <= ' '; ) // 行頭のインデント等の空白をスキップ
+		for (p = line; *p && *p <= ' '; ) // 行頭のインデント等の空白をスキップ
 			p++;
 
 		if (*p && (p[0] != '/' || p[1] != '/')) // ? ! (空行 || "//" で始まる行)

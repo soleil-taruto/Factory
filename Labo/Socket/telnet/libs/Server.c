@@ -52,7 +52,7 @@ static char *ParseLine(autoBlock_t *buff) // ret: NULL == “ü—Ís–³‚µ
 	char *line = NULL;
 	uint index;
 
-	for(index = 0; index < getSize(buff); index++)
+	for (index = 0; index < getSize(buff); index++)
 		if (getByte(buff, index) == '\n')
 			break;
 

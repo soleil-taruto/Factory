@@ -94,7 +94,7 @@ static void Main2(char *repositoryName, int manualMode)
 
 					tokens = tokenize(line, '\t');
 
-					for(token_index = 1; token_index < getCount(tokens); token_index++)
+					for (token_index = 1; token_index < getCount(tokens); token_index++)
 					{
 						addElement(files, (uint)strx(getLine(tokens, token_index)));
 					}

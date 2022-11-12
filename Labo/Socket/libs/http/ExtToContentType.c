@@ -270,7 +270,7 @@ char *httpExtToContentType(char *ext)
 {
 	uint index;
 
-	for(index = lengthof(Table); index; index--)
+	for (index = lengthof(Table); index; index--)
 	{
 		char **pair = Table[index - 1];
 
@@ -290,7 +290,7 @@ char *httpContentTypeToExt(char *contentType)
 {
 	uint index;
 
-	for(index = lengthof(Table); index; index--)
+	for (index = lengthof(Table); index; index--)
 	{
 		char **pair = Table[index - 1];
 

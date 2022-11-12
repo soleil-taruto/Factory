@@ -12,11 +12,11 @@ static autoBlock_t *BinStrToBlock(char *str)
 	reverseLine(str);
 	p = str;
 
-	for(index = 0; *p; index++)
+	for (index = 0; *p; index++)
 	{
 		int chr = 0x00;
 
-		for(bit = 1; bit < 0x100; bit <<= 1)
+		for (bit = 1; bit < 0x100; bit <<= 1)
 		{
 			switch (*p++)
 			{
@@ -45,8 +45,8 @@ static void ShowFloat_Main(void *pVal, uint valSz, uint expBits, uint expBase, u
 	char *exp;
 	char *fract;
 
-	for(index = 0; index < valSz; index++)
-	for(bit = 1; bit < 0x100; bit <<= 1)
+	for (index = 0; index < valSz; index++)
+	for (bit = 1; bit < 0x100; bit <<= 1)
 	{
 		str = addChar(str, ((uchar *)pVal)[index] & bit ? '1' : '0');
 	}
@@ -164,7 +164,7 @@ int main(int argc, char **argv)
 		double d = 3.0;
 		uint c;
 
-		for(c = 100; c; c--)
+		for (c = 100; c; c--)
 		{
 			f *= f;
 			d *= d;

@@ -66,8 +66,8 @@ static void MM_Randomize(void)
 	uint x;
 	uint y;
 
-	for(x = 0; x < Map_W; x++)
-	for(y = 0; y < Map_H; y++)
+	for (x = 0; x < Map_W; x++)
+	for (y = 0; y < Map_H; y++)
 	{
 		setTableCell(Map, x, y, mt19937_rnd(RndWlRtDenom) < RndWlRtNumer ? COLOR_WALL : COLOR_GROUND);
 	}
@@ -78,8 +78,8 @@ static void MM_BattlePos(int x, int y)
 	int yc;
 	uint wallcnt = 0;
 
-	for(xc = -1; xc <= 1; xc++)
-	for(yc = -1; yc <= 1; yc++)
+	for (xc = -1; xc <= 1; xc++)
+	for (yc = -1; yc <= 1; yc++)
 	{
 		int sx = x + xc;
 		int sy = y + yc;
@@ -141,12 +141,12 @@ static void MM_Around(void)
 	uint x;
 	uint y;
 
-	for(x = 0; x < Map_W; x++)
+	for (x = 0; x < Map_W; x++)
 	{
 		MM_AroundPos(x, 0);
 		MM_AroundPos(x, Map_H - 1);
 	}
-	for(y = 0; y < Map_H; y++)
+	for (y = 0; y < Map_H; y++)
 	{
 		MM_AroundPos(0, y);
 		MM_AroundPos(Map_W - 1, y);
@@ -175,13 +175,13 @@ static void MM_Island(void)
 	setCount(IslandYPosList, 0);
 	IslandCount= 0;
 
-	for(x = 0; x < Map_W; x++)
-	for(y = 0; y < Map_H; y++)
+	for (x = 0; x < Map_W; x++)
+	for (y = 0; y < Map_H; y++)
 	{
 		setTableCell(IslandMap, x, y, getTableCell(Map, x, y) == COLOR_GROUND ? UINTMAX : 0);
 	}
-	for(x = 0; x < Map_W; x++)
-	for(y = 0; y < Map_H; y++)
+	for (x = 0; x < Map_W; x++)
+	for (y = 0; y < Map_H; y++)
 	{
 		if (getTableCell(IslandMap, x, y) == UINTMAX)
 		{
@@ -241,8 +241,8 @@ static Pos_t MM_GetNearest(Pos_t *fromPos, uint target)
 	uint x;
 	uint y;
 
-	for(x = 0; x < Map_W; x++)
-	for(y = 0; y < Map_H; y++)
+	for (x = 0; x < Map_W; x++)
+	for (y = 0; y < Map_H; y++)
 	{
 		if (getTableCell(IslandMap, x, y) == target)
 		{
@@ -271,7 +271,7 @@ static void MM_NearestFromDest(PairPos_t *i, uint fromIsland, uint destIsland)
 	i->From.X = getElement(IslandXPosList, fromIsland);
 	i->From.Y = getElement(IslandYPosList, fromIsland);
 
-	for(c = 10; c; c--)
+	for (c = 10; c; c--)
 	{
 		Pos_t fromPos;
 
@@ -297,8 +297,8 @@ LOGPOS();
 	resetTable(NearestTable);
 LOGPOS();
 
-	for(fromIsland = 0; fromIsland < IslandCount; fromIsland++)
-	for(destIsland = 0; destIsland < IslandCount; destIsland++)
+	for (fromIsland = 0; fromIsland < IslandCount; fromIsland++)
+	for (destIsland = 0; destIsland < IslandCount; destIsland++)
 	{
 		cmdTitle_x(xcout("MakeMap - %u %u", fromIsland, destIsland));
 
@@ -332,12 +332,12 @@ static void MM_JoinNearest(void)
 	uint fromIsland;
 	uint destIsland;
 
-	for(fromIsland = 0; fromIsland < IslandCount; fromIsland++)
+	for (fromIsland = 0; fromIsland < IslandCount; fromIsland++)
 	{
 		PairPos_t *nearest = NULL;
 		uint64 nearestSqr = UINT64MAX;
 
-		for(destIsland = 0; destIsland < IslandCount; destIsland++)
+		for (destIsland = 0; destIsland < IslandCount; destIsland++)
 		{
 			if (fromIsland != destIsland)
 			{
@@ -372,8 +372,8 @@ static void MakeBmp(void)
 
 	Bmp = makeTable(Map_W, Map_H, 0);
 
-	for(x = 0; x < Map_W; x++)
-	for(y = 0; y < Map_H; y++)
+	for (x = 0; x < Map_W; x++)
+	for (y = 0; y < Map_H; y++)
 	{
 		*getTablePoint(Bmp, x, y) = getTableCell(Map, x, y);
 	}
@@ -409,7 +409,7 @@ int main(int argc, char **argv)
 	MM_Around();
 	LOGPOS();
 
-	for(c = 100; c; c--)
+	for (c = 100; c; c--)
 	{
 		cout("[%u]\n", c);
 

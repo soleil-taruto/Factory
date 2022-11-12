@@ -12,7 +12,7 @@ static void WrTV_Line(int kind, uint no, autoBlock_t *block)
 
 	writeToken_x(WFp, xcout("%c No.%03u : ", kind, no));
 
-	for(index = 0; index < 16; index++)
+	for (index = 0; index < 16; index++)
 		writeToken_x(WFp, xcout("%02X ", getByte(block, index)));
 
 	writeChar(WFp, '\n');
@@ -39,7 +39,7 @@ static void WrTV_K(uint no, char *sRawKey)
 
 	KeyTable = AES128_CreateKeyTable(rawKey, 1);
 
-	for(bit = 0; bit < 128; bit++)
+	for (bit = 0; bit < 128; bit++)
 	{
 		autoBlock_t *plain = bCreateBlock(16);
 

@@ -131,7 +131,7 @@ static void PerformTh(int sock, char *strip)
 	int foregroundFlag = 1;
 	uint waitMillis = 0;
 
-	for(; ; )
+	for (; ; )
 	{
 		autoBlock_t *sendData = GetCommRecvData(i, SendSizeMax);
 		autoBlock_t *recvData;
@@ -149,7 +149,7 @@ static void PerformTh(int sock, char *strip)
 
 		cout("Loop_1:%08x\n", *(uint *)directGetBuffer(credential));
 
-		for(; ; )
+		for (; ; )
 		{
 			recvData = Boomerang(credential, flag, sendData);
 
@@ -176,7 +176,7 @@ static void PerformTh(int sock, char *strip)
 
 		cout("Loop_2:%08x\n", *(uint *)directGetBuffer(credential));
 
-		for(; ; )
+		for (; ; )
 		{
 			if (ProcDeadFlag || RecvFlag == 'D') // Disconnect
 				break;

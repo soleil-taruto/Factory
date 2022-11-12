@@ -40,7 +40,7 @@ static void DoMask(autoBlock_t *fileData)
 	autoBlock_t *mask = makeBlockHexLine(S_MASK);
 	uint index;
 
-	for(index = 0; index < getSize(fileData); index++)
+	for (index = 0; index < getSize(fileData); index++)
 	{
 		b_(fileData)[index] ^= b_(mask)[index % getSize(mask)];
 	}

@@ -180,7 +180,7 @@ autoList_t *lss(char *dir)
 
 	dircnt = lastDirCount;
 
-	for(index = 0; index < dircnt; index++)
+	for (index = 0; index < dircnt; index++)
 	{
 		char *dir2 = getLine(paths, index);
 		autoList_t *subPaths;
@@ -464,7 +464,7 @@ static void CD_ExecBatch(char *dir, char *trailOpts, char *outFile)
 		0 バイトのファイルを開くと、readLine() は初回から NULL を返す。-> ""(空行)が追加されることはない！
 	*/
 
-	for(; ; )
+	for (; ; )
 	{
 		char *line = readLine(rfp);
 		char *path;
@@ -515,7 +515,7 @@ void cmdDir_lss2File(char *dir, char *dirsFile, char *filesFile)
 
 	fp = fileOpen(dirsFile, "rt");
 
-	for(; ; )
+	for (; ; )
 	{
 		char *subDir = readLine(fp);
 

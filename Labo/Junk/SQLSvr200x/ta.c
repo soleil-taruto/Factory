@@ -211,7 +211,7 @@ readArgs:
 			fp = fileOpen(schFile, "rt");
 			lines = newList();
 
-			for(colidx = 0; colidx < colcnt; colidx++)
+			for (colidx = 0; colidx < colcnt; colidx++)
 			{
 				char *typnm;
 				char *colln;

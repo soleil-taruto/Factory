@@ -210,7 +210,7 @@ static uint GetNearestLeaf(rbtTree_t *tree, rbtNode_t *node, uint direct) // ret
 
 	if (LastNode)
 	{
-		for(; ; )
+		for (; ; )
 		{
 			node = LastNode->Children[1 - direct];
 
@@ -324,7 +324,7 @@ void rbtSeekForEndElement(rbtTree_t *tree, uint direct) // direct == 0: Left, 1:
 
 	errorCase(!node); // —v‘f‚ªˆê‚ÂˆÈã‚È‚¯‚ê‚Î‚È‚ç‚È‚¢B
 
-	for(; ; )
+	for (; ; )
 	{
 		tmpNode = node->Children[direct];
 
@@ -361,7 +361,7 @@ void rbtSeekElement(rbtTree_t *tree, uint direct) // direct == 0: Left, 1: Right
 
 	if (tmpNode)
 	{
-		for(; ; )
+		for (; ; )
 		{
 			node = tmpNode;
 			tmpNode = node->Children[1 - direct];
@@ -374,7 +374,7 @@ void rbtSeekElement(rbtTree_t *tree, uint direct) // direct == 0: Left, 1: Right
 	}
 	else
 	{
-		for(; ; )
+		for (; ; )
 		{
 			tmpNode = node->Parent;
 

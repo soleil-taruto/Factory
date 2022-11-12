@@ -32,7 +32,7 @@ static void FindStartPos(void)
 	uint x;
 	uint y;
 
-	for(x = 0; x < Bmp_W; x++)
+	for (x = 0; x < Bmp_W; x++)
 	{
 		if (*DotAt(x, 0) == FIELD_COLOR)
 		{
@@ -47,7 +47,7 @@ static void FindStartPos(void)
 			return;
 		}
 	}
-	for(y = 0; y < Bmp_H; y++)
+	for (y = 0; y < Bmp_H; y++)
 	{
 		if (*DotAt(0, y) == FIELD_COLOR)
 		{
@@ -169,16 +169,16 @@ static void FindUnaccessPos(void)
 	UnaccessXPosList = newList();
 	UnaccessYPosList = newList();
 
-	for(x = 0; x < Bmp_W; x++)
-	for(y = 0; y < Bmp_H; y++)
+	for (x = 0; x < Bmp_W; x++)
+	for (y = 0; y < Bmp_H; y++)
 	{
 		if (*PaceAt(x, y) == UINTMAX && *DotAt(x, y) == FIELD_COLOR)
 		{
 			*getTablePoint(uaMap, x, y) = 1;
 		}
 	}
-	for(x = 0; x < Bmp_W; x++)
-	for(y = 0; y < Bmp_H; y++)
+	for (x = 0; x < Bmp_W; x++)
+	for (y = 0; y < Bmp_H; y++)
 	{
 		if (*getTablePoint(uaMap, x, y))
 		{
@@ -204,7 +204,7 @@ static void OPM_SetColorMap(void)
 	uint c;
 
 #if 1
-	for(c = 0; c < 255; c++)
+	for (c = 0; c < 255; c++)
 	{
 		addElement(cm, GetColor(c + 0, c + 0, 255 - c));
 		addElement(cm, GetColor(c + 1, c + 0, 255 - c));
@@ -212,13 +212,13 @@ static void OPM_SetColorMap(void)
 	}
 	addElement(cm, GetColor(255, 255, 0));
 #else
-	for(c = 0; c < 255; c++) addElement(cm, GetColor(0, c, 255 - c));
-	for(c = 0; c < 255; c++) addElement(cm, GetColor(c, 255 - c, 0));
-	for(c = 0; c < 255; c++) addElement(cm, GetColor(255 - c, c, c));
-	for(c = 0; c < 255; c++) addElement(cm, GetColor(c, 255 - c, 255));
-	for(c = 0; c < 255; c++) addElement(cm, GetColor(255, c, 255 - c));
-	for(c = 0; c < 255; c++) addElement(cm, GetColor(255, 255, c));
-	for(c = 0; c < 255; c++) addElement(cm, GetColor(255 - c, 255 - c, 255));
+	for (c = 0; c < 255; c++) addElement(cm, GetColor(0, c, 255 - c));
+	for (c = 0; c < 255; c++) addElement(cm, GetColor(c, 255 - c, 0));
+	for (c = 0; c < 255; c++) addElement(cm, GetColor(255 - c, c, c));
+	for (c = 0; c < 255; c++) addElement(cm, GetColor(c, 255 - c, 255));
+	for (c = 0; c < 255; c++) addElement(cm, GetColor(255, c, 255 - c));
+	for (c = 0; c < 255; c++) addElement(cm, GetColor(255, 255, c));
+	for (c = 0; c < 255; c++) addElement(cm, GetColor(255 - c, 255 - c, 255));
 #endif
 
 	OPM_ColorMap = cm;
@@ -229,8 +229,8 @@ static void OPM_SetColorPerPace(void)
 	uint x;
 	uint y;
 
-	for(x = 0; x < Bmp_W; x++)
-	for(y = 0; y < Bmp_H; y++)
+	for (x = 0; x < Bmp_W; x++)
+	for (y = 0; y < Bmp_H; y++)
 	{
 		uint pace = *PaceAt(x, y);
 
@@ -258,8 +258,8 @@ static void OutputPaceMap(void)
 	OPM_SetColorMap();
 	OPM_SetColorPerPace();
 
-	for(x = 0; x < Bmp_W; x++)
-	for(y = 0; y < Bmp_H; y++)
+	for (x = 0; x < Bmp_W; x++)
+	for (y = 0; y < Bmp_H; y++)
 	{
 		setElement(getList(pm_bmp, y), x, OPM_PaceToColor(*PaceAt(x, y)));
 	}
@@ -271,8 +271,8 @@ static void OutputUnaccessMap(void)
 	uint x;
 	uint y;
 
-	for(x = 0; x < Bmp_W; x++)
-	for(y = 0; y < Bmp_H; y++)
+	for (x = 0; x < Bmp_W; x++)
+	for (y = 0; y < Bmp_H; y++)
 	{
 		uint ua = *PaceAt(x, y) == UINTMAX && *DotAt(x, y) == FIELD_COLOR;
 
@@ -285,7 +285,7 @@ static void OutputUnaccessPos(void)
 	FILE *fp = fileOpen(c_getOutFile(UNACCESS_FILE), "wt");
 	uint index;
 
-	for(index = 0; index < getCount(UnaccessXPosList); index++)
+	for (index = 0; index < getCount(UnaccessXPosList); index++)
 	{
 		uint x = getElement(UnaccessXPosList, index);
 		uint y = getElement(UnaccessYPosList, index);

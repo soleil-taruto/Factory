@@ -83,7 +83,7 @@ void replaceChar(char *line, int findChr, int repChr) // mbs_
 {
 	char *p;
 
-	for(p = line; *p; p = mbsNext(p))
+	for (p = line; *p; p = mbsNext(p))
 	{
 		if (*p == findChr)
 		{
@@ -95,7 +95,7 @@ void unizChar(char *line, char *findChrs, int repChr) // mbs_
 {
 	char *p;
 
-	for(p = findChrs; *p; p++)
+	for (p = findChrs; *p; p++)
 	{
 		replaceChar(line, *p, repChr);
 	}
@@ -141,7 +141,7 @@ sint mbs_strnicmp(char *line1, char *line2, uint count)
 {
 	uint index;
 
-	for(index = 0; index < count; index++)
+	for (index = 0; index < count; index++)
 	{
 		if (line1[index] == '\0')
 		{
@@ -180,7 +180,7 @@ char *mbs_strchr(char *line, int findChr)
 {
 	char *p;
 
-	for(p = line; *p; p = mbsNext(p))
+	for (p = line; *p; p = mbsNext(p))
 	{
 		if (*p == findChr)
 		{
@@ -194,7 +194,7 @@ char *mbs_strrchr(char *line, int findChr) // _mbsrchr() ‚Æ“¯‚¶ŠÖ”‚Å‚Í‚È‚¢‚©H
 	char *foundPtr = NULL;
 	char *p;
 
-	for(p = line; *p; p = mbsNext(p))
+	for (p = line; *p; p = mbsNext(p))
 	{
 		if (*p == findChr)
 		{
@@ -252,7 +252,7 @@ uint strlen_max(char *str, uint retmax)
 {
 	uint count;
 
-	for(count = 0; str[count] && count < retmax; count++);
+	for (count = 0; str[count] && count < retmax; count++);
 
 	return count;
 }
@@ -330,7 +330,7 @@ char *mbs_strstrCase(char *line, char *ptn, int ignoreCase)
 		char *end = strchr(line, '\0') - ptnlen;
 		char *p;
 
-		for(p = line; p <= end; p = mbsNext(p))
+		for (p = line; p <= end; p = mbsNext(p))
 		{
 			if ((ignoreCase ? mbs_strnicmp : strncmp)(p, ptn, ptnlen) == 0)
 			{
@@ -389,7 +389,7 @@ char *strrstrCase(char *line, char *ptn, int ignoreCase) // mbs_
 {
 	char *ret = NULL;
 
-	for(; ; )
+	for (; ; )
 	{
 		char *p = mbs_strstrCase(line, ptn, ignoreCase);
 
@@ -518,7 +518,7 @@ void removeChar(char *line, int chr)
 
 		errorCase(!*n); // ? !chr
 
-		for(f = n + 1; *f; f++)
+		for (f = n + 1; *f; f++)
 		{
 			if (*f != chr)
 			{
@@ -554,7 +554,7 @@ char *thousandComma(char *line) // ret: strr(line)
 
 	reverseLine(line); // ‹t“]
 
-	for(index = 3; index < strlen(line); index += 4)
+	for (index = 3; index < strlen(line); index += 4)
 	{
 		line = insertChar(line, index, ',');
 	}
@@ -566,7 +566,7 @@ void trimLead(char *line, int delimChr)
 {
 	char *p;
 
-	for(p = line; *p; p++)
+	for (p = line; *p; p++)
 	{
 		if (*p != delimChr)
 		{
@@ -579,7 +579,7 @@ void trimTrail(char *line, int delimChr)
 {
 	char *p;
 
-	for(p = strchr(line, '\0'); line < p; p--)
+	for (p = strchr(line, '\0'); line < p; p--)
 	{
 		if (p[-1] != delimChr)
 		{
@@ -689,7 +689,7 @@ void toLowerLine(char *line) // mbs_
 {
 	char *p;
 
-	for(p = line; *p; p = mbsNext(p))
+	for (p = line; *p; p = mbsNext(p))
 	{
 		*p = m_tolower(*p);
 	}
@@ -698,7 +698,7 @@ void toUpperLine(char *line) // mbs_
 {
 	char *p;
 
-	for(p = line; *p; p = mbsNext(p))
+	for (p = line; *p; p = mbsNext(p))
 	{
 		*p = m_toupper(*p);
 	}
@@ -720,13 +720,13 @@ char *charSetChar(char *chrs)
 	int maxchr;
 	int c;
 
-	for(p = chrs; *p; p++)
+	for (p = chrs; *p; p++)
 	{
 		minchr = *p;
 		p++;
 		maxchr = *p;
 
-		for(c = minchr; c <= maxchr; c++)
+		for (c = minchr; c <= maxchr; c++)
 		{
 			line = addChar(line, c);
 		}
@@ -739,7 +739,7 @@ char *kanjiPunch(char *str, int knjChr)
 
 	str = strx(str);
 
-	for(p = str; *p; p++)
+	for (p = str; *p; p++)
 	{
 		if (isMbc(p))
 		{
@@ -779,7 +779,7 @@ void toAsciiLine(char *str, int okRet, int okTab, int okSpc)
 {
 	char *p;
 
-	for(p = str; *p; p++)
+	for (p = str; *p; p++)
 	{
 		if (*p == '\r') // CR-LF –”‚Í CR ‚ð LF ‚É‚·‚éB
 		{
@@ -847,7 +847,7 @@ void tokinit(char *str, char *delims)
 
 			memset(TokDelims, 0x00, 32);
 
-			for(p = delims; ; p++)
+			for (p = delims; ; p++)
 			{
 				uint delim = *p;
 
@@ -880,7 +880,7 @@ char *toknext(char *str, char *delims)
 		char *p;
 		uint upchr;
 
-		for(p = TokPtr; ; p++)
+		for (p = TokPtr; ; p++)
 		{
 			upchr = *p;
 

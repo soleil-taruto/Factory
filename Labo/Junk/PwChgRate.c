@@ -18,17 +18,17 @@ static void DoTest(double pwChgRate)
 	cout("PW_CHG_RATE: %f\n", pwChgRate);
 	cout("\n");
 
-	for(loop_cnt = 0; loop_cnt < LOOP_MAX; loop_cnt++)
+	for (loop_cnt = 0; loop_cnt < LOOP_MAX; loop_cnt++)
 	{
 		uint succeed_cnt = 0;
 		uint test_cnt;
 
-		for(test_cnt = 0; test_cnt < TEST_MAX; test_cnt++)
+		for (test_cnt = 0; test_cnt < TEST_MAX; test_cnt++)
 		{
 			uint pw = mt19937_rnd(PW_MAX);
 			uint attack;
 
-			for(attack = 0; attack < PW_MAX; attack++)
+			for (attack = 0; attack < PW_MAX; attack++)
 			{
 				double r = mt19937_rnd(IMAX) / (double)IMAX;
 

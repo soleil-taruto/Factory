@@ -64,7 +64,7 @@ void camellia_ecb(camellia_keyTable_t *i, autoBlock_t *in, autoBlock_t *out, int
 	bin = (uchar *)directGetBuffer(in);
 	bout = (uchar *)directGetBuffer(out);
 
-	for(index = 0; index < getSize(in); index += 16)
+	for (index = 0; index < getSize(in); index += 16)
 	{
 		camellia_encrypt(i, bin + index, bout + index, doEncrypt);
 	}
@@ -80,7 +80,7 @@ static void XorBlock(uchar *in1, uchar *in2, uchar *out)
 #else
 	uint index;
 
-	for(index = 0; index < 16; index++)
+	for (index = 0; index < 16; index++)
 	{
 		out[index] = in1[index] ^ in2[index];
 	}
@@ -115,7 +115,7 @@ void camellia_cbc(camellia_keyTable_t *i, autoBlock_t *iv, autoBlock_t *in, auto
 		XorBlock(biv, bin, bout);
 		camellia_encrypt(i, bout, bout, 1);
 
-		for(index = 16; index < getSize(in); index += 16)
+		for (index = 16; index < getSize(in); index += 16)
 		{
 			XorBlock(bout + index - 16, bin + index, bout + index);
 			camellia_encrypt(i, bout + index, bout + index, 1);
@@ -123,7 +123,7 @@ void camellia_cbc(camellia_keyTable_t *i, autoBlock_t *iv, autoBlock_t *in, auto
 	}
 	else
 	{
-		for(index = getSize(in) - 16; index; index -= 16)
+		for (index = getSize(in) - 16; index; index -= 16)
 		{
 			camellia_encrypt(i, bin + index, bout + index, 0);
 			XorBlock(bin + index - 16, bout + index, bout + index);
@@ -170,7 +170,7 @@ static void CamelliaCtr(camellia_keyTable_t *i, autoBlock_t *iv, autoBlock_t *in
 	bin = (uchar *)directGetBuffer(in);
 	bout = (uchar *)directGetBuffer(out);
 
-	for(index = 0; index < getSize(in); index++)
+	for (index = 0; index < getSize(in); index++)
 	{
 		if ((index & 0x0f) == 0)
 		{
@@ -178,7 +178,7 @@ static void CamelliaCtr(camellia_keyTable_t *i, autoBlock_t *iv, autoBlock_t *in
 			{
 				camellia_encrypt(i, ctr, eb, 1);
 
-				for(ctridx = 0; ctridx < 16; ctridx++)
+				for (ctridx = 0; ctridx < 16; ctridx++)
 					if (ctr[ctridx] = (ctr[ctridx] + 1) & 0xff)
 						break;
 			}
@@ -204,7 +204,7 @@ static void CamelliaCfbBlock(camellia_keyTable_t *i, uchar iv[16], uchar in[16],
 
 	camellia_encrypt(i, index ? iv : in + index - 16, eb, 1);
 
-	for(bndx = 0; bndx < 16 && index + bndx < size; bndx++)
+	for (bndx = 0; bndx < 16 && index + bndx < size; bndx++)
 	{
 		out[bndx] = in[bndx] ^ eb[bndx];
 	}
@@ -230,14 +230,14 @@ void camellia_cfb(camellia_keyTable_t *i, autoBlock_t *iv, autoBlock_t *in, auto
 
 	if (doEncrypt)
 	{
-		for(index = 0; index < getSize(in); index += 16)
+		for (index = 0; index < getSize(in); index += 16)
 		{
 			CamelliaCfbBlock(i, biv, bin, bout, index, getSize(in));
 		}
 	}
 	else
 	{
-		for(index = getSize(in) & ~15; ; index -= 16)
+		for (index = getSize(in) & ~15; ; index -= 16)
 		{
 			CamelliaCfbBlock(i, biv, bin, bout, index, getSize(in));
 

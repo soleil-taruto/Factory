@@ -25,7 +25,7 @@ static uint Root64(uint64 value)
 	uint root = 0;
 	uint bit;
 
-	for(bit = 1u << 31; bit; bit >>= 1)
+	for (bit = 1u << 31; bit; bit >>= 1)
 	{
 		uint r = root | bit;
 
@@ -45,9 +45,9 @@ static void MakeSosuMap(void)
 	SosuMap[0] = 0;
 	memset(SosuMap + 1, 1, SOSUMAP_SIZE - 1);
 
-	for(index = 0; index < lengthof(SosuList); index++)
+	for (index = 0; index < lengthof(SosuList); index++)
 	{
-		for(ndx = SosuList[index]; ndx < SOSUMAP_SIZE; ndx += SosuList[index])
+		for (ndx = SosuList[index]; ndx < SOSUMAP_SIZE; ndx += SosuList[index])
 		{
 			SosuMap[ndx] = 0;
 		}
@@ -70,13 +70,13 @@ static void DispSosu(void)
 	uint index;
 	uint64 count;
 
-	for(index = 0; index < lengthof(SosuList); index++)
+	for (index = 0; index < lengthof(SosuList); index++)
 	{
 		cout("%u\n", SosuList[index]);
 	}
 	fileSeek(SosuFp, SEEK_SET, 29);
 
-	for(count = 29; count <= CountMax; count++)
+	for (count = 29; count <= CountMax; count++)
 	{
 		if (readChar(SosuFp))
 		{
@@ -104,7 +104,7 @@ int main(int argc, char **argv)
 
 	rootCntMax = Root64(CountMax);
 
-	for(count = 29; count <= rootCntMax; count++)
+	for (count = 29; count <= rootCntMax; count++)
 	{
 		if (count < 100 || count % 100 == 0)
 			cmdTitle_x(xcout("Prime2tox - %I64u ‚È‚¤...", (uint64)count * count));
@@ -113,7 +113,7 @@ int main(int argc, char **argv)
 
 		if (readChar(SosuFp))
 		{
-			for(wcnt = (uint64)count * 3; wcnt <= CountMax; wcnt += (uint64)count * 2)
+			for (wcnt = (uint64)count * 3; wcnt <= CountMax; wcnt += (uint64)count * 2)
 			{
 				fileSeek(SosuFp, SEEK_SET, wcnt);
 				writeChar(SosuFp, 0);

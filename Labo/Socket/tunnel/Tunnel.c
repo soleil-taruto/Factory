@@ -56,7 +56,7 @@ static void PrintDataFltr(autoBlock_t *buff, uint header)
 			writeChar(OutputFp, ' ');
 			writeLine_x(OutputFp, makeJStamp(NULL, 1));
 		}
-		for(index = 0; index < getSize(buff); index++)
+		for (index = 0; index < getSize(buff); index++)
 		{
 			int chr = getByte(buff, index);
 			int pchr;

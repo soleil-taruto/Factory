@@ -97,7 +97,7 @@ static void PutPrime(uint prime, uint maxNumb)
 {
 	uint64 count;
 
-	for(count = prime * prime; count <= maxNumb; count += prime * 2)
+	for (count = prime * prime; count <= maxNumb; count += prime * 2)
 	{
 		SetPBit(count, 1);
 	}
@@ -107,18 +107,18 @@ static void PutPrimeTo13(void)
 	uint primes[] = { 3, 5, 7, 11, 13 };
 	uint index;
 
-	for(index = 0; index < P13_LEN; index++)
+	for (index = 0; index < P13_LEN; index++)
 		PBits[index] = 0;
 
-	for(index = 0; index < lengthof(primes); index++)
+	for (index = 0; index < lengthof(primes); index++)
 	{
 		PutPrime(primes[index], P13_LEN * 64 - 1);
 		SetPBit(primes[index], 1);
 	}
-	for(index = P13_LEN; index < PBIT_LEN; index++)
+	for (index = P13_LEN; index < PBIT_LEN; index++)
 		PBits[index] = PBits[index % P13_LEN];
 
-	for(index = 0; index < lengthof(primes); index++)
+	for (index = 0; index < lengthof(primes); index++)
 		SetPBit(primes[index], 0);
 
 	SetPBit(1, 1);
@@ -127,7 +127,7 @@ static void PutPrimeFrom17(void)
 {
 	uint prime;
 
-	for(prime = 17; prime <= 0xffff; prime += 2)
+	for (prime = 17; prime <= 0xffff; prime += 2)
 		if (!GetPBit(prime))
 			PutPrime(prime, UINTMAX);
 }
@@ -184,7 +184,7 @@ int IsPrime(uint64 value)
 
 	maxDenom = iSqrt64(value);
 
-	for(denom = 3; denom <= maxDenom; denom += 2)
+	for (denom = 3; denom <= maxDenom; denom += 2)
 		if (IsPrime_32(denom) && value % denom == 0) // IsPrime_32 <- value % denom == 0 ‚æ‚è‘¬‚¢‚Û‚¢B32bit‚¾‚©‚ç???
 			return 0;
 
@@ -221,7 +221,7 @@ void Factorization(uint64 value, uint64 dest[64]) // dest: Å‘å 63 ŒÂ, ÅŒã‚Ì—v‘
 		}
 		maxDenom = iSqrt64(value);
 
-		for(denom = 3; denom <= maxDenom; denom += 2)
+		for (denom = 3; denom <= maxDenom; denom += 2)
 		{
 			if (IsPrime_32(denom)) // value % denom == 0 ‚æ‚è‘¬‚¢‚Û‚¢B32bit‚¾‚©‚ç???
 			{

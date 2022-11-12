@@ -50,11 +50,11 @@ int main(int argc, char **argv)
 
 	mt19937_init();
 
-	for(c = 0; c < 100; c++)
+	for (c = 0; c < 100; c++)
 	{
 		DoTest((uint64)c);
 	}
-	for(c = 0; c < 100; c++)
+	for (c = 0; c < 100; c++)
 	{
 		cout("[%u]\n", c);
 		DoTest(mt19937_rnd64Mod(1000000ui64));

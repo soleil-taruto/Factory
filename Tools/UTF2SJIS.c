@@ -285,7 +285,7 @@ readArgs:
 		return;
 	}
 
-	for(; ; )
+	for (; ; )
 	{
 		DoConv_Path(c_dropDirFile());
 		cout("\n");

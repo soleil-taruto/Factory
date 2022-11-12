@@ -127,7 +127,7 @@ static void ReallocSessionBuffs(void)
 
 	LOGPOS();
 
-	for(index = 0; index < ConnectMax; index++)
+	for (index = 0; index < ConnectMax; index++)
 	{
 		Session_t *i = SessionList + index;
 
@@ -141,7 +141,7 @@ static uint GetMessageTotalSize(void)
 	uint totalSize = 0;
 	uint index;
 
-	for(index = 0; index < ConnectMax; index++)
+	for (index = 0; index < ConnectMax; index++)
 	{
 		Session_t *i = SessionList + index;
 
@@ -159,7 +159,7 @@ static int RecvHTTPParse(Session_t *i, int sock, uint firstByteTmoutSec, uint no
 	int needBreak = 0;
 	uint firstByteTmoutTime = GetTimeoutTime(firstByteTmoutSec);
 
-	for(; ; )
+	for (; ; )
 	{
 		if (osss && !getSize(i->BkBuff) && SockRecvCharWait(osss, 0))
 		{
@@ -535,7 +535,7 @@ static autoBlock_t *MakeSendData(void)
 	{
 		uint index;
 
-		for(index = 0; index < getCount(HttpDat.H_Keys); index++)
+		for (index = 0; index < getCount(HttpDat.H_Keys); index++)
 		{
 			char *value = getLine(HttpDat.H_Values, index);
 
@@ -590,7 +590,7 @@ static int SendHTTP(Session_t *i, int sock, uint noDatTmoutSec) // ret: ? ’ÊMƒG
 	int ret;
 	uint noDatTmoutTime = GetTimeoutTime(noDatTmoutSec);
 
-	for(; ; )
+	for (; ; )
 	{
 		if (!getSize(sendData))
 		{
@@ -930,7 +930,7 @@ static int ReadArgs(void)
 	{
 		uint index;
 
-		for(index = 0; index < ConnectMax; index++)
+		for (index = 0; index < ConnectMax; index++)
 		{
 			Session_t *i = SessionList + index;
 

@@ -26,8 +26,8 @@ static void CheckColorMinMax(char *file, int mode, int rgb)
 		error();
 	}
 
-	for(x = 0; x < getTableWidth(bmp); x++)
-	for(y = 0; y < getTableHeight(bmp); y++)
+	for (x = 0; x < getTableWidth(bmp); x++)
+	for (y = 0; y < getTableHeight(bmp); y++)
 	{
 		uint color = getTableCell(bmp, x, y);
 

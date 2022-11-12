@@ -40,7 +40,7 @@ void resizeTable(autoTable_t *i, uint w, uint h)
 	{
 		addElement(i->Rows, (uint)newList());
 	}
-	for(rowidx = 0; rowidx < h; rowidx++)
+	for (rowidx = 0; rowidx < h; rowidx++)
 	{
 		autoList_t *row = getList(i->Rows, rowidx);
 
@@ -106,8 +106,8 @@ void resetTableRect(autoTable_t *i, uint l, uint t, uint w, uint h)
 	uint x;
 	uint y;
 
-	for(x = 0; x < w; x++)
-	for(y = 0; y < h; y++)
+	for (x = 0; x < w; x++)
+	for (y = 0; y < h; y++)
 	{
 		resetTableCell(i, l + x, t + y);
 	}
@@ -131,8 +131,8 @@ void twistTable(autoTable_t *i) // [0][0] - [max][max] ‚ðŽ²‚É”½“]
 
 	if (getTableWidth(i) == getTableHeight(i))
 	{
-		for(x = 1; x < getTableWidth(i); x++)
-		for(y = 0; y < x; y++)
+		for (x = 1; x < getTableWidth(i); x++)
+		for (y = 0; y < x; y++)
 		{
 			swapTableCell(i, x, y, y, x);
 		}
@@ -141,11 +141,11 @@ void twistTable(autoTable_t *i) // [0][0] - [max][max] ‚ðŽ²‚É”½“]
 	{
 		autoList_t *rowsNew = newList();
 
-		for(x = 0; x < getTableWidth(i); x++)
+		for (x = 0; x < getTableWidth(i); x++)
 		{
 			autoList_t *rowNew = newList();
 
-			for(y = 0; y < getTableHeight(i); y++)
+			for (y = 0; y < getTableHeight(i); y++)
 			{
 				addElement(rowNew, getTableCell(i, x, y));
 			}
@@ -164,7 +164,7 @@ void hTurnTable(autoTable_t *i) // [mid][0] - [mid][max] ‚ðŽ²‚É”½“]
 #if 1
 	uint rowidx;
 
-	for(rowidx = 0; rowidx < getCount(i->Rows); rowidx++)
+	for (rowidx = 0; rowidx < getCount(i->Rows); rowidx++)
 	{
 		reverseElements(getList(i->Rows, rowidx));
 	}

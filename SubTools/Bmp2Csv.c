@@ -52,7 +52,7 @@ static void Csv2Bmp(char *rFile, char *wFile)
 
 		if (ThreeCellMode)
 		{
-			for(colidx = 0; colidx < getCount(rRow) / 3; colidx++)
+			for (colidx = 0; colidx < getCount(rRow) / 3; colidx++)
 			{
 				addElement(
 					wRow,

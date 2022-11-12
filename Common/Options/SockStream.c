@@ -145,7 +145,7 @@ int SockRecvChar(SockStream_t *i)
 	}
 	ResetBlockTimeout(i);
 
-	for(; ; )
+	for (; ; )
 	{
 		if (IsTimeout(i, 1))
 		{
@@ -245,7 +245,7 @@ void SockFlush(SockStream_t *i)
 
 	ResetBlockTimeout(i);
 
-	for(; ; )
+	for (; ; )
 	{
 		if (i->W_Buff.Index == i->W_Buff.Size)
 		{
@@ -281,7 +281,7 @@ autoBlock_t *SockRipRecvBuffer(SockStream_t *i)
 #else // “¯‚¶ƒR[ƒh..‚¾‚ÆŽv‚¤..
 	autoBlock_t *rippedBuffer = newBlock();
 
-	for(; i->R_Buff.Index < i->R_Buff.Size; i->R_Buff.Index++)
+	for (; i->R_Buff.Index < i->R_Buff.Size; i->R_Buff.Index++)
 	{
 		addByte(rippedBuffer, i->R_Buff.Buffer[i->R_Buff.Index]);
 	}
@@ -295,7 +295,7 @@ char *SockRecvLine(SockStream_t *i, uint lenmax)
 	char *line;
 	int chr;
 
-	for(; ; )
+	for (; ; )
 	{
 		chr = SockRecvChar(i);
 
@@ -321,7 +321,7 @@ void SockSendBlock(SockStream_t *i, void *block, uint blockSize)
 {
 	uint index;
 
-	for(index = 0; index < blockSize; index++)
+	for (index = 0; index < blockSize; index++)
 	{
 		SockSendChar(i, ((uchar *)block)[index]);
 	}
@@ -362,7 +362,7 @@ int SockRecvBlock(SockStream_t *i, void *block, uint blockSize) // ret: EOF‚ð“Ç‚
 {
 	uint index;
 
-	for(index = 0; index < blockSize; index++)
+	for (index = 0; index < blockSize; index++)
 	{
 		int chr = SockRecvChar(i);
 

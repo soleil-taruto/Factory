@@ -37,7 +37,7 @@ static void DistributeToLog(char *rFile)
 	FILE *wfp = NULL;
 	uint wDate = UINTMAX;
 
-	for(; ; )
+	for (; ; )
 	{
 		autoList_t *row = readCSVRow(rfp);
 		uint date;

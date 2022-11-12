@@ -76,7 +76,7 @@ static void LoadRemarks(void)
 	{
 		FILE *fp = fileOpen(REMARKS_SAVE_FILE, "rt");
 
-		for(; ; )
+		for (; ; )
 		{
 			char *line = readLine(fp);
 			Remark_t *i;
@@ -251,7 +251,7 @@ static void PerformTh(int sock, char *ip)
 
 		cout("range: %u - %u\n", index, getCount(Remarks));
 
-		for(; index < getCount(Remarks); index++)
+		for (; index < getCount(Remarks); index++)
 		{
 			Remark_t *i = (Remark_t *)getElement(Remarks, index);
 
@@ -314,7 +314,7 @@ static void PerformTh(int sock, char *ip)
 		{
 			uint index;
 
-			for(index = 0; index < REMARK_CLEAR_NUM; index++)
+			for (index = 0; index < REMARK_CLEAR_NUM; index++)
 				ReleaseRemark((Remark_t *)zSetElement(Remarks, index, 0));
 
 			removeZero(Remarks);

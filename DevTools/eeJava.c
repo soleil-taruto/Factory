@@ -16,7 +16,7 @@ static void DecodeJP(char *file)
 		uint index;
 		autoBlock_t *dest = newBlock();
 
-		for(index = 0; index + 2 <= getSize(text); index += 2)
+		for (index = 0; index + 2 <= getSize(text); index += 2)
 		{
 			if (
 				index + 4 <= getSize(text) &&
@@ -82,7 +82,7 @@ static void EncodeJP(char *file)
 		uint index;
 		autoBlock_t *dest = newBlock();
 
-		for(index = 0; index + 2 <= getSize(text); index += 2)
+		for (index = 0; index + 2 <= getSize(text); index += 2)
 		{
 			uint u16ch = b_(text)[index] | b_(text)[index + 1] << 8;
 

@@ -106,7 +106,7 @@ UI2048_t UI2048_Mul(UI2048_t a, UI2048_t b, UI2048_t ans[2])
 	m[2][mc[2]++] = f[0];
 	m[3][mc[3]++] = f[1];
 
-	for(i = 1; i < 4; i++)
+	for (i = 1; i < 4; i++)
 	while (2 <= mc[i])
 	{
 		UI1024_t t = m[i][--mc[i]];
@@ -177,7 +177,7 @@ static UI2048_t DivSub(UI2048_t a, UI2048_t b, UI2048_t ans[2], uint reti)
 		{
 			UI1024_t c = UI1024_Add(b.H, UI1024_x(1), NULL);
 
-			for(; ; )
+			for (; ; )
 			{
 				UI1024_t d = UI1024_Div(a.H, c, NULL);
 				UI2048_t dd;

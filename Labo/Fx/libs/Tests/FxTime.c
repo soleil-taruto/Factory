@@ -18,7 +18,7 @@ static void Test02(void)
 	uint endFxTime = TSec2FxTime(TimeData2TSec(Stamp2TimeData(20160803000000)));
 	uint fxTime;
 
-	for(fxTime = bgnFxTime; fxTime <= endFxTime; fxTime += 2)
+	for (fxTime = bgnFxTime; fxTime <= endFxTime; fxTime += 2)
 	{
 		uint t;
 

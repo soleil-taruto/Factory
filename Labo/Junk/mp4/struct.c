@@ -93,7 +93,7 @@ static void ShowBox(Box_t *root, uint indent)
 	Box_t *box;
 	uint index;
 
-	for(index = 0; index < indent; index++)
+	for (index = 0; index < indent; index++)
 		cout("\t");
 
 	cout("[%s] %u\n", root->Name, getSize(root->Image));

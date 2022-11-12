@@ -7,8 +7,8 @@ static autoList_t *CutBmp(autoList_t *bmp, uint l, uint t, uint w, uint h)
 	uint x;
 	uint y;
 
-	for(x = 0; x < w; x++)
-	for(y = 0; y < h; y++)
+	for (x = 0; x < w; x++)
+	for (y = 0; y < h; y++)
 	{
 		autoList_t *row = (autoList_t *)refElement(bmp, t + y);
 		uint dot = 0;
@@ -81,7 +81,7 @@ int main(int argc, char **argv)
 		uint w = toValue(getArg(2));
 		uint h = toValue(getArg(3));
 
-		for(; ; )
+		for (; ; )
 		{
 			CutBmpFile(c_dropFile(), l, t, w, h, NULL);
 			cout("\n");

@@ -54,10 +54,10 @@ static void DirCDMon(void)
 	char *monDir;
 	uint monDir_index;
 
-	for(; ; )
+	for (; ; )
 //	while (waitKey(0) != 0x1b) // old
 	{
-		for(; ; )
+		for (; ; )
 		{
 			switch (waitKey(2000))
 			{

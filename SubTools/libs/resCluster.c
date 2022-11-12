@@ -215,7 +215,7 @@ void restoreResourceCluster(char *clusterFile, autoBlock_t *rawKey, char *destDi
 	InitEncryptor(rawKey);
 	resCount = readValue(fp);
 
-	for(resIndex = 0; resIndex < resCount; resIndex++)
+	for (resIndex = 0; resIndex < resCount; resIndex++)
 	{
 		fileSeek(fp, SEEK_SET, (1 + resIndex) * sizeof(uint));
 		entIndex = readValue(fp);

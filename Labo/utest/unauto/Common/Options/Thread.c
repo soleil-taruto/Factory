@@ -28,7 +28,7 @@ static void Th(uint index)
 {
 	critical();
 	{
-		for(; ; )
+		for (; ; )
 		{
 			enterSemaphore(&Smph);
 			{
@@ -64,14 +64,14 @@ static void SemaphoreMain(void)
 
 	critical();
 	{
-		for(index = 0; index < TH_NUM; index++)
+		for (index = 0; index < TH_NUM; index++)
 		{
 			Ths[index] = runThread(Th, index);
 		}
 	}
 	uncritical();
 
-	for(index = 0; index < TH_NUM; index++)
+	for (index = 0; index < TH_NUM; index++)
 	{
 		waitThread(Ths[index]);
 	}

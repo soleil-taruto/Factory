@@ -73,7 +73,7 @@ static int IsMember(autoList_t *lines, uint targLineIndex)
 
 	// ã’[‚ğŒŸõ ...
 
-	for(index = targLineIndex; index; index--)
+	for (index = targLineIndex; index; index--)
 	{
 		line = getLine(lines, index - 1);
 		status = 
@@ -112,7 +112,7 @@ static int IsMember(autoList_t *lines, uint targLineIndex)
 		IM_EndLineIndex = index;
 		return 1;
 	}
-	for(; ; )
+	for (; ; )
 	{
 		index++;
 
@@ -139,7 +139,7 @@ static void EraseMember(autoList_t *lines, uint startLineIndex, uint endLineInde
 {
 	uint index;
 
-	for(index = startLineIndex; index < endLineIndex; index++)
+	for (index = startLineIndex; index < endLineIndex; index++)
 		*getLine(lines, index) = '\0';
 }
 static void Main2_Tools(void)

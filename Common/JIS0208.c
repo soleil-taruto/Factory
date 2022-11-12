@@ -86,7 +86,7 @@ errorCase(2 < cset);
 		{
 			subMtx[cset] = newList();
 
-			for(index = 0; index < RowCount; index++)
+			for (index = 0; index < RowCount; index++)
 			{
 				addElement(subMtx[cset], (uint)(mtx[index] + cset));
 			}
@@ -109,7 +109,7 @@ errorCase(mtx[index][cset] != mbchr);
 
 		index = 0;
 
-		for(idxmsk = 0x1000; idxmsk; idxmsk >>= 1)
+		for (idxmsk = 0x1000; idxmsk; idxmsk >>= 1)
 		{
 			uint i = index | idxmsk;
 
@@ -272,7 +272,7 @@ static int Conv932216(int mbchr, uint cset1, uint cset2)
 
 				if (getLine(tokens, 1)[0] != ' ') // ëŒâûÇ∑ÇÈ UTF-16 Ç™ñ≥Ç¢ÅB-> CP932 ë§Ç≈Ç‡ï∂éöÇ≈ÇÕÇ»Ç¢ÇÕÇ∏ÅB
 				{
-					for(c = 0; c < 2; c++)
+					for (c = 0; c < 2; c++)
 					{
 						addElement(pairList, toValueDigits(getLine(tokens, c) + 2, hexadecimal));
 					}
@@ -287,7 +287,7 @@ static int Conv932216(int mbchr, uint cset1, uint cset2)
 
 		p = directGetList(pairList);
 
-		for(index = 0; index < getCount(pairList); index += 2)
+		for (index = 0; index < getCount(pairList); index += 2)
 		{
 			addElement(dict[0], (uint)(p + index + 0));
 			addElement(dict[1], (uint)(p + index + 1));

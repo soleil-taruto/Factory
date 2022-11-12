@@ -72,8 +72,8 @@ static void MkMap(void)
 	int n;
 	int t;
 
-	for(n = 0; n < NN; n++)
-	for(t = 0; t < TT; t++)
+	for (n = 0; n < NN; n++)
+	for (t = 0; t < TT; t++)
 	{
 		Map[n][t] = GetDRand() < RR;
 	}
@@ -85,9 +85,9 @@ static void PrintMap(void)
 
 	cout("---- Map ----\n");
 
-	for(n = 0; n < NN; n++)
+	for (n = 0; n < NN; n++)
 	{
-		for(t = 0; t < TT; t++)
+		for (t = 0; t < TT; t++)
 		{
 			cout("%c", Map[n][t] ? '1' : '0');
 		}
@@ -101,8 +101,8 @@ static int GetArea_1(void)
 	int n;
 	int t;
 
-	for(t = 0; t < TT; t++)
-	for(n = 0; n < NN; n++)
+	for (t = 0; t < TT; t++)
+	for (n = 0; n < NN; n++)
 	{
 		if (Map[n][t])
 		{
@@ -120,7 +120,7 @@ static int GA_AtLeastNMsk(int t) // ret: ? Map[][t] ‚É‚Â‚¢‚ÄANMsk[n] == 1 ‚È‚ç 
 {
 	int n;
 
-	for(n = 0; n < NN; n++)
+	for (n = 0; n < NN; n++)
 		if (NMsk[n] && !Map[n][t])
 			return 0;
 
@@ -132,11 +132,11 @@ static void GA_Main(void)
 	int cnt = 0;
 	int t;
 
-	for(n = 0; n < NN; n++)
+	for (n = 0; n < NN; n++)
 		if (NMsk[n])
 			cnt++;
 
-	for(t = 0; t < TT; t++)
+	for (t = 0; t < TT; t++)
 		if (GA_AtLeastNMsk(t))
 			ALst[cnt]++;
 }
@@ -144,7 +144,7 @@ static int GA_Next(void)
 {
 	int n;
 
-	for(n = 0; n < NN; n++)
+	for (n = 0; n < NN; n++)
 	{
 		if (!NMsk[n])
 		{
@@ -171,7 +171,7 @@ static int GetArea_2(void)
 
 	ret = 0;
 
-	for(n = 1; n <= NN; n++)
+	for (n = 1; n <= NN; n++)
 	{
 		if (n % 2)
 			ret += ALst[n];
@@ -226,12 +226,12 @@ int main(int argc, char **argv)
 
 	mt19937_initCRnd();
 
-	for(n = 1; n <= N_MAX; n++)
-	for(t = 1; t <= T_MAX; t *= 10)
+	for (n = 1; n <= N_MAX; n++)
+	for (t = 1; t <= T_MAX; t *= 10)
 	{
 		DoTest(n, t);
 	}
-	for(; ; )
+	for (; ; )
 	{
 		DoTest_2(
 			mt19937_rnd(N_MAX) + 1,

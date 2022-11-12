@@ -51,13 +51,13 @@ autoList_t *CSVStreamToRow(FILE *fp)
 
 	row = newList();
 
-	for(; ; )
+	for (; ; )
 	{
 		autoBlock_t *cellBuff = newBlock();
 
 		if (chr == '\"')
 		{
-			for(; ; )
+			for (; ; )
 			{
 				chr = readChar(fp);
 
@@ -69,7 +69,7 @@ autoList_t *CSVStreamToRow(FILE *fp)
 		}
 		else
 		{
-			for(; ; )
+			for (; ; )
 			{
 				if (chr == ',' || chr == '\n' || chr == EOF)
 					break;

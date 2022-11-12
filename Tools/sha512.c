@@ -83,7 +83,7 @@ int main(int argc, char **argv)
 
 	if (argIs("/D")) // Drop
 	{
-		for(; ; )
+		for (; ; )
 		{
 			char *path = dropPath();
 

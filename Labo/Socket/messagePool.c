@@ -83,7 +83,7 @@ static char *DecodeUrlMessage(char *line) // ret: strr(line)
 	char *p;
 	char *swrk;
 
-	for(p = line; *p; p++)
+	for (p = line; *p; p++)
 	{
 		if (*p == '%' && m_ishexadecimal(p[1]) && m_ishexadecimal(p[2]))
 		{
@@ -119,7 +119,7 @@ static int GetSameMessageCount(char *line, uint lbnd)
 
 	cout("GSMC: %u, %s\n", lbnd, line);
 
-	for(index = lbnd; index < MessageIndex; index++)
+	for (index = lbnd; index < MessageIndex; index++)
 	{
 		char *lmess = MessageList[index].Message;
 
@@ -294,7 +294,7 @@ static int Perform(int sock, uint prm)
 		{
 			LoadHistMessageList(index);
 
-			for(midx = MESSAGE_BUNDLE_SIZE; midx; )
+			for (midx = MESSAGE_BUNDLE_SIZE; midx; )
 			{
 				midx--;
 
@@ -367,7 +367,7 @@ static int Perform(int sock, uint prm)
 			));
 		doPutOnload = 1;
 
-		for(midx = MessageIndex; midx; )
+		for (midx = MessageIndex; midx; )
 		{
 			midx--;
 

@@ -48,7 +48,7 @@ FILE *rfopen(char *file, char *mode)
 {
 	uint retrycnt;
 
-	for(retrycnt = 0; ; retrycnt++)
+	for (retrycnt = 0; ; retrycnt++)
 	{
 		// fopen() ‚Íˆø”‚É–â‘è‚ª–³‚­‚Ä‚àA‹H‚É¸”s‚·‚é‚±‚Æ‚ª‚ ‚éB
 		// “K“–‚ÉŠÔŠu‚ğ‹ó‚¯‚Ä‰½“x‚©ƒŠƒgƒ‰ƒC‚·‚éB
@@ -235,7 +235,7 @@ autoBlock_t *readBinaryToEnd(FILE *fp, autoBlock_t *buff) // buff: NULL == V‚µ‚
 	if (!buff)
 		buff = newBlock();
 
-	for(; ; )
+	for (; ; )
 	{
 		autoBlock_t *tmp = readBinaryStream(fp, 1024 * 1024 * 16);
 
@@ -254,7 +254,7 @@ void readWriteBinary(FILE *rfp, FILE *wfp, uint64 size)
 	uchar *buff = memAlloc(RWB_BUFF_SIZE);
 	uint64 count;
 
-	for(count = 0; count < size; )
+	for (count = 0; count < size; )
 	{
 		uint rwSize = m_min(RWB_BUFF_SIZE, size - count);
 		uint readSize;
@@ -333,7 +333,7 @@ char *readLineLenMax(FILE *fp, uint lenmax)
 	char *line;
 	int chr;
 
-	for(; ; )
+	for (; ; )
 	{
 		chr = readChar(fp);
 
@@ -416,7 +416,7 @@ char *readText(char *file)
 	FILE *fp = fileOpen(file, "rt");
 	autoBlock_t *text = newBlock();
 
-	for(; ; )
+	for (; ; )
 	{
 		int chr = readChar(fp);
 
@@ -444,7 +444,7 @@ void writeToken(FILE *fp, char *line)
 {
 	char *p;
 
-	for(p = line; *p; p++)
+	for (p = line; *p; p++)
 	{
 		writeChar(fp, *p);
 	}
@@ -552,7 +552,7 @@ void writeValue64Width(FILE *fp, uint64 value, uint width)
 	errorCase(!width);
 	errorCase(sizeof(uint64) < width);
 
-	for(bcnt = 0; bcnt < width; bcnt++)
+	for (bcnt = 0; bcnt < width; bcnt++)
 	{
 		writeChar(fp, value >> bcnt * 8 & 0xff);
 	}
@@ -574,7 +574,7 @@ uint64 readValue64Width(FILE *fp, uint width)
 	uint64 value = 0;
 	uint bcnt;
 
-	for(bcnt = 0; bcnt < width; bcnt++)
+	for (bcnt = 0; bcnt < width; bcnt++)
 	{
 		int chr = readChar(fp);
 

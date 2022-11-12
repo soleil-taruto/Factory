@@ -28,7 +28,7 @@ static void FormatFltr(char *line)
 
 	disctrl(line);
 
-	for(p = line; *p; p++)
+	for (p = line; *p; p++)
 		if (m_ishexadecimal(*p))
 			*p = '9';
 }
@@ -42,7 +42,7 @@ static void FindBrokenUUID_File(char *file)
 	{
 		char *p = line;
 
-		for(; ; )
+		for (; ; )
 		{
 			p = strchr(p, '{');
 

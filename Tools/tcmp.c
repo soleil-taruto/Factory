@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		for(; ; )
+		for (; ; )
 		{
 			file1 = dropFile();
 			file2 = dropFile();

@@ -9,12 +9,12 @@ int main(int argc, char **argv)
 	writeLine(fp, "uint JCharList[] =");
 	writeLine(fp, "{");
 
-	for(index = 0; index < 0x0800; index++)
+	for (index = 0; index < 0x0800; index++)
 	{
 		char sBits[33];
 		uint value = 0;
 
-		for(bit = 0; bit < 0x0020; bit++)
+		for (bit = 0; bit < 0x0020; bit++)
 		{
 			int chr = index << 5 | bit;
 

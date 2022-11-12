@@ -48,7 +48,7 @@ static void Reduction(void)
 	Factorization(N, n_dest);
 	Factorization(D, d_dest);
 
-	for(; ; )
+	for (; ; )
 	{
 		uint nc = n_dest[ni];
 		uint dc = d_dest[di];
@@ -79,10 +79,10 @@ static void Reduction(void)
 	errorCase(N == 0); // 2bs
 	errorCase(D == 0); // 2bs
 
-	for(ni = 1; n_dest[ni]; ni++)
+	for (ni = 1; n_dest[ni]; ni++)
 		N *= n_dest[ni];
 
-	for(di = 1; d_dest[di]; di++)
+	for (di = 1; d_dest[di]; di++)
 		D *= d_dest[di];
 
 	errorCase(N == 0); // 2bs
@@ -266,7 +266,7 @@ static uint64 GetValue(char *line)
 
 	GV_Sign = 1;
 
-	for(p = line; *p; p++)
+	for (p = line; *p; p++)
 	{
 		if (*p == '-')
 		{
@@ -319,7 +319,7 @@ Fraction_t *Frct_FromLine(char *line)
 	N = 0;
 	D = 1;
 
-	for(p = line; *p; p++)
+	for (p = line; *p; p++)
 	{
 		if (*p == '-')
 		{
@@ -375,7 +375,7 @@ char *Frct_ToLine(Fraction_t *i, uint basement)
 
 	ans = addLine_x(ans, xcout("%I64u", v));
 
-	for(rank = 0; rank < basement; )
+	for (rank = 0; rank < basement; )
 	{
 		if (N == 0)
 			break;

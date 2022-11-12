@@ -12,7 +12,7 @@ autoList_t *RSTR_SecondLineToColSpans(char *line)
 	char *p;
 	uint count = 0;
 
-	for(p = line; ; p++)
+	for (p = line; ; p++)
 	{
 		if (*p == '-')
 		{
@@ -89,7 +89,7 @@ void RedirSqlTableReader(char *file, FILE *outStrm, void (*writeColNames_x)(FILE
 	{
 		uint irow;
 
-		for(irow = 0; ; irow++)
+		for (irow = 0; ; irow++)
 		{
 			line = readLine(fp);
 			errorCase(!line);
@@ -105,7 +105,7 @@ void RedirSqlTableReader(char *file, FILE *outStrm, void (*writeColNames_x)(FILE
 		}
 		fileSeek(fp, SEEK_SET, 0);
 
-		for(; 1 < irow; irow--) // (irow - 1) が不要な行数
+		for (; 1 < irow; irow--) // (irow - 1) が不要な行数
 		{
 			line = readLine(fp);
 			errorCase(!line);
@@ -124,7 +124,7 @@ void RedirSqlTableReader(char *file, FILE *outStrm, void (*writeColNames_x)(FILE
 	memFree(line);
 	memFree(line2);
 
-	for(; ; )
+	for (; ; )
 	{
 		line = readLine(fp);
 		errorCase(!line);

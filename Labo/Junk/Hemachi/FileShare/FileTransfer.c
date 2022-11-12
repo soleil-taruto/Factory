@@ -157,7 +157,7 @@ static autoBlock_t *ReadAnswerBlock(void)
 {
 	autoBlock_t *block = newBlock();
 
-	for(; ; )
+	for (; ; )
 	{
 		autoBlock_t *subBlock = ReadAnswerSubBlock(512 * 1024);
 
@@ -176,7 +176,7 @@ static void GetDataList(char *file, char *command, int lsMode)
 
 	ProcCommand = command;
 
-	for(retrycnt = 0; retrycnt < 3; retrycnt++)
+	for (retrycnt = 0; retrycnt < 3; retrycnt++)
 	{
 		if (UserCancelled)
 			break;
@@ -190,7 +190,7 @@ static void GetDataList(char *file, char *command, int lsMode)
 		{
 			FILE *fp = fileOpen(file, "wt");
 
-			for(; ; )
+			for (; ; )
 			{
 				char *ansLine = ReadAnswerLine();
 
