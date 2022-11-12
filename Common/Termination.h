@@ -23,7 +23,7 @@ void error2(char *module, uint lineno, char *section, char *message);
 #define errorCase(cond) \
 	do { \
 	if ((cond)) error(); \
-	} while(0)
+	} while (0)
 
 /*
 	message: "\n" Ç≈â¸çs
@@ -31,4 +31,4 @@ void error2(char *module, uint lineno, char *section, char *message);
 #define errorCase_m(cond, message) \
 	do { \
 	if ((cond)) error_m((message)); \
-	} while(0)
+	} while (0)

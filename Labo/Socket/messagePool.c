@@ -461,7 +461,7 @@ static void ReleaseInfo(uint prm)
 }
 static int Idle(void)
 {
-	while(hasKey())
+	while (hasKey())
 	{
 		if (getKey() == 'Q')
 		{

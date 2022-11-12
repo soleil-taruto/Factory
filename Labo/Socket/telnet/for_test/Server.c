@@ -91,7 +91,7 @@ static int Perform(int sock, uint prm)
 	if (SockSendSequ(sock, i->SendQueue, 0) == -1)
 		return 0;
 
-	while(hasKey())
+	while (hasKey())
 	{
 		int chr = getKey();
 
@@ -122,7 +122,7 @@ static int Idle(void)
 {
 	if (!ConnectCount)
 	{
-		while(hasKey())
+		while (hasKey())
 		{
 			if (getKey() == 0x1b)
 			{

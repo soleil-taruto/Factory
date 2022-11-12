@@ -14,7 +14,7 @@ static void Print(autoBlock_t *a, char *title)
 }
 static void Norm(autoBlock_t *a)
 {
-	while(getSize(a) && getByte(a, getSize(a) - 1) == 0)
+	while (getSize(a) && getByte(a, getSize(a) - 1) == 0)
 		unaddByte(a);
 }
 static void Copy(autoBlock_t *src, autoBlock_t *dest)
@@ -57,7 +57,7 @@ static autoBlock_t *Dml;
 
 static void DD_Add(uint64 val, uint index)
 {
-	while(val != 0)
+	while (val != 0)
 	{
 		val += refByte(Ans, index);
 		putByte(Ans, index, val & 0xffui64);
@@ -78,7 +78,7 @@ static void DD_Mul(uint64 b)
 		uint64 val = getByte(Denom, index) * b;
 		uint c = index;
 
-		while(val != 0)
+		while (val != 0)
 		{
 			val += refByte(Dml, c);
 			putByte(Dml, c, val & 0xffui64);
@@ -105,7 +105,7 @@ static void DD_Red(uint aPos)
 	{
 		index += aPos;
 
-		while(!val)
+		while (!val)
 		{
 			val += getByte(Rem, index);
 			val += 0xff;
@@ -139,7 +139,7 @@ static void DoDiv(void)
 		(uint64)getByte(Denom, di + 1) << 8;
 	d++;
 
-	while(getSize(Denom) + 6 <= getSize(Rem))
+	while (getSize(Denom) + 6 <= getSize(Rem))
 	{
 		ni = getSize(Rem) - 8;
 		n = (uint64)getByte(Rem, ni + 0) <<  0 |
@@ -157,7 +157,7 @@ static void DoDiv(void)
 		DD_Mul(a);
 		DD_Red(ni - di);
 	}
-	while(getSize(Denom) <= getSize(Rem))
+	while (getSize(Denom) <= getSize(Rem))
 	{
 		ni = di;
 		n = (uint64)refByte(Rem, ni + 0) <<  0 |
@@ -178,7 +178,7 @@ static void DoDiv(void)
 		DD_Mul(a);
 		DD_Red(0);
 	}
-	while(Comp(Denom, Rem) <= 0)
+	while (Comp(Denom, Rem) <= 0)
 	{
 		LOGPOS(); // ‚±‚±‚É“ü‚é‚©H‚P‰ñ‚Í“ü‚é‚±‚Æ‚ª‚ ‚è‚»‚¤B‚Q‰ñˆÈã‚Í–³‚¢H
 
@@ -216,7 +216,7 @@ static void DT_Mul(void)
 		uint val = getByte(Ans, ai) * getByte(Denom, bi);
 		uint index = ai + bi;
 
-		while(val)
+		while (val)
 		{
 			val += refByte(Tml, index);
 			putByte(Tml, index, val & 0xff);
@@ -234,7 +234,7 @@ static void DT_Add(void)
 		uint val = getByte(Rem, index);
 		uint c = index;
 
-		while(val)
+		while (val)
 		{
 			val += refByte(Tml, c);
 			putByte(Tml, c, val & 0xff);
@@ -288,7 +288,7 @@ int main(int argc, char **argv)
 
 	Tml = newBlock();
 
-	while(!waitKey(0))
+	while (!waitKey(0))
 	{
 		DoTest(10);
 		DoTest(30);

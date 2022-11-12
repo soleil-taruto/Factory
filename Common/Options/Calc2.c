@@ -33,7 +33,7 @@ static void ReleaseOperand(calcOperand_t *co)
 
 static void Trim(calcOperand_t *co)
 {
-	while(getSize(co->F) && !getByte(co->F, getSize(co->F) - 1))
+	while (getSize(co->F) && !getByte(co->F, getSize(co->F) - 1))
 	{
 		unaddByte(co->F);
 	}
@@ -42,7 +42,7 @@ static void Trim(calcOperand_t *co)
 	{
 		uint desCnt = 0;
 
-		while(desCnt < getSize(co->F) && !getByte(co->F, desCnt))
+		while (desCnt < getSize(co->F) && !getByte(co->F, desCnt))
 		{
 			desCnt++;
 			co->E--;
@@ -50,7 +50,7 @@ static void Trim(calcOperand_t *co)
 		removeBytes(co->F, 0, desCnt);
 	}
 #else // same, ’x‚¢..
-	while(getSize(co->F) && !getByte(co->F, 0))
+	while (getSize(co->F) && !getByte(co->F, 0))
 	{
 		desertByte(co->F, 0);
 		co->E--;
@@ -69,7 +69,7 @@ static void Expand(calcOperand_t *co, uint count)
 	insertByteRepeat(co->F, 0, 0, count);
 	co->E += count;
 #else // same, ’x‚¢..
-	while(count)
+	while (count)
 	{
 		insertByte(co->F, 0, 0);
 		co->E++;
@@ -220,7 +220,7 @@ char *calcGetSmplString_EM(calcOperand_t *co, uint effectMin)
 
 	if (effectMin)
 	{
-		while((sint)getSize(co->F) < co->E + 1)
+		while ((sint)getSize(co->F) < co->E + 1)
 		{
 			addByte(co->F, 0);
 		}
@@ -230,7 +230,7 @@ char *calcGetSmplString_EM(calcOperand_t *co, uint effectMin)
 			Expand(co, effectMin - getSize(co->F));
 		}
 #else // same, ’x‚¢..
-		while(getSize(co->F) < effectMin)
+		while (getSize(co->F) < effectMin)
 		{
 			Expand(co, 1);
 		}
@@ -318,11 +318,11 @@ static SyncE(calcOperand_t *co1, calcOperand_t *co2)
 		Expand(co2, co1->E - co2->E);
 	}
 #else // same, ’x‚¢..
-	while(co1->E < co2->E)
+	while (co1->E < co2->E)
 	{
 		Expand(co1, 1);
 	}
-	while(co2->E < co1->E)
+	while (co2->E < co1->E)
 	{
 		Expand(co2, 1);
 	}
@@ -485,7 +485,7 @@ calcOperand_t *calcDiv(calcOperand_t *co1, calcOperand_t *co2)
 
 	co2->E -= shiftCnt;
 
-	while(0 <= shiftCnt)
+	while (0 <= shiftCnt)
 	{
 		tmp = calcSub(co1, co2);
 
@@ -601,7 +601,7 @@ int calcComp(calcOperand_t *co1, calcOperand_t *co2)
 	index1 = getSize(co1->F);
 	index2 = getSize(co2->F);
 
-	while(index1 && index2)
+	while (index1 && index2)
 	{
 		index1--;
 		index2--;

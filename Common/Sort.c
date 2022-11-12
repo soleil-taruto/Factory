@@ -107,7 +107,7 @@ void rapidSort(autoList_t *list, sint (*funcComp)(uint, uint))
 	addElement(rangeStack, 0);
 	addElement(rangeStack, getCount(list));
 
-	while(getCount(rangeStack))
+	while (getCount(rangeStack))
 	{
 		endnextidx = unaddElement(rangeStack);
 		startidx = unaddElement(rangeStack);
@@ -148,29 +148,29 @@ void rapidSort(autoList_t *list, sint (*funcComp)(uint, uint))
 			pivot = getElement(list, pivotidx);
 
 #if 1
-			while(nearidx < pivotidx && funcComp(getElement(list, nearidx), pivot) <= 0)
+			while (nearidx < pivotidx && funcComp(getElement(list, nearidx), pivot) <= 0)
 			{
 				nearidx++;
 			}
-			while(pivotidx < faridx && funcComp(pivot, getElement(list, faridx)) <= 0)
+			while (pivotidx < faridx && funcComp(pivot, getElement(list, faridx)) <= 0)
 			{
 				faridx--;
 			}
 #elif 1 // 同値が多いとき多少速い。<--- pivotの最終位置が中央に寄りやすいみたい。
-			while(nearidx < pivotidx && funcComp(getElement(list, nearidx), pivot) < 0)
+			while (nearidx < pivotidx && funcComp(getElement(list, nearidx), pivot) < 0)
 			{
 				nearidx++;
 			}
-			while(pivotidx < faridx && funcComp(pivot, getElement(list, faridx)) < 0)
+			while (pivotidx < faridx && funcComp(pivot, getElement(list, faridx)) < 0)
 			{
 				faridx--;
 			}
 #else // 同じ要素を比較することがある。この動作は想定されない場合がある気がする。
-			while(funcComp(getElement(list, nearidx), pivot) < 0)
+			while (funcComp(getElement(list, nearidx), pivot) < 0)
 			{
 				nearidx++;
 			}
-			while(funcComp(pivot, getElement(list, faridx)) < 0)
+			while (funcComp(pivot, getElement(list, faridx)) < 0)
 			{
 				faridx--;
 			}
@@ -355,7 +355,7 @@ uint binSearch(autoList_t *list, uint target, sint (*funcComp)(uint, uint))
 	uint p = 0;
 	uint q = getCount(list);
 
-	while(p < q)
+	while (p < q)
 	{
 		uint mid = (p + q) / 2;
 		sint comp;
@@ -388,7 +388,7 @@ uint findBoundNearestMatch(autoList_t *list, uint target, sint (*funcComp)(uint,
 	uint l = 0;
 	uint r = getCount(list);
 
-	while(l < r)
+	while (l < r)
 	{
 		int m = (l + r) / 2;
 		sint comp;
@@ -412,7 +412,7 @@ uint findBoundNearestRight(autoList_t *list, uint target, sint (*funcComp)(uint,
 	uint l = 0;
 	uint r = getCount(list);
 
-	while(l < r)
+	while (l < r)
 	{
 		int m = (l + r) / 2;
 		sint comp;

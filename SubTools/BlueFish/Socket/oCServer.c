@@ -82,7 +82,7 @@ static int Perform(int sock, uint dummyPrm)
 }
 static int Idle(void)
 {
-	while(hasKey())
+	while (hasKey())
 		if (getKey() == 0x1b)
 			return 0;
 

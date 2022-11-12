@@ -52,7 +52,7 @@ autoList_t *RSTR_LineToValues(char *line, autoList_t *colSpans, int asColName) /
 	{
 		char *q = p;
 
-		while(cs)
+		while (cs)
 		{
 			errorCase(!*p); // s‚ª“rØ‚ê‚½B
 			p = mbsNext(p);

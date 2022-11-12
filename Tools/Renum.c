@@ -18,7 +18,7 @@ static char *ZeroPad(uint value)
 	memFree(ret);
 	ret = xcout("%u", value);
 
-	while(strlen(ret) < Ketasuu)
+	while (strlen(ret) < Ketasuu)
 		ret = insertChar(ret, 0, '0');
 
 	return ret;

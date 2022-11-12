@@ -151,7 +151,7 @@ static int UploadFile(char *file, FILE *fp)
 	CreateParent(file);
 	outFp = fileOpen(file, "wb");
 
-	while(buffer = readBinaryStream(fp, 32 * 1024 * 1024))
+	while (buffer = readBinaryStream(fp, 32 * 1024 * 1024))
 	{
 		writeBinaryBlock_x(outFp, buffer);
 		SSPInterrupt();
@@ -186,7 +186,7 @@ static int DownloadFile(char *file, FILE *fp)
 
 	writeChar(fp, 'F');
 
-	while(buffer = readBinaryStream(readFp, 32 * 1024 * 1024))
+	while (buffer = readBinaryStream(readFp, 32 * 1024 * 1024))
 	{
 		writeBinaryBlock_x(fp, buffer);
 		SSPInterrupt();
@@ -366,7 +366,7 @@ endFunc:
 }
 static int Idle(void)
 {
-	while(hasKey())
+	while (hasKey())
 	{
 		if (getKey() == 0x1b)
 		{

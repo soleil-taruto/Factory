@@ -261,7 +261,7 @@ int collectEvents(uint hdl, uint millis) // ts_
 #else
 	uint scnt = 0;
 
-	while(WaitForSingleObject((HANDLE)hdl, millis) == WAIT_OBJECT_0)
+	while (WaitForSingleObject((HANDLE)hdl, millis) == WAIT_OBJECT_0)
 	{
 		millis = 0;
 		scnt++;

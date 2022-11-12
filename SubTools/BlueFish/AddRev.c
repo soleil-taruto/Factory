@@ -66,7 +66,7 @@ static void TrimRev(char *appDir)
 	sortJLinesICase(revDirs);
 	reverseElements(revDirs); // 終端 == 最も旧いリビジョン
 
-	while(REV_MIN < getCount(revDirs) && (REV_MAX < getCount(revDirs) || REV_TOTAL_SIZE_MAX < GetTotalSize_Paths(revDirs)))
+	while (REV_MIN < getCount(revDirs) && (REV_MAX < getCount(revDirs) || REV_TOTAL_SIZE_MAX < GetTotalSize_Paths(revDirs)))
 	{
 		char *revDir = (char *)unaddElement(revDirs); // 最も旧いリビジョンを取り出す。
 
@@ -98,7 +98,7 @@ static void TrimVer(char *appDir)
 	foreach (files, file, index)
 		cout("[VER] %s\n", file); // test-out
 
-	while(VER_MIN < getCount(files) && (VER_MAX < getCount(files) || VER_TOTAL_SIZE_MAX < GetTotalSize_Paths(files)))
+	while (VER_MIN < getCount(files) && (VER_MAX < getCount(files) || VER_TOTAL_SIZE_MAX < GetTotalSize_Paths(files)))
 	{
 		file = (char *)unaddElement(files);
 
@@ -135,7 +135,7 @@ static void TrimBeta(char *appDir)
 	foreach (files, file, index)
 		cout("[BETA] %s\n", file); // test-out
 
-	while(BETA_MIN < getCount(files) && (BETA_MAX < getCount(files) || BETA_TOTAL_SIZE_MAX < GetTotalSize_Paths(files)))
+	while (BETA_MIN < getCount(files) && (BETA_MAX < getCount(files) || BETA_TOTAL_SIZE_MAX < GetTotalSize_Paths(files)))
 	{
 		file = (char *)unaddElement(files);
 

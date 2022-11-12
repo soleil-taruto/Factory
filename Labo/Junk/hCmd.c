@@ -78,7 +78,7 @@ static int Perform(int sock, uint userInfo)
 		addElements_x(TextBuffer, readLines(stdoutFile));
 		addElements_x(TextBuffer, readLines(stderrFile));
 
-		while(9999 < getCount(TextBuffer))
+		while (9999 < getCount(TextBuffer))
 			memFree((char *)desertElement(TextBuffer, 0));
 
 		removeFile(batchFile);
@@ -153,7 +153,7 @@ static void ReleaseInfo(uint userInfo)
 }
 static int Idle(void)
 {
-	while(hasKey())
+	while (hasKey())
 	{
 		if (getKey() == 0x1b)
 		{

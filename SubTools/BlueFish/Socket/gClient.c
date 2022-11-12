@@ -71,7 +71,7 @@ static void Upload(SockStream_t *ss)
 		LOGPOS();
 		fp = fileOpen(file, "rb");
 
-		while(0ui64 < fileSize)
+		while (0ui64 < fileSize)
 		{
 			uint sendSize = (uint)m_min((uint64)BUFFSIZE, fileSize);
 			autoBlock_t gab;
@@ -141,7 +141,7 @@ static void Download(SockStream_t *ss)
 		fp = fileOpen(file, "wb"); // 同じ名前のファイルは上書き！
 		LOGPOS();
 
-		while(0ui64 < fileSize)
+		while (0ui64 < fileSize)
 		{
 			uint recvSize = (uint)m_min((uint64)BUFFSIZE, fileSize);
 			autoBlock_t gab;

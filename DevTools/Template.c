@@ -48,7 +48,7 @@ static void MakeTemplate(char *templateName, char *userParam)
 		{
 			memFree((char *)desertElement(lines, 0));
 		}
-		while(getCount(lines) && !*getLine(lines, 0));
+		while (getCount(lines) && !*getLine(lines, 0));
 	}
 	foreach (lines, line, index)
 	{

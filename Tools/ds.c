@@ -38,7 +38,7 @@ static void DirSize(char *dir)
 		sSize = strxl(line, 20);
 		localFile = strx(line + 20);
 
-		while(sSize[0] == '0' && sSize[1])
+		while (sSize[0] == '0' && sSize[1])
 			eraseChar(sSize);
 
 		sSize = thousandComma(sSize);

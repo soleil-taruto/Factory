@@ -40,12 +40,12 @@ void putBits(bitList_t *i, uint64 index, uint64 size, uint value) // size: 0 ok
 	uint64 bgn = index;
 	uint64 end = index + size;
 
-	while(bgn < end && bgn & 31)
+	while (bgn < end && bgn & 31)
 	{
 		putBit(i, bgn, value);
 		bgn++;
 	}
-	while(bgn < end && end & 31)
+	while (bgn < end && end & 31)
 	{
 		end--;
 		putBit(i, end, value);
@@ -75,12 +75,12 @@ void invBits(bitList_t *i, uint64 index, uint64 size) // size: 0 ok
 	uint64 bgn = index;
 	uint64 end = index + size;
 
-	while(bgn < end && bgn & 31)
+	while (bgn < end && bgn & 31)
 	{
 		invBit(i, bgn);
 		bgn++;
 	}
-	while(bgn < end && end & 31)
+	while (bgn < end && end & 31)
 	{
 		end--;
 		invBit(i, end);

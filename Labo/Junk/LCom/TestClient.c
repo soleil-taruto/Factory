@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 
 	mt19937_init32(toValue(nextArg()));
 
-	while(waitKey(0) != 0x1b)
+	while (waitKey(0) != 0x1b)
 	{
 		if (mt19937_rnd(2))
 		{

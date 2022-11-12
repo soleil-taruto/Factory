@@ -139,7 +139,7 @@ readArgs:
 		{
 			sleep(10);
 		}
-		while(t == time(NULL));
+		while (t == time(NULL));
 	}
 
 	LOGPOS();

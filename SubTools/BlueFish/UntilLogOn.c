@@ -62,7 +62,7 @@ int main(int argc, char **argv)
 
 	errorCase(!existFile(FILE_TOOLKIT_EXE)); // 外部コマンド存在確認
 
-	while(!IsLoggedOn())
+	while (!IsLoggedOn())
 	{
 		int key = coWaitKey(5000);
 

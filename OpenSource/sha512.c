@@ -74,7 +74,7 @@ void sha512_makeHashFile(char *file)
 	sha512_t *i = sha512_create();
 	autoBlock_t *block;
 
-	while(block = readBinaryStream(fp, 16 * 1024 * 1024))
+	while (block = readBinaryStream(fp, 16 * 1024 * 1024))
 	{
 		sha512_update(i, block);
 		releaseAutoBlock(block);

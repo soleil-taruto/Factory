@@ -70,7 +70,7 @@ static void DoRecv(void)
 	collectEvents(evBit_1, 0); // clear
 	eventSet(evReady);
 
-	while(!death)
+	while (!death)
 	{
 		uint bit;
 
@@ -79,7 +79,7 @@ static void DoRecv(void)
 			BitRecved(bit);
 			eventSet(evReady);
 		}
-		while(hasKey())
+		while (hasKey())
 			if (getKey() == 0x1b)
 				death = 1;
 	}

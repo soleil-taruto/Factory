@@ -30,7 +30,7 @@ static void Perform(int sock)
 	{
 		wfp = fileOpen(RecvFile, "wb");
 	}
-	while(!timeout || now() < timeout)
+	while (!timeout || now() < timeout)
 	{
 		if (getSize(rq))
 		{

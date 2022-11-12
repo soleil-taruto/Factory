@@ -103,7 +103,7 @@ static int Perform(int sock, uint prm)
 		if (SockSendSequ(sock, i->SendQueue, 0) == -1)
 			return 0;
 	}
-	while(inputLine);
+	while (inputLine);
 
 	return 1;
 }
@@ -111,7 +111,7 @@ static int Idle(void)
 {
 	static int endFlag;
 
-	while(hasKey())
+	while (hasKey())
 		if (getKey() == 0x1b)
 			endFlag = 1;
 

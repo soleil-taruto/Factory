@@ -404,7 +404,7 @@ autoList_t *readLines(char *file)
 	char *line;
 	autoList_t *lines = createAutoList(16);
 
-	while(line = readLine(fp))
+	while (line = readLine(fp))
 	{
 		addElement(lines, (uint)line);
 	}

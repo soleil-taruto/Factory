@@ -25,7 +25,7 @@ static void RemoveOldest(char *rootDir, uint keepNum)
 
 	LOGPOS();
 
-	while(keepNum < getCount(paths))
+	while (keepNum < getCount(paths))
 	{
 		LOGPOS();
 		removePath_x((char *)desertElement(paths, 0));

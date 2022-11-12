@@ -35,7 +35,7 @@ static uint EvCancel;
 	if (EvCancel && eqIntPulseSec(2, NULL)) { \
 		errorCase_m(handleWaitForMillis(EvCancel, 0), "要求により、キャンセルします。"); \
 	} \
-	} while(0) \
+	} while (0) \
 
 static void PutLv(uint low, uint hi)
 {

@@ -35,7 +35,7 @@ static void ReadLinesFromStdin(void)
 {
 	char *line;
 
-	while(line = readLine(stdin))
+	while (line = readLine(stdin))
 	{
 		RLFS_LineAction(line);
 		memFree(line);

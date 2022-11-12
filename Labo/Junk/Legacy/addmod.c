@@ -29,7 +29,7 @@ static char *GetProjFile(void)
 }
 static uint FindIndex(autoList_t *lines, uint index, char *format)
 {
-	while(index < getCount(lines))
+	while (index < getCount(lines))
 	{
 		if (lineExp(format, getLine(lines, index)))
 			return index;

@@ -251,7 +251,7 @@ static autoList_t *ReadCommonAndAppSpecRanges(char *file)
 	char *line;
 	int appSpecEntered = 0;
 
-	while(line = readLine(fp))
+	while (line = readLine(fp))
 	{
 		int enter;
 		int leave;

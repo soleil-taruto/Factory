@@ -61,12 +61,12 @@ static uint CheckOp(calcOperand_t *op)
 }
 static void TrimOp(calcOperand_t *op)
 {
-	while(getSize(op->Figures) && getByte(op->Figures, 0) == 0 && op->DecIndex)
+	while (getSize(op->Figures) && getByte(op->Figures, 0) == 0 && op->DecIndex)
 	{
 		desertByte(op->Figures, 0);
 		op->DecIndex--;
 	}
-	while(getSize(op->Figures) && getByte(op->Figures, getSize(op->Figures) - 1) == 0)
+	while (getSize(op->Figures) && getByte(op->Figures, getSize(op->Figures) - 1) == 0)
 	{
 		unaddByte(op->Figures);
 	}
@@ -85,8 +85,8 @@ static void ExpandOp(calcOperand_t *op)
 }
 static void ToSameDecIndex(calcOperand_t *op1, calcOperand_t *op2)
 {
-	while(op1->DecIndex < op2->DecIndex) ExpandOp(op1);
-	while(op2->DecIndex < op1->DecIndex) ExpandOp(op2);
+	while (op1->DecIndex < op2->DecIndex) ExpandOp(op1);
+	while (op2->DecIndex < op1->DecIndex) ExpandOp(op2);
 }
 static void AddInt(calcOperand_t *op, uint index, uint value)
 {
@@ -354,7 +354,7 @@ calcOperand_t *makeCalcOperand(char *line)
 		{
 			d = 0;
 
-			while(*p && *p != ']')
+			while (*p && *p != ']')
 			{
 				if (m_isdecimal(*p))
 				{
@@ -562,7 +562,7 @@ char *changeRadixCalcLine(char *line, uint radix, uint newRadix, uint basement) 
 
 	shiftCnt = 0;
 
-	while(getSize(op->Figures)) // ? op != 0
+	while (getSize(op->Figures)) // ? op != 0
 	{
 		calcOperand_t *wop1;
 		calcOperand_t *wop2;
@@ -669,7 +669,7 @@ char *calcRootPower(char *line, uint exponent, uint radix, uint basement) // set
 
 	calcLastMarume = 1;
 
-	while(strcmp(expLine, "0")) // ? expLine != 0
+	while (strcmp(expLine, "0")) // ? expLine != 0
 	{
 		sint ret;
 

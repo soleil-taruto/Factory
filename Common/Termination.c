@@ -22,7 +22,7 @@ void runFinalizers(void)
 {
 	if (Finalizers)
 	{
-		while(getCount(Finalizers))
+		while (getCount(Finalizers))
 		{
 			((void (*)(void))unaddElement(Finalizers))();
 		}

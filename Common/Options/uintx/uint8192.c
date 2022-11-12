@@ -107,7 +107,7 @@ UI8192_t UI8192_Mul(UI8192_t a, UI8192_t b, UI8192_t ans[2])
 	m[3][mc[3]++] = f[1];
 
 	for(i = 1; i < 4; i++)
-	while(2 <= mc[i])
+	while (2 <= mc[i])
 	{
 		UI4096_t t = m[i][--mc[i]];
 		UI4096_t u = m[i][--mc[i]];
@@ -147,7 +147,7 @@ static UI8192_t DivSub(UI8192_t a, UI8192_t b, UI8192_t ans[2], uint reti)
 			a = UI8192_Sub(a, UI8192_Mul(b, dd, NULL));
 		}
 
-		while(!UI4096_IsZero(a.H))
+		while (!UI4096_IsZero(a.H))
 		{
 			UI8192_t dd;
 			UI4096_t d2[2];
@@ -192,7 +192,7 @@ static UI8192_t DivSub(UI8192_t a, UI8192_t b, UI8192_t ans[2], uint reti)
 				a = UI8192_Sub(a, UI8192_Mul(b, dd, NULL));
 			}
 		}
-		while(0 <= UI8192_Comp(a, b))
+		while (0 <= UI8192_Comp(a, b))
 		{
 			ans[0] = UI8192_Add(ans[0], UI8192_x(1), NULL);
 			a = UI8192_Sub(a, b);

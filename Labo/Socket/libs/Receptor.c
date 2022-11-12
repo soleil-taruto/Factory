@@ -42,7 +42,7 @@ void ReceptorLoop(
 
 		mutexRelease(mtx);
 	}
-	while(idle())
+	while (idle())
 	{
 		collectEvents(startEvent, 3000); // óvãÅë“Çø
 
@@ -66,7 +66,7 @@ void ReceptorLoop(
 				errorCase(!existFile(filePrm));
 				errorCase(!existFile(fileAns));
 
-				while(!DoLock(mtx))
+				while (!DoLock(mtx))
 					if (!idle())
 						goto endFunc;
 

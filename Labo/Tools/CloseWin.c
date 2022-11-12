@@ -163,7 +163,7 @@ typedef struct tagPROCESSENTRY32 {
 					perform(pe32);
 				}
 			}
-			while(Process32Next(hSnapshot, &pe32));
+			while (Process32Next(hSnapshot, &pe32));
 		}
 		CloseHandle(hSnapshot);
 	}

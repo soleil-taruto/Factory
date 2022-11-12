@@ -210,7 +210,7 @@ void insertBytes(autoBlock_t *i, uint index, autoBlock_t *bytes)
 		{
 			i->Block[n] = i->Block[n - bytes->Size];
 		}
-		while(1)
+		while (1)
 		{
 			i->Block[n] = bytes->Block[n - index];
 			if (n == index) break;
@@ -243,7 +243,7 @@ void insertByteRepeat(autoBlock_t *i, uint index, uint byte, uint count)
 		{
 			i->Block[n] = i->Block[n - count];
 		}
-		while(1)
+		while (1)
 		{
 			i->Block[n] = byte;
 			if (n == index) break;
@@ -489,7 +489,7 @@ autoBlock_t *unaddBytesRev(autoBlock_t *i, uint count) // [... a b c] -> [c b a]
 #else // old_same @ 2019.3.24
 	autoBlock_t *block = createBlock(count);
 
-	while(count)
+	while (count)
 	{
 		addByte(block, unaddByte(i));
 		count--;

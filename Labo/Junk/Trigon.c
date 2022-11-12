@@ -88,7 +88,7 @@ static void Expand(uint prn_accur)
 }
 static void ShootingStar(autoList_t *lines)
 {
-	while(strchr(getLine(lines, 0), '*'))
+	while (strchr(getLine(lines, 0), '*'))
 	{
 		char *line;
 		uint index;
@@ -107,7 +107,7 @@ static void ShootingStar(autoList_t *lines)
 		{
 			uint sndx = (uint)strchr(line, '*') - (uint)line;
 
-			while(sndx < sndxmax)
+			while (sndx < sndxmax)
 			{
 				line = insertChar(line, sndx, ' ');
 				sndx++;
@@ -158,7 +158,7 @@ static void Trigon(uint accur)
 	addElement(SineList, (uint)strx("0"));
 	addElement(SineList, (uint)strx("1"));
 
-	while(accur)
+	while (accur)
 	{
 		Expand(accur);
 		accur--;

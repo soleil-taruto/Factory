@@ -29,7 +29,7 @@ static void TextFltr(char *file, uint lineLenMax)
 	rfp = fileOpen(file, "rt");
 	wfp = fileOpen(midFile, "wt");
 
-	while(line = readLineLenMax(rfp, lineLenMax))
+	while (line = readLineLenMax(rfp, lineLenMax))
 	{
 		line2JLine(line, 1, 0, 1, 1);
 		writeLine_x(wfp, line);
@@ -319,7 +319,7 @@ retry:
 
 			cout("■受信データ\n");
 
-			while(line = readLineLenMax(fp, 128 * 1024 * 1024))
+			while (line = readLineLenMax(fp, 128 * 1024 * 1024))
 			{
 				char *pLine;
 
@@ -362,7 +362,7 @@ retry:
 			retrycnt--;
 
 			LOGPOS();
-			while(now() <= lastStartTime + 2) sleep(300);
+			while (now() <= lastStartTime + 2) sleep(300);
 			LOGPOS();
 
 			goto retry;

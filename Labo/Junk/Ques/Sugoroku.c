@@ -14,11 +14,11 @@ int main(int argc, char **argv)
 	memset(sugo_n, 0x00, sizeof(sugo_n));
 	d = 0;
 
-	while(d < 10000000)
+	while (d < 10000000)
 	{
 		c = 0;
 
-		while(c < SUGO_LEN)
+		while (c < SUGO_LEN)
 		{
 			sugo_n[c]++;
 

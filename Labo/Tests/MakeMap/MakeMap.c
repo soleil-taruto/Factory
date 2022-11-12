@@ -15,7 +15,7 @@ static void PaintMap(autoTable_t *map, uint x, uint y, uint target, uint dest)
 	addElement(xList, x);
 	addElement(yList, y);
 
-	while(rIndex < getCount(xList))
+	while (rIndex < getCount(xList))
 	{
 		x = getElement(xList, rIndex);
 		y = getElement(yList, rIndex);
@@ -327,7 +327,7 @@ static void MM_JoinNearest(void)
 		}
 	}
 #else // OLD
-	while(x1 != x2 || y1 != y2)
+	while (x1 != x2 || y1 != y2)
 	{
 		if (abs(x1 - x2) < abs(y1 - y2))
 		{

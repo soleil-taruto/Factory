@@ -310,7 +310,7 @@ autoBlock_t *makeCryptoRandBlock(uint count)
 {
 	autoBlock_t *block = createBlock(count);
 
-	while(count)
+	while (count)
 	{
 		addByte(block, getCryptoByte());
 		count--;

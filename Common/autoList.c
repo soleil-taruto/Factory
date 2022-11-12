@@ -221,7 +221,7 @@ void putElement(autoList_t *i, uint index, uint element)
 			i->Elements[i->Count] = 0; // –¢’è‹`’l
 			i->Count++;
 		}
-		while(i->Count < newCount);
+		while (i->Count < newCount);
 //		memset(i->Elements + i->Count, 0x00, (newCount - i->Count) * sizeof(uint)); // –w‚Ç‚Ìê‡ addElement ‚É‚æ‚Á‚ÄŠg’£‚³‚ê‚éBaddElement ‚Ìê‡‚P—v‘f‚µ‚©Šg’£‚µ‚È‚¢‚Ì‚ÅA
 	}
 	i->Elements[index] = element;
@@ -569,7 +569,7 @@ autoList_t *getList(autoList_t *table, uint index)
 }
 autoList_t *refList(autoList_t *table, uint index)
 {
-	while(getCount(table) <= index)
+	while (getCount(table) <= index)
 	{
 		addElement(table, (uint)createAutoList(0));
 	}

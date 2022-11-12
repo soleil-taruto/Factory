@@ -32,7 +32,7 @@ static void Interlude(void)
 {
 	Progress();
 
-	while(hasKey())
+	while (hasKey())
 	{
 		if (getKey() == 0x1b)
 		{

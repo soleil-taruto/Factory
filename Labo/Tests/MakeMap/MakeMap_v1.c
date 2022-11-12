@@ -15,7 +15,7 @@ static void PaintMap(autoTable_t *map, uint x, uint y, uint target, uint dest)
 	addElement(xList, x);
 	addElement(yList, y);
 
-	while(rIndex < getCount(xList))
+	while (rIndex < getCount(xList))
 	{
 		x = getElement(xList, rIndex);
 		y = getElement(yList, rIndex);
@@ -310,7 +310,7 @@ LOGPOS();
 }
 static void MM_JoinPairPos(PairPos_t i)
 {
-	while(i.From.X != i.Dest.X || i.From.Y != i.Dest.Y)
+	while (i.From.X != i.Dest.X || i.From.Y != i.Dest.Y)
 	{
 		if (abs((int)i.From.X - (int)i.Dest.X) < abs((int)i.From.Y - (int)i.Dest.Y)) // ? Y •ûŒü‚É‰“‚¢
 		{

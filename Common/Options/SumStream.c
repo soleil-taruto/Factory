@@ -82,7 +82,7 @@ int CheckSumStream(void (*streamReader)(uchar *, uint), uint64 streamLength)
 	buffer = (uchar *)memAlloc(R_BUFF_SIZE);
 	count = streamLength - SUMSIZE;
 
-	while(R_BUFF_SIZE < count)
+	while (R_BUFF_SIZE < count)
 	{
 		streamReader(buffer, R_BUFF_SIZE);
 		UpdateSum(buffer, R_BUFF_SIZE);

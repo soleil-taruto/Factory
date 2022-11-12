@@ -39,7 +39,7 @@ static void DispSosu(void)
 	{
 		if (index % 10000 == 1)
 		{
-			while(hasKey())
+			while (hasKey())
 			{
 				if (getKey() == 0x1b)
 				{

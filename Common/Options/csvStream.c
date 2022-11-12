@@ -49,7 +49,7 @@ autoList_t *readCSVRow(FILE *fp)
 	{
 		addElement(row, (uint)readCSVCell(fp, &termChr));
 	}
-	while(termChr != '\n' && termChr != EOF);
+	while (termChr != '\n' && termChr != EOF);
 
 	if (termChr == EOF && getCount(row) == 1 && *getLine(row, 0) == '\0')
 	{

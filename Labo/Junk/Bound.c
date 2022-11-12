@@ -21,7 +21,7 @@ static uint SLGetLowestIndex(uint value)
 	uint p = 0;
 	uint q = SLGetCount() - 1;
 
-	while(p < q)
+	while (p < q)
 	{
 		uint c = (p + q) / 2;
 		sint r = m_simpleComp(getElement(SubList, SLGetRealIndex(c)), value);
@@ -42,7 +42,7 @@ static uint GetIndex(autoList_t *list, uint value)
 	uint p = 0;
 	uint q = getCount(list);
 
-	while(p < q)
+	while (p < q)
 	{
 		uint c = (p + q) / 2;
 		sint r = m_simpleComp(getElement(list, c), value);
@@ -91,7 +91,7 @@ static void GetBound(autoList_t *list, uint value, uint *p_ndx1, uint *p_ndx2)
 
 static void AddValueNum(autoList_t *list, uint value, uint num)
 {
-	while(num)
+	while (num)
 	{
 		addElement(list, value);
 		num--;
@@ -163,7 +163,7 @@ static void DoTest2(uint num, uint valmax)
 		{
 			exp1 = index;
 
-			while(++index < getCount(list))
+			while (++index < getCount(list))
 				if (getElement(list, index) != targetVal)
 					break;
 
@@ -188,7 +188,7 @@ int main(int argc, char **argv)
 {
 	mt19937_init();
 
-	while(!checkKey(0x1b))
+	while (!checkKey(0x1b))
 	{
 		DoTest(10);
 		DoTest(100);

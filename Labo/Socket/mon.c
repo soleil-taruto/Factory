@@ -71,7 +71,7 @@ int main(int argc, char **argv)
 
 			for(sec = 0; sec < 5; sec++)
 			{
-				while(hasKey())
+				while (hasKey())
 				{
 					switch(getKey())
 					{

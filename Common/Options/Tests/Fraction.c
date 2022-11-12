@@ -36,7 +36,7 @@ readArgs:
 		goto readArgs;
 	}
 
-	while(hasArgs(3))
+	while (hasArgs(3))
 	{
 		s1 = nextArg();
 		operator = nextArg()[0];
@@ -51,7 +51,7 @@ readArgs:
 
 		memFree(s3);
 
-		while(hasArgs(2))
+		while (hasArgs(2))
 		{
 			operator = nextArg()[0];
 			s2 = nextArg();

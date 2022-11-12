@@ -15,7 +15,7 @@ int main(int argc, char **argv)
 
 	LOGPOS();
 
-	while(waitKey(0) != 0x1b)
+	while (waitKey(0) != 0x1b)
 	{
 		autoBlock_t *message = NectarReceipt(i);
 

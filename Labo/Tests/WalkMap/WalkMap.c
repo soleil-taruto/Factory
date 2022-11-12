@@ -86,7 +86,7 @@ static void MakePaceMap(void)
 	addElement(walkXPosList, StartX);
 	addElement(walkYPosList, StartY);
 
-	while(getCount(walkCountList))
+	while (getCount(walkCountList))
 	{
 		uint w = desertElement(walkCountList, 0);
 		uint x = desertElement(walkXPosList, 0);
@@ -133,7 +133,7 @@ static void FUP_Paint(autoList_t *uaMap, uint x, uint y)
 	addElement(xLst, x);
 	addElement(yLst, y);
 
-	while(getCount(xLst))
+	while (getCount(xLst))
 	{
 		x = desertElement(xLst, 0);
 		y = desertElement(yLst, 0);

@@ -115,7 +115,7 @@ static void WebMon(char *url)
 
 			for(sec = 0; sec < PeriodSec; sec++)
 			{
-				while(hasKey())
+				while (hasKey())
 				{
 					switch(getKey())
 					{

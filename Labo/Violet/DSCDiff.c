@@ -47,7 +47,7 @@ static autoList_t *B_ReadLines(char *file)
 	autoList_t *lines = newList();
 	char *line;
 
-	while(line = B_ReadLine(fp))
+	while (line = B_ReadLine(fp))
 	{
 		addElement(lines, (uint)line);
 	}

@@ -113,7 +113,7 @@ endFunc:
 }
 static int Idle(void)
 {
-	while(hasKey())
+	while (hasKey())
 	{
 		if (getKey() == 0x1b)
 		{

@@ -143,7 +143,7 @@ autoList_t *TryGetFileList(char *findPtn)
 			addElement(list, (uint)name);
 			addElement(TGFL_InfoList, (uint)info);
 		}
-		while(_findnext(h, &fd) == 0);
+		while (_findnext(h, &fd) == 0);
 
 		_findclose(h);
 	}
@@ -571,7 +571,7 @@ static int Idle(void)
 	if (handleWaitForMillis(StopEv, 0))
 		return 0;
 
-	while(hasKey())
+	while (hasKey())
 		if (getKey() == 0x1b)
 			return 0;
 

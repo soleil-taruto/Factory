@@ -106,7 +106,7 @@ enterDir:
 		uchar buffer[26];
 //		uchar buffer[9]; // old
 
-		while(getCount(paths))
+		while (getCount(paths))
 		{
 			char *path = (char *)unaddElement(paths);
 			FILE *fp;
@@ -165,7 +165,7 @@ enterDir:
 
 			fp = fileOpen(path, "rb");
 
-			while(block = readBinaryStream(fp, WRITER_BUFFSIZE))
+			while (block = readBinaryStream(fp, WRITER_BUFFSIZE))
 			{
 				streamWriter(directGetBuffer(block), getSize(block));
 				releaseAutoBlock(block);
@@ -388,7 +388,7 @@ void StreamToDir(char *dir, void (*streamReader)(uchar *, uint))
 
 				fp = fileOpen(path, "wb");
 
-				while(0i64 < count && !STD_ReadStop)
+				while (0i64 < count && !STD_ReadStop)
 				{
 					autoBlock_t *block = nobCreateBlock(count < (uint64)READER_BUFFSIZE ? (uint)count : READER_BUFFSIZE);
 

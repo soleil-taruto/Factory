@@ -39,7 +39,7 @@ static void Fadeout(uint startPos, uint count)
 }
 static void TrimEnd(void)
 {
-	while(getLastElement(WavData) == 0x80008000)
+	while (getLastElement(WavData) == 0x80008000)
 		unaddElement(WavData);
 }
 static void TrimBgn(void)
@@ -57,7 +57,7 @@ static void TrimBgn(void)
 }
 static void PutSilentEnd(uint count)
 {
-	while(count)
+	while (count)
 	{
 		addElement(WavData, 0x80008000);
 		count--;
@@ -67,7 +67,7 @@ static void PutSilentBgn(uint count)
 {
 	autoList_t *nwd = newList();
 
-	while(count)
+	while (count)
 	{
 		addElement(nwd, 0x80008000);
 		count--;

@@ -13,7 +13,7 @@ static void Recv_Th(uint prm)
 	{
 		cout("受信ループ開始\n");
 
-		while(!i->DeadFlag)
+		while (!i->DeadFlag)
 		{
 			if (getSize(i->RecvBuff) < BUFF_FULL)
 			{
@@ -65,7 +65,7 @@ static void Send_Th(uint prm)
 	{
 		cout("送信ループ開始\n");
 
-		while(!i->SockClosedFlag)
+		while (!i->SockClosedFlag)
 		{
 			if (getSize(i->SendBuff))
 			{

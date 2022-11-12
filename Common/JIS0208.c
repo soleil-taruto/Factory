@@ -42,7 +42,7 @@ static autoList_t *MakeMatrix(void)
 
 	fp = fileOpen(file, "rt");
 
-	while(line = readLine(fp))
+	while (line = readLine(fp))
 	{
 		if (line[0] == '0')
 		{

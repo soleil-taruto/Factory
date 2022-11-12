@@ -36,7 +36,7 @@ static char *GetProjFile(char *dir)
 
 	dir = strx(dir);
 
-	while(!(projFile = GetProjFile_Dir(dir)))
+	while (!(projFile = GetProjFile_Dir(dir)))
 	{
 		errorCase(isRootDirAbs(dir));
 

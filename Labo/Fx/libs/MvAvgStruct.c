@@ -35,13 +35,13 @@ static void DoShift(MvAvg_t *i, uint fxTime)
 
 	if (i->CurrFxTime)
 	{
-		while(i->CurrFxTime < fxTime)
+		while (i->CurrFxTime < fxTime)
 		{
 			i->CurrFxTime += 2;
 			i->CurrTotal -= GetMid(GetPrice(i->CurrFxTime - i->Span, i->Pair));
 			i->CurrTotal += GetMid(GetPrice(i->CurrFxTime, i->Pair));
 		}
-		while(fxTime < i->CurrFxTime)
+		while (fxTime < i->CurrFxTime)
 		{
 			i->CurrTotal -= GetMid(GetPrice(i->CurrFxTime, i->Pair));
 			i->CurrTotal += GetMid(GetPrice(i->CurrFxTime - i->Span, i->Pair));

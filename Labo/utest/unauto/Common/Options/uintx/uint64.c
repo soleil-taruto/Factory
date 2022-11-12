@@ -19,7 +19,7 @@ static uint64 GetTestValue(void)
 }
 static void Test01(void)
 {
-	while(!waitKey(0))
+	while (!waitKey(0))
 	{
 		{
 			uint64 a = GetTestValue();

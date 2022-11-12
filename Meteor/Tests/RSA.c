@@ -256,7 +256,7 @@ int main(int argc, char **argv)
 
 	hasArgs(0); // touch
 
-	while(!hasKey() || getKey() != 0x1b)
+	while (!hasKey() || getKey() != 0x1b)
 	{
 		cout("[%u]\n", test_c);
 

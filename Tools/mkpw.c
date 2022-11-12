@@ -93,13 +93,13 @@ int main(int argc, char **argv)
 
 	for(; ; )
 	{
-		while(strlen(pw) < pwLen)
+		while (strlen(pw) < pwLen)
 		{
 			do
 			{
 				chrIdx = getCryptoByte() & 0x3f;
 			}
-			while(pwChrNum <= chrIdx);
+			while (pwChrNum <= chrIdx);
 
 			pw = addChar(pw, pwChrs[chrIdx]);
 		}

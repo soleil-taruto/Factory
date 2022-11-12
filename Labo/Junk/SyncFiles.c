@@ -95,7 +95,7 @@ found_mod:
 		index == 1 && !_stricmp(getLine(hashes, 1), getLine(hashes, 2)) ? (index = 0, 1) : 0
 		);
 
-	while(
+	while (
 		trlidx++,
 		trlidx < getCount(hashes)
 		)
@@ -284,7 +284,7 @@ readArgs:
 		goto readArgs;
 	}
 
-	while(hasArgs(1))
+	while (hasArgs(1))
 	{
 		addElement(dirs, (uint)makeFullPath(nextArg()));
 	}

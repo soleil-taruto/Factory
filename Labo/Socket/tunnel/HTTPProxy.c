@@ -173,7 +173,7 @@ static int RecvHTTPParse(Session_t *i, int sock, uint firstByteTmoutSec, uint no
 			addByte(i->BkBuff, chr); // memo: 片方から受信中に、もう片方からデータが送信されることってあるのか？
 		}
 
-		while(SockRecvCharWait(ss, needTryParse ? 0 : 2000))
+		while (SockRecvCharWait(ss, needTryParse ? 0 : 2000))
 		{
 			int chr = SockRecvChar(ss);
 
@@ -514,7 +514,7 @@ static char *HFldFolding(char *str)
 {
 	uint index = 50;
 
-	while(index + 10 <= strlen(str))
+	while (index + 10 <= strlen(str))
 	{
 		if (str[index] <= '\x20')
 		{
@@ -557,7 +557,7 @@ static autoBlock_t *MakeSendData(void)
 	{
 		uint rPos = 0;
 
-		while(rPos < getSize(HttpDat.Body))
+		while (rPos < getSize(HttpDat.Body))
 		{
 			uint partSize = m_min(0xfff, getSize(HttpDat.Body) - rPos);
 
@@ -713,7 +713,7 @@ static void PerformTh(int sock, char *strip)
 	setSize(i->Buff, 0); // 2bs
 	setSize(i->BkBuff, 0); // 2bs
 
-	while(now() <= endTime)
+	while (now() <= endTime)
 	{
 		// ---- 上り ----
 

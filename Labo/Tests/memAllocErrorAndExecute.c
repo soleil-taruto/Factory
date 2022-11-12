@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 
 	LOGPOS();
 
-	while(malloc(size));
+	while (malloc(size));
 
 	LOGPOS();
 

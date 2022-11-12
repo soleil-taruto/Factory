@@ -403,7 +403,7 @@ char *sockClientEx(uchar ip[4], char *domain, uint portno, char *prmFile, int (*
 	sockClientStatus.AnsFile = t->AnsFile;
 
 #define TransmitLoop(condLoop, condTransmitError) \
-	while(condLoop) { \
+	while (condLoop) { \
 		SockCurrTime = time(NULL); \
 		if (idleFunc() == 0) goto error_transmission; \
 		if (condTransmitError) goto error_transmission; \

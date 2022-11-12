@@ -7,7 +7,7 @@ static autoList_t *LoadCsv(char *file)
 	autoList_t *rows = newList();
 	autoList_t *row;
 
-	while(row = readCSVRow(fp))
+	while (row = readCSVRow(fp))
 		addElement(rows, (uint)row);
 
 	fileClose(fp);

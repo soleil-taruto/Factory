@@ -107,7 +107,7 @@ UI128_t UI128_Mul(UI128_t a, UI128_t b, UI128_t ans[2])
 	m[3][mc[3]++] = f[1];
 
 	for(i = 1; i < 4; i++)
-	while(2 <= mc[i])
+	while (2 <= mc[i])
 	{
 		UI64_t t = m[i][--mc[i]];
 		UI64_t u = m[i][--mc[i]];
@@ -147,7 +147,7 @@ static UI128_t DivSub(UI128_t a, UI128_t b, UI128_t ans[2], uint reti)
 			a = UI128_Sub(a, UI128_Mul(b, dd, NULL));
 		}
 
-		while(!UI64_IsZero(a.H))
+		while (!UI64_IsZero(a.H))
 		{
 			UI128_t dd;
 			UI64_t d2[2];
@@ -192,7 +192,7 @@ static UI128_t DivSub(UI128_t a, UI128_t b, UI128_t ans[2], uint reti)
 				a = UI128_Sub(a, UI128_Mul(b, dd, NULL));
 			}
 		}
-		while(0 <= UI128_Comp(a, b))
+		while (0 <= UI128_Comp(a, b))
 		{
 			ans[0] = UI128_Add(ans[0], UI128_x(1), NULL);
 			a = UI128_Sub(a, b);

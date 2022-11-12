@@ -152,7 +152,7 @@ static char *ZeroPad(uint value, uint minlen)
 {
 	char *ret = xcout("%u", value);
 
-	while(strlen(ret) < minlen)
+	while (strlen(ret) < minlen)
 		ret = insertChar(ret, 0, '0');
 
 	return ret;

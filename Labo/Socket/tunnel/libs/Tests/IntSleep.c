@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 
 	critical();
 	{
-		while(hasArgs(1))
+		while (hasArgs(1))
 		{
 			uint millis = toValue(nextArg());
 

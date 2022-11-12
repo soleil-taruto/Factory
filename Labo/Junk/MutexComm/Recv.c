@@ -92,13 +92,13 @@ static void DoRecv(void)
 	cout("+-----------------------------------+\n");
 	LOGPOS();
 
-	while(!death)
+	while (!death)
 	{
 		TryRecv(0, 1, 2);
 		TryRecv(1, 2, 0);
 		TryRecv(2, 0, 1);
 
-		while(hasKey())
+		while (hasKey())
 			if (getKey() == 0x1b)
 				death = 1;
 	}

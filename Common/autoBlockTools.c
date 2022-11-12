@@ -179,7 +179,7 @@ autoBlock_t *ab_makeBlockLine_x(char *line)
 
 void ab_addTrailZero(autoBlock_t *i, uint count)
 {
-	while(count)
+	while (count)
 	{
 		addByte(i, 0x00);
 		count--;
@@ -189,7 +189,7 @@ uint ab_unaddTrailZero(autoBlock_t *i)
 {
 	uint count = 0;
 
-	while(getSize(i) && !getByte(i, getSize(i) - 1))
+	while (getSize(i) && !getByte(i, getSize(i) - 1))
 	{
 		unaddByte(i);
 		count++;

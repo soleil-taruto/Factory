@@ -107,7 +107,7 @@ UI256_t UI256_Mul(UI256_t a, UI256_t b, UI256_t ans[2])
 	m[3][mc[3]++] = f[1];
 
 	for(i = 1; i < 4; i++)
-	while(2 <= mc[i])
+	while (2 <= mc[i])
 	{
 		UI128_t t = m[i][--mc[i]];
 		UI128_t u = m[i][--mc[i]];
@@ -147,7 +147,7 @@ static UI256_t DivSub(UI256_t a, UI256_t b, UI256_t ans[2], uint reti)
 			a = UI256_Sub(a, UI256_Mul(b, dd, NULL));
 		}
 
-		while(!UI128_IsZero(a.H))
+		while (!UI128_IsZero(a.H))
 		{
 			UI256_t dd;
 			UI128_t d2[2];
@@ -192,7 +192,7 @@ static UI256_t DivSub(UI256_t a, UI256_t b, UI256_t ans[2], uint reti)
 				a = UI256_Sub(a, UI256_Mul(b, dd, NULL));
 			}
 		}
-		while(0 <= UI256_Comp(a, b))
+		while (0 <= UI256_Comp(a, b))
 		{
 			ans[0] = UI256_Add(ans[0], UI256_x(1), NULL);
 			a = UI256_Sub(a, b);

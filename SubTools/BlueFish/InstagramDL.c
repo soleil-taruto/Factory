@@ -51,7 +51,7 @@ static void AddKnownUrl(char *url)
 
 	insertElement(knownUrls, 0, (uint)strx(url));
 
-	while(KNOWN_URL_MAX < getCount(knownUrls))
+	while (KNOWN_URL_MAX < getCount(knownUrls))
 		memFree((char *)unaddElement(knownUrls));
 
 	writeLines(KNOWN_URL_FILE, knownUrls);
@@ -93,7 +93,7 @@ static void AddKnownHash(char *hash)
 
 	insertElement(knownHashes, 0, (uint)strx(hash));
 
-	while(KNOWN_HASH_MAX < getCount(knownHashes))
+	while (KNOWN_HASH_MAX < getCount(knownHashes))
 		memFree((char *)unaddElement(knownHashes));
 
 	writeLines(KNOWN_HASH_FILE, knownHashes);
@@ -353,7 +353,7 @@ static void Main2(void)
 			if (IsKnownUrl(url))
 				break;
 
-		while(index)
+		while (index)
 		{
 			LOGPOS();
 			url = getLine(urls, --index);

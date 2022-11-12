@@ -159,7 +159,7 @@ static void MarumeMap(int count)
 	w = getTableWidth(Map);
 	h = getTableHeight(Map);
 
-	while(0 < count)
+	while (0 < count)
 	{
 		x = mt19937_rnd(w);
 		y = mt19937_rnd(h);
@@ -179,7 +179,7 @@ static void WipeMarumeMap(int count, int mode) // mode: 0 - 7
 	w = getTableWidth(Map);
 	h = getTableHeight(Map);
 
-	while(0 < count)
+	while (0 < count)
 	{
 		for(x = 0; x < w; x++)
 		for(y = 0; y < h; y++)

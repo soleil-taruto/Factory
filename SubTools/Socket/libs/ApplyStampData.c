@@ -32,7 +32,7 @@ void SlewApplyTimeData(time_t trueTime)
 //		sleep(100);
 		sleep(10);
 	}
-	while(systemTime == time(NULL));
+	while (systemTime == time(NULL));
 
 	sleep(500); // systemTime + 1.5 �܂ő҂B
 

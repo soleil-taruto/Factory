@@ -86,7 +86,7 @@ static void DispSosu(void)
 	{
 		if (index % 10000 == 0)
 		{
-			while(hasKey())
+			while (hasKey())
 			{
 				if (getKey() == 0x1b)
 				{

@@ -393,7 +393,7 @@ static void ExecCSVFile(
 		TrimCSVRow(colNames, 0);
 		hfc = 1;
 	}
-	while(row = CSVStreamToRow(fp))
+	while (row = CSVStreamToRow(fp))
 	{
 		TrimCSVRow(row, getCount(colNames));
 		addElement(rows, (uint)row);
@@ -468,7 +468,7 @@ void TA_TableDataFltr(char *csvFile, autoList_t *colNames, char *outCsvFile)
 	}
 	releaseDim(row, 1);
 
-	while(row = CSVStreamToRow(fp))
+	while (row = CSVStreamToRow(fp))
 	{
 		foreach (colodr, colidx2, colidx)
 		{

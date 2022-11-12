@@ -115,7 +115,7 @@ static void DoWait(uint hdl, void (*interrupt)(void))
 		if (handleWaitForMillis(hdl, 2000))
 			break;
 
-		while(hasKey())
+		while (hasKey())
 			if (getKey() == 'F')
 				cancelled = 1;
 
@@ -182,7 +182,7 @@ static void LockClient(void)
 
 		sleep(2000); // 滅多に無さそうだから、スリープでいいや..
 
-		while(hasKey())
+		while (hasKey())
 			if (getKey() == 'F')
 				cancelled = 1;
 

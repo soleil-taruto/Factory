@@ -29,7 +29,7 @@ static char *Prv_UTF16ToUTF8Line(autoBlock_t *u16Line)
 }
 static void U16Line_LTrim(autoBlock_t *u16Line)
 {
-	while(
+	while (
 		2 <= getSize(u16Line) &&
 		b_(u16Line)[0] <= ' ' &&
 		b_(u16Line)[1] == 0x00

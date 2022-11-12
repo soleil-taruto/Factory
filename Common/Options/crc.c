@@ -7,7 +7,7 @@ static uint CRC_FileFltr(char *file, uint (*startFunc)(void), uint (*updateFunc)
 	uint counter = startFunc();
 	uint buffSize = 1024;
 
-	while(block = readBinaryStream(fp, buffSize))
+	while (block = readBinaryStream(fp, buffSize))
 	{
 		counter = updateFunc(counter, directGetBuffer(block), getSize(block));
 		releaseAutoBlock(block);
@@ -29,7 +29,7 @@ static uint CRC_FileFltr(char *file, uint (*startFunc)(void), uint (*updateFunc)
 	if (counter & 0x100) { \
 		counter ^= 0x107; \
 	} \
-	} while(0)
+	} while (0)
 
 static uint Swap8(uint counter)
 {

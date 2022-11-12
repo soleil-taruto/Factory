@@ -211,7 +211,7 @@ static void ProcProj(int checkOnly)
 
 	DeletableCsFiles = newList();
 
-	while(TrimProjLines());
+	while (TrimProjLines());
 
 	if (ConfirmDeleteCsFiles())
 	{

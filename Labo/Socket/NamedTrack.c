@@ -222,7 +222,7 @@ static void WaitClient(int sock, char *name, autoBlock_t *blockSend)
 		goto endfunc;
 	}
 	cout("e");
-	while(!i->Disconnected)
+	while (!i->Disconnected)
 	{
 		cout("E");
 		inner_uncritical();
@@ -438,7 +438,7 @@ static void RefluxPerform(uint connectmax)
 
 			collectDeadThreads(thhdls);
 
-			while(hasKey())
+			while (hasKey())
 			{
 				if (getKey() == 0x1b)
 				{
@@ -448,7 +448,7 @@ static void RefluxPerform(uint connectmax)
 			}
 		}
 	endLoop:
-		while(getCount(thhdls))
+		while (getCount(thhdls))
 		{
 			inner_uncritical();
 			{
@@ -466,7 +466,7 @@ static void RefluxPerform(uint connectmax)
 
 static int IdleTh(void)
 {
-	while(hasKey())
+	while (hasKey())
 	{
 		if (getKey() == 0x1b)
 		{

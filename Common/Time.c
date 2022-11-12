@@ -191,7 +191,7 @@ time_t compactStampToTime(char *stamp)
 	time_t nt =              -1; // Min - 1
 	time_t ft = 0x793406fff + 1; // Max + 1
 
-	while(nt + 2 < ft)
+	while (nt + 2 < ft)
 	{
 		time_t mt = (nt + ft) / 2;
 		char *ms;

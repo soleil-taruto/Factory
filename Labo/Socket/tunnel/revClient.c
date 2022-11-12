@@ -54,7 +54,7 @@ static void TransmitTh(int sockPair[2])
 }
 static void PM_Interval(void)
 {
-	while(hasKey())
+	while (hasKey())
 		if (getKey() == 0x1b) // ? エスケープキー押下 -> 停止要求
 			ProcDeadFlag = 1;
 
@@ -108,7 +108,7 @@ LOGPOS(); // test
 
 							millis += RECV_C_ONCE_MILLIS;
 						}
-						while(millis < RECV_C_TIMEOUT_MILLIS);
+						while (millis < RECV_C_TIMEOUT_MILLIS);
 					}
 #else // old
 					retval = SockRecvSequLoop(sock, buff, RECV_C_TIMEOUT_MILLIS, 1);
@@ -161,7 +161,7 @@ LOGPOS(); // test
 		{
 			uint waitMillis = 0;
 
-			while(ConnectCount)
+			while (ConnectCount)
 			{
 				inner_uncritical();
 				{

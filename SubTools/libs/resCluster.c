@@ -30,14 +30,14 @@ static void AddPadding(autoBlock_t *image)
 {
 	addByte(image, FIRST_PADDING);
 
-	while(getSize(image) & 0x0f)
+	while (getSize(image) & 0x0f)
 	{
 		addByte(image, SECOND_PADDING);
 	}
 }
 static void UnaddPadding(autoBlock_t *image)
 {
-	while(unaddByte(image) != FIRST_PADDING)
+	while (unaddByte(image) != FIRST_PADDING)
 	{
 		noop();
 	}

@@ -16,7 +16,7 @@ static void ToFormat(char *p)
 }
 static void ToNoJpn(char *p)
 {
-	while(*p)
+	while (*p)
 	{
 		if (isMbc(p))
 		{
@@ -110,7 +110,7 @@ static void FindBrokenUUID_File(char *file)
 			CurrLineIndex = index;
 			CurrLine = line;
 
-			while(p = DoCheck(p));
+			while (p = DoCheck(p));
 
 			CurrFile = NULL;
 			CurrLineIndex = 0;
@@ -152,7 +152,7 @@ int main(int argc, char **argv)
 {
 	antiSubversion = 1;
 
-	while(hasArgs(1))
+	while (hasArgs(1))
 	{
 		FindBrokenUUID(nextArg());
 	}

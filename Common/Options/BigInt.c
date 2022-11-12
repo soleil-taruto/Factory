@@ -132,7 +132,7 @@ autoList_t *divBigInt(autoList_t *i, autoList_t *j, autoList_t **remain)
 
 	count *= 32;
 
-	while(count)
+	while (count)
 	{
 		autoList_t *wout;
 

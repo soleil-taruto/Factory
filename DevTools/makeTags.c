@@ -47,7 +47,7 @@ static void RemoveLiteralString(char *entity)
 	char *p = entity;
 	char *q;
 
-	while(*p)
+	while (*p)
 	{
 		if (*p == '"')
 		{

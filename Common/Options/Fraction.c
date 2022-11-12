@@ -92,7 +92,7 @@ static void Normalize(void)
 {
 	Reduction();
 
-	while(SINTMAX < N || SINTMAX < D) // �ۂ߁I
+	while (SINTMAX < N || SINTMAX < D) // �ۂ߁I
 	{
 		cout("< %I64u / %I64u\n", N, D);
 
@@ -416,7 +416,7 @@ char *Frct_ToLine(Fraction_t *i, uint basement)
 		{
 			char *p = strchr(ans, '\0');
 
-			while(p[-1] == '0')
+			while (p[-1] == '0')
 				p--;
 
 			*p = '\0';

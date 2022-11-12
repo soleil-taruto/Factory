@@ -165,7 +165,7 @@ readArgs:
 		char *file;
 		uint index;
 
-		while(hasArgs(1))
+		while (hasArgs(1))
 		{
 			char *path = nextArg();
 

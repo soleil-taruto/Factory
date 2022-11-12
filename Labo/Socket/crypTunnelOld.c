@@ -130,7 +130,7 @@ static void ChannelTh(uint prm)
 			ab_addBytes(recvBuffer, i->CarryRecvBuffer);
 			nobSetSize(i->CarryRecvBuffer, 0);
 		}
-		while(KeepTheServer)
+		while (KeepTheServer)
 		{
 			if (getSize(recvBuffer) || getSize(sendBuffer))
 				cout("[%c%c] %u -> %u R:%4u S:%4u\n"
@@ -407,7 +407,7 @@ endfunc:
 
 static int IdleTh(void)
 {
-	while(hasKey())
+	while (hasKey())
 	{
 		if (getKey() == 0x1b)
 		{

@@ -42,7 +42,7 @@ static char *GetWord(char **pp, int endChr)
 }
 static char *TitleFltr(char *title)
 {
-	while(startsWith(title, "H"))
+	while (startsWith(title, "H"))
 		eraseLine(title, 2);
 
 	trim(title, ' ');
@@ -128,7 +128,7 @@ static void BookmarkToText(char *file)
 			p = q;
 			addDate = GetWord(&p, '"');
 
-			while(*p && *p != '>') p++; // chrome
+			while (*p && *p != '>') p++; // chrome
 
 			errorCase(*p != '>'); p++;
 			title = GetWord(&p, '<');

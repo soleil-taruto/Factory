@@ -21,7 +21,7 @@ int main(int argc, char **argv)
 			int n = 0;
 			int d = 0;
 
-			while(d < 1000000)
+			while (d < 1000000)
 			{
 				char *fld = "f---*-*----*";
 				int pos = 0;

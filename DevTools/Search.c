@@ -90,7 +90,7 @@ static void SearchFile(char *file)
 	fileSize = getFileSize(file);
 	fp = fileOpen(file, "rb");
 
-	while(rIndex < fileSize)
+	while (rIndex < fileSize)
 	{
 		chr = readChar(fp);
 		rIndex++;

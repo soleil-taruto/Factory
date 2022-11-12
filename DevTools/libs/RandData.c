@@ -84,7 +84,7 @@ void MakeRandBinaryFile(char *file, uint64 fileSize)
 {
 	FILE *fp = fileOpen(file, "wb");
 
-	while(0i64 < fileSize)
+	while (0i64 < fileSize)
 	{
 		uint blockSize = fileSize < FILEBLOCKSIZE ? (uint)fileSize : FILEBLOCKSIZE;
 		autoBlock_t *block;

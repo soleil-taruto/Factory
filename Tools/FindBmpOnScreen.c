@@ -167,7 +167,7 @@ readArgs:
 
 		LOGPOS();
 
-		while(!FindBmpOnScreen())
+		while (!FindBmpOnScreen())
 		{
 			if (sec < 20)
 				sec++;

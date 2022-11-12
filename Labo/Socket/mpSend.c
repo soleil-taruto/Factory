@@ -41,7 +41,7 @@ static void SendMpMessage(int sock)
 	ab_addLine(mq, swrk = EncodeUrlMessage(MpMessage)); memFree(swrk);
 	ab_addLine(mq, "\n");
 
-	while(getSize(mq))
+	while (getSize(mq))
 	{
 		SockSendSequ(sock, mq, 3000);
 	}

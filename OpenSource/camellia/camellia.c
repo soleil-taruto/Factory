@@ -105,7 +105,7 @@ typedef unsigned char u8;
 	lr = (lr << bits) + (rl >> (32 - bits));	\
 	rl = (rl << bits) + (rr >> (32 - bits));	\
 	rr = (rr << bits) + (w0 >> (32 - bits));	\
-    } while(0)
+    } while (0)
 
 #define CAMELLIA_ROLDQo32(ll, lr, rl, rr, w0, w1, bits)	\
     do {						\
@@ -115,7 +115,7 @@ typedef unsigned char u8;
 	lr = (rl << (bits - 32)) + (rr >> (64 - bits));	\
 	rl = (rr << (bits - 32)) + (w0 >> (64 - bits));	\
 	rr = (w0 << (bits - 32)) + (w1 >> (64 - bits));	\
-    } while(0)
+    } while (0)
 
 #define CAMELLIA_SP1110(INDEX) (camellia_sp1110[(INDEX)])
 #define CAMELLIA_SP0222(INDEX) (camellia_sp0222[(INDEX)])
@@ -139,7 +139,7 @@ typedef unsigned char u8;
 	yl ^= yr;						\
 	yr = CAMELLIA_RR8(yr);					\
 	yr ^= yl;						\
-    } while(0)
+    } while (0)
 
 
 /*
@@ -161,7 +161,7 @@ typedef unsigned char u8;
 	t3 = krl;							\
 	t3 &= rl;							\
 	rr ^= CAMELLIA_RL1(t3);						\
-    } while(0)
+    } while (0)
 
 #define CAMELLIA_ROUNDSM(xl, xr, kl, kr, yl, yr, il, ir, t0, t1)	\
     do {								\
@@ -180,7 +180,7 @@ typedef unsigned char u8;
 	il ^= ir;							\
 	yl ^= ir;							\
 	yr ^= il;							\
-    } while(0)
+    } while (0)
 
 
 static const u32 camellia_sp1110[256] = {

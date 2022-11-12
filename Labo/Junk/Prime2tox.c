@@ -58,7 +58,7 @@ static void WriteSosuMap(void)
 	uint64 count = CountMax + 1;
 	autoBlock_t gab;
 
-	while(SOSUMAP_SIZE < count)
+	while (SOSUMAP_SIZE < count)
 	{
 		fileWrite(SosuFp, gndBlockVar(SosuMap, SOSUMAP_SIZE, gab));
 		count -= SOSUMAP_SIZE;

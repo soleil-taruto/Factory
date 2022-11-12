@@ -335,7 +335,7 @@ static void PerformTh(int sock, char *strip)
 }
 static int IdleTh(void)
 {
-	while(hasKey())
+	while (hasKey())
 	{
 		if (getKey() == 0x1b)
 		{

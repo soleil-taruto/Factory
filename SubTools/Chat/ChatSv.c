@@ -141,7 +141,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 		cout("REMARK %s:%s\n", stamp, message);
 
-		while(REMARK_NUMMAX < getCount(TimeLine) || TIMELINE_SIZEMAX < TimeLineSize)
+		while (REMARK_NUMMAX < getCount(TimeLine) || TIMELINE_SIZEMAX < TimeLineSize)
 		{
 			Remark_t *remark = (Remark_t *)desertElement(TimeLine, 0);
 
@@ -290,7 +290,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 		// ---- overflow ----
 
-		while(MEMBER_NUMMAX < getCount(Members) || MEMBER_TOTALSIZEMAX < MemberTotalSize)
+		while (MEMBER_NUMMAX < getCount(Members) || MEMBER_TOTALSIZEMAX < MemberTotalSize)
 		{
 			uint oldestPos = 0;
 			uint oldestTime = UINTMAX;
@@ -389,7 +389,7 @@ static int Idle(void)
 	if (handleWaitForMillis(StopEv, 0))
 		return 0;
 
-	while(hasKey())
+	while (hasKey())
 		if (getKey() == 0x1b)
 			return 0;
 

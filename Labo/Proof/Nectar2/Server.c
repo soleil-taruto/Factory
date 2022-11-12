@@ -5,7 +5,7 @@ int main(int argc, char **argv)
 {
 	Nectar2_t *i = CreateNectar2("Kira_Kira_PRE-CURE_a_la_mode");
 
-	while(waitKey(0) != 0x1b)
+	while (waitKey(0) != 0x1b)
 	{
 		char *message = Nectar2RecvLine(i, '\0');
 

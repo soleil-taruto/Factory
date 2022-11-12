@@ -175,7 +175,7 @@ static void RecvDataParse(void)
 	}
 	errorCase(RBitIndex); // ? 途中のビットで止まってる。
 
-	while(getCount(Row) < 34)
+	while (getCount(Row) < 34)
 		addElement(Row, (uint)strx(""));
 
 	// DATA
@@ -258,7 +258,7 @@ static void SaveFile(void *record, char *file) // (file == NULL) -> stdout
 
 	cout("キャプチャデータを出力します...\n");
 
-	while(record)
+	while (record)
 	{
 		uchar *p = (uchar *)record;
 		SYSTEMTIME *time;

@@ -116,7 +116,7 @@ static int Perform(int sock, uint dummy)
 			}
 			line = SockNextLine(buffer);
 		}
-		while(!line); // タイムアウト無し
+		while (!line); // タイムアウト無し
 
 		releaseAutoBlock(buffer);
 		line = lineToPrintLine(strw = line, 0); // 画面に出すので、念のため危ない文字を排除
@@ -206,7 +206,7 @@ static int Perform(int sock, uint dummy)
 
 		releaseAutoBlock(retBody);
 
-		while(getSize(buffer)) // タイムアウト無し
+		while (getSize(buffer)) // タイムアウト無し
 		{
 			if (!KeepTheServer)
 			{
@@ -240,7 +240,7 @@ static void ReleaseInfo(uint dummy)
 }
 static int Idle(void)
 {
-	while(hasKey())
+	while (hasKey())
 	{
 		if (getKey() == 0x1b)
 		{

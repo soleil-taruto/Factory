@@ -136,7 +136,7 @@ int main(int argc, char **argv)
 			DoTest(c / 10);
 			DoTest(c);
 		}
-		while(!waitKey(0))
+		while (!waitKey(0))
 		{
 			DoTest(1 + mt19937_rnd(1000));
 		}

@@ -36,7 +36,7 @@ static void PCCOrPDC(int connectFlag)
 	if (!TimeWaitRing)
 		TimeWaitRing = na_(int, TimeWaitSec);
 
-	while(LastTime < currTime)
+	while (LastTime < currTime)
 	{
 		int *tw;
 
@@ -115,7 +115,7 @@ int main(int argc, char **argv)
 	{
 		mt19937_init();
 
-		while(waitKey(0) != 0x1b)
+		while (waitKey(0) != 0x1b)
 		{
 			int sel = mt19937_rnd(3);
 

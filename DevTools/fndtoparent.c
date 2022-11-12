@@ -27,7 +27,7 @@ static void Search(void)
 	char *dir = getCwd();
 	int found = 0;
 
-	while(!isAbsRootDir(dir))
+	while (!isAbsRootDir(dir))
 	{
 		addCwd(dir);
 		{

@@ -25,7 +25,7 @@ static void SendUpFile(int sock)
 
 	cout("Header\n");
 
-	while(getSize(buffer))
+	while (getSize(buffer))
 		if (SockSendSequ(sock, buffer, 3000) == -1)
 			return;
 

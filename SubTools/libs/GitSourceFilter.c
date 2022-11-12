@@ -10,15 +10,15 @@ static char *MaskLine(char *line, char *end)
 	char *p = line;
 	uint span;
 
-	while(p < end && *p <= ' ')
+	while (p < end && *p <= ' ')
 		p++;
 
-	while(p < end && end[-1] <= ' ')
+	while (p < end && end[-1] <= ' ')
 		end--;
 
 	span = (uint)end - (uint)p;
 
-	while(p < end)
+	while (p < end)
 		*p++ = '/';
 
 	if (span < 2)

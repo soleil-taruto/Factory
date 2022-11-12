@@ -55,7 +55,7 @@ uint mt19937_rnd(uint modulo) // ret: 0 Å` (modulo - 1)
 	{
 		r = mt19937_rnd32();
 	}
-	while(r < r_mod);
+	while (r < r_mod);
 
 #if 0
 	r -= r_mod;
@@ -94,7 +94,7 @@ uint64 mt19937_rnd64Mod(uint64 modulo) // ret: 0 Å` (modulo - 1)
 	{
 		r = mt19937_rnd64();
 	}
-	while(r < r_mod);
+	while (r < r_mod);
 
 	r %= modulo;
 

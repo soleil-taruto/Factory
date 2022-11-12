@@ -98,7 +98,7 @@ static void RPCPerform(char *program)
 
 		sleep(RETRY_SLEEP_MILLIS);
 
-		while(hasKey())
+		while (hasKey())
 		{
 			switch(getKey())
 			{

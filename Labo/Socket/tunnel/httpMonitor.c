@@ -75,7 +75,7 @@ static char *RCB_ReadLineTo(int endChr)
 {
 	autoBlock_t *buff = newBlock();
 
-	while(RCB_RPos < getSize(RCB_Block))
+	while (RCB_RPos < getSize(RCB_Block))
 	{
 		int chr = getByte(RCB_Block, RCB_RPos);
 

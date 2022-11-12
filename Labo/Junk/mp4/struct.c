@@ -20,7 +20,7 @@ static autoList_t *LoadByImage(autoBlock_t *image)
 	uint rPos = 0;
 	uint broken = 0;
 
-	while(rPos < getSize(image))
+	while (rPos < getSize(image))
 	{
 		Box_t *i;
 		uint size;

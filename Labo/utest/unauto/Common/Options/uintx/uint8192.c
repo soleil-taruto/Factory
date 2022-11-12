@@ -80,7 +80,7 @@ static void Test01(void)
 	calcRadix = 16;
 	calcBasement = 0;
 
-	while(!waitKey(0))
+	while (!waitKey(0))
 	{
 		// ADD
 		{

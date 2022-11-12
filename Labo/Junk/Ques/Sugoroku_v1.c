@@ -9,7 +9,7 @@ static int TestOnce(int target)
 {
 	int pos = 0;
 
-	while(pos < target)
+	while (pos < target)
 	{
 		pos += mt19937_rnd(6) + 1;
 	}

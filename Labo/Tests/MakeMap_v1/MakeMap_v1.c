@@ -26,7 +26,7 @@ static void MakeMap(int w, int h, int seed, int permil, int count)
 	{
 		setTableCell(map, x, y, mt19937_rnd(1000) < permil ? 1 : 0);
 	}
-	while(0 <= count)
+	while (0 <= count)
 	{
 		int ctr[2] = { 0, 0 };
 		int xc;

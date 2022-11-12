@@ -228,7 +228,7 @@ static void FDE_FindSameArea(void)
 }
 static void FDE_FindSameBegin(void)
 {
-	while(FDE.SIndex && FDE.LIndex)
+	while (FDE.SIndex && FDE.LIndex)
 	{
 		if (FD.LineComp(getLine(FDE.SLines, FDE.SIndex - 1), getLine(FDE.LLines, FDE.LIndex - 1))) // ? not same
 			break;
@@ -240,7 +240,7 @@ static void FDE_FindSameBegin(void)
 
 static int FindDiffBegin(void) // ret: ? found
 {
-	while(FD.Index1 < getCount(FD.Lines1) && FD.Index2 < getCount(FD.Lines2))
+	while (FD.Index1 < getCount(FD.Lines1) && FD.Index2 < getCount(FD.Lines2))
 	{
 		if (FD.LineComp(getLine(FD.Lines1, FD.Index1), getLine(FD.Lines2, FD.Index2))) // ? not same
 			return 1;
@@ -300,7 +300,7 @@ autoList_t *getDiffLinesReport(autoList_t *lines1, autoList_t *lines2, int ignor
 	FD.Index1 = 0;
 	FD.Index2 = 0;
 
-	while(FindDiffBegin())
+	while (FindDiffBegin())
 	{
 		begin1 = FD.Index1;
 		begin2 = FD.Index2;
@@ -340,7 +340,7 @@ autoList_t *getDiffLinesReportLim(autoList_t *lines1, autoList_t *lines2, int ig
 
 		if (lineNumLimit < lineNum)
 		{
-			while(lineNumLimit < getCount(report))
+			while (lineNumLimit < getCount(report))
 				memFree((char *)unaddElement(report));
 
 			addElement(report, (uint)xcout("‘S•”‚Å %u s‚ ‚è‚Ü‚µ‚½...", lineNum));

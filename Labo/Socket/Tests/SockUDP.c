@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 	{
 		sock = sockUDPOpenRecv(portno);
 
-		while(!waitKey(0))
+		while (!waitKey(0))
 		{
 			autoBlock_t *data = sockUDPRecv(sock, 2000);
 

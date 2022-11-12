@@ -73,7 +73,7 @@ void sockMonitor(
 		errorCase(ioctlsocket(sock, SIO_RCVALL, &optval) != 0);
 	}
 
-	while(idleProc())
+	while (idleProc())
 	{
 		retval = SockWait(sock, RECVWAITMILLIS, 0);
 		errorCase(retval == -1);

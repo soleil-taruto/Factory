@@ -42,7 +42,7 @@ static void RemoveIndentedLines(autoList_t *lines)
 			{
 				memFree((char *)desertElement(lines, index));
 			}
-			while(index < getCount(lines) && getLine(lines, index)[0] == '\0');
+			while (index < getCount(lines) && getLine(lines, index)[0] == '\0');
 		}
 	}
 }

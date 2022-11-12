@@ -17,11 +17,11 @@ static void Perform(int sock)
 	ab_addLine(buffer, message);
 	ab_addLine(buffer, "\r\n");
 
-	while(getSize(buffer))
+	while (getSize(buffer))
 		if (SockSendSequ(sock, buffer, 3000) == -1)
 			error();
 
-	while(getSize(buffer) < strlen(message))
+	while (getSize(buffer) < strlen(message))
 		if (SockRecvSequ(sock, buffer, 3000) == -1)
 			error();
 

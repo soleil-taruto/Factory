@@ -36,7 +36,7 @@ static int RecvStream(SockStream_t *i, FILE *fp, uint recvSize) // ret: errored
 	autoBlock_t *subBlock;
 	uint subSize;
 
-	while(recvSize)
+	while (recvSize)
 	{
 		subSize = m_min(recvSize, CONTENT_BUFF_SIZE);
 		subBlock = nobCreateBlock(subSize);
@@ -282,7 +282,7 @@ autoList_t *httpDivideContent(char *contentFile) // ret: 1 <= getCount(ret)
 
 		addElement(parts, (uint)part);
 	}
-	while(RNP_ReadTrailer(fp));
+	while (RNP_ReadTrailer(fp));
 
 	fileClose(fp);
 	return parts;

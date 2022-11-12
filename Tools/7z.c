@@ -74,7 +74,7 @@ static void DoTrimOneDir(char *wDir)
 	char *rDir = strx(wDir);
 	int dove = 0;
 
-	while(lsCount(rDir) == 1)
+	while (lsCount(rDir) == 1)
 	{
 		autoList_t *paths = ls(rDir);
 		char *path;

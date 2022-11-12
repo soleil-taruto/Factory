@@ -79,7 +79,7 @@ void LComRecvLoop(char *(*funcRecvEvent)(char *), uint id)
 
 	for(; ; )
 	{
-		while(hasKey())
+		while (hasKey())
 			if (getKey() == 0x1b)
 				goto endLoop;
 

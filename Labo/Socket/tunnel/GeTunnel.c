@@ -146,7 +146,7 @@ static void HD_Trim(char *str)
 	char *rp = str;
 	char *wp = str;
 
-	while(*rp)
+	while (*rp)
 	{
 		if (*rp == '-')
 		{
@@ -190,7 +190,7 @@ static void DecodeUrl(char *url)
 
 	wp = rp;
 
-	while(*rp)
+	while (*rp)
 	{
 		if (*rp == '%' && rp[1] && rp[2])
 		{
@@ -345,7 +345,7 @@ static char *HE_DivText_xc(char *text, char *indent)
 	autoBlock_t *buff = newBlock();
 	char *p = text;
 
-	while(*p)
+	while (*p)
 	{
 		uint len = strlen(p);
 

@@ -63,7 +63,7 @@ int main(int argc, char **argv)
 	codeLines = inputLines();
 	codeLines_utf8 = newList();
 
-	while(getCount(codeLines) && *(char *)getLastElement(codeLines) == '\0')
+	while (getCount(codeLines) && *(char *)getLastElement(codeLines) == '\0')
 	{
 		memFree((char *)unaddElement(codeLines));
 	}

@@ -444,7 +444,7 @@ int SockSendSequLoop(int sock, autoBlock_t *messageQueue, uint waitMillis)
 	uint passedTick = 0;
 	int retval = 0;
 
-	while(getSize(messageQueue) && passedTick < waitMillis)
+	while (getSize(messageQueue) && passedTick < waitMillis)
 	{
 		int ret = SockSendSequ(sock, messageQueue, waitMillis - passedTick);
 
@@ -472,7 +472,7 @@ int SockRecvSequLoop(int sock, autoBlock_t *messageQueue, uint waitMillis, uint 
 	uint passedTick = 0;
 	int retval = 0;
 
-	while(getSize(messageQueue) < maxMessageQueueSize && passedTick < waitMillis)
+	while (getSize(messageQueue) < maxMessageQueueSize && passedTick < waitMillis)
 	{
 		int ret = SockRecvSequ_RM(sock, messageQueue, waitMillis - passedTick, maxMessageQueueSize - getSize(messageQueue));
 
@@ -504,7 +504,7 @@ int SockRecvSequLoopEnder(int sock, autoBlock_t *messageQueue, uint waitMillis, 
 	if (!*endPtn)
 		return 0;
 
-	while(getSize(messageQueue) < maxMessageQueueSize && passedTick < waitMillis)
+	while (getSize(messageQueue) < maxMessageQueueSize && passedTick < waitMillis)
 	{
 		int ret = SockRecvSequ_RM(sock, messageQueue, waitMillis - passedTick, 1);
 

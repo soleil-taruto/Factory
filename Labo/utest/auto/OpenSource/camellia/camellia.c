@@ -39,7 +39,7 @@ static void Test_TestVector(void)
 	char *line;
 	autoBlock_t *rawkey = NULL;
 
-	while(line = readLine(fp))
+	while (line = readLine(fp))
 	{
 		if (startsWith(line, "K No."))
 		{

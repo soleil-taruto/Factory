@@ -118,7 +118,7 @@ static uint FindEnd(autoList_t *lines, uint index, uint startTabIndent)
 
 		tLine = strx(line);
 
-		while(*tLine == '\t')
+		while (*tLine == '\t')
 		{
 			eraseChar(tLine);
 			tabIndent++;
@@ -150,7 +150,7 @@ static void RemoveSync_File(char *file)
 		uint tabIndent = 0;
 		char *targTLine = xcout("// sync > @ %s", RangeName);
 
-		while(*tLine == '\t')
+		while (*tLine == '\t')
 		{
 			eraseChar(tLine);
 			tabIndent++;
@@ -180,7 +180,7 @@ static void RemoveSync_File(char *file)
 		uint tabIndent = 0;
 		char *targTLine = xcout("// ^ sync @ %s", RangeName);
 
-		while(*tLine == '\t')
+		while (*tLine == '\t')
 		{
 			eraseChar(tLine);
 			tabIndent++;

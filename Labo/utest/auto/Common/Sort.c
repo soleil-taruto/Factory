@@ -48,7 +48,7 @@ static void SortTest_MMMC(void (*funcSort)(autoList_t *, sint (*)(uint, uint)), 
 	cout("countMax: %u\n", countMax);
 	cout("stepMax: %u\n", stepMax);
 
-	while(testCount)
+	while (testCount)
 	{
 		uint start = mt19937_range(0, startMax);
 		uint count = mt19937_range(0, countMax);
@@ -106,7 +106,7 @@ static void SortTest_GGC(void (*funcSort)(autoList_t *, sint (*)(uint, uint)), u
 	cout("grpMax: %u\n", grpMax);
 	cout("grpSzMax: %u\n", grpSzMax);
 
-	while(testCount)
+	while (testCount)
 	{
 		uint grp   = mt19937_range(0, grpMax);
 		uint grpSz = mt19937_range(0, grpSzMax);
@@ -160,7 +160,7 @@ static autoList_t *FB_MakeList(uint count, uint minval, uint maxval)
 {
 	autoList_t *list = newList();
 
-	while(count)
+	while (count)
 	{
 		addElement(list, mt19937_range(minval, maxval));
 		count--;
@@ -247,7 +247,7 @@ static autoList_t *GB_MakeList(uint count, uint minval, uint maxval)
 {
 	autoList_t *list = newList();
 
-	while(count)
+	while (count)
 	{
 		addElement(list, mt19937_range(minval, maxval));
 		count--;
@@ -268,7 +268,7 @@ static int GB_Test(autoList_t *list, uint target, uint bound[2])
 
 	bound[0] = index;
 
-	while(++index < getCount(list))
+	while (++index < getCount(list))
 		if (getElement(list, index) != target)
 			break;
 

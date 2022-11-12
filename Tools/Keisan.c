@@ -116,7 +116,7 @@ static void HexKeisan(void)
 
 	op1 = MakeHexOp(nextArg());
 
-	while(hasArgs(2))
+	while (hasArgs(2))
 	{
 		op = nextArg()[0];
 		op2 = MakeHexOp(nextArg());
@@ -283,7 +283,7 @@ readArgs:
 
 	op1 = strx(nextArg());
 
-	while(hasArgs(2))
+	while (hasArgs(2))
 	{
 		pop= nextArg();
 		op2 = strx(nextArg());

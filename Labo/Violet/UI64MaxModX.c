@@ -76,7 +76,7 @@ static void DoTest(void)
 	}
 	DoTest_01(UINT64MAX);
 
-	while(waitKey(0) != 0x1b)
+	while (waitKey(0) != 0x1b)
 	{
 		DoTest_01(mt19937_rnd64() & SINT64MAX);
 	}

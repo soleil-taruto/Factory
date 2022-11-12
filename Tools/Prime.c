@@ -106,7 +106,7 @@ int main(int argc, char **argv)
 			{
 				int cancelled = 0;
 
-				while(hasKey())
+				while (hasKey())
 					if (getKey() == 0x1b)
 						cancelled = 1;
 

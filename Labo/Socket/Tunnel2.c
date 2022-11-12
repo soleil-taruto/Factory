@@ -99,7 +99,7 @@ static void PerformTh(int sock, char *strip)
 
 	cout("接続 %d\n", sock);
 
-	while(!StopServerRq)
+	while (!StopServerRq)
 	{
 		TransmitProc(ss, fss, "上り");
 		TransmitProc(fss, ss, "下り");
@@ -122,7 +122,7 @@ static void PerformTh(int sock, char *strip)
 }
 static int IdleTh(void)
 {
-	while(hasKey())
+	while (hasKey())
 		if (getKey() == 0x1b) // ? エスケープキー押下 -> 停止要求
 			StopServerRq = 1;
 

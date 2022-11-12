@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 
 	foreach (selfiles, file, index)
 	{
-		while(hasKey())
+		while (hasKey())
 		{
 			if (getKey() == 0x1b)
 			{

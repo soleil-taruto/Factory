@@ -67,7 +67,7 @@ static int AntiSamePaths(autoList_t *paths)
 
 	foreach (paths, path, index)
 	{
-		while(findJLineICase(gndSubElementsVar(paths, 0, index, gal), path) < index) // ? found same path
+		while (findJLineICase(gndSubElementsVar(paths, 0, index, gal), path) < index) // ? found same path
 		{
 			path = incrementPath(path);
 			setElement(paths, index, (uint)path);
@@ -118,7 +118,7 @@ static void RenameEx(void)
 		}
 		else if (getCount(paths) < getCount(newPaths))
 		{
-			while(getCount(paths) < getCount(newPaths))
+			while (getCount(paths) < getCount(newPaths))
 				memFree((void *)unaddElement(newPaths));
 		}
 		else if (RenumberPaths(newPaths))

@@ -362,7 +362,7 @@ void MergeFile(
 	element1 = readElement(rfp1);
 	element2 = readElement(rfp2);
 
-	while(element1 || element2)
+	while (element1 || element2)
 	{
 		int ret;
 

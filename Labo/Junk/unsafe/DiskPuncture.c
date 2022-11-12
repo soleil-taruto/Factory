@@ -43,7 +43,7 @@ static void CopyGarbageFiles(void)
 
 	foreach (GarbageFiles, file, index)
 	{
-		while(CheckBorderSize(getFileSize(file)))
+		while (CheckBorderSize(getFileSize(file)))
 		{
 			char *outFile = GetOutputFile(outDir);
 			uint startTime = now();

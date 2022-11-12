@@ -171,7 +171,7 @@ int main(int argc, char **argv)
 	RootDir = makeFullPath(nextArg());
 	ResSubDirs = newList();
 
-	while(argIs("/SD"))
+	while (argIs("/SD"))
 		addElement(ResSubDirs, (uint)nextArg());
 
 	DDResFile      = makeFullPath(nextArg());

@@ -15,7 +15,7 @@ void AddTimeWait(void)
 
 	errorCase(currTime < LastTime); // 2bs
 
-	while(LastTime < currTime)
+	while (LastTime < currTime)
 	{
 		if (!TimeWaitTotal)
 		{

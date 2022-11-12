@@ -55,7 +55,7 @@ static void DirCDMon(void)
 	uint monDir_index;
 
 	for(; ; )
-//	while(waitKey(0) != 0x1b) // old
+//	while (waitKey(0) != 0x1b) // old
 	{
 		for(; ; )
 		{
@@ -112,7 +112,7 @@ int main(int argc, char **argv)
 	{
 		MonTarget = 'F';
 	}
-	while(hasArgs(1))
+	while (hasArgs(1))
 	{
 		char *dir = nextArg();
 

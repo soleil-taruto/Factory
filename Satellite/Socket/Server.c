@@ -76,7 +76,7 @@ int Idle(void)
 {
 	int ret = 1;
 
-	while(hasKey())
+	while (hasKey())
 		if (getKey() == 27) // escape
 			ret = 0;
 

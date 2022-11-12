@@ -18,7 +18,7 @@ static void DoType(char *file)
 		cout("* %s\n", file);
 		cout("===============================================================================\n");
 	}
-	while(line = readLine(fp))
+	while (line = readLine(fp))
 	{
 		cout("%s\n", line);
 		memFree(line);

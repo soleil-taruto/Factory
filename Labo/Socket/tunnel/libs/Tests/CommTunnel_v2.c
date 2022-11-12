@@ -31,7 +31,7 @@ static void Perform(int sock, int fwdSock)
 	a = CreateComm(sock);
 	b = CreateComm(fwdSock);
 
-	while(!ProcDeadFlag)
+	while (!ProcDeadFlag)
 	{
 		autoBlock_t *aToB = GetCommRecvData(a, UINTMAX);
 		autoBlock_t *bToA = GetCommRecvData(b, UINTMAX);
@@ -59,7 +59,7 @@ static void Perform(int sock, int fwdSock)
 		inner_critical();
 	}
 
-	while(!ProcDeadFlag)
+	while (!ProcDeadFlag)
 	{
 		autoBlock_t *aToB = GetCommRecvData(a, UINTMAX);
 		autoBlock_t *bToA = GetCommRecvData(b, UINTMAX);

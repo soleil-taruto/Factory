@@ -42,7 +42,7 @@ static void Tree2PathList(char *rFile, char *wFile)
 			char *node = strx(p);
 			uint deep = (uint)p - (uint)line;
 
-			while(getCount(DeepStk) && deep <= getLastElement(DeepStk))
+			while (getCount(DeepStk) && deep <= getLastElement(DeepStk))
 			{
 				memFree((char *)unaddElement(NodeStk));
 				unaddElement(DeepStk);

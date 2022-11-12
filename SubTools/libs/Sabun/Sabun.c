@@ -66,7 +66,7 @@ static void FindSameArea(void)
 }
 static void FindSameBegin(void)
 {
-	while(SPos && BPos)
+	while (SPos && BPos)
 	{
 		if (getByte(&SBlock, SPos - 1) != getByte(&BBlock, BPos - 1)) // ? ç∑ï™ÇÃèIí[
 			break;
@@ -83,7 +83,7 @@ static uint RIndex;
 
 static int FindDiffBegin(void)
 {
-	while(LIndex < getSize(LBlock) && RIndex < getSize(RBlock))
+	while (LIndex < getSize(LBlock) && RIndex < getSize(RBlock))
 	{
 		if (getByte(LBlock, LIndex) != getByte(RBlock, RIndex))
 			break;
@@ -145,7 +145,7 @@ void MakeSabun(autoBlock_t *lBlock, autoBlock_t *rBlock, autoList_t *lDiff, auto
 	LIndex = 0;
 	RIndex = 0;
 
-	while(FindDiffBegin())
+	while (FindDiffBegin())
 	{
 		uint lBegin = LIndex;
 		uint rBegin = RIndex;

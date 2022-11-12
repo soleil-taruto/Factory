@@ -85,7 +85,7 @@ static uint CS_ChangeTest_L(autoList_t *fileInfos, uint index) // ƒXƒ^ƒ“ƒv•ÏXu
 	time_t t = ((FileInfo_t *)getElement(fileInfos, index))->Stamp;
 	uint ret = 0;
 
-	while(index)
+	while (index)
 	{
 		FileInfo_t *i = (FileInfo_t *)getElement(fileInfos, --index);
 
@@ -104,7 +104,7 @@ static uint CS_ChangeTest_R(autoList_t *fileInfos, uint index) // ƒXƒ^ƒ“ƒv•ÏXu
 	time_t t = ((FileInfo_t *)getElement(fileInfos, index))->Stamp;
 	uint ret = 0;
 
-	while(++index < getCount(fileInfos))
+	while (++index < getCount(fileInfos))
 	{
 		FileInfo_t *i = (FileInfo_t *)getElement(fileInfos, index);
 
@@ -121,7 +121,7 @@ static void CS_Change_L(autoList_t *fileInfos, uint index) // ƒXƒ^ƒ“ƒv•ÏX_‘O•ûŒ
 {
 	time_t t = ((FileInfo_t *)getElement(fileInfos, index))->Stamp;
 
-	while(index)
+	while (index)
 	{
 		FileInfo_t *i = (FileInfo_t *)getElement(fileInfos, --index);
 
@@ -137,7 +137,7 @@ static void CS_Change_R(autoList_t *fileInfos, uint index) // ƒXƒ^ƒ“ƒv•ÏX_Œã•ûŒ
 {
 	time_t t = ((FileInfo_t *)getElement(fileInfos, index))->Stamp;
 
-	while(++index < getCount(fileInfos))
+	while (++index < getCount(fileInfos))
 	{
 		FileInfo_t *i = (FileInfo_t *)getElement(fileInfos, index);
 

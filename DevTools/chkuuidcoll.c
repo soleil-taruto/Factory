@@ -171,7 +171,7 @@ static void CollectUUID(void)
 
 	if (hasArgs(1))
 	{
-		while(hasArgs(1))
+		while (hasArgs(1))
 		{
 			char *path = makeFullPath(nextArg());
 

@@ -28,7 +28,7 @@ static rbtNode_t *GetNode(rbtTree_t *tree, void *element)
 
 	node = tree->Root;
 
-	while(node)
+	while (node)
 	{
 		sint ret_comp = tree->FuncComp(node->Element, element, tree->ExtraData);
 
@@ -67,7 +67,7 @@ void rbtReleaseTree(rbtTree_t *tree)
 	errorCase(!tree);
 	addElement(nodes, (uint)tree->Root);
 
-	while(getCount(nodes))
+	while (getCount(nodes))
 	{
 		rbtNode_t *node = (rbtNode_t *)unaddElement(nodes);
 
@@ -233,7 +233,7 @@ void rbtRemoveElement(rbtTree_t *tree, void *element) // element == NULL ‚Ì‚Æ‚« 
 	tree->LastAccessNode = NULL;
 	tree->FuncRelease(node->Element, tree->ExtraData);
 
-	while(GetNearestLeaf(tree, node, 0) || GetNearestLeaf(tree, node, 1))
+	while (GetNearestLeaf(tree, node, 0) || GetNearestLeaf(tree, node, 1))
 	{
 		node->Element = LastNode->Element;
 		node = LastNode;

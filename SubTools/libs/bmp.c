@@ -86,7 +86,7 @@ autoList_t *readBMPFile(char *file)
 	default:
 		error();
 	}
-	while(colPalCnt)
+	while (colPalCnt)
 	{
 		uchar cR;
 		uchar cG;
@@ -113,7 +113,7 @@ autoList_t *readBMPFile(char *file)
 
 			x = 0;
 
-			while(x < Bfi.Width)
+			while (x < Bfi.Width)
 			{
 				uchar c8 = readChar(fp);
 

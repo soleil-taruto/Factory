@@ -49,7 +49,7 @@ int main(int argc, char **argv)
 			if (waitOneSecFlag)
 				sleep(1050); // ‚P•b{ƒ}[ƒWƒ“ -- ŠmÀ‚É‚P•bˆÈãŠÔŠu‚ğŠJ‚¯‚½‚¢B
 		}
-		while(hasArgs(1));
+		while (hasArgs(1));
 	}
 	else
 	{

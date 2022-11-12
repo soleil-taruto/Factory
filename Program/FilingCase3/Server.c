@@ -312,7 +312,7 @@ static void PerformTh(int sock, char *strip)
 		memFree(path);
 		memFree(sDataSize);
 	}
-	while(keepConn);
+	while (keepConn);
 
 	LOGPOS();
 	ReleaseSockStream(ss);
@@ -324,7 +324,7 @@ static int IdleTh(void)
 	if (EvStop && handleWaitForMillis(EvStop, 0))
 		keep = 0;
 
-	while(hasKey())
+	while (hasKey())
 		if (getKey() == 0x1b)
 			keep = 0;
 

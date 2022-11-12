@@ -418,7 +418,7 @@ void replacePtn(char *line, char *ptn1, char *ptn2, int ignoreCase) // mbs_
 
 	errorCase(ptnSz != strlen(ptn2));
 
-	while(p = mbs_strstrCase(p, ptn1, ignoreCase))
+	while (p = mbs_strstrCase(p, ptn1, ignoreCase))
 	{
 		memcpy(p, ptn2, ptnSz);
 		p += ptnSz;
@@ -436,7 +436,7 @@ char *replaceLine(char *line, char *ptn1, char *ptn2, int ignoreCase) // mbs_ re
 
 	LastReplacedCount = 0;
 
-	while(p = mbs_strstrCase(line + si, ptn1, ignoreCase))
+	while (p = mbs_strstrCase(line + si, ptn1, ignoreCase))
 	{
 		char *lold = line;
 
@@ -453,7 +453,7 @@ char *replaceLine(char *line, char *ptn1, char *ptn2, int ignoreCase) // mbs_ re
 }
 char *replaceLineLoop(char *line, char *ptn1, char *ptn2, int ignoreCase, uint loopMax) // mbs_ ret: strr(line)
 {
-	while(loopMax)
+	while (loopMax)
 	{
 		line = replaceLine(line, ptn1, ptn2, ignoreCase);
 
@@ -537,7 +537,7 @@ void reverseLine(char *line)
 	{
 		lfar--;
 
-		while(lnear < lfar)
+		while (lnear < lfar)
 		{
 			int swap = lnear[0];
 
@@ -594,7 +594,7 @@ void trimSequ(char *line, int delimChr)
 
 	errorCase(delimChr == '\0');
 
-	while(n = strchr(n, delimChr))
+	while (n = strchr(n, delimChr))
 	{
 		n++;
 
@@ -606,12 +606,12 @@ void trimSequ(char *line, int delimChr)
 			{
 				f++;
 			}
-			while(*f == delimChr);
+			while (*f == delimChr);
 
-			while(*f)
+			while (*f)
 			{
 				if (*f == delimChr)
-					while(f[1] == delimChr)
+					while (f[1] == delimChr)
 						f++;
 
 				*n++ = *f++;
@@ -759,7 +759,7 @@ char *setStrLenMin(char *str, uint lenmin, int defchr) // ret: strlen(str) < len
 {
 	int count = strlen(str);
 
-	while(count < lenmin)
+	while (count < lenmin)
 	{
 		str = addChar(str, defchr);
 		count++;

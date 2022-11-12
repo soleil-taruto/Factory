@@ -187,7 +187,7 @@ readArgs:
 				fileSeek(fp, SEEK_SET, bgnPos);
 				cout("< \"");
 
-				while(getSeekPos(fp) < endPos)
+				while (getSeekPos(fp) < endPos)
 				{
 					int chr = readChar(fp);
 					m_toHalf(chr);

@@ -15,7 +15,7 @@ static autoList_t *ReadLinesFromStdin(void)
 	autoList_t *lines = newList();
 	char *line;
 
-	while(line = readLine(stdin))
+	while (line = readLine(stdin))
 		addElement(lines, (uint)line);
 
 	return lines;

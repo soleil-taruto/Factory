@@ -56,7 +56,7 @@ readArgs:
 	}
 	fp = file ? fileOpen(file, "rt") : stdin;
 
-	while(line = readLine(fp))
+	while (line = readLine(fp))
 	{
 		int fnd = 0;
 

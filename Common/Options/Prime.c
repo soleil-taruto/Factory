@@ -211,7 +211,7 @@ void Factorization(uint64 value, uint64 dest[64]) // dest: Å‘å 63 ŒÂ, ÅŒã‚Ì—v‘
 		uint64 denom; // maxDenom is max UINTMAX -> 18446744073709551557 ‚Æ‚© uint ‚¾‚Æ–³ŒÀƒ‹[ƒv‚É‚È‚é‹C‚ª‚·‚éB
 		uint maxDenom;
 
-		while(value % 2 == 0)
+		while (value % 2 == 0)
 		{
 			dest[wPos++] = 2;
 			value /= 2;
@@ -225,7 +225,7 @@ void Factorization(uint64 value, uint64 dest[64]) // dest: Å‘å 63 ŒÂ, ÅŒã‚Ì—v‘
 		{
 			if (IsPrime_32(denom)) // value % denom == 0 ‚æ‚è‘¬‚¢‚Û‚¢B32bit‚¾‚©‚ç???
 			{
-				while(value % denom == 0)
+				while (value % denom == 0)
 				{
 					dest[wPos++] = denom;
 					value /= denom;

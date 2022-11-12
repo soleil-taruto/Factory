@@ -44,7 +44,7 @@ static void DoRDMD(char *dir)
 
 int main(int argc, char **argv)
 {
-	while(hasArgs(1))
+	while (hasArgs(1))
 	{
 		if (argIs("/RD"))
 		{

@@ -106,7 +106,7 @@ static autoList_t *BinToText(autoBlock_t *block)
 			*text_p = '\0';
 			line2JLine(text, 1, 0, 0, 1);
 
-			while(strlen(line) < TEXT_SEP_POS)
+			while (strlen(line) < TEXT_SEP_POS)
 				line = addChar(line, ' ');
 
 			line = addChar(line, TEXT_SEP_CHAR);

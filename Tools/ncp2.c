@@ -36,7 +36,7 @@ static void CheckAbortRequest(void)
 {
 	int escapePressed = 0;
 
-	while(hasKey())
+	while (hasKey())
 		if (getKey() == 0x1b)
 			escapePressed = 1;
 
@@ -326,7 +326,7 @@ static void MirrorDir(char *clientDir, char *serverDir, int direction)
 {
 	uint retryCount = 0;
 
-	while(!MirrorDirMain(clientDir, serverDir, direction) && !AbortRequested)
+	while (!MirrorDirMain(clientDir, serverDir, direction) && !AbortRequested)
 	{
 		if (MIRROR_DIR_RETRY_COUNT < ++retryCount)
 		{

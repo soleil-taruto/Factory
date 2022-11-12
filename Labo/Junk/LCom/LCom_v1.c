@@ -41,7 +41,7 @@ void LComRecvLoop(char *(*funcRecvEvent)(char *), uint id)
 
 	cout("Press ESCAPE key to exit LComRecvLoop().\n");
 
-	while(!hasKey() || getKey() != 0x1b)
+	while (!hasKey() || getKey() != 0x1b)
 	{
 		if (handleWaitForMillis(eh, 100))
 		{

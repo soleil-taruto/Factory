@@ -46,7 +46,7 @@ static void MergePart(
 	element1 = readElement(rfp1);
 	element2 = readElement(rfp2);
 
-	while(element1 && element2)
+	while (element1 && element2)
 	{
 		if (compElement(element1, element2) <= 0) // ? element1 <= element2
 		{
@@ -79,7 +79,7 @@ static void MergePart(
 		{
 			writeElement_x(wfp, tElement);
 		}
-		while(tElement = readElement(tfp));
+		while (tElement = readElement(tfp));
 	}
 
 	fileClose(rfp1);
@@ -186,7 +186,7 @@ void MergeSort(
 
 	fileClose(fp);
 
-	while(2 < getCount(partFiles))
+	while (2 < getCount(partFiles))
 	{
 		char *partFile1 = (char *)unaddElement(partFiles);
 		char *partFile2 = (char *)unaddElement(partFiles);

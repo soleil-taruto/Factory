@@ -98,7 +98,7 @@ autoBlock_t *makeMultiPartContent(void)
 
 	errorCase(!TextList);
 
-	while(!boundary || IsIncludeBoundary(boundary))
+	while (!boundary || IsIncludeBoundary(boundary))
 	{
 		memFree(boundary);
 		boundary = MakeBoundary();

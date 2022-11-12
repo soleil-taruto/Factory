@@ -70,7 +70,7 @@ void coSleep(uint millis)
 
 	goto loopStart;
 
-	while(elapse < millis)
+	while (elapse < millis)
 	{
 		uint m = m_min(millis - elapse, SLEEP_NICK_MILLIS);
 
@@ -562,7 +562,7 @@ static void ReadSysArgs(void)
 			subArgs = tokenizeArgs(text);
 			memFree(text);
 
-			while(getCount(subArgs))
+			while (getCount(subArgs))
 				insertElement(Args, argi, (uint)unaddElement(subArgs));
 
 			releaseAutoList(subArgs);
@@ -576,7 +576,7 @@ static void ReadSysArgs(void)
 
 			subArgs = readLines(arg);
 
-			while(getCount(subArgs))
+			while (getCount(subArgs))
 				insertElement(Args, argi, (uint)unaddElement(subArgs));
 
 			releaseAutoList(subArgs);

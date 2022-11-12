@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 	uint lastY = 0;
 	uint slpcnt = 0;
 
-	while(!hasKey() || getKey() != 0x1b)
+	while (!hasKey() || getKey() != 0x1b)
 	{
 		uint x;
 		uint y;

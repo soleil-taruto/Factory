@@ -41,7 +41,7 @@ static int SkipLine(FILE *fp)
 		if (chr == EOF) // ? 1文字以上のEOFで終わる行 <- 行と見なす。
 			break;
 	}
-	while(chr != '\n'); // ? ! 改行
+	while (chr != '\n'); // ? ! 改行
 
 	return 1;
 }
@@ -53,12 +53,12 @@ static void LineMid(char *file, uint64 minLineNo, uint64 maxLineNo)
 	errorCase(minLineNo < 1);
 	errorCase(maxLineNo < minLineNo);
 
-	while(lineNo < minLineNo)
+	while (lineNo < minLineNo)
 	{
 		errorCase(!SkipLine(fp)); // ? 開始行より前にファイルが終了した。
 		lineNo++;
 	}
-	while(lineNo <= maxLineNo)
+	while (lineNo <= maxLineNo)
 	{
 		char *line = readLine(fp);
 
@@ -75,7 +75,7 @@ static void LineNumMain(char *file)
 	FILE *fp = file ? fileOpen(file, "rb") : (stdin_set_bin(), stdin);
 	uint64 linenum = 0;
 
-	while(SkipLine(fp))
+	while (SkipLine(fp))
 	{
 		linenum++;
 	}

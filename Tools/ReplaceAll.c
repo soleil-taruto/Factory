@@ -48,7 +48,7 @@ static int AntiSamePaths(autoList_t *paths)
 	uint index;
 	uint inccnt = 0;
 
-	while(index = findPair(paths, (sint (*)(uint, uint))mbs_stricmp))
+	while (index = findPair(paths, (sint (*)(uint, uint))mbs_stricmp))
 	{
 		path = getLine(paths, index);
 		cout("< %s\n", path);

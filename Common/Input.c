@@ -41,7 +41,7 @@ static int InputJTextMode;
 	main()
 	{
 		for(; ; )
-			while(_kbhit())
+			while (_kbhit())
 				printf("%02x", _getch());
 	}
 
@@ -171,7 +171,7 @@ int hasKey(void)
 }
 void clearKey(void)
 {
-	while(hasKey())
+	while (hasKey())
 	{
 		getKey();
 	}
@@ -193,7 +193,7 @@ int clearCoWaitKey(uint millis)
 }
 int checkKey(int key)
 {
-	while(hasKey())
+	while (hasKey())
 		if (getKey() == key)
 			return 1;
 
@@ -377,7 +377,7 @@ char *coInputLinePrn(void (*printFunc)(char *jbuffer))
 		memFree(jbuffer);
 		ungetKey(getKey()); // ì¸óÕë“ÇøÅB
 
-		while(hasKey())
+		while (hasKey())
 		{
 			int chr = getKey();
 
@@ -485,7 +485,7 @@ char *dropPath(void)
 	ungetKey(getKey());
 	InputJTextMode = 1;
 
-	while(hasKey())
+	while (hasKey())
 	{
 		path = addChar(path, getKey());
 	}

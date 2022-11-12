@@ -23,7 +23,7 @@ void NormalizeXNode(XNode_t *root, char *(*strFltr)(char *))
 
 	addElement(nodes, (uint)root);
 
-	while(getCount(nodes))
+	while (getCount(nodes))
 	{
 		XNode_t *node = (XNode_t *)unaddElement(nodes);
 

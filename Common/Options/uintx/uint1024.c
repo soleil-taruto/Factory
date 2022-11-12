@@ -107,7 +107,7 @@ UI1024_t UI1024_Mul(UI1024_t a, UI1024_t b, UI1024_t ans[2])
 	m[3][mc[3]++] = f[1];
 
 	for(i = 1; i < 4; i++)
-	while(2 <= mc[i])
+	while (2 <= mc[i])
 	{
 		UI512_t t = m[i][--mc[i]];
 		UI512_t u = m[i][--mc[i]];
@@ -147,7 +147,7 @@ static UI1024_t DivSub(UI1024_t a, UI1024_t b, UI1024_t ans[2], uint reti)
 			a = UI1024_Sub(a, UI1024_Mul(b, dd, NULL));
 		}
 
-		while(!UI512_IsZero(a.H))
+		while (!UI512_IsZero(a.H))
 		{
 			UI1024_t dd;
 			UI512_t d2[2];
@@ -192,7 +192,7 @@ static UI1024_t DivSub(UI1024_t a, UI1024_t b, UI1024_t ans[2], uint reti)
 				a = UI1024_Sub(a, UI1024_Mul(b, dd, NULL));
 			}
 		}
-		while(0 <= UI1024_Comp(a, b))
+		while (0 <= UI1024_Comp(a, b))
 		{
 			ans[0] = UI1024_Add(ans[0], UI1024_x(1), NULL);
 			a = UI1024_Sub(a, b);

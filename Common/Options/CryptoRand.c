@@ -92,7 +92,7 @@ uint64 getCryptoRand64Mod(uint64 modulo) // ret: 0 Å` (modulo - 1)
 	{
 		r = getCryptoRand64();
 	}
-	while(r < r_mod);
+	while (r < r_mod);
 
 	return r % modulo;
 }
@@ -110,7 +110,7 @@ autoBlock_t *makeCryptoRandBlock(uint count)
 {
 	autoBlock_t *block = createBlock(count);
 
-	while(count)
+	while (count)
 	{
 		addByte(block, getCryptoByte());
 		count--;

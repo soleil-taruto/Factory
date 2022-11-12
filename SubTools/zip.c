@@ -155,7 +155,7 @@ static void PackZipFile(char *zipFile, char *srcDir)
 			readLines(ZIP_MD5_HISTORY_FILE) :
 			newList();
 
-		while(ZIP_MD5_HISTORY_LMT < getCount(lines))
+		while (ZIP_MD5_HISTORY_LMT < getCount(lines))
 			memFree((char *)desertElement(lines, 0));
 
 		addElement(lines, (uint)xcout("----"));
@@ -233,7 +233,7 @@ static void DestroyFindVersionPtn(autoBlock_t *text, uint startPos, uint count)
 		{
 			chr = '\x21' + getCryptoByte() % ('\x7e' + 1 - '\x21');
 		}
-		while(chr == ':');
+		while (chr == ':');
 #else
 		chr = ';'; // ':' ‚Å‚È‚¯‚ê‚Î‰½‚Å‚à—Ç‚¢B
 #endif

@@ -60,7 +60,7 @@ typedef unsigned __int64 uint64;
 	TYPE_T tmp = (TYPE_T)(lop1); \
 	*(TYPE_T *)&(lop1) = (TYPE_T)(lop2); \
 	*(TYPE_T *)&(lop2) = tmp; \
-	} while(0)
+	} while (0)
 
 // ‚±‚ê‚Í•„†‚È‚µB•„†‚ ‚è‚Í Ë d2i()
 #define m_d2i(value) \

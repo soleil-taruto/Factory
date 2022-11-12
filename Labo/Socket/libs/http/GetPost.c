@@ -425,7 +425,7 @@ void httpSendResponseFileType(SockStream_t *i, char *file, char *contentType)
 
 #define SEND_BUFF_SIZE (1024 * 512)
 
-	while(sendcnt < cSize)
+	while (sendcnt < cSize)
 	{
 		autoBlock_t *buffBlock = nobCreateBlock((uint)m_min(cSize - sendcnt, (uint64)SEND_BUFF_SIZE));
 

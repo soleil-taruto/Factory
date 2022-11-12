@@ -36,7 +36,7 @@ static void RemoveEndMuon(void)
 {
 	uint count = getCount(WavData);
 
-	while(count && IsMuonRow(getElement(WavData, count - 1)))
+	while (count && IsMuonRow(getElement(WavData, count - 1)))
 		count--;
 
 	count += FADE_SZ;

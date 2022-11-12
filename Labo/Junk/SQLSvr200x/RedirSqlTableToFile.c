@@ -17,7 +17,7 @@ static void ToConsole(char *file)
 
 	fp = fileOpen(outFile, "rt");
 
-	while(line = readLine(fp))
+	while (line = readLine(fp))
 	{
 		cout("%s\n", line);
 		memFree(line);

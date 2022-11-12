@@ -13,7 +13,7 @@ static void PrintSubStruct(uint startPos, uint endPos, uint indent)
 {
 	uint index = startPos;
 
-	while(index < endPos)
+	while (index < endPos)
 	{
 		uint size;
 		char *name;

@@ -87,7 +87,7 @@ static char *HFldFolding(char *line)
 {
 	uint index = 70; // Ç±ÇÒÇ»í∑Ç¢ÉLÅ[ÇÕñ≥Ç¢ÇæÇÎÇ§...
 
-	while(index + 10 <= strlen(line))
+	while (index + 10 <= strlen(line))
 	{
 		if (line[index] <= '\x20') // ? WSP
 		{

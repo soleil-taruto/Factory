@@ -87,7 +87,7 @@ autoList_t *tokenizeMinMax(char *line, int delimiter, uint nummin, uint nummax, 
 	addByte(token, '\0');
 	addElement(tokens, (uint)unbindBlock(token));
 
-	while(getCount(tokens) < nummin)
+	while (getCount(tokens) < nummin)
 	{
 		addElement(tokens, (uint)strx(def_token));
 	}
@@ -143,10 +143,10 @@ void trimLines(autoList_t *lines)
 }
 void trimEdgeLines(autoList_t *lines)
 {
-	while(getCount(lines) && !*(char *)getLastElement(lines))
+	while (getCount(lines) && !*(char *)getLastElement(lines))
 		memFree((char *)unaddElement(lines));
 
-	while(getCount(lines) && !*getLine(lines, 0))
+	while (getCount(lines) && !*getLine(lines, 0))
 		memFree((char *)desertElement(lines, 0));
 }
 void emptizeSubLines(autoList_t *lines, uint start, uint count)

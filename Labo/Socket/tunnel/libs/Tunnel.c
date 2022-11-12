@@ -36,7 +36,7 @@ static int IdleTh(void)
 {
 	int clsFlag = 0;
 
-	while(hasKey())
+	while (hasKey())
 	{
 		int key = getKey();
 

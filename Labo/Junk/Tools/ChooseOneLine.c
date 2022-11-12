@@ -52,7 +52,7 @@ int main(int argc, char **argv)
 
 		rcntLines = readLines(RecentlyLinesFile);
 
-		while(getCount(Lines) / 2 < getCount(rcntLines))
+		while (getCount(Lines) / 2 < getCount(rcntLines))
 			memFree((char *)desertElement(rcntLines, 0));
 
 		writeLines(RecentlyLinesFile, rcntLines);

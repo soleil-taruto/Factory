@@ -10,7 +10,7 @@ static void PerformTh(int sock, char *ip)
 	ConnectCounter++;
 	cout(">> %d (%u)\n", sock, ConnectCounter);
 
-	while((line = SockNextLine(buffer)) == NULL)
+	while ((line = SockNextLine(buffer)) == NULL)
 		if (SockRecvSequ(sock, buffer, 3000) == -1)
 			break;
 
@@ -22,7 +22,7 @@ static void PerformTh(int sock, char *ip)
 	setSize(buffer, 0);
 	ab_addLine_x(buffer, line);
 
-	while(getSize(buffer))
+	while (getSize(buffer))
 		if (SockSendSequ(sock, buffer, 3000) == -1)
 			break;
 

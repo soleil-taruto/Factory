@@ -41,7 +41,7 @@ static char *ReadJoin(void)
 	char *buff = strx("");
 	char *p;
 
-	while((p = mbs_strrchr(LastLine, '\\')) && !p[1])
+	while ((p = mbs_strrchr(LastLine, '\\')) && !p[1])
 	{
 		*p = '\0';
 		buff = addLine(buff, LastLine);
@@ -157,7 +157,7 @@ static void Main3(char *rFile, char *wFile)
 	errorCase(strcmp(ReadLine(), "Windows Registry Editor Version 5.00")); // バージョンとか変わるんじゃね？
 	errorCase(strcmp(ReadLine(), ""));
 
-	while(ReadLine_N())
+	while (ReadLine_N())
 	{
 		char *line = LastLine;
 

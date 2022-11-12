@@ -58,10 +58,10 @@ static void DoPrint(int n, int exp) {
 
 	printf("%d", b->Vals[index]);
 
-	while(0 <= --index) {
+	while (0 <= --index) {
 		printf("%09d", b->Vals[index]);
 	}
-	while(b = b->Prev) {
+	while (b = b->Prev) {
 		for(index = BLOCKSZ - 1; 0 <= index; index--) {
 			printf("%09d", b->Vals[index]);
 		}

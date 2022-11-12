@@ -15,7 +15,7 @@ autoList_t *readCSVFile(char *file)
 	autoList_t *table = newList();
 	autoList_t *row = newList();
 
-	while((chr = readChar(fp)) != EOF)
+	while ((chr = readChar(fp)) != EOF)
 	{
 		autoBlock_t *cellBuff = newBlock();
 
@@ -135,7 +135,7 @@ void csvTrim(autoList_t *table)
 
 	foreach (table, row, rowidx)
 	{
-		while(getCount(row))
+		while (getCount(row))
 		{
 			char *cell = getLine(row, getCount(row) - 1);
 
@@ -145,7 +145,7 @@ void csvTrim(autoList_t *table)
 			memFree((void *)unaddElement(row));
 		}
 	}
-	while(getCount(table))
+	while (getCount(table))
 	{
 		row = (autoList_t *)getElement(table, getCount(table) - 1);
 
@@ -171,7 +171,7 @@ void csvRect(autoList_t *table)
 	}
 	foreach (table, row, rowidx)
 	{
-		while(getCount(row) < maxcolcnt)
+		while (getCount(row) < maxcolcnt)
 		{
 			addElement(row, (uint)strx(""));
 		}
@@ -189,7 +189,7 @@ void csvSquare(autoList_t *table)
 
 	if (rowcnt < colcnt)
 	{
-		while(rowcnt < colcnt)
+		while (rowcnt < colcnt)
 		{
 			autoList_t *row = newList();
 			uint colidx;
@@ -209,7 +209,7 @@ void csvSquare(autoList_t *table)
 
 		foreach (table, row, rowidx)
 		{
-			while(getCount(row) < rowcnt)
+			while (getCount(row) < rowcnt)
 			{
 				addElement(row, (uint)strx(""));
 			}

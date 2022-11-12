@@ -7,7 +7,7 @@
 	do { \
 	m_maxim((var), (minval)); \
 	m_minim((var), (maxval)); \
-	} while(0)
+	} while (0)
 
 extern char *decimal;
 extern char *binadecimal;

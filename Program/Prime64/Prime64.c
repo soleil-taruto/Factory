@@ -54,7 +54,7 @@ static void WrUI64(FILE *fp, uint64 value)
 		*p = '0' + (value % 10);
 		value /= 10;
 	}
-	while(value != 0);
+	while (value != 0);
 
 	s = ((uint)buff + 21) - (uint)p;
 
@@ -67,7 +67,7 @@ static void WrUI64(FILE *fp, uint64 value)
 
 static uint64 GetLowPrime(uint64 value)
 {
-	while(2 < value)
+	while (2 < value)
 	{
 		value--;
 
@@ -78,7 +78,7 @@ static uint64 GetLowPrime(uint64 value)
 }
 static uint64 GetHiPrime(uint64 value)
 {
-	while(value < PRIME_MAX)
+	while (value < PRIME_MAX)
 	{
 		value++;
 

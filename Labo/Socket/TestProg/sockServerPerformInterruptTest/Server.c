@@ -13,11 +13,11 @@ static int Perform(char *prmFile, char *ansFile)
 	moveFile(prmFile, ansFile);
 	createFile(prmFile);
 
-	while(count)
+	while (count)
 	{
 		cout("%u\n", count);
 
-		while(hasKey())
+		while (hasKey())
 		{
 			if (getKey() == 0x1b)
 			{
@@ -39,7 +39,7 @@ static int Perform(char *prmFile, char *ansFile)
 }
 static int Idle(void)
 {
-	while(hasKey())
+	while (hasKey())
 		if (getKey() == 0x1b)
 			KeepServerRq = 0;
 

@@ -57,7 +57,7 @@ static void Pad128(char *file)
 	fp = fileOpen(file, "r+b");
 	fileSeek(fp, SEEK_END, 0);
 
-	while(size & 15)
+	while (size & 15)
 	{
 		writeChar(fp, getCryptoByte());
 		size++;

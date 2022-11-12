@@ -12,7 +12,7 @@ static void DoTestOnce(uint n)
 	uint nu = 0;
 	uint de = 0;
 
-	while(de < 100000)
+	while (de < 100000)
 	{
 		uint c;
 

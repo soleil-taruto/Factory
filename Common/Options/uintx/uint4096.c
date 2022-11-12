@@ -107,7 +107,7 @@ UI4096_t UI4096_Mul(UI4096_t a, UI4096_t b, UI4096_t ans[2])
 	m[3][mc[3]++] = f[1];
 
 	for(i = 1; i < 4; i++)
-	while(2 <= mc[i])
+	while (2 <= mc[i])
 	{
 		UI2048_t t = m[i][--mc[i]];
 		UI2048_t u = m[i][--mc[i]];
@@ -147,7 +147,7 @@ static UI4096_t DivSub(UI4096_t a, UI4096_t b, UI4096_t ans[2], uint reti)
 			a = UI4096_Sub(a, UI4096_Mul(b, dd, NULL));
 		}
 
-		while(!UI2048_IsZero(a.H))
+		while (!UI2048_IsZero(a.H))
 		{
 			UI4096_t dd;
 			UI2048_t d2[2];
@@ -192,7 +192,7 @@ static UI4096_t DivSub(UI4096_t a, UI4096_t b, UI4096_t ans[2], uint reti)
 				a = UI4096_Sub(a, UI4096_Mul(b, dd, NULL));
 			}
 		}
-		while(0 <= UI4096_Comp(a, b))
+		while (0 <= UI4096_Comp(a, b))
 		{
 			ans[0] = UI4096_Add(ans[0], UI4096_x(1), NULL);
 			a = UI4096_Sub(a, b);

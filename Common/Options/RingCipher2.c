@@ -49,7 +49,7 @@ static void AddPadding(autoBlock_t *block)
 	{
 		padSize = padSzLow | getCryptoByte() & 0xf0;
 	}
-	while(size + padSize < 0xff);
+	while (size + padSize < 0xff);
 
 	for(count = padSize; count; count--)
 	{
@@ -176,7 +176,7 @@ int rngcphrDecrypt(autoBlock_t *block, autoList_t *keyTableList)
 
 	if (
 		getSize(block) < 16 + 64 + 64 + 64 ||
-//		getSize(block) < 256 + 64 + 64 + 64 || // while(size + padSize < 0xff); ‚µ‚Ä‚È‚©‚Á‚½Žž‚ÌˆÃ†•¶‚Í‚±‚ê‚æ‚è’Z‚¢ (Å¬padding ‹Œ->V: 16->256)
+//		getSize(block) < 256 + 64 + 64 + 64 || // while (size + padSize < 0xff); ‚µ‚Ä‚È‚©‚Á‚½Žž‚ÌˆÃ†•¶‚Í‚±‚ê‚æ‚è’Z‚¢ (Å¬padding ‹Œ->V: 16->256)
 		getSize(block) % 16 != 0
 		)
 		goto fault;
@@ -213,7 +213,7 @@ static void F_AddPadding(char *file)
 	{
 		padSize = padSzLow | getCryptoByte() & 0xf0;
 	}
-	while(fileSize + padSize < 0xff);
+	while (fileSize + padSize < 0xff);
 
 	fp = fileOpen(file, "ab");
 
@@ -463,7 +463,7 @@ static int F_Decrypt(char *file, autoList_t *keyTableList)
 
 	if (
 		fileSize < 16 + 64 + 64 + 64 ||
-//		fileSize < 256 + 64 + 64 + 64 || // while(fileSize + padSize < 0xff); ‚µ‚Ä‚È‚©‚Á‚½Žž‚ÌˆÃ†•¶‚Í‚±‚ê‚æ‚è’Z‚¢ (Å¬padding ‹Œ->V: 16->256)
+//		fileSize < 256 + 64 + 64 + 64 || // while (fileSize + padSize < 0xff); ‚µ‚Ä‚È‚©‚Á‚½Žž‚ÌˆÃ†•¶‚Í‚±‚ê‚æ‚è’Z‚¢ (Å¬padding ‹Œ->V: 16->256)
 		fileSize % 16 != 0
 		)
 		return 0;

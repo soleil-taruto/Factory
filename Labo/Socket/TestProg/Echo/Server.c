@@ -18,7 +18,7 @@ static int Perform(char *prmFile, char *ansFile)
 }
 static int Idle(void)
 {
-	while(hasKey())
+	while (hasKey())
 	{
 		if (getKey() == 0x1b)
 		{

@@ -101,7 +101,7 @@ static int Idle(void)
 			));
 	}
 
-	while(hasKey())
+	while (hasKey())
 	{
 		if (getKey() == 0x1b)
 		{
@@ -208,7 +208,7 @@ static void ReadEndToStream(FILE *rfp, FILE *wfp)
 {
 	autoBlock_t *buffer;
 
-	while(buffer = readBinaryStream(rfp, 128 * 1024 * 1024))
+	while (buffer = readBinaryStream(rfp, 128 * 1024 * 1024))
 	{
 		IOCounter += (uint64)getSize(buffer);
 		cmdTitle_x(xcout("ncp - %I64u bytes copied", IOCounter));
@@ -476,7 +476,7 @@ readArgs:
 		}
 		ClientRequest();
 
-		while(path = readLine(AnsFp))
+		while (path = readLine(AnsFp))
 		{
 			line2JLine(path, 1, 0, 0, 1);
 			cout("%s%s\n", majorOutputLinePrefix, path);
@@ -495,7 +495,7 @@ readArgs:
 
 		ClientRequest();
 
-		while(path = readLine(AnsFp))
+		while (path = readLine(AnsFp))
 		{
 			line2JLine(path, 1, 0, 0, 1);
 			cout("%s%s\n", majorOutputLinePrefix, path);

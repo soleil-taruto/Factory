@@ -185,7 +185,7 @@ double dPow(double value, uint extend)
 
 	answer = value;
 
-	while(--extend)
+	while (--extend)
 		answer *= value;
 
 	return answer;
@@ -276,7 +276,7 @@ char *zPad64(uint64 value, char *digits, uint minlen)
 
 	errorCase(radix < 2);
 
-	while(value != 0 || getSize(buff) < minlen)
+	while (value != 0 || getSize(buff) < minlen)
 	{
 		addByte(buff, digits[value % radix]);
 		value /= radix;

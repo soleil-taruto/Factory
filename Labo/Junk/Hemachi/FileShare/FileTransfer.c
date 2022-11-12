@@ -34,7 +34,7 @@ static int UserCancelled;
 
 static void Interrupt(void)
 {
-	while(hasKey())
+	while (hasKey())
 	{
 		if (getKey() == 0x1b)
 		{
@@ -228,7 +228,7 @@ static void UploadFile(char *file, char *svrPath)
 
 	ProcCommand = "UP";
 
-	while(!UserCancelled)
+	while (!UserCancelled)
 	{
 		autoBlock_t *block = readBinaryStream(fp, TransferBlockSize);
 
@@ -237,7 +237,7 @@ static void UploadFile(char *file, char *svrPath)
 		if (!block)
 			break;
 
-		while(!UserCancelled)
+		while (!UserCancelled)
 		{
 			cout("startPos: %I64u\n", startPos);
 			cout("block: (%u)\n", getSize(block));
@@ -290,7 +290,7 @@ static void DownloadFile(char *file, char *svrPath, int autoCreateParentMode)
 
 	fp = fileOpen(midFile, "wb");
 
-	while(!UserCancelled)
+	while (!UserCancelled)
 	{
 		cout("startPos: %I64u\n", startPos);
 
@@ -345,7 +345,7 @@ static void Prv_RemoveFile(char *svrPath)
 {
 	ProcCommand = "RM";
 
-	while(!UserCancelled)
+	while (!UserCancelled)
 	{
 		OpenParamsFile();
 		WriteParamLine("RM");
@@ -363,7 +363,7 @@ static void Prv_MoveFile(char *svrPath, char *newSvrPath)
 {
 	ProcCommand = "MV";
 
-	while(!UserCancelled)
+	while (!UserCancelled)
 	{
 		OpenParamsFile();
 		WriteParamLine("MV");
@@ -386,7 +386,7 @@ static void RunScript(char *file)
 	reverseElements(lines);
 	cout("RunScript() Start\n");
 
-	while(getCount(lines) && !UserCancelled)
+	while (getCount(lines) && !UserCancelled)
 	{
 		char *command;
 		char *file;

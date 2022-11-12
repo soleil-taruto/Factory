@@ -92,7 +92,7 @@ readArgs:
 		tblnm = nextArg();
 		outFile = nextArg();
 
-		while(hasArgs(1))
+		while (hasArgs(1))
 			addElement(colnms, (uint)nextArg());
 
 		TA_GetTableData(tblnm, midFile);
@@ -112,7 +112,7 @@ readArgs:
 
 		if (hasArgs(1))
 		{
-			while(hasArgs(1))
+			while (hasArgs(1))
 			{
 				BackupTable(dir, nextArg());
 			}

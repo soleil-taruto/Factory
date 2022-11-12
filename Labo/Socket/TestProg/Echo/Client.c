@@ -12,7 +12,7 @@ static int Idle(void)
 		,sockClientStatus.AnsFile->FileSize
 		);
 
-	while(hasKey())
+	while (hasKey())
 	{
 		int key = getKey();
 

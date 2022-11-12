@@ -29,7 +29,7 @@ static void TextFltr(char *rFile, char *wFile)
 	cout("< %s\n", rFile);
 	cout("> %s\n", wFile);
 
-	while(line = readLine(rfp))
+	while (line = readLine(rfp))
 	{
 		line2JLine(line, 1, 0, 1, 1);
 		writeLine_x(wfp, line);
@@ -39,7 +39,7 @@ static void TextFltr(char *rFile, char *wFile)
 }
 static int DoLock(void)
 {
-	while(!handleWaitForMillis(MutexHandle, 3000))
+	while (!handleWaitForMillis(MutexHandle, 3000))
 	{
 		cout("MUTEX FAULT!\n");
 
@@ -72,7 +72,7 @@ static void MainLoop(void)
 	SockStartup();
 	cout("START\n");
 
-	while(!collectEvents(StopAppEventHandle, 0))
+	while (!collectEvents(StopAppEventHandle, 0))
 	{
 		collectEvents(StartEventHandle, 3000);
 

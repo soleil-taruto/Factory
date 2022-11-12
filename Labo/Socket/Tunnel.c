@@ -72,7 +72,7 @@ static int Perform(int sock, uint prm)
 
 	retval = 1;
 
-	while(getSize(sendData) || getSize(recvData))
+	while (getSize(sendData) || getSize(recvData))
 	{
 		if (getSize(sendData) && SockSendSequ(fwdSock, sendData, 1) == -1)
 		{
@@ -95,7 +95,7 @@ endfunc:
 
 static int Idle(void)
 {
-	while(hasKey())
+	while (hasKey())
 	{
 		if (getKey() == 0x1b)
 		{

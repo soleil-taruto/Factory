@@ -62,7 +62,7 @@ static int IsProcessAlive(uint targetProcId)
 				if (procId == targetProcId)
 					alive = 1;
 			}
-			while(Process32Next(hSnapshot, &pe32));
+			while (Process32Next(hSnapshot, &pe32));
 		}
 		CloseHandle(hSnapshot);
 	}

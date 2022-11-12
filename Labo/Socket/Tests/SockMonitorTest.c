@@ -50,7 +50,7 @@ static int IdleProc(void)
 {
 	int retval = 1;
 
-	while(hasKey())
+	while (hasKey())
 	{
 		if (getKey() == 0x1b)
 		{

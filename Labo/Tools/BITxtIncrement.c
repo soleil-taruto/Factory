@@ -34,7 +34,7 @@ static void BITxtIncrement_File(char *file)
 		}
 	}
 
-	while(getSize(data) && getByte(data, getSize(data) - 1) == 0)
+	while (getSize(data) && getByte(data, getSize(data) - 1) == 0)
 		setSize(data, getSize(data) - 1);
 
 	reverseBytes(data);

@@ -95,7 +95,7 @@ static void CascMergeSort(autoList_t *divfiles, char *outputfile) // Cascade? Me
 
 			addElement(strms, (uint)i);
 		}
-		while(1 < getCount(strms))
+		while (1 < getCount(strms))
 		{
 			Stream_t *i = (Stream_t *)memCalloc(sizeof(Stream_t));
 
@@ -241,7 +241,7 @@ int main(int argc, char **argv)
 			charcnt = 0;
 			lines = newList();
 
-			while(line = readLine(fp))
+			while (line = readLine(fp))
 			{
 				charcnt += strlen(line);
 				addElement(lines, (uint)line);

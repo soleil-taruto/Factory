@@ -9,7 +9,7 @@ static uint GetMeaningCharPct(char *p)
 
 	p++;
 
-	while(*p != '}')
+	while (*p != '}')
 	{
 		if (m_ishexadecimal(*p) || *p == '-')
 			numer++;

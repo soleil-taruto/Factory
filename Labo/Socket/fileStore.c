@@ -131,7 +131,7 @@ static void CheckUploadDirOverflow(void)
 {
 	autoList_t *files = GetUploadFiles();
 
-	while(UPLOADFILEMAX < getCount(files) ||
+	while (UPLOADFILEMAX < getCount(files) ||
 		UploadDirSizeMax < GetTotalFileSize(files))
 		removeFile_x((char *)unaddElement(files));
 
@@ -500,7 +500,7 @@ static void PerformTh(int sock, char *strip)
 }
 static int IdleTh(void)
 {
-	while(hasKey())
+	while (hasKey())
 	{
 		if (getKey() == 0x1b)
 		{

@@ -636,7 +636,7 @@ void mkAddCwd(char *dir)
 }
 void unaddAllCwd(void)
 {
-	while(CwdStack && getCount(CwdStack))
+	while (CwdStack && getCount(CwdStack))
 		unaddCwd();
 }
 

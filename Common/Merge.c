@@ -16,7 +16,7 @@ autoList_t *merge(autoList_t *list1, autoList_t *list2, sint (*funcComp)(uint, u
 	rapidSort(list1, funcComp);
 	rapidSort(list2, funcComp);
 
-	while(getCount(list1) && getCount(list2))
+	while (getCount(list1) && getCount(list2))
 	{
 		int comp = funcComp(getLastElement(list1), getLastElement(list2));
 

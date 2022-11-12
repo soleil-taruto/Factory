@@ -50,7 +50,7 @@ char *GetMailHeader(autoList_t *mail, char *key)
 			{
 				char *q = p + 1;
 
-				while(*q == ' ')
+				while (*q == ' ')
 					q++;
 
 				value = strx(q);
@@ -59,14 +59,14 @@ char *GetMailHeader(autoList_t *mail, char *key)
 
 			if (value)
 			{
-				while(++index < getCount(mail))
+				while (++index < getCount(mail))
 				{
 					line = getLine(mail, index);
 
 					if (line[0] != '\t' && line[0] != ' ') // ? not LWSP-char
 						break;
 
-					while(line[0] == '\t' || line[0] == ' ') // ? LWSP-char
+					while (line[0] == '\t' || line[0] == ' ') // ? LWSP-char
 						line++;
 
 					value = addChar(value, ' ');

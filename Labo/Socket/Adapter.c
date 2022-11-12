@@ -31,7 +31,7 @@ static void TextFltr(char *rFile, char *wFile)
 	FILE *wfp = fileOpen(wFile, "wt");
 	char *line;
 
-	while(line = readLineLenMax(rfp, TextLineLenMax))
+	while (line = readLineLenMax(rfp, TextLineLenMax))
 	{
 		line2JLine(line, 1, 0, 1, 1);
 		writeLine_x(wfp, line);
@@ -48,7 +48,7 @@ static int DoLock(void)
 
 	for(trycnt = 0; ; trycnt++)
 	{
-		while(hasKey())
+		while (hasKey())
 		{
 			int chr = getKey();
 
@@ -123,7 +123,7 @@ static int Perform(char *prmFile, char *ansFile)
 }
 static int Idle(void)
 {
-	while(hasKey())
+	while (hasKey())
 	{
 		if (getKey() == 0x1b)
 		{

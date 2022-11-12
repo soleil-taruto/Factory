@@ -117,7 +117,7 @@ readArgs:
 		else
 			cout("\rwait for ESCAPE or other keys while %u seconds... ", remain);
 
-		while(hasKey())
+		while (hasKey())
 		{
 			switch(getKey())
 			{

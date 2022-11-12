@@ -59,7 +59,7 @@ int main(int argc, char **argv)
 
 	mt19937_init();
 
-	while(!hasKey())
+	while (!hasKey())
 	{
 		bindex = mt19937_rnd(BLOCK_MAX);
 		block = blocks[bindex];

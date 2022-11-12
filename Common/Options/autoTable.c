@@ -26,17 +26,17 @@ void resizeTable(autoTable_t *i, uint w, uint h)
 
 	errorCase(w && !h); // ? (1 x 0), (2 x 0), (3 x 0)...
 
-	while(h < getCount(i->Rows))
+	while (h < getCount(i->Rows))
 	{
 		autoList_t *row = (autoList_t *)unaddElement(i->Rows);
 
-		while(getCount(row))
+		while (getCount(row))
 		{
 			i->ReleaseCell(unaddElement(row));
 		}
 		releaseAutoList(row);
 	}
-	while(getCount(i->Rows) < h)
+	while (getCount(i->Rows) < h)
 	{
 		addElement(i->Rows, (uint)newList());
 	}
@@ -44,11 +44,11 @@ void resizeTable(autoTable_t *i, uint w, uint h)
 	{
 		autoList_t *row = getList(i->Rows, rowidx);
 
-		while(w < getCount(row))
+		while (w < getCount(row))
 		{
 			i->ReleaseCell(unaddElement(row));
 		}
-		while(getCount(row) < w)
+		while (getCount(row) < w)
 		{
 			addElement(row, i->CreateCell());
 		}

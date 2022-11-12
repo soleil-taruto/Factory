@@ -26,7 +26,7 @@ char *incrementColumnDigits(char *column, char *digits) // ret: strr(column)
 	errorCase(!digits[0]);
 	enddp = strchr(digits, '\0') - 1;
 
-	while(column < p)
+	while (column < p)
 	{
 		int d = *--p;
 		char *dp;
@@ -90,7 +90,7 @@ char *toCreatablePath(char *path, uint faultCountMax) // ret: strr(path)
 {
 	uint faultCount = 0;
 
-	while(existPath(path))
+	while (existPath(path))
 	{
 		errorCase(faultCountMax <= faultCount);
 		faultCount++;
@@ -845,7 +845,7 @@ uint revBit(uint value, uint startBit, uint bitNum)
 	uint h = startBit + bitNum - 1;
 	uint ret = 0;
 
-	while(l < h)
+	while (l < h)
 	{
 		uint lb = value >> l & 1;
 		uint hb = value >> h & 1;
@@ -936,7 +936,7 @@ autoBlock_t *decodeBase64(autoBlock_t *src)
 	uint value;
 	uint remaining;
 
-	while(src_size && getByte(src, src_size - 1) == BASE64_PAD)
+	while (src_size && getByte(src, src_size - 1) == BASE64_PAD)
 		src_size--;
 
 	for(index = 0; index + 4 <= src_size; index += 4)

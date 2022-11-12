@@ -11,7 +11,7 @@ static void FileList2MD5List(char *fileListFile, char *outFile)
 	FILE *wfp = fileOpen(outFile, "wt");
 	char *file;
 
-	while(file = readLine(rfp))
+	while (file = readLine(rfp))
 	{
 		writeLine_x(wfp, md5Cache_makeHexHashFile(file));
 		memFree(file);

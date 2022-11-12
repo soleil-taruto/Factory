@@ -281,7 +281,7 @@ static void DownloadPart(char *realPath, FILE *wfp, uint64 startPos, uint readSi
 
 			cout("readSize_Resized: %u\n", readSize);
 
-			while(readSize)
+			while (readSize)
 			{
 				autoBlock_t *block = neReadBinaryBlock(rfp, m_min(readSize, 512 * 1024));
 

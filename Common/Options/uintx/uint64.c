@@ -107,7 +107,7 @@ UI64_t UI64_Mul(UI64_t a, UI64_t b, UI64_t ans[2])
 	m[3][mc[3]++] = f[1];
 
 	for(i = 1; i < 4; i++)
-	while(2 <= mc[i])
+	while (2 <= mc[i])
 	{
 		UI32_t t = m[i][--mc[i]];
 		UI32_t u = m[i][--mc[i]];
@@ -147,7 +147,7 @@ static UI64_t DivSub(UI64_t a, UI64_t b, UI64_t ans[2], uint reti)
 			a = UI64_Sub(a, UI64_Mul(b, dd, NULL));
 		}
 
-		while(!UI32_IsZero(a.H))
+		while (!UI32_IsZero(a.H))
 		{
 			UI64_t dd;
 			UI32_t d2[2];
@@ -192,7 +192,7 @@ static UI64_t DivSub(UI64_t a, UI64_t b, UI64_t ans[2], uint reti)
 				a = UI64_Sub(a, UI64_Mul(b, dd, NULL));
 			}
 		}
-		while(0 <= UI64_Comp(a, b))
+		while (0 <= UI64_Comp(a, b))
 		{
 			ans[0] = UI64_Add(ans[0], UI64_x(1), NULL);
 			a = UI64_Sub(a, b);

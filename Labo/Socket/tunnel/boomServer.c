@@ -370,7 +370,7 @@ setConsoleColor(0x0d); // test
 		}
 	}
 
-	while(hasKey())
+	while (hasKey())
 		if (getKey() == 0x1b)
 			ProcDeadFlag = 1;
 

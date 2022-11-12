@@ -16,7 +16,7 @@ static uint BitKazoe(uint64 value)
 {
 	uint count = 0;
 
-	while(value != 0)
+	while (value != 0)
 	{
 		value ^= value & (~value + 1);
 		count++;
@@ -156,7 +156,7 @@ static void Test01(void)
 	TestValue(0xf0f0f0f0f0f0f0f0ui64); // 11110000...11110000
 	TestValue(0xffffffffffffffffui64); // 1111...1111
 
-	while(!waitKey(0))
+	while (!waitKey(0))
 	{
 		TestValue(NextValue());
 		TestValue(NextValue() & NextValue());

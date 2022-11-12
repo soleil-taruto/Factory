@@ -147,7 +147,7 @@ autoList_t *ls(char *dir)
 				AddPath(files, path, FilesExtraFp, lsFileAction, fileInfos);
 			}
 		}
-		while(_findnext(h, &lastFindData) == 0);
+		while (_findnext(h, &lastFindData) == 0);
 
 		_findclose(h);
 	}
@@ -317,7 +317,7 @@ void lss2File(char *dir, char *dirsFile, char *filesFile)
 
 	fileClose(DirsExtraFp);
 
-	while(getFileSize(entryDirsFile) != 0ui64)
+	while (getFileSize(entryDirsFile) != 0ui64)
 	{
 		FILE *fp = fileOpen(entryDirsFile, "rt");
 		char *dir;
@@ -325,7 +325,7 @@ void lss2File(char *dir, char *dirsFile, char *filesFile)
 
 		DirsExtraFp = fileOpen(underDirsFile, "wt");
 
-		while(dir = readLine(fp))
+		while (dir = readLine(fp))
 		{
 			releaseDim(ls(dir), 1);
 			memFree(dir);
@@ -364,7 +364,7 @@ void fileSearch(char *wCard, int (*action)(struct _finddata_t *))
 		if (!action(&findData))
 			break;
 	}
-	while(_findnext(h, &findData) == 0);
+	while (_findnext(h, &findData) == 0);
 
 	_findclose(h);
 }
@@ -425,7 +425,7 @@ uint lsCount(char *dir)
 
 				count++;
 			}
-			while(_findnext(h, &findData) == 0);
+			while (_findnext(h, &findData) == 0);
 
 			_findclose(h);
 		}

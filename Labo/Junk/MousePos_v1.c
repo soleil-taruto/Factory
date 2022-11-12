@@ -6,7 +6,7 @@ int main(int argc, char **argv)
 {
     POINT pos;
 
-	while(!hasKey() || getKey() != 0x1b)
+	while (!hasKey() || getKey() != 0x1b)
 	{
 	    GetCursorPos(&pos);
 		cout("%d, %d\n", pos.x, pos.y);

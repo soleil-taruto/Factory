@@ -38,7 +38,7 @@ static void PrintSq(char *line)
 
 			sVal = xcout("%u", value);
 
-			while(strlen(sVal) < width)
+			while (strlen(sVal) < width)
 				sVal = insertChar(sVal, 0, '0');
 
 			buff = strx(line);

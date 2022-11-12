@@ -45,7 +45,7 @@ static char *ReadLine(void)
 {
 	autoBlock_t *buff = newBlock();
 
-	while(RPos < getSize(RBuff))
+	while (RPos < getSize(RBuff))
 	{
 		int chr = getByte(RBuff, RPos++);
 
@@ -64,7 +64,7 @@ static int SkipTrailer(void)
 {
 	char *line;
 
-	while(line = ReadLine())
+	while (line = ReadLine())
 	{
 		if (*line == '\0')
 		{
@@ -82,7 +82,7 @@ static int ReadHeader(void)
 
 	HttpDat.Header = newList();
 
-	while(line = ReadLine())
+	while (line = ReadLine())
 	{
 		if (*line == '\0')
 		{

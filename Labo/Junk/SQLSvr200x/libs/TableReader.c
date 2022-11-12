@@ -102,7 +102,7 @@ autoList_t *TR_SelectTop1WhereAnd(char *csvFile, autoList_t *whereColNames, auto
 	whereIndexes = GetIndexList(whereColNames, colNames);
 	retIndexes = GetIndexList(retColNames, colNames);
 
-	while(row = CSVStreamToRow(fp))
+	while (row = CSVStreamToRow(fp))
 	{
 		foreach (whereIndexes, colidx, index)
 			if (strcmp(refLine(row, colidx), getLine(whereColValues, index))) // ? not match
@@ -157,7 +157,7 @@ uint64 TR_SelectWhereAnd(char *csvFile, autoList_t *whereColNames, autoList_t *w
 	destfp = fileOpen(destFile, "wt");
 	releaseDim(colNames, 1);
 
-	while(row = CSVStreamToRow(fp))
+	while (row = CSVStreamToRow(fp))
 	{
 		foreach (whereIndexes, colidx, index)
 			if (strcmp(refLine(row, colidx), getLine(whereColValues, index))) // ? not match
@@ -204,7 +204,7 @@ uint64 TR_DeleteWhereAnd(char *csvFile, autoList_t *whereColNames, autoList_t *w
 	RowToCSVStream(destfp, colNames);
 	releaseDim(colNames, 1);
 
-	while(row = CSVStreamToRow(fp))
+	while (row = CSVStreamToRow(fp))
 	{
 		foreach (whereIndexes, colidx, index)
 			if (strcmp(refLine(row, colidx), getLine(whereColValues, index))) // ? not match
@@ -249,7 +249,7 @@ void TR_InsertInto(char *csvFile, autoList_t *colNames, autoList_t *colValueTabl
 	RowToCSVStream(destfp, colNames);
 	releaseDim(tableColNames, 1);
 
-	while(row = CSVStreamToRow(fp))
+	while (row = CSVStreamToRow(fp))
 	{
 		TrimCSVRow(row, getCount(colNames));
 		RowToCSVStream(destfp, row);

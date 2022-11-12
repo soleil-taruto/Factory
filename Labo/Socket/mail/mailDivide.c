@@ -125,14 +125,14 @@ static void RecvLoop(void)
 			}
 			releaseDim(mails, 2);
 		}
-		while(index);
+		while (index);
 
 		for(index = 9; index; index--)
 		{
 			cout("%u\n", index);
 			coSleep(3000);
 
-			while(hasKey())
+			while (hasKey())
 			{
 				switch(getKey())
 				{

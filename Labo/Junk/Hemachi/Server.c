@@ -245,7 +245,7 @@ static char *MemberNameFltr(char *name, char *passphrase) // ret: strr(name)
 		{
 			cout("MEMBER OVER-FLOW! -> CLEAR\n");
 
-			while(getCount(MemberList))
+			while (getCount(MemberList))
 			{
 				ReleaseMember((Member_t *)unaddElement(MemberList));
 			}
@@ -360,7 +360,7 @@ static int Perform(char *prmFile, char *ansFile)
 			{
 				reverseElements(TweetList); // ‹t“]
 
-				while(TWEETMIN < getCount(TweetList))
+				while (TWEETMIN < getCount(TweetList))
 				{
 					ReleaseTweet((Tweet_t *)unaddElement(TweetList));
 				}
@@ -527,7 +527,7 @@ static void OutputDump(void)
 }
 static int Idle(void)
 {
-	while(hasKey())
+	while (hasKey())
 	{
 		switch(getKey())
 		{

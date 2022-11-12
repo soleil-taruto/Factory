@@ -89,11 +89,11 @@ autoList_t *CSVStreamToRow(FILE *fp)
 }
 void TrimCSVRow(autoList_t *row, uint mincolcnt)
 {
-	while(getLine(row, getCount(row) - 1)[0] == '\0')
+	while (getLine(row, getCount(row) - 1)[0] == '\0')
 	{
 		memFree((void *)unaddElement(row));
 	}
-	while(getCount(row) < mincolcnt)
+	while (getCount(row) < mincolcnt)
 	{
 		addElement(row, (uint)strx(""));
 	}

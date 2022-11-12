@@ -5,7 +5,7 @@ static int KeepLoopRq = 1;
 
 static int Idle(void)
 {
-	while(hasKey())
+	while (hasKey())
 		if (getKey() == 0x1b)
 			KeepLoopRq = 0;
 
@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 	SockStartup();
 	memset(ip, 0, 4);
 
-	while(KeepLoopRq)
+	while (KeepLoopRq)
 	{
 		char *dlFile;
 

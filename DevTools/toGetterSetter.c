@@ -4,7 +4,7 @@ static int Mode = 'B'; // "BGS" == Both, Getter only, Setter only
 
 static void RemovePublicEtc(autoList_t *tokens)
 {
-	while(getCount(tokens))
+	while (getCount(tokens))
 	{
 		char *token = getLine(tokens, 0);
 

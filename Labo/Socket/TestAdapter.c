@@ -67,7 +67,7 @@ int main(int argc, char **argv)
 
 		eventSet(startEvent);
 
-		while(!stopLoop)
+		while (!stopLoop)
 		{
 			cout("‰ž“š‘Ò‚¿...\n");
 			collectEvents(answerEvent, 3000);
@@ -98,7 +98,7 @@ int main(int argc, char **argv)
 			}
 			mutexRelease(mtx);
 
-			while(hasKey())
+			while (hasKey())
 			{
 				if (getKey() == 0x1b)
 				{

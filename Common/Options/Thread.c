@@ -149,7 +149,7 @@ thread_tls static uint InnerLockCountList[INNER_UNLOCK_MAX];
 		critical(); \
 		error(); \
 	} \
-	} while(0)
+	} while (0)
 
 #if 1
 static void CritAfterLeave(void)
@@ -225,7 +225,7 @@ void fnlzSemaphore(semaphore_t *i)
 }
 void enterSemaphore(semaphore_t *i)
 {
-	while(!i->Count) // ifでも良いのでは？ <-- ダメ。
+	while (!i->Count) // ifでも良いのでは？ <-- ダメ。
 // enter -> !Countで待ち -> leave x 2 -> Setしてenter抜ける -> enter -> enter -> !Countで待ちに入るがSetされているので待たない。== whileで戻ってくる必要がある。
 	{
 		inner_uncritical();

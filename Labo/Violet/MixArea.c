@@ -167,7 +167,7 @@ static int GetArea_2(void)
 	{
 		GA_Main();
 	}
-	while(GA_Next());
+	while (GA_Next());
 
 	ret = 0;
 

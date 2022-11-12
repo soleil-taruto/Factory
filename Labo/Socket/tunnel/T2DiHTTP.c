@@ -119,7 +119,7 @@ static void LoadFile(char *rFile)
 	RecvFiles = newList();
 	ConId = 0;
 
-	while(ReadLine(rfp))
+	while (ReadLine(rfp))
 	{
 		errorCase(Id < 1000);
 

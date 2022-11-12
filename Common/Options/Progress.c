@@ -30,7 +30,7 @@ void ProgressRate(double rate) // rate 0.0 - 1.0
 
 	m_range(end, 0, 79);
 
-	while(StarCount < end)
+	while (StarCount < end)
 	{
 		Progress();
 //		sleep(0);

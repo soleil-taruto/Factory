@@ -20,7 +20,7 @@ static void GetPaths(char *rootDir, autoList_t **p_dirs, autoList_t **p_files)
 
 	changeRoots(dirs, rootDir, NULL);
 
-	while(lastDirCount < getCount(dirs))
+	while (lastDirCount < getCount(dirs))
 		addElement(files, (uint)unaddElement(dirs));
 
 	// for mergeLines2

@@ -80,7 +80,7 @@ static MediaInfo_t GetMediaInfo(char *file)
 		{
 			tokinit(p, " ,");
 
-			while(p = toknext(NULL, NULL))
+			while (p = toknext(NULL, NULL))
 			{
 				if (lineExp("<1,,09>x<1,,09>", p))
 				{

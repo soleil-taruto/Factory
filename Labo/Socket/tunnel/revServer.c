@@ -175,7 +175,7 @@ LOGPOS();
 				tmoutTime = UINTMAX; // Joinした。-> Joinタイムアウトはもう無い。
 			}
 		}
-		while(!i->Closed && !ProcDeadFlag);
+		while (!i->Closed && !ProcDeadFlag);
 	}
 LOGPOS();
 

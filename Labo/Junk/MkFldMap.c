@@ -26,7 +26,7 @@ static void MkFldMap(uint mapW, uint mapH, uint noChgMax)
 		}
 	}
 
-	while(noChgCnt < noChgMax)
+	while (noChgCnt < noChgMax)
 	{
 		int x = mt19937_rnd(mapW);
 		int y = mt19937_rnd(mapH);

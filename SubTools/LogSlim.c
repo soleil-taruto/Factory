@@ -157,7 +157,7 @@ static void SlimByTotal(void)
 		foreach (i->FileInfos, fi, fi_index)
 			size += fi->Size;
 	}
-	while(TotalSizeMax < size)
+	while (TotalSizeMax < size)
 	{
 		LOGPOS();
 

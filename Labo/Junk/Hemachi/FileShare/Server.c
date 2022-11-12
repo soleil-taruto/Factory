@@ -30,7 +30,7 @@ static int Idle(void)
 {
 	HFS_KeepDiskFreeSpace();
 
-	while(hasKey())
+	while (hasKey())
 	{
 		switch(getKey())
 		{

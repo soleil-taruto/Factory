@@ -57,7 +57,7 @@ static void MakeMap(int w, int h, int seed, int count)
 	{
 		setTableCell(map, x, y, mt19937_rnd(w) <= x ? 1 : 0);
 	}
-	while(0 <= count)
+	while (0 <= count)
 	{
 		x = mt19937_rnd(w);
 		y = mt19937_rnd(h);

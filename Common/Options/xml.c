@@ -77,7 +77,7 @@ static void ReadFileData(char *file, uint lenmax)
 	FILE *fp = fileOpen(file, "rb");
 	autoBlock_t *buff = newBlock();
 
-	while(getSize(buff) < lenmax)
+	while (getSize(buff) < lenmax)
 	{
 		int chr = readChar(fp);
 
@@ -107,15 +107,15 @@ static int NextIs(char *nextPtn)
 }
 static void SkipTo(char *endChrs)
 {
-	while(!strchr(endChrs, ReadChar()));
+	while (!strchr(endChrs, ReadChar()));
 }
 static void SkipSpace(void)
 {
-	while(m_isspace(ReadChar()));
+	while (m_isspace(ReadChar()));
 }
 static void SkipToPtn(char *endPtn)
 {
-	while(!NextIs(endPtn))
+	while (!NextIs(endPtn))
 		ReadChar();
 }
 static void Reset_RLine(void)
@@ -431,7 +431,7 @@ static void AllNodeFltr(XNode_t *node)
 
 	addElement(nodeStack, (uint)node);
 
-	while(getCount(nodeStack))
+	while (getCount(nodeStack))
 	{
 		node = (XNode_t *)unaddElement(nodeStack);
 		NodeFltr(node);
