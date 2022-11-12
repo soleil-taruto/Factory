@@ -28,7 +28,7 @@ FILE *TryFileOpen(char *file, char *mode)
 {
 	FILE *fp = fopen(file, mode);
 
-	if(!fp)
+	if (!fp)
 		cout("**** FILE OPEN ERROR ****\n");
 
 	return fp;
@@ -37,19 +37,19 @@ uint64 TryGetFileSize(FILE *fp)
 {
 	sint64 size;
 
-	if(_fseeki64(fp, 0I64, SEEK_END) != 0) // ? 失敗
+	if (_fseeki64(fp, 0I64, SEEK_END) != 0) // ? 失敗
 	{
 		cout("**** FILE SEEK END ERROR ****\n");
 		return 0;
 	}
 	size = _ftelli64(fp);
 
-	if(size < 0I64)
+	if (size < 0I64)
 	{
 		cout("**** FILE SIZE ERROR ****\n");
 		return 0;
 	}
-	if(_fseeki64(fp, 0I64, SEEK_SET) != 0) // ? 失敗
+	if (_fseeki64(fp, 0I64, SEEK_SET) != 0) // ? 失敗
 	{
 		cout("**** FILE SEEK SET ERROR ****\n");
 		return 0;
@@ -63,7 +63,7 @@ autoBlock_t *TryReadBlock(FILE *fp, uint size)
 
 	readSize = fread(block, 1, size, fp);
 
-	if(ferror(fp))
+	if (ferror(fp))
 	{
 		cout("**** FILE READ ERORR ****\n");
 		memFree(block);
@@ -75,7 +75,7 @@ void TryFileClose(FILE *fp)
 {
 	int ret = fclose(fp);
 
-	if(ret)
+	if (ret)
 		cout("**** FILE CLOSE ERROR ****\n");
 }
 
@@ -104,7 +104,7 @@ autoList_t *TryGetFileList(char *findPtn)
 
 	cout("findPtn: %s\n", findPtn);
 
-	if(TGFL_InfoList) // ? already inited
+	if (TGFL_InfoList) // ? already inited
 	{
 		releaseDim(TGFL_InfoList, 1);
 	}
@@ -112,7 +112,7 @@ autoList_t *TryGetFileList(char *findPtn)
 
 	h = _findfirst(findPtn, &fd);
 
-	if(h != -1)
+	if (h != -1)
 	{
 		do
 		{
@@ -121,7 +121,7 @@ autoList_t *TryGetFileList(char *findPtn)
 
 			name = strx(name);
 
-			if(!strcmp(name, ".") || !strcmp(name, "..") || fd.attrib & _A_SUBDIR)
+			if (!strcmp(name, ".") || !strcmp(name, "..") || fd.attrib & _A_SUBDIR)
 			{
 				name = addChar(name, '/');
 				info = strx("ディレクトリ");
@@ -176,10 +176,10 @@ static void ReleaseConnInfo(uint prm)
 
 	releaseAutoBlock(i->RecvBuff);
 
-	if(i->SendBuff)
+	if (i->SendBuff)
 		releaseAutoBlock(i->SendBuff);
 
-	if(i->RFp)
+	if (i->RFp)
 		TryFileClose(i->RFp);
 
 	memFree(i);
@@ -191,7 +191,7 @@ static char *GetFileListTemplateHtml(void)
 {
 	static char *template;
 
-	if(!template)
+	if (!template)
 	{
 		char *file = combine(getSelfDir(), "FileListTemplate.html_");
 
@@ -204,7 +204,7 @@ static char *GetFileListElementTemplateHtml(void)
 {
 	static char *template;
 
-	if(!template)
+	if (!template)
 	{
 		char *file = combine(getSelfDir(), "FileListElementTemplate.html_");
 
@@ -257,7 +257,7 @@ static void Perform_FindPtn(ConnInfo_t *i, char *ttlPath, char *findPtn)
 
 	// old
 	/*
-	if(!B_LinkColor) // ? not inited B_
+	if (!B_LinkColor) // ? not inited B_
 	{
 		mt19937_initRnd(crc32CheckLine(getEnvLine("COMPUTERNAME")));
 
@@ -282,7 +282,7 @@ static void Perform_FindPtn(ConnInfo_t *i, char *ttlPath, char *findPtn)
 		autoList_t *wLines = newList();
 		char *wText;
 
-		if(getCount(list))
+		if (getCount(list))
 		{
 			foreach(list, name, index)
 			{
@@ -340,7 +340,7 @@ static void Perform_Dir(ConnInfo_t *i, char *dir)
 {
 	char *wCard = strx(dir);//combine(dir, "*"); // HACK: combine() はネットワークパスを考慮しない。
 
-	if(endsWith(wCard, "\\"))
+	if (endsWith(wCard, "\\"))
 		wCard = addChar(wCard, '*');
 	else
 		wCard = addLine(wCard, "\\*");
@@ -352,7 +352,7 @@ static int ParseHeaderTokens(ConnInfo_t *i, autoList_t *tokens)
 {
 	uint token_num = getCount(tokens);
 
-	if((token_num == 3 || token_num == 4) && !_stricmp("GET", getLine(tokens, 0)))
+	if ((token_num == 3 || token_num == 4) && !_stricmp("GET", getLine(tokens, 0)))
 	{
 		char *url = getLine(tokens, 1);
 		char *file;
@@ -362,19 +362,19 @@ static int ParseHeaderTokens(ConnInfo_t *i, autoList_t *tokens)
 
 		file = URLToPath(url);
 
-		if(token_num == 4)
+		if (token_num == 4)
 		{
 			url302Pfx = getLine(tokens, 3);
 			url302Pfx = strchrNext(url302Pfx, '=');
 			line2JLine(url302Pfx, 0, 0, 0, 0); // 表示のため
 			cout("★url302Pfx: %s\n", url302Pfx);
 		}
-		if(!file)
+		if (!file)
 		{
 		bad_url:
 			cout("BAD URL\n");
 
-			if(UTP_Path[0] == '\0') // ? パスを指定しなかった。
+			if (UTP_Path[0] == '\0') // ? パスを指定しなかった。
 			{
 				char *redDir = PathToURL(DefaultDir);
 
@@ -394,16 +394,16 @@ static int ParseHeaderTokens(ConnInfo_t *i, autoList_t *tokens)
 		}
 		cout("FILE: %s\n", file);
 
-		if(VisibleDefaultDirOnly)
+		if (VisibleDefaultDirOnly)
 		{
 			static char *ddYen;
 
 			cout("VDDO-CHECK\n");
 
-			if(!ddYen)
+			if (!ddYen)
 				ddYen = putYen(DefaultDir);
 
-			if(!mbs_stricmp(file, DefaultDir) || startsWithICase(file, ddYen))
+			if (!mbs_stricmp(file, DefaultDir) || startsWithICase(file, ddYen))
 			{
 				cout("VDDO-OK\n");
 			}
@@ -426,13 +426,13 @@ static int ParseHeaderTokens(ConnInfo_t *i, autoList_t *tokens)
 				return 1;
 			}
 		}
-		if(UTP_HtmlMode)
+		if (UTP_HtmlMode)
 		{
 			Perform_FindPtn(i, file, file);
 			memFree(file);
 			return 1;
 		}
-		if(UTP_EndSlash)
+		if (UTP_EndSlash)
 		{
 			Perform_Dir(i, file);
 			memFree(file);
@@ -440,9 +440,9 @@ static int ParseHeaderTokens(ConnInfo_t *i, autoList_t *tokens)
 		}
 		fp = TryFileOpen(file, "rb");
 
-		if(!fp)
+		if (!fp)
 		{
-			if(m_isalpha(file[0]) && existDir(file)) // ? ローカル && 存在するディレクトリ
+			if (m_isalpha(file[0]) && existDir(file)) // ? ローカル && 存在するディレクトリ
 			{
 				char *redDir = PathToURL(file);
 
@@ -465,7 +465,7 @@ static int ParseHeaderTokens(ConnInfo_t *i, autoList_t *tokens)
 		i->SendBuff = newBlock();
 		i->RFp = fp;
 
-		if(UTP_DownloadMode)
+		if (UTP_DownloadMode)
 			contentType = "application/octet-stream";
 		else
 			contentType = httpExtToContentType(getExt(file));
@@ -487,14 +487,14 @@ static int Perform(int sock, uint prm)
 {
 	ConnInfo_t *i = (ConnInfo_t *)prm;
 
-	if(!i->SendBuff)
+	if (!i->SendBuff)
 	{
 		char *header;
 		char *p;
 		autoList_t *tokens;
 		int retval;
 
-		if(SockRecvSequ(sock, i->RecvBuff, sockUserTransmitIndex ? 0 : 100) == -1)
+		if (SockRecvSequ(sock, i->RecvBuff, sockUserTransmitIndex ? 0 : 100) == -1)
 		{
 			cout("RECV ERROR\n");
 			return 0;
@@ -502,15 +502,15 @@ static int Perform(int sock, uint prm)
 		header = ab_toLine(i->RecvBuff);
 		p = strchr(header, '\r');
 
-		if(!p)
+		if (!p)
 		{
-			if(HEADER_FIRST_LINE_LENMAX < strlen(header))
+			if (HEADER_FIRST_LINE_LENMAX < strlen(header))
 			{
 				cout("RECV TOO-LONG\n");
 				memFree(header);
 				return 0;
 			}
-			if(i->ConnectedTime + 2 < now())
+			if (i->ConnectedTime + 2 < now())
 			{
 				cout("RECV TIMEOUT\n");
 				memFree(header);
@@ -526,34 +526,34 @@ static int Perform(int sock, uint prm)
 		memFree(header);
 		releaseDim(tokens, 1);
 
-		if(!retval)
+		if (!retval)
 		{
 			cout("PARSE HEADER FAULT\n");
 			return 0;
 		}
 	}
-	if(SockRecvSequ(sock, i->RecvBuff, 0) == -1)
+	if (SockRecvSequ(sock, i->RecvBuff, 0) == -1)
 	{
 		cout("RECV GOMI ERROR\n");
 		return 0;
 	}
 	setSize(i->RecvBuff, 0);
 
-	if(getSize(i->SendBuff) < 2000000 && i->RFp)
+	if (getSize(i->SendBuff) < 2000000 && i->RFp)
 	{
 		autoBlock_t *block = TryReadBlock(i->RFp, 3000000);
 
-		if(!block)
+		if (!block)
 			return 0;
 
 		ab_addBytes_x(i->SendBuff, block);
 	}
-	if(SockSendSequ(sock, i->SendBuff, sockUserTransmitIndex ? 0 : 100) == -1)
+	if (SockSendSequ(sock, i->SendBuff, sockUserTransmitIndex ? 0 : 100) == -1)
 	{
 		cout("SEND ERROR\n");
 		return 0;
 	}
-	if(!getSize(i->SendBuff))
+	if (!getSize(i->SendBuff))
 	{
 		cout("SEND COMPLETED\n");
 		return 0;
@@ -568,11 +568,11 @@ static uint StopEv;
 
 static int Idle(void)
 {
-	if(handleWaitForMillis(StopEv, 0))
+	if (handleWaitForMillis(StopEv, 0))
 		return 0;
 
 	while(hasKey())
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 			return 0;
 
 	return 1;
@@ -583,49 +583,49 @@ int main(int argc, char **argv)
 	uint portno = 80;//60002;
 
 readArgs:
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		stopFlag = 1;
 		goto readArgs;
 	}
-	if(argIs("/CL"))
+	if (argIs("/CL"))
 	{
 		B_LinkColor = nextArg(); // ex. "#0080ff"
 		goto readArgs;
 	}
-	if(argIs("/CB"))
+	if (argIs("/CB"))
 	{
 		B_BackColor = nextArg(); // ex. "#0080ff"
 		goto readArgs;
 	}
-	if(argIs("/CT"))
+	if (argIs("/CT"))
 	{
 		B_TextColor = nextArg(); // ex. "#0080ff"
 		goto readArgs;
 	}
-	if(argIs("/DD"))
+	if (argIs("/DD"))
 	{
 		DefaultDir = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/VDDO"))
+	if (argIs("/VDDO"))
 	{
 		LOGPOS();
 		VisibleDefaultDirOnly = 1;
 		goto readArgs;
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 		portno = toValue(nextArg());
 
-	if(!DefaultDir)
+	if (!DefaultDir)
 		DefaultDir = getSelfDir();
 	else
 		DefaultDir = makeFullPath(DefaultDir);
 
 	StopEvName = xcout(STOP_EV_UUID "_%u", portno);
 
-	if(stopFlag)
+	if (stopFlag)
 	{
 		LOGPOS();
 		eventWakeup(StopEvName);

@@ -16,12 +16,12 @@ static int Idle(void)
 	{
 		int key = getKey();
 
-		if(key == 0x1b)
+		if (key == 0x1b)
 		{
 			cout("中止\n");
 			return 0;
 		}
-		else if(key == 'P')
+		else if (key == 'P')
 		{
 			cout("一時停止\n");
 			getKey();
@@ -38,12 +38,12 @@ int main(int argc, char **argv)
 	uint portno;
 	int batchMode;
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 		domain = nextArg();
 	else
 		domain = "localhost";
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 		portno = toValue(nextArg());
 	else
 		portno = 65000;
@@ -61,7 +61,7 @@ int main(int argc, char **argv)
 		cout("retFile: %s\n", retFile ? retFile : "<NULL>");
 		cout("ip: %s\n", SockIp2Line(ip));
 
-		if(retFile)
+		if (retFile)
 		{
 			cout("チェック中...\n");
 			errorCase(!isSameFile(file, retFile));
@@ -70,7 +70,7 @@ int main(int argc, char **argv)
 			removeFile(retFile);
 			memFree(retFile);
 		}
-		if(batchMode && !hasArgs(1))
+		if (batchMode && !hasArgs(1))
 		{
 			break;
 		}

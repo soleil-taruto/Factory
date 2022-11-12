@@ -23,24 +23,24 @@ static void WritePrompt(char *file, char *cmdln)
 }
 static int TryExecuteInnerCommand(char *cmdln, char *stdoutFile, char *stderrFile)
 {
-	if(startsWithICase(cmdln, "CD "))
+	if (startsWithICase(cmdln, "CD "))
 	{
 		char *dir = cmdln + 3;
 
-		if(existDir(dir))
+		if (existDir(dir))
 		{
 			WritePrompt(stdoutFile, cmdln);
 			changeCwd(dir);
 			return 1;
 		}
 	}
-	if(!_stricmp(cmdln, "CLS"))
+	if (!_stricmp(cmdln, "CLS"))
 	{
 		releaseDim(TextBuffer, 1);
 		TextBuffer = newList();
 		return 1;
 	}
-	if(startsWithICase(cmdln, "START "))
+	if (startsWithICase(cmdln, "START "))
 	{
 		WritePrompt(stdoutFile, cmdln);
 		coExecute(cmdln);
@@ -56,7 +56,7 @@ static int Perform(int sock, uint userInfo)
 
 	parts = httpRecvRequestMultiPart(i, &header);
 
-	if(!_stricmp(c_httpGetPartLine(parts, "hCmdRequest"), "hCmdExecuteCommandLine"))
+	if (!_stricmp(c_httpGetPartLine(parts, "hCmdRequest"), "hCmdExecuteCommandLine"))
 	{
 		char *batchFile = makeTempPath("bat");
 		char *stdoutFile = makeTempPath("stdout.txt");
@@ -67,13 +67,13 @@ static int Perform(int sock, uint userInfo)
 		cout("cmdln: %s\n", cmdln);
 		writeOneLine(batchFile, cmdln);
 
-		if(!TryExecuteInnerCommand(cmdln, stdoutFile, stderrFile))
+		if (!TryExecuteInnerCommand(cmdln, stdoutFile, stderrFile))
 			coExecute_x(xcout("> %s 2> %s %s", stdoutFile, stderrFile, batchFile));
 
 		cout("cmded\n");
 
-		if(!existFile(stdoutFile)) createFile(stdoutFile);
-		if(!existFile(stderrFile)) createFile(stderrFile);
+		if (!existFile(stdoutFile)) createFile(stdoutFile);
+		if (!existFile(stderrFile)) createFile(stderrFile);
 
 		addElements_x(TextBuffer, readLines(stdoutFile));
 		addElements_x(TextBuffer, readLines(stderrFile));
@@ -113,7 +113,7 @@ static int Perform(int sock, uint userInfo)
 			{
 				line = HtmlFltr(strx(line));
 
-				if(!*line)
+				if (!*line)
 					line = addChar(line, ' ');
 
 				line = addLine(line, "<br/>");
@@ -155,7 +155,7 @@ static int Idle(void)
 {
 	while(hasKey())
 	{
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 		{
 			cout("End hCmd\n");
 			return 0;
@@ -169,10 +169,10 @@ int main(int argc, char **argv)
 	char *startDir = ".";
 	uint portno = 80;
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 		startDir = nextArg();
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 		portno = toValue(nextArg());
 
 	TextBuffer = newList();

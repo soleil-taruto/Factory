@@ -36,7 +36,7 @@ static void MakeCryptoRand(uint rowcnt, uint colcnt)
 	fileClose(fp);
 	releaseAutoBlock(block);
 
-	if(KBOutFile)
+	if (KBOutFile)
 	{
 		cout("< %s\n", file);
 		cout("> %s\n", KBOutFile);
@@ -51,17 +51,17 @@ static void MakeCryptoRand(uint rowcnt, uint colcnt)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		KBOutFile = nextArg();
 	}
 
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		MakeCryptoRand(toValue(getArg(0)), toValue(getArg(1))); // n x m x 8 bits
 		return;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		MakeCryptoRand(toValue(getArg(0)), 32); // n x 256 bits
 		return;

@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 		n *= 10;
 		d *= 9;
 
-		if(n == d)
+		if (n == d)
 		{
 			cout("%d %d %d\n", a, b, c);
 		}

@@ -26,7 +26,7 @@ static autoList_t *LoadByImage(autoBlock_t *image)
 		uint size;
 		uint name;
 
-		if(getSize(image) - rPos < 8)
+		if (getSize(image) - rPos < 8)
 		{
 //			LOGPOS();
 			broken = 1;
@@ -37,7 +37,7 @@ static autoList_t *LoadByImage(autoBlock_t *image)
 
 		size = revEndian(size);
 
-		if(size < 8)
+		if (size < 8)
 		{
 //			LOGPOS();
 			broken = 1;
@@ -46,7 +46,7 @@ static autoList_t *LoadByImage(autoBlock_t *image)
 		rPos += 8;
 		size -= 8;
 
-		if(getSize(image) - rPos < size)
+		if (getSize(image) - rPos < size)
 		{
 //			LOGPOS();
 			broken = 1;
@@ -63,7 +63,7 @@ static autoList_t *LoadByImage(autoBlock_t *image)
 
 		addElement(ret, (uint)i);
 	}
-	if(broken)
+	if (broken)
 	{
 //		LOGPOS();
 		setCount(ret, 0);
@@ -110,7 +110,7 @@ static Box_t *FindBox(Box_t *root, char *name)
 	uint index;
 
 	foreach(root->SubBoxes, box, index)
-		if(!strcmp(box->Name, name))
+		if (!strcmp(box->Name, name))
 			return box;
 
 	return box;
@@ -179,7 +179,7 @@ static void DoFile(char *file)
 }
 int main(int argc, char **argv)
 {
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		DoFile(nextArg());
 		return;

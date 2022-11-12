@@ -67,7 +67,7 @@ static void JavaJPConvFile(char *file)
 
 		for(index = 0; index + 2 <= getSize(u16Line); index += 2)
 		{
-			if(
+			if (
 				index + 4 <= getSize(u16Line) &&
 				b_(u16Line)[index + 0] == '\\' && b_(u16Line)[index + 1] == 0x00 &&
 				b_(u16Line)[index + 2] == '\\' && b_(u16Line)[index + 3] == 0x00
@@ -80,7 +80,7 @@ static void JavaJPConvFile(char *file)
 
 				index += 2;
 			}
-			else if(
+			else if (
 				index + 12 <= getSize(u16Line) &&
 				b_(u16Line)[index + 0] == '\\' && b_(u16Line)[index + 1] == 0x00 &&
 				b_(u16Line)[index + 2] == 'u'  && b_(u16Line)[index + 3] == 0x00 &&
@@ -109,7 +109,7 @@ static void JavaJPConvFile(char *file)
 				addByte(dest, b_(u16Line)[index + 1]);
 			}
 		}
-		if(line_modified)
+		if (line_modified)
 		{
 			U16Line_LTrim(u16Line);
 			U16Line_AddAsciiLine(dest, " // orig: ");
@@ -126,7 +126,7 @@ static void JavaJPConvFile(char *file)
 	WkFile_A = NULL;
 	WkFile_B = NULL;
 
-	if(modified)
+	if (modified)
 	{
 		cout("ファイルを更新します。\n");
 		writeLines(file, lines);
@@ -149,7 +149,7 @@ static void JavaJPConv(char *rootDir)
 	findAcceptName = NULL; // restore
 
 	foreach(files, file, index)
-		if(!_stricmp(getExt(file), "java"))
+		if (!_stricmp(getExt(file), "java"))
 			JavaJPConvFile(file);
 
 	releaseDim(files, 1);

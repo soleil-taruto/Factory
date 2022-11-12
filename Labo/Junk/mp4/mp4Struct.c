@@ -18,7 +18,7 @@ static void PrintSubStruct(uint startPos, uint endPos, uint indent)
 		uint size;
 		char *name;
 
-		if(endPos < index + 8)
+		if (endPos < index + 8)
 		{
 			PrintIndent(indent);
 			cout("中止：残り領域が小さすぎる。\n");
@@ -26,13 +26,13 @@ static void PrintSubStruct(uint startPos, uint endPos, uint indent)
 		}
 		size = ab_getValueBE(FileData, index);
 
-		if(size < 8)
+		if (size < 8)
 		{
 			PrintIndent(indent);
 			cout("中止：サイズが小さすぎる。\n");
 			break;
 		}
-		if(endPos < index + size)
+		if (endPos < index + size)
 		{
 			PrintIndent(indent);
 			cout("中止：サイズが大きすぎる。\n");
@@ -69,7 +69,7 @@ static void PrintMp4Struct_File(char *file)
 }
 static void PrintMp4Struct(char *path)
 {
-	if(existDir(path))
+	if (existDir(path))
 	{
 		autoList_t *files = lssFiles(path);
 		char *file;
@@ -85,7 +85,7 @@ static void PrintMp4Struct(char *path)
 }
 int main(int argc, char **argv)
 {
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		PrintMp4Struct(nextArg());
 		return;

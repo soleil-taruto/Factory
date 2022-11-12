@@ -7,7 +7,7 @@ static void ChangeColor(int color)
 #else // îpé~ @ 2018.2.28
 	errorCase(!m_isRange(color, 0x00, 0xff));
 
-	if(isFactoryDirEnabled())
+	if (isFactoryDirEnabled())
 	{
 		execute_x(xcout("COLOR %02x\n", color));
 	}

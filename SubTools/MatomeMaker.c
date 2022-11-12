@@ -49,7 +49,7 @@ static void TrmRum(char *rumDir)
 	{
 		char *lastExecDateTime;
 
-		if(existFile(LASTEXEC_DATETIME_FILE))
+		if (existFile(LASTEXEC_DATETIME_FILE))
 			lastExecDateTime = readFirstLine(LASTEXEC_DATETIME_FILE);
 		else
 			lastExecDateTime = strx("00000000000000");
@@ -59,7 +59,7 @@ static void TrmRum(char *rumDir)
 
 		foreach(revs, rev, rev_index)
 		{
-			if(strcmp(getLocal(rev), lastExecDateTime) < 0) // ? rev < lastExecDateTime
+			if (strcmp(getLocal(rev), lastExecDateTime) < 0) // ? rev < lastExecDateTime
 			{
 				cout("K %s\n", rev);
 				recurRemoveDir(rev);
@@ -68,7 +68,7 @@ static void TrmRum(char *rumDir)
 		releaseDim(revs, 1);
 		memFree(lastExecDateTime);
 
-		if(!lsCount(revsDir)) // リビジョンが無くなったら .rum ごと捨てる。
+		if (!lsCount(revsDir)) // リビジョンが無くなったら .rum ごと捨てる。
 		{
 			cout("E %s\n", rumDir);
 			recurRemoveDir(rumDir);
@@ -107,7 +107,7 @@ static void TrmRum(char *rumDir)
 
 			errorCase_m(!existFile(entFile), "need rum /t");
 
-			if(!IsCorrect(entFile, relFile))
+			if (!IsCorrect(entFile, relFile))
 				line[0] = '\0';
 
 			memFree(entFile);
@@ -138,7 +138,7 @@ static void CpRums(void)
 
 	foreach(dirs, dir, index)
 	{
-		if(!_stricmp("rum", getExt(dir)))
+		if (!_stricmp("rum", getExt(dir)))
 		{
 			char *destDir = changeRoot(strx(dir), RDir, W_DIR);
 
@@ -171,7 +171,7 @@ int main(int argc, char **argv)
 	createDir(W_DIR);
 
 #if 0
-	if(existFile(LASTEXEC_DATETIME_FILE)) // 前回の実行日時を確認
+	if (existFile(LASTEXEC_DATETIME_FILE)) // 前回の実行日時を確認
 	{
 		char *lastExecDateTime = readFirstLine(LASTEXEC_DATETIME_FILE);
 		char *jStamp;
@@ -182,7 +182,7 @@ int main(int argc, char **argv)
 		cout("これより古いリビジョンは除外します。\n");
 		cout("続行？\n");
 
-		if(clearGetKey() == 0x1b)
+		if (clearGetKey() == 0x1b)
 			termination(0);
 
 		cout("続行！\n");

@@ -22,7 +22,7 @@ static autoList_t *GetColumnWidthList(char *bdrLine)
 
 	for(p = bdrLine; *p; p++)
 	{
-		if(*p == ' ')
+		if (*p == ' ')
 		{
 			addElement(cwList, cw);
 			cw = 0;
@@ -54,11 +54,11 @@ static autoList_t *SplitRow(char *recLine, autoList_t *cwList)
 
 	for(; ; )
 	{
-		if(!c)
+		if (!c)
 		{
 			addElement(row, (uint)column);
 
-			if(getCount(cwList) == getCount(row))
+			if (getCount(cwList) == getCount(row))
 				break;
 
 			c = getElement(cwList, getCount(row));
@@ -68,7 +68,7 @@ static autoList_t *SplitRow(char *recLine, autoList_t *cwList)
 		}
 		errorCase(!*p); // 行の途中で終了
 
-		if(isMbc(p))
+		if (isMbc(p))
 		{
 			column = addChar(column, *p++);
 		}
@@ -101,10 +101,10 @@ autoList_t *SqlRecReader(char *recFile)
 
 	foreach(recLines, recLine, rowidx)
 	{
-		if(rowidx == 1) // ? ボーダーラインの行
+		if (rowidx == 1) // ? ボーダーラインの行
 			continue;
 
-		if(*recLine == '\0') // ? 空行
+		if (*recLine == '\0') // ? 空行
 		{
 			// EXEC の場合、空行も無くいきなり終わる。
 			errorCase(!lineExp("(<>)", getLine(recLines, rowidx + 1))); // "(n 行処理されました)"

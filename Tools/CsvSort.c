@@ -13,33 +13,33 @@ int main(int argc, char **argv)
 	int compareMode = 'S';
 
 readArgs:
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		partSize = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		sortColumnIndex = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		sortDirection = 'D';
 		goto readArgs;
 	}
-	if(argIs("/I"))
+	if (argIs("/I"))
 	{
 		compareMode = 'I';
 		goto readArgs;
 	}
-	if(argIs("/9"))
+	if (argIs("/9"))
 	{
 		compareMode = '9';
 		goto readArgs;
 	}
 
-	if(argIs("/1"))
+	if (argIs("/1"))
 	{
 		CsvSort(getArg(0), getArg(0), sortColumnIndex, sortDirection, compareMode, partSize);
 	}

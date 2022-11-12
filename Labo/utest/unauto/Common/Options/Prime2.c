@@ -6,10 +6,10 @@ static void DoTest_One(uint64 value)
 	int ret1 = IsPrime(value);
 	int ret2 = IsPrime_R(value);
 
-	if(pulseSec(2, NULL))
+	if (pulseSec(2, NULL))
 		cout("%I64u -> %d %d\n", value, ret1, ret2);
 
-	if(ret1 ? !ret2 : ret2)
+	if (ret1 ? !ret2 : ret2)
 	{
 		cout("%I64u -> %d %d ERROR!\n", value, ret1, ret2);
 		error();

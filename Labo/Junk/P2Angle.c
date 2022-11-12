@@ -10,11 +10,11 @@ static double GetAngle(double x, double y)
 	double t;
 	uint count;
 
-	if(y < 0.0) return 2.0 * PI - GetAngle(x, -y);
-	if(x < 0.0) return PI - GetAngle(-x, y);
+	if (y < 0.0) return 2.0 * PI - GetAngle(x, -y);
+	if (x < 0.0) return PI - GetAngle(-x, y);
 
-	if(x == 0.0) return PI / 2.0;
-	if(y == 0.0) return 0.0;
+	if (x == 0.0) return PI / 2.0;
+	if (y == 0.0) return 0.0;
 
 	t = y / x;
 
@@ -22,10 +22,10 @@ static double GetAngle(double x, double y)
 	{
 		rm = (r1 + r2) / 2.0;
 
-		if(!count)
+		if (!count)
 			break;
 
-		if(t < tan(rm))
+		if (t < tan(rm))
 			r2 = rm;
 		else
 			r1 = rm;

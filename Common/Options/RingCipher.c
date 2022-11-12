@@ -18,7 +18,7 @@ void rcphrEncryptor(autoBlock_t *block, autoList_t *keyTableList, int doEncrypt)
 	errorCase(getSize(block) % BLOCK_SIZE != 0);
 	errorCase(getCount(keyTableList) == 0);
 
-	if(getCount(keyTableList) == 1)
+	if (getCount(keyTableList) == 1)
 	{
 		for(index = 0; index < 2; index++)
 		{
@@ -78,16 +78,16 @@ int rcphrDecryptorBlock(autoBlock_t *block, autoList_t *keyTableList, uint64 cou
 //	errorCase(!keyTableList); // ‰º‚ÌŠÖ”‚É“n‚·B
 	errorCase(!counter2);
 
-	if(getSize(block) < BLOCK_SIZE * 2)
+	if (getSize(block) < BLOCK_SIZE * 2)
 		return 0;
 
-	if(getSize(block) % BLOCK_SIZE != 0)
+	if (getSize(block) % BLOCK_SIZE != 0)
 		return 0;
 
 	rcphrEncryptor(block, keyTableList, 0);
 	SwapCounter2(block);
 
-	if(!cphrUnaddHash(block))
+	if (!cphrUnaddHash(block))
 		return 0;
 
 	counter2[1]  = (uint64)ab_unaddValue(block) << 32;

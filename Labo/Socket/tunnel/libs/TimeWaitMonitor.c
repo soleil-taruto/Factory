@@ -17,7 +17,7 @@ void AddTimeWait(void)
 
 	while(LastTime < currTime)
 	{
-		if(!TimeWaitTotal)
+		if (!TimeWaitTotal)
 		{
 			cout("TW_BRK\n");
 
@@ -27,7 +27,7 @@ void AddTimeWait(void)
 
 		LastTime++;
 
-		if(TimeWaitRing[LastTime % TIME_WAIT_SEC])
+		if (TimeWaitRing[LastTime % TIME_WAIT_SEC])
 			cout("TW_[%u]: %u-%u\n", LastTime, TimeWaitTotal, TimeWaitRing[LastTime % TIME_WAIT_SEC]);
 
 		TimeWaitTotal -= TimeWaitRing[LastTime % TIME_WAIT_SEC];

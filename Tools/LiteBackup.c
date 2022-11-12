@@ -39,7 +39,7 @@ int main(int argc, char **argv)
 	cout("| LITE-BACKUP |\n");
 	cout("+-------------+\n");
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 		dir = nextArg();
 	else
 		dir = c_dropDir();

@@ -22,13 +22,13 @@ static void CheckFiles(void)
 
 		cout("%s == %s ", file, hash);
 
-		if(SkipError)
+		if (SkipError)
 		{
-			if(!lineExp("<32,09AFaf>", file) || _stricmp(file, hash))
+			if (!lineExp("<32,09AFaf>", file) || _stricmp(file, hash))
 			{
 				cout("ng\n");
 
-				if(!ngFiles)
+				if (!ngFiles)
 					ngFiles = newList();
 
 				addElement(ngFiles, (uint)makeFullPath(file));
@@ -45,7 +45,7 @@ static void CheckFiles(void)
 		}
 		memFree(hash);
 	}
-	if(ngFiles)
+	if (ngFiles)
 	{
 		cout("★★★ 破損ファイルが %u 件見つかりました。FOUNDLISTFILE に出力します。\n", getCount(ngFiles));
 
@@ -57,7 +57,7 @@ static void CheckFiles(void)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/-E"))
+	if (argIs("/-E"))
 	{
 		SkipError = 1;
 	}

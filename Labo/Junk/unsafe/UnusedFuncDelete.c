@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 	{
 		LOGPOS();
 
-		if(
+		if (
 			!_stricmp("h", getExt(file)) ||
 			!_stricmp("c", getExt(file)) ||
 			!_stricmp("cpp", getExt(file))
@@ -27,7 +27,7 @@ int main(int argc, char **argv)
 
 			foreach(lines, line, line_index)
 			{
-				if(lineExp("//// #### DELETED ==== <7,09> $$$$ ////\t<>", line))
+				if (lineExp("//// #### DELETED ==== <7,09> $$$$ ////\t<>", line))
 				{
 					LOGPOS();
 					memFree(line);
@@ -35,7 +35,7 @@ int main(int argc, char **argv)
 					deleted = 1;
 				}
 			}
-			if(deleted)
+			if (deleted)
 			{
 				LOGPOS();
 				removeZero(lines);

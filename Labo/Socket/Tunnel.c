@@ -5,11 +5,11 @@ static int DispBinaryMode;
 
 static void DispData(autoBlock_t *block, int sock, char *title)
 {
-	if(getSize(block))
+	if (getSize(block))
 	{
 		cout("%s: %d\n", title, sock);
 
-		if(DispBinaryMode)
+		if (DispBinaryMode)
 		{
 			uint index;
 
@@ -50,7 +50,7 @@ static void ReleaseInfo(uint prm)
 {
 	int sock = (int)prm;
 
-	if(sock != -1)
+	if (sock != -1)
 		sockDisconnect(sock);
 
 	cout("êÿíf: %d\n", sock);
@@ -62,24 +62,24 @@ static int Perform(int sock, uint prm)
 	autoBlock_t *sendData = newBlock();
 	autoBlock_t *recvData = newBlock();
 
-	if(sock == -1) goto endfunc;
+	if (sock == -1) goto endfunc;
 
-	if(SockRecvSequ(sock,    sendData, 1) == -1) goto endfunc;
-	if(SockRecvSequ(fwdSock, recvData, 0) == -1) goto endfunc;
+	if (SockRecvSequ(sock,    sendData, 1) == -1) goto endfunc;
+	if (SockRecvSequ(fwdSock, recvData, 0) == -1) goto endfunc;
 
-	if(!SilentMode) DispData(sendData, fwdSock, "è„ÇË");
-	if(!SilentMode) DispData(recvData, fwdSock, "â∫ÇË");
+	if (!SilentMode) DispData(sendData, fwdSock, "è„ÇË");
+	if (!SilentMode) DispData(recvData, fwdSock, "â∫ÇË");
 
 	retval = 1;
 
 	while(getSize(sendData) || getSize(recvData))
 	{
-		if(getSize(sendData) && SockSendSequ(fwdSock, sendData, 1) == -1)
+		if (getSize(sendData) && SockSendSequ(fwdSock, sendData, 1) == -1)
 		{
 			setSize(sendData, 0);
 			retval = 0;
 		}
-		if(getSize(recvData) && SockSendSequ(sock, recvData, 1) == -1)
+		if (getSize(recvData) && SockSendSequ(sock, recvData, 1) == -1)
 		{
 			setSize(recvData, 0);
 			retval = 0;
@@ -97,7 +97,7 @@ static int Idle(void)
 {
 	while(hasKey())
 	{
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 		{
 			return 0;
 		}
@@ -113,35 +113,35 @@ int main(int argc, char **argv)
 
 readArgs:
 	// ì]ëóêÊ
-	if(argIs("/FD")) // Forward Domain
+	if (argIs("/FD")) // Forward Domain
 	{
 		FwdDomain = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/FP")) // Forward Port
+	if (argIs("/FP")) // Forward Port
 	{
 		FwdPort = toValue(nextArg());
 		goto readArgs;
 	}
 
 	// ë“ÇøéÛÇØ
-	if(argIs("/P")) // Port
+	if (argIs("/P")) // Port
 	{
 		portno = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/C")) // Connect max
+	if (argIs("/C")) // Connect max
 	{
 		connectmax = toValue(nextArg());
 		goto readArgs;
 	}
 
-	if(argIs("/S")) // Silent mode
+	if (argIs("/S")) // Silent mode
 	{
 		SilentMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/B")) // disp Binary mode
+	if (argIs("/B")) // disp Binary mode
 	{
 		DispBinaryMode = 1;
 		goto readArgs;

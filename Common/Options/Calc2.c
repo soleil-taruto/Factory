@@ -57,7 +57,7 @@ static void Trim(calcOperand_t *co)
 	}
 #endif
 
-	if(!getSize(co->F))
+	if (!getSize(co->F))
 	{
 		co->E = 0;
 		co->Sign = 1; // ŠÛ‚ß•\‹L‚É‘Î‰ž‚µ‚È‚¢‚Ì‚ÅACalc.c ‚Ì‚æ‚¤‚É‚Í‚µ‚È‚¢B
@@ -85,7 +85,7 @@ static void AddInt(calcOperand_t *co, uint index, uint value)
 		putByte(co->F, index, value % calcRadix);
 		value /= calcRadix;
 
-		if(!value)
+		if (!value)
 			break;
 
 		index++;
@@ -118,25 +118,25 @@ calcOperand_t *calcFromSmplString(char *str)
 	{
 		int chr = *p;
 
-		if(chr == '-')
+		if (chr == '-')
 		{
 			co->Sign = -1;
 			continue;
 		}
-		if(chr == '.')
+		if (chr == '.')
 		{
 			fndPrd = 1;
 			continue;
 		}
-		if(m_isdecimal(chr) || m_isalpha(chr))
+		if (m_isdecimal(chr) || m_isalpha(chr))
 		{
 			uint value = m_c2i(chr);
 
-			if(value < calcRadix)
+			if (value < calcRadix)
 			{
 				addByte(co->F, value);
 
-				if(fndPrd)
+				if (fndPrd)
 					co->E++;
 			}
 		}
@@ -155,7 +155,7 @@ calcOperand_t *calcFromString(char *str)
 
 	str = strx(str);
 
-	if(calcRadix < 15) // ? "Ee" are not digit
+	if (calcRadix < 15) // ? "Ee" are not digit
 	{
 		(p = strchr(str, 'E')) ||
 		(p = strchr(str, 'e'));
@@ -168,7 +168,7 @@ calcOperand_t *calcFromString(char *str)
 		(p = strstr(str, "e-"));
 	}
 
-	if(p)
+	if (p)
 	{
 		*p = '\0';
 		p++;
@@ -189,7 +189,7 @@ calcOperand_t *calcFromInt(sint value)
 
 	errorCase(!m_isRange(value, -IMAX, IMAX));
 
-	if(value < 0)
+	if (value < 0)
 	{
 		AddInt(co, 0, (uint)-value);
 		co->Sign = -1;
@@ -218,14 +218,14 @@ char *calcGetSmplString_EM(calcOperand_t *co, uint effectMin)
 
 	Trim(co);
 
-	if(effectMin)
+	if (effectMin)
 	{
 		while((sint)getSize(co->F) < co->E + 1)
 		{
 			addByte(co->F, 0);
 		}
 #if 1
-		if(getSize(co->F) < effectMin)
+		if (getSize(co->F) < effectMin)
 		{
 			Expand(co, effectMin - getSize(co->F));
 		}
@@ -244,13 +244,13 @@ char *calcGetSmplString_EM(calcOperand_t *co, uint effectMin)
 
 	for(index = 0; index < iEnd; index++)
 	{
-		if(index && index == co->E)
+		if (index && index == co->E)
 		{
 			addByte(buff, '.');
 		}
 		addByte(buff, m_i2c(refByte(co->F, index)));
 	}
-	if(co->Sign == -1)
+	if (co->Sign == -1)
 	{
 		addByte(buff, '-');
 	}
@@ -272,13 +272,13 @@ char *calcGetString(calcOperand_t *co)
 	co = GetClone(co);
 	Trim(co);
 
-	if(calcEffect && calcEffect < getSize(co->F))
+	if (calcEffect && calcEffect < getSize(co->F))
 	{
 		uint iEnd = getSize(co->F) - calcEffect;
 
 		for(index = 0; index < iEnd; index++)
 		{
-			if(calcRndOff && index == iEnd - 1 && calcRadix / 2 <= getByte(co->F, index))
+			if (calcRndOff && index == iEnd - 1 && calcRadix / 2 <= getByte(co->F, index))
 			{
 				AddInt(co, iEnd, 1); // ŽlŽÌŒÜ“ü
 			}
@@ -286,7 +286,7 @@ char *calcGetString(calcOperand_t *co)
 		}
 		Trim(co);
 	}
-	if(calcScient)
+	if (calcScient)
 	{
 		sint me = m_max(0, (sint)getSize(co->F) - 1);
 		sint ee;
@@ -309,11 +309,11 @@ char *calcGetString(calcOperand_t *co)
 static SyncE(calcOperand_t *co1, calcOperand_t *co2)
 {
 #if 1
-	if(co1->E < co2->E)
+	if (co1->E < co2->E)
 	{
 		Expand(co1, co2->E - co1->E);
 	}
-	if(co2->E < co1->E)
+	if (co2->E < co1->E)
 	{
 		Expand(co2, co1->E - co2->E);
 	}
@@ -339,7 +339,7 @@ calcOperand_t *calcAdd(calcOperand_t *co1, calcOperand_t *co2)
 	errorCase(!co2);
 	CheckVars();
 
-	if(co1 == co2)
+	if (co1 == co2)
 	{
 		co2 = GetClone(co2);
 		ans = calcAdd(co1, co2);
@@ -347,14 +347,14 @@ calcOperand_t *calcAdd(calcOperand_t *co1, calcOperand_t *co2)
 		return ans;
 	}
 
-	if(co1->Sign == -1)
+	if (co1->Sign == -1)
 	{
 		co1->Sign = 1;
 		ans = calcSub(co2, co1);
 		co1->Sign = -1;
 		return ans;
 	}
-	if(co2->Sign == -1)
+	if (co2->Sign == -1)
 	{
 		co2->Sign = 1;
 		ans = calcSub(co1, co2);
@@ -386,10 +386,10 @@ calcOperand_t *calcSub(calcOperand_t *co1, calcOperand_t *co2)
 	errorCase(!co2);
 	CheckVars();
 
-	if(co1 == co2)
+	if (co1 == co2)
 		return CreateOperand(); // x - x == 0
 
-	if(co1->Sign == -1)
+	if (co1->Sign == -1)
 	{
 		co1->Sign = 1;
 		ans = calcAdd(co1, co2);
@@ -397,7 +397,7 @@ calcOperand_t *calcSub(calcOperand_t *co1, calcOperand_t *co2)
 		co1->Sign = -1;
 		return ans;
 	}
-	if(co2->Sign == -1)
+	if (co2->Sign == -1)
 	{
 		co2->Sign = 1;
 		ans = calcAdd(co1, co2);
@@ -416,7 +416,7 @@ calcOperand_t *calcSub(calcOperand_t *co1, calcOperand_t *co2)
 	{
 		AddInt(ans, index, refByte(co1->F, index) + calcRadix - refByte(co2->F, index) - (index ? 1 : 0));
 	}
-	if(!refByte(ans->F, iEnd))
+	if (!refByte(ans->F, iEnd))
 	{
 		ReleaseOperand(ans);
 		ans = calcSub(co2, co1);
@@ -468,7 +468,7 @@ calcOperand_t *calcDiv(calcOperand_t *co1, calcOperand_t *co2)
 	Trim(co2);
 	ans = CreateOperand();
 
-	if(!getSize(co2->F)) // ? ƒ[ƒ‚ÅœŽZ
+	if (!getSize(co2->F)) // ? ƒ[ƒ‚ÅœŽZ
 		return ans;
 
 	ans->Sign = co1->Sign * co2->Sign;
@@ -489,7 +489,7 @@ calcOperand_t *calcDiv(calcOperand_t *co1, calcOperand_t *co2)
 	{
 		tmp = calcSub(co1, co2);
 
-		if(tmp->Sign == 1)
+		if (tmp->Sign == 1)
 		{
 			AddInt(ans, shiftCnt, 1);
 			ReleaseOperand(co1);
@@ -569,10 +569,10 @@ int calcComp(calcOperand_t *co1, calcOperand_t *co2)
 	Trim(co1);
 	Trim(co2);
 
-	if(co1->Sign == 1 && co2->Sign == -1)
+	if (co1->Sign == 1 && co2->Sign == -1)
 		return 1;
 
-	if(co1->Sign == -1 && co2->Sign == 1)
+	if (co1->Sign == -1 && co2->Sign == 1)
 		return -1;
 
 	s = co1->Sign;
@@ -580,22 +580,22 @@ int calcComp(calcOperand_t *co1, calcOperand_t *co2)
 	size1 = getSize(co1->F);
 	size2 = getSize(co2->F);
 
-	if(!size1 && !size2)
+	if (!size1 && !size2)
 		return 0;
 
-	if(!size1)
+	if (!size1)
 		return -s;
 
-	if(!size2)
+	if (!size2)
 		return s;
 
 	scale1 = (sint)size1 - co1->E;
 	scale2 = (sint)size2 - co2->E;
 
-	if(scale1 < scale2)
+	if (scale1 < scale2)
 		return -s;
 
-	if(scale2 < scale1)
+	if (scale2 < scale1)
 		return s;
 
 	index1 = getSize(co1->F);
@@ -608,13 +608,13 @@ int calcComp(calcOperand_t *co1, calcOperand_t *co2)
 
 		ret = (int)getByte(co1->F, index1) - (int)getByte(co2->F, index2);
 
-		if(ret != 0)
+		if (ret != 0)
 			return ret * s;
 	}
-	if(index1)
+	if (index1)
 		return s;
 
-	if(index2)
+	if (index2)
 		return -s;
 
 	return 0;
@@ -625,26 +625,26 @@ calcOperand_t *calcPower(calcOperand_t *co, uint exponent)
 	// exponent
 	CheckVars();
 
-	if(!exponent)
+	if (!exponent)
 	{
 		co = CreateOperand();
 		AddInt(co, 0, 1);
 		return co;
 	}
-	if(exponent == 1)
+	if (exponent == 1)
 		return GetClone(co);
 
 	{
 		calcOperand_t *ans = calcMul(co, co);
 		calcOperand_t *tmp;
 
-		if(4 <= exponent)
+		if (4 <= exponent)
 		{
 			tmp = calcPower(ans, exponent / 2);
 			ReleaseOperand(ans);
 			ans = tmp;
 		}
-		if(exponent & 1)
+		if (exponent & 1)
 		{
 			tmp = calcMul(ans, co);
 			ReleaseOperand(ans);
@@ -679,7 +679,7 @@ static sint Root_GetShiftCntMin(calcOperand_t *co, uint exponent)
 	shiftCnt /= 2;
 
 	for(ss = shiftCnt; ss /= 2; )
-		if(Root_TryShiftCnt(co, shiftCnt + ss, exponent))
+		if (Root_TryShiftCnt(co, shiftCnt + ss, exponent))
 			shiftCnt += ss;
 
 	return shiftCnt;
@@ -717,7 +717,7 @@ calcOperand_t *calcRoot(calcOperand_t *co, uint exponent)
 
 			ReleaseOperand(tmp2);
 
-			if(ret < 0)
+			if (ret < 0)
 			{
 				ReleaseOperand(ansTmp);
 				break;
@@ -725,7 +725,7 @@ calcOperand_t *calcRoot(calcOperand_t *co, uint exponent)
 			ReleaseOperand(ans);
 			ans = ansTmp;
 
-			if(ret == 0)
+			if (ret == 0)
 				goto endSftCtLoop;
 		}
 	}

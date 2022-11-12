@@ -57,7 +57,7 @@ static void ContextSwitching(void) // ts_
 }
 void sleep(uint millis) // ts_
 {
-	if(millis)
+	if (millis)
 		Sleep(millis);
 	else
 		ContextSwitching(); // sleep(0); のときは、単にコンテキストスイッチを行う。
@@ -117,7 +117,7 @@ char *getEnvLine(char *name) // ret: c_
 	errorCase(!name);
 	line = getenv(name);
 
-	if(!line)
+	if (!line)
 		line = "";
 
 	return line;
@@ -128,7 +128,7 @@ static DWORD GetTickCount_TEST(void)
 	static int initOnce;
 	static uint baseTick;
 
-	if(!initOnce)
+	if (!initOnce)
 	{
 		initOnce = 1;
 		baseTick = UINT_MAX - 10000 - GetTickCount();
@@ -148,13 +148,13 @@ uint64 nowTick(void)
 	uint64 retTick;
 	static uint64 lastRetTick;
 
-	if(currTick < lastTick) // ? カウンタが戻った -> オーバーフローした？
+	if (currTick < lastTick) // ? カウンタが戻った -> オーバーフローした？
 	{
 		uint diffTick = lastTick - currTick;
 
 //		LOGPOS(); // 再帰！！！
 
-		if(UINTMAX / 2 < diffTick) // オーバーフローだろう。
+		if (UINTMAX / 2 < diffTick) // オーバーフローだろう。
 		{
 			baseTick += (uint64)UINT_MAX + 1;
 		}
@@ -179,10 +179,10 @@ int pulseSec(uint span, uint *p_nextSec)
 	static uint defNextSec;
 	uint sec = now();
 
-	if(!p_nextSec)
+	if (!p_nextSec)
 		p_nextSec = &defNextSec;
 
-	if(sec < *p_nextSec)
+	if (sec < *p_nextSec)
 		return 0;
 
 	*p_nextSec = sec + span;
@@ -195,7 +195,7 @@ int eqIntPulseSec(uint span, uint *p_nextSec)
 
 	count++;
 
-	if(count % callPerCheck == 0 && pulseSec(span, p_nextSec))
+	if (count % callPerCheck == 0 && pulseSec(span, p_nextSec))
 	{
 		count = m_max(callPerCheck / 3, count / 10);
 		callPerCheck = m_max(1, count);
@@ -212,7 +212,7 @@ uint getTick(void)
 #endif
 uint getUDiff(uint tick1, uint tick2) // ret: tick2 - tick1
 {
-	if(tick2 < tick1)
+	if (tick2 < tick1)
 	{
 		return 0xffffffffu - ((tick1 - tick2) - 1u);
 	}
@@ -220,7 +220,7 @@ uint getUDiff(uint tick1, uint tick2) // ret: tick2 - tick1
 }
 uint64 getUDiff64(uint64 tick1, uint64 tick2) // ret: tick2 - tick1
 {
-	if(tick2 < tick1)
+	if (tick2 < tick1)
 	{
 		return 0xffffffffffffffffui64 - ((tick1 - tick2) - 1ui64);
 	}
@@ -230,7 +230,7 @@ sint getIDiff(uint tick1, uint tick2) // ret: tick2 - tick1
 {
 	uint diff = getUDiff(tick1, tick2);
 
-	if(diff < 0x80000000u)
+	if (diff < 0x80000000u)
 	{
 		return (sint)diff;
 	}
@@ -240,7 +240,7 @@ sint64 getIDiff64(uint64 tick1, uint64 tick2) // ret: tick2 - tick1
 {
 	uint64 diff = getUDiff64(tick1, tick2);
 
-	if(diff < 0x8000000000000000ui64)
+	if (diff < 0x8000000000000000ui64)
 	{
 		return (sint64)diff;
 	}
@@ -261,13 +261,13 @@ uint64 nextCommonCount(void)
 
 	mutex();
 
-	if(existFile(FILE_SHARE_COUNTER))
+	if (existFile(FILE_SHARE_COUNTER))
 	{
 		line = readFirstLine(FILE_SHARE_COUNTER);
 		counter = toValue64(line);
 		memFree(line);
 
-		if(counter < 1000) // ? 小さすぎる。ファイルぶっ壊れた？
+		if (counter < 1000) // ? 小さすぎる。ファイルぶっ壊れた？
 			goto initCounter;
 	}
 	else // カウンタ初期化
@@ -282,7 +282,7 @@ uint64 nextCommonCount(void)
 	}
 	errorCase(counter == UINT64MAX); // カンスト
 
-	if(UINT64MAX / 2 < counter)
+	if (UINT64MAX / 2 < counter)
 		LOGPOS(); // カンスト注意
 
 	line = xcout("%I64u", counter + 1);
@@ -298,12 +298,12 @@ static char *c_GetTempSuffix(void)
 	static char *ret;
 	static int useFactoryTmpDir;
 
-	if(ret)
+	if (ret)
 		memFree(ret);
 	else
 		useFactoryTmpDir = isFactoryDirEnabled() && existDir("C:\\Factory\\tmp");
 
-	if(!useFactoryTmpDir)
+	if (!useFactoryTmpDir)
 	{
 		static uint pid;
 		static uint64 pFATime;
@@ -311,10 +311,10 @@ static char *c_GetTempSuffix(void)
 
 		errorCase(counter == UINT64MAX); // カンスト
 
-		if(UINT64MAX / 2 < counter)
+		if (UINT64MAX / 2 < counter)
 			LOGPOS(); // カンスト注意
 
-		if(!pid)
+		if (!pid)
 		{
 			pid = getSelfProcessId();
 			pFATime = (uint64)time(NULL);
@@ -332,15 +332,15 @@ char *makeTempPath(char *ext) // ext: NULL ok
 	static char *pbase;
 	char *path;
 
-	if(!pbase)
+	if (!pbase)
 	{
 		int useFactoryTmpDir = isFactoryDirEnabled() && existDir("C:\\Factory\\tmp");
 
-		if(!useFactoryTmpDir)
+		if (!useFactoryTmpDir)
 		{
 			char *tmpDir = combine(getSelfDir(), "tmp");
 
-			if(existDir(tmpDir))
+			if (existDir(tmpDir))
 				pbase = combine(getSelfDir(), "tmp\\");
 			else
 				pbase = combine(getSelfDir(), "$tmp$");
@@ -354,10 +354,10 @@ char *makeTempPath(char *ext) // ext: NULL ok
 	{
 		path = xcout("%s%s", pbase, c_GetTempSuffix());
 
-		if(ext)
+		if (ext)
 			path = addExt(path, ext);
 
-		if(!accessible(path))
+		if (!accessible(path))
 			break;
 
 		memFree(path);
@@ -396,11 +396,11 @@ char *getSelfFile(void)
 {
 	static char *fileBuff;
 
-	if(!fileBuff)
+	if (!fileBuff)
 	{
 		fileBuff = memAlloc(SELFBUFFSIZE + SELFBUFFMARGIN);
 
-		if(!GetModuleFileName(NULL, fileBuff, SELFBUFFSIZE))
+		if (!GetModuleFileName(NULL, fileBuff, SELFBUFFSIZE))
 			error();
 
 		/*
@@ -419,7 +419,7 @@ char *getSelfDir(void)
 {
 	static char *dirBuff;
 
-	if(!dirBuff)
+	if (!dirBuff)
 		dirBuff = getParent(getSelfFile());
 
 	return dirBuff;
@@ -428,7 +428,7 @@ uint getSelfProcessId(void)
 {
 	static uint pid; // 0 は System Idle Process
 
-	if(!pid)
+	if (!pid)
 	{
 		pid = (uint)GetCurrentProcessId();
 //		pid = (uint)_getpid(); // old
@@ -441,7 +441,7 @@ static char *GetOutDir(void)
 {
 	static char *dir;
 
-	if(!dir)
+	if (!dir)
 		dir = makeTempDir("out");
 
 	return dir;
@@ -484,10 +484,10 @@ autoList_t *tokenizeArgs(char *str)
 
 	for(p = str; *p; p++)
 	{
-		if(literalMode)
+		if (literalMode)
 		{
-			if(*p == '"') // トークンの途中であってもリテラル終了
-//			if(*p == '"' && (p[1] == ' ' || !p[1]))
+			if (*p == '"') // トークンの途中であってもリテラル終了
+//			if (*p == '"' && (p[1] == ' ' || !p[1]))
 			{
 				literalMode = 0;
 				goto addEnd;
@@ -495,27 +495,27 @@ autoList_t *tokenizeArgs(char *str)
 		}
 		else
 		{
-			if(*p == ' ')
+			if (*p == ' ')
 			{
 				addElement(args, (uint)unbindBlock2Line(buff));
 				buff = newBlock();
 				goto addEnd;
 			}
-			if(*p == '"') // トークンの途中であってもリテラル開始
-//			if(*p == '"' && !getSize(buff))
+			if (*p == '"') // トークンの途中であってもリテラル開始
+//			if (*p == '"' && !getSize(buff))
 			{
 				literalMode = 1;
 				goto addEnd;
 			}
 		}
 
-		if(isMbc(p))
+		if (isMbc(p))
 		{
 			addByte(buff, *p);
 			p++;
 		}
-		else if(*p == '\\')
-//		else if(*p == '\\' && (p[1] == '\\' || p[1] == '"'))
+		else if (*p == '\\')
+//		else if (*p == '\\' && (p[1] == '\\' || p[1] == '"'))
 		{
 			p++;
 		}
@@ -536,12 +536,12 @@ static void ReadSysArgs(void)
 	{
 		char *arg = getLine(Args, argi);
 
-		if(!_stricmp(arg, "//$")) // 読み込み中止
+		if (!_stricmp(arg, "//$")) // 読み込み中止
 		{
 			desertElement(Args, argi);
 			break;
 		}
-		else if(!_stricmp(arg, "//-C"))
+		else if (!_stricmp(arg, "//-C"))
 		{
 			desertElement(Args, argi);
 			coutOff = 1;
@@ -550,7 +550,7 @@ static void ReadSysArgs(void)
 			readResourceArgsText() と tokenizeArgs() で２回 "" の除去が行われる。
 			-> !strcmp(getArg(x), "A B C") としたい場合、ファイルの当該行を ""A B C"" にする。
 		*/
-		else if(!_stricmp(arg, "//F")) // パラメータをファイルから読み込んで置き換える。
+		else if (!_stricmp(arg, "//F")) // パラメータをファイルから読み込んで置き換える。
 		{
 			char *text;
 			autoList_t *subArgs;
@@ -567,7 +567,7 @@ static void ReadSysArgs(void)
 
 			releaseAutoList(subArgs);
 		}
-		else if(!_stricmp(arg, "//R")) // パラメータをファイルから読み込んで置き換える。レスポンスファイル (改行を引数の区切りと見なす)
+		else if (!_stricmp(arg, "//R")) // パラメータをファイルから読み込んで置き換える。レスポンスファイル (改行を引数の区切りと見なす)
 		{
 			autoList_t *subArgs;
 
@@ -587,40 +587,40 @@ static void ReadSysArgs(void)
 			-> ストリームを閉じるのが、シェルに制御を返すより遅れる？
 			-> 何れにせよ明示的に閉じたほうが良い。
 		*/
-		else if(!_stricmp(arg, "//O")) // 標準出力(coutの出力)をファイルに書き出す。★注意：termination();しないとストリームを閉じない。
+		else if (!_stricmp(arg, "//O")) // 標準出力(coutの出力)をファイルに書き出す。★注意：termination();しないとストリームを閉じない。
 		{
 			desertElement(Args, argi);
 			arg = (char *)desertElement(Args, argi);
 
 			setCoutWrFile(arg, "wt");
 		}
-		else if(!_stricmp(arg, "//A")) // 標準出力(coutの出力)をファイルに追記する。★注意：termination();しないとストリームを閉じない。
+		else if (!_stricmp(arg, "//A")) // 標準出力(coutの出力)をファイルに追記する。★注意：termination();しないとストリームを閉じない。
 		{
 			desertElement(Args, argi);
 			arg = (char *)desertElement(Args, argi);
 
 			setCoutWrFile(arg, "at");
 		}
-		else if(!_stricmp(arg, "//L")) // 標準出力(coutの出力)をログに出力する。★注意：termination();しないとストリームを閉じない。
+		else if (!_stricmp(arg, "//L")) // 標準出力(coutの出力)をログに出力する。★注意：termination();しないとストリームを閉じない。
 		{
 			desertElement(Args, argi);
 			arg = (char *)desertElement(Args, argi);
 
 			setCoutLogFile(arg); // arg == fileBase
 		}
-		else if(!_stricmp(arg, "//LA")) // 標準出力(coutの出力)をログに追記する。★注意：termination();しないとストリームを閉じない。
+		else if (!_stricmp(arg, "//LA")) // 標準出力(coutの出力)をログに追記する。★注意：termination();しないとストリームを閉じない。
 		{
 			desertElement(Args, argi);
 			arg = (char *)desertElement(Args, argi);
 
 			setCoutLogFileAdd(arg); // arg == fileBase
 		}
-		else if(!_stricmp(arg, "//-E"))
+		else if (!_stricmp(arg, "//-E"))
 		{
 			desertElement(Args, argi);
 			noErrorDlgMode = 1;
 		}
-		else if(!_stricmp(arg, "//CT"))
+		else if (!_stricmp(arg, "//CT"))
 		{
 			desertElement(Args, argi);
 			arg = (char *)desertElement(Args, argi);
@@ -631,7 +631,7 @@ static void ReadSysArgs(void)
 
 			errorCase(!m_isRange(sockConnectTimeoutSec, 1, 3600));
 		}
-		else if(!_stricmp(arg, "//MOLP"))
+		else if (!_stricmp(arg, "//MOLP"))
 		{
 			desertElement(Args, argi);
 			arg = (char *)desertElement(Args, argi);
@@ -646,7 +646,7 @@ static void ReadSysArgs(void)
 }
 static autoList_t *GetArgs(void)
 {
-	if(!Args)
+	if (!Args)
 	{
 		uint argi;
 
@@ -669,9 +669,9 @@ int hasArgs(uint count)
 }
 int argIs(char *spell)
 {
-	if(ArgIndex < getCount(GetArgs()))
+	if (ArgIndex < getCount(GetArgs()))
 	{
-		if(!_stricmp(getLine(GetArgs(), ArgIndex), spell))
+		if (!_stricmp(getLine(GetArgs(), ArgIndex), spell))
 		{
 			ArgIndex++;
 			return 1;
@@ -693,7 +693,7 @@ char *nextArg(void)
 }
 char *nnNextArg(void)
 {
-	if(!hasArgs(1))
+	if (!hasArgs(1))
 		return NULL;
 
 	return nextArg();
@@ -748,12 +748,12 @@ static int FindPathParent(char *dir, char *localPath) // dir: abs_dir
 //cout("FPP.1:%s\n", dir); // test
 //cout("FPP.2:%s\n", FPP_Path); // test
 
-		if(existPath(FPP_Path))
+		if (existPath(FPP_Path))
 			return 1;
 
 		memFree(FPP_Path);
 
-		if(isAbsRootDir(dir))
+		if (isAbsRootDir(dir))
 			return 0;
 
 		dir = getParent(dir);
@@ -761,20 +761,20 @@ static int FindPathParent(char *dir, char *localPath) // dir: abs_dir
 }
 char *innerResPathFltr(char *path)
 {
-	if(isFactoryDirDisabled() && startsWithICase(path, "C:\\Factory\\")) // ? Factory 無効 && Factory 配下を参照
+	if (isFactoryDirDisabled() && startsWithICase(path, "C:\\Factory\\")) // ? Factory 無効 && Factory 配下を参照
 		goto go_search;
 
-	if(getLocal(path) != path) // ? パスを指定している。
-		if(existPath(path))
+	if (getLocal(path) != path) // ? パスを指定している。
+		if (existPath(path))
 			goto foundPath;
 
 go_search:
-	if(FindPathParent(getSelfDir(), getLocal(path)))
+	if (FindPathParent(getSelfDir(), getLocal(path)))
 	{
 		path = FPP_Path;
 		goto foundPath;
 	}
-	if(FindPathParent(getCwd(), getLocal(path)))
+	if (FindPathParent(getCwd(), getLocal(path)))
 	{
 		path = FPP_Path;
 		goto foundPath;
@@ -797,7 +797,7 @@ char *LOGPOS_Time(int mode)
 	static uint64 lastMillis;
 	uint64 millis = nowTick();
 
-	if(!buff[0]) // ? 初回
+	if (!buff[0]) // ? 初回
 	{
 		sprintf(buff, "%I64u:%02u.%03u"
 			,millis / 60000
@@ -817,7 +817,7 @@ char *LOGPOS_Time(int mode)
 			,millis - lastMillis
 			);
 	}
-	if(mode == 'T')
+	if (mode == 'T')
 	{
 		char *p = strchr(buff, '\0');
 		char *stamp = makeStamp(0L);
@@ -850,11 +850,11 @@ char *getAppDataEnv(char *name, char *defval)
 	uint index;
 	uint nameLen;
 
-	if(!envs)
+	if (!envs)
 	{
 		LOGPOS();
 
-		if(existFile(APPDATA_ENVSFILE))
+		if (existFile(APPDATA_ENVSFILE))
 			envs = readResourceLines(APPDATA_ENVSFILE);
 		else
 			envs = newList();
@@ -863,12 +863,12 @@ char *getAppDataEnv(char *name, char *defval)
 	nameLen = strlen(name);
 
 	foreach(envs, env, index)
-		if(startsWith(env, name))
+		if (startsWith(env, name))
 			break;
 
 	memFree(name);
 
-	if(env)
+	if (env)
 		return env + nameLen;
 
 	return defval;

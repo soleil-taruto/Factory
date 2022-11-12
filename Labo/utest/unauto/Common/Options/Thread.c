@@ -15,7 +15,7 @@ static void RndSleep(void)
 {
 	uint millis = mt19937_rnd(10);
 
-	if(millis)
+	if (millis)
 	{
 		inner_uncritical();
 		{
@@ -44,7 +44,7 @@ static void Th(uint index)
 			}
 			leaveSemaphore(&Smph);
 
-			if(Dead || waitKey(0) == 0x1b)
+			if (Dead || waitKey(0) == 0x1b)
 			{
 				Dead = 1;
 				break;

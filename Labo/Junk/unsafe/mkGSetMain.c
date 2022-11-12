@@ -58,11 +58,11 @@ int main(int argc, char **argv)
 
 		foreach(midDirs, midDir, index)
 		{
-			if(lineExp(midDirFormat, midDir))
+			if (lineExp(midDirFormat, midDir))
 			{
 				char *path = xcout("%s\\%s\\%s", leadDir, midDir, trailPath);
 
-				if(accessible(path))
+				if (accessible(path))
 				{
 					foundPath = path;
 					break;
@@ -77,7 +77,7 @@ int main(int argc, char **argv)
 		outLine = strx(wFileFormat);
 		outLine = replaceLine(outLine, wffRepPtn, foundPath, 0);
 
-		if(!existFile(wFile) || IsNeedUpdateOneLineFile(wFile, outLine))
+		if (!existFile(wFile) || IsNeedUpdateOneLineFile(wFile, outLine))
 		{
 			LOGPOS();
 			writeOneLine(wFile, outLine);

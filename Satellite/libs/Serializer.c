@@ -26,7 +26,7 @@ static void SerializerMain(void *data, uint depth)
 {
 	errorCase(!data);
 
-	if(!depth)
+	if (!depth)
 	{
 		autoBlock_t *block = (autoBlock_t *)data;
 
@@ -92,7 +92,7 @@ static void ReadBytes(void *out_p, uint size)
 }
 static void *DeserializerMain(uint depth)
 {
-	if(!depth)
+	if (!depth)
 	{
 		autoBlock_t *buff;
 		uint size;

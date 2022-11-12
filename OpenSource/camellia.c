@@ -103,14 +103,14 @@ void camellia_cbc(camellia_keyTable_t *i, autoBlock_t *iv, autoBlock_t *in, auto
 //	errorCase(getSize(out) % 16 != 0);
 	errorCase(getSize(in) != getSize(out));
 
-	if(!getSize(in))
+	if (!getSize(in))
 		return;
 
 	biv = (uchar *)directGetBuffer(iv);
 	bin = (uchar *)directGetBuffer(in);
 	bout = (uchar *)directGetBuffer(out);
 
-	if(doEncrypt)
+	if (doEncrypt)
 	{
 		XorBlock(biv, bin, bout);
 		camellia_encrypt(i, bout, bout, 1);
@@ -172,14 +172,14 @@ static void CamelliaCtr(camellia_keyTable_t *i, autoBlock_t *iv, autoBlock_t *in
 
 	for(index = 0; index < getSize(in); index++)
 	{
-		if((index & 0x0f) == 0)
+		if ((index & 0x0f) == 0)
 		{
-			if(!ofbmode)
+			if (!ofbmode)
 			{
 				camellia_encrypt(i, ctr, eb, 1);
 
 				for(ctridx = 0; ctridx < 16; ctridx++)
-					if(ctr[ctridx] = (ctr[ctridx] + 1) & 0xff)
+					if (ctr[ctridx] = (ctr[ctridx] + 1) & 0xff)
 						break;
 			}
 			else
@@ -228,7 +228,7 @@ void camellia_cfb(camellia_keyTable_t *i, autoBlock_t *iv, autoBlock_t *in, auto
 	bin = (uchar *)directGetBuffer(in);
 	bout = (uchar *)directGetBuffer(out);
 
-	if(doEncrypt)
+	if (doEncrypt)
 	{
 		for(index = 0; index < getSize(in); index += 16)
 		{
@@ -241,7 +241,7 @@ void camellia_cfb(camellia_keyTable_t *i, autoBlock_t *iv, autoBlock_t *in, auto
 		{
 			CamelliaCfbBlock(i, biv, bin, bout, index, getSize(in));
 
-			if(!index)
+			if (!index)
 				break;
 		}
 	}

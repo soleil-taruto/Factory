@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 
 		foreach(files, file, file_index)
 		{
-			if(mbs_stristr(file, "\\.git"))
+			if (mbs_stristr(file, "\\.git"))
 				continue;
 
 			cout("Insx %s\n", file);

@@ -23,9 +23,9 @@ int main(int argc, char **argv)
 
 	mutex();
 	{
-		if(existFile(LOG_FILE) && LOG_FILE_SIZE_MAX < getFileSize(LOG_FILE))
+		if (existFile(LOG_FILE) && LOG_FILE_SIZE_MAX < getFileSize(LOG_FILE))
 		{
-			if(existFile(LOG_FILE_02))
+			if (existFile(LOG_FILE_02))
 			{
 				removeFileIfExist(
 					LOG_FILE_03

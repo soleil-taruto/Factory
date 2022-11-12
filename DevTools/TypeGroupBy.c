@@ -32,27 +32,27 @@ int main(int argc, char **argv)
 	autoList_t *outLines = newList();
 
 readArgs:
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		countMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/-C"))
+	if (argIs("/-C"))
 	{
 		noCountMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/I"))
+	if (argIs("/I"))
 	{
 		ignoreCase = 1;
 		goto readArgs;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 		lines = readLines(nextArg());
 	else
 		lines = ReadLinesFromStdin();
 
-	if(ignoreCase)
+	if (ignoreCase)
 		foreach(lines, line, index)
 			toUpperLine(line);
 
@@ -61,10 +61,10 @@ readArgs:
 	for(index = 0; index < getCount(lines); index += count)
 	{
 		for(count = 0; index + count < getCount(lines); count++)
-			if(strcmp(getLine(lines, index), getLine(lines, index + count)))
+			if (strcmp(getLine(lines, index), getLine(lines, index + count)))
 				break;
 
-		if(noCountMode)
+		if (noCountMode)
 			line = xcout("%s", getLine(lines, index));
 		else
 			line = xcout("%10u %s", count, getLine(lines, index));
@@ -77,10 +77,10 @@ readArgs:
 	for(; ; )
 	{
 		foreach(lines, line, index)
-			if(line[0] != ' ')
+			if (line[0] != ' ')
 				break;
 
-		if(line)
+		if (line)
 			break;
 
 		foreach(lines, line, index)
@@ -88,7 +88,7 @@ readArgs:
 	}
 	rapidSortLines(lines);
 
-	if(countMode)
+	if (countMode)
 		cout("%u\n", getCount(lines));
 	else
 		foreach(lines, line, index)

@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 	{
 		char *message = Nectar2RecvLine(i, '\0');
 
-		if(message)
+		if (message)
 		{
 			cout("%s\n", message);
 			memFree(message);

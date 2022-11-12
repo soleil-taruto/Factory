@@ -3,7 +3,7 @@
 
 int main(int argc, char **argv)
 {
-	if(argIs("/W2C"))
+	if (argIs("/W2C"))
 	{
 		char *rWavFile;
 		char *wCsvFile;
@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 		LOGPOS();
 		return;
 	}
-	if(argIs("/C2W"))
+	if (argIs("/C2W"))
 	{
 		char *rCsvFile;
 		char *rHzFile;

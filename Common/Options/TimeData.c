@@ -135,32 +135,32 @@ TimeData_t ResStamp2TimeData(uint64 prmStamp)
 	uint64 stamp = prmStamp;
 	TimeData_t td;
 
-	if(stamp <= 1231) // ? MMDD
+	if (stamp <= 1231) // ? MMDD
 	{
 		stamp += GetNowTimeData().Y * 10000;
 		stamp *= 1000000;
 	}
-	else if(stamp < 10000) // ? YYYY
+	else if (stamp < 10000) // ? YYYY
 	{
 		stamp *= 10000;
 		stamp += 101;
 		stamp *= 1000000;
 	}
-	else if(stamp < 1000000) // ? YYYYMM
+	else if (stamp < 1000000) // ? YYYYMM
 	{
 		stamp *= 100;
 		stamp += 1;
 		stamp *= 1000000;
 	}
-	else if(stamp < 100000000) // ? YYYYMMDD
+	else if (stamp < 100000000) // ? YYYYMMDD
 	{
 		stamp *= 1000000;
 	}
-	else if(stamp < 10000000000) // ? YYYYMMDDHH
+	else if (stamp < 10000000000) // ? YYYYMMDDHH
 	{
 		stamp *= 10000;
 	}
-	else if(stamp < 1000000000000) // ? YYYYMMDDHHMM
+	else if (stamp < 1000000000000) // ? YYYYMMDDHHMM
 	{
 		stamp *= 100;
 	}

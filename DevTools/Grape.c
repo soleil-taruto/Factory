@@ -29,27 +29,27 @@ int main(int argc, char **argv)
 	uint fndnum = 0;
 
 readArgs:
-	if(argIs("/I")) // Ignore case
+	if (argIs("/I")) // Ignore case
 	{
 		ignoreCase = 1;
 		goto readArgs;
 	}
-	if(argIs("/V")) // inVerse
+	if (argIs("/V")) // inVerse
 	{
 		inverseFlag = 1;
 		goto readArgs;
 	}
-	if(argIs("/F")) // input File
+	if (argIs("/F")) // input File
 	{
 		file = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/C")) // count
+	if (argIs("/C")) // count
 	{
 		showFndNumOnly = 1;
 		goto readArgs;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		addElement(patterns, (uint)nextArg());
 		goto readArgs;
@@ -62,29 +62,29 @@ readArgs:
 
 		foreach(patterns, pattern, index)
 		{
-			if(mbs_strstrCase(line, pattern, ignoreCase))
+			if (mbs_strstrCase(line, pattern, ignoreCase))
 			{
 				fnd = 1;
 				goto found;
 			}
 		}
 	found:
-		if(inverseFlag)
+		if (inverseFlag)
 			fnd = !fnd;
 
-		if(fnd)
+		if (fnd)
 		{
-			if(!showFndNumOnly)
+			if (!showFndNumOnly)
 				cout("%s\n", line);
 
 			fndnum++;
 		}
 		memFree(line);
 	}
-	if(file)
+	if (file)
 		fileClose(fp);
 
-	if(showFndNumOnly)
+	if (showFndNumOnly)
 		cout("%u\n", fndnum);
 
 	return (int)fndnum;

@@ -20,7 +20,7 @@ static void FoundError(char *message)
 }
 static char *ProjectLocalDirToRepositoryName(char *localDir)
 {
-	if(lineExp("<1,azAZ><8,09>_<1,,>", localDir))
+	if (lineExp("<1,azAZ><8,09>_<1,,>", localDir))
 	{
 		localDir += 10;
 	}
@@ -34,7 +34,7 @@ static void CheckGitRelease(char *dir)
 
 	addCwd(dir);
 
-	if(!existFile(LOCAL_GIT_RELEASE_BAT))
+	if (!existFile(LOCAL_GIT_RELEASE_BAT))
 	{
 		FoundError(LOCAL_GIT_RELEASE_BAT " が見つかりません。");
 	}
@@ -53,7 +53,7 @@ static void CheckGitRelease(char *dir)
 				,ProjectLocalDirToRepositoryName(getLocal(dir))
 				);
 
-			if(strcmp(text, text2))
+			if (strcmp(text, text2))
 			{
 				FoundError(LOCAL_GIT_RELEASE_BAT " の内容に問題があります。(bad contents)");
 			}
@@ -64,7 +64,7 @@ static void CheckGitRelease(char *dir)
 		{
 			char *repoDir = combine("C:\\huge\\GitHub", ProjectLocalDirToRepositoryName(getLocal(dir)));
 
-			if(!existDir(repoDir))
+			if (!existDir(repoDir))
 			{
 				FoundError(LOCAL_GIT_RELEASE_BAT " の内容に問題があります。(no repoDir)");
 			}
@@ -74,7 +74,7 @@ static void CheckGitRelease(char *dir)
 		{
 			char *repo = ProjectLocalDirToRepositoryName(getLocal(dir));
 
-			if(findJLineICase(KnownRepos, repo) < getCount(KnownRepos))
+			if (findJLineICase(KnownRepos, repo) < getCount(KnownRepos))
 			{
 				FoundError(LOCAL_GIT_RELEASE_BAT " の内容に問題があります。(リポジトリの重複)");
 			}
@@ -85,7 +85,7 @@ static void CheckGitRelease(char *dir)
 		}
 	}
 
-	if(!existFile(LOCAL_RUN_ME_FIRST_BAT))
+	if (!existFile(LOCAL_RUN_ME_FIRST_BAT))
 	{
 		FoundError(LOCAL_RUN_ME_FIRST_BAT " が見つかりません。");
 	}
@@ -96,7 +96,7 @@ static void CheckGitRelease(char *dir)
 			"C:\\Factory\\dittybox\\devrunmefirst.bat\r\n"
 			);
 
-		if(strcmp(text, text2))
+		if (strcmp(text, text2))
 		{
 			FoundError(LOCAL_RUN_ME_FIRST_BAT " の内容に問題があります。");
 		}
@@ -104,22 +104,22 @@ static void CheckGitRelease(char *dir)
 		memFree(text2);
 	}
 
-	if(m_01(existFile(LOCAL_LICENSE)) + m_01(existFile(LOCAL_LICENSE_IGNORE)) != 1)
+	if (m_01(existFile(LOCAL_LICENSE)) + m_01(existFile(LOCAL_LICENSE_IGNORE)) != 1)
 	{
 		FoundError("ライセンスファイル (LICENSE) が見つかりません。");
 	}
-	if(existFile(LOCAL_LICENSE) && getFileSize(LOCAL_LICENSE) == 0)
+	if (existFile(LOCAL_LICENSE) && getFileSize(LOCAL_LICENSE) == 0)
 	{
 		FoundError("ライセンスファイル (LICENSE) が空っぽです。");
 	}
-	if(existFile(LOCAL_LICENSE_IGNORE) && getFileSize(LOCAL_LICENSE_IGNORE) != 0)
+	if (existFile(LOCAL_LICENSE_IGNORE) && getFileSize(LOCAL_LICENSE_IGNORE) != 0)
 	{
 		FoundError(LOCAL_LICENSE_IGNORE " が空ではありません。");
 	}
 
 	unaddCwd();
 
-	if(ErrorFound)
+	if (ErrorFound)
 		addElement(ErrorFiles, (uint)combine(dir, LOCAL_GIT_RELEASE_BAT));
 
 	memFree(dir);
@@ -143,7 +143,7 @@ static void CheckDir(char *dir)
 {
 	char *gitReleaseBat = combine(dir, LOCAL_GIT_RELEASE_BAT);
 
-	if(existFile(gitReleaseBat))
+	if (existFile(gitReleaseBat))
 	{
 		CheckGitRelease(dir);
 	}
@@ -160,11 +160,11 @@ int main(int argc, char **argv)
 
 	errorCase_m(argIs("/C"), "廃止オプション"); // zantei
 
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		CheckGitRelease(nextArg());
 	}
-	else if(hasArgs(1))
+	else if (hasArgs(1))
 	{
 		CheckDir(nextArg());
 	}
@@ -175,7 +175,7 @@ int main(int argc, char **argv)
 
 	cout("\n");
 
-	if(getCount(ErrorFiles))
+	if (getCount(ErrorFiles))
 	{
 		cout("★★★ [ %u ] 件のエラーが見つかりました。\n", getCount(ErrorFiles));
 	}

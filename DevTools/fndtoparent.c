@@ -37,7 +37,7 @@ static void Search(void)
 
 			foreach(files, file, index)
 			{
-				if(FuncIsMatch(file))
+				if (FuncIsMatch(file))
 				{
 					FoundAction(file);
 					found = 1;
@@ -48,14 +48,14 @@ static void Search(void)
 		}
 		unaddCwd();
 
-		if(found)
+		if (found)
 			break;
 
 		dir = getParent_x(dir);
 	}
 	memFree(dir);
 
-	if(!found)
+	if (!found)
 		cout("not found\n");
 }
 int main(int argc, char **argv)
@@ -64,18 +64,18 @@ int main(int argc, char **argv)
 	FoundAction = (void (*)(char *))noop_u;
 
 readArgs:
-	if(argIs("/E"))
+	if (argIs("/E"))
 	{
 		TargetExt = nextArg();
 		FuncIsMatch = IsMatchTargetExt;
 		goto readArgs;
 	}
-	if(argIs("/O"))
+	if (argIs("/O"))
 	{
 		FoundAction = FoundOpenNB;
 		goto readArgs;
 	}
-	if(argIs("/OB"))
+	if (argIs("/OB"))
 	{
 		FoundAction = FoundOpen;
 		goto readArgs;

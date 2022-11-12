@@ -54,7 +54,7 @@ UI512_t UI512_Add(UI512_t a, UI512_t b, UI512_t ans[2])
 	UI256_t f[2];
 	UI512_t tmp[2];
 
-	if(!ans)
+	if (!ans)
 		ans = tmp;
 
 	UI256_Add(a.L, b.L, c);
@@ -89,7 +89,7 @@ UI512_t UI512_Mul(UI512_t a, UI512_t b, UI512_t ans[2])
 	uint i;
 	UI512_t tmp[2];
 
-	if(!ans)
+	if (!ans)
 		ans = tmp;
 
 	UI256_Mul(a.L, b.L, c);
@@ -130,12 +130,12 @@ static UI512_t DivSub(UI512_t a, UI512_t b, UI512_t ans[2], uint reti)
 
 	errorCase(UI512_IsZero(b));
 
-	if(!ans)
+	if (!ans)
 		ans = tmp;
 
 	ans[0] = UI512_0();
 
-	if(UI256_IsZero(b.H))
+	if (UI256_IsZero(b.H))
 	{
 		{
 			UI512_t dd;
@@ -173,7 +173,7 @@ static UI512_t DivSub(UI512_t a, UI512_t b, UI512_t ans[2], uint reti)
 	}
 	else
 	{
-		if(!UI256_IsFill(b.H))
+		if (!UI256_IsFill(b.H))
 		{
 			UI256_t c = UI256_Add(b.H, UI256_x(1), NULL);
 
@@ -182,7 +182,7 @@ static UI512_t DivSub(UI512_t a, UI512_t b, UI512_t ans[2], uint reti)
 				UI256_t d = UI256_Div(a.H, c, NULL);
 				UI512_t dd;
 
-				if(UI256_IsZero(d))
+				if (UI256_IsZero(d))
 					break;
 
 				dd.L = d;
@@ -222,7 +222,7 @@ sint UI512_Comp(UI512_t a, UI512_t b)
 {
 	sint ret = UI256_Comp(a.H, b.H);
 
-	if(!ret)
+	if (!ret)
 		ret = UI256_Comp(a.L, b.L);
 
 	return ret;

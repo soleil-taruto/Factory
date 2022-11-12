@@ -14,16 +14,16 @@ autoList_t *RSTR_SecondLineToColSpans(char *line)
 
 	for(p = line; ; p++)
 	{
-		if(*p == '-')
+		if (*p == '-')
 		{
 			count++;
 		}
-		else if(*p == ' ' || *p == '\0')
+		else if (*p == ' ' || *p == '\0')
 		{
 			errorCase(!count); // 幅ゼロは考えられない。
 			addElement(colSpans, count);
 
-			if(*p == '\0')
+			if (*p == '\0')
 			{
 				break;
 			}
@@ -43,7 +43,7 @@ autoList_t *RSTR_LineToValues(char *line, autoList_t *colSpans, int asColName) /
 	char *p = line;
 	autoList_t *values = newList();
 
-	if(!isJLine(line, 1, 0, 0, 1)) // タブの無い CP-932 であること。
+	if (!isJLine(line, 1, 0, 0, 1)) // タブの無い CP-932 であること。
 	{
 		line2JLine(line, 1, 0, 0, 1);
 		cout("文字コードの補正を行いました。\n");
@@ -58,7 +58,7 @@ autoList_t *RSTR_LineToValues(char *line, autoList_t *colSpans, int asColName) /
 			p = mbsNext(p);
 			cs--;
 		}
-		if(index + 1 < getCount(colSpans)) // ? 非最終カラム
+		if (index + 1 < getCount(colSpans)) // ? 非最終カラム
 		{
 			errorCase(*p != ' '); // カラムの間が空白ではない。
 			*p = '\0';
@@ -69,7 +69,7 @@ autoList_t *RSTR_LineToValues(char *line, autoList_t *colSpans, int asColName) /
 
 		trimEdge(q, ' ');
 
-		if(asColName)
+		if (asColName)
 		{
 			errorCase(asColName && *q == '\0'); // カラム名に空文字列は無いはず。
 			errorCase(findLine(values, q) < index); // カラム名の重複を認めない。
@@ -94,7 +94,7 @@ void RedirSqlTableReader(char *file, FILE *outStrm, void (*writeColNames_x)(FILE
 			line = readLine(fp);
 			errorCase(!line);
 
-			if(lineExp("< ->", line) &&
+			if (lineExp("< ->", line) &&
 				lineExp("-<>", line) &&
 				lineExp("<>-", line) &&
 				!lineExp("<>  <>", line)
@@ -129,7 +129,7 @@ void RedirSqlTableReader(char *file, FILE *outStrm, void (*writeColNames_x)(FILE
 		line = readLine(fp);
 		errorCase(!line);
 
-		if(!*line)
+		if (!*line)
 		{
 			break;
 		}

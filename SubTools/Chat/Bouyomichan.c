@@ -2,7 +2,7 @@
 
 static uint ToWord(uint pml, uint minval, uint maxval)
 {
-	if(pml == 0xffff)
+	if (pml == 0xffff)
 		return 0xffff;
 
 	errorCase(!m_isRange(pml, 0, 1000));
@@ -80,7 +80,7 @@ void SendToBouyomichan(char *domain, uint portno, char *message, uint speedPml, 
 	// volumePml
 	errorCase(!m_isRange(voice, 0, 8));
 
-	if(!*message)
+	if (!*message)
 		return;
 
 	Speed  = ToWord(speedPml, 50, 300);

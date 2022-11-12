@@ -18,14 +18,14 @@ static void MskSrcFile(char *file, int eurpFlag)
 	foreach(lines, line, index)
 	{
 		for(p = line; *p; p++)
-			if(' ' < *p)
+			if (' ' < *p)
 				*p = '/';
 
 		p = strchr(line, '/');
 
-		if(p && p[1] != '/')
+		if (p && p[1] != '/')
 		{
-			if(p[1])
+			if (p[1])
 				p[1] = '/';
 			else
 				setElement(lines, index, (uint)addChar(line, '/'));
@@ -39,7 +39,7 @@ static void MskSrcFile(char *file, int eurpFlag)
 
 	LOGPOS();
 
-	if(eurpFlag)
+	if (eurpFlag)
 		EscapeUnusableResPath(file);
 
 	PostGitMaskFile(file);
@@ -50,11 +50,11 @@ static void MaskSourceFile(char *file)
 
 	cout("* %s\n", file);
 
-	     if(!_stricmp(ext, "c"    )) MskSrcFile(file, 0);
-	else if(!_stricmp(ext, "h"    )) MskSrcFile(file, 0);
-	else if(!_stricmp(ext, "cs"   )) MskSrcFile(file, 0);
-	else if(!_stricmp(ext, "cpp"  )) MskSrcFile(file, 0);
-	else if(!_stricmp(ext, "java" )) MskSrcFile(file, 0);
+	     if (!_stricmp(ext, "c"    )) MskSrcFile(file, 0);
+	else if (!_stricmp(ext, "h"    )) MskSrcFile(file, 0);
+	else if (!_stricmp(ext, "cs"   )) MskSrcFile(file, 0);
+	else if (!_stricmp(ext, "cpp"  )) MskSrcFile(file, 0);
+	else if (!_stricmp(ext, "java" )) MskSrcFile(file, 0);
 }
 static void MaskTextFile(char *file)
 {
@@ -62,8 +62,8 @@ static void MaskTextFile(char *file)
 
 	cout("# %s\n", file);
 
-	     if(!_stricmp(ext, "txt")) MskSrcFile(file, 1);
-	else if(!_stricmp(ext, "csv")) MskSrcFile(file, 1);
+	     if (!_stricmp(ext, "txt")) MskSrcFile(file, 1);
+	else if (!_stricmp(ext, "csv")) MskSrcFile(file, 1);
 }
 static void MaskSourceByResFile(autoList_t *files)
 {
@@ -76,11 +76,11 @@ static void MaskSourceByResFile(autoList_t *files)
 	{
 		cout("* %s\n", file);
 
-		if(!existFile(file))
+		if (!existFile(file))
 		{
 			cout("¡¡¡íœÏ‚Ý¡¡¡\n"); // IGN_FILES_FILE, IGN_DIRS_FILE ‚É‚æ‚èAŠù‚Éíœ‚³‚ê‚Ä‚¢‚é‰Â”\«‚à‚ ‚éB
 		}
-		else if(!_stricmp(MSK_FILES_FILE, getLocal(file)))
+		else if (!_stricmp(MSK_FILES_FILE, getLocal(file)))
 		{
 			autoList_t *mskfiles = readResourceLines(file);
 			char *mskfile;
@@ -104,7 +104,7 @@ static void MaskSourceByResFile(autoList_t *files)
 
 			LOGPOS();
 		}
-		else if(!_stricmp(IGN_FILES_FILE, getLocal(file)))
+		else if (!_stricmp(IGN_FILES_FILE, getLocal(file)))
 		{
 			autoList_t *ignfiles = readResourceLines(file);
 			char *ignfile;
@@ -129,7 +129,7 @@ static void MaskSourceByResFile(autoList_t *files)
 
 			LOGPOS();
 		}
-		else if(!_stricmp(IGN_DIRS_FILE, getLocal(file)))
+		else if (!_stricmp(IGN_DIRS_FILE, getLocal(file)))
 		{
 			autoList_t *igndirs = readResourceLines(file);
 			char *igndir;
@@ -171,14 +171,14 @@ static void GitSourceMask_Sub(autoList_t *files, char *flagFile, void (*maskFunc
 
 	foreach(files, file, index)
 	{
-		if(!_stricmp(flagFile, getLocal(file)))
+		if (!_stricmp(flagFile, getLocal(file)))
 		{
 			char *prefix = addChar(changeLocal(file, ""), '\\');
 			char *subfile;
 			uint subfile_index;
 
 			foreach(files, subfile, subfile_index)
-				if(startsWithICase(subfile, prefix))
+				if (startsWithICase(subfile, prefix))
 					addElement(targets, (uint)subfile);
 
 			memFree(prefix);

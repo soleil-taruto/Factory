@@ -13,7 +13,7 @@ static autoList_t *OpenedFPList;
 
 static void AddOpenedFP(FILE *fp)
 {
-	if(!OpenedFPList)
+	if (!OpenedFPList)
 		OpenedFPList = newList();
 
 	addElement(OpenedFPList, (uint)fp);
@@ -29,7 +29,7 @@ static void RemoveOpenedFP(FILE *fp)
 }
 void termination_fileCloseAll(void)
 {
-	if(OpenedFPList)
+	if (OpenedFPList)
 	{
 		FILE *fp;
 		uint index;
@@ -54,19 +54,19 @@ FILE *rfopen(char *file, char *mode)
 		// “K“–‚ÉŠÔŠu‚ğ‹ó‚¯‚Ä‰½“x‚©ƒŠƒgƒ‰ƒC‚·‚éB
 		FILE *fp = fopen(file, mode); // file == "" ‚Ì‚Æ‚« NULL ‚ğ•Ô‚·B
 
-		if(fp != NULL)
+		if (fp != NULL)
 		{
-			if(retrycnt)
+			if (retrycnt)
 			{
 				cout("File opened at %u-th retrial.\n", retrycnt);
 			}
 			return fp;
 		}
-		if(retrycnt % 5 == 0)
+		if (retrycnt % 5 == 0)
 		{
 			cout("Can not open file \"%s\" as \"%s\" mode, %u-th trial.\n", file, mode, retrycnt + 1);
 
-			if(20 <= retrycnt)
+			if (20 <= retrycnt)
 			{
 				return NULL;
 			}
@@ -86,7 +86,7 @@ void fileClose(FILE *fp)
 {
 	RemoveOpenedFP(fp);
 
-	if(fclose(fp) != 0)
+	if (fclose(fp) != 0)
 	{
 		error();
 	}
@@ -142,7 +142,7 @@ HANDLE getHandleByFilePointer(FILE *fp) // ret: CreateFile() ‚É‚æ‚Á‚Ä“¾‚ç‚ê‚é HA
 */
 void fileSeek(FILE *fp, int origin, sint64 offset) // origin, offset ‚Ì•À‚Ñ‚Í fseek() ‚Æ‹t
 {
-	if(_fseeki64(fp, offset, origin) != 0)
+	if (_fseeki64(fp, offset, origin) != 0)
 	{
 		error();
 	}
@@ -151,7 +151,7 @@ void fileRead(FILE *fp, autoBlock_t *block) // getSize(block) ƒoƒCƒg“Ç‚İ‚Ş‘O‚É
 {
 	uint size = getSize(block);
 
-	if(size)
+	if (size)
 	{
 		uint retsize = fread(directGetBuffer(block), 1, size, fp);
 
@@ -163,7 +163,7 @@ void fileWrite(FILE *fp, autoBlock_t *block)
 {
 	uint size = getSize(block);
 
-	if(size)
+	if (size)
 	{
 		uint retsize = fwrite(directGetBuffer(block), 1, size, fp);
 
@@ -186,12 +186,12 @@ autoBlock_t *readBinaryStream(FILE *fp, uint size) // size == 0 ‚Å‚à‰ÂB“Ç‚İI‚í
 	// EOF ‚Ì’¼‘O‚Ü‚½‚Í EOF ‚É’B‚µ‚Ä‚¢‚éê‡ 0 ‚ğ•Ô‚·B
 	readSize = fread(block, 1, size, fp);
 
-	if(size < readSize || (!readSize || readSize < size) && ferror(fp))
+	if (size < readSize || (!readSize || readSize < size) && ferror(fp))
 	{
 		error();
 	}
-//	if(!readSize && size) // ‚±‚Á‚¿‚Å‚à—Ç‚¢‚ñ‚Å‚È‚¢H
-	if(!readSize && feof(fp))
+//	if (!readSize && size) // ‚±‚Á‚¿‚Å‚à—Ç‚¢‚ñ‚Å‚È‚¢H
+	if (!readSize && feof(fp))
 	{
 		memFree(block);
 		return NULL;
@@ -202,7 +202,7 @@ autoBlock_t *readBinaryBlock(FILE *fp, uint size) // NULL ‚ğ•Ô‚³‚È‚¢B
 {
 	autoBlock_t *block = readBinaryStream(fp, size);
 
-	if(!block)
+	if (!block)
 		block = createBlock(0);
 
 	return block;
@@ -232,14 +232,14 @@ autoBlock_t *readBinaryToEnd(FILE *fp, autoBlock_t *buff) // buff: NULL == V‚µ‚
 {
 	errorCase(!fp); // 2bs
 
-	if(!buff)
+	if (!buff)
 		buff = newBlock();
 
 	for(; ; )
 	{
 		autoBlock_t *tmp = readBinaryStream(fp, 1024 * 1024 * 16);
 
-		if(!tmp)
+		if (!tmp)
 			break;
 
 		ab_addBytes_x(buff, tmp);
@@ -288,7 +288,7 @@ void writeBinaryBlock(FILE *fp, autoBlock_t *block) // getSize(block) == 0 ‚Å‚à‰
 {
 	uint ret;
 
-	if((ret = fwrite(directGetBuffer(block), 1, getSize(block), fp)) != getSize(block)) // fwrite(, 1, 0, ) ‚Ì‚Æ‚« 0 ‚ğ•Ô‚·B
+	if ((ret = fwrite(directGetBuffer(block), 1, getSize(block), fp)) != getSize(block)) // fwrite(, 1, 0, ) ‚Ì‚Æ‚« 0 ‚ğ•Ô‚·B
 	{
 		cout("fwrite error, ret: %u, block_size: %u, LastError: %08x\n", ret, getSize(block), GetLastError());
 		error();
@@ -314,7 +314,7 @@ int readChar(FILE *fp) // ƒoƒCƒiƒŠEƒeƒLƒXƒg–â‚í‚¸ƒXƒgƒŠ[ƒ€‚©‚ç‚PƒoƒCƒg(‚P•¶š)
 {
 	int chr = fgetc(fp);
 
-	if(chr == EOF && ferror(fp))
+	if (chr == EOF && ferror(fp))
 	{
 		error();
 	}
@@ -337,24 +337,24 @@ char *readLineLenMax(FILE *fp, uint lenmax)
 	{
 		chr = readChar(fp);
 
-		if(chr == '\r')
+		if (chr == '\r')
 		{
-			if(readChar(fp) != '\n') // ? CR-(not_LF)
+			if (readChar(fp) != '\n') // ? CR-(not_LF)
 			{
 				cout("Warning: Reading antiquity MAC file! %d\n", fp);
 			}
 			break;
 		}
-		if(chr == '\n' || chr == EOF)
+		if (chr == '\n' || chr == EOF)
 		{
 			break;
 		}
-		if(lenmax <= getSize(lineBuff))
+		if (lenmax <= getSize(lineBuff))
 		{
 			cout("Warning: Text line overflow! %d, Ignore 0x%02x and after.\n", fp, chr);
 			break;
 		}
-		if(chr == '\0')
+		if (chr == '\0')
 		{
 			chr = '\1';
 		}
@@ -363,7 +363,7 @@ char *readLineLenMax(FILE *fp, uint lenmax)
 	addByte(lineBuff, '\0');
 	line = unbindBlock(lineBuff);
 
-	if(line[0] == '\0' && chr == EOF)
+	if (line[0] == '\0' && chr == EOF)
 	{
 		memFree(line);
 		line = NULL;
@@ -378,7 +378,7 @@ char *readLine_strr(FILE *fp)
 {
 	char *line = readLine(fp);
 
-	if(line)
+	if (line)
 		line = strr(line);
 
 	return line;
@@ -387,7 +387,7 @@ char *nnReadLine(FILE *fp)
 {
 	char *line = readLine(fp);
 
-	if(!line)
+	if (!line)
 		line = strx("");
 
 	return line;
@@ -420,7 +420,7 @@ char *readText(char *file)
 	{
 		int chr = readChar(fp);
 
-		if(chr == EOF)
+		if (chr == EOF)
 		{
 			break;
 		}
@@ -435,7 +435,7 @@ char *readText_b(char *file)
 }
 void writeChar(FILE *fp, int chr) // ƒoƒCƒiƒŠEƒeƒLƒXƒg–â‚í‚¸ƒXƒgƒŠ[ƒ€‚É‚PƒoƒCƒg(‚P•¶š)‘‚«o‚·B
 {
-	if(fputc(chr, fp) == EOF)
+	if (fputc(chr, fp) == EOF)
 	{
 		error();
 	}
@@ -494,7 +494,7 @@ char *readFirstLine(char *file)
 	line = readLine(fp);
 	fileClose(fp);
 
-	if(!line)
+	if (!line)
 		line = strx("");
 
 	return line;
@@ -578,7 +578,7 @@ uint64 readValue64Width(FILE *fp, uint width)
 	{
 		int chr = readChar(fp);
 
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
 		value |= (uint64)chr << bcnt * 8;
@@ -647,7 +647,7 @@ FILE *buffUnbind(BUFF *bp)
 {
 	FILE *fp = bp->Fp;
 
-	if(bp->Buffer)
+	if (bp->Buffer)
 		releaseAutoBlock(bp->Buffer);
 
 	memFree(bp);
@@ -664,17 +664,17 @@ void buffClose(BUFF *bp)
 }
 int buffReadChar(BUFF *bp)
 {
-	if(!bp->Buffer)
+	if (!bp->Buffer)
 		goto read1storeof;
 
-	if(bp->Index == getSize(bp->Buffer))
+	if (bp->Index == getSize(bp->Buffer))
 	{
 		releaseAutoBlock(bp->Buffer);
 
 	read1storeof:
 		bp->Buffer = readBinaryStream(bp->Fp, bp->BuffSize);
 
-		if(!bp->Buffer)
+		if (!bp->Buffer)
 			return EOF;
 
 		bp->Index = 0;
@@ -683,17 +683,17 @@ int buffReadChar(BUFF *bp)
 }
 void buffUnreadChar(BUFF *bp, int chr)
 {
-	if(chr == EOF)
+	if (chr == EOF)
 		return;
 
-	if(!bp->Buffer)
+	if (!bp->Buffer)
 		bp->Buffer = newBlock();
 
 	insertByte(bp->Buffer, 0, chr);
 }
 void buffUnreadBuffer(BUFF *bp)
 {
-	if(!bp->Buffer)
+	if (!bp->Buffer)
 		return;
 
 	fileSeek(bp->Fp, SEEK_CUR, -(sint64)(getSize(bp->Buffer) - bp->Index));

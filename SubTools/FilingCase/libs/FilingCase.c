@@ -19,7 +19,7 @@ static int IsIds(autoList_t *lines)
 	uint index;
 
 	foreach(lines, line, index)
-		if(!IsId(line))
+		if (!IsId(line))
 			return 0;
 
 	return 1;
@@ -41,7 +41,7 @@ static char *NameOrIdToId(char *nameOrId)
 {
 	char *id;
 
-	if(IsId(nameOrId))
+	if (IsId(nameOrId))
 		id = nameOrId;
 	else
 		id = sha512_128Line(nameOrId);
@@ -82,7 +82,7 @@ void FC_Lock(void)
 {
 	errorCase(IMAX < LockedCount);
 
-	if(!LockedCount)
+	if (!LockedCount)
 		DoLock();
 
 	LockedCount++;
@@ -92,7 +92,7 @@ void FC_Unlock(void)
 	errorCase(!LockedCount);
 	LockedCount--;
 
-	if(!LockedCount)
+	if (!LockedCount)
 		DoUnlock();
 }
 
@@ -111,7 +111,7 @@ autoList_t *FC_GetAllTableId(void)
 
 	FC_Lock();
 	{
-		if(existDir(ROOT_DIR))
+		if (existDir(ROOT_DIR))
 			ret = lsDirs(ROOT_DIR);
 		else
 			ret = newList();
@@ -141,7 +141,7 @@ void FC_SwapTable(char *tableNameOrId1, char *tableNameOrId2)
 	dir2 = GetTableDir(tableId2);
 	dir3 = GetTableDir(tmpId);
 
-	if(!strcmp(tableId1, tableId2))
+	if (!strcmp(tableId1, tableId2))
 		goto endFunc;
 
 	FC_Lock();
@@ -207,7 +207,7 @@ autoList_t *FC_GetAllColumnId(char *tableNameOrId)
 
 	FC_Lock();
 	{
-		if(existDir(dir))
+		if (existDir(dir))
 			ret = lsDirs(dir);
 		else
 			ret = newList();
@@ -243,7 +243,7 @@ void FC_SwapColumn(char *tableNameOrId, char *columnNameOrId1, char *columnNameO
 	dir2 = GetColumnDir(tableId, columnId2);
 	dir3 = GetColumnDir(tableId, tmpId);
 
-	if(!strcmp(columnId1, columnId2))
+	if (!strcmp(columnId1, columnId2))
 		goto endFunc;
 
 	FC_Lock();
@@ -313,7 +313,7 @@ static autoList_t *GetVTRs(char *tableId, char *columnId, char *valueId)
 	char *dir = GetVTRDir(tableId, columnId, valueId);
 	autoList_t *ret;
 
-	if(existDir(dir))
+	if (existDir(dir))
 		ret = lsFiles(dir);
 	else
 		ret = newList();
@@ -357,7 +357,7 @@ autoBlock_t *FC_GetValue(char *tableNameOrId, char *rowNameOrId, char *columnNam
 
 	FC_Lock();
 	{
-		if(existFile(file))
+		if (existFile(file))
 			ret = readBinary(file);
 		else
 			ret = newBlock();
@@ -391,7 +391,7 @@ void FC_SetValue(char *tableNameOrId, char *rowNameOrId, char *columnNameOrId, a
 
 	FC_Lock();
 	{
-		if(existFile(file))
+		if (existFile(file))
 		{
 			{
 				autoBlock_t *oldValue = readBinary(file);
@@ -433,7 +433,7 @@ void FC_SetValue(char *tableNameOrId, char *rowNameOrId, char *columnNameOrId, a
 				memFree(tDir);
 			}
 		}
-		if(getSize(value))
+		if (getSize(value))
 		{
 			createPath(file, 'X');
 			writeBinary(file, value);
@@ -469,7 +469,7 @@ autoList_t *FC_GetRowIds(char *tableNameOrId, char *columnNameOrId, autoBlock_t 
 	errorCase(!columnNameOrId);
 	errorCase(!value);
 
-	if(!getSize(value))
+	if (!getSize(value))
 	{
 		autoList_t *rowIds = FC_GetTableAllRowId(tableNameOrId);
 		autoList_t *cIds = FC_GetAllRowId(tableNameOrId, columnNameOrId);
@@ -511,7 +511,7 @@ char *FC_GetRowId(char *tableNameOrId, char *columnNameOrId, autoBlock_t *value)
 
 	rowIds = FC_GetRowIds(tableNameOrId, columnNameOrId, value);
 
-	if(getCount(rowIds))
+	if (getCount(rowIds))
 		ret = (char *)unaddElement(rowIds);
 	else
 		ret = NULL;
@@ -581,7 +581,7 @@ autoList_t *FC_GetAllRowId(char *tableNameOrId, char *columnNameOrId)
 
 	FC_Lock();
 	{
-		if(existDir(dir))
+		if (existDir(dir))
 			ret = lsFiles(dir);
 		else
 			ret = newList();

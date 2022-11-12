@@ -95,7 +95,7 @@ static void DoTrep(void)
 		bgnPos = toValue64(getLine(tokens, c++));
 		endPos = toValue64(getLine(tokens, c++));
 
-		if(!rbtHasKey(f2SectTree, (uint)file))
+		if (!rbtHasKey(f2SectTree, (uint)file))
 			rbtAddValue(f2SectTree, (uint)file, (uint)newList());
 
 		sections = (autoList_t *)rbtGetLastAccessValue(f2SectTree);
@@ -124,12 +124,12 @@ static void DoTrep(void)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/-C"))
+	if (argIs("/-C"))
 	{
 		NoCheckMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		ForceMode = 1;
 		goto readArgs;
@@ -138,7 +138,7 @@ readArgs:
 
 	DestPtn = nextArg();
 
-	if(!NoCheckMode)
+	if (!NoCheckMode)
 	{
 		autoList_t *lines = readLines(SECTIONLISTFILE);
 		char *line;
@@ -197,7 +197,7 @@ readArgs:
 				fileClose(fp);
 				cout("\"\n");
 
-				if(knownSrcPtn)
+				if (knownSrcPtn)
 				{
 					multiSrcPtn      |=      strcmp(knownSrcPtn, srcPtn);
 					multiSrcPtnICase |= mbs_stricmp(knownSrcPtn, srcPtn);
@@ -207,32 +207,32 @@ readArgs:
 					knownSrcPtn = srcPtn;
 			}
 
-			if(!isChangeableRoot(file, currDir))
+			if (!isChangeableRoot(file, currDir))
 				foundOuterPath = 1;
 		}
 		cout("> \"%s\"\n", DestPtn);
 
-		if(multiSrcPtnICase)
+		if (multiSrcPtnICase)
 		{
 			cout("##########################\n");
 			cout("## 複数のパタンがあるよ ##\n");
 			cout("##########################\n");
 		}
-		else if(multiSrcPtn)
+		else if (multiSrcPtn)
 		{
 			cout("Ignore case かな？\n");
 		}
-		if(foundOuterPath)
+		if (foundOuterPath)
 			cout("カレントの配下じゃないのもあるよ。\n");
 
 		memFree(knownSrcPtn);
 		memFree(currDir);
 	}
-	if(!ForceMode)
+	if (!ForceMode)
 	{
 		cout("続行するには R を押して下さい。\n");
 
-		if(getKey() != 'R')
+		if (getKey() != 'R')
 			termination(0);
 
 		cout("続行します。\n");

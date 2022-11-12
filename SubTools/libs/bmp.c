@@ -65,7 +65,7 @@ autoList_t *readBMPFile(char *file)
 
 	hiSign = 0x80000000 & Bfi.Height;
 
-	if(hiSign)
+	if (hiSign)
 		Bfi.Height = (Bfi.Height ^ 0xffffffff) + 1;
 
 	errorCase(!Bfi.Width);
@@ -106,7 +106,7 @@ autoList_t *readBMPFile(char *file)
 	{
 		autoList_t *row = newList();
 
-		if(Bfi.BitCount <= 8)
+		if (Bfi.BitCount <= 8)
 		{
 			uint bitMax = 8 / Bfi.BitCount;
 			uint bit;
@@ -128,7 +128,7 @@ autoList_t *readBMPFile(char *file)
 				readChar(fp);
 			}
 		}
-		else if(Bfi.BitCount == 24)
+		else if (Bfi.BitCount == 24)
 		{
 			for(x = 0; x < Bfi.Width; x++)
 			{
@@ -169,7 +169,7 @@ autoList_t *readBMPFile(char *file)
 	}
 	fileClose(fp);
 
-	if(!hiSign)
+	if (!hiSign)
 		reverseElements(table); // 0 <= Bfi.Height ‚È‚çA‰º‚©‚çã (¶‚©‚ç‰E) ‚É•À‚ÔB
 
 	releaseAutoList(colorPallet);

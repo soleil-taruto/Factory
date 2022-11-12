@@ -19,7 +19,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 		while(hasKey())
 		{
-			if(getKey() == 0x1b)
+			if (getKey() == 0x1b)
 			{
 				cout("Perform Abort\n");
 				KeepServerRq = 0;
@@ -40,7 +40,7 @@ static int Perform(char *prmFile, char *ansFile)
 static int Idle(void)
 {
 	while(hasKey())
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 			KeepServerRq = 0;
 
 	return KeepServerRq;

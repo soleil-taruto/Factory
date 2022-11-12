@@ -19,7 +19,7 @@ static void Perform(int sock, int fwdSock)
 {
 	int successful = 0;
 
-	if(ServerMode)
+	if (ServerMode)
 	{
 		autoBlock_t *data = newBlock();
 
@@ -44,14 +44,14 @@ static void Perform(int sock, int fwdSock)
 		releaseAutoBlock(data);
 		releaseAutoBlock(bkData);
 	}
-	if(!successful)
+	if (!successful)
 		return;
 
 	CrossChannel(sock, fwdSock, NULL, 0, NULL, 0);
 }
 static int ReadArgs(void)
 {
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		ServerMode = 1;
 		return 1;

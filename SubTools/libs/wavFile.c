@@ -44,7 +44,7 @@ static int AV_Return;
 */
 static void AddValue(FILE *wfp, uint value)
 {
-	if(Fmt.ChannelNum == 1) // monoral
+	if (Fmt.ChannelNum == 1) // monoral
 	{
 		writeLine_x(wfp, xcout("%05u,%05u", value, value));
 	}
@@ -93,7 +93,7 @@ void readWAVFileToCSVFile(char *rFile, char *wFile)
 		uint size;
 		uint64 rPos;
 
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
 		name[0] = chr;
@@ -105,7 +105,7 @@ void readWAVFileToCSVFile(char *rFile, char *wFile)
 
 		errorCase_m(4200000000 < size, "チャンクサイズが大きすぎます。"); // HACK: 厳密な上限ではない。
 
-		if(!strcmp(name, "fmt "))
+		if (!strcmp(name, "fmt "))
 		{
 			errorCase_m(Fmt.Loaded, "複数のフォーマットチャンクは処理できません。"); // ? 2回目のフォーマットチャンク
 			errorCase(size < 16);
@@ -120,7 +120,7 @@ void readWAVFileToCSVFile(char *rFile, char *wFile)
 
 			fileSeek(rfp, SEEK_CUR, (sint64)size - 16);
 		}
-		else if(!strcmp(name, "data"))
+		else if (!strcmp(name, "data"))
 		{
 			errorCase_m(RawData.Pos != 0, "複数のデータチャンクは処理できません。"); // ? 2回目のデータチャンク
 
@@ -146,7 +146,7 @@ void readWAVFileToCSVFile(char *rFile, char *wFile)
 
 	fileSeek(rfp, SEEK_SET, RawData.Pos);
 
-	if(Fmt.BitPerSample == 8)
+	if (Fmt.BitPerSample == 8)
 	{
 		for(index = 0; index < RawData.Size; index++)
 		{
@@ -204,7 +204,7 @@ void writeWAVFileFromCSVFile(char *rFile, char *wFile, uint hz)
 		uint v1;
 		uint v2;
 
-		if(!row)
+		if (!row)
 			break;
 
 		v1 = toValue(getLine(row, 0));

@@ -56,7 +56,7 @@ static void LoadSaveData(void)
 {
 	char *file = GetSaveDataFile();
 
-	if(existFile(file))
+	if (existFile(file))
 	{
 		autoBlock_t *fileData = readBinary(file);
 		char *fileText;
@@ -84,7 +84,7 @@ static void OutputSaveData(void)
 
 	fileText = addLine_x(fileText, xcout("%u,%u", StageNo, HiScore));
 
-	if(ExtraOpened)
+	if (ExtraOpened)
 		fileText = addLine(fileText, NEW_LINE EXTRA_OPENED);
 
 	fileData = ab_makeBlockLine_x(fileText);
@@ -95,7 +95,7 @@ int main(int argc, char **argv)
 {
 	int changed = 0;
 
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		GameDir = nextArg();
 		goto readArgs;
@@ -120,32 +120,32 @@ int main(int argc, char **argv)
 	ShowSaveData();
 
 readArgs:
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		StageNo = toValue(nextArg());
 		changed = 1;
 		goto readArgs;
 	}
-	if(argIs("/H"))
+	if (argIs("/H"))
 	{
 		HiScore = toValue(nextArg());
 		changed = 1;
 		goto readArgs;
 	}
-	if(argIs("/E+"))
+	if (argIs("/E+"))
 	{
 		ExtraOpened = 1;
 		changed = 1;
 		goto readArgs;
 	}
-	if(argIs("/E-"))
+	if (argIs("/E-"))
 	{
 		ExtraOpened = 0;
 		changed = 1;
 		goto readArgs;
 	}
 
-	if(changed)
+	if (changed)
 	{
 		cout(">\n");
 

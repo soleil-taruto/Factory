@@ -31,18 +31,18 @@ int HFS_NM_LockPath(char *path, int checkOnlyMode) // ? ロック可能 || ロックした
 	cout("lines_num: %u\n", getCount(lines));
 
 	foreach(lines, line, index)
-		if(!mbs_stricmp(line, path))
+		if (!mbs_stricmp(line, path))
 			break;
 
 	releaseDim(lines, 1);
 	alreadyLocked = line ? 1 : 0;
 	cout("alreadyLocked: %d\n", alreadyLocked);
 
-	if(checkOnlyMode)
+	if (checkOnlyMode)
 	{
 		retval = !alreadyLocked;
 	}
-	else if(LOCKED_NUMMAX <= getCount(lines)) // ? try lock mode + overflow (ロック不可)
+	else if (LOCKED_NUMMAX <= getCount(lines)) // ? try lock mode + overflow (ロック不可)
 	{
 		cout("これ以上ロックできません。\n");
 		retval = 0;
@@ -71,7 +71,7 @@ void HFS_NM_UnlockPath(char *path)
 
 	foreach(lines, line, index)
 	{
-		if(!mbs_stricmp(line, path))
+		if (!mbs_stricmp(line, path))
 		{
 			cout("アンロックします。\n");
 			line[0] = '\0';

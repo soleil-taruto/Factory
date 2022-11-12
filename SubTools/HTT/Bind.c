@@ -47,7 +47,7 @@ static void ThrowHTTRequest(void)
 	static int sock = -1;
 	autoBlock_t *message;
 
-	if(sock != -1)
+	if (sock != -1)
 	{
 //		LOGPOS();
 		sockDisconnect(sock);
@@ -56,7 +56,7 @@ static void ThrowHTTRequest(void)
 	sock = sockConnect(ip, Domain, PortNo);
 //	cout("sock: %d\n", sock);
 
-	if(sock == -1)
+	if (sock == -1)
 	{
 		ConnectErrorCount++;
 		return;
@@ -80,7 +80,7 @@ static void DoWait(uint hdl, void (*interrupt)(void))
 
 	LOGPOS();
 
-	if(interrupt == ThrowHTTRequest)
+	if (interrupt == ThrowHTTRequest)
 	{
 		cout("ロックしようとしています...\n");
 		cout("+-----------------------------------+\n");
@@ -106,27 +106,27 @@ static void DoWait(uint hdl, void (*interrupt)(void))
 		Progress();
 		interrupt();
 
-		if(ConnectErrorMax != UINTMAX && ConnectErrorMax <= ConnectErrorCount)
+		if (ConnectErrorMax != UINTMAX && ConnectErrorMax <= ConnectErrorCount)
 		{
 			cout("CONNECT-ERROR-MAX\n");
 			cancelled = 1;
 			break;
 		}
-		if(handleWaitForMillis(hdl, 2000))
+		if (handleWaitForMillis(hdl, 2000))
 			break;
 
 		while(hasKey())
-			if(getKey() == 'F')
+			if (getKey() == 'F')
 				cancelled = 1;
 
-		if(cancelled)
+		if (cancelled)
 			break;
 	}
 	ProgressEnd(cancelled);
 
-	if(cancelled)
+	if (cancelled)
 	{
-		if(interrupt == ThrowHTTRequest)
+		if (interrupt == ThrowHTTRequest)
 		{
 			cout("+-------------------------+\n");
 			cout("| ロックせずに続行します。|\n");
@@ -141,7 +141,7 @@ static void DoWait(uint hdl, void (*interrupt)(void))
 	}
 	else // ? 成功
 	{
-		if(interrupt == ThrowHTTRequest)
+		if (interrupt == ThrowHTTRequest)
 		{
 			cout("ロックしました。\n");
 		}
@@ -171,7 +171,7 @@ static void LockClient(void)
 
 		mutex();
 		{
-			if(!existFile(CLIENT_LOCK_FLAG_FILE))
+			if (!existFile(CLIENT_LOCK_FLAG_FILE))
 			{
 				createFile(CLIENT_LOCK_FLAG_FILE);
 				unmutex();
@@ -183,15 +183,15 @@ static void LockClient(void)
 		sleep(2000); // 滅多に無さそうだから、スリープでいいや..
 
 		while(hasKey())
-			if(getKey() == 'F')
+			if (getKey() == 'F')
 				cancelled = 1;
 
-		if(cancelled)
+		if (cancelled)
 			break;
 	}
 	ProgressEnd(cancelled);
 
-	if(cancelled)
+	if (cancelled)
 		cout("他のクライアントをロックせずに続行します。\n"); // イレギュラー
 	else
 		cout("他のクライアントをロックしました。\n"); // 正規
@@ -206,7 +206,7 @@ static void UnlockClient(void)
 
 	mutex();
 	{
-		if(existFile(CLIENT_LOCK_FLAG_FILE))
+		if (existFile(CLIENT_LOCK_FLAG_FILE))
 		{
 			removeFile(CLIENT_LOCK_FLAG_FILE);
 			unlocked = 1;
@@ -214,7 +214,7 @@ static void UnlockClient(void)
 	}
 	unmutex();
 
-	if(unlocked)
+	if (unlocked)
 		cout("他のクライアントのロックを解除しました。\n"); // 正規
 	else
 		cout("他のクライアントはロックされていません。\n"); // イレギュラー
@@ -228,12 +228,12 @@ int main(int argc, char **argv)
 	int hdlLocked = eventOpen(LOCKED_EVENT_UUID);
 	int hdlUnlock = eventOpen(UNLOCK_EVENT_UUID);
 
-	if(argIs("/S")) // Service
+	if (argIs("/S")) // Service
 	{
 //		LOGPOS();
 		handleWaitForever(hdlMtx);
 		{
-			if(!existFile(SERVER_LOCK_FLAG_FILE))
+			if (!existFile(SERVER_LOCK_FLAG_FILE))
 			{
 				mutexRelease(hdlMtx);
 //				LOGPOS();
@@ -249,12 +249,12 @@ int main(int argc, char **argv)
 		DoWakeup(hdlLocked);
 		DoWait(hdlUnlock, noop);
 	}
-	else if(argIs("/L")) // Lock
+	else if (argIs("/L")) // Lock
 	{
 		Domain = nextArg();
 		PortNo = toValue(nextArg());
 
-		if(argIs("/CEX"))
+		if (argIs("/CEX"))
 			ConnectErrorMax = toValue(nextArg());
 
 		errorCase(hasArgs(1)); // 不明なオプション
@@ -275,7 +275,7 @@ int main(int argc, char **argv)
 		DoWait(hdlLocked, ThrowHTTRequest);
 		SockCleanup();
 	}
-	else if(argIs("/U")) // Unlock
+	else if (argIs("/U")) // Unlock
 	{
 		DoWakeup(hdlUnlock);
 		UnlockClient();

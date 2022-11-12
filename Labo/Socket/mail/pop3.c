@@ -49,7 +49,7 @@ static autoList_t *RecvMail(SockStream_t *ss, uint mailno)
 
 	for(; ; )
 	{
-		if(IsEOFSockStream(ss))
+		if (IsEOFSockStream(ss))
 		{
 			cout("endStream\n");
 			overCount = 1;
@@ -57,7 +57,7 @@ static autoList_t *RecvMail(SockStream_t *ss, uint mailno)
 		}
 		line = RecvBinLineDisp(ss);
 
-		if(!strcmp(line, ".")) // ? メール本体の終了
+		if (!strcmp(line, ".")) // ? メール本体の終了
 		{
 			memFree(line);
 			break;
@@ -65,14 +65,14 @@ static autoList_t *RecvMail(SockStream_t *ss, uint mailno)
 		szCount += strlen(line);
 		szCount += 1 + 4; // null char + element of lines
 
-		if(overCount || MailSizeMax < szCount)
+		if (overCount || MailSizeMax < szCount)
 		{
 			memFree(line);
 
 			overCount++;
 			cout("overCount: %u, %f\n", overCount, overCount / (double)IMAX);
 
-			if(IMAX < overCount) // もう諦める。
+			if (IMAX < overCount) // もう諦める。
 				break;
 		}
 		else
@@ -80,7 +80,7 @@ static autoList_t *RecvMail(SockStream_t *ss, uint mailno)
 	}
 	cout("szCount: %u\n", szCount);
 
-	if(overCount)
+	if (overCount)
 	{
 		releaseDim(lines, 1);
 		lines = NULL;
@@ -109,7 +109,7 @@ static void Perform(int sock)
 	line = RecvLineDisp(ss); // maybe +OK <mail-num> <total-size>
 	tokens = tokenize(line, ' ');
 
-	if(!strcmp("+OK", refLine(tokens, 0)))
+	if (!strcmp("+OK", refLine(tokens, 0)))
 	{
 		mailnum = toValue(refLine(tokens, 1));
 	}
@@ -126,12 +126,12 @@ static void Perform(int sock)
 	{
 		autoList_t *mail = RecvMail(ss, mailno);
 
-		if(RecvAndDeleteMode) // 存在するけど受信できないメールがあった場合それを削除するために break; より前に DELE を実行する。
+		if (RecvAndDeleteMode) // 存在するけど受信できないメールがあった場合それを削除するために break; より前に DELE を実行する。
 		{
 			SendLineDisp_x(ss, xcout("DELE %u", mailno));
 			memFree(RecvLineDisp(ss)); // maybe +OK
 		}
-		if(!mail)
+		if (!mail)
 			break;
 
 		addElement(MailList, (uint)mail);

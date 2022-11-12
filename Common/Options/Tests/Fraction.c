@@ -3,7 +3,7 @@
 
 static void PrintString(char *str, Fraction_t *i, int printFraction)
 {
-	if(printFraction)
+	if (printFraction)
 	{
 		char *iStr = Frct_ToFractionLine(i);
 
@@ -25,12 +25,12 @@ int main(int argc, char **argv)
 	int operator;
 
 readArgs:
-	if(argIs("/B"))
+	if (argIs("/B"))
 	{
 		basement = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		printFraction = 1;
 		goto readArgs;

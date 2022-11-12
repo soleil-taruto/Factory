@@ -11,7 +11,7 @@
 
 	main() {
 		uint hdl;
-		if(hdl = mutexTryLock("MUTEX_NAME")) {
+		if (hdl = mutexTryLock("MUTEX_NAME")) {
 			ロック中
 			mutexUnlock(hdl);
 		}
@@ -33,7 +33,7 @@
 
 	main() {
 		uint hdl = mutexOpen("MUTEX_NAME");
-		if(handleWaitForMillis(hdl, TIMEOUT_MILLIS)) {
+		if (handleWaitForMillis(hdl, TIMEOUT_MILLIS)) {
 			ロック中
 			mutexRelease(hdl);
 		}
@@ -49,7 +49,7 @@ uint mutexOpen(char *mutexName)
 	hdl = CreateMutexA(NULL, FALSE, mutexName);
 //	memFree(mutexName);
 
-	if(hdl == NULL)
+	if (hdl == NULL)
 	{
 		error();
 	}
@@ -57,7 +57,7 @@ uint mutexOpen(char *mutexName)
 }
 void handleClose(uint hdl)
 {
-	if(CloseHandle((HANDLE)hdl) == 0)
+	if (CloseHandle((HANDLE)hdl) == 0)
 	{
 		error();
 	}
@@ -67,11 +67,11 @@ int handleWaitForMillis(uint hdl, uint millis)
 {
 	uint retval = WaitForSingleObject((HANDLE)hdl, millis);
 
-	if(retval == WAIT_OBJECT_0)
+	if (retval == WAIT_OBJECT_0)
 	{
 		return 1; // シグナル状態 (ロック成功)
 	}
-	if(retval == WAIT_TIMEOUT)
+	if (retval == WAIT_TIMEOUT)
 	{
 		return 0;
 	}
@@ -80,7 +80,7 @@ int handleWaitForMillis(uint hdl, uint millis)
 }
 void handleWaitForever(uint hdl)
 {
-	if(!handleWaitForMillis(hdl, INFINITE))
+	if (!handleWaitForMillis(hdl, INFINITE))
 	{
 		error();
 	}
@@ -93,14 +93,14 @@ int mltHandleWaitForMillis(autoList_t *hdls, uint millis, uint *pIndex) // *pInd
 
 	retval = WaitForMultipleObjects(getCount(hdls), (HANDLE *)directGetList(hdls), FALSE, millis);
 
-	if(WAIT_OBJECT_0 <= retval && retval < WAIT_OBJECT_0 + getCount(hdls))
+	if (WAIT_OBJECT_0 <= retval && retval < WAIT_OBJECT_0 + getCount(hdls))
 	{
-		if(pIndex)
+		if (pIndex)
 			*pIndex = retval - WAIT_OBJECT_0;
 
 		return 1; // シグナル状態 (ロック成功)
 	}
-	if(retval == WAIT_TIMEOUT)
+	if (retval == WAIT_TIMEOUT)
 	{
 		return 0;
 	}
@@ -109,14 +109,14 @@ int mltHandleWaitForMillis(autoList_t *hdls, uint millis, uint *pIndex) // *pInd
 }
 void mltHandleWaitForever(autoList_t *hdls, uint *pIndex)
 {
-	if(!mltHandleWaitForMillis(hdls, INFINITE, pIndex))
+	if (!mltHandleWaitForMillis(hdls, INFINITE, pIndex))
 	{
 		error();
 	}
 }
 void mutexRelease(uint hdl)
 {
-	if(ReleaseMutex((HANDLE)hdl) == 0)
+	if (ReleaseMutex((HANDLE)hdl) == 0)
 	{
 		error();
 	}
@@ -133,7 +133,7 @@ uint mutexTryLock(char *mutexName)
 {
 	uint hdl = mutexOpen(mutexName);
 
-	if(handleWaitForMillis(hdl, 0))
+	if (handleWaitForMillis(hdl, 0))
 		return hdl;
 
 	handleClose(hdl);
@@ -143,7 +143,7 @@ uint mutexTryProcLock(char *mutexName)
 {
 	uint hdl = mutexTryLock(mutexName);
 
-	if(!hdl)
+	if (!hdl)
 		termination(1);
 
 	return hdl;
@@ -161,7 +161,7 @@ static uint CommonLockCount;
 
 void mutex(void)
 {
-	if(!CommonLockCount)
+	if (!CommonLockCount)
 	{
 		CommonHandle = mutexLock(COMMONMUTEXNAME);
 	}
@@ -172,7 +172,7 @@ void unmutex(void)
 	errorCase(!CommonLockCount);
 
 	CommonLockCount--;
-	if(!CommonLockCount)
+	if (!CommonLockCount)
 	{
 		mutexUnlock(CommonHandle);
 	}
@@ -205,7 +205,7 @@ void unmutex(void)
 
 		uint hdl = eventOpen("test");
 		ループ {
-			if(handleWaitForMillis(hdl, 500)) {
+			if (handleWaitForMillis(hdl, 500)) {
 				処理
 			}
 		}
@@ -216,7 +216,7 @@ uint eventOpen(char *eventName)
 {
 	HANDLE hdl = CreateEventA(NULL, FALSE, FALSE, eventName);
 
-	if(hdl == NULL)
+	if (hdl == NULL)
 	{
 		error();
 	}
@@ -224,7 +224,7 @@ uint eventOpen(char *eventName)
 }
 void eventSet(uint hdl)
 {
-	if(SetEvent((HANDLE)hdl) == 0)
+	if (SetEvent((HANDLE)hdl) == 0)
 	{
 		error();
 	}

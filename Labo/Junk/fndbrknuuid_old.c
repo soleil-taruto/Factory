@@ -11,13 +11,13 @@ static uint GetMeaningCharPct(char *p)
 
 	while(*p != '}')
 	{
-		if(m_ishexadecimal(*p) || *p == '-')
+		if (m_ishexadecimal(*p) || *p == '-')
 			numer++;
 
 		denom++;
 		p++;
 	}
-	if(!denom)
+	if (!denom)
 		return 0;
 
 	return (numer * 100) / denom;
@@ -29,7 +29,7 @@ static void FormatFltr(char *line)
 	disctrl(line);
 
 	for(p = line; *p; p++)
-		if(m_ishexadecimal(*p))
+		if (m_ishexadecimal(*p))
 			*p = '9';
 }
 static void FindBrokenUUID_File(char *file)
@@ -46,11 +46,11 @@ static void FindBrokenUUID_File(char *file)
 		{
 			p = strchr(p, '{');
 
-			if(!p)
+			if (!p)
 				break;
 
 			// ? uuidらしきパターンを発見した。
-			if(
+			if (
 				(
 					lineExp("{<1,1,!\xff><>}<>", p) ||
 					lineExp("{<><1,1,!\xff>}<>", p)
@@ -62,7 +62,7 @@ static void FindBrokenUUID_File(char *file)
 
 				FormatFltr(fmt);
 
-				if(!startsWith(fmt, UUID_FMT)) // ? uuidと一致しない。
+				if (!startsWith(fmt, UUID_FMT)) // ? uuidと一致しない。
 				{
 					cout("%s %u\n", file, index + 1);
 				}
@@ -77,7 +77,7 @@ static int IsTargetFile(char *file)
 {
 	char *ext;
 
-	if(!_stricmp(file, getSelfFile()))
+	if (!_stricmp(file, getSelfFile()))
 	{
 //		LOGPOS();
 		return 0;
@@ -93,14 +93,14 @@ static int IsTargetFile(char *file)
 }
 static void FindBrokenUUID(char *path)
 {
-	if(existDir(path))
+	if (existDir(path))
 	{
 		autoList_t *files = lssFiles(path);
 		char *file;
 		uint index;
 
 		foreach(files, file, index)
-			if(IsTargetFile(file))
+			if (IsTargetFile(file))
 				FindBrokenUUID_File(file);
 
 		releaseDim(files, 1);

@@ -20,7 +20,7 @@ static void MakeImage(void)
 	{
 		int color = 0;
 
-		if(0 < x && x < XSIZE - 1 && 0 < y && y < YSIZE - 1)
+		if (0 < x && x < XSIZE - 1 && 0 < y && y < YSIZE - 1)
 		{
 			color = (x + y) % 5 < 3 ? 0xff0000 : 0xffffff;
 		}

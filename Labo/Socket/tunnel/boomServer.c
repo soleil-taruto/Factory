@@ -109,7 +109,7 @@ static void BoomerangRecv(SockStream_t *ss)
 	uint crc16;
 	uint r_crc16;
 
-	if(!RecvCredential)
+	if (!RecvCredential)
 	{
 		RecvCredential = nobCreateBlock(CREDENTIAL_SIZE);
 		RecvData = newBlock();
@@ -118,7 +118,7 @@ static void BoomerangRecv(SockStream_t *ss)
 
 	recvSize = blockToValue(block);
 
-	if(recvSize < HEADER_SIZE || RecvSizeMax < recvSize)
+	if (recvSize < HEADER_SIZE || RecvSizeMax < recvSize)
 		goto errorEnd;
 
 	recvSize -= HEADER_SIZE;
@@ -135,7 +135,7 @@ static void BoomerangRecv(SockStream_t *ss)
 
 	cout("CRC16=%04x, R_CRC16=%04x\n", crc16, r_crc16);
 
-	if(crc16 != r_crc16)
+	if (crc16 != r_crc16)
 		goto errorEnd;
 
 	return;
@@ -187,22 +187,22 @@ static int Perform(int sock, uint prm)
 	SockStream_t *ss = *(SockStream_t **)prm;
 	Session_t *session;
 
-	if(!ss)
+	if (!ss)
 	{
 		ss = CreateSockStream(sock, SockTimeoutSec);
 		*(SockStream_t **)prm = ss;
 	}
-	if(!SockRecvCharWait(ss, 100))
+	if (!SockRecvCharWait(ss, 100))
 		return 1;
 
 	BoomerangRecv(ss);
 
-	if(RecvFlag == 'E') // Error
+	if (RecvFlag == 'E') // Error
 		goto errorEnd;
 
 	// init
 	{
-		if(!SendCredential)
+		if (!SendCredential)
 		{
 			SendCredential = nobCreateBlock(CREDENTIAL_SIZE);
 			SendData = newBlock();
@@ -212,19 +212,19 @@ static int Perform(int sock, uint prm)
 		nobSetSize(SendData, 0);
 	}
 
-	if(!rbtHasKey(SessionTree, (uint)RecvCredential))
+	if (!rbtHasKey(SessionTree, (uint)RecvCredential))
 	{
 		static uchar ip[4];
 		int fwdSock;
 
-		if(RecvFlag == 'D') // Disconnect
+		if (RecvFlag == 'D') // Disconnect
 		{
 			cout("Information: 存在しないセッションの切断要求を受信しました。\n");
 setConsoleColor(0x0e); // test
 			SendFlag = 'D'; // Disconnect
 			goto doSend;
 		}
-		if(ConnectMax < rbtGetCount(SessionTree))
+		if (ConnectMax < rbtGetCount(SessionTree))
 		{
 			LOGPOS();
 			SendFlag = 'E'; // Error
@@ -232,7 +232,7 @@ setConsoleColor(0x0e); // test
 		}
 		fwdSock = sockConnect(ip, FwdHost, FwdPortNo);
 
-		if(fwdSock == -1)
+		if (fwdSock == -1)
 		{
 			LOGPOS();
 			SendFlag = 'D'; // Disconnect
@@ -245,7 +245,7 @@ setConsoleColor(0x0e); // test
 	else
 		session = (Session_t *)rbtGetLastAccessValue(SessionTree);
 
-	if(RecvFlag == 'D') // Disconnect
+	if (RecvFlag == 'D') // Disconnect
 	{
 		LOGPOS();
 		rbtUnaddLastAccessValue(SessionTree);
@@ -255,13 +255,13 @@ setConsoleColor(0x0e); // test
 	}
 	UpdateNoConnectTimeout(session);
 
-	if(RecvFlag == (session->LastForegroundFlag ? 'F' : 'B'))
+	if (RecvFlag == (session->LastForegroundFlag ? 'F' : 'B'))
 	{
 		LOGPOS();
 		addBytes(SendData, session->LastSendData);
 		goto doSend;
 	}
-	if(!AddCommSendData(session->Comm, RecvData, 0)) // ? 失敗
+	if (!AddCommSendData(session->Comm, RecvData, 0)) // ? 失敗
 	{
 		LOGPOS();
 		SendFlag = 'E'; // Error
@@ -269,7 +269,7 @@ setConsoleColor(0x0e); // test
 	}
 	ab_addBytes_x(SendData, GetCommRecvData(session->Comm, SendSizeMax));
 
-	if(IsCommDeadAndEmpty(session->Comm) && !getSize(SendData))
+	if (IsCommDeadAndEmpty(session->Comm) && !getSize(SendData))
 	{
 		LOGPOS();
 		rbtUnaddLastAccessValue(SessionTree);
@@ -296,7 +296,7 @@ static void ReleaseInfo(uint prm)
 {
 	SockStream_t *ss = *(SockStream_t **)prm;
 
-	if(ss)
+	if (ss)
 		ReleaseSockStream(ss);
 
 	memFree((SockStream_t **)prm);
@@ -324,7 +324,7 @@ static void OpenStopEvent(void)
 }
 static int StopEvent_HasSignal(void)
 {
-	if(collectEvents(StopEventHdl, 0))
+	if (collectEvents(StopEventHdl, 0))
 	{
 		LOGPOS();
 		return 1;
@@ -341,7 +341,7 @@ static void StopEvent_Set(void)
 
 static int Idle(void)
 {
-	if(rbtGetCount(SessionTree))
+	if (rbtGetCount(SessionTree))
 	{
 		uint remain;
 
@@ -360,7 +360,7 @@ static int Idle(void)
 
 			rbtJumpForLeft(SessionTree);
 
-			if(IsNoConnectTimeout(session)) // 削除
+			if (IsNoConnectTimeout(session)) // 削除
 			{
 				cout("Information: 無接続タイムアウト\n");
 setConsoleColor(0x0d); // test
@@ -371,10 +371,10 @@ setConsoleColor(0x0d); // test
 	}
 
 	while(hasKey())
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 			ProcDeadFlag = 1;
 
-	if(StopEvent_HasSignal())
+	if (StopEvent_HasSignal())
 		ProcDeadFlag = 1;
 
 	return !ProcDeadFlag;
@@ -392,32 +392,32 @@ int main(int argc, char **argv)
 	OpenStopEvent();
 
 readArgs:
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		StopEvent_Set();
 		goto endFunc;
 	}
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		ConnectMax = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/SS"))
+	if (argIs("/SS"))
 	{
 		SendSizeMax = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/RS"))
+	if (argIs("/RS"))
 	{
 		RecvSizeMax = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		SockTimeoutSec = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/NCT"))
+	if (argIs("/NCT"))
 	{
 		NoConnectTimeoutSec = toValue(nextArg());
 		goto readArgs;

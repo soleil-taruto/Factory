@@ -22,12 +22,12 @@ static char *GetBoundary(void)
 	{
 		int chr;
 
-		if(100 < index) // boundary文字列は70文字以下
+		if (100 < index) // boundary文字列は70文字以下
 			break;
 
 		chr = getByte(Content, index);
 
-		if(chr == '\r')
+		if (chr == '\r')
 			break;
 	}
 	return unbindBlock2Line(getSubBytes(Content, 2, index - 2));
@@ -49,12 +49,12 @@ static void Perform(int sock)
 	header = addLine(header, Content ? "POST" : "GET");
 	header = addChar(header, ' ');
 
-	if(ProxyDomain)
+	if (ProxyDomain)
 	{
 		header = addLine(header, "http://");
 		header = addLine(header, Domain);
 
-		if(Portno != 80)
+		if (Portno != 80)
 			header = addLine_x(header, xcout(":%u", Portno));
 	}
 	header = addLine(header, Path);
@@ -69,7 +69,7 @@ static void Perform(int sock)
 	header = addLine(header, "Host: ");
 	header = addLine(header, Domain);
 
-	if(Portno != 80)
+	if (Portno != 80)
 		header = addLine_x(header, xcout(":%u", Portno));
 
 	SockSendLine(ss, header);
@@ -77,11 +77,11 @@ static void Perform(int sock)
 
 	// 拡張ヘッダフィールド
 
-	if(httpExtraHeader)
+	if (httpExtraHeader)
 	{
 		foreach(httpExtraHeader, header, index)
 		{
-			if(startsWithICase(header, "Content-Type:"))
+			if (startsWithICase(header, "Content-Type:"))
 				ctflag = 1;
 
 			SockSendLine(ss, header);
@@ -90,18 +90,18 @@ static void Perform(int sock)
 
 	// ContentTypeフィールド
 
-	if(Content && getSize(Content) && !ctflag)
+	if (Content && getSize(Content) && !ctflag)
 	{
 		int chr = getByte(Content, 0);
 
-		if(chr == '-')
+		if (chr == '-')
 		{
 			char *boundary = GetBoundary();
 
 			SockSendLine_x(ss, xcout("Content-Type: multipart/form-data; boundary=\"%s\"", boundary));
 			memFree(boundary);
 		}
-		else if(chr == '{')
+		else if (chr == '{')
 		{
 			SockSendLine(ss, "Content-Type: application/json");
 		}
@@ -113,7 +113,7 @@ static void Perform(int sock)
 
 	// ContentLengthフィールド + Content
 
-	if(Content)
+	if (Content)
 	{
 		SockSendLine_x(ss, xcout("Content-Length: %u", getSize(Content)));
 		SockSendLine(ss, "");
@@ -131,7 +131,7 @@ static void Perform(int sock)
 	/*
 		httpRecvRequest*()をレスポンスの受信に使う。
 	*/
-	if(RetContFile)
+	if (RetContFile)
 	{
 		httpRecvRequestFile(ss, &header, RetContFile); // RetContFile は必ず作成される。(失敗時は空)
 
@@ -146,7 +146,7 @@ static void Perform(int sock)
 
 	RetContent = bindBlock(content, csize);
 
-	if(IsEOFSockStream(ss) && !ss->Extra.M4UServerMode_Operated)
+	if (IsEOFSockStream(ss) && !ss->Extra.M4UServerMode_Operated)
 	{
 		releaseAutoBlock(RetContent);
 		RetContent = NULL;
@@ -188,7 +188,7 @@ autoBlock_t *httpSendRequest(char *domain, uint portno, char *proxyDomain, uint 
 	RetContentSizeMax = sizemax;
 	RetContent = NULL;
 
-	if(proxyDomain)
+	if (proxyDomain)
 	{
 		domain = proxyDomain;
 		portno = proxyPortno;
@@ -218,7 +218,7 @@ int httpSendRequestFile(char *domain, uint portno, char *proxyDomain, uint proxy
 	dmyCont = httpSendRequest(domain, portno, proxyDomain, proxyPortno, path, content, timeout, 0);
 	RetContFile = NULL;
 
-	if(dmyCont)
+	if (dmyCont)
 	{
 		releaseAutoBlock(dmyCont);
 		return 1;

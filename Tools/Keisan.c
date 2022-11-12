@@ -42,7 +42,7 @@
 
 static char *LeftPad(char *line)
 {
-	if(strlen(line) & 1)
+	if (strlen(line) & 1)
 	{
 		static char *padLine;
 
@@ -80,7 +80,7 @@ static void DispHexOp(autoList_t *op, uint bound, char *title)
 
 	op = copyAutoList(op);
 
-	if(getCount(op) < bound)
+	if (getCount(op) < bound)
 	{
 		setCount(op, bound);
 	}
@@ -89,7 +89,7 @@ static void DispHexOp(autoList_t *op, uint bound, char *title)
 
 	foreach(op, value, index)
 	{
-		if(index)
+		if (index)
 		{
 			cout(":");
 		}
@@ -108,7 +108,7 @@ static void HexKeisan(void)
 	int op;
 
 // readArgs:
-	if(argIs("/B")) // Bound
+	if (argIs("/B")) // Bound
 	{
 		bound = toValue(nextArg());
 //		goto readArgs;
@@ -174,7 +174,7 @@ static void SetMemory(char *key, char *value)
 {
 	uint index = findLineCase(MemoryKeys, key, 1);
 
-	if(index < getCount(MemoryKeys))
+	if (index < getCount(MemoryKeys))
 	{
 		memFree(getLine(MemoryValues, index));
 		setElement(MemoryValues, index, (uint)strx(value));
@@ -192,7 +192,7 @@ static char *GetMemory(char *key)
 
 static char *InsSepOp(char *line, uint ranks)
 {
-	if(ranks) // x , n -> x Ç… n åÖçèÇ›Ç≈ ',' Çì¸ÇÍÇÈÅB
+	if (ranks) // x , n -> x Ç… n åÖçèÇ›Ç≈ ',' Çì¸ÇÍÇÈÅB
 	{
 		uint decpidx = (uint)strchrEnd(line, '.') - (uint)line;
 		uint index;
@@ -205,7 +205,7 @@ static char *InsSepOp(char *line, uint ranks)
 			index -= ranks;
 			line = insertChar(line, index, ',');
 		}
-		if(startsWith(line, "-,"))
+		if (startsWith(line, "-,"))
 			eraseChar(line + 1);
 	}
 	else // x , 0 -> í∑Ç≥Çï‘Ç∑ÅB
@@ -228,7 +228,7 @@ static char *Permutation(uint v1, uint v2, uint radix)
 	{
 		ans = calcLine_xx(ans, '*', changeRadixCalcLine_x(xcout("%u", count), 10, radix, 0), radix, 0);
 
-		if(v1 <= count)
+		if (v1 <= count)
 			break;
 	}
 	return ans;
@@ -253,29 +253,29 @@ static void Main2(void)
 
 	InitMemory();
 
-	if(argIs("/H")) // Hex
+	if (argIs("/H")) // Hex
 	{
 		HexKeisan();
 		goto endFunc;
 	}
 
 readArgs:
-	if(argIs("/R") || argIs("/X")) // Radix
+	if (argIs("/R") || argIs("/X")) // Radix
 	{
 		radix = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/B")) // Basement
+	if (argIs("/B")) // Basement
 	{
 		basement = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		calcBracketedDecimalMin = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/-M"))
+	if (argIs("/-M"))
 	{
 		noShowMarume = 1;
 		goto readArgs;
@@ -289,7 +289,7 @@ readArgs:
 		op2 = strx(nextArg());
 		onceNoShowMarume = 0;
 
-		if(op2[0] == '@')
+		if (op2[0] == '@')
 		{
 			ans = strx(GetMemory(op2 + 1));
 			memFree(op2);
@@ -346,11 +346,11 @@ readArgs:
 		default:
 			error();
 		}
-		if(calcLastMarume && !noShowMarume && !onceNoShowMarume)
+		if (calcLastMarume && !noShowMarume && !onceNoShowMarume)
 		{
 			char *tmp;
 
-			if(m_tolower(*pop) == 'l')
+			if (m_tolower(*pop) == 'l')
 				tmp = calcLineToMarume(ans, 0);
 			else
 				tmp = calcLineToMarume(ans, basement);

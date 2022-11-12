@@ -10,7 +10,7 @@ static void FileToStream(char *rFile, FILE *wFp)
 	{
 		autoBlock_t *buff = readBinaryStream(rFp, 512000000);
 
-		if(!buff)
+		if (!buff)
 			break;
 
 		LOGPOS();

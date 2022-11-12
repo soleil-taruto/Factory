@@ -25,7 +25,7 @@ static void LoadData(char *domain)
 {
 	char *saveDataFile = GetSaveDataFile(domain);
 
-	if(existFile(saveDataFile))
+	if (existFile(saveDataFile))
 	{
 		FILE *fp = fileOpen(saveDataFile, "rt");
 
@@ -41,7 +41,7 @@ static void LoadData(char *domain)
 	}
 	memFree(saveDataFile);
 
-	if(existFile(COMMON_SAVE_DATA_FILE))
+	if (existFile(COMMON_SAVE_DATA_FILE))
 	{
 		FILE *fp = fileOpen(COMMON_SAVE_DATA_FILE, "rt");
 
@@ -91,13 +91,13 @@ static char *GetIP_x(char *command)
 	{
 		coExecute(command);
 
-		if(existFile(IP_OUT_FILE))
+		if (existFile(IP_OUT_FILE))
 		{
 			ip = readFirstLine(IP_OUT_FILE);
 
 			coutJLine_x(xcout("Recved_IP.1=[%s]", ip)); // test
 
-			if(!lineExp("<1,3,09>.<1,3,09>.<1,3,09>.<1,3,09>", ip)) // ? ! IP address
+			if (!lineExp("<1,3,09>.<1,3,09>.<1,3,09>.<1,3,09>", ip)) // ? ! IP address
 			{
 				memFree(ip);
 				ip = NULL;
@@ -142,11 +142,11 @@ static void CheckDyIP(char *domain)
 
 	cout("currTime - RecentDyIPGotTime == %I64d\n", currTime - RecentDyIPGotTime);
 
-	if(RecentDyIPGotTime + 90 < currTime) // ? timeout
+	if (RecentDyIPGotTime + 90 < currTime) // ? timeout
 	{
 		dyIP = GetDyIP();
 
-		if(dyIP)
+		if (dyIP)
 		{
 			memFree(RecentDyIP);
 			RecentDyIP = strx(dyIP);
@@ -161,9 +161,9 @@ static void CheckDyIP(char *domain)
 	}
 	domainIP = GetDomainIP(domain);
 
-	if(dyIP && domainIP)
+	if (dyIP && domainIP)
 	{
-		if(strcmp(dyIP, domainIP))
+		if (strcmp(dyIP, domainIP))
 		{
 			cout("IP•sˆê’v\n");
 			retCode = 1;
@@ -173,16 +173,16 @@ static void CheckDyIP(char *domain)
 	else
 		NoIPCount++;
 
-	if(3 <= NoIPCount)
-//	if(10 < NoIPCount)
+	if (3 <= NoIPCount)
+//	if (10 < NoIPCount)
 		retCode = 1;
 
 	cout("currTime - LastUpdatedTime == %.3f\n", (currTime - LastUpdatedTime) / 86400.0);
 
-	if(LastUpdatedTime + 35 * 86400 < currTime) // ? timeout
+	if (LastUpdatedTime + 35 * 86400 < currTime) // ? timeout
 		retCode = 1;
 
-	if(retCode)
+	if (retCode)
 	{
 		NoIPCount = 0;
 		LastUpdatedTime = currTime;

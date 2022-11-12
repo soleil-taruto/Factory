@@ -28,7 +28,7 @@ static void Perform(int sock)
 	{
 		char *line = SockRecvLine(ss, 5);
 
-		if(!memcmp(line, "HTTP/", 5))
+		if (!memcmp(line, "HTTP/", 5))
 		{
 			ConnectStatus = "[OK]";
 			ConnectFault = 0;
@@ -43,18 +43,18 @@ static void ParseUrl(char *url)
 {
 	char *p = strstr(url, "://");
 
-	if(p)
+	if (p)
 		url = p + 3;
 
 	Domain = strx(url);
 	p = strchr(Domain, '/');
 
-	if(p)
+	if (p)
 		*p = '\0';
 
 	p = strchr(Domain, ':');
 
-	if(p)
+	if (p)
 	{
 		*p = '\0';
 		PortNo = toValue(p + 1);
@@ -91,20 +91,20 @@ static void WebMon(char *url)
 			et = now();
 			dt = et - st;
 
-			if(4 < dt)
+			if (4 < dt)
 				cout("Information: 通信に %d 秒掛かりました。\n", dt);
 
-			if(!ConnectFault)
+			if (!ConnectFault)
 				break;
 
 			c--;
 
-			if(c)
+			if (c)
 				cout("Warning: 通信に失敗しました。%s あと %u 回リトライします。\n", ConnectStatus, c);
 
 			Sleep(5000);
 		}
-		if(ConnectFault)
+		if (ConnectFault)
 			ConnectFaultCount++;
 
 		cout("%s %s:%u %s NG=%u\n", c_makeJStamp(NULL, 0), Domain, PortNo, ConnectStatus, ConnectFaultCount);
@@ -142,7 +142,7 @@ int main(int argc, char **argv)
 {
 	char *url;
 
-	if(argIs("/PS"))
+	if (argIs("/PS"))
 	{
 		PeriodSec = toValue(nextArg());
 		m_range(PeriodSec, 1, 3600);

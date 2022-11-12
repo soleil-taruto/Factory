@@ -12,14 +12,14 @@ static int IsIgnorePath(char *path, char *localPath)
 	// 表示しないパスの条件は SimpleIndex に合わせる。
 	// 但し index.html は表示する。
 
-	if(existDir(path)) // ディレクトリ
+	if (existDir(path)) // ディレクトリ
 	{
-		if(localPath[0] == '_')
+		if (localPath[0] == '_')
 			return 1;
 	}
 	else // ファイル
 	{
-		if(
+		if (
 			!_stricmp(localPath, "_index.html_") ||
 			!_stricmp(localPath, "_header.html_") ||
 			!_stricmp(localPath, "_footer.html_")
@@ -46,10 +46,10 @@ static void Search(char *rootDir, uint depth, char *pathPrefix)
 	{
 		char *localPath = getLocal(path);
 
-		if(IsIgnorePath(path, localPath))
+		if (IsIgnorePath(path, localPath))
 			continue;
 
-		if(empLnSw)
+		if (empLnSw)
 		{
 			writeChar(OutFp, '\n'); // 空行
 			empLnSw = 0;
@@ -57,7 +57,7 @@ static void Search(char *rootDir, uint depth, char *pathPrefix)
 		for(ndx = 0; ndx < depth; ndx++)
 			writeChar(OutFp, '\t');
 
-		if(IsNoLinkPath(path))
+		if (IsNoLinkPath(path))
 		{
 			writeLine(OutFp, localPath);
 		}
@@ -71,7 +71,7 @@ static void Search(char *rootDir, uint depth, char *pathPrefix)
 			memFree(tmp1);
 			memFree(tmp2);
 		}
-		if(existDir(path))
+		if (existDir(path))
 		{
 			char *nextPathPrefix = xcout("%s/%s", pathPrefix, localPath);
 

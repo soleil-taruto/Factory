@@ -19,10 +19,10 @@ autoList_t *SqlBcpReader(char *bcpFile, int chrT, int chrR)
 		{
 			int chr = readChar(fp);
 
-			if(chr == EOF)
+			if (chr == EOF)
 				break;
 
-			if(chr == chrT || chr == chrR)
+			if (chr == chrT || chr == chrR)
 			{
 				char *cell = unbindBlock2Line(buff);
 
@@ -31,7 +31,7 @@ autoList_t *SqlBcpReader(char *bcpFile, int chrT, int chrR)
 				addElement(row, (uint)cell);
 				buff = newBlock();
 
-				if(chr == chrR)
+				if (chr == chrR)
 				{
 					addElement(table, (uint)row);
 					row = newList();
@@ -51,7 +51,7 @@ autoList_t *SqlBcpReader(char *bcpFile, int chrT, int chrR)
 
 	// check
 	{
-		if(getCount(table)) // ? 行が１つ以上ある。
+		if (getCount(table)) // ? 行が１つ以上ある。
 		{
 			uint colcnt = getCount(getList(table, 0));
 			autoList_t * row;

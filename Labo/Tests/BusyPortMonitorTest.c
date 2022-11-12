@@ -33,14 +33,14 @@ static void PCCOrPDC(int connectFlag)
 
 	errorCase(currTime < LastTime); // 2bs
 
-	if(!TimeWaitRing)
+	if (!TimeWaitRing)
 		TimeWaitRing = na_(int, TimeWaitSec);
 
 	while(LastTime < currTime)
 	{
 		int *tw;
 
-		if(TimeWaitTotal == 0)
+		if (TimeWaitTotal == 0)
 		{
 			cout("TW_[%I64d]_Break\n", LastTime);
 
@@ -59,7 +59,7 @@ static void PCCOrPDC(int connectFlag)
 	}
 	cout("TW_[%I64d]: %d C=%d\n", LastTime, TimeWaitTotal, ConnectCount);
 
-	if(connectFlag)
+	if (connectFlag)
 	{
 		int busyPortTotal = ConnectCount + TimeWaitTotal;
 		double rate;
@@ -111,7 +111,7 @@ int main(int argc, char **argv)
 {
 	P_Time = 10000;
 
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		mt19937_init();
 
@@ -128,7 +128,7 @@ int main(int argc, char **argv)
 				break;
 
 			case 1:
-				if(ConnectCount) {
+				if (ConnectCount) {
 					PostDisconnectClient();
 				}
 				break;

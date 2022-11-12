@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 
 	SockStartup(); // ïKê{ÅI
 
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		autoList_t *lines = readLines(nextArg());
 		char *line;
@@ -33,7 +33,7 @@ int main(int argc, char **argv)
 
 		sockUDPClose(sock);
 	}
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		sock = sockUDPOpenRecv(portno);
 
@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 		{
 			autoBlock_t *data = sockUDPRecv(sock, 2000);
 
-			if(data)
+			if (data)
 			{
 				char *line = unbindBlock2Line(data);
 

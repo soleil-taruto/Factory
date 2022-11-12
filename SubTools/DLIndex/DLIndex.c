@@ -81,7 +81,7 @@ static int IsAsciiStr(char *str)
 
 	for(p = str; *p; p++)
 	{
-		if(!m_isRange(*p, '\x21', '\x7e'))
+		if (!m_isRange(*p, '\x21', '\x7e'))
 		{
 			return 0;
 		}
@@ -94,7 +94,7 @@ static int IsHexStr(char *str)
 
 	for(p = str; *p; p++)
 	{
-		if(
+		if (
 			!m_isRange(*p, '0', '9') &&
 			!m_isRange(m_tolower(*p), 'a', 'f')
 			)
@@ -122,7 +122,7 @@ static char *GetAppResourceFile(char *localFile)
 {
 	char *file;
 
-	if(existFile(localFile))
+	if (existFile(localFile))
 		file = makeFullPath(localFile);
 	else
 		file = combine(getSelfDir(), localFile);
@@ -218,14 +218,14 @@ static void LoadRevInfos(char *rootDir, autoList_t *riList)
 			char *dlFile;
 			char *dlHashFile;
 
-			if(getCount(dlFiles) == 1)
+			if (getCount(dlFiles) == 1)
 			{
 				dlFile = getLine(dlFiles, 0);
 				dlHashFile = addExt(strx(dlFile), "md5");
 			}
-			else if(getCount(dlFiles) == 2)
+			else if (getCount(dlFiles) == 2)
 			{
-				if(strlen(getLine(dlFiles, 1)) < strlen(getLine(dlFiles, 0)))
+				if (strlen(getLine(dlFiles, 1)) < strlen(getLine(dlFiles, 0)))
 					swapElement(dlFiles, 0, 1);
 
 				dlFile = getLine(dlFiles, 0);
@@ -251,13 +251,13 @@ static void LoadRevInfos(char *rootDir, autoList_t *riList)
 			ri->Size = getFileSize(dlFile);
 			cout("size: %I64u\n", ri->Size);
 
-			if(existFile(dlHashFile)) // チェック
+			if (existFile(dlHashFile)) // チェック
 			{
 				ri->Hash = readFirstLine(dlHashFile);
 				cout("rdHash: %s\n", ri->Hash);
 				errorCase(!IsHexStr(ri->Hash));
 
-				if(!SkipHashCheckFlag)
+				if (!SkipHashCheckFlag)
 				{
 					char *mkHash = md5_makeHexHashFile(dlFile);
 
@@ -291,7 +291,7 @@ static void LoadAppInfos(char *rootDir)
 	{
 		foreach(appDirs, dir, index)
 		{
-			if(getLocal(dir)[0] == '_') // ? APP が '_' で始まる。
+			if (getLocal(dir)[0] == '_') // ? APP が '_' で始まる。
 			{
 				dir[0] = '\0';
 			}
@@ -314,7 +314,7 @@ static void LoadAppInfos(char *rootDir)
 
 		LoadRevInfos(dir, ai->RevInfos);
 #if 1
-		if(!getCount(ai->RevInfos))
+		if (!getCount(ai->RevInfos))
 		{
 			RevInfo_t *ri = nb_(RevInfo_t);
 
@@ -332,7 +332,7 @@ static void LoadAppInfos(char *rootDir)
 		{
 			char *file = combine(dir, DESCRIPTION_FILE);
 
-			if(existFile(file))
+			if (existFile(file))
 				ai->Description = untokenize_xc(readLines(file), "\n");
 			else
 				ai->Description = strx("説明文がありません。");
@@ -345,7 +345,7 @@ static void LoadAppInfos(char *rootDir)
 		{
 			char *file = combine(dir, SOURCECODELINK_FILE);
 
-			if(existFile(file))
+			if (existFile(file))
 				ai->SourceCodeLinks = readResourceLines(file);
 			else
 				ai->SourceCodeLinks = newList();
@@ -432,7 +432,7 @@ static void MakeAppIndex(char *rootDir, AppInfo_t *ai, char *appIndexFmt, char *
 	{
 		char *sourcecodelink;
 
-		if(getCount(ai->SourceCodeLinks))
+		if (getCount(ai->SourceCodeLinks))
 			sourcecodelink = getLine(ai->SourceCodeLinks, 0);
 		else
 			sourcecodelink = "javascript:alert('リンク情報がありません。')";
@@ -569,7 +569,7 @@ int main(int argc, char **argv)
 	char *rootDir;
 
 readArgs:
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		SkipHashCheckFlag = 1;
 		goto readArgs;

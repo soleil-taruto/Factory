@@ -9,7 +9,7 @@ int IsBlueFishComputer(void)
 	static int inited;
 	static int ret;
 
-	if(!inited)
+	if (!inited)
 	{
 		ret = Real_IsBlueFishComputer();
 		cout("‚±‚ÌŠÂ‹«‚Í BlueFish ‚Å%s\n", ret ? "‚·B" : "‚Í‚ ‚è‚Ü‚¹‚ñB");

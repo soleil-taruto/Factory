@@ -36,14 +36,14 @@ static void ChannelTransmit(uint prm)
 		{
 			int ioOccurred = 0;
 
-			if(ProcDeadFlag)
+			if (ProcDeadFlag)
 				goto endTransmit;
 
-			if(getSize(wBuff) < 1000000) // ? ! 送信バッファ溜まり過ぎ
+			if (getSize(wBuff) < 1000000) // ? ! 送信バッファ溜まり過ぎ
 			{
 				int execDataFltrFlag = 0;
 
-				if(getSize(wBuff))
+				if (getSize(wBuff))
 					rTmout = 0;
 
 				/*
@@ -54,13 +54,13 @@ static void ChannelTransmit(uint prm)
 				*/
 				retval = SockRecvSequ(i->RSock, rBuff, rTmout);
 
-				if(retval == -1)
+				if (retval == -1)
 				{
 					*i->P_DeadFlag = 1;
 					break;
 				}
 
-				if(getSize(rBuff))
+				if (getSize(rBuff))
 				{
 					rTmout = 0;
 					execDataFltrFlag = 1;
@@ -72,12 +72,12 @@ static void ChannelTransmit(uint prm)
 					execDataFltrFlag = lastDataFltrExecTime + 2 < now();
 				}
 
-				if(execDataFltrFlag)
+				if (execDataFltrFlag)
 				{
 					ChannelDeadFlag = 0;
 					i->DataFltr(rBuff, i->FltrData);
 
-					if(ChannelDeadFlag)
+					if (ChannelDeadFlag)
 					{
 						*i->P_DeadFlag = 1;
 						break;
@@ -87,7 +87,7 @@ static void ChannelTransmit(uint prm)
 				addBytes(wBuff, rBuff);
 				setSize(rBuff, 0);
 			}
-			if(ProcDeadFlag)
+			if (ProcDeadFlag)
 				goto endTransmit;
 
 			/*
@@ -95,14 +95,14 @@ static void ChannelTransmit(uint prm)
 				あるとすれば i->WSock は生きてるかもしれないので、読み込めなくなるまで SockRecvSequ() を実行したい。
 				-> i->P_DeadFlag の立ち上がりで即終了しないようにした。
 			*/
-			if(*i->P_DeadFlag) // ? 逆方向で切断を検知した。
+			if (*i->P_DeadFlag) // ? 逆方向で切断を検知した。
 			{
-				if(dosFlag)
+				if (dosFlag)
 				{
-					if(getSize(wBuff) == 0) // ? 受信データ・送信データ共に無いので終了
+					if (getSize(wBuff) == 0) // ? 受信データ・送信データ共に無いので終了
 						goto endTransmit;
 
-					if(dosTmout < now()) // ? タイムアウト
+					if (dosTmout < now()) // ? タイムアウト
 					{
 						cout("★★★逆方向の切断を検知したのにタイムアウト_wBuff_size: %u @ %s\n", getSize(wBuff), tmp = makeJStamp(NULL, 0));
 						memFree(tmp);
@@ -119,27 +119,27 @@ static void ChannelTransmit(uint prm)
 				rTmout = 0;
 			}
 
-			if(getSize(wBuff))
+			if (getSize(wBuff))
 			{
 				retval = SockSendSequ(i->WSock, wBuff, 2000);
 
-				if(retval == -1)
+				if (retval == -1)
 				{
 					*i->P_DeadFlag = 1;
 					goto endTransmit;
 				}
 
-				if(retval)
+				if (retval)
 				{
 					ioOccurred = 1;
 				}
 			}
 
-			if(ioOccurred)
+			if (ioOccurred)
 			{
 				*i->P_NoDataTimeoutTime = GetTimeoutTime(CC_NoDataTimeoutSec);
 			}
-			else if(*i->P_NoDataTimeoutTime < now())
+			else if (*i->P_NoDataTimeoutTime < now())
 			{
 				cout("★★★CC無通信タイムアウト★★★\n");
 				*i->P_DeadFlag = 1;
@@ -152,18 +152,18 @@ static void ChannelTransmit(uint prm)
 
 			for(; ; )
 			{
-				if(ProcDeadFlag)
+				if (ProcDeadFlag)
 					break;
 
 				retval = SockSendSequ(i->WSock, wBuff, 2000);
 
-				if(retval == -1)
+				if (retval == -1)
 					break;
 
-				if(getSize(wBuff) == 0)
+				if (getSize(wBuff) == 0)
 					break;
 
-				if(abortTime < now()) // ? タイムアウト
+				if (abortTime < now()) // ? タイムアウト
 				{
 					cout("★★★書き込みタイムアウト_wBuff_size: %u @ %s\n", getSize(wBuff), tmp = makeJStamp(NULL, 0));
 					memFree(tmp);
@@ -206,10 +206,10 @@ void CrossChannel(
 	// bToAFltr
 	// bToAFltrData
 
-	if(!aToBFltr)
+	if (!aToBFltr)
 		aToBFltr = (void (*)(autoBlock_t *, uint))noop_uu;
 
-	if(!bToAFltr)
+	if (!bToAFltr)
 		bToAFltr = (void (*)(autoBlock_t *, uint))noop_uu;
 
 	aToB.RSock = sockA;

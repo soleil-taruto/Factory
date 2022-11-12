@@ -4,7 +4,7 @@ char *LineToCSVCell(char *line)
 {
 	line = strx(line);
 
-	if(strchr(line, '\"') || strchr(line, ',') || strchr(line, '\n')) // ? "" 必要
+	if (strchr(line, '\"') || strchr(line, ',') || strchr(line, '\n')) // ? "" 必要
 	{
 		line = replaceLine(line, "\"", "\"\"", 0);
 		line = insertChar(line, 0, '\"');
@@ -20,7 +20,7 @@ char *RowToCSVLine(autoList_t *row)
 
 	foreach(row, cell, index)
 	{
-		if(index)
+		if (index)
 			buffer = addChar(buffer, ',');
 
 		buffer = addLine_x(buffer, LineToCSVCell(cell));
@@ -34,7 +34,7 @@ void RowToCSVStream(FILE *fp, autoList_t *row)
 
 	foreach(row, cell, index)
 	{
-		if(index)
+		if (index)
 			writeChar(fp, ',');
 
 		writeToken_x(fp, LineToCSVCell(cell));
@@ -46,7 +46,7 @@ autoList_t *CSVStreamToRow(FILE *fp)
 	autoList_t *row;
 	int chr = readChar(fp);
 
-	if(chr == EOF)
+	if (chr == EOF)
 		return NULL;
 
 	row = newList();
@@ -55,13 +55,13 @@ autoList_t *CSVStreamToRow(FILE *fp)
 	{
 		autoBlock_t *cellBuff = newBlock();
 
-		if(chr == '\"')
+		if (chr == '\"')
 		{
 			for(; ; )
 			{
 				chr = readChar(fp);
 
-				if(chr == '\"' && (chr = readChar(fp)) != '\"' || chr == EOF)
+				if (chr == '\"' && (chr = readChar(fp)) != '\"' || chr == EOF)
 					break;
 
 				addByte(cellBuff, chr);
@@ -71,7 +71,7 @@ autoList_t *CSVStreamToRow(FILE *fp)
 		{
 			for(; ; )
 			{
-				if(chr == ',' || chr == '\n' || chr == EOF)
+				if (chr == ',' || chr == '\n' || chr == EOF)
 					break;
 
 				addByte(cellBuff, chr);
@@ -80,7 +80,7 @@ autoList_t *CSVStreamToRow(FILE *fp)
 		}
 		addElement(row, (uint)unbindBlock2Line(cellBuff));
 
-		if(chr == '\n' || chr == EOF)
+		if (chr == '\n' || chr == EOF)
 			break;
 
 		chr = readChar(fp);

@@ -42,13 +42,13 @@ int main(int argc, char **argv)
 
 		cout("ansFile: %s\n", ansFile ? ansFile : "<NONE>");
 
-		if(ansFile)
+		if (ansFile)
 		{
 			moveFile(ansFile, wFile);
 			memFree(ansFile);
 			break;
 		}
-		if(3 <= tryCount)
+		if (3 <= tryCount)
 			break;
 
 		coSleep(2000);

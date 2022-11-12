@@ -54,7 +54,7 @@ static void ShowHashDir(char *dir)
 }
 static void ShowHashBlock(autoBlock_t *block)
 {
-	if(!QuietMode)
+	if (!QuietMode)
 	{
 		cout("MD5 ( %s ) =\n", c_makeHexLine(block));
 	}
@@ -63,17 +63,17 @@ static void ShowHashBlock(autoBlock_t *block)
 
 int main(int argc, char **argv)
 {
-	if(argIs("/Q"))
+	if (argIs("/Q"))
 	{
 		QuietMode = 1;
 	}
 
-	if(argIs("/H")) // Hex-string
+	if (argIs("/H")) // Hex-string
 	{
 		ShowHashBlock(c_makeBlockHexLine(nextArg()));
 		return;
 	}
-	if(argIs("/S")) // String
+	if (argIs("/S")) // String
 	{
 		autoBlock_t gab;
 		char *line = nextArg();
@@ -81,16 +81,16 @@ int main(int argc, char **argv)
 		ShowHashBlock(gndBlockLineVar(line, gab));
 		return;
 	}
-	if(argIs("/D")) // Drop
+	if (argIs("/D")) // Drop
 	{
 		for(; ; )
 		{
 			char *path = dropPath();
 
-			if(!path)
+			if (!path)
 				break;
 
-			if(existDir(path))
+			if (existDir(path))
 				ShowHashDir(path);
 			else
 				cout("%s\n", c_md5_makeHexHashFile(path));
@@ -100,7 +100,7 @@ int main(int argc, char **argv)
 		}
 		return;
 	}
-	if(argIs("/LSS"))
+	if (argIs("/LSS"))
 	{
 		autoList_t *files = readLines(FOUNDLISTFILE);
 		char *file;
@@ -112,11 +112,11 @@ int main(int argc, char **argv)
 		releaseDim(files, 1);
 		return;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		char *path = nextArg();
 
-		if(existDir(path))
+		if (existDir(path))
 		{
 			ShowHashDir(path);
 			return;

@@ -10,7 +10,7 @@ static void ClearRepoDir(char *dir)
 	uint index;
 
 	foreach(paths, path, index)
-		if(!startsWithICase(getLocal(path), ".git"))
+		if (!startsWithICase(getLocal(path), ".git"))
 			recurRemovePath(path);
 
 	releaseDim(paths, 1);
@@ -43,7 +43,7 @@ static void RemoveNotNeedFiles(char *dir)
 	{
 		char *ext = getExt(file);
 
-		if(
+		if (
 			!_stricmp(ext, "exe") ||
 			!_stricmp(ext, "obj")
 			)

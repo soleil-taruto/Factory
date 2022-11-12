@@ -43,7 +43,7 @@ static int TrimProjLines(void)
 
 	foreach(ProjLines, line, index)
 	{
-		if(startsWith(line, "    <Compile Include=\"") && endsWith(line, "\" />"))
+		if (startsWith(line, "    <Compile Include=\"") && endsWith(line, "\" />"))
 		{
 			char *csFile = ne_strchr(line, '"') + 1;
 			char *p;
@@ -53,7 +53,7 @@ static int TrimProjLines(void)
 			csFile = strx(csFile);
 			*p = '"';
 
-			if(
+			if (
 				isFairRelPath(csFile, strlen(ProjDir)) && // ? SJISファイル名 && ProjDirの配下(".."を含まない＆絶対パスではない)
 				!_stricmp(getExt(csFile), "cs") &&        // ? .csファイル
 				!startsWithICase(csFile, "Properties\\") && // ? ! 除外
@@ -66,12 +66,12 @@ static int TrimProjLines(void)
 
 				cout("csFile.2: %s\n", csFile);
 
-				if(existFile(csFile))
+				if (existFile(csFile))
 				{
 					LOGPOS();
 					desertElement(ProjLines, index);
 
-					if(TryBuild())
+					if (TryBuild())
 					{
 						LOGPOS();
 						memFree(line);
@@ -143,7 +143,7 @@ static void ProcProj(int checkOnly)
 		char *p;
 
 		foreach(ProjLines, line, index)
-			if(startsWith(line, "    <AssemblyName>") && endsWith(line, "</AssemblyName>"))
+			if (startsWith(line, "    <AssemblyName>") && endsWith(line, "</AssemblyName>"))
 				break;
 
 		errorCase(!line);
@@ -175,7 +175,7 @@ static void ProcProj(int checkOnly)
 
 		foreach(files, file, index)
 		{
-			if(
+			if (
 				!mbs_stristr(file, "\\bin\\Release\\") ||
 				!mbs_stristr(getLocal(file), AsmbName) ||
 				_stricmp(getExt(file), "exe") && _stricmp(getExt(file), "dll")
@@ -202,7 +202,7 @@ static void ProcProj(int checkOnly)
 
 	errorCase_m(existPath(ProjBackupFile), "バックアップファイルが残っています。");
 
-	if(checkOnly)
+	if (checkOnly)
 		goto checkOnlyEnd;
 
 	LOGPOS();
@@ -213,7 +213,7 @@ static void ProcProj(int checkOnly)
 
 	while(TrimProjLines());
 
-	if(ConfirmDeleteCsFiles())
+	if (ConfirmDeleteCsFiles())
 	{
 		char *file;
 		uint index;
@@ -258,7 +258,7 @@ static void TrimCsProjCs(void)
 		uint index;
 
 		foreach(files, file, index)
-			if(_stricmp(getExt(file), "sln"))
+			if (_stricmp(getExt(file), "sln"))
 				file[0] = '\0';
 
 		trimLines(files);
@@ -289,7 +289,7 @@ static void TrimCsProjCs(void)
 		uint index;
 
 		foreach(files, file, index)
-			if(_stricmp(getExt(file), "csproj"))
+			if (_stricmp(getExt(file), "csproj"))
 				file[0] = '\0';
 
 		trimLines(files);
@@ -319,14 +319,14 @@ static int SearchSubDirFlag;
 
 static void Main2(void)
 {
-	if(SearchSubDirFlag)
+	if (SearchSubDirFlag)
 	{
 		autoList_t *files = lssFiles(".");
 		char *file;
 		uint index;
 
 		foreach(files, file, index)
-			if(_stricmp(getExt(file), "sln"))
+			if (_stricmp(getExt(file), "sln"))
 				file[0] = '\0';
 
 		trimLines(files);
@@ -352,12 +352,12 @@ static void Main2(void)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		SearchSubDirFlag = 1;
 	}
 
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		char *slnDir = c_dropDir();
 
@@ -367,7 +367,7 @@ int main(int argc, char **argv)
 		}
 		unaddCwd();
 	}
-	else if(hasArgs(1))
+	else if (hasArgs(1))
 	{
 		char *slnDir = nextArg();
 

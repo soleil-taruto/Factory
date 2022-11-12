@@ -5,7 +5,7 @@ static void CompareDirPair(char *dir1, char *dir2, int ignoreCaseOfPath)
 	errorCase(!existDir(dir1));
 	errorCase(!existDir(dir2));
 
-	if(isSameDir(dir1, dir2, ignoreCaseOfPath))
+	if (isSameDir(dir1, dir2, ignoreCaseOfPath))
 	{
 		cout("+--------------+\n");
 		cout("| ˆê’v‚µ‚Ü‚µ‚½ |\n");
@@ -25,12 +25,12 @@ int main(int argc, char **argv)
 	char *dir2;
 	int ignoreCaseOfPath= 0;
 
-	if(argIs("/I")) // Ignore case of path
+	if (argIs("/I")) // Ignore case of path
 	{
 		ignoreCaseOfPath = 1;
 	}
 
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		dir1 = nextArg();
 		dir2 = nextArg();

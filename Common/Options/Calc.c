@@ -43,18 +43,18 @@ static uint CheckOp(calcOperand_t *op)
 {
 	uint index;
 
-	if(calcRadix < RADIX_MIN || RADIX_MAX < calcRadix)
+	if (calcRadix < RADIX_MIN || RADIX_MAX < calcRadix)
 		return 0;
 
-	if(BASEMENT_MAX < calcBasement)
+	if (BASEMENT_MAX < calcBasement)
 		return 0;
 
-	if(!op)
+	if (!op)
 		return 0;
 
 	for(index = 0; index < getSize(op->Figures); index++)
 	{
-		if(calcRadix <= getByte(op->Figures, index))
+		if (calcRadix <= getByte(op->Figures, index))
 			return 0;
 	}
 	return 1;
@@ -70,11 +70,11 @@ static void TrimOp(calcOperand_t *op)
 	{
 		unaddByte(op->Figures);
 	}
-	if(getSize(op->Figures) == 0) // ? op == "0"
+	if (getSize(op->Figures) == 0) // ? op == "0"
 	{
 		op->DecIndex = 0;
 
-		if(!calcLastMarume) // ŠÛ‚ß‚ª”­¶‚µ‚½‚Ì‚È‚çop‚Íƒ[ƒ‚Å‚Í‚È‚¢‚Ì‚Å•„†‚ð•Ï‚¦‚Ä‚Í‚È‚ç‚È‚¢B
+		if (!calcLastMarume) // ŠÛ‚ß‚ª”­¶‚µ‚½‚Ì‚È‚çop‚Íƒ[ƒ‚Å‚Í‚È‚¢‚Ì‚Å•„†‚ð•Ï‚¦‚Ä‚Í‚È‚ç‚È‚¢B
 			op->Sign = 1;
 	}
 }
@@ -97,7 +97,7 @@ static void AddInt(calcOperand_t *op, uint index, uint value)
 
 		value /= calcRadix;
 
-		if(!value)
+		if (!value)
 			break;
 
 		index++;
@@ -113,7 +113,7 @@ calcOperand_t *addCalc(calcOperand_t *op1, calcOperand_t *op2)
 	errorCase(!CheckOp(op1));
 	errorCase(!CheckOp(op2));
 
-	if(op1->Sign == -1)
+	if (op1->Sign == -1)
 	{
 		op1->Sign = 1;
 		ans = subCalc(op2, op1);
@@ -121,7 +121,7 @@ calcOperand_t *addCalc(calcOperand_t *op1, calcOperand_t *op2)
 
 		goto endfunc;
 	}
-	if(op2->Sign == -1)
+	if (op2->Sign == -1)
 	{
 		op2->Sign = 1;
 		ans = subCalc(op1, op2);
@@ -156,7 +156,7 @@ calcOperand_t *subCalc(calcOperand_t *op1, calcOperand_t *op2)
 	errorCase(!CheckOp(op1));
 	errorCase(!CheckOp(op2));
 
-	if(op1->Sign == -1)
+	if (op1->Sign == -1)
 	{
 		op1->Sign = 1;
 		ans = addCalc(op1, op2);
@@ -165,7 +165,7 @@ calcOperand_t *subCalc(calcOperand_t *op1, calcOperand_t *op2)
 
 		goto endfunc;
 	}
-	if(op2->Sign == -1)
+	if (op2->Sign == -1)
 	{
 		op2->Sign = 1;
 		ans = addCalc(op1, op2);
@@ -186,7 +186,7 @@ calcOperand_t *subCalc(calcOperand_t *op1, calcOperand_t *op2)
 	{
 		AddInt(ans, index, refByte(op1->Figures, index) + calcRadix - refByte(op2->Figures, index) - (index ? 1 : 0));
 	}
-	if(refByte(ans->Figures, index) == 0) // ? op1 < op2
+	if (refByte(ans->Figures, index) == 0) // ? op1 < op2
 	{
 		releaseCalcOperand(ans);
 		ans = subCalc(op2, op1);
@@ -239,7 +239,7 @@ calcOperand_t *divCalc(calcOperand_t *op1, calcOperand_t *op2) // set calcLastMa
 	TrimOp(op1);
 	TrimOp(op2);
 
-	if(getSize(op2->Figures) == 0) // ? op1 / 0 == 0
+	if (getSize(op2->Figures) == 0) // ? op1 / 0 == 0
 		return ans;
 
 	ans->Sign = op1->Sign * op2->Sign;
@@ -266,7 +266,7 @@ calcOperand_t *divCalc(calcOperand_t *op1, calcOperand_t *op2) // set calcLastMa
 	{
 		calcOperand_t *tmpans = subCalc(op1, op2);
 
-		if(tmpans->Sign == 1) // ? 0 <= tmpans
+		if (tmpans->Sign == 1) // ? 0 <= tmpans
 		{
 			AddInt(ans, shiftCnt, 1);
 
@@ -277,7 +277,7 @@ calcOperand_t *divCalc(calcOperand_t *op1, calcOperand_t *op2) // set calcLastMa
 		{
 			releaseCalcOperand(tmpans);
 
-			if(!shiftCnt)
+			if (!shiftCnt)
 				break;
 
 			op2->DecIndex++;
@@ -299,11 +299,11 @@ sint compCalc(calcOperand_t *op1, calcOperand_t *op2) // ret: (-1, 0, 1) as strc
 	calcOperand_t *ans = subCalc(op1, op2);
 	sint ret;
 
-	if(ans->Sign == -1) // ? op1 < op2
+	if (ans->Sign == -1) // ? op1 < op2
 	{
 		ret = -1;
 	}
-	else if(getSize(ans->Figures) == 0) // ? op1 == op2
+	else if (getSize(ans->Figures) == 0) // ? op1 == op2
 	{
 		ret = 0;
 	}
@@ -331,45 +331,45 @@ calcOperand_t *makeCalcOperand(char *line)
 	{
 		uint d = *p;
 
-		if(d == '-')
+		if (d == '-')
 		{
 			op->Sign = -1;
 			continue;
 		}
-		if(d == '.')
+		if (d == '.')
 		{
 			fndPeriod = 1;
 			continue;
 		}
 
-		if(m_isdecimal(d))
+		if (m_isdecimal(d))
 		{
 			d -= '0';
 		}
-		else if(m_isalpha(d))
+		else if (m_isalpha(d))
 		{
 			d = m_tolower(d) - 'a' + 10;
 		}
-		else if(d == '[') // ? "[123]"
+		else if (d == '[') // ? "[123]"
 		{
 			d = 0;
 
 			while(*p && *p != ']')
 			{
-				if(m_isdecimal(*p))
+				if (m_isdecimal(*p))
 				{
 					d *= 10;
 					d += *p - '0';
 				}
 				p++;
 			}
-			if(!*p)
+			if (!*p)
 				break;
 		}
 		else
 			continue; // Unknown char
 
-		if(fndPeriod)
+		if (fndPeriod)
 			op->DecIndex++;
 
 		addByte(op->Figures, d);
@@ -396,12 +396,12 @@ char *makeLineCalcOperand(calcOperand_t *op)
 	{
 		uint d;
 
-		if(index && index == op->DecIndex)
+		if (index && index == op->DecIndex)
 			addByte(lineBuff, '.');
 
 		d = refByte(op->Figures, index);
 
-		if(calcBracketedDecimalMin <= d) // 36 ` 255
+		if (calcBracketedDecimalMin <= d) // 36 ` 255
 		{
 			char *tmpLine;
 			autoBlock_t tmpBlock;
@@ -411,7 +411,7 @@ char *makeLineCalcOperand(calcOperand_t *op)
 
 			addBytes(lineBuff, gndBlockLineVar(tmpLine, tmpBlock)); memFree(tmpLine);
 		}
-		else if(10 <= d) // 10 ` 35
+		else if (10 <= d) // 10 ` 35
 		{
 			addByte(lineBuff, d + 'a' - 10);
 		}
@@ -420,7 +420,7 @@ char *makeLineCalcOperand(calcOperand_t *op)
 			addByte(lineBuff, d + '0');
 		}
 	}
-	if(op->Sign == -1)
+	if (op->Sign == -1)
 	{
 		addByte(lineBuff, '-');
 	}
@@ -585,7 +585,7 @@ char *changeRadixCalcLine(char *line, uint radix, uint newRadix, uint basement) 
 			value *= radix;
 			value += refByte(wop3->Figures, index);
 
-			if(!index)
+			if (!index)
 				break;
 		}
 		calcRadix = newRadix;
@@ -621,14 +621,14 @@ char *calcPower(char *line, uint exponent, uint radix)
 	errorCase(!line);
 	errorCase(radix < RADIX_MIN || RADIX_MAX < radix);
 
-	if(exponent == 0) return strx("1");
-	if(exponent == 1) return trimCalcLine(line, radix);
+	if (exponent == 0) return strx("1");
+	if (exponent == 1) return trimCalcLine(line, radix);
 
 	tmpLine = calcPower(line, exponent / 2, radix);
 	ansLine = calcLine(tmpLine, '*', tmpLine, radix, 0);
 	memFree(tmpLine);
 
-	if(exponent & 1)
+	if (exponent & 1)
 	{
 		ansLine = calcLine(tmpLine = ansLine, '*', line, radix, 0);
 		memFree(tmpLine);
@@ -648,7 +648,7 @@ char *calcRootPower(char *line, uint exponent, uint radix, uint basement) // set
 	errorCase(BASEMENT_MAX < basement);
 
 	line = trimCalcLine(line, radix);
-	if(line[0] == '-') eraseChar(line); // line = abs(line);
+	if (line[0] == '-') eraseChar(line); // line = abs(line);
 
 	// make expLine
 	{
@@ -658,7 +658,7 @@ char *calcRootPower(char *line, uint exponent, uint radix, uint basement) // set
 		{
 			tmpLine = addChar(strx(expLine), '0');
 
-			if(compCalcLine(line, tmpLine, radix) == -1) // ? line < tmpLine
+			if (compCalcLine(line, tmpLine, radix) == -1) // ? line < tmpLine
 				break;
 
 			memFree(expLine);
@@ -678,7 +678,7 @@ char *calcRootPower(char *line, uint exponent, uint radix, uint basement) // set
 
 		ret = compCalcLine(line, tmpLine, radix);
 
-		if(ret == -1) // ? line < tmpLine
+		if (ret == -1) // ? line < tmpLine
 		{
 			memFree(anxLine);
 			memFree(tmpLine);
@@ -693,7 +693,7 @@ char *calcRootPower(char *line, uint exponent, uint radix, uint basement) // set
 
 			ansLine = anxLine;
 
-			if(!ret)
+			if (!ret)
 			{
 				calcLastMarume = 0;
 				break;
@@ -712,7 +712,7 @@ static uint GetLogarithm(char *line1, char *line2, char **p_expLine, uint radix)
 	char *rLine;
 	uint exponent;
 
-	if(compCalcLine(line1, line2, radix) == -1) // ? line1 < line2
+	if (compCalcLine(line1, line2, radix) == -1) // ? line1 < line2
 	{
 		*p_expLine = NULL;
 		return 0;
@@ -720,7 +720,7 @@ static uint GetLogarithm(char *line1, char *line2, char **p_expLine, uint radix)
 	pLine = calcLine(line2, '*', line2, radix, 0);
 	exponent = GetLogarithm(line1, pLine, &qLine, radix);
 
-	if(!exponent)
+	if (!exponent)
 	{
 		*p_expLine = strx(line2);
 		return 1;
@@ -728,7 +728,7 @@ static uint GetLogarithm(char *line1, char *line2, char **p_expLine, uint radix)
 	rLine = calcLine(qLine, '*', line2, radix, 0);
 	exponent *= 2;
 
-	if(compCalcLine(line1, rLine, radix) != -1) // ? rLine <= line1
+	if (compCalcLine(line1, rLine, radix) != -1) // ? rLine <= line1
 	{
 		memFree(qLine);
 		qLine = rLine;
@@ -751,10 +751,10 @@ uint calcLogarithm(char *line1, char *line2, uint radix) // line2: ’ê, set calcL
 
 	line1 = trimCalcLine(line1, radix);
 	line2 = trimCalcLine(line2, radix);
-//	if(line1[0] == '-') eraseChar(line1); // line1 = abs(line1);
-//	if(line2[0] == '-') eraseChar(line2); // line2 = abs(line2);
+//	if (line1[0] == '-') eraseChar(line1); // line1 = abs(line1);
+//	if (line2[0] == '-') eraseChar(line2); // line2 = abs(line2);
 
-	if(
+	if (
 		compCalcLine(line1, "1", radix) <= 0 ||
 		compCalcLine(line2, "1", radix) <= 0
 //		!strcmp(line1, "0") || !strcmp(line1, "1") ||
@@ -768,7 +768,7 @@ uint calcLogarithm(char *line1, char *line2, uint radix) // line2: ’ê, set calcL
 	{
 		exponent = GetLogarithm(line1, line2, &expLine, radix);
 
-		if(expLine)
+		if (expLine)
 		{
 			calcLastMarume = strcmp(line1, expLine);
 			memFree(expLine);
@@ -793,7 +793,7 @@ char *calcLineToMarume(char *line, uint basement)
 	line = strx(line);
 	p = strchr(line, '.');
 
-	if(!p)
+	if (!p)
 	{
 		line = addChar(line, '.');
 		p = strchr(line, '.');

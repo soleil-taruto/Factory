@@ -39,15 +39,15 @@ void NS_SendFile(SockStream_t *ss, char *file)
 	{
 		autoBlock_t *buff = readBinaryStream(fp, 20000000); // 20 MB
 
-		if(!buff)
+		if (!buff)
 			break;
 
-		if(pulseSec(1, NULL))
+		if (pulseSec(1, NULL))
 		{
 			uint64 count = getSeekPos(fp);
 			cmdTitle_x(xcout("%s Send %I64u / %I64u = %.3fPct", NS_AppTitle, count, fileSize, count * 100.0 / fileSize));
 
-			if(IsEOFSockStream(ss))
+			if (IsEOFSockStream(ss))
 			{
 				cout("接続が死んでるずら。SF\n");
 				break;
@@ -80,7 +80,7 @@ void NS_RecvFile(SockStream_t *ss, char *file)
 	writeStamp  = SockRecvValue64(ss);
 	fileSize    = SockRecvValue64(ss);
 
-	if(SockRecvChar(ss) != 'A') // Alive
+	if (SockRecvChar(ss) != 'A') // Alive
 	{
 		cout("この接続は死んでますわ。(STAMP-SIZE-RECVED)\n");
 		goto endFunc;
@@ -93,11 +93,11 @@ void NS_RecvFile(SockStream_t *ss, char *file)
 
 	for(count = 0; count < fileSize; count++)
 	{
-		if(eqIntPulseSec(1, NULL))
+		if (eqIntPulseSec(1, NULL))
 		{
 			cmdTitle_x(xcout("%s Recv %I64u / %I64u = %.3fPct", NS_AppTitle, count, fileSize, count * 100.0 / fileSize));
 
-			if(IsEOFSockStream(ss))
+			if (IsEOFSockStream(ss))
 			{
 				cout("接続が死んでるずら。RF\n");
 				break;
@@ -107,8 +107,8 @@ void NS_RecvFile(SockStream_t *ss, char *file)
 	}
 	fileClose(fp);
 
-	if(SockRecvChar(ss) != 'A') // Alive
-//	if(IsEOFSockStream(ss))
+	if (SockRecvChar(ss) != 'A') // Alive
+//	if (IsEOFSockStream(ss))
 	{
 		cout("この接続は死んでますわ。(DATA-RECVED)\n");
 		removeFile(midFile);

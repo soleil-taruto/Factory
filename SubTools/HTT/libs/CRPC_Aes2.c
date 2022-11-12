@@ -62,7 +62,7 @@ autoBlock_t *ServiceRPC(autoBlock_t *recvData, uint phase)
 	autoBlock_t *rawKey4;
 	autoBlock_t *sendData;
 
-	if(!phase) // ‰‰ñ
+	if (!phase) // ‰‰ñ
 	{
 		autoBlock_t *rawKey = CRPC_GetRawKey();
 

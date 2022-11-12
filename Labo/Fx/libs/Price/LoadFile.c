@@ -6,7 +6,7 @@ static int IsAllZero(autoList_t *list)
 	uint index;
 
 	foreach(list, i, index)
-		if(i != NULL)
+		if (i != NULL)
 			return 0;
 
 	return 1;
@@ -20,7 +20,7 @@ static void CompletionLead(autoList_t *list)
 	uint rIndex;
 
 	for(rIndex = 0; ; rIndex++)
-		if(getElement(list, rIndex))
+		if (getElement(list, rIndex))
 			break;
 
 	for(index = 0; index < rIndex; index++)
@@ -32,7 +32,7 @@ static void CompletionTrail(autoList_t *list)
 	uint rIndex;
 
 	for(rIndex = getCount(list) - 1; ; rIndex--)
-		if(getElement(list, rIndex))
+		if (getElement(list, rIndex))
 			break;
 
 	for(index = getCount(list) - 1; rIndex < index; index--)
@@ -45,14 +45,14 @@ static void CompletionMid(autoList_t *list)
 
 	for(rIndex = 1; rIndex + 1 < getCount(list); rIndex++)
 	{
-		if(!getElement(list, rIndex))
+		if (!getElement(list, rIndex))
 		{
 			uint bgnidx = rIndex - 1;
 			uint endidx;
 			uint count;
 
 			for(endidx = rIndex + 1; ; endidx++)
-				if(getElement(list, endidx))
+				if (getElement(list, endidx))
 					break;
 
 			count = endidx - bgnidx;
@@ -92,7 +92,7 @@ static void Completion(autoList_t *list)
 		Price_t *c = (Price_t *)getElement(list, index + 1);
 		Price_t *d = (Price_t *)getElement(list, index + 2);
 
-		if(!b && c && d)
+		if (!b && c && d)
 		{
 			ReleasePrice(c);
 			setElement(list, index + 1, 0);
@@ -146,15 +146,15 @@ static double ToDouble(char *str)
 
 	for(p = str; *p; p++)
 	{
-		if(m_isdecimal(*p))
+		if (m_isdecimal(*p))
 		{
 			numer *= 10.0;
 			numer += *p - '0';
 
-			if(readDot)
+			if (readDot)
 				denom *= 10.0;
 		}
-		else if(*p == '.')
+		else if (*p == '.')
 		{
 			readDot = 1;
 		}

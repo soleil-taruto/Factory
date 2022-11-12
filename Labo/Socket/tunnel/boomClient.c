@@ -42,10 +42,10 @@ static autoBlock_t *Boomerang(autoBlock_t *credential, int flag, autoBlock_t *se
 
 	cout("CRC16=%04x\n", crc16);
 
-	if(!RecvCredential)
+	if (!RecvCredential)
 		RecvCredential = nobCreateBlock(CREDENTIAL_SIZE);
 
-	if(OneBoomerangMode)
+	if (OneBoomerangMode)
 	{
 		inner_uncritical();
 		{
@@ -55,7 +55,7 @@ static autoBlock_t *Boomerang(autoBlock_t *credential, int flag, autoBlock_t *se
 	}
 	sock = sockConnect(ip, FwdHost, FwdPortNo);
 
-	if(sock == -1)
+	if (sock == -1)
 	{
 		LOGPOS();
 		goto endBoom;
@@ -80,7 +80,7 @@ static autoBlock_t *Boomerang(autoBlock_t *credential, int flag, autoBlock_t *se
 
 		recvSize = blockToValue(block);
 
-		if(!m_isRange(recvSize, HEADER_SIZE, RecvSizeMax))
+		if (!m_isRange(recvSize, HEADER_SIZE, RecvSizeMax))
 		{
 			cout("OutOfRange_recvSize: %u (RecvSizeMax: %u) SS_EOF: %d\n", recvSize, RecvSizeMax, IsEOFSockStream(ss));
 			goto disconnect;
@@ -94,7 +94,7 @@ static autoBlock_t *Boomerang(autoBlock_t *credential, int flag, autoBlock_t *se
 		recvSize -= HEADER_SIZE;
 		recvData = nobCreateBlock(recvSize);
 
-		if(!SockRecvBlock(ss, directGetBuffer(recvData), recvSize)) // ? 読み込みエラー
+		if (!SockRecvBlock(ss, directGetBuffer(recvData), recvSize)) // ? 読み込みエラー
 		{
 			LOGPOS();
 			releaseAutoBlock(recvData);
@@ -105,7 +105,7 @@ static autoBlock_t *Boomerang(autoBlock_t *credential, int flag, autoBlock_t *se
 
 		cout("CRC16=%04x, R_CRC16=%04x\n", crc16, r_crc16);
 
-		if(crc16 != r_crc16)
+		if (crc16 != r_crc16)
 		{
 			LOGPOS();
 			releaseAutoBlock(recvData);
@@ -119,7 +119,7 @@ disconnect:
 	sockDisconnect(sock);
 
 endBoom:
-	if(OneBoomerangMode)
+	if (OneBoomerangMode)
 		leaveCritical(&BoomCrit); // ★★★Boom_閉塞ここまで★★★
 
 	return recvData;
@@ -138,9 +138,9 @@ static void PerformTh(int sock, char *strip)
 		int flag;
 		uint nConTmout = now() + NoConnectTimeoutSec;
 
-		if(IsCommDeadAndEmpty(i) && !getSize(sendData))
+		if (IsCommDeadAndEmpty(i) && !getSize(sendData))
 			flag = 'D'; // Disconnect
-		else if(foregroundFlag)
+		else if (foregroundFlag)
 			flag = 'F'; // Foreground
 		else
 			flag = 'B'; // Background
@@ -153,14 +153,14 @@ static void PerformTh(int sock, char *strip)
 		{
 			recvData = Boomerang(credential, flag, sendData);
 
-			if(recvData)
+			if (recvData)
 			{
-				if(RecvFlag != 'E') // ! Error
+				if (RecvFlag != 'E') // ! Error
 					break;
 
 				releaseAutoBlock(recvData);
 			}
-			if(ProcDeadFlag || nConTmout < now())
+			if (ProcDeadFlag || nConTmout < now())
 			{
 				cout("無接続タイムアウト又はプロセス終了による切断\n");
 				releaseAutoBlock(sendData);
@@ -178,10 +178,10 @@ static void PerformTh(int sock, char *strip)
 
 		for(; ; )
 		{
-			if(ProcDeadFlag || RecvFlag == 'D') // Disconnect
+			if (ProcDeadFlag || RecvFlag == 'D') // Disconnect
 				break;
 
-			if(AddCommSendData(i, recvData, 0))
+			if (AddCommSendData(i, recvData, 0))
 				break;
 
 			inner_uncritical();
@@ -191,7 +191,7 @@ static void PerformTh(int sock, char *strip)
 			inner_critical();
 		}
 
-		if(getSize(sendData) || getSize(recvData))
+		if (getSize(sendData) || getSize(recvData))
 			waitMillis = 0;
 		else
 			waitMillis = m_min(waitMillis + 100, 2000);
@@ -199,7 +199,7 @@ static void PerformTh(int sock, char *strip)
 		releaseAutoBlock(sendData);
 		releaseAutoBlock(recvData);
 
-		if(ProcDeadFlag || RecvFlag == 'D') // Disconnect
+		if (ProcDeadFlag || RecvFlag == 'D') // Disconnect
 			break;
 
 		cout("waitMillis: %u\n", waitMillis);
@@ -215,32 +215,32 @@ disconnect:
 	ReleaseComm(i);
 	releaseAutoBlock(credential);
 
-	if(RecvCredential)
+	if (RecvCredential)
 		releaseAutoBlock(RecvCredential);
 }
 static int ReadArgs(void)
 {
-	if(argIs("/SS"))
+	if (argIs("/SS"))
 	{
 		SendSizeMax = toValue(nextArg());
 		return 1;
 	}
-	if(argIs("/RS"))
+	if (argIs("/RS"))
 	{
 		RecvSizeMax = toValue(nextArg());
 		return 1;
 	}
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		SockTimeoutSec = toValue(nextArg());
 		return 1;
 	}
-	if(argIs("/NCT"))
+	if (argIs("/NCT"))
 	{
 		NoConnectTimeoutSec = toValue(nextArg());
 		return 1;
 	}
-	if(argIs("/B"))
+	if (argIs("/B"))
 	{
 		OneBoomerangMode = 1;
 		return 1;

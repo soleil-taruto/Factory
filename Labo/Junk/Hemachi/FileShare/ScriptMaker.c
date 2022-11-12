@@ -26,7 +26,7 @@ static char *GetFairServerPath(char *svrPath)
 	}
 	svrPath = untokenize_cx(sPTkns, xcout("%c", VIR_PATH_DLMTR));
 
-	if(!*svrPath) // ? == ""
+	if (!*svrPath) // ? == ""
 	{
 		memFree(svrPath);
 		svrPath = strx("_"); // 代替
@@ -104,13 +104,13 @@ static void AddToScript(char *command, char *file, char *svrPath, char *newSvrPa
 {
 	errorCase(m_isEmpty(command));
 
-	if(m_isEmpty(file))
+	if (m_isEmpty(file))
 		file = "(DUMMY)";
 
-	if(m_isEmpty(svrPath))
+	if (m_isEmpty(svrPath))
 		svrPath = "(DUMMY)";
 
-	if(m_isEmpty(newSvrPath))
+	if (m_isEmpty(newSvrPath))
 		newSvrPath = "(DUMMY)";
 
 	writeLine(ScriptFp, command);
@@ -135,7 +135,7 @@ static void MakeUploadScript(char *path, char *svrPath, int intoSubDirMode, char
 
 	OpenScript(destFile);
 
-	if(existDir(path))
+	if (existDir(path))
 	{
 		autoList_t *files = lssFiles(path);
 		char *file;
@@ -196,21 +196,21 @@ static void MakeDownloadScript(char *path, char *svrPath, int intoSubDirMode, in
 
 	foreach(svrFileList, svrFile, index)
 	{
-		if(mbsStartsWithICase(svrFile, svrPath))
+		if (mbsStartsWithICase(svrFile, svrPath))
 		{
 			int chr = svrFile[strlen(svrPath)];
 
-			if(chr == VIR_PATH_DLMTR)
+			if (chr == VIR_PATH_DLMTR)
 			{
 				char *relFile = strx(svrFile + strlen(svrPath) + 1);
 				char *file = strx(path);
 
 				replaceChar(relFile, VIR_PATH_DLMTR, '\\');
 
-				if(intoSubDirMode)
+				if (intoSubDirMode)
 					relFile = combine_cx(lclSvrPath, relFile);
 
-				if(autoCreateParent)
+				if (autoCreateParent)
 					TryCreateParent(path, relFile);
 
 				file = combine(path, relFile);
@@ -220,7 +220,7 @@ static void MakeDownloadScript(char *path, char *svrPath, int intoSubDirMode, in
 				memFree(relFile);
 				memFree(file);
 			}
-			else if(!chr)
+			else if (!chr)
 			{
 				AddToScript("DL", path, svrPath, NULL); // ファイルとして
 			}
@@ -254,11 +254,11 @@ static void MakeMoveScript(char *svrPath, char *newSvrPath, char *svrFileListFil
 
 	foreach(svrFileList, svrFile, index)
 	{
-		if(mbsStartsWithICase(svrFile, svrPath))
+		if (mbsStartsWithICase(svrFile, svrPath))
 		{
 			char *p = svrFile + strlen(svrPath);
 
-			if(*p == VIR_PATH_DLMTR || *p == '\0') // ? ディレクトリ || ファイル
+			if (*p == VIR_PATH_DLMTR || *p == '\0') // ? ディレクトリ || ファイル
 			{
 				char *newSvrFile = xcout("%s%s", newSvrPath, p);
 
@@ -292,11 +292,11 @@ static void MakeRemoveScript(char *svrPath, int intoSubDirMode, char *svrFileLis
 
 	foreach(svrFileList, svrFile, index)
 	{
-		if(mbsStartsWithICase(svrFile, svrPath))
+		if (mbsStartsWithICase(svrFile, svrPath))
 		{
 			int chr = svrFile[strlen(svrPath)];
 
-			if(chr == VIR_PATH_DLMTR || chr == '\0') // ? ディレクトリ || ファイル
+			if (chr == VIR_PATH_DLMTR || chr == '\0') // ? ディレクトリ || ファイル
 			{
 				AddToScript("MV", NULL, svrFile, NULL);
 			}
@@ -327,7 +327,7 @@ static void MakeNormalizeScript(char *svrFileListFile, char *destFile)
 		char *realSvrFile = lineToFairLocalPath(svrFile, 0); // サーバー上で FiarLocalPath ではあるはず。
 		char *trueSvrFile = GetFairServerPath(svrFile);
 
-		if(mbs_stricmp(realSvrFile, trueSvrFile))
+		if (mbs_stricmp(realSvrFile, trueSvrFile))
 		{
 			AddToScript("MV", NULL, realSvrFile, trueSvrFile);
 		}
@@ -345,20 +345,20 @@ int main(int argc, char **argv)
 	int intoSubDirMode = 0;
 	int autoCraeteParent = 0;
 
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		intoSubDirMode = 1;
 	}
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		autoCraeteParent = 1;
 	}
-	if(argIs("/A"))
+	if (argIs("/A"))
 	{
 		AddScriptMode = 1;
 	}
 
-	if(argIs("/UP"))
+	if (argIs("/UP"))
 	{
 		char *path;
 		char *svrPath;
@@ -371,7 +371,7 @@ int main(int argc, char **argv)
 		MakeUploadScript(path, svrPath, intoSubDirMode, destFile);
 		return;
 	}
-	if(argIs("/DL"))
+	if (argIs("/DL"))
 	{
 		char *path;
 		char *svrPath;
@@ -386,7 +386,7 @@ int main(int argc, char **argv)
 		MakeDownloadScript(path, svrPath, intoSubDirMode, autoCraeteParent, svrFileListFile, destFile);
 		return;
 	}
-	if(argIs("/MV"))
+	if (argIs("/MV"))
 	{
 		char *svrPath;
 		char *newSvrPath;
@@ -401,7 +401,7 @@ int main(int argc, char **argv)
 		MakeMoveScript(svrPath, newSvrPath, svrFileListFile, destFile);
 		return;
 	}
-	if(argIs("/RM"))
+	if (argIs("/RM"))
 	{
 		char *svrPath;
 		char *destFile;
@@ -414,7 +414,7 @@ int main(int argc, char **argv)
 		MakeRemoveScript(svrPath, intoSubDirMode, svrFileListFile, destFile);
 		return;
 	}
-	if(argIs("/Norm"))
+	if (argIs("/Norm"))
 	{
 		char *svrFileListFile;
 		char *destFile;

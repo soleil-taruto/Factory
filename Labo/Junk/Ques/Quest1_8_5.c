@@ -30,9 +30,9 @@ int main(int argc, char **argv)
 				{
 					int sai = mt19937_range(1, 6);
 
-					if(sai == 6) // ? まど神様
+					if (sai == 6) // ? まど神様
 					{
-						if(madokami_sai == 7)
+						if (madokami_sai == 7)
 						{
 							n++;
 							break;
@@ -41,10 +41,10 @@ int main(int argc, char **argv)
 					}
 					pos += sai;
 
-					if(strlen(fld) <= pos)
+					if (strlen(fld) <= pos)
 						break;
 
-					if(fld[pos] == '*')
+					if (fld[pos] == '*')
 					{
 						n++;
 						break;

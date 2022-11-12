@@ -10,7 +10,7 @@ int main(int argc, char **argv)
 
 		cout("%02x (%u)\n", chr, chr);
 
-		if(chr == 0x1b)
+		if (chr == 0x1b)
 			break;
 	}
 }

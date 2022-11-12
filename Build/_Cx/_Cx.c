@@ -41,7 +41,7 @@ static void UpdateNewestFile(char *file)
 {
 	time_t fileTime = getFileModifyTime(file);
 
-	if(NewestFileTime < fileTime)
+	if (NewestFileTime < fileTime)
 	{
 		memFree(NewestFile);
 
@@ -66,7 +66,7 @@ static void ShowExitMessages(void)
 }
 static void AddExitMessage_x(char *message)
 {
-	if(!ExitMessages)
+	if (!ExitMessages)
 	{
 		ExitMessages = newList();
 		addFinalizer(ShowExitMessages);
@@ -101,7 +101,7 @@ static autoList_t *GetResponse(char *source, int buildFlag)
 
 		foreach(lines, line, line_index)
 		{
-			if(lineExp("<\t\t  >#<\t\t  >include<\t\t  >\"<>\"<>", line))
+			if (lineExp("<\t\t  >#<\t\t  >include<\t\t  >\"<>\"<>", line))
 			{
 				char *p = strchr(line, '\"');
 				char *q;
@@ -112,14 +112,14 @@ static autoList_t *GetResponse(char *source, int buildFlag)
 				errorCase(!q);
 				*q = '\0';
 
-				if(!existFile(p))
+				if (!existFile(p))
 				{
 					cout("存在しないインクルード先: %s -> %s\n", file, p);
 					continue; // #if 0 の中の可能性があるので、エラーにせず続行する。
 				}
 				p = makeFullPath(p);
 
-				if(findLineCase(includes, p, 1) == getCount(includes))
+				if (findLineCase(includes, p, 1) == getCount(includes))
 				{
 					addElement(remFiles, (uint)p);
 					addElement(includes, (uint)strx(p));
@@ -135,19 +135,19 @@ static autoList_t *GetResponse(char *source, int buildFlag)
 	releaseDim(remFiles, 1);
 	sortJLinesICase(includes);
 
-	if(buildFlag)
+	if (buildFlag)
 	{
 		foreach(includes, file, index)
 		{
 			char *objfile = changeExt(file, "obj");
 
-			if(existFile(objfile))
+			if (existFile(objfile))
 			{
-				if(OptimizeLevel == OPTLV_LINK_TEST_MODULE)
+				if (OptimizeLevel == OPTLV_LINK_TEST_MODULE)
 				{
 					char *testobjfile = xcout("%sTest.obj", c_changeExt(file, ""));
 
-					if(existFile(testobjfile))
+					if (existFile(testobjfile))
 					{
 						cout("< %s\n", objfile);
 						cout("> %s\n", testobjfile);
@@ -166,7 +166,7 @@ static autoList_t *GetResponse(char *source, int buildFlag)
 	}
 	foreach(includes, file, index)
 	{
-		if(existFile(file))
+		if (existFile(file))
 		{
 			UpdateNewestFile(file);
 		}
@@ -182,7 +182,7 @@ static void MakeResponse(char *source, char *response, int buildFlag)
 {
 	autoList_t *objfiles = GetResponse(source, buildFlag);
 
-	if(buildFlag)
+	if (buildFlag)
 		writeLines(response, objfiles);
 
 	releaseDim(objfiles, 1);
@@ -197,11 +197,11 @@ static uint GetVSEditionYear(char *slnFile)
 	memFree(neReadLine(fp));
 	line = neReadLine(fp);
 
-	     if(!strcmp(line, "# Visual C# Express 2008"  )) ret = 2008;
-	else if(!strcmp(line, "# Visual C++ Express 2008" )) ret = 2008;
-	else if(!strcmp(line, "# Visual C# Express 2010"  )) ret = 2010;
-	else if(!strcmp(line, "# Visual C++ Express 2010" )) ret = 2010;
-	else if(!strcmp(line, "# Visual Studio Version 16")) ret = 2019;
+	     if (!strcmp(line, "# Visual C# Express 2008"  )) ret = 2008;
+	else if (!strcmp(line, "# Visual C++ Express 2008" )) ret = 2008;
+	else if (!strcmp(line, "# Visual C# Express 2010"  )) ret = 2010;
+	else if (!strcmp(line, "# Visual C++ Express 2010" )) ret = 2010;
+	else if (!strcmp(line, "# Visual Studio Version 16")) ret = 2019;
 	else
 		error_m("Unknown VS Edition");
 
@@ -220,7 +220,7 @@ static int IsGitMaskedSource(char *source)
 		for(p = line; *p && *p <= ' '; ) // 行頭のインデント等の空白をスキップ
 			p++;
 
-		if(*p && (p[0] != '/' || p[1] != '/')) // ? ! (空行 || "//" で始まる行)
+		if (*p && (p[0] != '/' || p[1] != '/')) // ? ! (空行 || "//" で始まる行)
 		{
 			memFree(line);
 			fileClose(fp);
@@ -246,21 +246,21 @@ static void Build(char *module, uint remCount) // remCount: 0 == 無効
 
 	exemanifest = addExt(strx(exefile), "manifest");
 
-//	if(!existFile(source))
+//	if (!existFile(source))
 //		source = addLine(source, "pp"); // .c -> .cpp
 
 	errorCase(mbs_strchr(module, '\\')); // ローカル名であること。
 	errorCase(strchr(module, ' ')); // コマンドラインに渡すため、空白を含まないこと。
 
-	if(existFile(solution))
+	if (existFile(solution))
 	{
-		if(OptimizeLevel != CLEANING_MODE)
+		if (OptimizeLevel != CLEANING_MODE)
 		{
 			uint vsEditionYear = GetVSEditionYear(solution);
 
 			cout("solution file's Visual Studio Editon (Year) == %u\n", vsEditionYear);
 
-			if(vsEditionYear == 2010 || vsEditionYear == 2019)
+			if (vsEditionYear == 2010 || vsEditionYear == 2019)
 			{
 				char *slncacheFile = addExt(strx(solution), "cache");
 				int successful;
@@ -269,13 +269,13 @@ static void Build(char *module, uint remCount) // remCount: 0 == 無効
 
 				successful = lastSystemRet == 0;
 
-				if(existFile(slncacheFile))
+				if (existFile(slncacheFile))
 				{
 					cout("%s\n", slncacheFile);
 					cout("sln.cacheファイルが存在します。ビルドは失敗しました。\n");
 					successful = 0;
 				}
-				if(successful) // ? ビルド成功
+				if (successful) // ? ビルド成功
 				{
 					// noop
 				}
@@ -302,7 +302,7 @@ static void Build(char *module, uint remCount) // remCount: 0 == 無効
 	remove(CLSTDERR);
 	remove(CLSTDOUT);
 
-	if(OptimizeLevel == CLEANING_MODE)
+	if (OptimizeLevel == CLEANING_MODE)
 	{
 		remove(objfile);
 		remove(exefile);
@@ -311,9 +311,9 @@ static void Build(char *module, uint remCount) // remCount: 0 == 無効
 	}
 	objmode = existFile(header);
 
-	if(objmode)
+	if (objmode)
 	{
-		if(!ForceBuildMode && existFile(objfile))
+		if (!ForceBuildMode && existFile(objfile))
 		{
 			time_t objfileTime = getFileModifyTime(objfile);
 
@@ -322,7 +322,7 @@ static void Build(char *module, uint remCount) // remCount: 0 == 無効
 			cout("NewestFile=%s\n", NewestFile);
 			cout("NewestFileTime: %I64d, objfileTime: %I64d\n", NewestFileTime, objfileTime);
 
-			if(NewestFileTime + BUILT_TIME_MARGIN <= objfileTime) // ? 最後の修正・コンパイルの後でコンパイルされている。
+			if (NewestFileTime + BUILT_TIME_MARGIN <= objfileTime) // ? 最後の修正・コンパイルの後でコンパイルされている。
 			{
 				cout("SKIP_BUILD_OBJ\n");
 				SkippedObjCount++;
@@ -333,7 +333,7 @@ static void Build(char *module, uint remCount) // remCount: 0 == 無効
 		remove(objfile);
 		remove(exefile);
 
-		if(IsGitMaskedSource(source))
+		if (IsGitMaskedSource(source))
 		{
 			cout("SKIP_MASKED_OBJ\n");
 			SkippedObjCount++;
@@ -350,14 +350,14 @@ static void Build(char *module, uint remCount) // remCount: 0 == 無効
 	{
 		MakeResponse(source, response, 1);
 
-		if(!ForceBuildMode && existFile(exefile))
+		if (!ForceBuildMode && existFile(exefile))
 		{
 			time_t exefileTime = getFileModifyTime(exefile);
 
 			cout("NewestFile=%s\n", NewestFile);
 			cout("NewestFileTime: %I64d, exefileTime: %I64d\n", NewestFileTime, exefileTime);
 
-			if(NewestFileTime + BUILT_TIME_MARGIN <= exefileTime) // ? 最後の修正・コンパイルの後でビルドされている。
+			if (NewestFileTime + BUILT_TIME_MARGIN <= exefileTime) // ? 最後の修正・コンパイルの後でビルドされている。
 			{
 				removeFile(response);
 
@@ -370,7 +370,7 @@ static void Build(char *module, uint remCount) // remCount: 0 == 無効
 		remove(objfile);
 		remove(exefile);
 
-		if(IsGitMaskedSource(source))
+		if (IsGitMaskedSource(source))
 		{
 			cout("SKIP_MASKED_EXE\n");
 			SkippedExeCount++;
@@ -401,9 +401,9 @@ static void Build(char *module, uint remCount) // remCount: 0 == 無効
 		removeFile(CLSTDERR);
 		removeFile(CLSTDOUT);
 	}
-	if(lastSystemRet == 0) // ? Successful
+	if (lastSystemRet == 0) // ? Successful
 	{
-		if(objmode)
+		if (objmode)
 		{
 			// noop
 		}
@@ -423,7 +423,7 @@ static void Build(char *module, uint remCount) // remCount: 0 == 無効
 
 		writeOneLine_cx(FOUNDLISTFILE, xcout("%s\\%s", c_getCwd(), source));
 
-		if(remCount)
+		if (remCount)
 			cout(" (remaining %u sources)", remCount);
 
 		cout("\n");
@@ -446,7 +446,7 @@ static void BeforeDeepBuild(int shallowMode)
 
 	cout("BeforeDeepBuild start\n");
 
-	if(shallowMode)
+	if (shallowMode)
 	{
 		coExecute("runsub.exe /-S " PROG_NAME);
 		coExecute("runsub.exe /-S _" PROG_NAME);
@@ -466,7 +466,7 @@ static void AfterDeepBuild(int shallowMode)
 
 	cout("AfterDeepBuild start\n");
 
-	if(shallowMode)
+	if (shallowMode)
 	{
 		coExecute("runsub.exe /-S " PROG_NAME);
 		coExecute("runsub.exe /-S _" PROG_NAME);
@@ -512,12 +512,12 @@ static void DeepBuild(int shallowMode)
 
 	foreach(files, file, index)
 	{
-		if(!_stricmp("c", getExt(file)))
-//		if(!_stricmp("c", getExt(file)) || !_stricmp("cpp", getExt(file)))
+		if (!_stricmp("c", getExt(file)))
+//		if (!_stricmp("c", getExt(file)) || !_stricmp("cpp", getExt(file)))
 		{
 			char *header = changeExt(file, "h");
 
-			if(existFile(header))
+			if (existFile(header))
 			{
 				addElement(objSources, (uint)strx(file));
 			}
@@ -527,7 +527,7 @@ static void DeepBuild(int shallowMode)
 			}
 			memFree(header);
 		}
-		else if(!_stricmp("sln", getExt(file)))
+		else if (!_stricmp("sln", getExt(file)))
 		{
 			addElement(exeSources, (uint)strx(file));
 		}
@@ -544,7 +544,7 @@ static void DeepBuild(int shallowMode)
 
 	releaseAutoList(exeSources);
 
-	if(OptimizeLevel != CLEANING_MODE)
+	if (OptimizeLevel != CLEANING_MODE)
 	{
 		BeforeDeepBuild(shallowMode);
 	}
@@ -554,11 +554,11 @@ static void DeepBuild(int shallowMode)
 
 		cout("[%u] %s\n", remCount, file);
 
-		if(remCount <= beginRemCount)
+		if (remCount <= beginRemCount)
 		{
 			char *dir = getParent(file);
 
-			if(remCount == beginRemCount)
+			if (remCount == beginRemCount)
 			{
 				AddExitMessage_x(xcout("began: %s", file));
 				coSleep(2000);
@@ -572,7 +572,7 @@ static void DeepBuild(int shallowMode)
 			memFree(dir);
 		}
 	}
-	if(OptimizeLevel != CLEANING_MODE)
+	if (OptimizeLevel != CLEANING_MODE)
 	{
 		AfterDeepBuild(shallowMode);
 	}
@@ -584,7 +584,7 @@ static void DeepBuild(int shallowMode)
 	cout("BUILT_OBJ: %u (SKIPPED: %u)\n", BuiltObjCount, SkippedObjCount);
 	cout("BUILT_EXE: %u (SKIPPED: %u)\n", BuiltExeCount, SkippedExeCount);
 
-	if(BuiltSlnCount)
+	if (BuiltSlnCount)
 		cout("BUILT_SLN: %u\n", BuiltSlnCount);
 
 	writeLines("C:\\Factory\\tmp\\Built.txt", BuiltLines);
@@ -595,32 +595,32 @@ int main(int argc, char **argv)
 	BuiltLines = newList();
 
 readArgs:
-	if(argIs("--"))
+	if (argIs("--"))
 	{
 		OptimizeLevel = OPTLV_LINK_TEST_MODULE;
 		goto readArgs;
 	}
-	if(argIs("clean"))
+	if (argIs("clean"))
 	{
 		OptimizeLevel = CLEANING_MODE;
 		goto readArgs;
 	}
-	if(argIs("++"))
+	if (argIs("++"))
 	{
 		ForceBuildMode = 1;
 		goto readArgs;
 	}
 
-	if(argIs("***"))
+	if (argIs("***"))
 	{
 		ForceBuildMode = 1;
 		DeepBuild(0);
 	}
-	else if(argIs("**"))
+	else if (argIs("**"))
 	{
 		DeepBuild(0);
 	}
-	else if(argIs("*"))
+	else if (argIs("*"))
 	{
 		DeepBuild(1);
 	}

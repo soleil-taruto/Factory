@@ -6,12 +6,12 @@ static int RXHNFlags[2];
 
 void SockPostOpen(int sock)
 {
-	if(!Handles)
+	if (!Handles)
 		Handles = newList();
 
 	addElement(Handles, (uint)sock);
 
-	if(MaxHandleNum < getCount(Handles))
+	if (MaxHandleNum < getCount(Handles))
 	{
 		MaxHandleNum = getCount(Handles);
 		cout("Information: Maximum handles updated. %u\n", MaxHandleNum);
@@ -21,15 +21,15 @@ void SockPostOpen(int sock)
 }
 static void ShowHandlesInformation(uint hdlnum)
 {
-	if(getCount(Handles) != hdlnum)
+	if (getCount(Handles) != hdlnum)
 		return;
 
-	if(RXHNFlags[hdlnum])
+	if (RXHNFlags[hdlnum])
 	{
 		cout("Information: Handles == %u <- max.\n", hdlnum);
 		RXHNFlags[hdlnum] = 0;
 	}
-	else if(sockServerMode)
+	else if (sockServerMode)
 	{
 		cout("Information: Handles == %u.\n", hdlnum);
 	}
@@ -78,14 +78,14 @@ void SockLine2Ip(uchar ip[4], char *strip)
 	autoList_t *tokens = tokenize(strip, '.');
 	uint index;
 
-	if(getCount(tokens) != 4)
+	if (getCount(tokens) != 4)
 		goto broken;
 
 	for(index = 0; index < 4; index++)
 	{
 		uint n = toValue(getLine(tokens, index));
 
-		if(255 < n)
+		if (255 < n)
 			goto broken;
 
 		ip[index] = n;
@@ -114,10 +114,10 @@ void SockStartup(void)
 	WSADATA wsd;
 	int retval;
 
-	if(SockStartupDepth++)
+	if (SockStartupDepth++)
 		return;
 
-	if(SockStartupCount++)
+	if (SockStartupCount++)
 		cout("Warning: SockStartup() has been performed many times!\n");
 
 	ver = MAKEWORD(2, 2);
@@ -128,7 +128,7 @@ void SockCleanup(void)
 {
 	errorCase(!SockStartupDepth);
 
-	if(--SockStartupDepth)
+	if (--SockStartupDepth)
 		return;
 
 	WSACleanup();
@@ -189,7 +189,7 @@ int SockSend(int sock, uchar *buffData, uint dataSize)
 {
 	int retval = send(sock, buffData, m_min(dataSize, SEND_MAX), 0);
 
-	if(1 <= retval)
+	if (1 <= retval)
 		SockTotalSendSize += (uint64)retval;
 
 	return retval;
@@ -198,7 +198,7 @@ int SockRecv(int sock, uchar *buffData, uint dataSize)
 {
 	int retval = recv(sock, buffData, dataSize, 0);
 
-	if(1 <= retval)
+	if (1 <= retval)
 		SockTotalRecvSize += (uint64)retval;
 
 	return retval;
@@ -207,12 +207,12 @@ int SockTransmit(int sock, uchar *buffData, uint dataSize, uint waitMillis, uint
 {
 	int retval;
 
-	if(dataSize == 0)
+	if (dataSize == 0)
 		return 0;
 
 	retval = SockWait(sock, waitMillis, forWrite);
 
-	if(retval <= 0)
+	if (retval <= 0)
 		goto endfunc;
 
 // test
@@ -223,7 +223,7 @@ errorCase(t + 2 < now());
 }
 	errorCase(retval < -1 || (sint)dataSize < retval);
 
-	if(retval == 0) // ? select() が 1 を返したのに、0 バイト -> sock が相手側で閉じられたときの挙動
+	if (retval == 0) // ? select() が 1 を返したのに、0 バイト -> sock が相手側で閉じられたときの挙動
 		retval = -1;
 
 endfunc:
@@ -250,16 +250,16 @@ int SockTransmitBlock_WF1B(int sock, SockBlock_t *i, uint waitMillis, uint forWr
 {
 	int retsize = SockTransmit(sock, i->Block + i->Counter, i->BlockSize - i->Counter, waitMillis, forWrite);
 
-	if(0 < retsize)
+	if (0 < retsize)
 	{
 		i->Counter += retsize;
 	}
-	if(0 <= retsize && i->Counter < i->BlockSize && (!waitForeverFirstByte || i->Counter)) // timeout check
+	if (0 <= retsize && i->Counter < i->BlockSize && (!waitForeverFirstByte || i->Counter)) // timeout check
 	{
-		if(!i->TransmitStartTime)
+		if (!i->TransmitStartTime)
 			i->TransmitStartTime = SockCurrTime;
 
-		if(i->TransmitStartTime + BLOCKTIMEOUTSEC < SockCurrTime) // ? timeout
+		if (i->TransmitStartTime + BLOCKTIMEOUTSEC < SockCurrTime) // ? timeout
 			return -1;
 	}
 	return retsize;
@@ -282,7 +282,7 @@ SockFile_t *SockCreateFile(char *file, uint64 fileSize) // Grip file!
 }
 void SockReleaseFile(SockFile_t *i)
 {
-	if(i->Block)
+	if (i->Block)
 		SockReleaseBlock(i->Block);
 
 	removeFile(i->File);
@@ -294,7 +294,7 @@ int SockSendFile(int sock, SockFile_t *i, uint waitMillis)
 {
 	int retsize;
 
-	if(!i->Block)
+	if (!i->Block)
 	{
 		FILE *fp = fileOpen(i->File, "rb");
 		uint blockSize;
@@ -306,11 +306,11 @@ int SockSendFile(int sock, SockFile_t *i, uint waitMillis)
 
 		i->Block = SockCreateBlock(blockSize);
 
-		if(_fseeki64(fp, i->Counter, SEEK_SET) != 0)
+		if (_fseeki64(fp, i->Counter, SEEK_SET) != 0)
 		{
 			error();
 		}
-		if(fread(i->Block->Block, 1, blockSize, fp) != blockSize)
+		if (fread(i->Block->Block, 1, blockSize, fp) != blockSize)
 		{
 			error();
 		}
@@ -318,7 +318,7 @@ int SockSendFile(int sock, SockFile_t *i, uint waitMillis)
 	}
 	retsize = SockTransmitBlock(sock, i->Block, waitMillis, 1);
 
-	if(i->Block->Counter == i->Block->BlockSize)
+	if (i->Block->Counter == i->Block->BlockSize)
 	{
 		i->Counter += (uint64)i->Block->BlockSize;
 
@@ -331,7 +331,7 @@ int SockRecvFile(int sock, SockFile_t *i, uint waitMillis)
 {
 	int retsize;
 
-	if(!i->Block)
+	if (!i->Block)
 	{
 		uint blockSize;
 		uint64 bs2;
@@ -344,11 +344,11 @@ int SockRecvFile(int sock, SockFile_t *i, uint waitMillis)
 	}
 	retsize = SockTransmitBlock(sock, i->Block, waitMillis, 0);
 
-	if(i->Block->Counter == i->Block->BlockSize)
+	if (i->Block->Counter == i->Block->BlockSize)
 	{
 		FILE *fp = fileOpen(i->File, "ab");
 
-		if(fwrite(i->Block->Block, 1, i->Block->BlockSize, fp) != i->Block->BlockSize)
+		if (fwrite(i->Block->Block, 1, i->Block->BlockSize, fp) != i->Block->BlockSize)
 		{
 			error();
 		}
@@ -366,7 +366,7 @@ int SockSendSequ(int sock, autoBlock_t *messageQueue, uint waitMillis)
 {
 	int retval = SockTransmit(sock, directGetBuffer(messageQueue), getSize(messageQueue), waitMillis, 1);
 
-	if(0 < retval)
+	if (0 < retval)
 	{
 		removeBytes(messageQueue, 0, retval);
 	}
@@ -394,7 +394,7 @@ char *SockNextLine(autoBlock_t *messageQueue) // ret: NULL == まだ次の行が無い。
 
 	for(index = 0; index < getSize(messageQueue); index++)
 	{
-		if(getByte(messageQueue, index) == '\n') // ? LF
+		if (getByte(messageQueue, index) == '\n') // ? LF
 		{
 			char *line = ab_makeLine_x(ab_makeSubBytes(
 				messageQueue,
@@ -421,7 +421,7 @@ int SockSendISequ(int sock, autoBlock_t *messageQueue, uint *pIndex, uint waitMi
 //	errorCase(getSize(messageQueue) < index);
 	retval = SockTransmit(sock, (uchar *)directGetBuffer(messageQueue) + index, getSize(messageQueue) - index, waitMillis, 1);
 
-	if(0 < retval)
+	if (0 < retval)
 	{
 		index += retval;
 //		errorCase(getSize(messageQueue) < index);
@@ -448,7 +448,7 @@ int SockSendSequLoop(int sock, autoBlock_t *messageQueue, uint waitMillis)
 	{
 		int ret = SockSendSequ(sock, messageQueue, waitMillis - passedTick);
 
-		if(ret == -1)
+		if (ret == -1)
 		{
 			retval = -1;
 			break;
@@ -476,7 +476,7 @@ int SockRecvSequLoop(int sock, autoBlock_t *messageQueue, uint waitMillis, uint 
 	{
 		int ret = SockRecvSequ_RM(sock, messageQueue, waitMillis - passedTick, maxMessageQueueSize - getSize(messageQueue));
 
-		if(ret == -1)
+		if (ret == -1)
 		{
 			retval = -1;
 			break;
@@ -501,25 +501,25 @@ int SockRecvSequLoopEnder(int sock, autoBlock_t *messageQueue, uint waitMillis, 
 	uint passedTick = 0;
 	int retval = 0;
 
-	if(!*endPtn)
+	if (!*endPtn)
 		return 0;
 
 	while(getSize(messageQueue) < maxMessageQueueSize && passedTick < waitMillis)
 	{
 		int ret = SockRecvSequ_RM(sock, messageQueue, waitMillis - passedTick, 1);
 
-		if(ret == -1)
+		if (ret == -1)
 		{
 			retval = -1;
 			break;
 		}
-		if(ret == 1)
+		if (ret == 1)
 		{
 			retval++;
 
-			if(strlen(endPtn) <= getSize(messageQueue))
+			if (strlen(endPtn) <= getSize(messageQueue))
 			{
-				if(!memcmp(
+				if (!memcmp(
 					(uchar *)directGetBuffer(messageQueue) + getSize(messageQueue) - strlen(endPtn),
 					endPtn,
 					strlen(endPtn)
@@ -541,7 +541,7 @@ char *SockNextLineLoop(int sock, uint waitMillis, uint maxLen)
 
 	retval = SockRecvSequLoopEnder(sock, buff, waitMillis, maxLen + 2, "\r\n");
 
-	if(retval == -1 && getSize(buff) == 0)
+	if (retval == -1 && getSize(buff) == 0)
 	{
 		releaseAutoBlock(buff);
 		return NULL;
@@ -555,10 +555,10 @@ static uint ET2WM(uint endTime)
 {
 	uint nowTime = now();
 
-	if(endTime < nowTime)
+	if (endTime < nowTime)
 		return 0;
 
-	if(endTime == nowTime)
+	if (endTime == nowTime)
 		return 500;
 
 	return (endTime - nowTime) * 1000;

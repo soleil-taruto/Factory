@@ -10,11 +10,11 @@ static void MakeEdges(void)
 
 	for(chr = 0x100; chr <= 0xffff; chr++)
 	{
-		if(!isJChar(chr - 1) && isJChar(chr))
+		if (!isJChar(chr - 1) && isJChar(chr))
 		{
 			addElement(Edges, (uint)chr);
 		}
-		if(isJChar(chr) && !isJChar(chr + 1))
+		if (isJChar(chr) && !isJChar(chr + 1))
 		{
 			addElement(Edges, (uint)chr);
 		}

@@ -17,7 +17,7 @@ void updateMemory(void)
 	ms.dwLength = sizeof(MEMORYSTATUSEX);
 //	ms = { sizeof(MEMORYSTATUSEX) };
 
-	if(!(int)GlobalMemoryStatusEx(&ms)) // ? Ž¸”s
+	if (!(int)GlobalMemoryStatusEx(&ms)) // ? Ž¸”s
 	{
 		error();
 	}

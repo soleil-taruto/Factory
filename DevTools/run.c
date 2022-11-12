@@ -23,7 +23,7 @@ static char *ToPrms(autoList_t *args)
 	{
 		buff = addChar(buff, ' ');
 
-		if(!*arg || strchr(arg, '\t') || strchr(arg, ' '))
+		if (!*arg || strchr(arg, '\t') || strchr(arg, ' '))
 		{
 			buff = addChar(buff, '"');
 			buff = addLine(buff, arg);
@@ -43,11 +43,11 @@ static void FindProgram_Collect(char *trgDir)
 	char *batFile = xcout("%s\\%s.bat", trgDir, FP_Program);
 	char *exeFile = xcout("%s\\%s.exe", trgDir, FP_Program);
 
-	if(existFile(batFile))
+	if (existFile(batFile))
 	{
 		addElement(FP_Founds, (uint)strx(batFile));
 	}
-	if(existFile(exeFile))
+	if (existFile(exeFile))
 	{
 		addElement(FP_Founds, (uint)strx(exeFile));
 	}
@@ -66,7 +66,7 @@ static void FindProgram_Main(char *trgDir)
 	{
 		char *localDir = getLocal(dir);
 
-		if(lineExp("<1,,__09AZaz>", localDir) && _stricmp(localDir, "obj") && _stricmp(localDir, DebugMode ? "Release" : "Debug"))
+		if (lineExp("<1,,__09AZaz>", localDir) && _stricmp(localDir, "obj") && _stricmp(localDir, DebugMode ? "Release" : "Debug"))
 		{
 			char *subDir = xcout("%s\\%s", trgDir, localDir);
 
@@ -86,7 +86,7 @@ static char *FindProgram(char *program)
 
 	errorCase_m(getCount(FP_Founds) == 0, "ÉvÉçÉOÉâÉÄÇ™å©Ç¬Ç©ÇËÇ‹ÇπÇÒÅB");
 
-	if(getCount(FP_Founds) != 1)
+	if (getCount(FP_Founds) != 1)
 	{
 		char *found;
 		uint found_index;
@@ -129,7 +129,7 @@ int main(int argc, char **argv)
 
 	cout("%s%s\n", program, prms);
 
-	if(IntoProgramDirMode)
+	if (IntoProgramDirMode)
 	{
 		char *wd = changeLocal(program, "");
 

@@ -250,7 +250,7 @@ static char *CharsetExts[] =
 
 static char *GetContentTypeCharset(char *ctype, char *cset)
 {
-	if(!cset)
+	if (!cset)
 		cset = "Shift_JIS";
 
 	return constrfltr_x(xcout("%s; charset=%s", ctype, cset));
@@ -274,11 +274,11 @@ char *httpExtToContentType(char *ext)
 	{
 		char **pair = Table[index - 1];
 
-		if(!_stricmp(pair[0], ext))
+		if (!_stricmp(pair[0], ext))
 		{
 			char *contentType = pair[1];
 
-			if(IsCharsetExt(ext))
+			if (IsCharsetExt(ext))
 				contentType = GetContentTypeCharset(contentType, httpCharset);
 
 			return contentType;
@@ -294,7 +294,7 @@ char *httpContentTypeToExt(char *contentType)
 	{
 		char **pair = Table[index - 1];
 
-		if(startsWithICase(contentType, pair[1]))
+		if (startsWithICase(contentType, pair[1]))
 		{
 			char *ext = pair[0];
 

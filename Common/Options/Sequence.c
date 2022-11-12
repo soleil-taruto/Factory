@@ -38,16 +38,16 @@ uint chooseOneSq(autoList_t *list, int (*isTarget)(uint))
 	uint index;
 
 	foreach(list, value, index)
-		if(isTarget(value))
+		if (isTarget(value))
 			count++;
 
 	count = mt19937_rnd(count);
 
 	foreach(list, value, index)
 	{
-		if(isTarget(value))
+		if (isTarget(value))
 		{
-			if(!count)
+			if (!count)
 				goto foundChoseTarget;
 
 			count--;
@@ -62,7 +62,7 @@ foundChoseTarget:
 	uint index;
 
 	foreach(list, value, index)
-		if(isTarget(value))
+		if (isTarget(value))
 			addElement(indexes, index);
 
 	index = getElement(indexes, mt19937_rnd(getCount(indexes)));

@@ -68,7 +68,7 @@ void rbtAddValue(rbTree_t *tree, uint key, uint value)
 	{
 		rbtNode_t *root = tree->Tree->Root;
 
-		if(root)
+		if (root)
 		{
 			rbtElement_t *eRoot = (rbtElement_t *)root->Element;
 
@@ -138,7 +138,7 @@ static uint UnaddValue(rbTree_t *tree, rbtElement_t *target)
 		element->Links[0]->Links[1] = element->Links[1];
 		element->Links[1]->Links[0] = element->Links[0];
 
-		if(tree->CurrElement == element)
+		if (tree->CurrElement == element)
 		{
 			tree->CurrElement = NULL;
 		}
@@ -213,7 +213,7 @@ void rbtCallAllValue(rbTree_t *tree, void (*funcOfValue)(uint))
 	errorCase(!tree);
 	errorCase(!funcOfValue);
 
-	if(rbtGetCount(tree))
+	if (rbtGetCount(tree))
 	{
 		uint cnt;
 

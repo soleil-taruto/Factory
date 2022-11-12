@@ -99,7 +99,7 @@ static autoBlock_t *InputPassphrase2KeyBundle(char *passEx)
 	char *passphrase_k;
 	autoBlock_t *keyBundle;
 
-	if(*passEx)
+	if (*passEx)
 	{
 		cout("+--------------------------------------------------+\n");
 		cout("| 引数に指定されたであろうパスフレーズを使用します |\n");
@@ -118,7 +118,7 @@ static autoBlock_t *InputPassphrase2KeyBundle(char *passEx)
 //cout("2:%s\n", passphrase); // test
 //cout("K:%s\n", passphrase_k); // test
 
-	if(lineExp("<>[<1,,><2,09>]", passphrase_k))
+	if (lineExp("<>[<1,,><2,09>]", passphrase_k))
 	{
 		char *p = strchr(passphrase, '\0') - 5;
 		int xChr;
@@ -162,7 +162,7 @@ static autoBlock_t *InputPassphrase2KeyBundle(char *passEx)
 
 			for(count = 0; count < xNum; count++)
 			{
-				if(count % 8 == 0)
+				if (count % 8 == 0)
 					ProgressRate((double)count / xNum);
 
 				sha512_update(i, &gab);
@@ -198,7 +198,7 @@ static autoBlock_t *InputPassphrase2KeyBundle(char *passEx)
 */
 autoBlock_t *cphrLoadKeyBundleFileEx(char *fileEx)
 {
-	if(fileEx[0] == '*')
+	if (fileEx[0] == '*')
 		return InputPassphrase2KeyBundle(fileEx + 1);
 
 	return cphrLoadKeyBundleFile(fileEx);
@@ -217,7 +217,7 @@ int cphrUnaddHash(autoBlock_t *block) // ret: 0 == block は破損している。
 	autoBlock_t *hash;
 	int retval;
 
-	if(getSize(block) < MD5_SIZE)
+	if (getSize(block) < MD5_SIZE)
 		return 0;
 
 	expectedHash = getSubBytes(block, getSize(block) - MD5_SIZE, MD5_SIZE);
@@ -242,7 +242,7 @@ void cphrAddPadding(autoBlock_t *block) // 少なくとも block は BLOCK_SIZE バイト
 	size %= BLOCK_SIZE;
 	size += (getCryptoByte() / BLOCK_SIZE) * BLOCK_SIZE;
 
-	if(size < BLOCK_SIZE) size += BLOCK_SIZE; // @ 2015.1.25
+	if (size < BLOCK_SIZE) size += BLOCK_SIZE; // @ 2015.1.25
 
 	for(index = 0; index < size; index++)
 	{
@@ -257,12 +257,12 @@ int cphrUnaddPadding(autoBlock_t *block) // ret: 0 == block は破損している。
 {
 	uint size;
 
-	if(getSize(block) < 1)
+	if (getSize(block) < 1)
 		return 0;
 
 	size = unaddByte(block);
 
-	if(getSize(block) < size)
+	if (getSize(block) < size)
 		return 0;
 
 	setSize(block, getSize(block) - size);
@@ -361,7 +361,7 @@ int cphrDecryptorBlock(autoBlock_t *block, autoList_t *keyTableList) // ret: 0 =
 	errorCase(!block);
 //	errorCase(!keyTableList);
 
-	if(getSize(block) < BLOCK_SIZE) // iv なし
+	if (getSize(block) < BLOCK_SIZE) // iv なし
 		return 0;
 
 	iv = getSubBytes(block, getSize(block) - BLOCK_SIZE, BLOCK_SIZE);
@@ -369,8 +369,8 @@ int cphrDecryptorBlock(autoBlock_t *block, autoList_t *keyTableList) // ret: 0 =
 
 	cphrEncryptor(block, keyTableList, iv, 0);
 
-	if(!cphrUnaddPadding(block)) goto endfunc;
-	if(!cphrUnaddHash(block))    goto endfunc;
+	if (!cphrUnaddPadding(block)) goto endfunc;
+	if (!cphrUnaddHash(block))    goto endfunc;
 
 	retval = 1;
 
@@ -387,9 +387,9 @@ static uint GetDivBlockSize(void)
 	uint currTime = now();
 	uint size = G_DivBlockSize;
 
-	if(lastTime == currTime)
+	if (lastTime == currTime)
 		size += size / 8;
-	else if(lastTime + 2 <= currTime)
+	else if (lastTime + 2 <= currTime)
 		size -= size / 8;
 
 	lastTime = currTime;
@@ -438,7 +438,7 @@ void cphrEncryptorFile(char *srcFile, char *destFile, autoList_t *keyTableList, 
 		block = readBinaryBlock(rfp, divBlockSize);
 		md5_update(md5, block);
 
-		if(getSize(block) < divBlockSize)
+		if (getSize(block) < divBlockSize)
 		{
 			addBytes(block, pab = md5_makeHash(md5));
 			releaseAutoBlock(pab);
@@ -449,7 +449,7 @@ void cphrEncryptorFile(char *srcFile, char *destFile, autoList_t *keyTableList, 
 		writeBinaryBlock(wfp, block);
 		releaseAutoBlock(block);
 
-		if(rfpend)
+		if (rfpend)
 			break;
 
 		interlude();
@@ -486,15 +486,15 @@ int cphrDecryptorFile(char *srcFile, char *destFile, autoList_t *keyTableList, v
 	rfp = fileOpen(srcFile, "rb");
 	wfp = fileOpen(destFile, "wb");
 
-	if(srcFileSize < BLOCK_SIZE)
+	if (srcFileSize < BLOCK_SIZE)
 		goto endfunc;
 
-	if(_fseeki64(rfp, srcFileSize - BLOCK_SIZE, SEEK_SET) != 0) // ? シーク失敗
+	if (_fseeki64(rfp, srcFileSize - BLOCK_SIZE, SEEK_SET) != 0) // ? シーク失敗
 		error();
 
 	iv = readBinaryBlock(rfp, BLOCK_SIZE);
 
-	if(_fseeki64(rfp, 0i64, SEEK_SET) != 0) // ? シーク失敗
+	if (_fseeki64(rfp, 0i64, SEEK_SET) != 0) // ? シーク失敗
 		error();
 
 	md5 = md5_create();
@@ -506,7 +506,7 @@ int cphrDecryptorFile(char *srcFile, char *destFile, autoList_t *keyTableList, v
 		int endblock;
 
 		// 最後の block が短すぎるとまずいので、ある程度短い端数は一緒に読み込んでしまう。
-		if(srcFileSize - srcIndex < divBlockSize + divBlockSize / 8)
+		if (srcFileSize - srcIndex < divBlockSize + divBlockSize / 8)
 		{
 			uint remSize = srcFileSize - srcIndex;
 
@@ -524,12 +524,12 @@ int cphrDecryptorFile(char *srcFile, char *destFile, autoList_t *keyTableList, v
 		}
 		cphrEncryptor(block, keyTableList, iv, 0);
 
-		if(endblock)
+		if (endblock)
 		{
-			if(!cphrUnaddPadding(block))
+			if (!cphrUnaddPadding(block))
 				goto endfunc;
 
-			if(getSize(block) < MD5_SIZE)
+			if (getSize(block) < MD5_SIZE)
 				goto endfunc;
 
 			expectedHash = getSubBytes(block, getSize(block) - MD5_SIZE, MD5_SIZE);
@@ -537,13 +537,13 @@ int cphrDecryptorFile(char *srcFile, char *destFile, autoList_t *keyTableList, v
 		}
 		md5_update(md5, block);
 
-		if(endblock)
-			if(!isSameBlock(expectedHash, hash = md5_makeHash(md5))) // ? ハッシュ不一致
+		if (endblock)
+			if (!isSameBlock(expectedHash, hash = md5_makeHash(md5))) // ? ハッシュ不一致
 				goto endfunc;
 
 		writeBinaryBlock(wfp, block);
 
-		if(endblock)
+		if (endblock)
 			break;
 
 		srcIndex += getSize(block);
@@ -556,11 +556,11 @@ endfunc:
 	fileClose(rfp);
 	fileClose(wfp);
 
-	if(iv)           releaseAutoBlock(iv);
-	if(block)        releaseAutoBlock(block);
-	if(hash)         releaseAutoBlock(hash);
-	if(expectedHash) releaseAutoBlock(expectedHash);
-	if(md5)          md5_release(md5);
+	if (iv)           releaseAutoBlock(iv);
+	if (block)        releaseAutoBlock(block);
+	if (hash)         releaseAutoBlock(hash);
+	if (expectedHash) releaseAutoBlock(expectedHash);
+	if (md5)          md5_release(md5);
 
 	return retval;
 }

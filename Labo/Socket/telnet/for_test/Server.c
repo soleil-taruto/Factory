@@ -22,14 +22,14 @@ Info_t;
 
 static void DispRecvData(Info_t *i)
 {
-	if(getSize(i->RecvQueue))
+	if (getSize(i->RecvQueue))
 	{
 		char *line = toPrintLine(i->RecvQueue, 1);
 
 		cout("%p > %s\n", i, line);
 		memFree(line);
 
-		if(RecvFp)
+		if (RecvFp)
 			writeBinaryBlock(RecvFp, i->RecvQueue);
 
 		setSize(i->RecvQueue, 0);
@@ -49,10 +49,10 @@ static uint CreateInfo(void)
 	i->SendQueue = newBlock();
 	i->Timeout = TimeoutSec ? now() + TimeoutSec : 0;
 
-	if(SendFile)
+	if (SendFile)
 		ab_addBytes_x(i->SendQueue, readBinary(SendFile));
 
-	if(SendData)
+	if (SendData)
 		addBytes(i->SendQueue, SendData);
 
 	return (uint)i;
@@ -80,30 +80,30 @@ static int Perform(int sock, uint prm)
 {
 	Info_t *i = (Info_t *)prm;
 
-	if(StopServer) // sockServerUserTransmit の場合 Idle(funcIdle) が 0 を返したら即切断・終了するので、ここで判定して 0 を返す必要は無い。でも無害なので放置する。
+	if (StopServer) // sockServerUserTransmit の場合 Idle(funcIdle) が 0 を返したら即切断・終了するので、ここで判定して 0 を返す必要は無い。でも無害なので放置する。
 		return 0;
 
-	if(SockRecvSequ(sock, i->RecvQueue, 1) == -1)
+	if (SockRecvSequ(sock, i->RecvQueue, 1) == -1)
 		return 0;
 
 	DispRecvData(i);
 
-	if(SockSendSequ(sock, i->SendQueue, 0) == -1)
+	if (SockSendSequ(sock, i->SendQueue, 0) == -1)
 		return 0;
 
 	while(hasKey())
 	{
 		int chr = getKey();
 
-		if(chr == 0x1b)
+		if (chr == 0x1b)
 		{
 			StopServer = 1;
 			return 0;
 		}
-		if(chr == 'D')
+		if (chr == 'D')
 			return 0;
 
-		if(chr == 'I')
+		if (chr == 'I')
 		{
 			cmdTitle("Server - Input");
 
@@ -120,11 +120,11 @@ static int Perform(int sock, uint prm)
 }
 static int Idle(void)
 {
-	if(!ConnectCount)
+	if (!ConnectCount)
 	{
 		while(hasKey())
 		{
-			if(getKey() == 0x1b)
+			if (getKey() == 0x1b)
 			{
 				StopServer = 1;
 			}
@@ -137,34 +137,34 @@ int main(int argc, char **argv)
 	uint portno = 23;
 
 readArgs:
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		SendFile = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/I"))
+	if (argIs("/I"))
 	{
 		SendData = inputTextAsBinary();
 		goto readArgs;
 	}
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		RecvFp = fileOpen(nextArg(), "wb");
 		goto readArgs;
 	}
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		TimeoutSec = toValue(nextArg());
 		goto readArgs;
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		portno = toValue(nextArg());
 	}
 	sockServerUserTransmit(Perform, CreateInfo, ReleaseInfo, portno, 10, Idle);
 
-	if(RecvFp)
+	if (RecvFp)
 	{
 		fileClose(RecvFp);
 	}

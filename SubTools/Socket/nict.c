@@ -27,27 +27,27 @@ static int NictPerform(int sock, uint prm_dummy)
 	{
 		char *line = SockRecvLine(ss, 2000);
 
-		if(!*line)
+		if (!*line)
 		{
 			memFree(line);
 			break;
 		}
 		removeBlank(line);
 
-		if(!_stricmp(line, "Transfer-Encoding:chunked"))
+		if (!_stricmp(line, "Transfer-Encoding:chunked"))
 			chunked = 1;
 
 		memFree(line);
 	}
 
-	if(chunked)
+	if (chunked)
 	{
 		httpChunkedRecver_t *recver = httpCreateChunkedRecver(ss);
 		autoBlock_t *body;
 
 		body = httpRecvChunked(recver);
 
-		if(body)
+		if (body)
 		{
 			char *sBody = unbindBlock2Line(body);
 			char *p;
@@ -81,7 +81,7 @@ static int NictPerform(int sock, uint prm_dummy)
 	line2JLine(line, 1, 0, 0, 1); // 表示のため
 	cout("[%s]\n", line);
 
-	if(
+	if (
 		lineExp("<1,,09>", line) ||
 		lineExp("<1,,09>.<1,,09>", line)
 		)
@@ -90,7 +90,7 @@ static int NictPerform(int sock, uint prm_dummy)
 
 		NictTime = toValue64(line);
 
-		if(m_isRange(NictTime, 1000000000ui64, 32500000000ui64)) // ? およそ 2000年 ～ 3000年, それ以外は何かおかしい！
+		if (m_isRange(NictTime, 1000000000ui64, 32500000000ui64)) // ? およそ 2000年 ～ 3000年, それ以外は何かおかしい！
 			ret = 1;
 	}
 	ReleaseSockStream(ss);
@@ -116,12 +116,12 @@ static void Main2(void)
 	int dayChangeEvasion = 1;
 
 readArgs:
-	if(argIs("/V"))
+	if (argIs("/V"))
 	{
 		viewOnly = 1;
 		goto readArgs;
 	}
-	if(argIs("/-E"))
+	if (argIs("/-E"))
 	{
 		dayChangeEvasion = 0;
 		goto readArgs;
@@ -144,7 +144,7 @@ readArgs:
 
 	LOGPOS();
 
-	if(dayChangeEvasion)
+	if (dayChangeEvasion)
 	{
 		uint hms = (uint)(toValue64(c_makeCompactStamp(NULL)) % 1000000ui64);
 
@@ -154,21 +154,21 @@ readArgs:
 		// 余裕は 35 秒くらいでいいと思う。
 		// -- 1 分でいいや。
 
-//		if(hms < 5 || 235925 < hms)
-		if(hms < 5 || 235900 < hms)
+//		if (hms < 5 || 235925 < hms)
+		if (hms < 5 || 235900 < hms)
 		{
 			cout("日付変更が近いので、中止します。\n");
 			return;
 		}
 	}
-	if(!GetNictTime())
+	if (!GetNictTime())
 	{
 		cout("取得失敗\n");
 		return;
 	}
 	cout("取得した時刻：%s\n", c_makeJStamp(getStampDataTime(NictTime), 0));
 
-	if(!viewOnly)
+	if (!viewOnly)
 	{
 		LOGPOS();
 		SlewApplyTimeData(NictTime);

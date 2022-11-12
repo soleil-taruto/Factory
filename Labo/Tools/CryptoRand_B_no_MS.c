@@ -12,7 +12,7 @@ static uint GetCrByte(void)
 	static uchar buffer[BUFFERSIZE];
 	static uint index = BUFFERSIZE;
 
-	if(index == BUFFERSIZE)
+	if (index == BUFFERSIZE)
 	{
 		getCryptoBlock_MS(buffer, BUFFERSIZE);
 		index = 0;

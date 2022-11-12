@@ -18,7 +18,7 @@ static void UploadCurrDir(char *dir)
 	writeLine(fp, Passphrase);
 	writeLine(fp, "prompt");
 
-	if(*dir != '.')
+	if (*dir != '.')
 	{
 		autoList_t *ptkns = tokenize(dir, '\\'); // Š¿š‚Íg‚í‚È‚¢‚¾‚ë‚¤B
 		char *ptkn;
@@ -67,7 +67,7 @@ int main(int argc, char **argv)
 	UserName = nextArg();
 	Passphrase = nextArg();
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		addCwd(nextArg());
 		FtpUpdate();

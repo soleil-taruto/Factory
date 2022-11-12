@@ -14,11 +14,11 @@
 
 int main(int argc, char **argv)
 {
-	if(argIs("/O")) // Open
+	if (argIs("/O")) // Open
 	{
 		DoorOpen();
 	}
-	else if(argIs("/C")) // Close
+	else if (argIs("/C")) // Close
 	{
 		DoorClose();
 	}
@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 
 		cout("エスケープキー以外を押すとトレイを閉じます。\n");
 
-		if(clearGetKey() != 0x1b)
+		if (clearGetKey() != 0x1b)
 			DoorClose();
 	}
 }

@@ -77,11 +77,11 @@ static uint GetCounter(char *groupName)
 {
 	uint counter = 1; // 初期値
 
-	if(existFile(GetCounterFile(groupName)))
+	if (existFile(GetCounterFile(groupName)))
 	{
 		char *line = readFirstLine(GetCounterFile(groupName));
 
-		if(lineExp("<1,9,09>", line)) // 10億-1でカンスト
+		if (lineExp("<1,9,09>", line)) // 10億-1でカンスト
 			counter = toValue(line);
 
 		memFree(line);
@@ -125,11 +125,11 @@ static char *ToFairMailAddress(char *mailAddress) // ret: strr(mailAddress)
 {
 	char *p = strrchr(mailAddress, '<'); // 最後の '<'
 
-	if(p)
+	if (p)
 	{
 		char *q = strchr(++p, '>');
 
-		if(q)
+		if (q)
 		{
 			char *tmp = strxl(p, (uint)q - (uint)p);
 
@@ -145,7 +145,7 @@ static int IsKnownMessageId(void) // ret: ? 既知のメール
 	static char *lastMessageId;
 	char *messageId = MP_GetHeaderValue("Message-Id");
 
-	if(!messageId) // ? Message-Id 無し
+	if (!messageId) // ? Message-Id 無し
 	{
 		cout("メッセージIDなし\n");
 		return 0;
@@ -154,7 +154,7 @@ static int IsKnownMessageId(void) // ret: ? 既知のメール
 
 	cout("MID.1: %s\n", messageId);
 
-	if(!lastMessageId)
+	if (!lastMessageId)
 	{
 		cout("初回メール\n");
 		lastMessageId = messageId;
@@ -162,7 +162,7 @@ static int IsKnownMessageId(void) // ret: ? 既知のメール
 	}
 	cout("MID.2: %s\n", lastMessageId);
 
-	if(!strcmp(messageId, lastMessageId))
+	if (!strcmp(messageId, lastMessageId))
 	{
 		cout("前回のメッセージIDと同じ -> 既知のメール\n");
 		memFree(messageId);
@@ -189,7 +189,7 @@ static void DistributeOne(char *groupName, char *memberFrom, char *memberTo, uin
 	cout("D1.> [%s]\n", memberTo);
 	cout("D1.C %u\n", counter);
 
-	if(!contentTransferEncoding)
+	if (!contentTransferEncoding)
 		contentTransferEncoding = strx("7bit"); // Content-Transfer-Encoding のデフォルトは "7bit", 強制的に指定している理由は不明 (..\mail\mailForward.c に倣った)
 
 	ab_addLine(mail, "Date: ");
@@ -212,13 +212,13 @@ static void DistributeOne(char *groupName, char *memberFrom, char *memberTo, uin
 	ab_addLine_x(mail, MakeMailMessageID(SelfMailAddress));
 	ab_addLine(mail, "\r\n");
 
-	if(mimeVersion)
+	if (mimeVersion)
 	{
 		ab_addLine(mail, "MIME-Version: ");
 		ab_addLine(mail, mimeVersion);
 		ab_addLine(mail, "\r\n");
 	}
-	if(contentType)
+	if (contentType)
 	{
 		ab_addLine(mail, "Content-Type: ");
 		ab_addLine(mail, contentType);
@@ -272,7 +272,7 @@ static void Distribute(autoList_t *memberList, char *groupName, char *mailFrom) 
 
 	foreach(memberList, member, index)
 	{
-		if(!strcmp(mailFrom, member))
+		if (!strcmp(mailFrom, member))
 		{
 			memberFrom = member;
 			break;
@@ -297,11 +297,11 @@ static void Distribute(autoList_t *memberList, char *groupName, char *mailFrom) 
 		cout("unreturn: %d\n", unreturn);
 		cout("sendonly: %d\n", sendonly);
 
-		if(unreturn && member == memberFrom)
+		if (unreturn && member == memberFrom)
 		{
 			cout("■折り返し拒否メンバーなので飛ばす。\n");
 		}
-		else if(sendonly)
+		else if (sendonly)
 		{
 			cout("■送信オンリーメンバーなので飛ばす。\n");
 		}
@@ -316,7 +316,7 @@ static void Distribute(autoList_t *memberList, char *groupName, char *mailFrom) 
 	}
 	releaseAutoList(shuffledMemberList);
 
-	if(DistributeOne_ErrorFlag)
+	if (DistributeOne_ErrorFlag)
 	{
 		autoList_t *bodyLines = newList();
 		char *fromField = MP_GetHeaderValue("From");
@@ -325,13 +325,13 @@ static void Distribute(autoList_t *memberList, char *groupName, char *mailFrom) 
 
 		LOGPOS();
 
-		if(!fromField)
+		if (!fromField)
 			fromField = strx("<NONE>");
 
-		if(!dateField)
+		if (!dateField)
 			dateField = strx("<NONE>");
 
-		if(!messageId)
+		if (!messageId)
 			messageId = strx("<NONE>");
 
 		toAsciiLine(fromField, 0, 0, 1); // 送信テキストに使用するため
@@ -361,7 +361,7 @@ static void RecvEvent(void)
 {
 	char *mailFrom = MP_GetHeaderValue("From");
 
-	if(!mailFrom)
+	if (!mailFrom)
 	{
 		cout("No mailFrom!\n");
 		return;
@@ -382,7 +382,7 @@ static void RecvEvent(void)
 
 			foreach(memberList, member, member_index)
 			{
-				if(!strcmp(mailFrom, member))
+				if (!strcmp(mailFrom, member))
 				{
 					addElement(indexes, index);
 					mail_myself = member;
@@ -393,13 +393,13 @@ static void RecvEvent(void)
 		{
 			char *subject = MP_GetHeaderValue("Subject");
 
-			if(subject)
+			if (subject)
 			{
 				foreach(indexes, index, index_index)
 				{
 					char *groupPtn = xcout("[%s]", getLine(GroupNameList, index));
 
-					if(mbs_stristr(subject, groupPtn)) // ? ターゲット発見
+					if (mbs_stristr(subject, groupPtn)) // ? ターゲット発見
 					{
 						setCount(indexes, 1);
 						setElement(indexes, 0, index);
@@ -412,11 +412,11 @@ static void RecvEvent(void)
 			}
 		}
 
-		if(2 <= getCount(indexes))
+		if (2 <= getCount(indexes))
 		{
 			char *subject = MP_GetHeaderValue("Subject");
 
-			if(!subject || !mbs_stristr(subject, "[]")) // ? 空のグループパターンが無い
+			if (!subject || !mbs_stristr(subject, "[]")) // ? 空のグループパターンが無い
 			{
 				errorCase(!mail_myself);
 				DistributeOne_ErrorFlag = 0;
@@ -446,12 +446,12 @@ static void RecvLoop(void)
 		int mailRecved = 0;
 		uint index;
 
-		if(getCount(mailList))
+		if (getCount(mailList))
 		{
 			uint mailSize = getElement(mailList, 0);
 			int del = 1; // 存在するけど受信できないメールがあった場合それを削除するために、デフォルトで 1 (削除)
 
-			if(mailSize <= MAILSIZEMAX)
+			if (mailSize <= MAILSIZEMAX)
 			{
 				autoBlock_t *mail = RecvMail(PopServer, PopPortno, UserName, Passphrase, 1, MAILSIZEMAX);
 
@@ -461,7 +461,7 @@ static void RecvLoop(void)
 				MailParser(mail);
 				LOGPOS();
 
-				if(!IsKnownMessageId())
+				if (!IsKnownMessageId())
 					RecvEvent();
 				else
 					cout("既知のメールであるため無視します。\n");
@@ -470,14 +470,14 @@ static void RecvLoop(void)
 				MP_Clear();
 				releaseAutoBlock(mail);
 			}
-			if(del)
+			if (del)
 				DeleteMail(PopServer, PopPortno, UserName, Passphrase, 1);
 
 			mailRecved = 1;
 		}
 		releaseAutoList(mailList);
 
-		if(mailRecved) // ? 何かメールを受信した。
+		if (mailRecved) // ? 何かメールを受信した。
 			waitSec = 10;
 		else
 			waitSec++;
@@ -487,7 +487,7 @@ static void RecvLoop(void)
 		cout("waitSec: %u\n", waitSec);
 
 		for(index = 0; index < waitSec; index += 3)
-			if(checkKey(0x1b) || handleWaitForMillis(stopEv, 3000))
+			if (checkKey(0x1b) || handleWaitForMillis(stopEv, 3000))
 				goto endLoop;
 
 		mt19937_rnd32(); // 乱数のカウンタを回す。
@@ -504,83 +504,83 @@ int main(int argc, char **argv)
 	SendOnlyMemberList = newList();
 
 readArgs:
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		LOGPOS();
 		eventWakeup(STOP_EV_NAME);
 		return;
 	}
-	if(argIs("/PD")) // Pop server Domain
+	if (argIs("/PD")) // Pop server Domain
 	{
 		PopServer = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/PP")) // Pop server Port number
+	if (argIs("/PP")) // Pop server Port number
 	{
 		PopPortno = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/SD")) // Smtp server Domain
+	if (argIs("/SD")) // Smtp server Domain
 	{
 		SmtpServer = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/SP")) // Smtp server Port number
+	if (argIs("/SP")) // Smtp server Port number
 	{
 		SmtpPortno = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/U")) // User name
+	if (argIs("/U")) // User name
 	{
 		UserName = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/P")) // Passphrase
+	if (argIs("/P")) // Passphrase
 	{
 		Passphrase = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/M")) // self Mail address
+	if (argIs("/M")) // self Mail address
 	{
 		SelfMailAddress = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/F")) // members File
+	if (argIs("/F")) // members File
 	{
 		LOGPOS();
 		addElement(GroupList, (uint)readResourceLines(nextArg()));
 		goto readArgs;
 	}
-	if(argIs("/G")) // Groups file
+	if (argIs("/G")) // Groups file
 	{
 		LOGPOS();
 		addElements_x(GroupList, readResourceFilesLines(nextArg()));
 		goto readArgs;
 	}
-	if(argIs("/N")) // group Names file
+	if (argIs("/N")) // group Names file
 	{
 		LOGPOS();
 		GroupNameList = readResourceLines(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/UR")) // Un-Return members file
+	if (argIs("/UR")) // Un-Return members file
 	{
 		LOGPOS();
 		addElements_x(UnreturnMemberList, readResourceLines(nextArg()));
 		goto readArgs;
 	}
-	if(argIs("/SO")) // Send Only members file
+	if (argIs("/SO")) // Send Only members file
 	{
 		LOGPOS();
 		addElements_x(SendOnlyMemberList, readResourceLines(nextArg()));
 		goto readArgs;
 	}
-	if(argIs("/C")) // Counter file path-base
+	if (argIs("/C")) // Counter file path-base
 	{
 		CounterFileBase = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/-D")) // no recv and Delete
+	if (argIs("/-D")) // no recv and Delete
 	{
 		LOGPOS();
 		RecvAndDeleteMode = 0;

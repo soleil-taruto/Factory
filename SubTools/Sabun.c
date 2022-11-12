@@ -17,7 +17,7 @@ static void DispSabun(Sabun_t *s)
 	WL("<Pos>%u</Pos>\n", s->Pos);
 	WL("<Length>%u</Length>\n", s->Length);
 
-	if(s->Data)
+	if (s->Data)
 	{
 		uint index;
 
@@ -35,7 +35,7 @@ static void DispSabunList_V(autoList_t *lDiff, autoList_t *rDiff)
 	Sabun_t *s;
 	uint index;
 
-	if(!lDiff && !rDiff)
+	if (!lDiff && !rDiff)
 		return;
 
 	errorCase(!lDiff || !rDiff);
@@ -59,13 +59,13 @@ static void DispSabunList(autoList_t *diff, char *tag)
 	Sabun_t *s;
 	uint index;
 
-	if(!diff)
+	if (!diff)
 		return;
 
 	WL("<%s>\n", tag);
 
 	foreach(diff, s, index)
-		if(s->Length)
+		if (s->Length)
 			DispSabun(s);
 
 	WL("</%s>\n", tag);
@@ -80,7 +80,7 @@ static void DispDirSabunList(autoList_t *diff)
 
 	foreach(diff, ds, index)
 	{
-		if(VerboseMode || ds->Kind < 6 || (ds->LDiff && getCount(ds->LDiff)))
+		if (VerboseMode || ds->Kind < 6 || (ds->LDiff && getCount(ds->LDiff)))
 		{
 			WL("<Dir-Sabun>\n");
 			WL("<Path>%s</Path>\n", ds->Path);
@@ -88,7 +88,7 @@ static void DispDirSabunList(autoList_t *diff)
 			WL("<L-Exist>%u</L-Exist>\n", ds->Kind >> 1 & 1);
 			WL("<R-Exist>%u</R-Exist>\n", ds->Kind >> 2 & 1);
 
-			if(VerboseMode)
+			if (VerboseMode)
 			{
 				DispSabunList_V(ds->LDiff, ds->RDiff);
 			}
@@ -106,17 +106,17 @@ int main(int argc, char **argv)
 {
 	WFp = stdout;
 
-	if(argIs("/O"))
+	if (argIs("/O"))
 	{
 		WFp = fileOpen(nextArg(), "wt");
 		addFinalizer(CloseWFp);
 	}
-	if(argIs("/V"))
+	if (argIs("/V"))
 	{
 		VerboseMode = 1;
 	}
 
-	if(argIs("/D")) // Dir
+	if (argIs("/D")) // Dir
 	{
 		char *localDir;
 		char *rDir;
@@ -133,7 +133,7 @@ int main(int argc, char **argv)
 		memFree(rDir);
 	}
 
-	if(argIs("/F")) // File
+	if (argIs("/F")) // File
 	{
 		autoBlock_t *lFData;
 		autoBlock_t *rFData;
@@ -148,7 +148,7 @@ int main(int argc, char **argv)
 		WL("<?xml version=\"1.0\" encoding=\"shift_jis\"?>\n");
 		WL("<File-Sabun-List>\n");
 
-		if(VerboseMode)
+		if (VerboseMode)
 		{
 			DispSabunList_V(lDiff, rDiff);
 		}

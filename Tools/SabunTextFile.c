@@ -18,7 +18,7 @@ static void Main2(char *file1, char *file2)
 	char *line;
 	uint index;
 
-	if(Limit)
+	if (Limit)
 		report = getDiffLinesReportLim(lines1, lines2, IgnoreCaseFlag, Limit);
 	else
 		report = getDiffLinesReport(lines1, lines2, IgnoreCaseFlag);
@@ -30,16 +30,16 @@ static void Main2(char *file1, char *file2)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/I"))
+	if (argIs("/I"))
 	{
 		IgnoreCaseFlag = 1;
 	}
-	if(argIs("/L"))
+	if (argIs("/L"))
 	{
 		Limit = toValue(nextArg());
 	}
 
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		Main2(getArg(0), getArg(1));
 		return;

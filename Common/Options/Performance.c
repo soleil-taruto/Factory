@@ -4,12 +4,12 @@ uint64 GetPerformanceCounter(void)
 {
 	LARGE_INTEGER i;
 
-	if(!QueryPerformanceCounter(&i))
+	if (!QueryPerformanceCounter(&i))
 	{
 		error();
 	}
 #if 0
-	if(i.QuadPart <= 0i64)
+	if (i.QuadPart <= 0i64)
 	{
 		error();
 	}
@@ -20,15 +20,15 @@ uint64 GetPerformanceFrequency(void)
 {
 	static uint64 freq;
 
-	if(freq == 0ui64)
+	if (freq == 0ui64)
 	{
 		LARGE_INTEGER i;
 
-		if(!QueryPerformanceFrequency(&i))
+		if (!QueryPerformanceFrequency(&i))
 		{
 			error();
 		}
-		if(i.QuadPart <= 0i64)
+		if (i.QuadPart <= 0i64)
 		{
 			error();
 		}

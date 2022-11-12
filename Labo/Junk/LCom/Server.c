@@ -11,24 +11,24 @@ static char *RecvEvent(char *line)
 
 	cout("Recv: %s\n", line);
 
-	if(getCount(tokens) == 2)
+	if (getCount(tokens) == 2)
 	{
 		char *key   = getLine(tokens, 0);
 		char *value = getLine(tokens, 1);
 
-		if(rbtHasKey(Dictionary, (uint)key))
+		if (rbtHasKey(Dictionary, (uint)key))
 		{
 			memFree((void *)rbtUnaddValue(Dictionary, (uint)key));
 		}
 		rbtAddValue(Dictionary, (uint)key, (uint)strx(value));
 		resLine = "Settled";
 	}
-	else if(getCount(tokens) == 1)
+	else if (getCount(tokens) == 1)
 	{
 		char *key = getLine(tokens, 0);
 		char *value;
 
-		if(rbtHasKey(Dictionary, (uint)key))
+		if (rbtHasKey(Dictionary, (uint)key))
 		{
 //			value = (char *)rbtGetValue(Dictionary, (uint)key);
 			value = (char *)rbtGetLastAccessValue(Dictionary);

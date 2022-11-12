@@ -36,19 +36,19 @@ static int DoConnect(char *fwdHost, uint fwdPortNo) // ret: -1 == 接続できなかっ
 	strIp = SockIp2Line(ip);
 	cout("FWD_IP: %s\n", strIp);
 
-	if(!*(uint *)ip)
+	if (!*(uint *)ip)
 	{
 		cout("NO_HOST\n");
 		return -1;
 	}
-	if(getCount(OKIPPrfxList))
+	if (getCount(OKIPPrfxList))
 	{
 		foreach(OKIPPrfxList, ipprfx, index)
 		{
-			if(startsWith(strIp, ipprfx))
+			if (startsWith(strIp, ipprfx))
 				break;
 		}
-		if(!ipprfx)
+		if (!ipprfx)
 		{
 			cout("NOT_OKIP\n");
 			return -1;
@@ -56,7 +56,7 @@ static int DoConnect(char *fwdHost, uint fwdPortNo) // ret: -1 == 接続できなかっ
 	}
 	foreach(NGIPPrfxList, ipprfx, index)
 	{
-		if(startsWith(strIp, ipprfx))
+		if (startsWith(strIp, ipprfx))
 		{
 			cout("IS_NGIP\n");
 			return -1;
@@ -68,7 +68,7 @@ static void PreDataFltr(autoBlock_t *buff, uint uPData)
 {
 	autoBlock_t **pData = (autoBlock_t **)uPData;
 
-	if(*pData)
+	if (*pData)
 	{
 		autoBlock_t *nb = newBlock();
 
@@ -94,13 +94,13 @@ static void PerformTh(int sock, char *strip)
 		int chr = SockRecvChar(ss);
 		uint endPos;
 
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
 		addByte(buff, chr);
 		endPos = getSize(buff);
 
-		if(4 <= endPos && !memcmp((uchar *)directGetBuffer(buff) + endPos - 4, "\r\n\r\n", 4))
+		if (4 <= endPos && !memcmp((uchar *)directGetBuffer(buff) + endPos - 4, "\r\n\r\n", 4))
 		{
 			uint fndPos;
 			char *host;
@@ -115,7 +115,7 @@ static void PerformTh(int sock, char *strip)
 
 			fndPos = findLineCase(HttpDat.H_Keys, "Host", 1);
 
-			if(fndPos == getCount(HttpDat.H_Keys))
+			if (fndPos == getCount(HttpDat.H_Keys))
 			{
 				cout("NO_HOST_FIELD\n");
 				break;
@@ -126,7 +126,7 @@ static void PerformTh(int sock, char *strip)
 
 			fndPos = findLineCase(HttpDat.H_Keys, "Connection", 1);
 
-			if(fndPos == getCount(HttpDat.H_Keys))
+			if (fndPos == getCount(HttpDat.H_Keys))
 			{
 				addElement(HttpDat.H_Keys, (uint)strx("Connection"));
 				addElement(HttpDat.H_Values, (uint)NULL);
@@ -137,7 +137,7 @@ static void PerformTh(int sock, char *strip)
 
 			p = strchr(host, ':');
 
-			if(p)
+			if (p)
 			{
 				*p = '\0';
 				p++;
@@ -157,7 +157,7 @@ static void PerformTh(int sock, char *strip)
 
 			cout("FWD_SOCK: %d\n", fwdSock);
 
-			if(fwdSock != -1)
+			if (fwdSock != -1)
 			{
 				autoBlock_t *buffTmp = buff; // PreDataFltr() で NULL をセットされる。
 
@@ -169,7 +169,7 @@ static void PerformTh(int sock, char *strip)
 			memFree(fwdHost);
 			break;
 		}
-		if(65000 < endPos)
+		if (65000 < endPos)
 		{
 			cout("OVERFLOW_HEADER_SIZE\n");
 			break;
@@ -182,7 +182,7 @@ static void PerformTh(int sock, char *strip)
 }
 static int ReadArgs(void)
 {
-	if(argIs("/O"))
+	if (argIs("/O"))
 	{
 		char *ipprfx = nextArg();
 
@@ -191,7 +191,7 @@ static int ReadArgs(void)
 		addElement(OKIPPrfxList, (uint)ipprfx);
 		return 1;
 	}
-	if(argIs("/N"))
+	if (argIs("/N"))
 	{
 		char *ipprfx = nextArg();
 

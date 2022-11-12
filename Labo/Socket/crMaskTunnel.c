@@ -43,18 +43,18 @@ static void Perform(int sock, int fwdSock)
 	autoBlock_t *maskPtn;
 	FltrInfo_t fltrInfos[2];
 
-	if(ServerMode)
+	if (ServerMode)
 	{
 		maskPtn = newBlock();
 
-		if(SockRecvSequLoop(sock, maskPtn, SENDRECV_TIMEOUT_MILLIS, MASKPTN_SIZE) != MASKPTN_SIZE)
+		if (SockRecvSequLoop(sock, maskPtn, SENDRECV_TIMEOUT_MILLIS, MASKPTN_SIZE) != MASKPTN_SIZE)
 			goto disconnect;
 	}
 	else
 	{
 		maskPtn = makeCryptoRandBlock(MASKPTN_SIZE);
 
-		if(SockSendSequLoop(fwdSock, maskPtn, SENDRECV_TIMEOUT_MILLIS) != MASKPTN_SIZE)
+		if (SockSendSequLoop(fwdSock, maskPtn, SENDRECV_TIMEOUT_MILLIS) != MASKPTN_SIZE)
 			goto disconnect;
 	}
 
@@ -70,7 +70,7 @@ disconnect:
 }
 static int ReadArgs(void)
 {
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		ServerMode = 1;
 		return 1;

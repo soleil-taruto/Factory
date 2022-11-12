@@ -46,7 +46,7 @@ static char *LastHeaderName;
 
 static int IsSymLine(char *line)
 {
-	if(lineExpICase("<\1 >////<\1 >^<\1 >sync<>", line)) // ? SymLine らしい
+	if (lineExpICase("<\1 >////<\1 >^<\1 >sync<>", line)) // ? SymLine らしい
 	{
 		errorCase(!lineExp("<\t\t>//// ^ sync @ <1,,__09AZaz>", line)); // ? SymLine ではない。
 
@@ -81,7 +81,7 @@ static void Search(void)
 		addElements_x(files, lssFiles(dir));
 
 	foreach(files, file, index)
-	if(findLineCase(TargetExts, getExt(file), 1) < getCount(TargetExts))
+	if (findLineCase(TargetExts, getExt(file), 1) < getCount(TargetExts))
 	{
 		autoList_t *lines = readLines(file);
 		char *line;
@@ -92,7 +92,7 @@ static void Search(void)
 
 		foreach(lines, line, line_index)
 		{
-			if(IsSymLine(line))
+			if (IsSymLine(line))
 			{
 				autoList_t gal;
 
@@ -131,7 +131,7 @@ static void Confirm(void)
 	uint idx;
 
 	foreach(Headers, header, index)
-		if(findLine(names, header->Name) == getCount(names))
+		if (findLine(names, header->Name) == getCount(names))
 			addElement(names, (uint)header->Name);
 
 	rapidSortLines(names);
@@ -142,9 +142,9 @@ static void Confirm(void)
 		int needSync;
 
 		foreach(Headers, header, idx)
-		if(!strcmp(header->Name, name))
+		if (!strcmp(header->Name, name))
 		{
-			if(findLine(md5s, header->TextMD5) == getCount(md5s))
+			if (findLine(md5s, header->TextMD5) == getCount(md5s))
 				addElement(md5s, (uint)header->TextMD5);
 		}
 
@@ -152,13 +152,13 @@ static void Confirm(void)
 
 		cout("%s %s\n", needSync ? "■未同期" : "□同期済", name);
 
-		if(needSync)
+		if (needSync)
 			addElement(NeedSyncHeaderNames, (uint)name);
 	}
 
 	cout("続行？\n");
 
-	if(clearGetKey() == 0x1b)
+	if (clearGetKey() == 0x1b)
 		termination(0);
 
 	cout("続行します。\n");
@@ -191,7 +191,7 @@ static void SH_Main(Header_t *masterHeader, Header_t *targetHeader)
 }
 static void SyncHeader(Header_t *masterHeader, Header_t *targetHeader)
 {
-	if(!strcmp(masterHeader->TextMD5, targetHeader->TextMD5)) // ? 同じ -> 更新不要
+	if (!strcmp(masterHeader->TextMD5, targetHeader->TextMD5)) // ? 同じ -> 更新不要
 	{
 		LOGPOS();
 	}
@@ -205,7 +205,7 @@ static sint Eval_NotEmptyEmpty(Header_t *header)
 	char *text = strx(header->Text);
 	sint ret;
 
-	if(startsWith(text, "\xEF\xBB\xBF")) // BOM
+	if (startsWith(text, "\xEF\xBB\xBF")) // BOM
 		eraseLine(text, 3);
 
 	ucTrim(text);
@@ -220,11 +220,11 @@ static sint Comp_HeaderStampDesc(uint v1, uint v2)
 	sint ret;
 
 	ret = Eval_NotEmptyEmpty(a) - Eval_NotEmptyEmpty(b);
-	if(ret)
+	if (ret)
 		return ret;
 
 	ret = m_simpleComp(a->Stamp, b->Stamp) * -1;
-	if(ret)
+	if (ret)
 		return ret;
 
 	ret = strcmp(a->File, b->File);
@@ -246,14 +246,14 @@ static void ProcHeaderGroup(autoList_t *headerGroup)
 
 		cout("続行？\n");
 
-		if(clearGetKey() == 0x1b)
+		if (clearGetKey() == 0x1b)
 			termination(0);
 
 		cout("続行します。\n");
 	}
 
 	foreach(headerGroup, header, index)
-	if(index)
+	if (index)
 	{
 		SyncHeader((Header_t *)getElement(headerGroup, 0), header);
 	}
@@ -272,7 +272,7 @@ static void ProcAllHeaders(void)
 		setCount(headerGroup, 0);
 
 		foreach(Headers, header, header_index)
-			if(!strcmp(header->Name, name))
+			if (!strcmp(header->Name, name))
 				addElement(headerGroup, (uint)header);
 
 		ProcHeaderGroup(headerGroup);
@@ -292,19 +292,19 @@ int main(int argc, char **argv)
 	NeedSyncHeaderNames = newList();
 
 readArgs:
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		addElement(RootDirs, (uint)nextArg());
 		goto readArgs;
 	}
-	if(argIs("/E"))
+	if (argIs("/E"))
 	{
 		S_TargetExts = nextArg();
 		goto readArgs;
 	}
 	errorCase(hasArgs(1)); // 不明なコマンド引数
 
-	if(!getCount(RootDirs))
+	if (!getCount(RootDirs))
 	{
 		addElement(RootDirs, (uint)DEF_ROOT_DIR_01);
 		addElement(RootDirs, (uint)DEF_ROOT_DIR_02);

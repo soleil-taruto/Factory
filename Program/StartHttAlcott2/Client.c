@@ -8,24 +8,24 @@ int main(int argc, char **argv)
 	autoBlock_t gab;
 	Frtwv_t *i = Frtwv_Create(FORTEWAVE_IDENT);
 
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		Frtwv_Clear(i);
 	}
 
-	if(argIs("START"))
+	if (argIs("START"))
 	{
 		Frtwv_SendOL(i, gndBlockLineVar("START", gab), 0);
 	}
-	else if(argIs("CLEAR"))
+	else if (argIs("CLEAR"))
 	{
 		Frtwv_SendOL(i, gndBlockLineVar("CLEAR", gab), 0);
 	}
-	else if(argIs("END"))
+	else if (argIs("END"))
 	{
 		Frtwv_SendOL(i, gndBlockLineVar("END", gab), 0);
 	}
-	else if(argIs("EXIT"))
+	else if (argIs("EXIT"))
 	{
 		Frtwv_SendOL(i, gndBlockLineVar("EXIT", gab), 0);
 	}

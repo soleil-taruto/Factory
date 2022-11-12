@@ -42,7 +42,7 @@ static void DoSend(char *message)
 
 		for(bit = 1 << 7; bit; bit >>= 1)
 		{
-			if(*p & bit)
+			if (*p & bit)
 				DoSendBit(0, 1);
 			else
 				DoSendBit(1, 0);
@@ -66,7 +66,7 @@ static void Main2(void)
 	M_Init();
 	addFinalizer(M_Fnlz);
 
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		char *text = readText(nextArg());
 
@@ -74,7 +74,7 @@ static void Main2(void)
 		memFree(text);
 		return;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		DoSend(nextArg());
 		return;

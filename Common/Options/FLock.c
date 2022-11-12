@@ -10,7 +10,7 @@ FILE *FLockLoop(char *file)
 	{
 		FILE *fp = FLock(file);
 
-		if(fp)
+		if (fp)
 		{
 			LOGPOS();
 			return fp;
@@ -28,7 +28,7 @@ FILE *FLock(char *file)
 	fd = _fileno(fp);
 	fh = (HANDLE)_get_osfhandle(fd);
 
-	if(!LockFile(fh, 0, 0, UINTMAX, UINTMAX)) // ? ロック失敗
+	if (!LockFile(fh, 0, 0, UINTMAX, UINTMAX)) // ? ロック失敗
 	{
 		fileClose(fp);
 		return NULL;

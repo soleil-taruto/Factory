@@ -13,7 +13,7 @@ static void RemoveUnwantedFiles(autoList_t *files)
 	uint index;
 
 	foreach(files, file, index)
-		if(!_stricmp("log", getExt(file)))
+		if (!_stricmp("log", getExt(file)))
 			*file = '\0';
 
 	trimLines(files);
@@ -48,7 +48,7 @@ static void PickOutDx(char *dir)
 
 	foreach(files, file, index)
 	{
-		if(IsDx(file))
+		if (IsDx(file))
 		{
 			sint center = (sint)index;
 			sint s;
@@ -60,7 +60,7 @@ static void PickOutDx(char *dir)
 
 			for(i = s; i <= e; i++)
 			{
-				if(0 <= i && i < (sint)getCount(files))
+				if (0 <= i && i < (sint)getCount(files))
 				{
 					uint ii = (uint)i;
 
@@ -71,7 +71,7 @@ static void PickOutDx(char *dir)
 	}
 	foreach(files, file, index)
 	{
-		if(refBit(copyFlags, index))
+		if (refBit(copyFlags, index))
 		{
 			char *rFile = combine(dir, file);
 			char *wFile = combine(destDir2, file);
@@ -86,7 +86,7 @@ static void PickOutDx(char *dir)
 			memFree(wFile);
 		}
 	}
-	if(copied)
+	if (copied)
 	{
 		coExecute_x(xcout("C:\\Factory\\SubTools\\OrderStamp.exe \"%s\"", destDir2));
 		coExecute_x(xcout("START \"\" \"%s\"", destDir));

@@ -55,10 +55,10 @@ static void TransmitTh(int sockPair[2])
 static void PM_Interval(void)
 {
 	while(hasKey())
-		if(getKey() == 0x1b) // ? エスケープキー押下 -> 停止要求
+		if (getKey() == 0x1b) // ? エスケープキー押下 -> 停止要求
 			ProcDeadFlag = 1;
 
-	if(handleWaitForMillis(StopEventHdl, 0)) // ? 停止要求
+	if (handleWaitForMillis(StopEventHdl, 0)) // ? 停止要求
 		ProcDeadFlag = 1;
 }
 static void PollingMain(void)
@@ -71,16 +71,16 @@ static void PollingMain(void)
 
 			PM_Interval();
 
-			if(ProcDeadFlag)
+			if (ProcDeadFlag)
 				break;
 
 LOGPOS(); // test
-			if(ConnectCount < ConnectMax)
+			if (ConnectCount < ConnectMax)
 				sock = sockConnect(NULL, RevHost, RevPortNo);
 			else
 				sock = -1;
 
-			if(sock != -1) // ? 成功
+			if (sock != -1) // ? 成功
 			{
 				int connectFlag;
 
@@ -98,12 +98,12 @@ LOGPOS(); // test
 						{
 							retval = SockRecvSequLoop(sock, buff, RECV_C_ONCE_MILLIS, 1);
 
-							if(retval != 0)
+							if (retval != 0)
 								break;
 
 							PM_Interval();
 
-							if(ProcDeadFlag)
+							if (ProcDeadFlag)
 								break;
 
 							millis += RECV_C_ONCE_MILLIS;
@@ -120,12 +120,12 @@ LOGPOS(); // test
 					connectFlag = retval == 1 && retcode == 'C'; // ? 接続アリ
 				}
 
-				if(connectFlag)
+				if (connectFlag)
 				{
 					int fwdSock = sockConnect(NULL, FwdHost, FwdPortNo);
 LOGPOS(); // test
 
-					if(fwdSock != -1)
+					if (fwdSock != -1)
 					{
 						int sockPair[2];
 
@@ -144,7 +144,7 @@ LOGPOS(); // test
 				}
 				sockDisconnect(sock);
 			}
-			if(ProcDeadFlag)
+			if (ProcDeadFlag)
 				break;
 
 LOGPOS(); // test
@@ -169,7 +169,7 @@ LOGPOS(); // test
 				}
 				inner_critical();
 
-				if(waitMillis < 2000)
+				if (waitMillis < 2000)
 					waitMillis++;
 			}
 		}
@@ -184,12 +184,12 @@ int main(int argc, char **argv)
 	FwdPortNo = toValue(nextArg());
 
 readArgs:
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		ConnectMax = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		PollingMillis = toValue(nextArg());
 		goto readArgs;
@@ -205,7 +205,7 @@ readArgs:
 	StopEventName = xcout(STOPEVENTUUID ".%s", c_md5_makeHexHashLine_x(xcout("%s.%u.%s.%u", RevHost, RevPortNo, FwdHost, FwdPortNo)));
 	StopEventHdl = eventOpen(StopEventName);
 
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		eventWakeupHandle(StopEventHdl);
 		return;

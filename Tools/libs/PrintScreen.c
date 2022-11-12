@@ -17,7 +17,7 @@ autoList_t *PrintScreen(void)
 	{
 		char *file = xcout("%s%02u.bmp", fileBase, screenNo);
 
-		if(!existFile(file))
+		if (!existFile(file))
 		{
 			memFree(file);
 			break;

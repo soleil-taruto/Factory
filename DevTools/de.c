@@ -7,7 +7,7 @@ int main(int argc, char **argv)
 
 	file = selectLine(files);
 
-	if(file)
+	if (file)
 	{
 		char *dir = changeLocal(file, ".");
 

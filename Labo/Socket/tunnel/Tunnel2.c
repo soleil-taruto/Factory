@@ -37,7 +37,7 @@ static void WriteLog(uint conId, int direction, autoBlock_t *rawData)
 	LOGPOS();
 	cout("stamp: %I64u\n", stamp);
 
-	if(lastStamp < stamp)
+	if (lastStamp < stamp)
 	{
 		lastStamp = stamp;
 	}
@@ -52,7 +52,7 @@ static void WriteLog(uint conId, int direction, autoBlock_t *rawData)
 	{
 		int chr = getByte(rawData, index);
 
-		if(m_isasciikana(chr) && chr != '"' && chr != '\\')
+		if (m_isasciikana(chr) && chr != '"' && chr != '\\')
 		{
 			writeChar(OutputFp, chr);
 		}
@@ -69,7 +69,7 @@ static void WriteLog(uint conId, int direction, autoBlock_t *rawData)
 }
 static void PrintDataFltr(autoBlock_t *buff, uint prm)
 {
-	if(getSize(buff))
+	if (getSize(buff))
 	{
 		ConInfo_t *i = (ConInfo_t *)prm;
 
@@ -109,20 +109,20 @@ static void Perform(int sock, int fwdSock)
 }
 static int ReadArgs(void)
 {
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		OutputFile = nextArg();
 		OutputMode = "wb";
 		return 1;
 	}
-	if(argIs("/A"))
+	if (argIs("/A"))
 	{
 		OutputFile = nextArg();
 		OutputMode = "ab";
 		return 1;
 	}
 
-	if(!OutputFile)
+	if (!OutputFile)
 	{
 		char *stamp = makeCompactStamp(NULL);
 
@@ -148,6 +148,6 @@ errorCase(!OutputMode); // 2bs
 
 	fileClose(OutputFp);
 
-	if(OutputFileAuto)
+	if (OutputFileAuto)
 		openOutDir();
 }

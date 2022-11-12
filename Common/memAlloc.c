@@ -7,7 +7,7 @@ void *memAlloc(uint size)
 	size = m_max(size, 1);
 	block = malloc(size);
 
-	if(block == NULL)
+	if (block == NULL)
 	{
 		error();
 	}
@@ -18,7 +18,7 @@ void *memRealloc(void *block, uint size)
 	size = m_max(size, 1);
 	block = realloc(block, size);
 
-	if(block == NULL)
+	if (block == NULL)
 	{
 		error();
 	}

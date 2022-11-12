@@ -22,16 +22,16 @@ int main(int argc, char **argv)
 	time_t retTime;
 	int slewMode = 1;
 
-	if(argIs("/-W"))
+	if (argIs("/-W"))
 	{
 		slewMode = 0;
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		server = nextArg();
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		portno = toValue(nextArg());
 	}
@@ -45,17 +45,17 @@ int main(int argc, char **argv)
 
 		cout("%u\n", retFile ? 1 : 0);
 
-		if(retFile)
+		if (retFile)
 		{
-			if(UnpadFile2(retFile, "MISO_Ans"))
+			if (UnpadFile2(retFile, "MISO_Ans"))
 			{
 				fp = fileOpen(retFile, "rb");
 				retTime = (time_t)readValue64(fp);
 				fileClose(fp);
 
-				if(!strcmp(server, "localhost"))
+				if (!strcmp(server, "localhost"))
 					cout("%I64d\n", retTime);
-				else if(slewMode)
+				else if (slewMode)
 					SlewApplyTimeData(retTime);
 				else
 					ApplyStampData(getStampDataTime(retTime));

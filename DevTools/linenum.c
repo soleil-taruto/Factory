@@ -31,14 +31,14 @@ static int SkipLine(FILE *fp)
 {
 	int chr = readChar(fp);
 
-	if(chr == EOF) // ? 0文字のEOFで終わる行 <- 行と見なさない。
+	if (chr == EOF) // ? 0文字のEOFで終わる行 <- 行と見なさない。
 		return 0;
 
 	do
 	{
 		chr = readChar(fp);
 
-		if(chr == EOF) // ? 1文字以上のEOFで終わる行 <- 行と見なす。
+		if (chr == EOF) // ? 1文字以上のEOFで終わる行 <- 行と見なす。
 			break;
 	}
 	while(chr != '\n'); // ? ! 改行
@@ -81,12 +81,12 @@ static void LineNumMain(char *file)
 	}
 	cout("%I64u\n", linenum);
 
-	if(file)
+	if (file)
 		fileClose(fp);
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/M"))
+	if (argIs("/M"))
 	{
 		uint64 minLineNo;
 		uint64 maxLineNo;
@@ -99,7 +99,7 @@ int main(int argc, char **argv)
 		LineMid(file, minLineNo, maxLineNo);
 		return;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 		LineNumMain(nextArg());
 	else
 		LineNumMain(NULL);

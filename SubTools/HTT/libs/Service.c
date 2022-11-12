@@ -67,7 +67,7 @@ void ServiceDisconnect(void)
 }
 static void ServiceErrorDisconnectExit(void)
 {
-	if(errorOccurred)
+	if (errorOccurred)
 	{
 		LOGPOS();
 		removeFile(HttSendFile);
@@ -81,7 +81,7 @@ int main(int argc, char **argv)
 	HttSendFile = makeFullPath(HTT_SEND_FILE);
 	HttTightFile = makeFullPath(HTT_TIGHT_FILE);
 
-	if(!existFile(HttIPFile) || !existFile(HttRecvFile) || !existFile(HttSendFile))
+	if (!existFile(HttIPFile) || !existFile(HttRecvFile) || !existFile(HttSendFile))
 	{
 		LOGPOS();
 		termination(0);
@@ -90,7 +90,7 @@ int main(int argc, char **argv)
 
 	BootTime = time(NULL);
 
-	if(getFileSize(HttIPFile) != 0) // 送受信メイン
+	if (getFileSize(HttIPFile) != 0) // 送受信メイン
 	{
 		HttIP = readFirstLine(HttIPFile);
 

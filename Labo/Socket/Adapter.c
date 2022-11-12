@@ -52,14 +52,14 @@ static int DoLock(void)
 		{
 			int chr = getKey();
 
-			if(chr == 0x1b || chr == 'D')
+			if (chr == 0x1b || chr == 'D')
 			{
 				cout("Disconnect\n");
 				return 0;
 			}
 			cout("Press ESCAPE or D to disconnet.\n");
 		}
-		if(handleWaitForMillis(MutexHandle, 3000))
+		if (handleWaitForMillis(MutexHandle, 3000))
 			break;
 
 		cout("MUTEX FAULT! %u\n", trycnt);
@@ -70,10 +70,10 @@ static int Perform(char *prmFile, char *ansFile)
 {
 	cout("Perform Params: %I64u\n", getFileSize(prmFile));
 
-	if(!DoLock())
+	if (!DoLock())
 		return 0;
 
-	if(!Deserializer)
+	if (!Deserializer)
 	{
 		removeFileIfExist(ParamsFile);
 		moveFile(prmFile, ParamsFile);
@@ -90,13 +90,13 @@ static int Perform(char *prmFile, char *ansFile)
 		eventSet(StartEventHandle); // 受信側に通知・再通知
 		collectEvents(AnswerEventHandle, 3000); // 応答待ち
 
-		if(!DoLock())
+		if (!DoLock())
 			return 0;
 
-		if(existFile(AnswerFile)) // ? 応答アリ
+		if (existFile(AnswerFile)) // ? 応答アリ
 			break;
 
-		if(!existFile(ParamsFile)) // ? 事故
+		if (!existFile(ParamsFile)) // ? 事故
 		{
 			mutexRelease(MutexHandle);
 			return 0;
@@ -106,7 +106,7 @@ static int Perform(char *prmFile, char *ansFile)
 	}
 	removeFileIfExist(ParamsFile); // Cleanup
 
-	if(Serializer)
+	if (Serializer)
 	{
 		Serializer(AnswerFile, ansFile);
 		removeFile(AnswerFile);
@@ -125,7 +125,7 @@ static int Idle(void)
 {
 	while(hasKey())
 	{
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 		{
 			cout("Exit the server.\n");
 			return 0;
@@ -141,44 +141,44 @@ int main(int argc, char **argv)
 	uint64 uploadmax = 66000; // 64K + a
 
 readArgs:
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		portno = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		connectmax = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/X"))
+	if (argIs("/X"))
 	{
 		uploadmax = toValue64(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		Deserializer = TextFltr;
 		Serializer = TextFltr;
 		goto readArgs;
 	}
-	if(argIs("/TD") || argIs("/TP"))
+	if (argIs("/TD") || argIs("/TP"))
 	{
 		Deserializer = TextFltr;
 		goto readArgs;
 	}
-	if(argIs("/TS") || argIs("/TA"))
+	if (argIs("/TS") || argIs("/TA"))
 	{
 		Serializer = TextFltr;
 		goto readArgs;
 	}
-	if(argIs("/TLX"))
+	if (argIs("/TLX"))
 	{
 		TextLineLenMax = toValue(nextArg());
 		goto readArgs;
 	}
 
-	if(argIs("/RES"))
+	if (argIs("/RES"))
 	{
 		autoList_t *lines = readResourceLines(nextArg());
 
@@ -214,7 +214,7 @@ readArgs:
 	ParamsFile = makeFullPath(ParamsFile);
 	AnswerFile = makeFullPath(AnswerFile);
 
-	if(DoLock())
+	if (DoLock())
 	{
 		// Locked
 		{
@@ -229,7 +229,7 @@ readArgs:
 		sockServer(Perform, portno, connectmax, uploadmax, Idle);
 		cmdTitle("Adapter");
 
-		if(handleWaitForMillis(MutexHandle, 2000))
+		if (handleWaitForMillis(MutexHandle, 2000))
 		{
 			// Cleanup
 			removeFileIfExist(ParamsFile);

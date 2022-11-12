@@ -37,17 +37,17 @@ static BinMD5MergeCounter(char *file1, char *file2, char *outFile)
 	{
 		int ret = memcmp(buff1, buff2, RecordSize);
 
-		if(ret < 0)
+		if (ret < 0)
 		{
-			if(count1 <= rPos1)
+			if (count1 <= rPos1)
 				break;
 
 			ReadRecord(fp1, buff1);
 			rPos1++;
 		}
-		else if(0 < ret)
+		else if (0 < ret)
 		{
-			if(count2 <= rPos2)
+			if (count2 <= rPos2)
 				break;
 
 			ReadRecord(fp2, buff2);
@@ -58,7 +58,7 @@ static BinMD5MergeCounter(char *file1, char *file2, char *outFile)
 			countBoth++;
 
 		readBoth:
-			if(count1 <= rPos1 || count2 <= rPos2)
+			if (count1 <= rPos1 || count2 <= rPos2)
 				break;
 
 			ReadRecord(fp1, buff1);
@@ -79,7 +79,7 @@ static BinMD5MergeCounter(char *file1, char *file2, char *outFile)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/SZ"))
+	if (argIs("/SZ"))
 	{
 		RecordSize = toValue(nextArg());
 	}

@@ -41,7 +41,7 @@ static int IsSimpleName(char *localPath)
 }
 static char *MkDivLine(char *href, char *lref, char *trailer)
 {
-	if(href)
+	if (href)
 		return xcout("<div><a href=\"%s\">%s</a>%s</div>", c_urlEncoder(href), lref, trailer);
 	else
 		return xcout("<div>%s%s</div>", lref, trailer);
@@ -73,8 +73,8 @@ static sint S_DirFileComp(char *path1, char *path2)
 	int d1 = existDir(path1);
 	int d2 = existDir(path2);
 
-	if(d1 && !d2) return -1;
-	if(d2 && !d1) return 1;
+	if (d1 && !d2) return -1;
+	if (d2 && !d1) return 1;
 
 	return S_PathComp(path1, path2);
 }
@@ -92,9 +92,9 @@ static char *MakeDivList(uint depth, int noIndex)
 
 	dircnt = lastDirCount;
 
-	if(depth)
+	if (depth)
 		addElement(divs, (uint)MkDivLine("../" INDEXFILE, "&lt;parent directory&gt;", ""));
-	else if(RootParentHRef)
+	else if (RootParentHRef)
 		addElement(divs, (uint)MkDivLine(RootParentHRef, "&lt;return&gt;", ""));
 
 	rapidSort(paths, (sint (*)(uint, uint))S_DirFileComp);
@@ -108,25 +108,25 @@ static char *MakeDivList(uint depth, int noIndex)
 
 		cmdTitle_x(xcout("SimpleIndex - %u (%u) %u PCT = %u / %u", funcEnteredCount, depth, (uint)(index * 100.0 / getCount(paths)), index, getCount(paths)));
 
-		if(!IsSimpleName(getLocal(path)))
+		if (!IsSimpleName(getLocal(path)))
 			cout("URLに適さない名前: %s\n", path);
 
 		path = getLocal(path);
 
-		if(index < dircnt) // ? dir
+		if (index < dircnt) // ? dir
 		{
 			int hiddenItem = path[0] == '_'; // "_" で始まるローカルディレクトリは隠す。(項目を表示しない) かつ robots=noindex にする。
 
 			MakeIndex(path, depth + 1, hiddenItem || noIndex);
 
-			if(hiddenItem)
+			if (hiddenItem)
 				goto nextPath;
 
 			href = xcout("%s/" INDEXFILE, path);
 			lref = xcout("%s", path);
 			trailer = strx("");
 		}
-		else if(
+		else if (
 //			!_stricmp(INDEXTEMPLATE, path) || // 廃止 @ 2022.8.13
 			!_stricmp(HEADERFILE, path) ||
 			!_stricmp(FOOTERFILE, path) ||
@@ -146,7 +146,7 @@ static char *MakeDivList(uint depth, int noIndex)
 			lsize = xcout("%I64u", size);
 			lsize = thousandComma(lsize);
 
-			if(!MD5Disabled)
+			if (!MD5Disabled)
 			{
 				pab = md5Cache_makeHashFile(path);
 				hash = makeHexLine(pab);
@@ -170,17 +170,17 @@ static char *MakeDivList(uint depth, int noIndex)
 		{
 			char *prm_href = href;
 
-			if(size == 0)
+			if (size == 0)
 				prm_href = NULL;
 
 			addElement(divs, (uint)MkDivLine(prm_href, lref, trailer));
 		}
 
-		if(!ImageTagDisabled)
+		if (!ImageTagDisabled)
 		{
 			char *ext = getExt(href);
 
-			if(
+			if (
 				!_stricmp("BMP", ext) ||
 				!_stricmp("GIF", ext) ||
 				!_stricmp("JPG", ext) ||
@@ -192,7 +192,7 @@ static char *MakeDivList(uint depth, int noIndex)
 
 				addElement(divs, (uint)div);
 			}
-			else if(
+			else if (
 				!_stricmp("avi", ext) ||
 				!_stricmp("mp4", ext) ||
 				!_stricmp("mpeg", ext) ||
@@ -204,7 +204,7 @@ static char *MakeDivList(uint depth, int noIndex)
 
 				addElement(divs, (uint)div);
 			}
-			else if(
+			else if (
 				!_stricmp("mid", ext) ||
 				!_stricmp("midi", ext) ||
 				!_stricmp("mp3", ext) ||
@@ -237,7 +237,7 @@ static char *GetTemplate(char *file) // ret: bind
 
 	memFree(text);
 
-	if(existFile(file))
+	if (existFile(file))
 		text = readText(file);
 	else
 		text = strx("");
@@ -250,7 +250,7 @@ static void MakeIndex(char *dir, uint depth, int noIndex)
 	char *lhtml;
 	char *divlist;
 
-	if(MakeIndexMaxDepth < depth)
+	if (MakeIndexMaxDepth < depth)
 		return;
 
 	addCwd(dir);
@@ -260,7 +260,7 @@ static void MakeIndex(char *dir, uint depth, int noIndex)
 	// テンプレートの最初の行が一致しなければ
 	// ユーザーが作成したファイルと見なして更新しない。
 	//
-	if(existFile(INDEXFILE))
+	if (existFile(INDEXFILE))
 	{
 		autoList_t *lines1 = readLines(INDEXFILE);
 		autoList_t *lines2 = readLines(DEF_INDEXTEMPLATE);
@@ -270,7 +270,7 @@ static void MakeIndex(char *dir, uint depth, int noIndex)
 		line1 = getLine(lines1, 0);
 		line2 = getLine(lines2, 0);
 
-		if(strcmp(line1, line2))
+		if (strcmp(line1, line2))
 		{
 			cout("インデックスファイルの最初の行が一致しないためユーザー作成と見なし更新しない。\n");
 			cout("dir: %s\n", dir);
@@ -305,7 +305,7 @@ static void MakeIndex(char *dir, uint depth, int noIndex)
 	{
 		char *lhtmlOld = existFile(INDEXFILE) ? readText(INDEXFILE) : NULL;
 
-		if(!lhtmlOld || strcmp(lhtmlOld, lhtml)) // ? indexファイル新規作成 || indexファイルの内容が更新された。
+		if (!lhtmlOld || strcmp(lhtmlOld, lhtml)) // ? indexファイル新規作成 || indexファイルの内容が更新された。
 		{
 #if 0
 			// test test test test test -- lhtml, lhtmlOld 比較用
@@ -339,47 +339,47 @@ int main(int argc, char **argv)
 	char *dir;
 
 readArgs:
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		Title = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/L"))
+	if (argIs("/L"))
 	{
 		LinkColor = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/X"))
+	if (argIs("/X"))
 	{
 		TextColor = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/B"))
+	if (argIs("/B"))
 	{
 		BackColor = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		RootParentHRef = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/-I"))
+	if (argIs("/-I"))
 	{
 		ImageTagDisabled = 1;
 		goto readArgs;
 	}
-	if(argIs("/-M"))
+	if (argIs("/-M"))
 	{
 		MD5Disabled = 1;
 		goto readArgs;
 	}
-	if(argIs("/-S"))
+	if (argIs("/-S"))
 	{
 		MakeIndexMaxDepth = 0;
 		goto readArgs;
 	}
-	if(argIs("/RN"))
+	if (argIs("/RN"))
 	{
 		noIndex = 1;
 		goto readArgs;

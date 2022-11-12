@@ -99,7 +99,7 @@ static void MakeIndex(char *indexDir, char *templateDir)
 		{
 			char *p = strchr(title2, '<');
 
-			if(p)
+			if (p)
 			{
 				*p = '\0';
 				ucTrimEdge(title2);
@@ -114,7 +114,7 @@ static void MakeIndex(char *indexDir, char *templateDir)
 		{
 			LOGPOS();
 
-			if(lineExpICase("<>_v<3,09>.zip", file)) // ? Ver_ファイル
+			if (lineExpICase("<>_v<3,09>.zip", file)) // ? Ver_ファイル
 			{
 				char *ver = strchr(file, '\0') - 7;
 				char *verLink;
@@ -131,7 +131,7 @@ static void MakeIndex(char *indexDir, char *templateDir)
 				escapeYen(verLink);
 				verTitle = xcout("%s v%c.%c%c", title2, ver[0], ver[1], ver[2]);
 
-				if(newestPassed)
+				if (newestPassed)
 					tmp = strx(templateVer);
 				else
 					tmp = strx(templateVerNewest);
@@ -161,7 +161,7 @@ static void MakeIndex(char *indexDir, char *templateDir)
 		{
 			LOGPOS();
 
-			if(lineExpICase("<>_BETA_<14,09>.zip", file)) // ? Beta_ファイル
+			if (lineExpICase("<>_BETA_<14,09>.zip", file)) // ? Beta_ファイル
 			{
 				char *verLink;
 				char *verTitle;
@@ -173,7 +173,7 @@ static void MakeIndex(char *indexDir, char *templateDir)
 				escapeYen(verLink);
 				verTitle = strx(getLocal(file));
 
-				if(newestPassed)
+				if (newestPassed)
 					tmp = strx(templateVer);
 				else
 					tmp = strx(templateVerNewest);

@@ -27,7 +27,7 @@ static int KeyGenerated;
 
 void ClientCRPC_PreConnect(void)
 {
-	if(!KeyGenerated)
+	if (!KeyGenerated)
 	{
 		RSA_GenerateKey();
 		KeyGenerated = 1;
@@ -77,7 +77,7 @@ void ClientCRPC_Begin(SockStream_t *ss)
 }
 void ClientCRPC_End(void)
 {
-	if(S_EncCounter1)
+	if (S_EncCounter1)
 	{
 		releaseAutoBlock(S_EncCounter1);
 		releaseAutoBlock(S_EncCounter2);
@@ -114,7 +114,7 @@ autoBlock_t *ClientCRPC(SockStream_t *ss, autoBlock_t *sendData) // ret: NULL ナ
 	errorCase(!ss);
 	errorCase(!sendData);
 
-	if(!S_EncCounter1) // ? ClientCRPC_Begin() 未実行・未成功
+	if (!S_EncCounter1) // ? ClientCRPC_Begin() 未実行・未成功
 	{
 		cout("C_CRPC_RSA_Aes_カウンターが無い！\n");
 		return newBlock();
@@ -141,7 +141,7 @@ ShowData(recvData, "recvData_C"); // test
 	Crypt(recvData, S_RawKey4, S_EncCounter4);
 ShowData(recvData, "recvData_P"); // test
 
-	if(!UnputHash(recvData))
+	if (!UnputHash(recvData))
 	{
 		cout("C_CRPC_RSA_Aes_受信データ破損\n");
 		setSize(recvData, 0);

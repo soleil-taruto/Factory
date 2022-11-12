@@ -61,13 +61,13 @@ LOGPOS();
 LOGPOS();
 	foreach(files, file, index)
 	{
-		if(!_stricmp("cs", getExt(file)))
+		if (!_stricmp("cs", getExt(file)))
 		{
 			moveFile(file, escapedFile);
 
 			writeOneLine(file, "// try delete");
 
-			if(TryBuild())
+			if (TryBuild())
 			{
 				addElement(deletableCsFiles, (uint)strx(file));
 				*file = '\0';
@@ -85,7 +85,7 @@ LOGPOS();
 	trimLines(files);
 LOGPOS();
 
-	if(deletedFlag)
+	if (deletedFlag)
 		goto restart;
 
 LOGPOS();
@@ -122,7 +122,7 @@ static void Main2_Solution(void)
 
 	foreach(files, file, index)
 	{
-		if(!_stricmp("sln", getExt(file)))
+		if (!_stricmp("sln", getExt(file)))
 		{
 			errorCase(slnFile); // ? 2‚Â–Ú
 			slnFile = strx(file);

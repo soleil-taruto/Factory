@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 	char *dir;
 	uint index;
 
-	if(dailymode)
+	if (dailymode)
 	{
 		char *comment = hasArgs(1) ? nextArg() : "Daily";
 
@@ -34,13 +34,13 @@ int main(int argc, char **argv)
 
 		dirs = lssDirs(rootDir);
 
-		if(argIs("/R"))
+		if (argIs("/R"))
 		{
 			LOGPOS();
 			addElement(dirs, (uint)makeFullPath(rootDir));
 		}
 
-		if(hasArgs(1))
+		if (hasArgs(1))
 		{
 			coExecute_x(xcout("rum /c \"%s\"", nextArg()));
 		}
@@ -52,7 +52,7 @@ int main(int argc, char **argv)
 			{
 				cout("続行？\n");
 
-				if(clearGetKey() == 0x1b)
+				if (clearGetKey() == 0x1b)
 					termination(0);
 
 				cout("続行します。\n");
@@ -64,7 +64,7 @@ int main(int argc, char **argv)
 	{
 		char *rumDir = addExt(strx(dir), "rum");
 
-		if(existDir(rumDir))
+		if (existDir(rumDir))
 		{
 			cout("* %s\n", dir);
 

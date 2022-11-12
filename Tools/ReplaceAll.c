@@ -26,11 +26,11 @@ static int AntiInvalidPaths(autoList_t *paths)
 		}
 		newPath = untokenize(ptkns, "\\");
 
-		if(!*newPath)
+		if (!*newPath)
 		{
 			newPath = addChar(newPath, '_');
 		}
-		if(strcmp(path, newPath))
+		if (strcmp(path, newPath))
 		{
 			cout("< %s\n", path);
 			cout("> %s\n", newPath);
@@ -78,7 +78,7 @@ static int FindTooLongPaths(autoList_t *paths, uint rootLen)
 
 	foreach(paths, path, index)
 	{
-		if(PATH_SIZE < rootLen + 1 + strlen(path))
+		if (PATH_SIZE < rootLen + 1 + strlen(path))
 		{
 			cout("* %s\n", path);
 			fndcnt++;
@@ -142,8 +142,8 @@ static int Confirm(void)
 	{
 		int key = getKey();
 
-		if(key == 0x1b) return 0;
-		if(key == 'P') return 1;
+		if (key == 0x1b) return 0;
+		if (key == 'P') return 1;
 	}
 }
 
@@ -168,13 +168,13 @@ static void ReplaceEx(void)
 		releaseDim(newPaths, 1);
 		newPaths = tmpPaths;
 
-		if(getCount(newPaths) == 0)
+		if (getCount(newPaths) == 0)
 		{
 			goto endfunc;
 		}
 		errorCase(getCount(paths) != getCount(newPaths));
 
-		if(AntiInvalidPaths(newPaths) == 0 && AntiSamePaths(newPaths) == 0 && FindTooLongPaths(newPaths, strlen(rootDir)) == 0)
+		if (AntiInvalidPaths(newPaths) == 0 && AntiSamePaths(newPaths) == 0 && FindTooLongPaths(newPaths, strlen(rootDir)) == 0)
 		{
 			break;
 		}
@@ -186,13 +186,13 @@ static void ReplaceEx(void)
 	{
 		newPath = getLine(newPaths, index);
 
-		if(strcmp(path, newPath))
+		if (strcmp(path, newPath))
 		{
 			cout("< %s\n", path);
 			cout("> %s\n", newPath);
 		}
 	}
-	if(!Confirm())
+	if (!Confirm())
 		goto endfunc;
 
 	addCwd(midDir);
@@ -204,7 +204,7 @@ static void ReplaceEx(void)
 		cout("? %s\n", newPath);
 
 		CreatePathCascade(newPath);
-		if(existFile(path))
+		if (existFile(path))
 		{
 			errorCase(existFile(newPath));
 			createFile(newPath);
@@ -232,7 +232,7 @@ static void ReplaceEx(void)
 		path = combine(rootDir, path);
 
 		CreatePathCascade(newPath);
-		if(existFile(path))
+		if (existFile(path))
 			moveFile(path, newPath);
 		else
 			createDir(newPath);
@@ -263,7 +263,7 @@ static void ReplaceExDir(char *dir)
 
 int main(int argc, char **argv)
 {
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		ReplaceExDir(nextArg());
 	}

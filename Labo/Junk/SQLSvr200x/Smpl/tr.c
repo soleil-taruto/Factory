@@ -11,47 +11,47 @@ int main(int argc, char **argv)
 	autoList_t *resultColNames = NULL;
 
 readArgs:
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		memFree(rFile);
 		rFile = strx(nextArg());
 	}
-	if(argIs("/W"))
+	if (argIs("/W"))
 	{
 		memFree(wFile);
 		wFile = strx(nextArg());
 	}
-	if(argIs("+"))
+	if (argIs("+"))
 	{
-		if(!whereColNames)
+		if (!whereColNames)
 			whereColNames = newList();
 
 		addElement(whereColNames, (uint)strx(nextArg()));
 		goto readArgs;
 	}
-	if(argIs("="))
+	if (argIs("="))
 	{
-		if(!whereColValues)
+		if (!whereColValues)
 			whereColValues = newList();
 
 		addElement(whereColValues, (uint)strx(nextArg()));
 		goto readArgs;
 	}
-	if(argIs(":"))
+	if (argIs(":"))
 	{
-		if(!resultColNames)
+		if (!resultColNames)
 			resultColNames = newList();
 
 		addElement(resultColNames, (uint)strx(nextArg()));
 		goto readArgs;
 	}
 
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		writeLines_cx(wFile, TR_GetSchema(rFile));
 		goto readArgs;
 	}
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		/*
 			wFile - TEXT (resultColNames ÇÃí∑Ç≥)çs
@@ -65,7 +65,7 @@ readArgs:
 		resultColNames = NULL;
 		goto readArgs;
 	}
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		/*
 			rFile == wFile <- NG
@@ -80,7 +80,7 @@ readArgs:
 		resultColNames = NULL;
 		goto readArgs;
 	}
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		/*
 			rFile == wFile <- NG
@@ -94,7 +94,7 @@ readArgs:
 		whereColValues = NULL;
 		goto readArgs;
 	}
-	if(argIs("/I"))
+	if (argIs("/I"))
 	{
 		autoList_t *colValueTable = readCSVFileTR(nextArg());
 		autoList_t *colNames;
@@ -109,7 +109,7 @@ readArgs:
 		TR_InsertInto_cxxc(rFile, colNames, colValueTable, wFile);
 		goto readArgs;
 	}
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		/*
 			wFile - CSV
@@ -122,7 +122,7 @@ readArgs:
 	memFree(rFile);
 	memFree(wFile);
 
-	if(whereColNames)  releaseDim(whereColNames, 1);
-	if(whereColValues) releaseDim(whereColValues, 1);
-	if(resultColNames) releaseDim(resultColNames, 1);
+	if (whereColNames)  releaseDim(whereColNames, 1);
+	if (whereColValues) releaseDim(whereColValues, 1);
+	if (resultColNames) releaseDim(resultColNames, 1);
 }

@@ -31,7 +31,7 @@ static void LoadFolderIconPairs(void)
 		errorCase(!existFile(iconFile));
 
 		foreach(lines, line, index)
-		if(index)
+		if (index)
 		{
 			char *dir = line;
 
@@ -51,7 +51,7 @@ static void SetFolderIcon(char *dir, char *iconFile)
 {
 	char *iniFile = combine(dir, "desktop.ini");
 
-	if(iconFile)
+	if (iconFile)
 	{
 		coExecute_x(xcout("ATTRIB -S -H \"%s\"", iniFile));
 
@@ -90,7 +90,7 @@ static void ChangeFolderIcons(void)
 	{
 		uint fipIndex = findLineCase(FIP_Dirs, dir, 1);
 
-		if(fipIndex < getCount(FIP_Dirs) && !ClearMode)
+		if (fipIndex < getCount(FIP_Dirs) && !ClearMode)
 		{
 			SetFolderIcon(dir, getLine(FIP_IconFiles, fipIndex));
 		}
@@ -108,7 +108,7 @@ static void Main2(void)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		ClearMode = 1;
 	}

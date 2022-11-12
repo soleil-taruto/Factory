@@ -46,7 +46,7 @@ static BOOL CALLBACK EnumDoCloseWin(HWND hWnd, LPARAM lp)
 {
 	cout("hWnd: %u\n", hWnd);
 
-	if(NoCheckVisible || IsWindowVisible(hWnd))
+	if (NoCheckVisible || IsWindowVisible(hWnd))
 	{
 		DWORD procId;
 
@@ -54,7 +54,7 @@ static BOOL CALLBACK EnumDoCloseWin(HWND hWnd, LPARAM lp)
 
 		cout("procId: %u (%u)\n", procId, P_Pe32.th32ProcessID);
 
-		if(procId == P_Pe32.th32ProcessID)
+		if (procId == P_Pe32.th32ProcessID)
 		{
 			LOGPOS();
 			SendMessage(hWnd, WM_CLOSE, (WPARAM)NULL, (LPARAM)NULL);
@@ -72,7 +72,7 @@ static BOOL CALLBACK EnumFindWinTitle(HWND hWnd, LPARAM lp)
 {
 	cout("hWnd: %u\n", hWnd);
 
-	if(NoCheckVisible || IsWindowVisible(hWnd))
+	if (NoCheckVisible || IsWindowVisible(hWnd))
 	{
 		char winTitle[WINTITLE_LENMAX + 1];
 
@@ -81,8 +81,8 @@ static BOOL CALLBACK EnumFindWinTitle(HWND hWnd, LPARAM lp)
 
 		cout("winTitle: [%s]\n", winTitle);
 
-		if(!mbs_stricmp(winTitle, P_WinTitle)) // ? 大文字小文字不問・完全一致した。
-//		if( mbs_stristr(winTitle, P_WinTitle)) // ? 大文字小文字不問・部分一致した。
+		if (!mbs_stricmp(winTitle, P_WinTitle)) // ? 大文字小文字不問・完全一致した。
+//		if ( mbs_stristr(winTitle, P_WinTitle)) // ? 大文字小文字不問・部分一致した。
 		{
 			LOGPOS();
 			FoundFlag = 1;
@@ -121,13 +121,13 @@ static void SearchProcByExeName(char *exeName, void (*perform)(PROCESSENTRY32 pe
 
 	hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
 
-	if(hSnapshot != INVALID_HANDLE_VALUE)
+	if (hSnapshot != INVALID_HANDLE_VALUE)
 	{
 		PROCESSENTRY32 pe32;
 
 		pe32.dwSize = sizeof(PROCESSENTRY32);
 
-		if(Process32First(hSnapshot, &pe32))
+		if (Process32First(hSnapshot, &pe32))
 		{
 			do
 			{
@@ -157,7 +157,7 @@ typedef struct tagPROCESSENTRY32 {
 				cout("dwFlags: %08x\n", pe32.dwFlags);
 				cout("----\n");
 
-				if(!_stricmp(pe32.szExeFile, exeName))
+				if (!_stricmp(pe32.szExeFile, exeName))
 				{
 					LOGPOS();
 					perform(pe32);
@@ -179,42 +179,42 @@ int main(int argc, char **argv)
 	int waitCloseTitleMode = 0;
 	char *winTitle;
 
-	if(argIs("/-V"))
+	if (argIs("/-V"))
 	{
 		NoCheckVisible = 1;
 	}
-	if(argIs("/L"))
+	if (argIs("/L"))
 	{
 		SearchProcByExeName("", (void (*)(PROCESSENTRY32 pe32))noop);
 		return;
 	}
-	if(argIs("/LT"))
+	if (argIs("/LT"))
 	{
 		EnumWindows(PrintWinTitle, (LPARAM)NULL);
 		return;
 	}
-	if(argIs("/O"))
+	if (argIs("/O"))
 	{
 		waitOpenMode = 1;
 		exeName = nextArg();
 	}
-	if(argIs("/OT"))
+	if (argIs("/OT"))
 	{
 		waitOpenTitleMode = 1;
 		winTitle = nextArg();
 	}
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		waitCloseMode = 1;
 		exeName = nextArg();
 	}
-	if(argIs("/CT"))
+	if (argIs("/CT"))
 	{
 		waitCloseTitleMode = 1;
 		winTitle = nextArg();
 	}
 
-	if(waitOpenMode)
+	if (waitOpenMode)
 	{
 		for(loopCnt = 1; ; loopCnt++)
 		{
@@ -223,12 +223,12 @@ int main(int argc, char **argv)
 
 			cout("FoundFlag: %d\n", FoundFlag);
 
-			if(FoundFlag)
+			if (FoundFlag)
 				break;
 
 			cout("ループ回数 [ %u ], F を押すと強制的に続行するよ。(wait open)\n", loopCnt);
 
-			if(waitKey(0) == 'F')
+			if (waitKey(0) == 'F')
 			{
 				LOGPOS();
 				break;
@@ -240,7 +240,7 @@ int main(int argc, char **argv)
 		return;
 	}
 
-	if(waitOpenTitleMode)
+	if (waitOpenTitleMode)
 	{
 		for(loopCnt = 1; ; loopCnt++)
 		{
@@ -249,12 +249,12 @@ int main(int argc, char **argv)
 
 			cout("FoundFlag: %d\n", FoundFlag);
 
-			if(FoundFlag)
+			if (FoundFlag)
 				break;
 
 			cout("ループ回数 [ %u ], F を押すと強制的に続行するよ。(wait open title)\n", loopCnt);
 
-			if(waitKey(0) == 'F')
+			if (waitKey(0) == 'F')
 			{
 				LOGPOS();
 				break;
@@ -266,7 +266,7 @@ int main(int argc, char **argv)
 		return;
 	}
 
-	if(waitCloseMode)
+	if (waitCloseMode)
 	{
 		for(loopCnt = 1; ; loopCnt++)
 		{
@@ -275,7 +275,7 @@ int main(int argc, char **argv)
 
 			cout("FoundFlag: %d\n", FoundFlag);
 
-			if(!FoundFlag)
+			if (!FoundFlag)
 			{
 				cout("念の為もう一度確認します。(wait close)\n");
 
@@ -286,12 +286,12 @@ int main(int argc, char **argv)
 
 				cout("FoundFlag.2: %d\n", FoundFlag);
 
-				if(!FoundFlag)
+				if (!FoundFlag)
 					break;
 			}
 			cout("ループ回数 [ %u ], F を押すと強制的に続行するよ。(wait close)\n", loopCnt);
 
-			if(coWaitKey(25000) == 'F')
+			if (coWaitKey(25000) == 'F')
 			{
 				LOGPOS();
 				break;
@@ -301,7 +301,7 @@ int main(int argc, char **argv)
 		return;
 	}
 
-	if(waitCloseTitleMode)
+	if (waitCloseTitleMode)
 	{
 		for(loopCnt = 1; ; loopCnt++)
 		{
@@ -310,7 +310,7 @@ int main(int argc, char **argv)
 
 			cout("FoundFlag: %d\n", FoundFlag);
 
-			if(!FoundFlag)
+			if (!FoundFlag)
 			{
 				cout("念の為もう一度確認します。(wait close)\n");
 
@@ -321,12 +321,12 @@ int main(int argc, char **argv)
 
 				cout("FoundFlag.2: %d\n", FoundFlag);
 
-				if(!FoundFlag)
+				if (!FoundFlag)
 					break;
 			}
 			cout("ループ回数 [ %u ], F を押すと強制的に続行するよ。(wait close title)\n", loopCnt);
 
-			if(waitKey(25000) == 'F')
+			if (waitKey(25000) == 'F')
 			{
 				LOGPOS();
 				break;
@@ -346,12 +346,12 @@ int main(int argc, char **argv)
 
 			cout("WinClosedFlag: %d\n", WinClosedFlag);
 
-			if(!WinClosedFlag)
+			if (!WinClosedFlag)
 				break;
 
 			cout("ループ回数 [ %u ], F を押すと強制的に続行するよ。\n", loopCnt);
 
-			if(waitKey(0) == 'F')
+			if (waitKey(0) == 'F')
 			{
 				LOGPOS();
 				break;

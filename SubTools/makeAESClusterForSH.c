@@ -12,7 +12,7 @@ static int IsIgnoreRelFile(char *relFile)
 
 	foreach(pTkns, pTkn, index)
 	{
-		if(pTkn[0] == '_')
+		if (pTkn[0] == '_')
 		{
 			ret = 1;
 			break;
@@ -30,7 +30,7 @@ static autoList_t *GetContents(char *rootDir)
 	changeRoots(files, rootDir, NULL);
 
 	foreach(files, file, index)
-		if(IsIgnoreRelFile(file))
+		if (IsIgnoreRelFile(file))
 			file[0] = '\0';
 
 	trimLines(files);

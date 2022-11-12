@@ -16,7 +16,7 @@ static char *GetDivFile(char *file, uint dividx)
 }
 static void DMDeleteFile(char *file)
 {
-	if(DeleteMode)
+	if (DeleteMode)
 	{
 		cout("DELETE: %s\n", file);
 		removeFile(file);
@@ -51,7 +51,7 @@ static void Divide(char *file)
 
 			cout("divblock: %p (%u)", divblock, divblock ? getSize(divblock) : 0);
 
-			if(!divblock)
+			if (!divblock)
 				break;
 
 			writeBinaryBlock(divfp, divblock);
@@ -62,7 +62,7 @@ static void Divide(char *file)
 		fileClose(divfp);
 		cout("szcnt: %I64u\n", szcnt);
 
-		if(!szcnt)
+		if (!szcnt)
 		{
 			removeFile(divfile);
 			memFree(divfile);
@@ -89,7 +89,7 @@ static void Restore(char *file)
 
 		cout("divfile: %s\n", divfile);
 
-		if(!existFile(divfile))
+		if (!existFile(divfile))
 		{
 			memFree(divfile);
 			break;
@@ -102,7 +102,7 @@ static void Restore(char *file)
 
 			cout("divblock: %p (%u)\n", divblock, divblock ? getSize(divblock) : 0);
 
-			if(!divblock)
+			if (!divblock)
 				break;
 
 			writeBinaryBlock(fp, divblock);
@@ -119,7 +119,7 @@ static void Cleaver(char *file)
 {
 	char *ext = getExt(file);
 
-	if(lineExp("<5,09>", ext))
+	if (lineExp("<5,09>", ext))
 	{
 		file = changeExt(file, "");
 		Restore(file);
@@ -133,19 +133,19 @@ static void Cleaver(char *file)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/S")) // Size
+	if (argIs("/S")) // Size
 	{
 		DivSize = toValue64(nextArg());
 		errorCase(!DivSize);
 		goto readArgs;
 	}
-	if(argIs("/D") || argIs("/OAD")) // read-end and Delete
+	if (argIs("/D") || argIs("/OAD")) // read-end and Delete
 	{
 		DeleteMode = 1;
 		goto readArgs;
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		Cleaver(nextArg());
 	}

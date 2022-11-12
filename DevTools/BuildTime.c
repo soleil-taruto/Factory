@@ -16,7 +16,7 @@ static void ShowBuildTime_File(char *file, char *file4Prn)
 
 	for(index = 0; ; index++)
 	{
-		if(
+		if (
 			getByte(fileData, index + 0) == 'P' &&
 			getByte(fileData, index + 1) == 'E' &&
 			getByte(fileData, index + 2) == '\0' &&
@@ -40,7 +40,7 @@ static void ShowBuildTime(char *trgPath)
 {
 	trgPath = makeFullPath(trgPath);
 
-	if(existDir(trgPath))
+	if (existDir(trgPath))
 	{
 		autoList_t *paths = lss(trgPath);
 		char *path;
@@ -52,11 +52,11 @@ static void ShowBuildTime(char *trgPath)
 		{
 			char *relPath = changeRoot(strx(path), trgPath, NULL);
 
-			if(existDir(path))
+			if (existDir(path))
 			{
 				cout("------------------------ %s\n", relPath);
 			}
-			else if(
+			else if (
 				!_stricmp("exe", getExt(path)) ||
 				!_stricmp("dll", getExt(path)) ||
 				!_stricmp("exe_", getExt(path)) ||
@@ -86,14 +86,14 @@ static void ShowBuildTime(char *trgPath)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		char *outFile1 = getOutFile("BuildTime_Comp_1.txt");
 		char *outFile2 = getOutFile("BuildTime_Comp_2.txt");
 		char *path1;
 		char *path2;
 
-		if(hasArgs(2))
+		if (hasArgs(2))
 		{
 			path1 = nextArg();
 			path2 = nextArg();
@@ -109,7 +109,7 @@ int main(int argc, char **argv)
 		ShowBuildTime(path2);
 		unsetCoutWrFile();
 
-		if(isSameFile(outFile1, outFile2))
+		if (isSameFile(outFile1, outFile2))
 		{
 			cout("+------+\n");
 			cout("| ˆê’v |\n");
@@ -124,7 +124,7 @@ int main(int argc, char **argv)
 		openOutDir();
 		return;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		ShowBuildTime(nextArg());
 		return;

@@ -103,11 +103,11 @@ static uint GetCounter(char *groupName)
 {
 	uint counter = 1; // 初期値
 
-	if(existFile(GetCounterFile(groupName)))
+	if (existFile(GetCounterFile(groupName)))
 	{
 		char *line = readFirstLine(GetCounterFile(groupName));
 
-		if(lineExp("<1,9,09>", line)) // 10億-1でカンスト
+		if (lineExp("<1,9,09>", line)) // 10億-1でカンスト
 			counter = toValue(line);
 
 		memFree(line);
@@ -151,11 +151,11 @@ static char *ToFairMailAddress(char *mailAddress) // ret: strr(mailAddress)
 {
 	char *p = strrchr(mailAddress, '<'); // 最後の '<'
 
-	if(p)
+	if (p)
 	{
 		char *q = strchr(++p, '>');
 
-		if(q)
+		if (q)
 		{
 			char *tmp = strxl(p, (uint)q - (uint)p);
 
@@ -207,10 +207,10 @@ static void DistributeOne(autoList_t *mail, char *groupName, char *memberFrom, c
 		LOGPOS();
 	}
 
-	if(!contentTransferEncoding)
+	if (!contentTransferEncoding)
 		contentTransferEncoding = strx("7bit"); // Content-Transfer-Encoding のデフォルトは "7bit", 強制的に指定している理由は不明
 
-	if(
+	if (
 		!date ||
 		!subject ||
 		!mimeVersion ||
@@ -235,7 +235,7 @@ static void DistributeOne(autoList_t *mail, char *groupName, char *memberFrom, c
 		docomo は Reply-To を無視する。
 		vodafone も送信元が携帯のものに対しては Reply-To を無視するようだ。
 	*/
-	if(
+	if (
 		// 注意: if else の処理を入れ替えた。
 		/*
 		strstr(memberTo, "@docomo.ne.jp") ||
@@ -304,7 +304,7 @@ static void Distribute(autoList_t *mail, autoList_t *memberList, char *groupName
 
 	foreach(memberList, member, index)
 	{
-		if(!strcmp(mailFrom, member))
+		if (!strcmp(mailFrom, member))
 		{
 			memberFrom = member;
 			break;
@@ -327,11 +327,11 @@ static void Distribute(autoList_t *mail, autoList_t *memberList, char *groupName
 		cout("unreturn: %d\n", unreturn);
 		cout("sendonly: %d\n", sendonly);
 
-		if(unreturn && member == memberFrom)
+		if (unreturn && member == memberFrom)
 		{
 			cout("■折り返し拒否メンバーなので飛ばす。\n");
 		}
-		else if(sendonly)
+		else if (sendonly)
 		{
 			cout("■送信オンリーメンバーなので飛ばす。\n");
 		}
@@ -350,7 +350,7 @@ static void RecvEvent(autoList_t *mail)
 {
 	char *mailFrom = GetMailHeader(mail, "From");
 
-	if(!mailFrom)
+	if (!mailFrom)
 	{
 		cout("No mailFrom!\n");
 		return;
@@ -371,7 +371,7 @@ static void RecvEvent(autoList_t *mail)
 
 			foreach(memberList, member, member_index)
 			{
-				if(!strcmp(mailFrom, member))
+				if (!strcmp(mailFrom, member))
 				{
 					addElement(indexes, index);
 					mail_myself = member;
@@ -382,13 +382,13 @@ static void RecvEvent(autoList_t *mail)
 		{
 			char *subject = GetMailHeader(mail, "Subject");
 
-			if(subject)
+			if (subject)
 			{
 				foreach(indexes, index, index_index)
 				{
 					char *groupPtn = xcout("[%s]", getLine(GroupNameList, index));
 
-					if(mbs_stristr(subject, groupPtn)) // ? ターゲット発見
+					if (mbs_stristr(subject, groupPtn)) // ? ターゲット発見
 					{
 						setCount(indexes, 1);
 						setElement(indexes, 0, index);
@@ -401,11 +401,11 @@ static void RecvEvent(autoList_t *mail)
 			}
 		}
 
-		if(2 <= getCount(indexes))
+		if (2 <= getCount(indexes))
 		{
 			char *subject = GetMailHeader(mail, "Subject");
 
-			if(!subject || !mbs_stristr(subject, "[]")) // ? 空のグループパターンが無い
+			if (!subject || !mbs_stristr(subject, "[]")) // ? 空のグループパターンが無い
 			{
 				errorCase(!mail_myself);
 				DistributeOne(mail, "", mail_myself, mail_myself, 0);
@@ -445,7 +445,7 @@ static void RecvLoop(void)
 		}
 		releaseDim(mails, 2);
 
-		if(index) // ? 何かメールを受信した。
+		if (index) // ? 何かメールを受信した。
 			waitSec = 10;
 		else
 			waitSec++;
@@ -455,7 +455,7 @@ static void RecvLoop(void)
 		cout("waitSec: %u\n", waitSec);
 
 		for(index = 0; index < waitSec; index += 3)
-			if(checkKey(0x1b) || handleWaitForMillis(stopEv, 3000))
+			if (checkKey(0x1b) || handleWaitForMillis(stopEv, 3000))
 				goto endLoop;
 
 		mt19937_rnd32(); // 乱数のカウンタを回す。
@@ -472,83 +472,83 @@ int main(int argc, char **argv)
 	SendOnlyMemberList = newList();
 
 readArgs:
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		LOGPOS();
 		eventWakeup(STOP_EV_NAME);
 		return;
 	}
-	if(argIs("/PD")) // Pop server Domain
+	if (argIs("/PD")) // Pop server Domain
 	{
 		PopServer = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/PP")) // Pop server Port number
+	if (argIs("/PP")) // Pop server Port number
 	{
 		PopPortno = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/SD")) // Smtp server Domain
+	if (argIs("/SD")) // Smtp server Domain
 	{
 		SmtpServer = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/SP")) // Smtp server Port number
+	if (argIs("/SP")) // Smtp server Port number
 	{
 		SmtpPortno = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/U")) // User name
+	if (argIs("/U")) // User name
 	{
 		PopUserName = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/P")) // Passphrase
+	if (argIs("/P")) // Passphrase
 	{
 		PopPassphrase = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/M")) // self Mail address
+	if (argIs("/M")) // self Mail address
 	{
 		SelfMailAddress = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/F")) // members File
+	if (argIs("/F")) // members File
 	{
 		LOGPOS();
 		addElement(GroupList, (uint)readResourceLines(nextArg()));
 		goto readArgs;
 	}
-	if(argIs("/G")) // Groups file
+	if (argIs("/G")) // Groups file
 	{
 		LOGPOS();
 		addElements_x(GroupList, readResourceFilesLines(nextArg()));
 		goto readArgs;
 	}
-	if(argIs("/N")) // group Names file
+	if (argIs("/N")) // group Names file
 	{
 		LOGPOS();
 		GroupNameList = readResourceLines(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/UR")) // Un-Return members file
+	if (argIs("/UR")) // Un-Return members file
 	{
 		LOGPOS();
 		addElements_x(UnreturnMemberList, readResourceLines(nextArg()));
 		goto readArgs;
 	}
-	if(argIs("/SO")) // Send Only members file
+	if (argIs("/SO")) // Send Only members file
 	{
 		LOGPOS();
 		addElements_x(SendOnlyMemberList, readResourceLines(nextArg()));
 		goto readArgs;
 	}
-	if(argIs("/C")) // Counter file path-base
+	if (argIs("/C")) // Counter file path-base
 	{
 		CounterFileBase = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/-D")) // no recv and Delete
+	if (argIs("/-D")) // no recv and Delete
 	{
 		LOGPOS();
 		RecvAndDeleteMode = 0;

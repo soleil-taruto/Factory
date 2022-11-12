@@ -4,7 +4,7 @@
 
 static void AddLine(autoList_t **p_lines, char *line)
 {
-	if(!*p_lines)
+	if (!*p_lines)
 		*p_lines = newList();
 
 	addElement(*p_lines, (uint)strx(line));
@@ -16,17 +16,17 @@ static autoList_t *ResultColNames;
 static void ReadColArgs(void)
 {
 readArgs:
-	if(argIs("+"))
+	if (argIs("+"))
 	{
 		AddLine(&WhereColNames, nextArg());
 		goto readArgs;
 	}
-	if(argIs("="))
+	if (argIs("="))
 	{
 		AddLine(&WhereColValues, nextArg());
 		goto readArgs;
 	}
-	if(argIs(":"))
+	if (argIs(":"))
 	{
 		AddLine(&ResultColNames, nextArg());
 		goto readArgs;
@@ -34,7 +34,7 @@ readArgs:
 
 	errorCase(hasArgs(1)); // 不明なコマンド引数
 
-	if(!WhereColNames && !WhereColValues)
+	if (!WhereColNames && !WhereColValues)
 	{
 		AddLine(&WhereColNames, "$");
 		AddLine(&WhereColValues, "");
@@ -42,7 +42,7 @@ readArgs:
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		autoList_t *colnms = TR_GetSchema(nextArg());
 		char *colnm;
@@ -54,7 +54,7 @@ int main(int argc, char **argv)
 		releaseDim(colnms, 1);
 		return;
 	}
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		char *csvFile = nextArg();
 		autoList_t *values;
@@ -70,7 +70,7 @@ int main(int argc, char **argv)
 		releaseDim(values, 1);
 		return;
 	}
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		char *csvFile;
 		char *destFile;
@@ -117,17 +117,17 @@ int main(int argc, char **argv)
 		memFree(destFile);
 		return;
 	}
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		error(); // HACK: DELETE
 		return;
 	}
-	if(argIs("/I"))
+	if (argIs("/I"))
 	{
 		error(); // HACK: INSERT
 		return;
 	}
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		error(); // HACK: CREATE
 		return;

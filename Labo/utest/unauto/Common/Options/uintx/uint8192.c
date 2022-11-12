@@ -7,7 +7,7 @@ static char *TrimValueString(char *str)
 {
 	char *p;
 
-	if(!*str)
+	if (!*str)
 		return addChar(str, '0');
 
 	for(p = str; *p == '0' && p[1]; )
@@ -31,7 +31,7 @@ static char *MakeTestHexValue(void)
 {
 	uint scale;
 
-	if(mt19937_rnd(4)) // 75%
+	if (mt19937_rnd(4)) // 75%
 	{
 		scale = mt19937_range(0, 2048);
 	}
@@ -96,7 +96,7 @@ static void Test01(void)
 
 			sa = calc(s1, '+', s2);
 
-			if(2048 < strlen(sa))
+			if (2048 < strlen(sa))
 			{
 				eraseChar(sa);
 				sa = TrimValueString(sa);
@@ -144,7 +144,7 @@ static void Test01(void)
 
 			sa = calc(s1, '-', s2);
 
-			if(sa[0] == '-')
+			if (sa[0] == '-')
 				sa = calc(sa, '+', H_8192);
 
 			t1 = FromString(s1);
@@ -190,7 +190,7 @@ static void Test01(void)
 
 			sa = calc(s1, '*', s2);
 
-			if(2048 < strlen(sa))
+			if (2048 < strlen(sa))
 			{
 				eraseLine(sa, strlen(sa) - 2048);
 				sa = TrimValueString(sa);
@@ -236,7 +236,7 @@ static void Test01(void)
 			char *t2s;
 			char *tas;
 
-			if(!strcmp(s2, "0"))
+			if (!strcmp(s2, "0"))
 				*s2 = '1';
 
 			LOGPOS();

@@ -47,7 +47,7 @@ static void PostOutput(char *rPath)
 {
 	cout("POST_OUTPUT: %s\n", rPath);
 
-	if(OutputAndDeleteMode)
+	if (OutputAndDeleteMode)
 	{
 		cout("[DELETE]\n");
 
@@ -63,12 +63,12 @@ static int NoOverwriteMode;
 
 static char *MakeRestorePath(char *path, int rcdm)
 {
-	if(!rcdm)
+	if (!rcdm)
 		return changeExt_xc(combine_xc(makeFreeDir(), getLocal(path)), "");
 
 	path = changeExt(path, "");
 
-	if(!NoOverwriteMode)
+	if (!NoOverwriteMode)
 		recurRemovePathIfExist(path);
 
 	return path;
@@ -77,12 +77,12 @@ static char *AA_Restore(char *rFile, autoBlock_t *rawKey, int rcdm)
 {
 	char *ext;
 
-	if(!existFile(rFile))
+	if (!existFile(rFile))
 		return NULL;
 
 	ext = getExt(rFile);
 
-	if(!_stricmp(ext, EXT_CLUSTER))
+	if (!_stricmp(ext, EXT_CLUSTER))
 	{
 		char *wDir = MakeRestorePath(rFile, rcdm);
 
@@ -91,7 +91,7 @@ static char *AA_Restore(char *rFile, autoBlock_t *rawKey, int rcdm)
 		LOGPOS();
 		return wDir;
 	}
-	if(!_stricmp(ext, EXT_PACKED))
+	if (!_stricmp(ext, EXT_PACKED))
 	{
 		char *wFile = MakeRestorePath(rFile, rcdm);
 
@@ -100,7 +100,7 @@ static char *AA_Restore(char *rFile, autoBlock_t *rawKey, int rcdm)
 		LOGPOS();
 		return wFile;
 	}
-	if(!_stricmp(ext, EXT_ENCRYPTED))
+	if (!_stricmp(ext, EXT_ENCRYPTED))
 	{
 		char *wFile;
 
@@ -119,14 +119,14 @@ static void AA_PackAndEncrypt(char *rFile, autoBlock_t *rawKey, int mcfdm)
 {
 	char *wFile;
 
-	if(mcfdm)
+	if (mcfdm)
 		wFile = combine_xc(makeFreeDir(), getLocal(rFile));
 	else
 		wFile = strx(rFile);
 
 	wFile = addExt(wFile, EXT_PACKED);
 
-	if(existPath(wFile))
+	if (existPath(wFile))
 	{
 		errorCase_m(NoOverwriteMode, "上書きしようとしました。@ ZC_P_AA_PAE");
 		recurRemovePath(wFile);
@@ -135,13 +135,13 @@ static void AA_PackAndEncrypt(char *rFile, autoBlock_t *rawKey, int mcfdm)
 	ZC_Pack(rFile, wFile);
 	LOGPOS();
 
-	if(rawKey)
+	if (rawKey)
 	{
 		char *tmp = strx(wFile);
 
 		wFile = addExt(wFile, EXT_ENCRYPTED);
 
-		if(existPath(wFile))
+		if (existPath(wFile))
 		{
 			errorCase_m(NoOverwriteMode, "上書きしようとしました。@ ZC_E_AA_PAE");
 			recurRemovePath(wFile);
@@ -153,7 +153,7 @@ static void AA_PackAndEncrypt(char *rFile, autoBlock_t *rawKey, int mcfdm)
 		ZC_Encrypt(wFile, rawKey);
 		LOGPOS();
 	}
-	if(MakeClusterFreeDirMode)
+	if (MakeClusterFreeDirMode)
 	{
 		char *wDir = getParent(wFile);
 
@@ -170,11 +170,11 @@ static void AutoAction(char *rPath, autoBlock_t *rawKey)
 
 	rPath = makeFullPath(rPath);
 
-	if(existFile(rPath))
+	if (existFile(rPath))
 	{
 		char *ext = getExt(rPath);
 
-		if(
+		if (
 			!_stricmp(ext, EXT_CLUSTER) ||
 			!_stricmp(ext, EXT_PACKED) ||
 			!_stricmp(ext, EXT_ENCRYPTED)
@@ -189,14 +189,14 @@ static void AutoAction(char *rPath, autoBlock_t *rawKey)
 			{
 				char *nextWPath = AA_Restore(wPath, rawKey, 1);
 
-				if(!nextWPath)
+				if (!nextWPath)
 					break;
 
 				removeFile(wPath);
 				memFree(wPath);
 				wPath = nextWPath;
 			}
-			if(!RestoreCurrentDirMode)
+			if (!RestoreCurrentDirMode)
 			{
 				char *wDir = getParent(wPath);
 
@@ -214,14 +214,14 @@ static void AutoAction(char *rPath, autoBlock_t *rawKey)
 	{
 		char *midFile;
 
-		if(MakeClusterFreeDirMode)
+		if (MakeClusterFreeDirMode)
 			midFile = combine_xc(makeFreeDir(), getLocal(rPath));
 		else
 			midFile = strx(rPath);
 
 		midFile = addExt(midFile, EXT_CLUSTER);
 
-		if(existPath(midFile))
+		if (existPath(midFile))
 		{
 			errorCase_m(NoOverwriteMode, "上書きしようとしました。@ ZC_C_AA");
 			recurRemovePath(midFile);
@@ -245,7 +245,7 @@ static void MakeCluster(char *rPath, char *wFile, autoBlock_t *rawKey)
 	errorCase(existPath(wFile)); // rPath == wFile の場合この辺で error();
 	// rawKey
 
-	if(existDir(rPath))
+	if (existDir(rPath))
 	{
 		char *midFile = makeTempPath("zc_mid");
 
@@ -264,7 +264,7 @@ static void MakeCluster(char *rPath, char *wFile, autoBlock_t *rawKey)
 		ZC_Pack(rPath, wFile);
 		LOGPOS();
 	}
-	if(rawKey)
+	if (rawKey)
 	{
 		LOGPOS();
 		ZC_Encrypt(wFile, rawKey);
@@ -284,7 +284,7 @@ static void Restore(char *rFile, char *wPath, autoBlock_t *rawKey, int restoreDi
 
 	midFile = makeTempFile(NULL);
 
-	if(rawKey)
+	if (rawKey)
 	{
 		copyFile(rFile, midFile);
 
@@ -300,7 +300,7 @@ static void Restore(char *rFile, char *wPath, autoBlock_t *rawKey, int restoreDi
 		ZC_Unpack(rFile, wPath);
 		LOGPOS();
 	}
-	if(restoreDirMode)
+	if (restoreDirMode)
 	{
 		removeFile(midFile);
 		moveFile(wPath, midFile);
@@ -332,13 +332,13 @@ static void EncryptMain(autoBlock_t *rawKey, int mode) // mode: "ED"
 
 	copyFile(rFile, wFile);
 
-	if(mode == 'E')
+	if (mode == 'E')
 	{
 		ZC_Encrypt(wFile, rawKey);
 	}
 	else // D
 	{
-		if(!ZC_Decrypt(wFile, rawKey))
+		if (!ZC_Decrypt(wFile, rawKey))
 		{
 			cout("+---------------------+\n");
 			cout("| 復号に失敗しました。|\n");
@@ -369,27 +369,27 @@ int main(int argc, char **argv)
 	autoBlock_t *rawKey = NULL;
 
 readArgs:
-	if(argIs("/KB"))
+	if (argIs("/KB"))
 	{
 		rawKey = cphrLoadKeyBundleFileEx(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		RestoreCurrentDirMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/1"))
+	if (argIs("/1"))
 	{
 		MakeClusterFreeDirMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/-OW"))
+	if (argIs("/-OW"))
 	{
 		NoOverwriteMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/OAD"))
+	if (argIs("/OAD"))
 	{
 		cout("***********************\n");
 		cout("** OUTPUT AND DELETE **\n");
@@ -398,7 +398,7 @@ readArgs:
 		OutputAndDeleteMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/M"))
+	if (argIs("/M"))
 	{
 		char *rPath;
 		char *wFile;
@@ -409,7 +409,7 @@ readArgs:
 		MakeCluster(rPath, wFile, rawKey);
 		return;
 	}
-	if(argIs("/MO"))
+	if (argIs("/MO"))
 	{
 		char *rPath;
 		char *wFile;
@@ -421,7 +421,7 @@ readArgs:
 		MakeCluster(rPath, wFile, rawKey);
 		return;
 	}
-	if(argIs("/BM"))
+	if (argIs("/BM"))
 	{
 		char *rPath;
 		char *wFile;
@@ -433,7 +433,7 @@ readArgs:
 		MakeCluster(rPath, wFile, rawKey);
 		return;
 	}
-	if(argIs("/RF"))
+	if (argIs("/RF"))
 	{
 		char *rFile;
 		char *wPath;
@@ -444,7 +444,7 @@ readArgs:
 		Restore(rFile, wPath, rawKey, 0);
 		return;
 	}
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		char *rFile;
 		char *wDir;
@@ -455,7 +455,7 @@ readArgs:
 		Restore(rFile, wDir, rawKey, 1);
 		return;
 	}
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		char *rFile;
 		char *wFile;
@@ -467,7 +467,7 @@ readArgs:
 		PostOutput(rFile);
 		return;
 	}
-	if(argIs("/U"))
+	if (argIs("/U"))
 	{
 		char *rFile;
 		char *wFile;
@@ -479,17 +479,17 @@ readArgs:
 		PostOutput(rFile);
 		return;
 	}
-	if(argIs("/E"))
+	if (argIs("/E"))
 	{
 		EncryptMain(rawKey, 'E');
 		return;
 	}
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		EncryptMain(rawKey, 'D');
 		return;
 	}
-	if(argIs("/E+"))
+	if (argIs("/E+"))
 	{
 		char *file = nextArg();
 
@@ -497,11 +497,11 @@ readArgs:
 //		PostOutput(file); // 入出力ファイルなので..
 		return;
 	}
-	if(argIs("/D+"))
+	if (argIs("/D+"))
 	{
 		char *file = nextArg();
 
-		if(!ZC_Decrypt(file, rawKey))
+		if (!ZC_Decrypt(file, rawKey))
 		{
 			cout("+---------------------+\n");
 			cout("| 復号に失敗しました。|\n");
@@ -511,13 +511,13 @@ readArgs:
 //		PostOutput(file); // 入出力ファイルなので..
 		termination(0);
 	}
-	if(argIs("/-I"))
+	if (argIs("/-I"))
 	{
 		ZC_WithoutInfo = 1;
 		goto readArgs;
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		AutoAction(nextArg(), rawKey);
 		return;

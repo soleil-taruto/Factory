@@ -21,7 +21,7 @@ static void Perform(int sock, int fwdSock)
 	uint connectNo = ConnectNoCounter;
 	uint stress = 0;
 
-	if(ConnectNoCounter == UINTMAX)
+	if (ConnectNoCounter == UINTMAX)
 		ConnectNoCounter = 0;
 	else
 		ConnectNoCounter++;
@@ -39,7 +39,7 @@ static void Perform(int sock, int fwdSock)
 		AddCommSendData(b, aToB, 1);
 		AddCommSendData(a, bToA, 1);
 
-		if(getSize(aToB) || getSize(bToA))
+		if (getSize(aToB) || getSize(bToA))
 			waitMillis = 0;
 		else
 			waitMillis = m_min(waitMillis + 1, 2000);
@@ -49,7 +49,7 @@ static void Perform(int sock, int fwdSock)
 		releaseAutoBlock(aToB);
 		releaseAutoBlock(bToA);
 
-		if(m_01(IsCommDeadAndEmpty(a)) & m_01(IsCommDeadAndEmpty(b))) // 両方実行したい。
+		if (m_01(IsCommDeadAndEmpty(a)) & m_01(IsCommDeadAndEmpty(b))) // 両方実行したい。
 			break;
 
 		// TODO
@@ -58,7 +58,7 @@ static void Perform(int sock, int fwdSock)
 		{
 			stress += m_01(IsCommDeadAndEmpty(a)) | m_01(IsCommDeadAndEmpty(b));
 
-			if(100 < stress) // しきい値は適当。調整が必要
+			if (100 < stress) // しきい値は適当。調整が必要
 				break;
 		}
 

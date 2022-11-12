@@ -93,26 +93,26 @@ static Tweet_t *CreateTweet(char *name, char *message, autoList_t *trails)
 	char *trailer;
 	char *uiMessage;
 
-	if(!name[0])
+	if (!name[0])
 		name = "(N0)";
-	else if(NAMELENMAX < strlen(name))
+	else if (NAMELENMAX < strlen(name))
 		name = "(NL)";
 
-	if(!message[0])
+	if (!message[0])
 		message = "(M0)";
-	else if(MESSAGELENMAX < strlen(message))
+	else if (MESSAGELENMAX < strlen(message))
 		message = "(ML)";
 
 	{
 		static autoList_t *deftrails;
 
-		if(!deftrails)
+		if (!deftrails)
 			deftrails = tokenize("TWE", '\1');
 
-		if(!trails)
+		if (!trails)
 			trails = deftrails;
 
-		if(strcmp(refLine(trails, getCount(trails) - 1), "TWE"))
+		if (strcmp(refLine(trails, getCount(trails) - 1), "TWE"))
 		{
 			message = "(ERROR:TRAILS-FORMAT)";
 			trails = deftrails;
@@ -166,14 +166,14 @@ static Member_t *CreateMemberLAT(char *name, char *passphrase, uint64 lat)
 {
 	Member_t *i = (Member_t *)memAlloc(sizeof(Member_t));
 
-	if(!name[0])
+	if (!name[0])
 		name = "(N0)";
-	else if(MEMB_NAMELENMAX < strlen(name))
+	else if (MEMB_NAMELENMAX < strlen(name))
 		name = "(NL)";
 
-	if(!passphrase[0])
+	if (!passphrase[0])
 		passphrase = "(P0)";
-	else if(MEMB_PASSLENMAX < strlen(passphrase))
+	else if (MEMB_PASSLENMAX < strlen(passphrase))
 		passphrase = "(PL)";
 
 	i->Name = strx(name);
@@ -206,7 +206,7 @@ static Member_t *FindMember(char *name)
 	uint index;
 
 	foreach(MemberList, member, index)
-		if(!strcmp(name, member->Name))
+		if (!strcmp(name, member->Name))
 			break;
 
 	return member;
@@ -218,14 +218,14 @@ static char *MemberNameFltr(char *name, char *passphrase) // ret: strr(name)
 {
 	Member_t *member = FindMember(name);
 
-	if(member)
+	if (member)
 	{
-		if(!strcmp(passphrase, member->Passphrase))
+		if (!strcmp(passphrase, member->Passphrase))
 		{
 			uint64 lastTime = member->LastAccessTime;
 			uint64 currTime = GetTime();
 
-			if(GetSecond(lastTime) + 70 < GetSecond(currTime)) // ? 過去１分１０秒以内にアクセス無し -> ログアウトしていたと見なす。
+			if (GetSecond(lastTime) + 70 < GetSecond(currTime)) // ? 過去１分１０秒以内にアクセス無し -> ログアウトしていたと見なす。
 			{
 				cout("LOG-IN %s (%s)\n", name, passphrase);
 				cout("lastTime: %I64u\n", lastTime);
@@ -241,7 +241,7 @@ static char *MemberNameFltr(char *name, char *passphrase) // ret: strr(name)
 	}
 	else
 	{
-		if(MEMBERMAX <= getCount(MemberList))
+		if (MEMBERMAX <= getCount(MemberList))
 		{
 			cout("MEMBER OVER-FLOW! -> CLEAR\n");
 
@@ -268,7 +268,7 @@ static char *ReadParam(void)
 {
 	char *line = ReadParam_Eof2Null();
 
-	if(!line)
+	if (!line)
 		line = strx("");
 
 	return line;
@@ -280,7 +280,7 @@ static char *ReadParam_MMS(uint minlen, uint maxlen, char *substituteParam)
 
 	linelen = strlen(line);
 
-	if(linelen < minlen || maxlen < linelen)
+	if (linelen < minlen || maxlen < linelen)
 	{
 		memFree(line);
 		line = strx(substituteParam);
@@ -301,7 +301,7 @@ static uint GetValueFromLines(autoList_t *lines, uint index, uint defaultValue, 
 {
 	uint value = toValue(refLine(lines, index));
 
-	if(!value)
+	if (!value)
 		value = DEFFIRSTTWEETMAX;
 
 	m_range(value, minval, maxval);
@@ -317,7 +317,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 	command = ReadParam();
 
-	if(!strcmp(command, "TW"))
+	if (!strcmp(command, "TW"))
 	{
 		char *name;
 		char *passphrase;
@@ -336,19 +336,19 @@ static int Perform(char *prmFile, char *ansFile)
 		{
 			char *trail = ReadParam_Eof2Null();
 
-			if(!trail)
+			if (!trail)
 				break;
 
 			addElement(trails, (uint)trail);
 		}
 		name = MemberNameFltr(name, passphrase);
 
-		if(*message)
+		if (*message)
 		{
 			addElement(TweetList, (uint)CreateTweet(name, message, trails));
 
 #if 0
-			if(mbs_strstr(message, "ぬるぽ"))
+			if (mbs_strstr(message, "ぬるぽ"))
 				addElement(TweetList, (uint)CreateTweet(
 					"(鯖)",
 					"ガッ",
@@ -356,7 +356,7 @@ static int Perform(char *prmFile, char *ansFile)
 					));
 #endif
 
-			if(TWEETMAX < getCount(TweetList))
+			if (TWEETMAX < getCount(TweetList))
 			{
 				reverseElements(TweetList); // 逆転
 
@@ -371,16 +371,16 @@ static int Perform(char *prmFile, char *ansFile)
 		{
 			Tweet_t *tw = (Tweet_t *)getElement(TweetList, index - 1);
 
-			if(tw->Time <= knownTimeLineTime)
+			if (tw->Time <= knownTimeLineTime)
 			{
 				break;
 			}
 		}
-		if(index == 0) // ? knownTimeLineTime < 最古の発言の日時 -> 初回アクセスと見なす。
+		if (index == 0) // ? knownTimeLineTime < 最古の発言の日時 -> 初回アクセスと見なす。
 		{
 			uint firstTweetMax = GetValueFromLines(trails, 2, DEFFIRSTTWEETMAX, 1, TWEETMAX);
 
-			if(firstTweetMax < getCount(TweetList))
+			if (firstTweetMax < getCount(TweetList))
 			{
 				index = getCount(TweetList) - firstTweetMax;
 			}
@@ -401,7 +401,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 				foreach(trails, trail, trail_index)
 				{
-					if(!*trail)
+					if (!*trail)
 						trail = "(T0)";
 
 					WriteAnsLine(trail);
@@ -416,13 +416,13 @@ static int Perform(char *prmFile, char *ansFile)
 
 			foreach(MemberList, member, index)
 			{
-				if(GetSecond(currTime) < GetSecond(member->LastAccessTime) + 60) // ? 過去１分未満にアクセス有り
+				if (GetSecond(currTime) < GetSecond(member->LastAccessTime) + 60) // ? 過去１分未満にアクセス有り
 				{
 					WriteAnsLine("OL");
 					WriteAnsLine(member->Name);
 				}
 			}
-			if(GetSecond(currTime) < GetSecond(ProwlerLastAccessTime) + 60)
+			if (GetSecond(currTime) < GetSecond(ProwlerLastAccessTime) + 60)
 			{
 				WriteAnsLine("OL");
 				WriteAnsLine("(anonymous)");
@@ -436,7 +436,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 		retval = 1; // Successful
 	}
-	else if(!strcmp(command, "LO"))
+	else if (!strcmp(command, "LO"))
 	{
 		char *name;
 		char *passphrase;
@@ -449,11 +449,11 @@ static int Perform(char *prmFile, char *ansFile)
 
 		member = FindMember(name);
 
-		if(member)
+		if (member)
 		{
 			cout("FOUND MEMBER\n");
 
-			if(!strcmp(passphrase, member->Passphrase))
+			if (!strcmp(passphrase, member->Passphrase))
 			{
 				cout("PASSPHRASE OK -> RESET LAST-ACCESS-TIME\n");
 				member->LastAccessTime = 0;
@@ -467,7 +467,7 @@ static int Perform(char *prmFile, char *ansFile)
 		WriteAnsLine("BYE!");
 		retval = 1; // Successful
 	}
-	else if(!strcmp(command, "XLO")) // ログアウトしない -> noop
+	else if (!strcmp(command, "XLO")) // ログアウトしない -> noop
 	{
 		char *name = ReadParam();
 		cout("X-LOG-OUT %s\n", name);

@@ -4,11 +4,11 @@ static char *GetFqdn(char *mailAddr)
 {
 	char *p;
 
-	if(mailAddr)
+	if (mailAddr)
 	{
 		p = mbs_strchr(mailAddr, '@');
 
-		if(p)
+		if (p)
 			p++;
 		else
 			p = mailAddr;
@@ -16,7 +16,7 @@ static char *GetFqdn(char *mailAddr)
 	else
 		p = "";
 
-	if(!*p)
+	if (!*p)
 		p = "default";
 
 	return strx(p);
@@ -57,10 +57,10 @@ void MailParser(autoBlock_t *mail)
 		int folding;
 
 		for(; i < getSize(mail); i++)
-			if(b_(mail)[i] == '\n')
+			if (b_(mail)[i] == '\n')
 				break;
 
-		if(i == getSize(mail))
+		if (i == getSize(mail))
 		{
 			cout("ヘッダの終端が見つかりません。\n");
 			break;
@@ -71,10 +71,10 @@ void MailParser(autoBlock_t *mail)
 		folding = m_isspace(headerLine[0]) && getCount(MP_HeaderKeys);
 		ucTrimEdge(headerLine);
 
-		if(!*headerLine)
+		if (!*headerLine)
 			break;
 
-		if(folding)
+		if (folding)
 		{
 			char *lastValue = (char *)unaddElement(MP_HeaderValues);
 
@@ -87,7 +87,7 @@ void MailParser(autoBlock_t *mail)
 		{
 			char *p = strchr(headerLine, ':');
 
-			if(p)
+			if (p)
 			{
 				char *key = headerLine;
 				char *value;
@@ -112,7 +112,7 @@ void MailParser(autoBlock_t *mail)
 }
 void MP_Clear(void)
 {
-	if(!MP_HeaderKeys) // ? メール未展開
+	if (!MP_HeaderKeys) // ? メール未展開
 		return;
 
 	// 2bs
@@ -140,7 +140,7 @@ char *MP_GetHeaderValue(char *targKey) // ret: strx(), NULL == 見つからない。
 	errorCase(!MP_HeaderValues); // 2bs
 
 	foreach(MP_HeaderKeys, key, index)
-		if(!_stricmp(key, targKey))
+		if (!_stricmp(key, targKey))
 			return strx(getLine(MP_HeaderValues, index));
 
 	return NULL;
@@ -158,7 +158,7 @@ void PrintMailEntity(autoBlock_t *mail)
 {
 	char *line;
 
-	if(31000 < getSize(mail)) // ? 31 KB より大きい
+	if (31000 < getSize(mail)) // ? 31 KB より大きい
 	{
 		autoBlock_t *buff = newBlock();
 

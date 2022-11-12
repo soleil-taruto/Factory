@@ -28,7 +28,7 @@ void putBit(bitList_t *i, uint64 index, uint value)
 {
 	uint c = refElement(i->Buffer, (uint)(index >> 5));
 
-	if(value)
+	if (value)
 		c |= 1u << (uint)(index & 31);
 	else
 		c &= ~(1u << (uint)(index & 31));
@@ -50,7 +50,7 @@ void putBits(bitList_t *i, uint64 index, uint64 size, uint value) // size: 0 ok
 		end--;
 		putBit(i, end, value);
 	}
-	if(bgn < end)
+	if (bgn < end)
 	{
 		uint index    = (uint)(bgn >> 5);
 		uint indexEnd = (uint)(end >> 5);
@@ -85,7 +85,7 @@ void invBits(bitList_t *i, uint64 index, uint64 size) // size: 0 ok
 		end--;
 		invBit(i, end);
 	}
-	if(bgn < end)
+	if (bgn < end)
 	{
 		uint index    = (uint)(bgn >> 5);
 		uint indexEnd = (uint)(end >> 5);

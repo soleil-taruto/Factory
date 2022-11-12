@@ -19,7 +19,7 @@ static void PrintLine(uint index)
 
 	cout("%s\n", line);
 
-	if(RecentlyLinesFile)
+	if (RecentlyLinesFile)
 		addLine2File(RecentlyLinesFile, line);
 }
 static void DoRandom(void)
@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 
 	errorCase(!getCount(Lines));
 
-	if(argIs("/ER"))
+	if (argIs("/ER"))
 	{
 		autoList_t *rcntLines;
 		char *line;
@@ -58,7 +58,7 @@ int main(int argc, char **argv)
 		writeLines(RecentlyLinesFile, rcntLines);
 
 		foreach(Lines, line, index)
-			if(findLine(rcntLines, line) < getCount(rcntLines))
+			if (findLine(rcntLines, line) < getCount(rcntLines))
 				*line = '\0';
 
 		trimLines(Lines);
@@ -67,7 +67,7 @@ int main(int argc, char **argv)
 		releaseDim(rcntLines, 1);
 	}
 
-	if(argIs("/L"))
+	if (argIs("/L"))
 	{
 		char *line;
 		uint index;
@@ -77,17 +77,17 @@ int main(int argc, char **argv)
 
 		return;
 	}
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		DoRandom();
 		return;
 	}
-	if(argIs("/M"))
+	if (argIs("/M"))
 	{
 		DoModTime(toValue(nextArg()));
 		return;
 	}
-	if(argIs("/I"))
+	if (argIs("/I"))
 	{
 		uint index = toValue(nextArg());
 

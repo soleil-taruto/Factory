@@ -29,7 +29,7 @@ static uint Root64(uint64 value)
 	{
 		uint r = root | bit;
 
-		if((uint64)r * r <= value)
+		if ((uint64)r * r <= value)
 		{
 			root = r;
 		}
@@ -78,7 +78,7 @@ static void DispSosu(void)
 
 	for(count = 29; count <= CountMax; count++)
 	{
-		if(readChar(SosuFp))
+		if (readChar(SosuFp))
 		{
 			cout("%I64u\n", count);
 		}
@@ -106,12 +106,12 @@ int main(int argc, char **argv)
 
 	for(count = 29; count <= rootCntMax; count++)
 	{
-		if(count < 100 || count % 100 == 0)
+		if (count < 100 || count % 100 == 0)
 			cmdTitle_x(xcout("Prime2tox - %I64u ‚È‚¤...", (uint64)count * count));
 
 		fileSeek(SosuFp, SEEK_SET, (uint64)count);
 
-		if(readChar(SosuFp))
+		if (readChar(SosuFp))
 		{
 			for(wcnt = (uint64)count * 3; wcnt <= CountMax; wcnt += (uint64)count * 2)
 			{

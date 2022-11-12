@@ -28,7 +28,7 @@ static char *RecvPath(SockStream_t *ss, char *parentDir)
 	char *path = SockRecvLine(ss, RECV_LINE_LENMAX);
 	char *ret;
 
-	if(!CheckPath(path, parentDir))
+	if (!CheckPath(path, parentDir))
 	{
 		cout("パス名に問題があります！\n");
 		line2JLine(path, 1, 0, 0, 1); // 表示のため
@@ -68,7 +68,7 @@ static int Perform(int sock, uint dummyPrm)
 	// 最初に来る ECHO_WORD_REQ までは短いタイムアウトを設定する。
 	// それ以降は無制限
 
-	if(HelloPassword)
+	if (HelloPassword)
 	{
 		char *recvHPw;
 
@@ -76,7 +76,7 @@ static int Perform(int sock, uint dummyPrm)
 
 		recvHPw = SockRecvLine(ss, strlen(HelloPassword) + 1);
 
-		if(strcmp(recvHPw, HelloPassword))
+		if (strcmp(recvHPw, HelloPassword))
 		{
 			cout("ぶっぶーですわ！\n");
 //			coSleep(3000); // 間違えて接続というのもありそうなので、待たない。
@@ -90,29 +90,29 @@ static int Perform(int sock, uint dummyPrm)
 		command = SockRecvLine(ss, RECV_LINE_LENMAX);
 
 		// 表示のため -- "", ECHO_WORD_REQ に注意！
-		if(*command)
+		if (*command)
 			line2csym_ext(command, ".{-}");
 
 		cout("command: %s\n", command);
 
-		if(!*command) // 切断または通信エラー
+		if (!*command) // 切断または通信エラー
 			break;
 
-		if(!strcmp(command, ECHO_WORD_REQ))
+		if (!strcmp(command, ECHO_WORD_REQ))
 		{
 			LOGPOS();
 
 			SetSockStreamTimeout(ss, 0);
 			SockSendLine(ss, ECHO_WORD_ANS);
 		}
-		else if(!strcmp(command, "Start"))
+		else if (!strcmp(command, "Start"))
 		{
 			char *dir = RecvPath(ss, RootDir);
 
-			if(!dir)
+			if (!dir)
 				break;
 
-			if(!existDir(dir))
+			if (!existDir(dir))
 			{
 				cout("そんなディレクトリ存在しませんわ。\n");
 				memFree(dir);
@@ -122,49 +122,49 @@ static int Perform(int sock, uint dummyPrm)
 			ActiveDir = dir;
 			SendDirsAndFiles(ss, ActiveDir);
 		}
-		else if(!strcmp(command, "MD"))
+		else if (!strcmp(command, "MD"))
 		{
 			char *dir = RecvPath(ss, ActiveDir);
 
-			if(!dir)
+			if (!dir)
 				break;
 
 			NS_CreateParent(dir);
 			createDir(dir);
 			memFree(dir);
 		}
-		else if(!strcmp(command, "Delete"))
+		else if (!strcmp(command, "Delete"))
 		{
 			char *path = RecvPath(ss, ActiveDir);
 
-			if(!path)
+			if (!path)
 				break;
 
 			NS_DeletePath(path);
 			memFree(path);
 		}
-		else if(!strcmp(command, "Clear"))
+		else if (!strcmp(command, "Clear"))
 		{
 			recurClearDir(ActiveDir);
 		}
-		else if(!strcmp(command, "Send"))
+		else if (!strcmp(command, "Send"))
 		{
 			char *file = RecvPath(ss, ActiveDir);
 
-			if(!file)
+			if (!file)
 				break;
 
 			NS_RecvFile(ss, file);
 			memFree(file);
 		}
-		else if(!strcmp(command, "Recv"))
+		else if (!strcmp(command, "Recv"))
 		{
 			char *file = RecvPath(ss, ActiveDir);
 
-			if(!file)
+			if (!file)
 				break;
 
-			if(!existFile(file))
+			if (!existFile(file))
 			{
 				cout("Recv_そんなファイルありませんわ。\n");
 				memFree(file);
@@ -173,16 +173,16 @@ static int Perform(int sock, uint dummyPrm)
 			NS_SendFile(ss, file);
 			memFree(file);
 		}
-		else if(!strcmp(command, "GetFileStamp"))
+		else if (!strcmp(command, "GetFileStamp"))
 		{
 			char *file = RecvPath(ss, ActiveDir);
 			uint64 createStamp;
 			uint64 writeStamp;
 
-			if(!file)
+			if (!file)
 				break;
 
-			if(!existFile(file))
+			if (!existFile(file))
 			{
 				cout("GFS_そんなファイルありませんわ。\n");
 				memFree(file);
@@ -212,14 +212,14 @@ endFunc:
 static int Idle(void)
 {
 	while(hasKey())
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 			return 0;
 
 	return 1;
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/HPW"))
+	if (argIs("/HPW"))
 	{
 		HelloPassword = nextArg();
 	}

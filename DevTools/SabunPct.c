@@ -32,7 +32,7 @@ static char *GetWLine_File_File(char *file1, char *file2, char *wPath)
 	uint64 size2 = getFileSize(file2);
 	char *ret;
 
-	if(size1 == size2)
+	if (size1 == size2)
 	{
 		FILE *fp1 = fileOpen(file1, "rb");
 		FILE *fp2 = fileOpen(file2, "rb");
@@ -44,13 +44,13 @@ static char *GetWLine_File_File(char *file1, char *file2, char *wPath)
 			int chr1 = readChar(fp1);
 			int chr2 = readChar(fp2);
 
-			if(chr1 != chr2)
+			if (chr1 != chr2)
 				diffCount++;
 		}
 		fileClose(fp1);
 		fileClose(fp2);
 
-		if(diffCount == 0)
+		if (diffCount == 0)
 			ret = xcout("*%s", wPath);
 		else
 			ret = xcout("%I64u / %I64u = %f*%s", diffCount, size1, (double)diffCount / size1, wPath);
@@ -141,7 +141,7 @@ static void SabunPct(char *dir1, char *dir2)
 }
 int main(int argc, char **argv)
 {
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		SabunPct(getArg(0), getArg(1));
 		return;

@@ -27,7 +27,7 @@ static uint ChangeVol(uint index, uint uVol)
 	vol = divRndOff(vol, 100);
 #endif
 
-	if(!m_isRange(vol, -0x8000, 0x7fff))
+	if (!m_isRange(vol, -0x8000, 0x7fff))
 	{
 		cout("‰¹Š„‚êPOI: [%u] %d\n", index, vol);
 		m_range(vol, -0x8000, 0x7fff);
@@ -93,7 +93,7 @@ int main(int argc, char **argv)
 
 	errorCase(!m_isRange(VolumePct, 0, 65000));
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		char *file = nextArg();
 

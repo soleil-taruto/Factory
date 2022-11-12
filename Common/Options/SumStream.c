@@ -74,7 +74,7 @@ int CheckSumStream(void (*streamReader)(uchar *, uint), uint64 streamLength)
 	uchar *buffer;
 	uint64 count;
 
-	if(streamLength < SUMSIZE)
+	if (streamLength < SUMSIZE)
 		return 0;
 
 	InitSum();

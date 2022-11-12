@@ -39,7 +39,7 @@ static void ReadTimeTable(void)
 	autoList_t *lines;
 	uint index;
 
-	if(existFile(TIME_TABLE_FILE))
+	if (existFile(TIME_TABLE_FILE))
 		lines = readLines(TIME_TABLE_FILE);
 	else
 		lines = newList();
@@ -48,10 +48,10 @@ static void ReadTimeTable(void)
 	{
 		char *id = getLine(lines, index);
 
-		if(!strcmp(id, S_Id))
+		if (!strcmp(id, S_Id))
 			break;
 	}
-	if(TTbl)
+	if (TTbl)
 		releaseDim(TTbl, 1);
 
 	TTbl = lines;
@@ -68,7 +68,7 @@ static time_t GetTime(void)
 {
 	ReadTimeTable();
 
-	if(TTPos < getCount(TTbl)) // あった。
+	if (TTPos < getCount(TTbl)) // あった。
 	{
 		char *st = getLine(TTbl, TTPos + 1);
 		time_t time;
@@ -83,7 +83,7 @@ static void SetTime(time_t time)
 {
 	ReadTimeTable();
 
-	if(TTPos < getCount(TTbl)) // 既存
+	if (TTPos < getCount(TTbl)) // 既存
 	{
 		memFree(zSetLine(TTbl, TTPos + 1, xcout("%I64d", time)));
 	}
@@ -98,7 +98,7 @@ static void ClearTime(void)
 {
 	ReadTimeTable();
 
-	if(TTPos < getCount(TTbl)) // あった。
+	if (TTPos < getCount(TTbl)) // あった。
 	{
 		memFree(getLine(TTbl, TTPos + 0));
 		memFree(getLine(TTbl, TTPos + 1));
@@ -122,7 +122,7 @@ static void CheckTime(void)
 	cout("次回時刻：%f\n", nextTime / 3600.0);
 	cout("現在時刻：%f\n", currTime / 3600.0);
 
-	if(currTime < nextTime)
+	if (currTime < nextTime)
 	{
 		cout("次の時刻まであと %f 時間あります。endCode=1\n", (nextTime - currTime) / 3600.0);
 
@@ -136,7 +136,7 @@ static void UpdateTime(time_t addTime)
 	cout("時間キタ！次の時刻まで %f 時間です。endCode=0\n", addTime / 3600.0);
 	cout("次回時刻：%f\n", nextTime / 3600.0);
 
-	if(EqualInterval)
+	if (EqualInterval)
 	{
 		nextTime -= nextTime % addTime;
 
@@ -192,7 +192,7 @@ int main(int argc, char **argv)
 	mt19937_initCRnd();
 //	mkAppDataDir(); // appdata 抑止 @ 2021.3.19
 
-	if(argIs("/EI"))
+	if (argIs("/EI"))
 	{
 		EqualInterval = 1;
 	}
@@ -201,13 +201,13 @@ int main(int argc, char **argv)
 
 	errorCase(m_isEmpty(S_Id));
 
-	if(argIs("/CTT"))
+	if (argIs("/CTT"))
 	{
 		cout("Clear Time Table\n");
 		removeFileIfExist(TIME_TABLE_FILE);
 		return;
 	}
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		cout("Clear\n");
 		ClearTime();
@@ -216,11 +216,11 @@ int main(int argc, char **argv)
 
 	CheckTime();
 
-	if(argIs("/V"))
+	if (argIs("/V"))
 	{
 		UpdateTime_NoUpdate();
 	}
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		uint minSec;
 		uint maxSec;
@@ -230,7 +230,7 @@ int main(int argc, char **argv)
 
 		Update_Range(minSec, maxSec);
 	}
-	if(argIs("/RH"))
+	if (argIs("/RH"))
 	{
 		uint minHour;
 		uint maxHour;
@@ -240,25 +240,25 @@ int main(int argc, char **argv)
 
 		Update_RangeHour(minHour, maxHour);
 	}
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		uint sec = toValue(nextArg());
 
 		Update_Time(sec);
 	}
-	if(argIs("/TM"))
+	if (argIs("/TM"))
 	{
 		uint minute = toValue(nextArg());
 
 		Update_TimeMinute(minute);
 	}
-	if(argIs("/TH"))
+	if (argIs("/TH"))
 	{
 		uint hour = toValue(nextArg());
 
 		Update_TimeHour(hour);
 	}
-	if(argIs("/TD"))
+	if (argIs("/TD"))
 	{
 		uint day = toValue(nextArg());
 

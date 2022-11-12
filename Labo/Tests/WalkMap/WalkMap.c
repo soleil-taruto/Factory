@@ -34,13 +34,13 @@ static void FindStartPos(void)
 
 	for(x = 0; x < Bmp_W; x++)
 	{
-		if(*DotAt(x, 0) == FIELD_COLOR)
+		if (*DotAt(x, 0) == FIELD_COLOR)
 		{
 			StartX = x;
 			StartY = 0;
 			return;
 		}
-		if(*DotAt(x, Bmp_H - 1) == FIELD_COLOR)
+		if (*DotAt(x, Bmp_H - 1) == FIELD_COLOR)
 		{
 			StartX = x;
 			StartY = Bmp_H - 1;
@@ -49,13 +49,13 @@ static void FindStartPos(void)
 	}
 	for(y = 0; y < Bmp_H; y++)
 	{
-		if(*DotAt(0, y) == FIELD_COLOR)
+		if (*DotAt(0, y) == FIELD_COLOR)
 		{
 			StartX = 0;
 			StartY = y;
 			return;
 		}
-		if(*DotAt(Bmp_W - 1, y) == FIELD_COLOR)
+		if (*DotAt(Bmp_W - 1, y) == FIELD_COLOR)
 		{
 			StartX = Bmp_W - 1;
 			StartY = y;
@@ -92,7 +92,7 @@ static void MakePaceMap(void)
 		uint x = desertElement(walkXPosList, 0);
 		uint y = desertElement(walkYPosList, 0);
 
-		if(
+		if (
 			x < Bmp_W &&
 			y < Bmp_H &&
 			*DotAt(x, y) == FIELD_COLOR &&
@@ -138,7 +138,7 @@ static void FUP_Paint(autoList_t *uaMap, uint x, uint y)
 		x = desertElement(xLst, 0);
 		y = desertElement(yLst, 0);
 
-		if(
+		if (
 			x < Bmp_W &&
 			y < Bmp_H &&
 			*getTablePoint(uaMap, x, y)
@@ -172,7 +172,7 @@ static void FindUnaccessPos(void)
 	for(x = 0; x < Bmp_W; x++)
 	for(y = 0; y < Bmp_H; y++)
 	{
-		if(*PaceAt(x, y) == UINTMAX && *DotAt(x, y) == FIELD_COLOR)
+		if (*PaceAt(x, y) == UINTMAX && *DotAt(x, y) == FIELD_COLOR)
 		{
 			*getTablePoint(uaMap, x, y) = 1;
 		}
@@ -180,7 +180,7 @@ static void FindUnaccessPos(void)
 	for(x = 0; x < Bmp_W; x++)
 	for(y = 0; y < Bmp_H; y++)
 	{
-		if(*getTablePoint(uaMap, x, y))
+		if (*getTablePoint(uaMap, x, y))
 		{
 			addElement(UnaccessXPosList, x);
 			addElement(UnaccessYPosList, y);
@@ -234,7 +234,7 @@ static void OPM_SetColorPerPace(void)
 	{
 		uint pace = *PaceAt(x, y);
 
-		if(pace != UINTMAX)
+		if (pace != UINTMAX)
 		{
 			m_maxim(maxPace, pace);
 		}
@@ -244,7 +244,7 @@ static void OPM_SetColorPerPace(void)
 }
 static uint OPM_PaceToColor(uint pace)
 {
-	if(pace == UINTMAX)
+	if (pace == UINTMAX)
 		return 0;
 
 	return getElement(OPM_ColorMap, (pace / OPM_ColorPerPace) % getCount(OPM_ColorMap));
@@ -319,12 +319,12 @@ LOGPOS();
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		WalkMap(c_dropFile());
 		return;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		WalkMap(nextArg());
 		return;

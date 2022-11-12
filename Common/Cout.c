@@ -12,7 +12,7 @@ static uint LogFileTime;
 
 static void CloseWrFP(void)
 {
-	if(WrFP)
+	if (WrFP)
 	{
 		fileClose(WrFP);
 		WrFP = NULL;
@@ -20,7 +20,7 @@ static void CloseWrFP(void)
 }
 void setCoutWrFile(char *file, char *mode)
 {
-	if(WrFP)
+	if (WrFP)
 	{
 		fileClose(WrFP);
 		WrFP = fileOpen(file, mode);
@@ -74,28 +74,28 @@ void cout(char *format, ...)
 {
 	va_list marker;
 
-	if(coutOff)
+	if (coutOff)
 		return;
 
 #if 0 // moved @ 2019.3.21
-	if(WrFP)
+	if (WrFP)
 	{
 		int ret;
 
 		va_start(marker, format);
 		ret = vfprintf(WrFP, format, marker);
 
-		if(ret < 0)
+		if (ret < 0)
 		{
 			error();
 		}
 		va_end(marker);
 
-		if(LogFileBase)
+		if (LogFileBase)
 		{
 			LogFileSize += ret;
 
-			if(LOGFILESIZE_MAX <= LogFileSize || LOGFILE_PERIOD <= now() - LogFileTime)
+			if (LOGFILESIZE_MAX <= LogFileSize || LOGFILE_PERIOD <= now() - LogFileTime)
 			{
 				fileClose(WrFP);
 				WrFP = NULL; // error(); ‘Îô
@@ -108,11 +108,11 @@ void cout(char *format, ...)
 	va_start(marker, format);
 
 #if 1
-	if(!strcmp(format, "%s"))
+	if (!strcmp(format, "%s"))
 	{
 		coutLongText(va_arg(marker, char *));
 	}
-	else if(!strcmp(format, "%s\n"))
+	else if (!strcmp(format, "%s\n"))
 	{
 		coutLongText(va_arg(marker, char *));
 		coutLongText("\n");
@@ -122,7 +122,7 @@ void cout(char *format, ...)
 		coutLongText_x(vxcout(format, marker));
 	}
 #else // del @ 2019.3.21
-	if(vprintf(format, marker) < 0)
+	if (vprintf(format, marker) < 0)
 	{
 		error();
 	}
@@ -156,7 +156,7 @@ char *vxcout(char *format, va_list marker)
 
 #undef MARGIN
 
-		if(0 <= ret && ret <= size)
+		if (0 <= ret && ret <= size)
 			break;
 
 		memFree(buffer);
@@ -208,7 +208,7 @@ void coutLongText(char *text)
 #define PRINT_LMT 98
 
 		for(q = p; *q && (uint)q - (uint)p < PRINT_LMT; q = mbsNext(q))
-			if(*q == '\r' || *q == '\n')
+			if (*q == '\r' || *q == '\n')
 				needFlush = 1;
 
 #undef PRINT_LMT
@@ -218,20 +218,20 @@ void coutLongText(char *text)
 		errorCase(sprintf(format, "%%.%us", d) < 0);
 		errorCase(printf(format, p) != d);
 	}
-	if(needFlush)
+	if (needFlush)
 		errorCase(fflush(stdout));
 
-	if(WrFP)
+	if (WrFP)
 	{
 		errorCase(fputs(text, WrFP) < 0);
 
-		if(LogFileBase)
+		if (LogFileBase)
 		{
 			uint textLen = (uint)q - (uint)p;
 
 			LogFileSize += textLen;
 
-			if(LOGFILESIZE_MAX <= LogFileSize || LOGFILE_PERIOD <= now() - LogFileTime)
+			if (LOGFILESIZE_MAX <= LogFileSize || LOGFILE_PERIOD <= now() - LogFileTime)
 			{
 				fileClose(WrFP);
 				WrFP = NULL; // error(); ‚É‚È‚Á‚Ä‚à‘‚«ž‚Ü‚È‚¢‚æ‚¤‚É

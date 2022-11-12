@@ -49,7 +49,7 @@ static void Progress_Wrap(void)
 
 	callcnt++;
 
-	if(eqIntPulseSec(1, NULL))
+	if (eqIntPulseSec(1, NULL))
 	{
 		cmdTitle_x(xcout("hget - %u (S:%I64u, R:%I64u)", callcnt, SockTotalSendSize, SockTotalRecvSize));
 		Progress();
@@ -83,104 +83,104 @@ int main(int argc, char **argv)
 	httpBlockTimeout = 180;
 
 readArgs:
-	if(argIs("/S")) // Server domain
+	if (argIs("/S")) // Server domain
 	{
 		serverDomain = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/P")) // server Port-no
+	if (argIs("/P")) // server Port-no
 	{
 		portno = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/PS")) // Proxy Server domain
+	if (argIs("/PS")) // Proxy Server domain
 	{
 		proxyServerDomain = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/PP")) // Proxy server Port-no
+	if (argIs("/PP")) // Proxy server Port-no
 	{
 		proxyPortno = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/R")) // Request path (and query)
+	if (argIs("/R")) // Request path (and query)
 	{
 		path = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/C")) // request Content (これを指定するとPOSTになる)
+	if (argIs("/C")) // request Content (これを指定するとPOSTになる)
 	{
 		content = readBinary(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/T")) // Timeout (接続してからのタイムアウト, 秒, 0 == 無制限)
+	if (argIs("/T")) // Timeout (接続してからのタイムアウト, 秒, 0 == 無制限)
 	{
 		timeout = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/BT")) // Block Timeout (無通信タイムアウト, 秒, 0 == 無通信)
+	if (argIs("/BT")) // Block Timeout (無通信タイムアウト, 秒, 0 == 無通信)
 	{
 		httpBlockTimeout = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/O")) // Output file
+	if (argIs("/O")) // Output file
 	{
 		outFile = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/RET")) // RETry (0でリトライ無し)
+	if (argIs("/RET")) // RETry (0でリトライ無し)
 	{
 		retrycnt = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/J")) // 受信データを表示するとき日本語も読めるようにする。但し SJIS じゃないと駄目だし JIS0208.txt が必要、あんま意味ないかもね。
+	if (argIs("/J")) // 受信データを表示するとき日本語も読めるようにする。但し SJIS じゃないと駄目だし JIS0208.txt が必要、あんま意味ないかもね。
 	{
 		jflag = 1;
 		goto readArgs;
 	}
-	if(argIs("/J8")) // 表示データを表示する。utf-8
+	if (argIs("/J8")) // 表示データを表示する。utf-8
 	{
 		jflag = 1;
 		jflag_utf8 = 1;
 		goto readArgs;
 	}
-	if(argIs("/RSX")) // Recv content Size maX
+	if (argIs("/RSX")) // Recv content Size maX
 	{
 		httpMultiPartContentLenMax = toValue(nextArg()); // デフォルトは 2G くらい。
 		goto readArgs;
 	}
-	if(argIs("/RTX")) // Recv content (output file) Text filter line-length maX
+	if (argIs("/RTX")) // Recv content (output file) Text filter line-length maX
 	{
 		outFileTextFltrLineLenMax = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/H")) // 拡張ヘッダフィールド
+	if (argIs("/H")) // 拡張ヘッダフィールド
 	{
 		httpExtraHeader = readLines(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/-M4U")) // m4uサーバーモードoff
+	if (argIs("/-M4U")) // m4uサーバーモードoff
 	{
 		httpM4UServerMode = 0;
 		goto readArgs;
 	}
-	if(argIs("/HH")) // 受信ヘッダを表示する。
+	if (argIs("/HH")) // 受信ヘッダを表示する。
 	{
 		httpRecvedHeader = newList();
 		goto readArgs;
 	}
-	if(argIs("/HHO")) // 受信ヘッダをファイルに保存する。
+	if (argIs("/HHO")) // 受信ヘッダをファイルに保存する。
 	{
 		httpRecvedHeader = newList();
 		hdrOutFile = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/M")) // 排他的に実行する。
+	if (argIs("/M")) // 排他的に実行する。
 	{
 		mtxFlag = 1;
 		goto readArgs;
 	}
-	if(argIs("/L")) // BlueFish 内のバッチ用
+	if (argIs("/L")) // BlueFish 内のバッチ用
 	{
 		cout("#### LITE MODE ####\n");
 		sockConnectTimeoutSec = 5;
@@ -194,42 +194,42 @@ readArgs:
 		httpRecvedHeader = newList();
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		char *p;
 
 		serverDomain = strx(nextArg());
 
-		if(startsWith(serverDomain, "http://"))
+		if (startsWith(serverDomain, "http://"))
 			eraseLine(serverDomain, 7);
 
-		if(p = strchr(serverDomain, '/'))
+		if (p = strchr(serverDomain, '/'))
 		{
 			path = strx(p);
 			*p = '\0';
 		}
-		if(p = strchr(serverDomain, ':'))
+		if (p = strchr(serverDomain, ':'))
 		{
 			portno = toValue(p + 1);
 			*p = '\0';
 		}
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 		outFile = nextArg();
 
-	if(!path)
+	if (!path)
 		path = "/";
 
-	if(outFile)
+	if (outFile)
 	{
-		if(*outFile == '*')
+		if (*outFile == '*')
 			outFile = NULL;
 	}
 	else
 	{
 		char *p = strrchr(path, '/');
 
-		if(p)
+		if (p)
 			p++;
 		else
 			p = outFile;
@@ -237,19 +237,19 @@ readArgs:
 		outFile = getOutFile(lineToFairLocalPath(p, 50));
 		outputAndOpenOutDir = 1;
 	}
-	if(outFile)
+	if (outFile)
 		remove(outFile);
 
 retry:
 	lastStartTime = now();
 
-	if(httpRecvedHeader)
+	if (httpRecvedHeader)
 	{
 		releaseDim(httpRecvedHeader, 1);
 		httpRecvedHeader = newList();
 	}
 
-	if(mtxFlag)
+	if (mtxFlag)
 	{
 		LOGPOS();
 		mtx = mutexLock(MUTEX_ID);
@@ -270,7 +270,7 @@ retry:
 
 	LOGPOS();
 
-	if(mtxFlag)
+	if (mtxFlag)
 	{
 		LOGPOS();
 		mutexUnlock(mtx);
@@ -279,9 +279,9 @@ retry:
 
 	cmdTitle("hget - done");
 
-	if(retval)
+	if (retval)
 	{
-		if(httpRecvedHeader)
+		if (httpRecvedHeader)
 		{
 			char *rh_line;
 			uint rh_index;
@@ -293,23 +293,23 @@ retry:
 
 			cout("★受信ヘッダここまで\n");
 
-			if(hdrOutFile)
+			if (hdrOutFile)
 				writeLines(hdrOutFile, httpRecvedHeader);
 
 			releaseDim(httpRecvedHeader, 1);
 			httpRecvedHeader = NULL;
 		}
-		if(outFile)
+		if (outFile)
 		{
-			if(existFile(outFile))
+			if (existFile(outFile))
 				removeFile(outFile);
 
 			moveFile(resFile, outFile);
 
-			if(outFileTextFltrLineLenMax)
+			if (outFileTextFltrLineLenMax)
 				TextFltr(outFile, outFileTextFltrLineLenMax);
 
-			if(outputAndOpenOutDir)
+			if (outputAndOpenOutDir)
 				openOutDir();
 		}
 		else
@@ -323,9 +323,9 @@ retry:
 			{
 				char *pLine;
 
-				if(jflag)
+				if (jflag)
 				{
-					if(jflag_utf8)
+					if (jflag_utf8)
 					{
 						char *tmpfile = makeTempPath("utf");
 
@@ -356,7 +356,7 @@ retry:
 	{
 		cout("失敗しました。\n");
 
-		if(retrycnt)
+		if (retrycnt)
 		{
 			cout("あと %u 回リトライします。\n", retrycnt);
 			retrycnt--;

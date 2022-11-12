@@ -23,18 +23,18 @@ static char *B_ReadLine(FILE *fp)
 	{
 		int chr = readChar(fp);
 
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
-		if(0x20 <= chr && chr <= 0x7e && chr != '\\')
+		if (0x20 <= chr && chr <= 0x7e && chr != '\\')
 			ab_addChar(buff, chr);
 		else
 			ab_addLine_x(buff, xcout("\\x%02x", chr));
 
-		if(chr == '\n')
+		if (chr == '\n')
 			break;
 	}
-	if(!getSize(buff))
+	if (!getSize(buff))
 	{
 		releaseAutoBlock(buff);
 		return NULL;
@@ -67,10 +67,10 @@ static void CheckDiffFile(char *file1, char *file2, char *cmnRelPath)
 		char *line1 = (char *)refElement(lines1, index);
 		char *line2 = (char *)refElement(lines2, index);
 
-		if(!line1 || !line2 || strcmp(line1, line2))
+		if (!line1 || !line2 || strcmp(line1, line2))
 		{
-			if(line1) Report_Ent_x(xcout("\t< %05u [%s]", index + 1, line1));
-			if(line2) Report_Ent_x(xcout("\t> %05u [%s]", index + 1, line2));
+			if (line1) Report_Ent_x(xcout("\t< %05u [%s]", index + 1, line1));
+			if (line2) Report_Ent_x(xcout("\t> %05u [%s]", index + 1, line2));
 		}
 	}
 	releaseDim(lines1, 1);
@@ -148,7 +148,7 @@ LOGPOS();
 			char *file1 = combine(rootDir1, file);
 			char *file2 = combine(rootDir2, file);
 
-			if(isSameFile(file1, file2))
+			if (isSameFile(file1, file2))
 			{
 				Report(file, "");
 			}
@@ -181,7 +181,7 @@ int main(int argc, char **argv)
 	ReportLines = newList();
 	ReportLines_Ent = newList();
 
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		Main2(getArg(0), getArg(1));
 	}

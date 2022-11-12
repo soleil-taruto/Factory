@@ -24,12 +24,12 @@ static void DoOrderStamp(void)
 
 	eraseParents(files);
 
-	if(CaseSensitiveFlag)
+	if (CaseSensitiveFlag)
 		rapidSortLines(files);
 	else
 		sortJLinesICase(files);
 
-	if(ReverseFlag)
+	if (ReverseFlag)
 		reverseElements(files);
 
 	t = time(NULL) - getCount(files);
@@ -50,12 +50,12 @@ static void DoOrderStamp(void)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		ReverseFlag = 1;
 		goto readArgs;
 	}
-	if(argIs("/-I"))
+	if (argIs("/-I"))
 	{
 		CaseSensitiveFlag =1;
 		goto readArgs;

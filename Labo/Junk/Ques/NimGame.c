@@ -24,21 +24,21 @@ static int IsWin(uint a, uint b, uint c)
 	/*
 		a <= b <= c
 	*/
-	if(c < a) m_swap(c, a, uint);
-	if(c < b) m_swap(c, b, uint);
-	if(b < a) m_swap(b, a, uint);
+	if (c < a) m_swap(c, a, uint);
+	if (c < b) m_swap(c, b, uint);
+	if (b < a) m_swap(b, a, uint);
 
 	win = WinCube[a][b][c];
 
-	if(!win)
+	if (!win)
 	{
 		uint n;
 
 		win = 2;
 
-		for(n = 0; n < a; n++) if(!IsWin(n, b, c)) goto foundNoWin;
-		for(n = 0; n < b; n++) if(!IsWin(a, n, c)) goto foundNoWin;
-		for(n = 0; n < c; n++) if(!IsWin(a, b, n)) goto foundNoWin;
+		for(n = 0; n < a; n++) if (!IsWin(n, b, c)) goto foundNoWin;
+		for(n = 0; n < b; n++) if (!IsWin(a, n, c)) goto foundNoWin;
+		for(n = 0; n < c; n++) if (!IsWin(a, b, n)) goto foundNoWin;
 
 		win = 1;
 foundNoWin:
@@ -62,7 +62,7 @@ int main(int argc, char **argv)
 	for(b = a; b < TALLLMT; b++)
 	for(c = b; c < TALLLMT; c++)
 	{
-		if(!IsWin(a, b, c))
+		if (!IsWin(a, b, c))
 			cout("%2u %2u %2u\n", a, b, c);
 	}
 }

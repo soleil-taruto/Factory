@@ -5,13 +5,13 @@ int main(int argc, char **argv)
 	char *name = "abc";
 
 readArgs:
-	if(argIs("/N"))
+	if (argIs("/N"))
 	{
 		name = nextArg();
 		goto readArgs;
 	}
 
-	if(argIs("/K"))
+	if (argIs("/K"))
 	{
 		uint mtx;
 
@@ -28,7 +28,7 @@ readArgs:
 		LOGPOS();
 		return;
 	}
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		uint millis = toValue(nextArg());
 		uint mtx;

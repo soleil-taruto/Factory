@@ -8,7 +8,7 @@ static void RemoveEx(autoList_t *paths)
 	uint index;
 	char *destDir;
 
-	if(!ForceMode)
+	if (!ForceMode)
 	{
 		foreach(paths, path, index)
 		{
@@ -16,7 +16,7 @@ static void RemoveEx(autoList_t *paths)
 		}
 		cout("çÌèúÅH\n");
 
-		if(clearGetKey() == 0x1b)
+		if (clearGetKey() == 0x1b)
 			termination(1);
 	}
 	destDir = makeFreeDir();
@@ -30,7 +30,7 @@ static void RemoveEx(autoList_t *paths)
 		cout("< %s\n", path);
 		cout("> %s\n", destPath);
 
-		if(existDir(path))
+		if (existDir(path))
 		{
 			createDir(destPath);
 			moveDir(path, destPath);
@@ -47,7 +47,7 @@ int main(int argc, char **argv)
 {
 	autoList_t *files;
 
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		ForceMode = 1;
 	}

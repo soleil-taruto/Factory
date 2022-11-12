@@ -8,7 +8,7 @@ int main(int argc, char **argv)
 	{
 		int chr = readChar(stdin);
 
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
 		cout("%c", chr);

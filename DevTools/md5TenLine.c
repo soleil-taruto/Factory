@@ -35,7 +35,7 @@ int main(int argc, char **argv)
 	char *file;
 	uint index;
 
-	if(existFile(path))
+	if (existFile(path))
 	{
 		files = newList();
 		addElement(files, (uint)strx(path));

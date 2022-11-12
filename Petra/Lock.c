@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 
 	cout("ロックファイル：%s\n", lockingFile);
 
-	if(argIs("LOCK"))
+	if (argIs("LOCK"))
 	{
 		cout("ロックしています...\n");
 		LOGPOS_T();
@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 
 			mutex();
 			{
-				if(!existFile(lockingFile))
+				if (!existFile(lockingFile))
 				{
 					createFile(lockingFile);
 					locked = 1;
@@ -31,7 +31,7 @@ int main(int argc, char **argv)
 			}
 			unmutex();
 
-			if(locked)
+			if (locked)
 				break;
 
 			sleep(2000);
@@ -39,7 +39,7 @@ int main(int argc, char **argv)
 		LOGPOS_T();
 		cout("ロックしました。\n");
 	}
-	else if(argIs("UNLOCK"))
+	else if (argIs("UNLOCK"))
 	{
 		cout("ロック解除しています...\n");
 

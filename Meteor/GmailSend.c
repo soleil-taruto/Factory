@@ -4,7 +4,7 @@ static char *GetGmailSendExeFile(void)
 {
 	static char *file;
 
-	if(!file)
+	if (!file)
 		file = GetCollaboFile("C:\\app\\Kit\\GmailSend\\GmailSend.exe");
 
 	return file;
@@ -30,7 +30,7 @@ static void INIT(void)
 	{
 		static int passed;
 
-		if(passed)
+		if (passed)
 			return;
 
 		passed = 1;
@@ -194,17 +194,17 @@ int GS_TrySend(void) // ret: ? ê¨å˜
 		writeLine(prmFp, "/A");
 		writeLine(prmFp, line);
 	}
-	if(From)
+	if (From)
 	{
 		writeLine(prmFp, "/F");
 		writeLine(prmFp, From);
 	}
-	if(Subject)
+	if (Subject)
 	{
 		writeLine(prmFp, "/S");
 		writeLine(prmFp, Subject);
 	}
-	if(Body)
+	if (Body)
 	{
 		bodyFile = makeTempPath("gsBody.tmp");
 		writeOneLineNoRet_b(bodyFile, Body);
@@ -212,23 +212,23 @@ int GS_TrySend(void) // ret: ? ê¨å˜
 		writeLine(prmFp, "/B");
 		writeLine(prmFp, bodyFile);
 	}
-	if(User && Password)
+	if (User && Password)
 	{
 		writeLine(prmFp, "/C");
 		writeLine(prmFp, User);
 		writeLine(prmFp, Password);
 	}
-	if(Host)
+	if (Host)
 	{
 		writeLine(prmFp, "/Host");
 		writeLine(prmFp, Host);
 	}
-	if(Port)
+	if (Port)
 	{
 		writeLine(prmFp, "/Port");
 		writeLine_x(prmFp, xcout("%u", Port));
 	}
-	if(SSLDisabled)
+	if (SSLDisabled)
 		writeLine(prmFp, "/-SSL");
 
 	writeLine(prmFp, "/SF");
@@ -257,28 +257,28 @@ int GS_TrySend(void) // ret: ? ê¨å˜
 	foreach(Attachments, line, index)
 		cmdLine = addLine_x(cmdLine, xcout(" /A \"%s\"", line));
 
-	if(From)
+	if (From)
 		cmdLine = addLine_x(cmdLine, xcout(" /F \"%s\"", From));
 
-	if(Subject)
+	if (Subject)
 		cmdLine = addLine_x(cmdLine, xcout(" /S \"%s\"", Subject));
 
-	if(Body)
+	if (Body)
 	{
 		bodyFile = makeTempPath("gsBody.tmp");
 		writeOneLineNoRet_b(bodyFile, Body);
 		cmdLine = addLine_x(cmdLine, xcout(" /B \"*%s\"", bodyFile));
 	}
-	if(User && Password)
+	if (User && Password)
 		cmdLine = addLine_x(cmdLine, xcout(" /C \"%s\" \"%s\"", User, Password));
 
-	if(Host)
+	if (Host)
 		cmdLine = addLine_x(cmdLine, xcout(" /Host \"%s\"", Host));
 
-	if(Port)
+	if (Port)
 		cmdLine = addLine_x(cmdLine, xcout(" /Port %u", Port));
 
-	if(SSLDisabled)
+	if (SSLDisabled)
 		cmdLine = addLine(cmdLine, " /-SSL");
 
 	cmdLine = addLine_x(cmdLine, xcout(" /SF \"%s\"", successfulFile));
@@ -287,7 +287,7 @@ int GS_TrySend(void) // ret: ? ê¨å˜
 	coExecute(cmdLine);
 #endif
 
-	if(existFile(successfulFile))
+	if (existFile(successfulFile))
 	{
 		retval = 1;
 		removeFile(successfulFile);
@@ -295,7 +295,7 @@ int GS_TrySend(void) // ret: ? ê¨å˜
 	else
 		retval = 0;
 
-	if(existFile(errorLogFile))
+	if (existFile(errorLogFile))
 	{
 		char *errorLog = readText_b(errorLogFile);
 
@@ -306,7 +306,7 @@ int GS_TrySend(void) // ret: ? ê¨å˜
 		memFree(errorLog);
 		removeFile(errorLogFile);
 	}
-	if(bodyFile)
+	if (bodyFile)
 	{
 		removeFile(bodyFile);
 		memFree(bodyFile);
@@ -333,7 +333,7 @@ int GS_Send(void) // ret: ? ê¨å˜
 	{
 		cout("GS_Send_retry: %d\n", retry);
 
-		if(GS_TrySend())
+		if (GS_TrySend())
 		{
 			cout("+----------+\n");
 			cout("| ëóêMê¨å˜ |\n");

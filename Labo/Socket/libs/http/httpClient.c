@@ -23,15 +23,15 @@ int httpGetOrPostFile(char *url, autoBlock_t *sendBody, char *recvBodyFile) // s
 //	sendBody
 	errorCase(m_isEmpty(recvBodyFile));
 
-	if(!*url)
+	if (!*url)
 		return 0;
 
 	domain = strx(url);
 
-	if(startsWith(domain, "http://"))
+	if (startsWith(domain, "http://"))
 		eraseLine(domain, 7);
 
-	if(p = strchr(domain, '/'))
+	if (p = strchr(domain, '/'))
 	{
 		path = strx(p);
 		*p = '\0';
@@ -39,7 +39,7 @@ int httpGetOrPostFile(char *url, autoBlock_t *sendBody, char *recvBodyFile) // s
 	else
 		path = strx("/");
 
-	if(p = strchr(domain, ':'))
+	if (p = strchr(domain, ':'))
 	{
 		portNo = toValue(p + 1);
 		*p = '\0';
@@ -69,7 +69,7 @@ int httpGetOrPostFile(char *url, autoBlock_t *sendBody, char *recvBodyFile) // s
 			recvBodyFile
 			);
 
-		if(ret)
+		if (ret)
 			break;
 
 		coSleep(httpGetOrPostRetryDelayMillis);
@@ -91,7 +91,7 @@ autoBlock_t *httpGetOrPost(char *url, autoBlock_t *sendBody) // sendBody: NULL =
 
 	recvBodyFile = makeTempPath(NULL);
 
-	if(httpGetOrPostFile(url, sendBody, recvBodyFile))
+	if (httpGetOrPostFile(url, sendBody, recvBodyFile))
 	{
 		recvBody = readBinary(recvBodyFile);
 		removeFile(recvBodyFile);

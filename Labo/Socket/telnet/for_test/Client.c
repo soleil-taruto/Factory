@@ -18,25 +18,25 @@ static void Perform(int sock)
 	FILE *wfp = NULL;
 	uint timeout = TimeoutSec ? TimeoutSec + now() : 0;
 
-	if(SendFile)
+	if (SendFile)
 	{
 		ab_addBytes_x(sq, readBinary(SendFile));
 	}
-	if(SendData)
+	if (SendData)
 	{
 		ab_addBytes(sq, SendData);
 	}
-	if(RecvFile)
+	if (RecvFile)
 	{
 		wfp = fileOpen(RecvFile, "wb");
 	}
 	while(!timeout || now() < timeout)
 	{
-		if(getSize(rq))
+		if (getSize(rq))
 		{
 			char *line;
 
-			if(wfp)
+			if (wfp)
 				writeBinaryBlock(wfp, rq);
 
 			line = unbindBlock2Line(rq);
@@ -48,14 +48,14 @@ static void Perform(int sock)
 			rq = newBlock();
 		}
 
-		if(SockRecvSequ(sock, rq, 1) == -1)
+		if (SockRecvSequ(sock, rq, 1) == -1)
 			break;
 
-		if(SockSendSequ(sock, sq, 0) == -1)
+		if (SockSendSequ(sock, sq, 0) == -1)
 			break;
 
-		if(hasKey())
-//		if(sock_hasKey())
+		if (hasKey())
+//		if (sock_hasKey())
 		{
 			int chr;
 
@@ -63,10 +63,10 @@ static void Perform(int sock)
 			chr = getKey();
 			cmdTitle("Client");
 
-			if(chr == 0x1b)
+			if (chr == 0x1b)
 				break;
 
-			if(chr == 'I')
+			if (chr == 'I')
 			{
 				cmdTitle("Client - Input");
 
@@ -78,7 +78,7 @@ static void Perform(int sock)
 
 				cmdTitle("Client");
 			}
-			if(chr == 'i')
+			if (chr == 'i')
 			{
 				cmdTitle("Client - Input (no cr-lf)");
 
@@ -91,7 +91,7 @@ static void Perform(int sock)
 	releaseAutoBlock(rq);
 	releaseAutoBlock(sq);
 
-	if(wfp)
+	if (wfp)
 	{
 		fileClose(wfp);
 	}
@@ -103,32 +103,32 @@ int main(int argc, char **argv)
 	uint portno = 23;
 
 readArgs:
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		SendFile = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/I"))
+	if (argIs("/I"))
 	{
 		SendData = inputTextAsBinary();
 		goto readArgs;
 	}
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		RecvFile = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		TimeoutSec = toValue(nextArg());
 		goto readArgs;
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		domain = nextArg();
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		portno = toValue(nextArg());
 	}

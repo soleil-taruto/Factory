@@ -30,7 +30,7 @@ static void E_Fltr(char *path)
 {
 	char *ext = getExt(path);
 
-	if(lineExp("<1,,09AZaz>_", ext))
+	if (lineExp("<1,,09AZaz>_", ext))
 	{
 		char *newPath = strx(path);
 
@@ -53,22 +53,22 @@ int main(int argc, char **argv)
 	int b_mode = 0;
 
 readArgs:
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		force_mode = 1;
 		goto readArgs;
 	}
-	if(argIs("/M") || argIs("/R"))
+	if (argIs("/M") || argIs("/R"))
 	{
 		move_mode = 1;
 		goto readArgs;
 	}
-	if(argIs("/EF"))
+	if (argIs("/EF"))
 	{
 		ef_mode = 1;
 		goto readArgs;
 	}
-	if(argIs("/B"))
+	if (argIs("/B"))
 	{
 		b_mode = 1;
 		goto readArgs;
@@ -87,20 +87,20 @@ readArgs:
 	srcPath  = makeFullPath(srcPath);
 	destPath = makeFullPath(destPath);
 
-	if(b_mode)
+	if (b_mode)
 		destPath = addLocal(destPath, getLocal(srcPath));
 
 	cout("< %s\n", srcPath);
 	cout("> %s\n", destPath);
 
-	if(existPath(destPath))
+	if (existPath(destPath))
 	{
-		if(!force_mode)
+		if (!force_mode)
 		{
 			cout("コピー先が存在します。\n");
 			cout("削除？\n");
 
-			if(clearGetKey() == 0x1b)
+			if (clearGetKey() == 0x1b)
 				termination(0);
 
 			cout("削除します。\n");
@@ -108,11 +108,11 @@ readArgs:
 		recurRemovePath(destPath);
 	}
 
-	if(existFile(srcPath))
+	if (existFile(srcPath))
 	{
 		createPath(destPath, 'X');
 
-		if(move_mode)
+		if (move_mode)
 		{
 			moveFile(srcPath, destPath);
 		}
@@ -126,7 +126,7 @@ readArgs:
 		errorCase(!existDir(srcPath));
 		createPath(destPath, 'D');
 
-		if(move_mode)
+		if (move_mode)
 		{
 			moveDir(srcPath, destPath);
 			removeDir(srcPath);
@@ -137,11 +137,11 @@ readArgs:
 		}
 	}
 
-	if(ef_mode)
+	if (ef_mode)
 	{
 		cout("ef=%s\n", destPath);
 
-		if(existFile(destPath))
+		if (existFile(destPath))
 		{
 			E_Fltr(destPath);
 		}

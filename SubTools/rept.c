@@ -26,7 +26,7 @@ static void RepText_Main(char *rFile, char *wFile)
 }
 static void RepText(char *rFile, char *wFile)
 {
-	if(ForceMode || !existFile(wFile))
+	if (ForceMode || !existFile(wFile))
 	{
 		RepText_Main(rFile, wFile);
 	}
@@ -36,7 +36,7 @@ static void RepText(char *rFile, char *wFile)
 
 		RepText_Main(rFile, midFile);
 
-		if(isSameFile(midFile, wFile)) // ? 同じ -> 適用不要
+		if (isSameFile(midFile, wFile)) // ? 同じ -> 適用不要
 		{
 			cout("SKIP!\n");
 			removeFile(midFile);
@@ -55,17 +55,17 @@ int main(int argc, char **argv)
 	DestPtns = newList();
 
 readArgs:
-	if(argIs("/F")) // Force mode
+	if (argIs("/F")) // Force mode
 	{
 		ForceMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/I")) // Ignore case
+	if (argIs("/I")) // Ignore case
 	{
 		IgnoreCaseFlag = 1;
 		goto readArgs;
 	}
-	if(argIs("/P")) // Pair
+	if (argIs("/P")) // Pair
 	{
 		addElement(FindPtns, (uint)nextArg());
 		addElement(DestPtns, (uint)nextArg());

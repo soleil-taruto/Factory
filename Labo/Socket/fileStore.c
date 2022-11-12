@@ -76,7 +76,7 @@ static void L2AsciiFile(char *file)
 #if 0
 	line2fsym(file);
 #else
-	if(!lineExp("<1,,-.__09AZaz>", file) ||
+	if (!lineExp("<1,,-.__09AZaz>", file) ||
 		lineExp(".<>", file) ||
 		lineExp("<>.", file) ||
 		lineExp("<>..<>", file))
@@ -85,7 +85,7 @@ static void L2AsciiFile(char *file)
 
 		line2csym(file);
 
-		if(file < xp && xp[1])
+		if (file < xp && xp[1])
 		{
 			*xp = '.';
 		}
@@ -305,7 +305,7 @@ static void PerformTh(int sock, char *strip)
 		memFree(jh);
 	}
 
-	if(!_stricmp(c_httpGetPartLine(parts, "upload"), "upload"))
+	if (!_stricmp(c_httpGetPartLine(parts, "upload"), "upload"))
 	{
 		httpPart_t *part = httpGetPart(parts, "file");
 		char *upfile;
@@ -318,21 +318,21 @@ static void PerformTh(int sock, char *strip)
 
 		cout("[%d] upfile: %s\n", sock, upfile);
 
-		if(!strcmp(upfile, "_") || !_stricmp(upfile, FAVICON_FILE)) // ? ファイルリスト取得時と一緒になってしまうので "_" は回避 + favicon アップ禁止
+		if (!strcmp(upfile, "_") || !_stricmp(upfile, FAVICON_FILE)) // ? ファイルリスト取得時と一緒になってしまうので "_" は回避 + favicon アップ禁止
 		{
 			upfile[0] = '$';
 		}
-		if(IsAbnormalExt(getExt(upfile)))
+		if (IsAbnormalExt(getExt(upfile)))
 		{
 			upfile = addChar(upfile, '_');
 		}
 		upfile = combine_cx(UploadDir, upfile);
 
-		if(getFileSize(part->BodyFile) != 0) // 0 バイトは除外 <- (アップロード連打, Overflow) 対策を兼ねる。
+		if (getFileSize(part->BodyFile) != 0) // 0 バイトは除外 <- (アップロード連打, Overflow) 対策を兼ねる。
 		{
 			errorCase(FileLock); // ここまで到達しない。
 
-			if(existPath(upfile)) // ファイル名が被ったら、既存のファイルを退避する。
+			if (existPath(upfile)) // ファイル名が被ったら、既存のファイルを退避する。
 			{
 				char *escfile = strx(upfile);
 
@@ -377,21 +377,21 @@ static void PerformTh(int sock, char *strip)
 
 		httpDecodeHeaderFree(&dec);
 
-		if(lastLPath[0] == '*') // ? 特殊コマンド
+		if (lastLPath[0] == '*') // ? 特殊コマンド
 		{
 			autoList_t *specOpts = tokenize(lastLPath + 1, ':');
 
 			dlfile = NULL;
 
-			if(getCount(specOpts))
+			if (getCount(specOpts))
 			{
 				char *specCmd = (char *)desertElement(specOpts, 0);
 
-				if(FileLock)
+				if (FileLock)
 				{
 					dlfile = MakeRefreshHtmlFile("全てのファイルはロックされています。");
 				}
-				else if(!_stricmp(specCmd, "rename") && getCount(specOpts) == 2) // 名前の変更
+				else if (!_stricmp(specCmd, "rename") && getCount(specOpts) == 2) // 名前の変更
 				{
 					char *file1 = refLine(specOpts, 0);
 					char *file2 = refLine(specOpts, 1);
@@ -399,14 +399,14 @@ static void PerformTh(int sock, char *strip)
 					file1 = lineToFairLocalPath(file1, strlen(UploadDir));
 					file2 = lineToFairLocalPath(file2, strlen(UploadDir));
 
-					if(!strcmp(file2, "_") || !_stricmp(file2, FAVICON_FILE)) // 回避
+					if (!strcmp(file2, "_") || !_stricmp(file2, FAVICON_FILE)) // 回避
 					{
 						file2[0] = '$';
 					}
 					file1 = combine_cx(UploadDir, file1);
 					file2 = combine_cx(UploadDir, file2);
 
-					if(existFile(file1) && !existPath(file2))
+					if (existFile(file1) && !existPath(file2))
 					{
 						moveFile(file1, file2);
 						dlfile = MakeRefreshHtmlFile("名前を変更しました。");
@@ -414,17 +414,17 @@ static void PerformTh(int sock, char *strip)
 					memFree(file1);
 					memFree(file2);
 				}
-				else if(!_stricmp(specCmd, "remove") && getCount(specOpts) == 1) // rename に似てるから駄目
+				else if (!_stricmp(specCmd, "remove") && getCount(specOpts) == 1) // rename に似てるから駄目
 				{
 					dlfile = MakeRefreshHtmlFile("remove -> delete");
 				}
-				else if(!_stricmp(specCmd, "delete") && getCount(specOpts) == 1) // ファイル削除
+				else if (!_stricmp(specCmd, "delete") && getCount(specOpts) == 1) // ファイル削除
 				{
 					char *killfile = refLine(specOpts, 0);
 
 					killfile = combine_cx(UploadDir, lineToFairLocalPath(killfile, strlen(UploadDir)));
 
-					if(existFile(killfile))
+					if (existFile(killfile))
 					{
 						removeFile(killfile);
 						dlfile = MakeRefreshHtmlFile("ファイルを削除しました。");
@@ -435,7 +435,7 @@ static void PerformTh(int sock, char *strip)
 			}
 			releaseDim(specOpts, 1);
 
-			if(!dlfile)
+			if (!dlfile)
 				dlfile = MakeRefreshHtmlFile("コマンドエラー、何も実行しませんでした。");
 
 			SetSockStreamTimeout(i, 30);
@@ -446,7 +446,7 @@ static void PerformTh(int sock, char *strip)
 
 			upfile = combine_cx(UploadDir, upfile);
 
-			if(existFile(upfile))
+			if (existFile(upfile))
 			{
 				char *savefile = getLocal(upfile);
 
@@ -454,7 +454,7 @@ static void PerformTh(int sock, char *strip)
 				L2AsciiFile(savefile);
 				i->Extra.SaveFile = savefile;
 
-				if(!FileLock)
+				if (!FileLock)
 				{
 					dlfile = makeTempPath(getExt(upfile));
 					copyFile(upfile, dlfile);
@@ -480,7 +480,7 @@ static void PerformTh(int sock, char *strip)
 	memFree(i->Extra.ServerName);
 	i->Extra.ServerName = NULL;
 
-	if(!dlfilekeep)
+	if (!dlfilekeep)
 		removeFile(dlfile);
 	else
 		cout("keep: %s\n", dlfile);
@@ -489,7 +489,7 @@ static void PerformTh(int sock, char *strip)
 	memFree(header);
 	httpReleaseParts(parts);
 
-	if(i->Extra.SaveFile)
+	if (i->Extra.SaveFile)
 	{
 		memFree(i->Extra.SaveFile);
 		i->Extra.SaveFile = NULL;
@@ -502,7 +502,7 @@ static int IdleTh(void)
 {
 	while(hasKey())
 	{
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 		{
 			return 0;
 		}
@@ -518,69 +518,69 @@ int main(int argc, char **argv)
 	httpMultiPartContentLenMax = DEF_UPLOADFILESIZEMAX;
 
 readArgs:
-	if(argIs("/T")) // Title
+	if (argIs("/T")) // Title
 	{
 		Title = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/FC")) // Fore Color
+	if (argIs("/FC")) // Fore Color
 	{
 		ForeColor = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/F")) // fore color File
+	if (argIs("/F")) // fore color File
 	{
 		ForeColorFile = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/B")) // Back color
+	if (argIs("/B")) // Back color
 	{
 		BackColor = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/S")) // Submit text
+	if (argIs("/S")) // Submit text
 	{
 		SubmitText = nextArg();
 		goto readArgs;
 	}
 
-	if(argIs("/UX")) // Upload dir size maX
+	if (argIs("/UX")) // Upload dir size maX
 	{
 		UploadDirSizeMax = toValue64(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/UFX")) // Upload File size maX
+	if (argIs("/UFX")) // Upload File size maX
 	{
 		httpMultiPartContentLenMax = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/UD")) // Upload Dir
+	if (argIs("/UD")) // Upload Dir
 	{
 		UploadDir = nextArg();
 		goto readArgs;
 	}
 
-	if(argIs("/P")) // Port
+	if (argIs("/P")) // Port
 	{
 		portno = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/C")) // Connect max
+	if (argIs("/C")) // Connect max
 	{
 		connectmax = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/TO")) // Time-Out
+	if (argIs("/TO")) // Time-Out
 	{
 		Timeout = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/L")) // File lock
+	if (argIs("/L")) // File lock
 	{
 		FileLock = 1;
 		goto readArgs;
 	}
-	if(argIs("/H")) // File lock
+	if (argIs("/H")) // File lock
 	{
 		httpRecvRequestHostValue = nextArg();
 		goto readArgs;
@@ -588,10 +588,10 @@ readArgs:
 
 	cmdTitle_x(xcout("fileStore %u (%s)", portno, httpRecvRequestHostValue ? httpRecvRequestHostValue : "*"));
 
-	if(FileLock)
+	if (FileLock)
 		httpMultiPartContentLenMax = 0;
 
-	if(UploadDir)
+	if (UploadDir)
 	{
 		UploadDir = makeFullPath(UploadDir);
 

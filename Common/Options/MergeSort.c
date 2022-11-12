@@ -16,10 +16,10 @@ static sint CompReader(uint v1, uint v2)
 	Reader_t *r1 = (Reader_t *)v1;
 	Reader_t *r2 = (Reader_t *)v2;
 
-	if(!r1->Element)
+	if (!r1->Element)
 		return r2->Element ? 1 : 0;
 
-	if(!r2->Element)
+	if (!r2->Element)
 		return -1;
 
 	return CR_Comp(r1->Element, r2->Element);
@@ -105,7 +105,7 @@ static void MergePart(
 		{
 			Reader_t *r = (Reader_t *)getElement(readers, 0);
 
-			if(!r->Element)
+			if (!r->Element)
 				break;
 
 			writeElement_x(wfp, r->Element);
@@ -113,7 +113,7 @@ static void MergePart(
 
 			for(index = 1; index < readerCount; index++)
 			{
-				if(CompReader(getElement(readers, index - 1), getElement(readers, index)) <= 0)
+				if (CompReader(getElement(readers, index - 1), getElement(readers, index)) <= 0)
 					break;
 
 				swapElement(readers, index - 1, index);
@@ -128,7 +128,7 @@ static void MergePart(
 		}
 		releaseAutoList(readers);
 
-		if(rIndex == wIndex)
+		if (rIndex == wIndex)
 			break;
 
 		wIndex++;
@@ -188,7 +188,7 @@ void MergeSort(
 	uint64 startPos = 0;
 	uint64 totalRecordWeightSize = 0;
 
-	if(textMode)
+	if (textMode)
 	{
 		rMode = "rt";
 		wMode = "wt";
@@ -207,13 +207,13 @@ void MergeSort(
 		uint64 currPos;
 		uint64 readSize;
 
-		if(!element)
+		if (!element)
 			break;
 
-		if(!elements)
+		if (!elements)
 			elements = createAutoList(partSize / 1024); // HACK
 
-		if(MS_GetRecordWeightSize)
+		if (MS_GetRecordWeightSize)
 			totalRecordWeightSize += MS_GetRecordWeightSize(element);
 		else
 			totalRecordWeightSize += recordConstWeightSize;
@@ -225,7 +225,7 @@ void MergeSort(
 		readSize = currPos - startPos;
 		readSize += totalRecordWeightSize;
 
-		if(partSize < readSize)
+		if (partSize < readSize)
 		{
 			CommitPart(partsDir, partCount, wMode, writeElement_x, compElement, elements);
 			partCount++;
@@ -234,7 +234,7 @@ void MergeSort(
 			totalRecordWeightSize = 0;
 		}
 	}
-	if(elements)
+	if (elements)
 	{
 		CommitPart(partsDir, partCount, wMode, writeElement_x, compElement, elements);
 		partCount++;
@@ -327,13 +327,13 @@ void MergeFile(
 	MF_WriteElement = writeElement;
 	MF_ReleaseElement = releaseElement;
 
-	if(!sorted1)
+	if (!sorted1)
 	{
 		tmpFile1 = makeTempPath(NULL);
 		MergeSort(srcFile1, tmpFile1, textMode, readElement, MF_WriteElement_x, compElement, partSize, recordConstWeightSize);
 		srcFile1 = tmpFile1;
 	}
-	if(!sorted2)
+	if (!sorted2)
 	{
 		tmpFile2 = makeTempPath(NULL);
 		MergeSort(srcFile2, tmpFile2, textMode, readElement, MF_WriteElement_x, compElement, partSize, recordConstWeightSize);
@@ -344,7 +344,7 @@ void MergeFile(
 	MF_WriteElement = NULL;
 	MF_ReleaseElement = NULL;
 
-	if(textMode)
+	if (textMode)
 	{
 		rMode = "rt";
 		wMode = "wt";
@@ -366,11 +366,11 @@ void MergeFile(
 	{
 		int ret;
 
-		if(!element1)
+		if (!element1)
 		{
 			ret = 1;
 		}
-		else if(!element2)
+		else if (!element2)
 		{
 			ret = -1;
 		}
@@ -378,17 +378,17 @@ void MergeFile(
 		{
 			ret = compElement(element1, element2);
 		}
-		if(ret < 0)
+		if (ret < 0)
 		{
-			if(wfp1)
+			if (wfp1)
 				writeElement(wfp1, element1);
 
 			releaseElement(element1);
 			element1 = readElement(rfp1);
 		}
-		else if(0 < ret)
+		else if (0 < ret)
 		{
-			if(wfp2)
+			if (wfp2)
 				writeElement(wfp2, element2);
 
 			releaseElement(element2);
@@ -396,7 +396,7 @@ void MergeFile(
 		}
 		else
 		{
-			if(wfpBoth)
+			if (wfpBoth)
 				writeElement(wfpBoth, element1);
 
 			releaseElement(element1);
@@ -408,19 +408,19 @@ void MergeFile(
 	fileClose(rfp1);
 	fileClose(rfp2);
 
-	if(wfp1)
+	if (wfp1)
 		fileClose(wfp1);
 
-	if(wfp2)
+	if (wfp2)
 		fileClose(wfp2);
 
-	if(wfpBoth)
+	if (wfpBoth)
 		fileClose(wfpBoth);
 
-	if(tmpFile1)
+	if (tmpFile1)
 		removeFile_x(tmpFile1);
 
-	if(tmpFile2)
+	if (tmpFile2)
 		removeFile_x(tmpFile2);
 }
 

@@ -49,13 +49,13 @@ static char *GetUrlByReqFirstLine(char *reqFirstLine)
 	char *q;
 	char *url;
 
-	if(!p)
+	if (!p)
 		goto noUrl;
 
 	p++;
 	q = strchr(p, ' ');
 
-	if(!q)
+	if (!q)
 		goto noUrl;
 
 	url = strxl(p, (uint)q - (uint)p);
@@ -79,9 +79,9 @@ static char *c_GetHostFieldValue(void)
 {
 	static char *value;
 
-	if(!value)
+	if (!value)
 	{
-		if(H_FwdPortNo == 80)
+		if (H_FwdPortNo == 80)
 			value = strx(H_FwdHost);
 		else
 			value = xcout("%s:%u", H_FwdHost, H_FwdPortNo);
@@ -148,17 +148,17 @@ static void HD_Trim(char *str)
 
 	while(*rp)
 	{
-		if(*rp == '-')
+		if (*rp == '-')
 		{
 			*wp = '+';
 			wp++;
 		}
-		else if(*rp == '_')
+		else if (*rp == '_')
 		{
 			*wp = '/';
 			wp++;
 		}
-		else if(m_isBase64Char(*rp))
+		else if (m_isBase64Char(*rp))
 		{
 			*wp = *rp;
 			wp++;
@@ -171,13 +171,13 @@ static void HD_Decode(char *str, tagRng_t *tagRng, autoBlock_t *wBuff) // str: ï
 {
 	autoBlock_t gab;
 
-	if(tagRng)
+	if (tagRng)
 		str = strxRng(tagRng->innerBgn, tagRng->innerEnd);
 
 	HD_Trim(str);
 	ab_addBytes_x(wBuff, decodeBase64(gndBlockLineVar(str, gab)));
 
-	if(tagRng)
+	if (tagRng)
 		memFree(str);
 }
 static void DecodeUrl(char *url)
@@ -185,14 +185,14 @@ static void DecodeUrl(char *url)
 	char *rp = strchr(url, '%');
 	char *wp;
 
-	if(!rp)
+	if (!rp)
 		return;
 
 	wp = rp;
 
 	while(*rp)
 	{
-		if(*rp == '%' && rp[1] && rp[2])
+		if (*rp == '%' && rp[1] && rp[2])
 		{
 			*wp = m_c2i(rp[1]) << 4 | m_c2i(rp[2]);
 			rp += 2;
@@ -215,7 +215,7 @@ static void DecodeUrl(char *url)
 */
 static int HTTPDecode(autoBlock_t *rBuff, autoBlock_t *wBuff)
 {
-	if(!HTTPParse(rBuff))
+	if (!HTTPParse(rBuff))
 		return 0;
 
 	LOGPOS();
@@ -225,7 +225,7 @@ static int HTTPDecode(autoBlock_t *rBuff, autoBlock_t *wBuff)
 	{
 		char *body = unbindBlock2Line(copyAutoBlock(HttpDat.Body));
 
-		if(mbs_stristr(body, BODY_MESSAGE_PTN) && (
+		if (mbs_stristr(body, BODY_MESSAGE_PTN) && (
 			updateTagRng(body, "<caption>", "</caption>", 1) ||
 			updateTagRng(body, "<th>", "</th>", 1) ||
 			updateTagRng(body, "<td>", "</td>", 1)
@@ -246,14 +246,14 @@ static int HTTPDecode(autoBlock_t *rBuff, autoBlock_t *wBuff)
 
 		foreach(HttpDat.H_Keys, key, index)
 		{
-			if(!_stricmp(key, "Cookie") || !_stricmp(key, "Set-Cookie"))
+			if (!_stricmp(key, "Cookie") || !_stricmp(key, "Set-Cookie"))
 			{
 				char *value = getLine(HttpDat.H_Values, index);
 
 				value = strx(value);
 				value = addChar(value, ';');
 
-				if(updateTagRng(value, "blueSteel=", ";", 1))
+				if (updateTagRng(value, "blueSteel=", ";", 1))
 				{
 					*CurrInfo->P_EmbedMode = EMBED_COOKIE; // ñÑÇﬂçûÇ›ï˚ñ@ã≠êßïœçXÇ∑ÇÈÅB
 
@@ -264,7 +264,7 @@ static int HTTPDecode(autoBlock_t *rBuff, autoBlock_t *wBuff)
 				}
 				memFree(value);
 			}
-			else if(!_stricmp(key, "X-BlueSteel"))
+			else if (!_stricmp(key, "X-BlueSteel"))
 			{
 				*CurrInfo->P_EmbedMode = EMBED_XFIELD; // ñÑÇﬂçûÇ›ï˚ñ@ã≠êßïœçXÇ∑ÇÈÅB
 
@@ -281,7 +281,7 @@ static int HTTPDecode(autoBlock_t *rBuff, autoBlock_t *wBuff)
 
 		DecodeUrl(url);
 
-		if(updateTagRng(url, "/blueSteel/", ".html", 1)) // from Path
+		if (updateTagRng(url, "/blueSteel/", ".html", 1)) // from Path
 		{
 //			*CurrInfo->P_EmbedMode = EMBED_PATH; // ñÑÇﬂçûÇ›ï˚ñ@ã≠êßïœçXÇµÇ»Ç¢ÅB
 
@@ -292,7 +292,7 @@ static int HTTPDecode(autoBlock_t *rBuff, autoBlock_t *wBuff)
 		}
 		url = addChar(url, '&');
 
-		if(updateTagRng(url, "blueSteel=", "&", 1)) // from Query
+		if (updateTagRng(url, "blueSteel=", "&", 1)) // from Query
 		{
 //			*CurrInfo->P_EmbedMode = EMBED_QUERY_BODY; // ñÑÇﬂçûÇ›ï˚ñ@ã≠êßïœçXÇµÇ»Ç¢ÅB
 
@@ -322,15 +322,15 @@ static char *HE_Encode(autoBlock_t *buff)
 
 		for(index = 0; index < size; index++)
 		{
-			if(b_(buff)[index] == '+')
+			if (b_(buff)[index] == '+')
 			{
 				b_(buff)[index] = '-';
 			}
-			else if(b_(buff)[index] == '/')
+			else if (b_(buff)[index] == '/')
 			{
 				b_(buff)[index] = '_';
 			}
-			else if(b_(buff)[index] == '=')
+			else if (b_(buff)[index] == '=')
 			{
 				b_(buff)[index] = '\0'; // ÉpÉfÉBÉìÉO ('=') Ç™ñ≥Ç≠ÇƒÇ‡ decodeBase64 Ç≈Ç´ÇÈÅB
 				return unbindBlock(buff);
@@ -351,7 +351,7 @@ static char *HE_DivText_xc(char *text, char *indent)
 
 		m_minim(len, HE_DIV_LEN);
 
-		if(text < p)
+		if (text < p)
 		{
 			ab_addLine(buff, "\r\n");
 			ab_addLine(buff, indent);
@@ -373,7 +373,7 @@ static char *HE_ToBody_x(char *text)
 	ab_addLine(buff, "</h1>\r\n");
 	ab_addLine(buff, "\t\t<table>\r\n");
 
-	if(strlen(text) < 50)
+	if (strlen(text) < 50)
 	{
 		ab_addLine(buff, "\t\t\t<caption>");
 		ab_addLine(buff, text);
@@ -382,7 +382,7 @@ static char *HE_ToBody_x(char *text)
 		ab_addLine(buff, "\t\t\t\t<td>BlueSteel</td>\r\n");
 		ab_addLine(buff, "\t\t\t</tr>\r\n");
 	}
-	else if(strlen(text) < 1000)
+	else if (strlen(text) < 1000)
 	{
 		text = HE_DivText_xc(text, "\t\t\t\t\t");
 
@@ -419,14 +419,14 @@ static char *HE_ToBody_x(char *text)
 
 static void AddExtraHeaderLines(autoBlock_t *wBuff)
 {
-	if(ExtraHeaderLines)
+	if (ExtraHeaderLines)
 	{
 		char *line;
 		uint index;
 
 		foreach(ExtraHeaderLines, line, index)
 		{
-			if(*line)
+			if (*line)
 			{
 				ab_addLine(wBuff, line);
 				ab_addLine(wBuff, "\r\n");
@@ -442,11 +442,11 @@ static void HTTPEncode(autoBlock_t *buff)
 	LOGPOS();
 	resText = HE_Encode(buff);
 
-	if(ServerMode) // ÉåÉXÉ|ÉìÉX
+	if (ServerMode) // ÉåÉXÉ|ÉìÉX
 	{
 		ab_addLine(wBuff, "HTTP/1.1 200 OK\r\n");
 
-		if(*CurrInfo->P_EmbedMode == EMBED_QUERY_BODY || *CurrInfo->P_EmbedMode == EMBED_PATH)
+		if (*CurrInfo->P_EmbedMode == EMBED_QUERY_BODY || *CurrInfo->P_EmbedMode == EMBED_PATH)
 		{
 			resText = HE_ToBody_x(resText);
 
@@ -461,7 +461,7 @@ static void HTTPEncode(autoBlock_t *buff)
 		{
 			resText = HE_DivText_xc(resText, "\t");
 
-			if(*CurrInfo->P_EmbedMode == EMBED_COOKIE)
+			if (*CurrInfo->P_EmbedMode == EMBED_COOKIE)
 			{
 				ab_addLine_x(wBuff, xcout("Set-Cookie: blueSteel=%s; expires=Thu, 31-Dec-2099 23:59:59 GMT\r\n", resText));
 			}
@@ -481,14 +481,14 @@ static void HTTPEncode(autoBlock_t *buff)
 	{
 		char *urlBeforePath = "";
 
-		if(ProxyEnabled)
+		if (ProxyEnabled)
 			urlBeforePath = xcout("http://%s", c_GetHostFieldValue());
 
-		if(*CurrInfo->P_EmbedMode == EMBED_QUERY_BODY || *CurrInfo->P_EmbedMode == EMBED_PATH)
+		if (*CurrInfo->P_EmbedMode == EMBED_QUERY_BODY || *CurrInfo->P_EmbedMode == EMBED_PATH)
 		{
 			char *urlLnFmt;
 
-			if(*CurrInfo->P_EmbedMode == EMBED_QUERY_BODY)
+			if (*CurrInfo->P_EmbedMode == EMBED_QUERY_BODY)
 			{
 				urlLnFmt = "GET %s/index.html?blueSteel=%s HTTP/1.1\r\n";
 			}
@@ -507,7 +507,7 @@ static void HTTPEncode(autoBlock_t *buff)
 			ab_addLine_x(wBuff, xcout("Host: %s\r\n", c_GetHostFieldValue()));
 			AddExtraHeaderLines(wBuff);
 
-			if(*CurrInfo->P_EmbedMode == EMBED_COOKIE)
+			if (*CurrInfo->P_EmbedMode == EMBED_COOKIE)
 			{
 				resText = HE_DivText_xc(resText, "\t");
 
@@ -522,7 +522,7 @@ static void HTTPEncode(autoBlock_t *buff)
 				ab_addLine(wBuff, "\r\n");
 			}
 		}
-		if(ProxyEnabled)
+		if (ProxyEnabled)
 			memFree(urlBeforePath);
 	}
 	memFree(resText);
@@ -541,20 +541,20 @@ static int BoomerangDecode(autoBlock_t *rBuff, autoBlock_t *wBuff)
 
 	LOGPOS();
 
-	if(getSize(rBuff) < 4)
+	if (getSize(rBuff) < 4)
 	{
 		LOGPOS();
 		return 0;
 	}
 	size = blockToValue(directGetBuffer(rBuff));
 
-	if(BuffFull < size + 4) // ? ÉoÉbÉtÉ@Ç…ì¸ÇËÇ´ÇÁÇ»Ç¢ÅB
+	if (BuffFull < size + 4) // ? ÉoÉbÉtÉ@Ç…ì¸ÇËÇ´ÇÁÇ»Ç¢ÅB
 	{
 		DecodeErrorFlag = 1;
 		LOGPOS();
 		return 0;
 	}
-	if(getSize(rBuff) - 4 < size)
+	if (getSize(rBuff) - 4 < size)
 	{
 		LOGPOS();
 		return 0;
@@ -587,34 +587,34 @@ static void DataFltr(autoBlock_t *buff, uint prm)
 	CurrInfo = i;
 	DecodeErrorFlag = 0;
 
-	if(m_01(i->DLMode) ^ m_01(ServerMode))
+	if (m_01(i->DLMode) ^ m_01(ServerMode))
 	{
-		if(HTTPDecode(i->Buff, buff))
+		if (HTTPDecode(i->Buff, buff))
 			BoomerangEncode(buff);
 	}
 	else
 	{
-		if(BoomerangDecode(i->Buff, buff))
+		if (BoomerangDecode(i->Buff, buff))
 			HTTPEncode(buff);
 	}
 
-	if(BuffFull < getSize(i->Buff))
+	if (BuffFull < getSize(i->Buff))
 	{
 		cout("ÉoÉbÉtÉ@Ç…ó≠Ç‹ÇËâﬂÇ¨ÇƒÇ¢ÇÈÇÃÇ≈îjä¸ÇµÇ‹Ç∑ÅBsize=%u (BuffFull=%u)\n", getSize(i->Buff), BuffFull);
 		setSize(i->Buff, 0);
 	}
-	if(DecodeErrorFlag)
+	if (DecodeErrorFlag)
 	{
 		cout("ÉfÉRÅ[ÉhÇ…é∏îsÇµÇ‹ÇµÇΩÅBêÿífÇµÇ‹Ç∑ÅB\n");
 		ChannelDeadFlag = 1;
 
-		if(!i->DLMode && ServerMode) // ? ÉTÅ[ÉoÅ[ë§ÇÃè„ÇË
+		if (!i->DLMode && ServerMode) // ? ÉTÅ[ÉoÅ[ë§ÇÃè„ÇË
 		{
 			autoBlock_t *buff = newBlock();
 
 			LOGPOS();
 
-			if(RequestFaviconFlag && FaviconBody)
+			if (RequestFaviconFlag && FaviconBody)
 			{
 				ab_addLine(buff, "HTTP/1.1 200 OK\r\n");
 				ab_addLine_x(buff, xcout("Content-Length: %u\r\n", getSize(FaviconBody)));
@@ -622,7 +622,7 @@ static void DataFltr(autoBlock_t *buff, uint prm)
 				ab_addLine(buff, "\r\n");
 				ab_addBytes(buff, FaviconBody);
 			}
-			else if(ErrorBodyFmt)
+			else if (ErrorBodyFmt)
 			{
 #if 1 // ïœêîÇÃìWäJÉAÉä
 				char *body = strx(ErrorBodyFmt);
@@ -641,10 +641,10 @@ static void DataFltr(autoBlock_t *buff, uint prm)
 					*strchrEnd(domain, ':') = '\0';
 					path = GetUrlByReqFirstLine(HttpDat.H_Request);
 
-					if(startsWithICase(path, "http://"))
+					if (startsWithICase(path, "http://"))
 						copyLine(path, strchrEnd(path + 7, '/'));
 
-					if(*path == '/')
+					if (*path == '/')
 						eraseChar(path);
 
 #if 0 // del
@@ -755,7 +755,7 @@ static void Perform(int sock, int fwdSock)
 
 	CrossChannel(sock, fwdSock, DataFltr, (uint)i, DataFltr, (uint)j);
 
-	if(i->EmgResData)
+	if (i->EmgResData)
 	{
 		LOGPOS();
 		SockSendSequLoop(sock, i->EmgResData, 2000);
@@ -770,44 +770,44 @@ static void Perform(int sock, int fwdSock)
 }
 static int ReadArgs(void)
 {
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		H_FwdHost = nextArg();
 		H_FwdPortNo = toValue(nextArg());
 		return 1;
 	}
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		ServerMode = 1;
 		return 1;
 	}
-	if(argIs("/E"))
+	if (argIs("/E"))
 	{
 		EmbedMode = toValue(nextArg());
 		return 1;
 	}
-	if(argIs("/BS"))
+	if (argIs("/BS"))
 	{
 		BuffFull = toValue(nextArg());
 		return 1;
 	}
-	if(argIs("/EF"))
+	if (argIs("/EF"))
 	{
 		ErrorBodyFmt = readText(nextArg());
 		return 1;
 	}
-	if(argIs("/XRH")) // eXtra Req-Res Header lines file
+	if (argIs("/XRH")) // eXtra Req-Res Header lines file
 	{
 		ExtraHeaderLines = readLines(nextArg());
 		return 1;
 	}
-	if(argIs("/FAV"))
+	if (argIs("/FAV"))
 	{
 		FaviconBody = readBinary(nextArg());
 		return 1;
 	}
 
-	if(H_FwdHost) // ? ÉvÉçÉLÉVÇ™éwíËÇ≥ÇÍÇΩÅB
+	if (H_FwdHost) // ? ÉvÉçÉLÉVÇ™éwíËÇ≥ÇÍÇΩÅB
 	{
 		m_swap(H_FwdHost, FwdHost, char *);
 		m_swap(H_FwdPortNo, FwdPortNo, uint);

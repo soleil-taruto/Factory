@@ -72,7 +72,7 @@ static void SaveRemarks(void)
 }
 static void LoadRemarks(void)
 {
-	if(existFile(REMARKS_SAVE_FILE))
+	if (existFile(REMARKS_SAVE_FILE))
 	{
 		FILE *fp = fileOpen(REMARKS_SAVE_FILE, "rt");
 
@@ -81,7 +81,7 @@ static void LoadRemarks(void)
 			char *line = readLine(fp);
 			Remark_t *i;
 
-			if(!line)
+			if (!line)
 				break;
 
 			errorCase(REMARK_MAX + 10 < getCount(Remarks)); // + margin <
@@ -95,7 +95,7 @@ static void LoadRemarks(void)
 			{
 				m_range(i->Stamp, 10000101000000ui64, 99991231235959ui64);
 
-				if(getCount(Remarks))
+				if (getCount(Remarks))
 				{
 					uint64 nxtLwStmp = ((Remark_t *)getLastElement(Remarks))->Stamp + 1ui64;
 
@@ -132,7 +132,7 @@ static char *GetPseudoIP(char *name) // なんちゃってIPを返す。
 {
 	static char buff[16]; // maxlen: "255.255.255.255" <--- 実際は "99.99.99.99" -- へちま改のためにIPは常に11文字でなければならない。
 
-	if(4 <= strlen(name))
+	if (4 <= strlen(name))
 	{
 		uchar *p = strchr(name, '\0') - 4; // /Jオプションがあるけど、いちおうu付けておく...
 
@@ -176,7 +176,7 @@ static uint64 GetNextStamp(void)
 {
 	uint64 stamp = GetStamp();
 
-	if(getCount(Remarks))
+	if (getCount(Remarks))
 	{
 		uint64 nxtLwStmp = ((Remark_t *)getLastElement(Remarks))->Stamp + 1ui64;
 
@@ -197,10 +197,10 @@ static void UpdateMember(char *ident)
 	uint index;
 
 	foreach(Members, i, index)
-		if(!strcmp(i->Ident, ident))
+		if (!strcmp(i->Ident, ident))
 			break;
 
-	if(i)
+	if (i)
 	{
 		i->LastAccessTime = now();
 	}
@@ -214,7 +214,7 @@ static void UpdateMember(char *ident)
 	}
 	rapidSort(Members, MemberLATComp_Desc);
 
-	if(MEMBER_MAX < getCount(Members))
+	if (MEMBER_MAX < getCount(Members))
 		ReleaseMember((Member_t *)unaddElement(Members));
 }
 static void PerformTh(int sock, char *ip)
@@ -226,7 +226,7 @@ static void PerformTh(int sock, char *ip)
 	line2JLine(command, 0, 0, 0, 0);
 	cout("command: %s @ %s\n", command, GetNowStr());
 
-	if(!strcmp(command, "GET-REMARKS"))
+	if (!strcmp(command, "GET-REMARKS"))
 	{
 		char *name = SockRecvLine(ss, NAME_LENMAX);
 		char *ident;
@@ -266,7 +266,7 @@ static void PerformTh(int sock, char *ip)
 
 		foreach(lines, line, index)
 		{
-			if(line)
+			if (line)
 				SockSendLine_NF(ss, line);
 			else
 				SockSendChar(ss, 0xff); // Ender
@@ -279,7 +279,7 @@ static void PerformTh(int sock, char *ip)
 
 		cout("GET-REMARKS.2\n");
 	}
-	else if(!strcmp(command, "REMARK"))
+	else if (!strcmp(command, "REMARK"))
 	{
 		char *name = SockRecvLine(ss, NAME_LENMAX);
 		char *ident;
@@ -310,7 +310,7 @@ static void PerformTh(int sock, char *ip)
 
 		addElement(Remarks, (uint)i);
 
-		if(REMARK_MAX < getCount(Remarks))
+		if (REMARK_MAX < getCount(Remarks))
 		{
 			uint index;
 
@@ -323,7 +323,7 @@ static void PerformTh(int sock, char *ip)
 
 		cout("REMARK.2\n");
 	}
-	else if(!strcmp(command, "GET-MEMBERS"))
+	else if (!strcmp(command, "GET-MEMBERS"))
 	{
 		uint nowTime = now();
 		Member_t *i;
@@ -358,7 +358,7 @@ static int IdleTh(void)
 {
 	while(hasKey())
 	{
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 			return 0;
 
 		cout("ESCAPE-TO-STOP\n");

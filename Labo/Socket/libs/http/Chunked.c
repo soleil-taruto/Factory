@@ -21,7 +21,7 @@ static void RecvChunkedTrailer(httpChunkedRecver_t *i)
 	{
 		char *line = SockRecvLine(i->Stream, 1000);
 
-		if(!*line)
+		if (!*line)
 		{
 			memFree(line);
 			break;
@@ -37,7 +37,7 @@ autoBlock_t *httpRecvChunked(httpChunkedRecver_t *i) // ret == NULL: 終了
 	errorCase(!i);
 	errorCase(!i->Stream); // ? 既に終了
 
-	if(!i->RemSize)
+	if (!i->RemSize)
 	{
 		char *line = SockRecvLine(i->Stream, 1000);
 		// 最大８文字だけど、改行とかあるしギリギリにする必要もないかなと。<- chunk-extension があるじゃないの。30 -> 1000
@@ -47,7 +47,7 @@ autoBlock_t *httpRecvChunked(httpChunkedRecver_t *i) // ret == NULL: 終了
 		i->RemSize = toValueDigits(line, hexadecimal);
 		memFree(line);
 
-		if(!i->RemSize)
+		if (!i->RemSize)
 		{
 			RecvChunkedTrailer(i);
 
@@ -61,7 +61,7 @@ autoBlock_t *httpRecvChunked(httpChunkedRecver_t *i) // ret == NULL: 終了
 	SockRecvBlock(i->Stream, rBlock, rSize);
 	i->RemSize -= rSize;
 
-	if(!i->RemSize)
+	if (!i->RemSize)
 	{
 		// CR-LF
 		SockRecvChar(i->Stream);

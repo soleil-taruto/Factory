@@ -9,9 +9,9 @@ static int PrintPrimeOnlyFlag;
 
 static void PrintIsPrime(uint64 value)
 {
-	if(PrintPrimeOnlyFlag)
+	if (PrintPrimeOnlyFlag)
 	{
-		if(IsPrime(value))
+		if (IsPrime(value))
 			cout("%I64u\n", value);
 	}
 	else
@@ -19,7 +19,7 @@ static void PrintIsPrime(uint64 value)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		uint64 value = toValue64(nextArg());
 		uint64 factors[64];
@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 
 		return;
 	}
-	if(argIs("/FF"))
+	if (argIs("/FF"))
 	{
 		uint64 value = toValue64(nextArg());
 		uint64 factors[64];
@@ -56,7 +56,7 @@ int main(int argc, char **argv)
 		}
 		return;
 	}
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		uint64 minval;
 		uint64 maxval;
@@ -66,27 +66,27 @@ int main(int argc, char **argv)
 		minval = toValue64(nextArg());
 		maxval = toValue64(nextArg());
 
-		if(maxval == 0)
+		if (maxval == 0)
 			maxval = UINT64MAX;
 
 		errorCase(maxval < minval);
 
 		for(value = minval; ; value++)
 		{
-			if(IsPrime(value))
+			if (IsPrime(value))
 				count++;
 
-			if(value == maxval)
+			if (value == maxval)
 				break;
 		}
 		cout("%I64u\n", count);
 		return;
 	}
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		PrintPrimeOnlyFlag = 1;
 	}
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		uint64 minval;
 		uint64 maxval;
@@ -95,22 +95,22 @@ int main(int argc, char **argv)
 		minval = toValue64(nextArg());
 		maxval = toValue64(nextArg());
 
-		if(maxval == 0)
+		if (maxval == 0)
 			maxval = UINT64MAX;
 
 		errorCase(maxval < minval);
 
 		for(value = minval; ; value++)
 		{
-			if(eqIntPulseSec(2, NULL))
+			if (eqIntPulseSec(2, NULL))
 			{
 				int cancelled = 0;
 
 				while(hasKey())
-					if(getKey() == 0x1b)
+					if (getKey() == 0x1b)
 						cancelled = 1;
 
-				if(cancelled)
+				if (cancelled)
 				{
 					cout("cancelled!\n");
 					break;
@@ -118,7 +118,7 @@ int main(int argc, char **argv)
 			}
 			PrintIsPrime(value);
 
-			if(value == maxval)
+			if (value == maxval)
 				break;
 		}
 		return;

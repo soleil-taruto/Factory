@@ -18,7 +18,7 @@ static char *GetProjFile(void)
 	eraseParents(files);
 
 	foreach(files, file, index)
-		if(!_stricmp("vcproj", getExt(file)))
+		if (!_stricmp("vcproj", getExt(file)))
 			break;
 
 	errorCase(!file); // ? not found
@@ -31,7 +31,7 @@ static uint FindIndex(autoList_t *lines, uint index, char *format)
 {
 	while(index < getCount(lines))
 	{
-		if(lineExp(format, getLine(lines, index)))
+		if (lineExp(format, getLine(lines, index)))
 			return index;
 
 		index++;

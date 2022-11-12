@@ -10,21 +10,21 @@ static int Jammer(autoBlock_t *block, int doEncode)
 	uint index;
 	uint value = 0;
 
-	if(!getSize(block))
+	if (!getSize(block))
 	{
-		if(doEncode)
+		if (doEncode)
 		{
 			tznum++;
 		}
 		else
 		{
-			if(!tznum)
+			if (!tznum)
 				return 0;
 
 			tznum--;
 		}
 	}
-	else if(doEncode)
+	else if (doEncode)
 	{
 		for(index = 0; index < getSize(block) || value; index++)
 		{
@@ -43,7 +43,7 @@ static int Jammer(autoBlock_t *block, int doEncode)
 			value %= MULTIVAL;
 			value <<= 8;
 		}
-		if(value)
+		if (value)
 			return 0;
 
 		ab_unaddTrailZero(block);
@@ -56,7 +56,7 @@ static int PowerJammer(autoBlock_t *block, int doEncode)
 	uint count;
 
 	for(count = POWERVAL; count; count--)
-		if(!Jammer(block, doEncode))
+		if (!Jammer(block, doEncode))
 			return 0;
 
 	return 1;
@@ -101,7 +101,7 @@ static void ProcFile(int doEncode)
 
 	fileImage = readBinary(rFile);
 
-	if(PowerJammer(fileImage, doEncode))
+	if (PowerJammer(fileImage, doEncode))
 	{
 		writeBinary(wFile, fileImage);
 		cout("Successful\n");
@@ -115,11 +115,11 @@ static void ProcFile(int doEncode)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/E")) // encode
+	if (argIs("/E")) // encode
 	{
 		ProcFile(1);
 	}
-	if(argIs("/D")) // decode
+	if (argIs("/D")) // decode
 	{
 		ProcFile(0);
 	}

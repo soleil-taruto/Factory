@@ -23,14 +23,14 @@ static int GetFuncRange(uint index, int headerFlag)
 {
 	char *line = getLine(Lines, index);
 
-	if(headerFlag)
+	if (headerFlag)
 	{
-		if(line[0] != '\t' || !m_iscsymf(line[1])) // ? C言語の識別子で始まっていない。
+		if (line[0] != '\t' || !m_iscsymf(line[1])) // ? C言語の識別子で始まっていない。
 			return 0;
 	}
 	else
 	{
-		if(!m_iscsymf(line[0])) // ? C言語の識別子で始まっていない。
+		if (!m_iscsymf(line[0])) // ? C言語の識別子で始まっていない。
 			return 0;
 	}
 	FuncRangeBgn = index;
@@ -39,41 +39,41 @@ static int GetFuncRange(uint index, int headerFlag)
 	{
 		index++;
 
-		if(getCount(Lines) <= index) // ? ファイルの終端に到達
+		if (getCount(Lines) <= index) // ? ファイルの終端に到達
 			return 0;
 
 		line = getLine(Lines, index);
 
-		if(headerFlag)
+		if (headerFlag)
 		{
-			if(!strcmp(line, "\t{")) // ? 関数ブロック開始
+			if (!strcmp(line, "\t{")) // ? 関数ブロック開始
 				break;
 		}
 		else
 		{
-			if(!strcmp(line, "{")) // ? 関数ブロック開始
+			if (!strcmp(line, "{")) // ? 関数ブロック開始
 				break;
 		}
-		if(!line[0]) // ? 空行
+		if (!line[0]) // ? 空行
 			return 0;
 	}
 	for(; ; )
 	{
 		index++;
 
-		if(getCount(Lines) <= index) // ? ファイルの終端に到達
+		if (getCount(Lines) <= index) // ? ファイルの終端に到達
 			return 0;
 
 		line = getLine(Lines, index);
 
-		if(headerFlag)
+		if (headerFlag)
 		{
-			if(!strcmp(line, "\t}")) // ? 関数ブロック終了
+			if (!strcmp(line, "\t}")) // ? 関数ブロック終了
 				break;
 		}
 		else
 		{
-			if(!strcmp(line, "}")) // ? 関数ブロック終了
+			if (!strcmp(line, "}")) // ? 関数ブロック終了
 				break;
 		}
 	}
@@ -88,7 +88,7 @@ static void CommentOutFunc_WriteFile(char *file)
 
 	foreach(Lines, line, index)
 	{
-		if(m_isRange(index, FuncRangeBgn, FuncRangeEnd))
+		if (m_isRange(index, FuncRangeBgn, FuncRangeEnd))
 		{
 			line = "// DELETE";
 		}
@@ -106,7 +106,7 @@ static void CommentOutFunc_Lines(void)
 
 	foreach(Lines, line, index)
 	{
-		if(m_isRange(index, FuncRangeBgn, FuncRangeEnd))
+		if (m_isRange(index, FuncRangeBgn, FuncRangeEnd))
 		{
 			line = replaceLine(line, "*/", "＊/", 0);
 
@@ -122,7 +122,7 @@ static int CheckBuild(void)
 	coExecute("> C:\\temp\\1.tmp 2> C:\\temp\\2.tmp qq");
 	coExecute("> C:\\temp\\1.tmp 2> C:\\temp\\2.tmp cx *");
 
-	if(IsSuccessful())
+	if (IsSuccessful())
 	{
 		LOGPOS();
 		addElement(UnusedFuncFirstLines, (uint)strx(getLine(Lines, FuncRangeBgn)));
@@ -146,13 +146,13 @@ static void ProcCppFile(char *file, int headerFlag)
 
 	for(index = 0; index < getCount(Lines); index++)
 	{
-		if(GetFuncRange(index, headerFlag))
+		if (GetFuncRange(index, headerFlag))
 		{
 			cout("%s\n", getLine(Lines, FuncRangeBgn));
 
 			CommentOutFunc_WriteFile(file);
 
-			if(CheckBuild())
+			if (CheckBuild())
 			{
 				CommentOutFunc_Lines();
 				commentedOut = 1;
@@ -160,7 +160,7 @@ static void ProcCppFile(char *file, int headerFlag)
 			removeFile(file);
 		}
 	}
-	if(commentedOut)
+	if (commentedOut)
 	{
 		writeLines(file, Lines);
 		removeFile(escFile);
@@ -204,11 +204,11 @@ static void Main3(char *slnFile)
 
 	foreach(files, file, index)
 	{
-		if(!_stricmp("cpp", getExt(file)))
+		if (!_stricmp("cpp", getExt(file)))
 		{
 			ProcCppFile(file, 0);
 		}
-		else if(!_stricmp("h", getExt(file)))
+		else if (!_stricmp("h", getExt(file)))
 		{
 			ProcCppFile(file, 0);
 			ProcCppFile(file, 1);
@@ -228,7 +228,7 @@ static void Main2(void)
 
 	foreach(files, file, index)
 	{
-		if(!_stricmp("sln", getExt(file)))
+		if (!_stricmp("sln", getExt(file)))
 		{
 			errorCase(slnFile); // ? 2つ目
 			slnFile = file;

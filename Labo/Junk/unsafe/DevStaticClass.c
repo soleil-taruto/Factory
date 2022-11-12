@@ -8,10 +8,10 @@ static char *GetSlnFile_Dir(char *dir)
 	char *slnFile;
 
 	foreach(files, file, index)
-		if(!_stricmp("sln", getExt(file)))
+		if (!_stricmp("sln", getExt(file)))
 			break;
 
-	if(file)
+	if (file)
 		slnFile = strx(file);
 	else
 		slnFile = NULL;
@@ -27,7 +27,7 @@ static char *GetSlnFile(char *csFile)
 	{
 		char *slnFile = GetSlnFile_Dir(dir);
 
-		if(slnFile)
+		if (slnFile)
 		{
 			memFree(dir);
 			return slnFile;
@@ -46,7 +46,7 @@ static int IsCS2010_SlnFile(char *slnFile)
 	uint index;
 
 	foreach(lines, line, index)
-		if(!strcmp(line, "# Visual C# Express 2010"))
+		if (!strcmp(line, "# Visual C# Express 2010"))
 			break;
 
 	releaseDim(lines, 1);
@@ -88,7 +88,7 @@ static void ProcCSFile_Main(char *csFile)
 
 	foreach(lines, line, index)
 	{
-		if(
+		if (
 			lineExp("\tpublic class <1,,09AZaz__>", line) ||
 			lineExp("\tpublic class <1,,09AZaz__> //<>", line)
 			)
@@ -99,7 +99,7 @@ static void ProcCSFile_Main(char *csFile)
 			setElement(lines, index, (uint)lineNew);
 			writeLines(csFile, lines);
 
-			if(TryBuild(csFile))
+			if (TryBuild(csFile))
 			{
 				memFree(line);
 				modified = 1;
@@ -112,7 +112,7 @@ static void ProcCSFile_Main(char *csFile)
 			removeFile(csFile);
 		}
 	}
-	if(modified)
+	if (modified)
 	{
 		writeLines(csFile, lines);
 		removeFile(bkFile);
@@ -127,7 +127,7 @@ static void ProcCSFile(char *csFile)
 {
 	char *slnFile = GetSlnFile(csFile);
 
-	if(IsCS2010_SlnFile(slnFile))
+	if (IsCS2010_SlnFile(slnFile))
 	{
 		// .dll ïKóvÇ»Ç‚Ç¬Ç‡Ç†ÇÈÇÊÅB
 		{
@@ -164,7 +164,7 @@ static void Main2(char *rootDir)
 
 	foreach(files, file, index)
 	{
-		if(
+		if (
 			!_stricmp("cs", getExt(file)) &&
 			!mbs_stristr(file, "\\Properties\\") &&
 			!endsWithICase(file, ".Designer.cs")
@@ -175,7 +175,7 @@ static void Main2(char *rootDir)
 }
 int main(int argc, char **argv)
 {
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		Main2(nextArg());
 	}

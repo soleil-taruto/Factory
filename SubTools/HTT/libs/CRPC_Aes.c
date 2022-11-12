@@ -57,7 +57,7 @@ autoBlock_t *ServiceRPC(autoBlock_t *recvData, uint phase)
 	autoBlock_t *encCounter;
 	autoBlock_t *rawKey;
 
-	if(!phase) // ‰‰ñ
+	if (!phase) // ‰‰ñ
 	{
 		autoBlock_t *clSeed = recvData;
 		autoBlock_t *svSeed = MakeEncCounterSeed();

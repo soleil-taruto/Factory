@@ -49,12 +49,12 @@ static void RemoveLiteralString(char *entity)
 
 	while(*p)
 	{
-		if(*p == '"')
+		if (*p == '"')
 		{
 			p++;
 			break;
 		}
-		if(*p == '\\' && p[1])
+		if (*p == '\\' && p[1])
 			p += 2;
 		else
 			p = mbsNext(p);
@@ -74,21 +74,21 @@ static void RemoveComments(autoList_t *lines)
 	{
 		char *p = line;
 
-		if(!onComment)
+		if (!onComment)
 		{
 			char *q = strstr(p, "//");
 
-			if(q)
+			if (q)
 				*q = '\0';
 		}
 		for(; ; )
 		{
 			char *q = strstr(p, onComment ? "*/" : "/*");
 
-			if(!q)
+			if (!q)
 				break;
 
-			if(onComment)
+			if (onComment)
 			{
 				copyLine(p, q + 2);
 			}
@@ -96,7 +96,7 @@ static void RemoveComments(autoList_t *lines)
 			{
 				char *qq = strchr(p, '"');
 
-				if(qq && qq < q)
+				if (qq && qq < q)
 				{
 					RemoveLiteralString(qq + 1);
 					continue;
@@ -105,7 +105,7 @@ static void RemoveComments(autoList_t *lines)
 			}
 			onComment = !onComment;
 		}
-		if(onComment)
+		if (onComment)
 			*p = '\0';
 	}
 }
@@ -117,18 +117,18 @@ static void AdjustIndent(autoList_t *lines)
 
 	foreach(lines, line, index)
 	{
-		if(!strcmp(line, "{"))
+		if (!strcmp(line, "{"))
 		{
 			onBlock = 1;
 		}
-		else if(
+		else if (
 			!strcmp(line, "}") ||
 			!strcmp(line, "};")
 			)
 		{
 			onBlock = 0;
 		}
-		else if(
+		else if (
 			onBlock &&
 			line[0] != ' ' &&
 			line[0] != '#'
@@ -148,23 +148,23 @@ static void CheckTagLine(char *line, char *srcFile, uint srcLineNo)
 	tmpl = strx(line);
 
 	for(p = tmpl; *p; p++)
-		if(!__iscsym(*p))
+		if (!__iscsym(*p))
 			*p = ' ';
 
 	tokens = ucTokenize(tmpl);
 
-	if(lineExp("typedef<1,  ><>", line))
+	if (lineExp("typedef<1,  ><>", line))
 	{
 		1; // noop
 	}
-	else if(lineExp("#define<1,  ><>", line))
+	else if (lineExp("#define<1,  ><>", line))
 	{
-		if(2 <= getCount(tokens))
+		if (2 <= getCount(tokens))
 		{
 			AddTag(getLine(tokens, 1), "定義", srcFile, srcLineNo);
 		}
 	}
-	else if(__iscsymf(line[0]))
+	else if (__iscsymf(line[0]))
 	{
 		uint index = 0;
 
@@ -172,7 +172,7 @@ static void CheckTagLine(char *line, char *srcFile, uint srcLineNo)
 		{
 			char *token = getLine(tokens, index);
 
-			if(
+			if (
 				!strcmp(token, "static") ||
 				!strcmp(token, "extern")
 				)
@@ -181,11 +181,11 @@ static void CheckTagLine(char *line, char *srcFile, uint srcLineNo)
 
 		index++; // 評価される型をスキップする。
 
-		if(index < getCount(tokens))
+		if (index < getCount(tokens))
 		{
 			char *comment = "関数";
 
-			if(lineExp("<>;", line))
+			if (lineExp("<>;", line))
 				comment = "変数又は宣言";
 
 			AddTag(getLine(tokens, index), comment, srcFile, srcLineNo);
@@ -205,15 +205,15 @@ static void CheckTagTypedef(autoList_t *lines, char *srcFile)
 		switch(tdPhase)
 		{
 		case 0:
-			if(lineExp("typedef<1,  ><>", line) && !lineExp("<>;", line)) tdPhase++;
+			if (lineExp("typedef<1,  ><>", line) && !lineExp("<>;", line)) tdPhase++;
 			break;
 
 		case 1:
-			if(!strcmp(line, "{")) tdPhase++;
+			if (!strcmp(line, "{")) tdPhase++;
 			break;
 
 		case 2:
-			if(!strcmp(line, "}")) tdPhase++;
+			if (!strcmp(line, "}")) tdPhase++;
 			break;
 
 		case 3:
@@ -222,7 +222,7 @@ static void CheckTagTypedef(autoList_t *lines, char *srcFile)
 				char *p;
 
 				for(p = typnm; *p; p++)
-					if(!__iscsym(*p))
+					if (!__iscsym(*p))
 						*p = ' ';
 
 				trim(typnm, ' ');
@@ -269,7 +269,7 @@ static void FindTagsByJSFile(char *file)
 
 	foreach(lines, line, index)
 	{
-		if(lineExp("var <>;<>", line))
+		if (lineExp("var <>;<>", line))
 		{
 			char *p = ne_strchr(line, ' ') + 1;
 			char *q;
@@ -278,18 +278,18 @@ static void FindTagsByJSFile(char *file)
 			q = ne_strchr(p, ';');
 			q2 = strchr(p, '=');
 
-			if(q2)
+			if (q2)
 				q = m_min(q, q2);
 
 			*q = '\0';
 			trimTrail(p, ' ');
 
-			if(!startsWith(p, IGNORE_JS_NAME_PREFIX))
+			if (!startsWith(p, IGNORE_JS_NAME_PREFIX))
 			{
 				AddTag(p, "変数", file, index + 1);
 			}
 		}
-		else if(lineExp("function <>(<>", line))
+		else if (lineExp("function <>(<>", line))
 		{
 			char *p = ne_strchr(line, ' ') + 1;
 			char *q;
@@ -297,7 +297,7 @@ static void FindTagsByJSFile(char *file)
 			q = ne_strchr(p, '(');
 			*q = '\0';
 
-			if(!startsWith(p, IGNORE_JS_NAME_PREFIX))
+			if (!startsWith(p, IGNORE_JS_NAME_PREFIX))
 			{
 				AddTag(p, "関数", file, index + 1);
 			}
@@ -317,7 +317,7 @@ static void FindTags(char *rootDir)
 	{
 		char *ext = getExt(file);
 
-		if(
+		if (
 			!_stricmp(ext, "c") ||
 			!_stricmp(ext, "h") &&
 //			!existFile(c_changeExt(file, "cpp")) // .h のみとかある。
@@ -376,12 +376,12 @@ static void MakeJSTags_Dir(char *dir)
 #endif
 int main(int argc, char **argv)
 {
-	if(argIs("/JS"))
+	if (argIs("/JS"))
 	{
 #if 1
 		MakeJSTags(getArg(0), getArg(1));
 #else // old
-		if(hasArgs(2))
+		if (hasArgs(2))
 		{
 			MakeJSTags(getArg(0), getArg(1));
 		}

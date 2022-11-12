@@ -8,18 +8,18 @@ HttpDat_t HttpDat;
 
 static void ClearHttpDat(void)
 {
-	if(HttpDat.Header)
+	if (HttpDat.Header)
 		releaseDim(HttpDat.Header, 1);
 
 	memFree(HttpDat.H_Request);
 
-	if(HttpDat.H_Keys)
+	if (HttpDat.H_Keys)
 		releaseDim(HttpDat.H_Keys, 1);
 
-	if(HttpDat.H_Values)
+	if (HttpDat.H_Values)
 		releaseDim(HttpDat.H_Values, 1);
 
-	if(HttpDat.Body)
+	if (HttpDat.Body)
 		releaseAutoBlock(HttpDat.Body);
 
 	memset(&HttpDat, 0x00, sizeof(HttpDat_t));
@@ -49,10 +49,10 @@ static char *ReadLine(void)
 	{
 		int chr = getByte(RBuff, RPos++);
 
-		if(chr == '\r')
+		if (chr == '\r')
 			continue;
 
-		if(chr == '\n')
+		if (chr == '\n')
 			return unbindBlock2Line(buff);
 
 		addByte(buff, chr);
@@ -66,7 +66,7 @@ static int SkipTrailer(void)
 
 	while(line = ReadLine())
 	{
-		if(*line == '\0')
+		if (*line == '\0')
 		{
 			memFree(line);
 			return 1;
@@ -84,7 +84,7 @@ static int ReadHeader(void)
 
 	while(line = ReadLine())
 	{
-		if(*line == '\0')
+		if (*line == '\0')
 		{
 			memFree(line);
 			return 1;
@@ -108,17 +108,17 @@ static void HeaderParse(void)
 		line2JLine(line, 1, 0, 1, 1);
 		replaceChar(line, '\t', ' ');
 
-		if(index == 0)
+		if (index == 0)
 		{
 			trimEdge(line, ' ');
 
 			HttpDat.H_Request = strx(line);
 		}
-		else if(line[0] == ' ') // -> unfolding
+		else if (line[0] == ' ') // -> unfolding
 		{
 			trimEdge(line, ' ');
 
-			if(getCount(HttpDat.H_Values))
+			if (getCount(HttpDat.H_Values))
 			{
 				char *value = (char *)getLastElement(HttpDat.H_Values);
 
@@ -131,7 +131,7 @@ static void HeaderParse(void)
 		{
 			char *p = strchr(line, ':');
 
-			if(p)
+			if (p)
 			{
 				char *key;
 				char *value;
@@ -153,7 +153,7 @@ static void HeaderParse(void)
 		}
 		memFree(line);
 	}
-	if(!HttpDat.H_Request)
+	if (!HttpDat.H_Request)
 		HttpDat.H_Request = strx(""); // dummy
 }
 static void CheckHeader(void)
@@ -165,15 +165,15 @@ static void CheckHeader(void)
 	{
 		char *value = getLine(HttpDat.H_Values, index);
 
-		if(!_stricmp(key, "transfer-encoding"))
+		if (!_stricmp(key, "transfer-encoding"))
 		{
 			HttpDat.Chunked = (int)mbs_stristr(value, "chunked");
 		}
-		else if(!_stricmp(key, "content-length"))
+		else if (!_stricmp(key, "content-length"))
 		{
 			HttpDat.ContentLength = toValue(value);
 		}
-		else if(!_stricmp(key, "expect"))
+		else if (!_stricmp(key, "expect"))
 		{
 			HttpDat.Expect100Continue = (int)mbs_stristr(value, "100-continue");
 cout("HttpDat.Expect100Continue: %d\n", HttpDat.Expect100Continue);
@@ -182,13 +182,13 @@ cout("HttpDat.Expect100Continue: %d\n", HttpDat.Expect100Continue);
 }
 static int ReadBody(void)
 {
-	if(HttpDat.Expect100Continue)
+	if (HttpDat.Expect100Continue)
 	{
 		HttpDat.Body = newBlock();
 LOGPOS();
 		return 1;
 	}
-	if(HttpDat.Chunked)
+	if (HttpDat.Chunked)
 	{
 		HttpDat.Body = newBlock();
 
@@ -199,30 +199,30 @@ LOGPOS();
 			uint partSize;
 			autoBlock_t gab;
 
-			if(!line)
+			if (!line)
 				break;
 
 			p = strchr(line, ';');
 
-			if(p)
+			if (p)
 				*p = '\0'; // chunk-extension 破棄
 
 			partSize = toValueDigits_xc(line, hexadecimal);
 
-			if(!partSize) // ? 全パート読み込み完了
+			if (!partSize) // ? 全パート読み込み完了
 			{
-				if(!SkipTrailer()) // ? trailer 未読
+				if (!SkipTrailer()) // ? trailer 未読
 					break;
 
 				return 1;
 			}
-			if(getSize(RBuff) - RPos < partSize) // ? パート未読
+			if (getSize(RBuff) - RPos < partSize) // ? パート未読
 				break;
 
 			addBytes(HttpDat.Body, gndSubBytesVar(RBuff, RPos, partSize, gab));
 			RPos += partSize;
 
-			if(getSize(RBuff) - RPos < 2) // ? パートの後の CR-LF 未読
+			if (getSize(RBuff) - RPos < 2) // ? パートの後の CR-LF 未読
 				break;
 
 			RPos += 2; // CR-LF
@@ -230,7 +230,7 @@ LOGPOS();
 	}
 	else
 	{
-		if(HttpDat.ContentLength <= getSize(RBuff) - RPos)
+		if (HttpDat.ContentLength <= getSize(RBuff) - RPos)
 		{
 			autoBlock_t gab;
 
@@ -249,13 +249,13 @@ int HTTPParse(autoBlock_t *buff)
 	RBuff = buff;
 	RPos = 0;
 
-	if(!ReadHeader())
+	if (!ReadHeader())
 		return 0;
 
 	HeaderParse();
 	CheckHeader();
 
-	if(!ReadBody())
+	if (!ReadBody())
 		return 0;
 
 	HttpDat.EndPos = RPos;
@@ -297,7 +297,7 @@ static autoBlock_t *ReadToEnd(FILE *fp)
 	{
 		int chr = readChar(fp);
 
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
 		addByte(buff, chr);
@@ -318,7 +318,7 @@ void LoadHttpDat(char *file)
 
 		errorCase(!line);
 
-		if(!*line)
+		if (!*line)
 			break;
 
 		addElement(HttpDat.Header, (uint)line);

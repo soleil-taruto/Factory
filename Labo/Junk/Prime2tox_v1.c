@@ -19,13 +19,13 @@ static int IsSosu(uint64 value)
 	{
 		uint64 sosu = readValue64(SosuFp);
 
-		if(0xffffffff < sosu) // 2bs
+		if (0xffffffff < sosu) // 2bs
 			break;
 
-		if(value < sosu * sosu)
+		if (value < sosu * sosu)
 			break;
 
-		if(value % sosu == 0)
+		if (value % sosu == 0)
 			return 0;
 	}
 	return 1;
@@ -66,10 +66,10 @@ int main(int argc, char **argv)
 
 	for(value = 11; value <= max; value += 2)
 	{
-		if((value & 0x3ffe) == 0)
+		if ((value & 0x3ffe) == 0)
 			cmdTitle_x(xcout("Prime2tox - %I64u", value));
 
-		if(
+		if (
 			value % 3 != 0 &&
 			value % 5 != 0 &&
 			value % 7 != 0 &&

@@ -12,11 +12,11 @@ static void INIT(void)
 {
 	static int inited;
 
-	if(!inited)
+	if (!inited)
 	{
 		critical();
 		{
-			if(!inited)
+			if (!inited)
 			{
 				initCritical(&EntryGate);
 				WakeupEvHdl = eventOpen_x(MakeUUID(1));
@@ -35,7 +35,7 @@ void IntSleep(uint millis) // ts_, critical()の中から呼び出さないこと！
 
 	critical();
 	{
-		if(ThSerialNo != SerialNo)
+		if (ThSerialNo != SerialNo)
 		{
 			ThSerialNo = SerialNo;
 			uncritical();
@@ -51,7 +51,7 @@ void IntSleep(uint millis) // ts_, critical()の中から呼び出さないこと！
 
 	critical();
 	{
-		if(ThSerialNo != SerialNo)
+		if (ThSerialNo != SerialNo)
 		{
 			ThSerialNo = SerialNo;
 			uncritical();
@@ -65,14 +65,14 @@ void IntSleep(uint millis) // ts_, critical()の中から呼び出さないこと！
 
 	critical();
 	{
-		if(ThSerialNo != SerialNo)
+		if (ThSerialNo != SerialNo)
 			ThSerialNo = SerialNo;
 
 		WaitCount--;
 
-		if(EntryGateLockThHdl)
+		if (EntryGateLockThHdl)
 		{
-			if(WaitCount)
+			if (WaitCount)
 			{
 				eventSet(WakeupEvHdl);
 			}
@@ -100,12 +100,12 @@ void IntSleepInt(void) // ts_
 	{
 		errorCase(SerialNo == UINT64MAX); // カンスト..有り得ないだろうけど..
 
-		if(UINT64MAX / 2 < SerialNo)
+		if (UINT64MAX / 2 < SerialNo)
 			LOGPOS(); // カンスト注意..有り得ないだろうけど..
 
 		SerialNo++;
 
-		if(WaitCount && !EntryGateLockThHdl)
+		if (WaitCount && !EntryGateLockThHdl)
 		{
 			eventSet(WakeupEvHdl);
 			EntryGateLockThHdl = runThread(EntryGateLockTh, 0);

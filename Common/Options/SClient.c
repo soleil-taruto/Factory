@@ -10,9 +10,9 @@ static uint GetServerIP(char *host)
 {
 	uint index = findLine(ServerHosts, host);
 
-	if(index == getCount(ServerHosts))
+	if (index == getCount(ServerHosts))
 	{
-		if(100 < index) // overflow
+		if (100 < index) // overflow
 		{
 			LOGPOS();
 			releaseDim(ServerHosts, 1);
@@ -49,7 +49,7 @@ int SClient(char *serverHost, uint serverPort, int (*userPerform)(int, uint), ui
 	errorCase(!userPerform);
 	// userPrm
 
-	if(!ServerHosts) // init
+	if (!ServerHosts) // init
 	{
 		ServerHosts = newList();
 		ServerIPs = newList();

@@ -33,11 +33,11 @@ static uint NextBit(void)
 {
 	uint bit;
 
-	if(RIndex < RSize)
+	if (RIndex < RSize)
 	{
 		bit = RData[RIndex] & 1 << 7 - RBitIndex;
 
-		if(RBitIndex == 7)
+		if (RBitIndex == 7)
 		{
 			RIndex++;
 			RBitIndex = 0;
@@ -56,7 +56,7 @@ static uint NextValue(uint bitSize)
 	uint c;
 
 	for(c = 0; c < bitSize; c++)
-		if(NextBit())
+		if (NextBit())
 			value |= 1 << bitSize - 1 - c;
 
 	return value;
@@ -69,7 +69,7 @@ static void RecvDataParse(void)
 
 	addElement(Row, (uint)xcout("%u", ipVersion));
 
-	if(ipVersion == 4)
+	if (ipVersion == 4)
 	{
 		uint ihl = NextValue(4); // IP_INTERNET_HEADER_LENGTH
 		uint protocol;
@@ -128,7 +128,7 @@ static void RecvDataParse(void)
 			addElement(Row, (uint)buff);
 		}
 
-		if(protocol == 6) // ? TCP
+		if (protocol == 6) // ? TCP
 		{
 			uint dataOffset;
 
@@ -165,7 +165,7 @@ static void RecvDataParse(void)
 				addElement(Row, (uint)buff);
 			}
 		}
-		else if(protocol == 17) // ? UDP
+		else if (protocol == 17) // ? UDP
 		{
 			addElement(Row, (uint)xcout("%u", NextValue(16)));  // UDP_SOURCE_PORT
 			addElement(Row, (uint)xcout("%u", NextValue(16)));  // UDP_DESTINATION_PORT
@@ -278,7 +278,7 @@ static void SaveFile(void *record, char *file) // (file == NULL) -> stdout
 
 		writeCSVRow_x(fp, ParseRow(time, recvData, recvSize));
 	}
-	if(file)
+	if (file)
 		fileClose(fp);
 
 	cout("キャプチャデータを出力しました。\n");
@@ -288,13 +288,13 @@ static uint GetNicIndex(autoList_t *strNicIpList)
 {
 	uint nicIndex = 0; // 最初のNIC
 
-	if(TargetNicIP)
+	if (TargetNicIP)
 	{
 		char *strIp;
 		uint index;
 
 		foreach(strNicIpList, strIp, index)
-			if(!strcmp(strIp, TargetNicIP))
+			if (!strcmp(strIp, TargetNicIP))
 				nicIndex = index;
 	}
 	cout("NIC -> %s\n", getLine(strNicIpList, nicIndex));
@@ -302,7 +302,7 @@ static uint GetNicIndex(autoList_t *strNicIpList)
 }
 static int IsKeep(void)
 {
-	if(handleWaitForMillis(StopEventHdl, 0)) // ? 停止イベント
+	if (handleWaitForMillis(StopEventHdl, 0)) // ? 停止イベント
 	{
 		cout("STOP_EVENT_OK\n");
 		return 0;
@@ -317,24 +317,24 @@ int main(int argc, char **argv)
 	StopEventHdl = eventOpen(PROG_UUID);
 
 readArgs:
-	if(argIs("/NIC"))
+	if (argIs("/NIC"))
 	{
 		TargetNicIP = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		file = nextArg();
 		goto readArgs;
 	}
 
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		eventSet(StopEventHdl);
 		goto endFunc;
 	}
 
-	if(file)
+	if (file)
 	{
 		cout("出力ファイル: %s\n", file);
 		createFile(file); // 出力テスト

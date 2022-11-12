@@ -8,7 +8,7 @@ static char *GetClusterExeFile(void)
 {
 	static char *file;
 
-	if(!file)
+	if (!file)
 		file = GetCollaboFile("C:\\Factory\\Tools\\Cluster.exe");
 
 	return file;
@@ -20,7 +20,7 @@ static void DoCluster(char *file, char *dir, int mode) // mode: "MR"
 
 	// file == dir ÇÃèÍçáÇ±ÇÃâ∫ï”ÇËÇ≈ error();
 
-	if(mode == 'M')
+	if (mode == 'M')
 	{
 		cout("< %s\n", dir);
 		cout("> %s\n", file);
@@ -38,7 +38,7 @@ static void DoCluster(char *file, char *dir, int mode) // mode: "MR"
 	}
 	coExecute_x(xcout("start \"\" /b /wait \"%s\" %s/%c \"%s\" \"%s\"", GetClusterExeFile(), ZC_WithoutInfo || mode == 'R' ? "" : "/I ", mode, file, dir));
 
-	if(mode == 'M')
+	if (mode == 'M')
 	{
 		errorCase(!existFile(file));
 	}
@@ -62,7 +62,7 @@ static char *GetPackExeFile(void)
 {
 	static char *file;
 
-	if(!file)
+	if (!file)
 		file = GetCollaboFile("C:\\app\\Kit\\Compress\\Compress.exe");
 
 	return file;
@@ -106,7 +106,7 @@ static int DoEncrypt(char *file, autoBlock_t *rawKey, int mode) // mode: "ED"
 
 	keyTableList = rngcphrCreateKeyTableList(rawKey);
 
-	if(mode == 'E')
+	if (mode == 'E')
 	{
 		rngcphrEncryptFile(file, keyTableList);
 		retval = 1;

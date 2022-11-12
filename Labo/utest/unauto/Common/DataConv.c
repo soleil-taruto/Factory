@@ -22,9 +22,9 @@ static void Test_lineToFairLocalPath(char *str, uint sz)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/L2FLP"))
+	if (argIs("/L2FLP"))
 	{
-		if(hasArgs(2))
+		if (hasArgs(2))
 		{
 			Test_lineToFairLocalPath(getArg(0), toValue(getArg(1)));
 		}

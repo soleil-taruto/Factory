@@ -23,7 +23,7 @@ void sha512_expand(autoBlock_t *block, uint exnum) // exnum: 0- (0 as noop)
 
 	for(index = 0; index < exnum; index++)
 	{
-		if(index)
+		if (index)
 			sha512_update(ctx, gndBlockVar(sha512_hash, 64, gab));
 
 		sha512_makeHash(ctx);

@@ -43,11 +43,11 @@ static void FindCleanJava(autoList_t *files)
 
 	foreach(files, file, index)
 	{
-		if(!_stricmp(getLocal(file), ".project"))
+		if (!_stricmp(getLocal(file), ".project"))
 		{
 			char *cpFile = changeLocal(file, ".classpath");
 
-			if(existFile(cpFile))
+			if (existFile(cpFile))
 			{
 				CleanJavaProject(file);
 			}
@@ -93,7 +93,7 @@ static void FindCleanProjects(char *dir) // dir - ソリューションのルートDIR
 
 	foreach(files, file, index)
 	{
-		if(
+		if (
 			!_stricmp("vbproj", getExt(file)) || // vb2008, vb2010
 			!_stricmp("vcproj", getExt(file)) || // vc2008
 			!_stricmp("vcxproj", getExt(file)) || // vc2010
@@ -170,7 +170,7 @@ static void FindClean(char *dir) // dir - 検索ルートDIR
 
 	foreach(files, file, index)
 	{
-		if(!_stricmp("sln", getExt(file))) // ? ソリューションファイル
+		if (!_stricmp("sln", getExt(file))) // ? ソリューションファイル
 		{
 			CleanSolution(file);
 		}
@@ -184,7 +184,7 @@ static void FindClean(char *dir) // dir - 検索ルートDIR
 }
 int main(int argc, char **argv)
 {
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		FindClean(nextArg());
 	}
@@ -192,9 +192,9 @@ int main(int argc, char **argv)
 	{
 		char *path = dropPath();
 
-		if(path)
+		if (path)
 		{
-			if(existFile(path))
+			if (existFile(path))
 			{
 				path = getParent(path);
 			}

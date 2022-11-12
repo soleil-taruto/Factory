@@ -35,7 +35,7 @@ void sockMonitor(
 
 		index = selectNicProc(strNicIpList);
 
-		if(index < getCount(strNicIpList))
+		if (index < getCount(strNicIpList))
 			strNicIp = strx(getLine(strNicIpList, index)); // 選択されたIP -> strNicIp
 		else
 			strNicIp = NULL; // キャンセルされた。
@@ -43,7 +43,7 @@ void sockMonitor(
 		releaseAutoList(nicIpList);
 		releaseDim(strNicIpList, 1);
 
-		if(!strNicIp)
+		if (!strNicIp)
 			goto l_cleanup;
 	}
 
@@ -78,7 +78,7 @@ void sockMonitor(
 		retval = SockWait(sock, RECVWAITMILLIS, 0);
 		errorCase(retval == -1);
 
-		if(retval)
+		if (retval)
 		{
 			retval = recv(sock, recvBuff, RECVBUFFSIZE, 0);
 			errorCase(retval < 1 || RECVBUFFSIZE < retval);

@@ -14,11 +14,11 @@ static void ShowCDList(autoList_t *lines, int chrFlg)
 		cout("%s %c %s\n", c_makeCompactStamp(NULL), chrFlg, line);
 
 #if 0
-		if(strlen(getLocal(line)) == 29) // Žb’è
+		if (strlen(getLocal(line)) == 29) // Žb’è
 		{
 			static sint processingCount;
 
-			if(chrFlg == '+')
+			if (chrFlg == '+')
 				processingCount++;
 			else
 				processingCount--;
@@ -82,14 +82,14 @@ static void DirCDMon(void)
 		{
 			autoList_t *list;
 
-			if(MonTarget == 'D')
+			if (MonTarget == 'D')
 				list = cmdDir_lsDirs(monDir);
 			else // F
 				list = cmdDir_lsFiles(monDir);
 
 			sortJLinesICase(list);
 
-			if(refElement(LastLists, monDir_index))
+			if (refElement(LastLists, monDir_index))
 			{
 				autoList_t *lastList = getList(LastLists, monDir_index);
 
@@ -108,7 +108,7 @@ int main(int argc, char **argv)
 	MonDirs = newList();
 	LastLists = newList();
 
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		MonTarget = 'F';
 	}
@@ -122,7 +122,7 @@ int main(int argc, char **argv)
 
 		addElement(MonDirs, (uint)dir);
 	}
-	if(!getCount(MonDirs))
+	if (!getCount(MonDirs))
 	{
 		addElement(MonDirs, (uint)getCwd());
 	}

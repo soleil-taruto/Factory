@@ -28,20 +28,20 @@ int main(int argc, char **argv)
 	autoBlock_t *kb;
 	autoList_t *ktlst;
 
-	if(argIs("/P")) // Passphrase
+	if (argIs("/P")) // Passphrase
 	{
 		sha512_makeHashLine(nextArg());
 		kbfile = NULL;
 		kb = recreateBlock(sha512_hash, 64);
 		goto initktlst;
 	}
-	if(argIs("/B")) // key Bundle
+	if (argIs("/B")) // key Bundle
 	{
 		kbfile = NULL;
 		kb = makeBlockHexLine(nextArg());
 		goto initktlst;
 	}
-	if(argIs("/F") || argIs("/KB")) // key-bundle File
+	if (argIs("/F") || argIs("/KB")) // key-bundle File
 	{
 		kbfile = strx(nextArg());
 		goto initkb;
@@ -73,9 +73,9 @@ int main(int argc, char **argv)
 			int doEncrypt;
 			int retval;
 
-			if(batchmode)
+			if (batchmode)
 			{
-				if(!hasArgs(1))
+				if (!hasArgs(1))
 					break;
 
 				infile = strx(nextArg());
@@ -87,12 +87,12 @@ int main(int argc, char **argv)
 				infile = dropPath();
 				cout("\n");
 
-				if(!infile)
+				if (!infile)
 					break;
 			}
 			errorCase(!existFile(infile));
 
-			if(!_stricmp(EXT_CIPHER, getExt(infile)))
+			if (!_stricmp(EXT_CIPHER, getExt(infile)))
 			{
 				outfile = changeExt(infile, "");
 				doEncrypt = 0;
@@ -113,7 +113,7 @@ int main(int argc, char **argv)
 			cout("Done!\n");
 			cout("Processing...\n");
 
-			if(doEncrypt)
+			if (doEncrypt)
 			{
 				rngcphrEncryptFile(outfile, ktlst);
 				retval = 1;
@@ -124,9 +124,9 @@ int main(int argc, char **argv)
 			cout("Done!\n");
 			cout("\n");
 
-			if(!retval) // ? meybe fault decryption
+			if (!retval) // ? meybe fault decryption
 			{
-				if(existFile(outfile))
+				if (existFile(outfile))
 					removeFile(outfile);
 
 				error();
@@ -138,7 +138,7 @@ int main(int argc, char **argv)
 		releaseAutoBlock(kb);
 		cphrReleaseKeyTableList(ktlst);
 
-		if(batchmode)
+		if (batchmode)
 			break;
 	}
 	cout("\\e\n");

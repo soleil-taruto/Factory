@@ -23,16 +23,16 @@ Stream_t;
 
 static void ReleaseStream(Stream_t *i)
 {
-	if(i->FStrm)
+	if (i->FStrm)
 		fileClose(i->FStrm);
 
-	if(i->Strm1)
+	if (i->Strm1)
 		ReleaseStream(i->Strm1);
 
-	if(i->Strm2)
+	if (i->Strm2)
 		ReleaseStream(i->Strm2);
 
-	if(i->BackedLine)
+	if (i->BackedLine)
 		memFree(i->BackedLine);
 
 	memFree(i);
@@ -41,12 +41,12 @@ static char *CMS_ReadLine(Stream_t *i)
 {
 	char *retLine;
 
-	if(i->BackedLine)
+	if (i->BackedLine)
 	{
 		retLine = i->BackedLine;
 		i->BackedLine = NULL;
 	}
-	else if(i->FStrm)
+	else if (i->FStrm)
 	{
 		retLine = readLine(i->FStrm);
 	}
@@ -55,15 +55,15 @@ static char *CMS_ReadLine(Stream_t *i)
 		char *line1 = CMS_ReadLine(i->Strm1);
 		char *line2 = CMS_ReadLine(i->Strm2);
 
-		if(!line1)
+		if (!line1)
 		{
 			retLine = line2;
 		}
-		else if(!line2)
+		else if (!line2)
 		{
 			retLine = line1;
 		}
-		else if(0 < strcmp(line1, line2)) // ? 1 > 2
+		else if (0 < strcmp(line1, line2)) // ? 1 > 2
 		{
 			retLine = line2;
 			i->Strm1->BackedLine = line1;
@@ -115,12 +115,12 @@ static void CascMergeSort(autoList_t *divfiles, char *outputfile) // Cascade? Me
 
 		for(linecnt = 0; ; linecnt++)
 		{
-			if(eqIntPulseSec(2, NULL))
+			if (eqIntPulseSec(2, NULL))
 				cout("linecnt: %I64u\n", linecnt);
 
 			line = CMS_ReadLine(root);
 
-			if(!line)
+			if (!line)
 				break;
 
 			writeLine_x(fp, line);
@@ -133,7 +133,7 @@ static void CascMergeSort(autoList_t *divfiles, char *outputfile) // Cascade? Me
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		char *inputfile;
 		char *divdir;
@@ -165,16 +165,16 @@ int main(int argc, char **argv)
 			{
 				line = readLine(rfp);
 
-				if(!line)
+				if (!line)
 					break;
 
 				writeLine_x(wfp, line);
 			}
 			fileClose(wfp);
 
-			if(linecnt < linenummax)
+			if (linecnt < linenummax)
 			{
-				if(!linecnt)
+				if (!linecnt)
 					removeFile(divfile);
 
 				memFree(divfile);
@@ -186,7 +186,7 @@ int main(int argc, char **argv)
 		cout("done\n");
 		return;
 	}
-	if(argIs("/DS"))
+	if (argIs("/DS"))
 	{
 		char *divdir;
 		autoList_t *files;
@@ -214,7 +214,7 @@ int main(int argc, char **argv)
 		releaseDim(files, 1);
 		return;
 	}
-	if(argIs("/DDS")) // "/D" + "/DS"
+	if (argIs("/DDS")) // "/D" + "/DS"
 	{
 		char *inputfile;
 		char *divdir;
@@ -246,13 +246,13 @@ int main(int argc, char **argv)
 				charcnt += strlen(line);
 				addElement(lines, (uint)line);
 
-				if(charnummax < charcnt || charnummax / 100 < getCount(lines))
+				if (charnummax < charcnt || charnummax / 100 < getCount(lines))
 					break;
 			}
 			cout("charcnt: %u\n", charcnt);
 			cout("linecnt: %u\n", getCount(lines));
 
-			if(getCount(lines) == 0)
+			if (getCount(lines) == 0)
 			{
 				releaseAutoList(lines);
 				break;
@@ -269,7 +269,7 @@ int main(int argc, char **argv)
 		fileClose(fp);
 		return;
 	}
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		char *divdir;
 		char *outputfile;

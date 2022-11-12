@@ -24,7 +24,7 @@ static void Collect(int keepHierarchy)
 	{
 		char *outPath;
 
-		if(keepHierarchy)
+		if (keepHierarchy)
 		{
 			outPath = combine_cx(outDir, lineToFairRelPath(path, strlen(outDir)));
 			createPath(outPath, 'X');

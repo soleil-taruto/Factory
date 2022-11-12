@@ -2,16 +2,16 @@
 
 int isEmptyJTkn(char *token)
 {
-	if(m_isEmpty(token))
+	if (m_isEmpty(token))
 		return 1;
 
-	if(!isJLine(token, 1, 0, 0, 1))
+	if (!isJLine(token, 1, 0, 0, 1))
 		return 1;
 
-	if(token[0] == ' ')
+	if (token[0] == ' ')
 		return 1;
 
-	if(strchr(token, '\0')[-1] == ' ')
+	if (strchr(token, '\0')[-1] == ' ')
 		return 1;
 
 	return 0;
@@ -59,7 +59,7 @@ char *strxl(char *line, uint count)
 }
 char *strz(char *buffer, char *line)
 {
-	if(!buffer)
+	if (!buffer)
 		buffer = (char *)memAlloc(1);
 
 	buffer[0] = '\0';
@@ -85,7 +85,7 @@ void replaceChar(char *line, int findChr, int repChr) // mbs_
 
 	for(p = line; *p; p = mbsNext(p))
 	{
-		if(*p == findChr)
+		if (*p == findChr)
 		{
 			*p = repChr;
 		}
@@ -143,15 +143,15 @@ sint mbs_strnicmp(char *line1, char *line2, uint count)
 
 	for(index = 0; index < count; index++)
 	{
-		if(line1[index] == '\0')
+		if (line1[index] == '\0')
 		{
 			goto founddiff;
 		}
-		if(isMbc(line1 + index))
+		if (isMbc(line1 + index))
 		{
-			if(line1[index] != line2[index]) goto founddiff;
+			if (line1[index] != line2[index]) goto founddiff;
 			index++;
-			if(line1[index] != line2[index]) goto founddiff;
+			if (line1[index] != line2[index]) goto founddiff;
 		}
 		else
 		{
@@ -161,7 +161,7 @@ sint mbs_strnicmp(char *line1, char *line2, uint count)
 			chr1 = m_tolower(chr1);
 			chr2 = m_tolower(chr2);
 
-			if(chr1 != chr2)
+			if (chr1 != chr2)
 			{
 				return chr1 - chr2;
 			}
@@ -182,7 +182,7 @@ char *mbs_strchr(char *line, int findChr)
 
 	for(p = line; *p; p = mbsNext(p))
 	{
-		if(*p == findChr)
+		if (*p == findChr)
 		{
 			return p;
 		}
@@ -196,7 +196,7 @@ char *mbs_strrchr(char *line, int findChr) // _mbsrchr() ‚Æ“¯‚¶ŠÖ”‚Å‚Í‚È‚¢‚©H
 
 	for(p = line; *p; p = mbsNext(p))
 	{
-		if(*p == findChr)
+		if (*p == findChr)
 		{
 			foundPtr = p;
 		}
@@ -207,7 +207,7 @@ char *strchrEnd(char *line, int findChr)
 {
 	char *p = strchr(line, findChr);
 
-	if(!p)
+	if (!p)
 		p = strchr(line, '\0');
 
 	errorCase(!p);
@@ -221,7 +221,7 @@ char *strchrNext(char *line, int findChr)
 
 	p = strchr(line, findChr);
 
-	if(p) p++;
+	if (p) p++;
 	else  p = strchr(line, '\0');
 
 	return p;
@@ -264,12 +264,12 @@ sint numstrcmp(char *str1, char *str2)
 {
 	sint ret = getNumStrSign(str1) - getNumStrSign(str2);
 
-	if(ret)
+	if (ret)
 		return ret;
 
 	ret = (sint)strlen(str1) - (sint)strlen(str2); // Œ…”‚ª‘½‚¢•û‚Í•¶Žš—ñ‚Æ‚µ‚Ä’·‚¢‚Í‚¸B
 
-	if(ret)
+	if (ret)
 		return ret;
 
 	ret = strcmp(str1, str2);
@@ -304,7 +304,7 @@ static int Prv_EndsWith(char *line1, char *line2, int (*func_strcmp)(char *, cha
 	uint len1 = strlen(line1);
 	uint len2 = strlen(line2);
 
-	if(len1 < len2)
+	if (len1 < len2)
 		return 0;
 
 	return !func_strcmp(line1 + len1 - len2, line2);
@@ -325,14 +325,14 @@ char *mbs_strstrCase(char *line, char *ptn, int ignoreCase)
 {
 	uint ptnlen = strlen(ptn);
 
-	if(ptnlen <= strlen(line))
+	if (ptnlen <= strlen(line))
 	{
 		char *end = strchr(line, '\0') - ptnlen;
 		char *p;
 
 		for(p = line; p <= end; p = mbsNext(p))
 		{
-			if((ignoreCase ? mbs_strnicmp : strncmp)(p, ptn, ptnlen) == 0)
+			if ((ignoreCase ? mbs_strnicmp : strncmp)(p, ptn, ptnlen) == 0)
 			{
 				return p;
 			}
@@ -353,7 +353,7 @@ char *strstrNextCase(char *line, char *ptn, int ignoreCase) // mbs_
 {
 	char *p = mbs_strstrCase(line, ptn, ignoreCase);
 
-	if(p)
+	if (p)
 		p += strlen(ptn);
 
 	return p;
@@ -370,7 +370,7 @@ char *strstrEndCase(char *line, char *ptn, int ignoreCase) // mbs_
 {
 	char *p = mbs_strstrCase(line, ptn, ignoreCase);
 
-	if(!p)
+	if (!p)
 		p = strchr(line, '\0');
 
 	errorCase(!p);
@@ -393,7 +393,7 @@ char *strrstrCase(char *line, char *ptn, int ignoreCase) // mbs_
 	{
 		char *p = mbs_strstrCase(line, ptn, ignoreCase);
 
-		if(!p)
+		if (!p)
 			break;
 
 		ret = p;
@@ -457,7 +457,7 @@ char *replaceLineLoop(char *line, char *ptn1, char *ptn2, int ignoreCase, uint l
 	{
 		line = replaceLine(line, ptn1, ptn2, ignoreCase);
 
-		if(!LastReplacedCount)
+		if (!LastReplacedCount)
 			break;
 
 		loopMax--;
@@ -476,17 +476,17 @@ static uchar CB_Buff[CB_MINSIZE];
 
 void copyBlock(void *dest, void *src, uint size) // memcpy() ‚ÆˆÙ‚È‚èA—Ìˆæ‚Ìd•¡‚ð‹–‰Â‚·‚éB
 {
-	if(dest == src)
+	if (dest == src)
 		return;
 
-	if(!size) // memcpy(,,0) ‚µ‚Ä‚à‘åä•v‚¾‚ÆŽv‚¤‚¯‚ÇA”O‚Ì‚½‚ß‰ñ”ð
+	if (!size) // memcpy(,,0) ‚µ‚Ä‚à‘åä•v‚¾‚ÆŽv‚¤‚¯‚ÇA”O‚Ì‚½‚ß‰ñ”ð
 		return;
 
-	if((uchar *)dest + size <= src || (uchar *)src + size <= dest) // ? d•¡ƒiƒV
+	if ((uchar *)dest + size <= src || (uchar *)src + size <= dest) // ? d•¡ƒiƒV
 	{
 		memcpy(dest, src, size);
 	}
-	else if(size <= CB_MINSIZE)
+	else if (size <= CB_MINSIZE)
 	{
 		memcpy(CB_Buff, src, size);
 		memcpy(dest, CB_Buff, size);
@@ -495,12 +495,12 @@ void copyBlock(void *dest, void *src, uint size) // memcpy() ‚ÆˆÙ‚È‚èA—Ìˆæ‚Ìd•
 	{
 		uint half = size / 2;
 
-		if(dest < src)
+		if (dest < src)
 			copyBlock(dest, src, half);
 
 		copyBlock((uchar *)dest + half, (uchar *)src + half, size - half);
 
-		if(src < dest)
+		if (src < dest)
 			copyBlock(dest, src, half);
 	}
 }
@@ -512,7 +512,7 @@ void removeChar(char *line, int chr)
 {
 	char *n = strchr(line, chr);
 
-	if(n)
+	if (n)
 	{
 		char *f;
 
@@ -520,7 +520,7 @@ void removeChar(char *line, int chr)
 
 		for(f = n + 1; *f; f++)
 		{
-			if(*f != chr)
+			if (*f != chr)
 			{
 				*n++ = *f;
 			}
@@ -533,7 +533,7 @@ void reverseLine(char *line)
 	char *lnear = line;
 	char *lfar = strchr(line, '\0');
 
-	if(lnear < lfar)
+	if (lnear < lfar)
 	{
 		lfar--;
 
@@ -568,7 +568,7 @@ void trimLead(char *line, int delimChr)
 
 	for(p = line; *p; p++)
 	{
-		if(*p != delimChr)
+		if (*p != delimChr)
 		{
 			break;
 		}
@@ -581,7 +581,7 @@ void trimTrail(char *line, int delimChr)
 
 	for(p = strchr(line, '\0'); line < p; p--)
 	{
-		if(p[-1] != delimChr)
+		if (p[-1] != delimChr)
 		{
 			break;
 		}
@@ -598,7 +598,7 @@ void trimSequ(char *line, int delimChr)
 	{
 		n++;
 
-		if(*n == delimChr)
+		if (*n == delimChr)
 		{
 			char *f = n;
 
@@ -610,7 +610,7 @@ void trimSequ(char *line, int delimChr)
 
 			while(*f)
 			{
-				if(*f == delimChr)
+				if (*f == delimChr)
 					while(f[1] == delimChr)
 						f++;
 
@@ -741,7 +741,7 @@ char *kanjiPunch(char *str, int knjChr)
 
 	for(p = str; *p; p++)
 	{
-		if(isMbc(p))
+		if (isMbc(p))
 		{
 			*p++ = knjChr;
 			*p = knjChr;
@@ -771,7 +771,7 @@ void setStrLenMax(char *str, uint lenmax)
 #if 1
 	str[strlen_max(str, lenmax)] = '\0';
 #else // old_almost_same
-	if(lenmax < strlen(str))
+	if (lenmax < strlen(str))
 		str[lenmax] = '\0';
 #endif
 }
@@ -781,29 +781,29 @@ void toAsciiLine(char *str, int okRet, int okTab, int okSpc)
 
 	for(p = str; *p; p++)
 	{
-		if(*p == '\r') // CR-LF –”‚Í CR ‚ð LF ‚É‚·‚éB
+		if (*p == '\r') // CR-LF –”‚Í CR ‚ð LF ‚É‚·‚éB
 		{
-			if(p[1] == '\n')
+			if (p[1] == '\n')
 				copyLine(p, p + 1);
 			else
 				*p = '\n';
 
 			goto found_lf;
 		}
-		else if(*p == '\n')
+		else if (*p == '\n')
 		{
 		found_lf:
-			if(!okRet) { goto enc_char; }
+			if (!okRet) { goto enc_char; }
 		}
-		else if(*p == '\t')
+		else if (*p == '\t')
 		{
-			if(!okTab) { goto enc_char; }
+			if (!okTab) { goto enc_char; }
 		}
-		else if(*p == ' ')
+		else if (*p == ' ')
 		{
-			if(!okSpc) { goto enc_char; }
+			if (!okSpc) { goto enc_char; }
 		}
-		else if(m_isRange(*p, '\x21', '\x7e'))
+		else if (m_isRange(*p, '\x21', '\x7e'))
 		{
 			// noop
 		}
@@ -830,19 +830,19 @@ static uchar *TokDelims;
 
 void tokinit(char *str, char *delims)
 {
-	if(str)
+	if (str)
 	{
 		TokPtr = str;
 		memFree(TokDelims);
 		TokDelims = NULL;
 	}
-	if(delims)
+	if (delims)
 	{
 		char *p;
 
-		if(*delims)
+		if (*delims)
 		{
-			if(!TokDelims)
+			if (!TokDelims)
 				TokDelims = memAlloc(32);
 
 			memset(TokDelims, 0x00, 32);
@@ -853,7 +853,7 @@ void tokinit(char *str, char *delims)
 
 				TokDelims[delim / 8] |= 1 << delim % 8;
 
-				if(!delim)
+				if (!delim)
 					break;
 			}
 		}
@@ -870,12 +870,12 @@ char *toknext(char *str, char *delims)
 
 	tokinit(str, delims);
 
-	if(!TokPtr)
+	if (!TokPtr)
 		return NULL;
 
 	ret = TokPtr;
 
-	if(TokDelims)
+	if (TokDelims)
 	{
 		char *p;
 		uint upchr;
@@ -884,10 +884,10 @@ char *toknext(char *str, char *delims)
 		{
 			upchr = *p;
 
-			if(TokDelims[upchr / 8] & 1 << upchr % 8)
+			if (TokDelims[upchr / 8] & 1 << upchr % 8)
 				break;
 		}
-		if(upchr)
+		if (upchr)
 		{
 			*p = '\0';
 			p++;

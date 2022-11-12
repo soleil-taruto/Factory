@@ -24,7 +24,7 @@ static void RLFS_LineAction(char *line)
 	{
 		uint index = MaskStartIndex + count;
 
-		if(lineLen <= index)
+		if (lineLen <= index)
 			break;
 
 		line[index] = '*';

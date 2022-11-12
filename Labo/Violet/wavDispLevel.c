@@ -27,7 +27,7 @@ static void DispLevel(void)
 		{
 			ndx = deciSec * HZ_PER_DECISEC + index;
 
-			if(getCount(WavData) <= ndx)
+			if (getCount(WavData) <= ndx)
 				break;
 
 			lv = getElement(WavData, ndx) >> 16;
@@ -40,7 +40,7 @@ static void DispLevel(void)
 			m_maxim(hi, lv);
 			m_minim(lw, lv);
 		}
-		if(!index)
+		if (!index)
 			break;
 
 		cout("%02u:%02u.%u %6d, %6d\n"
@@ -62,7 +62,7 @@ static void DispLevel_F(char *file)
 }
 int main(int argc, char **argv)
 {
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		char *file = nextArg();
 

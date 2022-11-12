@@ -21,7 +21,7 @@ static void PaintMap(autoTable_t *map, uint x, uint y, uint target, uint dest)
 		y = getElement(yList, rIndex);
 		rIndex++;
 
-		if(
+		if (
 			x < getTableWidth(map) &&
 			y < getTableHeight(map) &&
 			getTableCell(map, x, y) == target
@@ -52,7 +52,7 @@ static uint MapGetCount(autoTable_t *map, uint target)
 	for(x = 0; x < getTableWidth(map); x++)
 	for(y = 0; y < getTableHeight(map); y++)
 	{
-		if(getTableCell(map, x, y) == target)
+		if (getTableCell(map, x, y) == target)
 		{
 			count++;
 		}
@@ -107,12 +107,12 @@ static void MM_BattlePos(int x, int y)
 			sy %= Map_H;
 		}
 
-		if(
+		if (
 			0 <= sx && sx < Map_W &&
 			0 <= sy && sy < Map_H
 			)
 		{
-			if(getTableCell(Map, sx, sy) == COLOR_WALL)
+			if (getTableCell(Map, sx, sy) == COLOR_WALL)
 			{
 				wallcnt++;
 			}
@@ -146,7 +146,7 @@ static void MM_Paint(uint x, uint y, uint target, uint dest)
 }
 static void MM_AroundPos(uint x, uint y)
 {
-	if(getTableCell(Map, x, y) == COLOR_GROUND)
+	if (getTableCell(Map, x, y) == COLOR_GROUND)
 	{
 		MM_Paint(x, y, COLOR_GROUND, COLOR_WALL);
 	}
@@ -202,7 +202,7 @@ static void MM_FindMaximum(void)
 	for(x = 0; x < Map_W; x++)
 	for(y = 0; y < Map_H; y++)
 	{
-		if(getTableCell(szMap, x, y) == 1)
+		if (getTableCell(szMap, x, y) == 1)
 		{
 			uint count;
 
@@ -211,7 +211,7 @@ static void MM_FindMaximum(void)
 			PaintMap(szMap, x, y, 1, nuttaCell);
 			count = MapGetCount(szMap, nuttaCell);
 
-			if(MaximSize < count)
+			if (MaximSize < count)
 			{
 				cout("M1: %u %u %u\n", x, y, count);
 
@@ -223,7 +223,7 @@ static void MM_FindMaximum(void)
 				Maxim_Y = y;
 				MaximSize = count;
 			}
-			else if(Maxim2ndSize < count)
+			else if (Maxim2ndSize < count)
 			{
 				cout("M2: %u %u %u\n", x, y, count);
 
@@ -256,7 +256,7 @@ static void MM_FindNearestFrom(int fx, int fy, uint target)
 	for(x = 0; x < Map_W; x++)
 	for(y = 0; y < Map_H; y++)
 	{
-		if(getTableCell(Map, x, y) == target)
+		if (getTableCell(Map, x, y) == target)
 		{
 			uint dx = abs(x - fx);
 			uint dy = abs(y - fy);
@@ -264,7 +264,7 @@ static void MM_FindNearestFrom(int fx, int fy, uint target)
 
 			sqr = (uint64)dx * dx + (uint64)dy * dy;
 
-			if(sqr < NF_Sqr)
+			if (sqr < NF_Sqr)
 			{
 				NF_X = x;
 				NF_Y = y;
@@ -310,8 +310,8 @@ static void MM_JoinNearest(void)
 	int y2 = Nrst2_Y;
 
 #if 1
-	if(x2 < x1) m_swap(x1, x2, int);
-	if(y2 < y1) m_swap(y1, y2, int);
+	if (x2 < x1) m_swap(x1, x2, int);
+	if (y2 < y1) m_swap(y1, y2, int);
 
 	{
 		int x;
@@ -320,7 +320,7 @@ static void MM_JoinNearest(void)
 		for(x = x1; x <= x2; x++)
 		for(y = y1; y <= y2; y++)
 		{
-			if(x == x1 || x == x2 || y == y1 || y == y2)
+			if (x == x1 || x == x2 || y == y1 || y == y2)
 			{
 				setTableCell(Map, x, y, COLOR_GROUND_NEAREST);
 			}
@@ -329,7 +329,7 @@ static void MM_JoinNearest(void)
 #else // OLD
 	while(x1 != x2 || y1 != y2)
 	{
-		if(abs(x1 - x2) < abs(y1 - y2))
+		if (abs(x1 - x2) < abs(y1 - y2))
 		{
 			y1 += m_sign(y2 - y1);
 			y2 += m_sign(y1 - y2);
@@ -418,7 +418,7 @@ int main(int argc, char **argv)
 		MM_FindMaximum();
 		LOGPOS();
 
-		if(!Maxim2ndSize) // ? 2‚ÂŒ©‚Â‚©‚ç‚È‚©‚Á‚½B
+		if (!Maxim2ndSize) // ? 2‚ÂŒ©‚Â‚©‚ç‚È‚©‚Á‚½B
 			break;
 
 		LOGPOS();

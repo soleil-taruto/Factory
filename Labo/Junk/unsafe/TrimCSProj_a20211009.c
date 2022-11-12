@@ -42,7 +42,7 @@ static int IsMember(autoList_t *lines, uint targLineIndex)
 		startsWith(line, "\t\tprivate ") ||
 		startsWith(line, "\t\tprotected ");
 
-	if(!status)
+	if (!status)
 		return 0;
 
 	// 上端を検索 ...
@@ -54,7 +54,7 @@ static int IsMember(autoList_t *lines, uint targLineIndex)
 			startsWith(line, "\t\t[") ||
 			startsWith(line, "\t\t/// ");
 
-		if(!status)
+		if (!status)
 			break;
 	}
 	IM_StartLineIndex = index;
@@ -65,23 +65,23 @@ static int IsMember(autoList_t *lines, uint targLineIndex)
 	index++;
 	line = refLine(lines, index);
 
-	if(startsWith(line, "\t\t\t: "))
+	if (startsWith(line, "\t\t\t: "))
 	{
 		index++;
 		line = refLine(lines, index);
 
-		if(strcmp(line, "\t\t{ }"))
+		if (strcmp(line, "\t\t{ }"))
 			return 0;
 
 		IM_EndLineIndex = index + 1;
 		return 1;
 	}
-	if(!strcmp(line, "\t\t{ }"))
+	if (!strcmp(line, "\t\t{ }"))
 	{
 		IM_EndLineIndex = index + 1;
 		return 1;
 	}
-	if(strcmp(line, "\t\t{"))
+	if (strcmp(line, "\t\t{"))
 	{
 		IM_EndLineIndex = index;
 		return 1;
@@ -90,12 +90,12 @@ static int IsMember(autoList_t *lines, uint targLineIndex)
 	{
 		index++;
 
-		if(getCount(lines) <= index)
+		if (getCount(lines) <= index)
 			return 0;
 
 		line = getLine(lines, index);
 
-		if(!strcmp(line, "\t\t}"))
+		if (!strcmp(line, "\t\t}"))
 			break;
 
 		status =
@@ -103,7 +103,7 @@ static int IsMember(autoList_t *lines, uint targLineIndex)
 			startsWith(line, "#") ||
 			startsWith(line, "\t\t\t");
 
-		if(!status)
+		if (!status)
 			return 0;
 	}
 	IM_EndLineIndex = index + 1;
@@ -120,7 +120,7 @@ static int IsMember_T3(autoList_t *lines, uint targLineIndex)
 		startsWith(line, "\t\t\tprivate ") ||
 		startsWith(line, "\t\t\tprotected ");
 
-	if(!status)
+	if (!status)
 		return 0;
 
 	// 上端を検索 ...
@@ -132,7 +132,7 @@ static int IsMember_T3(autoList_t *lines, uint targLineIndex)
 			startsWith(line, "\t\t\t[") ||
 			startsWith(line, "\t\t\t/// ");
 
-		if(!status)
+		if (!status)
 			break;
 	}
 	IM_StartLineIndex = index;
@@ -143,23 +143,23 @@ static int IsMember_T3(autoList_t *lines, uint targLineIndex)
 	index++;
 	line = refLine(lines, index);
 
-	if(startsWith(line, "\t\t\t\t: "))
+	if (startsWith(line, "\t\t\t\t: "))
 	{
 		index++;
 		line = refLine(lines, index);
 
-		if(strcmp(line, "\t\t\t{ }"))
+		if (strcmp(line, "\t\t\t{ }"))
 			return 0;
 
 		IM_EndLineIndex = index + 1;
 		return 1;
 	}
-	if(!strcmp(line, "\t\t\t{ }"))
+	if (!strcmp(line, "\t\t\t{ }"))
 	{
 		IM_EndLineIndex = index + 1;
 		return 1;
 	}
-	if(strcmp(line, "\t\t\t{"))
+	if (strcmp(line, "\t\t\t{"))
 	{
 		IM_EndLineIndex = index;
 		return 1;
@@ -168,12 +168,12 @@ static int IsMember_T3(autoList_t *lines, uint targLineIndex)
 	{
 		index++;
 
-		if(getCount(lines) <= index)
+		if (getCount(lines) <= index)
 			return 0;
 
 		line = getLine(lines, index);
 
-		if(!strcmp(line, "\t\t\t}"))
+		if (!strcmp(line, "\t\t\t}"))
 			break;
 
 		status =
@@ -181,7 +181,7 @@ static int IsMember_T3(autoList_t *lines, uint targLineIndex)
 			startsWith(line, "#") ||
 			startsWith(line, "\t\t\t\t");
 
-		if(!status)
+		if (!status)
 			return 0;
 	}
 	IM_EndLineIndex = index + 1;
@@ -216,7 +216,7 @@ LOGPOS();
 
 file = makeFullPath("SimpleWebServer.cs"); // g
 
-		if(!_stricmp("cs", getExt(file)))
+		if (!_stricmp("cs", getExt(file)))
 		{
 			autoList_t *lines = readLines(file); // ソースファイルから読み込み
 			char *line;
@@ -224,7 +224,7 @@ file = makeFullPath("SimpleWebServer.cs"); // g
 
 			foreach(lines, line, line_index)
 			{
-				if(
+				if (
 					IsMember(lines, line_index) ||
 					IsMember_T3(lines, line_index)
 					)
@@ -244,7 +244,7 @@ file = makeFullPath("SimpleWebServer.cs"); // g
 					writeLines(file, emLines);
 copyFile_cx(file, toCreatableTildaPath(combine("C:\\temp", getLocal(file)), IMAX)); // test test test test test
 
-					if(TryBuild())
+					if (TryBuild())
 					{
 						LOGPOS();
 						releaseDim(lines, 1);
@@ -264,7 +264,7 @@ copyFile_cx(file, toCreatableTildaPath(combine("C:\\temp", getLocal(file)), IMAX
 	}
 LOGPOS();
 
-	if(deletedFlag)
+	if (deletedFlag)
 		goto restart;
 
 LOGPOS();
@@ -301,7 +301,7 @@ static void Main2_Solution(void)
 
 	foreach(files, file, index)
 	{
-		if(!_stricmp("sln", getExt(file)))
+		if (!_stricmp("sln", getExt(file)))
 		{
 			errorCase(slnFile); // ? 2つ目
 			slnFile = strx(file);

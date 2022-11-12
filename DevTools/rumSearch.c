@@ -34,7 +34,7 @@ static int ReadChar(uint64 index)
 {
 	int chr;
 
-	if(index != RIndex)
+	if (index != RIndex)
 	{
 		fileSeek(RFp, SEEK_SET, index);
 		RIndex = index;
@@ -53,11 +53,11 @@ static void DispRange(sint64 start, sint64 end, sint64 fileSize)
 
 	for(index = start; index <= end; index++)
 	{
-		if(0 <= index && index < fileSize)
+		if (0 <= index && index < fileSize)
 		{
 			chr = ReadChar((uint64)index);
 
-			if(0x20 <= chr && chr <= 0x7e || 0xa1 <= chr && chr <= 0xdf)
+			if (0x20 <= chr && chr <= 0x7e || 0xa1 <= chr && chr <= 0xdf)
 			{
 				// noop
 			}
@@ -82,17 +82,17 @@ static void SearchEntFile(char *entFile, char *file, char *revision, char *rumDi
 	uint matchcnt;
 	int chr;
 
-	if(SpecExts)
+	if (SpecExts)
 	{
 		char *fileExt = getExt(file);
 		char *ext;
 		uint index;
 
 		foreach(SpecExts, ext, index)
-			if(!_stricmp(ext, fileExt))
+			if (!_stricmp(ext, fileExt))
 				break;
 
-		if(!ext) // ? SpecExts に一致する拡張子が無い -> 検索対象外
+		if (!ext) // ? SpecExts に一致する拡張子が無い -> 検索対象外
 			return;
 	}
 	fndPtnSize = strlen(FindPattern);
@@ -110,42 +110,42 @@ static void SearchEntFile(char *entFile, char *file, char *revision, char *rumDi
 		{
 			int chr = ReadChar(index + matchcnt);
 
-			if(!matchcnt && chr == '\n')
+			if (!matchcnt && chr == '\n')
 				newLineFlag = 1;
 
-			if(IgnoreCase)
+			if (IgnoreCase)
 				chr = m_tolower(chr);
 
-			if(chr != FindPattern[matchcnt])
+			if (chr != FindPattern[matchcnt])
 				break;
 		}
-		if(matchcnt == fndPtnSize) // ? 一致した。
+		if (matchcnt == fndPtnSize) // ? 一致した。
 		{
-			if(TokenOnlyMode)
+			if (TokenOnlyMode)
 			{
-				if(0 < index) // ? 一致した場所がファイルの先頭ではない。
+				if (0 < index) // ? 一致した場所がファイルの先頭ではない。
 				{
 					chr = ReadChar(index - 1);
 
-					if('\x20' < chr)
+					if ('\x20' < chr)
 						goto notMatch;
 				}
-				if(index + fndPtnSize < fileSize) // ? 一致した場所がファイルの終端ではない。
+				if (index + fndPtnSize < fileSize) // ? 一致した場所がファイルの終端ではない。
 				{
 					chr = ReadChar(index + fndPtnSize);
 
-					if('\x20' < chr)
+					if ('\x20' < chr)
 						goto notMatch;
 				}
 			}
 
 			// Found
 
-			if(!fndcnt)
+			if (!fndcnt)
 			{
 				TotalFileCount++;
 
-				if(findElement(FoundRumDirs, (uint)rumDir, simpleComp) == getCount(FoundRumDirs))
+				if (findElement(FoundRumDirs, (uint)rumDir, simpleComp) == getCount(FoundRumDirs))
 					addElement(FoundRumDirs, (uint)rumDir);
 
 				cout("%s\n", rumDir);
@@ -180,7 +180,7 @@ static void SearchEntFile(char *entFile, char *file, char *revision, char *rumDi
 		notMatch:
 			index++;
 		}
-		if(newLineFlag)
+		if (newLineFlag)
 			linecnt++;
 	}
 	fileClose(RFp);
@@ -235,26 +235,26 @@ static void SearchRumDir(char *rumDir)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/E"))
+	if (argIs("/E"))
 	{
 		SpecExts = tokenize(nextArg(), '.');
 		goto readArgs;
 	}
-	if(argIs("/I"))
+	if (argIs("/I"))
 	{
 		IgnoreCase = 1;
 		goto readArgs;
 	}
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		TokenOnlyMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		char *dir = nextArg();
 
-		if(!RumDirs)
+		if (!RumDirs)
 			RumDirs = newList();
 
 		dir = makeFullPath(dir);
@@ -269,10 +269,10 @@ readArgs:
 	FindPattern = nextArg();
 	errorCase(!*FindPattern);
 
-	if(IgnoreCase)
+	if (IgnoreCase)
 		toLowerLine(FindPattern);
 
-	if(!RumDirs)
+	if (!RumDirs)
 	{
 		autoList_t *dirs = lssDirs(".");
 		char *dir;
@@ -281,7 +281,7 @@ readArgs:
 		RumDirs = newList();
 
 		foreach(dirs, dir, index)
-			if(!_stricmp(RUM_DIR_EXT, getExt(dir)))
+			if (!_stricmp(RUM_DIR_EXT, getExt(dir)))
 				addElement(RumDirs, (uint)strx(dir));
 
 		releaseDim(dirs, 1);

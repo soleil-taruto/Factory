@@ -32,15 +32,15 @@ void combSort(autoList_t *list, sint (*funcComp)(uint, uint))
 	{
 		span = (uint)(((uint64)span * 10) / 13); //(uint)(span / 1.3);
 
-		if(span < 2)
+		if (span < 2)
 			break;
 
-		if(span == 9 || span == 10)
+		if (span == 9 || span == 10)
 			span = 11;
 
 		for(nearidx = 0, faridx = span; faridx < getCount(list); nearidx++, faridx++)
 		{
-			if(0 < funcComp(getElement(list, nearidx), getElement(list, faridx)))
+			if (0 < funcComp(getElement(list, nearidx), getElement(list, faridx)))
 			{
 				swapElement(list, nearidx, faridx);
 			}
@@ -60,12 +60,12 @@ void selectionSort(autoList_t *list, sint (*funcComp)(uint, uint)) // 安定ソート
 
 		for(faridx = nearidx + 1; faridx < getCount(list); faridx++)
 		{
-			if(0 < funcComp(getElement(list, minidx), getElement(list, faridx)))
+			if (0 < funcComp(getElement(list, minidx), getElement(list, faridx)))
 			{
 				minidx = faridx;
 			}
 		}
-		if(minidx != nearidx)
+		if (minidx != nearidx)
 		{
 			swapElement(list, nearidx, minidx);
 		}
@@ -97,7 +97,7 @@ void rapidSort(autoList_t *list, sint (*funcComp)(uint, uint))
 	uint faridx;
 
 	/*
-	if(getCount(list) < 2) // ? ソート不要
+	if (getCount(list) < 2) // ? ソート不要
 	{
 		goto endsort;
 	}
@@ -114,19 +114,19 @@ void rapidSort(autoList_t *list, sint (*funcComp)(uint, uint))
 		depth = unaddElement(rangeStack);
 
 		/*
-		if(endnextidx < startidx + 2) // ? ソート不要
+		if (endnextidx < startidx + 2) // ? ソート不要
 		{
 			continue;
 		}
 		*/
-		if(endnextidx - startidx < CUTOVER)
+		if (endnextidx - startidx < CUTOVER)
 		{
 			autoList_t sublist = gndSubElements(list, startidx, endnextidx - startidx);
 
 			selectionSort(&sublist, funcComp);
 			continue;
 		}
-		if(ABANDON < depth)
+		if (ABANDON < depth)
 		{
 #if 1
 			autoList_t sublist = gndSubElements(list, startidx, endnextidx - startidx);
@@ -176,19 +176,19 @@ void rapidSort(autoList_t *list, sint (*funcComp)(uint, uint))
 			}
 #endif
 
-			if(nearidx == faridx)
+			if (nearidx == faridx)
 			{
 				break;
 			}
 
 			swapElement(list, nearidx, faridx);
 
-			if(nearidx == pivotidx)
+			if (nearidx == pivotidx)
 			{
 				pivotidx = faridx;
 				nearidx++;
 			}
-			else if(faridx == pivotidx)
+			else if (faridx == pivotidx)
 			{
 				pivotidx = nearidx;
 				faridx--;
@@ -251,10 +251,10 @@ void rapidSortSubColumns(autoList_t *list, sint (*funcComp)(uint, uint), autoLis
 
 		we[wei++] = element;
 
-		if(subColumn)
+		if (subColumn)
 			we[wei++] = getElement(subColumn, index);
 
-		if(subColumns)
+		if (subColumns)
 			foreach(subColumns, sc, sc_index)
 				we[wei++] = getElement(sc, index);
 
@@ -270,10 +270,10 @@ void rapidSortSubColumns(autoList_t *list, sint (*funcComp)(uint, uint), autoLis
 
 		setElement(list, index, we[wei++]);
 
-		if(subColumn)
+		if (subColumn)
 			setElement(subColumn, index, we[wei++]);
 
-		if(subColumns)
+		if (subColumns)
 			foreach(subColumns, sc, sc_index)
 				setElement(sc, index, we[wei++]);
 
@@ -294,7 +294,7 @@ sint strcmp3(char *line1, char *line2) // mbs_
 {
 	sint retval = mbs_stricmp(line1, line2);
 
-	if(retval)
+	if (retval)
 		return retval;
 
 	return strcmp2(line1, line2);
@@ -306,7 +306,7 @@ sint strcmp2(char *line1, char *line2)
 #else
 	sint retval = strcmp(line1, line2);
 
-	if(retval)
+	if (retval)
 		return retval;
 
 	return m_simpleComp(line1, line2);
@@ -316,10 +316,10 @@ sint simpleComp(uint v1, uint v2)
 {
 	return m_simpleComp(v1, v2);
 /*
-	if(v1 < v2)
+	if (v1 < v2)
 		return -1;
 
-	if(v2 < v1)
+	if (v2 < v1)
 		return 1;
 
 	return 0;
@@ -327,10 +327,10 @@ sint simpleComp(uint v1, uint v2)
 }
 sint simpleComp64(uint64 v1, uint64 v2)
 {
-	if(v1 < v2)
+	if (v1 < v2)
 		return -1;
 
-	if(v2 < v1)
+	if (v2 < v1)
 		return 1;
 
 	return 0;
@@ -343,7 +343,7 @@ sint pSimpleComp2(uint v1, uint v2)
 {
 	sint retval = pSimpleComp(v1, v2);
 
-	if(retval)
+	if (retval)
 		return retval;
 
 	return m_simpleComp(v1, v2);
@@ -362,11 +362,11 @@ uint binSearch(autoList_t *list, uint target, sint (*funcComp)(uint, uint))
 
 		comp = funcComp(target, getElement(list, mid));
 
-		if(0 < comp)
+		if (0 < comp)
 		{
 			p = mid + 1;
 		}
-		else if(comp < 0)
+		else if (comp < 0)
 		{
 			q = mid;
 		}
@@ -395,7 +395,7 @@ uint findBoundNearestMatch(autoList_t *list, uint target, sint (*funcComp)(uint,
 
 		comp = funcComp(target, getElement(list, m));
 
-		if(0 < comp) // list[m] < target
+		if (0 < comp) // list[m] < target
 		{
 			l = m + 1;
 		}
@@ -419,7 +419,7 @@ uint findBoundNearestRight(autoList_t *list, uint target, sint (*funcComp)(uint,
 
 		comp = funcComp(target, getElement(list, m));
 
-		if(0 <= comp) // list[m] <= target
+		if (0 <= comp) // list[m] <= target
 		{
 			l = m + 1;
 		}
@@ -444,7 +444,7 @@ int getBound(autoList_t *list, uint target, sint (*funcComp)(uint, uint), uint b
 
 	findBound(list, target, funcComp, wkBound);
 
-	if(wkBound[0] < wkBound[1])
+	if (wkBound[0] < wkBound[1])
 	{
 		bound[0] = wkBound[0];
 		bound[1] = wkBound[1] - 1;

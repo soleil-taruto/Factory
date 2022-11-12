@@ -91,7 +91,7 @@ static autoList_t *GetHashes(char *targetDir)
 }
 static void DispHashesDiff(autoList_t *hashes1, autoList_t *hashes2)
 {
-	if(isSameLines(hashes1, hashes2, IgnoreCaseOfPath))
+	if (isSameLines(hashes1, hashes2, IgnoreCaseOfPath))
 	{
 		cout("+--------------+\n");
 		cout("| àÍívÇµÇ‹ÇµÇΩ |\n");
@@ -141,7 +141,7 @@ static void CheckDirCredFile(char *dir, char *credFile)
 
 	DispHashes(hashes);
 
-	if(existFile(credFile))
+	if (existFile(credFile))
 	{
 		autoList_t *credHashes = readLines(credFile);
 
@@ -163,7 +163,7 @@ static void MakeCredentialsCredFile(char *dir, char *credFile)
 
 	DispHashes(hashes);
 
-	if(existFile(credFile))
+	if (existFile(credFile))
 	{
 		autoList_t *credHashes = readLines(credFile);
 
@@ -172,7 +172,7 @@ static void MakeCredentialsCredFile(char *dir, char *credFile)
 
 		cout("è„èëÇ´ÅH\n");
 
-		if(clearGetKey() == 0x1b)
+		if (clearGetKey() == 0x1b)
 			goto endFunc;
 
 		cout("\n");
@@ -197,18 +197,18 @@ static void MakeCredentials(char *dir)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/I")) // Ignore case of path
+	if (argIs("/I")) // Ignore case of path
 	{
 		IgnoreCaseOfPath = 1;
 		goto readArgs;
 	}
-	if(argIs("/-SVN")) // Ignore .svn etc.
+	if (argIs("/-SVN")) // Ignore .svn etc.
 	{
 		antiSubversion = 1;
 		goto readArgs;
 	}
 
-	if(argIs("/C")) // drop and Compare
+	if (argIs("/C")) // drop and Compare
 	{
 		for(; ; )
 		{
@@ -222,7 +222,7 @@ readArgs:
 			cout("\n");
 		}
 	}
-	if(argIs("/D")) // Drop
+	if (argIs("/D")) // Drop
 	{
 		for(; ; )
 		{
@@ -230,14 +230,14 @@ readArgs:
 			cout("\n");
 		}
 	}
-	if(argIs("/O")) // Output credentials file
+	if (argIs("/O")) // Output credentials file
 	{
-		if(hasArgs(2))
+		if (hasArgs(2))
 		{
 			MakeCredentialsCredFile(getArg(0), getArg(1));
 			return;
 		}
-		if(hasArgs(1))
+		if (hasArgs(1))
 		{
 			MakeCredentials(nextArg());
 			return;
@@ -248,13 +248,13 @@ readArgs:
 			cout("\n");
 		}
 	}
-	if(argIs("/P")) // comPare credentials file
+	if (argIs("/P")) // comPare credentials file
 	{
 		CheckDirCredFile(getArg(0), getArg(1));
 		return;
 	}
 
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		char *dir1;
 		char *dir2;
@@ -265,7 +265,7 @@ readArgs:
 		CompareDir(dir1, dir2);
 		return;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		CheckDir(nextArg());
 		return;

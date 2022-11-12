@@ -27,22 +27,22 @@ static void MkOdPs(void)
 	OdPs[0] = 1;
 
 	for(n = 3; n * n <= PRIME_MAX; n += 2)
-		if(!IsNOP(n))
+		if (!IsNOP(n))
 			for(c = n * n; c <= PRIME_MAX; c += n * 2)
 				PutNOP(c);
 }
 static int IsPrime(int n)
 {
-	if(n < 2)
+	if (n < 2)
 		return 0;
 
-	if(n == 2)
+	if (n == 2)
 		return 1;
 
-	if(n % 2 == 0)
+	if (n % 2 == 0)
 		return 0;
 
-	if(PRIME_MAX < n)
+	if (PRIME_MAX < n)
 	{
 		printf("Error: PRIME_MAX < n\n");
 		return 0;
@@ -59,7 +59,7 @@ int main()
 	printf("MkOdPs done!\n");
 
 	for(n = 1; n <= PRIME_MAX; n++)
-		if(IsPrime(n))
+		if (IsPrime(n))
 			c++;
 
 	printf("1 - %d : %d\n", PRIME_MAX, c);

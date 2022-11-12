@@ -28,7 +28,7 @@ static int RecvResponse(SockStream_t *ss, char *expectedLine)
 
 	cout("expectedLine: %s -> %d\n", expectedLine, ret);
 
-	if(!ret)
+	if (!ret)
 		cout("★★★応答エラー！\n");
 
 	return ret;
@@ -52,7 +52,7 @@ static void Upload(SockStream_t *ss)
 
 		LOGPOS();
 
-		if(!RecvResponse(ss, "READY-NEXT-FILE"))
+		if (!RecvResponse(ss, "READY-NEXT-FILE"))
 			goto netError;
 
 		LOGPOS();
@@ -63,7 +63,7 @@ static void Upload(SockStream_t *ss)
 		SockSendValue64(ss, fileSize);
 		LOGPOS();
 
-		if(!RecvResponse(ss, "READY-FILE-ENTITY"))
+		if (!RecvResponse(ss, "READY-FILE-ENTITY"))
 			goto netError;
 
 		LOGPOS();
@@ -85,7 +85,7 @@ static void Upload(SockStream_t *ss)
 		SockSendChar(ss, 'E');
 		LOGPOS();
 
-		if(!RecvResponse(ss, "RECV-FILE-COMPLETED"))
+		if (!RecvResponse(ss, "RECV-FILE-COMPLETED"))
 			goto netError;
 
 		LOGPOS();
@@ -94,14 +94,14 @@ static void Upload(SockStream_t *ss)
 	}
 	LOGPOS();
 
-	if(!RecvResponse(ss, "READY-NEXT-FILE"))
+	if (!RecvResponse(ss, "READY-NEXT-FILE"))
 		goto netError;
 
 	LOGPOS();
 	SockSendChar(ss, 0xff);
 	LOGPOS();
 
-	if(!RecvResponse(ss, "OK"))
+	if (!RecvResponse(ss, "OK"))
 		goto netError;
 
 	cout("+--------------------------------+\n");
@@ -127,7 +127,7 @@ static void Download(SockStream_t *ss)
 
 		LOGPOS();
 
-		if(!SockRecvValue(ss))
+		if (!SockRecvValue(ss))
 			break;
 
 		LOGPOS();
@@ -146,7 +146,7 @@ static void Download(SockStream_t *ss)
 			uint recvSize = (uint)m_min((uint64)BUFFSIZE, fileSize);
 			autoBlock_t gab;
 
-			if(!SockRecvBlock(ss, Buff, recvSize))
+			if (!SockRecvBlock(ss, Buff, recvSize))
 			{
 				cout("★★★ファイルデータ受信エラー！\n");
 				errorFlag = 1;
@@ -163,14 +163,14 @@ static void Download(SockStream_t *ss)
 		SockFlush(ss);
 		LOGPOS();
 
-		if(SockRecvChar(ss) != 'D')
+		if (SockRecvChar(ss) != 'D')
 		{
 			cout("★★★ファイル終端符受信エラー！\n");
 			errorFlag = 1;
 		}
 		LOGPOS();
 
-		if(errorFlag)
+		if (errorFlag)
 		{
 			LOGPOS();
 			removeFile(file);
@@ -181,7 +181,7 @@ static void Download(SockStream_t *ss)
 		memFree(name);
 		LOGPOS();
 
-		if(errorFlag)
+		if (errorFlag)
 			goto netError;
 
 		LOGPOS();
@@ -205,11 +205,11 @@ static int Perform(int sock, uint prm)
 
 	LOGPOS();
 
-	if(Command[0] == 'u')
+	if (Command[0] == 'u')
 	{
 		Upload(ss);
 	}
-	else if(Command[0] == 'd')
+	else if (Command[0] == 'd')
 	{
 		Download(ss);
 	}
@@ -238,7 +238,7 @@ int main(int argc, char **argv)
 
 	LOGPOS();
 
-	if(!SClient(Server, PortNo, Perform, 0))
+	if (!SClient(Server, PortNo, Perform, 0))
 		cout("★★★接続エラー！\n");
 
 	LOGPOS();

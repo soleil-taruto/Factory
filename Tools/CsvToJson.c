@@ -38,7 +38,7 @@ static void CsvToJson(char *rFile, char *wFile)
 }
 int main(int argc, char **argv)
 {
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		CsvToJson(getArg(0), getArg(1));
 		return;

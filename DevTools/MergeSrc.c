@@ -24,7 +24,7 @@ static int DS_IsSameFile(char *file1, char *file2)
 {
 	int ret;
 
-	if(
+	if (
 		getFileSize(file1) < CRLF_CONV_SIZE_MAX &&
 		getFileSize(file2) < CRLF_CONV_SIZE_MAX
 		)
@@ -57,7 +57,7 @@ static void DoSearch(void)
 	{
 		char *wFile = changeRoot(strx(rFile), RDir, WDir);
 
-		if(!existFile(wFile) || !DS_IsSameFile(rFile, wFile)) // ? マージすべきファイル
+		if (!existFile(wFile) || !DS_IsSameFile(rFile, wFile)) // ? マージすべきファイル
 		{
 			addElement(RWFiles, (uint)strx(eraseRoot(rFile, RDir)));
 		}
@@ -82,7 +82,7 @@ static double DC_FilePairingRate(char *iDir, char *oDir)
 	{
 		char *oFile = changeRoot(strx(iFile), iDir, oDir);
 
-		if(existFile(oFile))
+		if (existFile(oFile))
 			n++;
 
 		memFree(oFile);
@@ -104,7 +104,7 @@ static void DC_DispRWFiles(void)
 			char *file1 = combine(RDir, file);
 			char *file2 = combine(WDir, file);
 
-			if(
+			if (
 				existFile(file2) &&
 				getFileSize(file1) < CRLF_CONV_SIZE_MAX &&
 				getFileSize(file2) < CRLF_CONV_SIZE_MAX
@@ -113,7 +113,7 @@ static void DC_DispRWFiles(void)
 				uint top1 = CRLF_GetTopFile(file1);
 				uint top2 = CRLF_GetTopFile(file2);
 
-				if(top1 != top2)
+				if (top1 != top2)
 					cout("### 改行コードが違います。### %u %u\n", top1, top2);
 			}
 			memFree(file1);
@@ -143,7 +143,7 @@ static void DC_OutputDiff(int keepTree)
 		char *file1;
 		char *file2;
 
-		if(keepTree)
+		if (keepTree)
 		{
 			file1 = combine(dir1, file);
 			file2 = combine(dir2, file);
@@ -171,7 +171,7 @@ static void DC_OutputDiff(int keepTree)
 		}
 		copyFile(rFile, file1);
 
-		if(existFile(wFile))
+		if (existFile(wFile))
 			copyFile(wFile, file2);
 
 		memFree(rFile);
@@ -191,7 +191,7 @@ static void EraseRWFiles(char *target)
 	uint index;
 
 	foreach(RWFiles, file, index)
-		if(!_stricmp(file, target))
+		if (!_stricmp(file, target))
 			file[0] = '\0';
 
 	trimLines(RWFiles);
@@ -249,7 +249,7 @@ restart:
 		cout("### 確認のため %s と入力してね。### (ignore case)\n", CFM_PTN);
 		line = coInputLine();
 
-		if(_stricmp(line, CFM_PTN)) // ? 一致しない。
+		if (_stricmp(line, CFM_PTN)) // ? 一致しない。
 		{
 			memFree(line);
 			goto restart;
@@ -274,7 +274,7 @@ static void DoMerge(void)
 		cout("< %s\n", rFile);
 		cout("> %s\n", wFile);
 
-		if(existFile(wFile))
+		if (existFile(wFile))
 			semiRemovePath(wFile);
 		else
 			createPath(wFile, 'X');
@@ -304,7 +304,7 @@ static void MergeDir(char *masterDir, char *slaveDir)
 	cout("[スレーブ] < %s\n", slaveDir);
 	cout("続行？\n");
 
-	if(getKey() == 0x1b)
+	if (getKey() == 0x1b)
 		termination(0);
 
 	cout("続行します。\n");

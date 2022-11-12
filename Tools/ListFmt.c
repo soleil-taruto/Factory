@@ -78,7 +78,7 @@ static void ListFmt_0(void)
 	uint index;
 	uint maxCount;
 
-	if(MinLCMode)
+	if (MinLCMode)
 	{
 		maxCount = UINTMAX;
 
@@ -106,7 +106,7 @@ static void LFX_Next(uint list_index)
 	char *line;
 	uint index;
 
-	if(list_index == getCount(Lists))
+	if (list_index == getCount(Lists))
 	{
 		ProcLine();
 		return;
@@ -143,7 +143,7 @@ static void ListFmt(void)
 	CurrLines = newList();
 	setCount(CurrLines, getCount(Lists));
 
-	if(XMode)
+	if (XMode)
 		ListFmt_XMode();
 	else
 		ListFmt_0();
@@ -163,17 +163,17 @@ int main(int argc, char **argv)
 	WorkFiles = newList();
 
 readArgs:
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		addElement(ListFiles, (uint)nextArg());
 		goto readArgs;
 	}
-	if(argIs("/LSS"))
+	if (argIs("/LSS"))
 	{
 		addElement(ListFiles, (uint)FOUNDLISTFILE);
 		goto readArgs;
 	}
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		autoList_t *list = newList();
 		uint count;
@@ -209,12 +209,12 @@ readArgs:
 
 		goto readArgs;
 	}
-	if(argIs("/-M"))
+	if (argIs("/-M"))
 	{
 		MinLCMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/X"))
+	if (argIs("/X"))
 	{
 		XMode = 1;
 		goto readArgs;

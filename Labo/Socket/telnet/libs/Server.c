@@ -53,10 +53,10 @@ static char *ParseLine(autoBlock_t *buff) // ret: NULL == 入力行無し
 	uint index;
 
 	for(index = 0; index < getSize(buff); index++)
-		if(getByte(buff, index) == '\n')
+		if (getByte(buff, index) == '\n')
 			break;
 
-	if(index < getSize(buff))
+	if (index < getSize(buff))
 	{
 		line = unbindBlock2Line(desertBytes(buff, 0, index + 1));
 		ucTrimEdge(line);
@@ -70,37 +70,37 @@ static int Perform(int sock, uint prm)
 	char *inputLine;
 	char *outputText;
 
-	if(CONNECT_MAX < ConnectCount)
+	if (CONNECT_MAX < ConnectCount)
 		return 0;
 
-	if(SockRecvSequ(sock, i->RecvQueue, sockUserTransmitIndex ? 0 : 100) == -1)
+	if (SockRecvSequ(sock, i->RecvQueue, sockUserTransmitIndex ? 0 : 100) == -1)
 		return 0;
 
-	if(SockSendSequ(sock, i->SendQueue, 0) == -1)
+	if (SockSendSequ(sock, i->SendQueue, 0) == -1)
 		return 0;
 
-	if(RECV_BUFF_MAX < getSize(i->RecvQueue))
+	if (RECV_BUFF_MAX < getSize(i->RecvQueue))
 		return 0;
 
-	if(i->Timeout < now())
+	if (i->Timeout < now())
 		return 0;
 
 	do
 	{
-		if(getSize(i->SendQueue))
+		if (getSize(i->SendQueue))
 			break;
 
 		inputLine = ParseLine(i->RecvQueue);
 		outputText = TelnetServerPerform(inputLine, i->TSP_Prm);
 		memFree(inputLine); // return 0; があるのでここで開放しておく。開放しても後で値を判定するので注意すること。
 
-		if(!outputText)
+		if (!outputText)
 			return 0;
 
 		ab_addLine(i->SendQueue, outputText);
 		memFree(outputText);
 
-		if(SockSendSequ(sock, i->SendQueue, 0) == -1)
+		if (SockSendSequ(sock, i->SendQueue, 0) == -1)
 			return 0;
 	}
 	while(inputLine);
@@ -112,7 +112,7 @@ static int Idle(void)
 	static int endFlag;
 
 	while(hasKey())
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 			endFlag = 1;
 
 	return !endFlag;
@@ -121,7 +121,7 @@ int main(int argc, char **argv)
 {
 	uint portno = 23;
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 		portno = toValue(nextArg());
 
 	sockServerUserTransmit(Perform, CreateInfo, ReleaseInfo, portno, IMAX, Idle); // 最大同時接続数の制限は Perform() でやっている。

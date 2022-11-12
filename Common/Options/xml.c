@@ -14,7 +14,7 @@ static int IsSpaceOnly(char *text)
 	char *p;
 
 	for(p = text; *p; p++)
-		if(!m_isspace(*p))
+		if (!m_isspace(*p))
 			return 0;
 
 	return 1;
@@ -24,13 +24,13 @@ static void TrimSpace(char *text)
 	char *p = strchr(text, '\0');
 
 	for(; text < p; p--)
-		if(!m_isspace(p[-1]))
+		if (!m_isspace(p[-1]))
 			break;
 
 	*p = '\0';
 
 	for(p = text; *p; p++)
-		if(!m_isspace(*p))
+		if (!m_isspace(*p))
 			break;
 
 	copyLine(text, p);
@@ -61,13 +61,13 @@ static XNode_t *CreateNode(char *name, char *text, int mkcflg)
 {
 	XNode_t *node = nb_(XNode_t);
 
-	if(name)
+	if (name)
 		node->Name = strx(name);
 
-	if(text)
+	if (text)
 		node->Text = strx(text);
 
-	if(mkcflg)
+	if (mkcflg)
 		node->Children = newList();
 
 	return node;
@@ -81,7 +81,7 @@ static void ReadFileData(char *file, uint lenmax)
 	{
 		int chr = readChar(fp);
 
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
 		addByte(buff, chr);
@@ -120,7 +120,7 @@ static void SkipToPtn(char *endPtn)
 }
 static void Reset_RLine(void)
 {
-	if(!RLine)
+	if (!RLine)
 		RLine = strx("");
 	else
 		*RLine = '\0';
@@ -142,7 +142,7 @@ static char *ReadTo(char *endChrs, int spcEnd)
 	{
 		ReadChar();
 
-		if(strchr(endChrs, RChr) || spcEnd && m_isspace(RChr))
+		if (strchr(endChrs, RChr) || spcEnd && m_isspace(RChr))
 			break;
 
 		RLine = addChar(RLine, RChr);
@@ -164,14 +164,14 @@ static char *ReadLiteral(int quot)
 	{
 		ReadChar();
 
-		if(_ismbblead(RChr))
+		if (_ismbblead(RChr))
 		{
 			RLine = addChar(RLine, RChr);
 			ReadChar();
 		}
-		else if(RChr == '\\')
+		else if (RChr == '\\')
 			ReadChar();
-		else if(RChr == quot)
+		else if (RChr == quot)
 			break;
 
 		RLine = addChar(RLine, RChr);
@@ -187,8 +187,8 @@ static char *ReadLiteral(int quot)
 */
 static void ReadAttributes(char *endChrs)
 {
-	if(RAttrNames)  releaseDim(RAttrNames, 1);
-	if(RAttrValues) releaseDim(RAttrValues, 1);
+	if (RAttrNames)  releaseDim(RAttrNames, 1);
+	if (RAttrValues) releaseDim(RAttrValues, 1);
 
 	RAttrNames  = newList();
 	RAttrValues = newList();
@@ -197,7 +197,7 @@ static void ReadAttributes(char *endChrs)
 	{
 		SkipSpace();
 
-		if(strchr(endChrs, RChr))
+		if (strchr(endChrs, RChr))
 			break;
 
 		BackChar();
@@ -210,7 +210,7 @@ static void ReadAttributes(char *endChrs)
 		SkipTo("=");
 		SkipSpace();
 
-		if(RChr == '\'' || RChr == '"')
+		if (RChr == '\'' || RChr == '"')
 		{
 			ReadLiteral(RChr);
 		}
@@ -233,10 +233,10 @@ static char *GetAttr(char *name)
 	Reset_RLine();
 
 	foreach(RAttrNames, rAName, index)
-		if(!_stricmp(rAName, name))
+		if (!_stricmp(rAName, name))
 			break;
 
-	if(rAName)
+	if (rAName)
 		RLine = addLine(RLine, getLine(RAttrValues, index));
 
 	return RLine;
@@ -292,17 +292,17 @@ static void ReadXMLDeclaration(char *file)
 
 	ReadFileData(file, 65000);
 
-	if(RData[0] == 0xEF) // ? UTF-8 の BOM
+	if (RData[0] == 0xEF) // ? UTF-8 の BOM
 		ReadLine(3);
 
 	ReadLine(5);
 
-	if(!_stricmp(RLine, "<?xml"))
+	if (!_stricmp(RLine, "<?xml"))
 	{
 		ReadAttributes("?");
 		GetAttr("encoding");
 
-		if(
+		if (
 			!_stricmp(RLine, "utf-8") ||
 			!_stricmp(RLine, "utf_8") ||
 			!_stricmp(RLine, "utf8")
@@ -320,7 +320,7 @@ static void ReadXML(char *file)
 	CurrNode = CreateNode(NULL, "", 1);
 	NodeStack = newList();
 
-	if(!NoDeclaration)
+	if (!NoDeclaration)
 	{
 		ReadLine(5);
 		errorCase(_stricmp(RLine, "<?xml"));
@@ -341,19 +341,19 @@ static void ReadXML(char *file)
 		SkipSpace();
 		BackChar();
 
-		if(NextIs("!DOCTYPE"))
+		if (NextIs("!DOCTYPE"))
 		{
 			RIndex += 8;
 			ReadAttributes(">");
 			continue;
 		}
-		if(NextIs("!--"))
+		if (NextIs("!--"))
 		{
 			RIndex += 3;
 			SkipToPtn("-->");
 			continue;
 		}
-		if(!NextIs("/")) // ? ! 閉じタグ
+		if (!NextIs("/")) // ? ! 閉じタグ
 		{
 			ReadTo("/>", 1);
 			BackChar();
@@ -368,7 +368,7 @@ static void ReadXML(char *file)
 
 			ReadAttributes("/>");
 
-			if(RChr == '/')
+			if (RChr == '/')
 				tagClosed = 1;
 
 			// 属性を子ノードとして追加
@@ -389,12 +389,12 @@ static void ReadXML(char *file)
 		else
 			tagClosed = 1;
 
-		if(tagClosed)
+		if (tagClosed)
 		{
 			ReadTo(">", 1);
 			CurrNode = (XNode_t *)unaddElement(NodeStack);
 
-			if(getCount(NodeStack) == 0)
+			if (getCount(NodeStack) == 0)
 				break;
 		}
 	}
@@ -418,7 +418,7 @@ static void NodeFltr(XNode_t *node)
 {
 	char *p = strrchr(node->Name, ':');
 
-	if(p)
+	if (p)
 		copyLine(node->Name, p + 1); // ネームスペースを除去
 
 	errorCase_m(!*node->Name, "XML:名前の無いタグ又は属性があります。");
@@ -451,7 +451,7 @@ static void WrIndent(uint count)
 }
 static void WriteNode(XNode_t *node, uint indent)
 {
-	if(getCount(node->Children))
+	if (getCount(node->Children))
 	{
 		WrIndent(indent);
 		writeLine_x(Fp, xcout("<%s>", node->Name));
@@ -465,7 +465,7 @@ static void WriteNode(XNode_t *node, uint indent)
 				WriteNode(child, indent + 1);
 		}
 
-		if(!getCount(node->Children) || !IsSpaceOnly(node->Text))
+		if (!getCount(node->Children) || !IsSpaceOnly(node->Text))
 		{
 			char *text = EncEntity(node->Text);
 
@@ -483,7 +483,7 @@ static void WriteNode(XNode_t *node, uint indent)
 	{
 		WrIndent(indent);
 
-		if(*node->Text)
+		if (*node->Text)
 			writeLine_x(Fp, xcout("<%s>%s</%s>", node->Name, c_EncEntity(node->Text), node->Name));
 		else
 			writeLine_x(Fp, xcout("<%s/>", node->Name));
@@ -499,7 +499,7 @@ XNode_t *readXMLFile(char *file)
 	ReadXMLDeclaration(file);
 cout("Encoding_UTF8: %d\n", Encoding_UTF8); // test
 
-	if(Encoding_UTF8)
+	if (Encoding_UTF8)
 	{
 		char *tmpFile = makeTempPath("xml");
 

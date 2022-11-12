@@ -8,7 +8,7 @@ static char *ChgEnc_SJISToUTF8_x(char *str, int inverse)
 	writeOneLineNoRet(rFile, str);
 	memFree(str);
 
-	if(inverse)
+	if (inverse)
 		UTF8ToSJISFile(rFile, wFile);
 	else
 		SJISToUTF8File(rFile, wFile);
@@ -43,7 +43,7 @@ char *urlEncoder(char *url)
 
 	for(p = url; *p; p++)
 	{
-		if(IsNoPctChar(*p))
+		if (IsNoPctChar(*p))
 			addByte(buff, *p);
 		else
 			ab_addLine_x(buff, xcout("%%%02x", *p));
@@ -59,7 +59,7 @@ char *urlDecoder(char *url)
 
 	for(p = url; *p; p++)
 	{
-		if(*p == '%' && m_ishexadecimal(p[1]) && m_ishexadecimal(p[2]))
+		if (*p == '%' && m_ishexadecimal(p[1]) && m_ishexadecimal(p[2]))
 		{
 			addByte(buff, m_c2i(p[1]) * 16 + m_c2i(p[2]));
 			p += 2;

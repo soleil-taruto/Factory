@@ -13,7 +13,7 @@ int main(int argc, char **argv)
 	{
 		while(hasKey())
 		{
-			if(getKey() == 0x1b)
+			if (getKey() == 0x1b)
 			{
 				cout("’†~‚µ‚Ü‚µ‚½B\n");
 				termination(0);

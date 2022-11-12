@@ -28,7 +28,7 @@ void disctrl(char *line)
 
 	for(p = line; *p; )
 	{
-		if(*p < ' ')
+		if (*p < ' ')
 			eraseChar(p);
 		else
 			p++;
@@ -40,7 +40,7 @@ void unctrl(char *line)
 
 	for(p = line; *p; p++)
 	{
-		if(*p < ' ')
+		if (*p < ' ')
 		{
 			*p = ' ';
 		}
@@ -134,7 +134,7 @@ autoList_t *readResourceLines(char *file)
 	{
 		ucTrimEdge(line);
 
-		if(line[0] == COMMENT_LEADER) // COMMENT_LEADER で始まる行を指定したい場合は '"' で始める。
+		if (line[0] == COMMENT_LEADER) // COMMENT_LEADER で始まる行を指定したい場合は '"' で始める。
 		{
 			line[0] = '\0';
 		}
@@ -145,10 +145,10 @@ autoList_t *readResourceLines(char *file)
 	{
 		char *p = strchr(line, '\0') - 1; // line == "" は有り得ない。
 
-		if(*p == '"')
+		if (*p == '"')
 			*p = '\0';
 
-		if(line[0] == '"')
+		if (line[0] == '"')
 			eraseChar(line);
 	}
 	return lines;
@@ -197,7 +197,7 @@ autoList_t *readResourceLinesList(char *file)
 
 	foreach(lines, line, index)
 	{
-		if(!strcmp(line, SEPARATOR_LINE))
+		if (!strcmp(line, SEPARATOR_LINE))
 		{
 			memFree(line);
 			addElement(linesList, (uint)store);
@@ -211,7 +211,7 @@ autoList_t *readResourceLinesList(char *file)
 
 	foreach(linesList, lines, index)
 	{
-		if(getCount(lines) == 0)
+		if (getCount(lines) == 0)
 		{
 			releaseAutoList(lines);
 			setElement(linesList, index, 0);

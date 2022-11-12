@@ -10,7 +10,7 @@ int main(int argc, char **argv)
 	int c;
 
 	for(c = 0x0000; c <= 0xffff; c++)
-		if(isJChar(c))
+		if (isJChar(c))
 			n++;
 
 	cout("%d\n", n);

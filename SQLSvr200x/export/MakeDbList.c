@@ -19,13 +19,13 @@ int main(int argc, char **argv)
 	{
 		char *db;
 
-		if(!index) // ? ヘッダー行
+		if (!index) // ? ヘッダー行
 			continue;
 
 		db = (char *)getElement(row, 0);
 
 		// ? システムデータベース
-		if(
+		if (
 			!_stricmp(db, "master") ||
 			!_stricmp(db, "msdb") ||
 			!_stricmp(db, "model") ||

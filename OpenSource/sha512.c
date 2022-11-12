@@ -88,7 +88,7 @@ static autoBlock_t *LocalizedBuffer;
 
 void sha512_localize(void)
 {
-	if(!LocalizedBuffer)
+	if (!LocalizedBuffer)
 		LocalizedBuffer = newBlock();
 
 	ab_addBlock(LocalizedBuffer, sha512_hash, 64);

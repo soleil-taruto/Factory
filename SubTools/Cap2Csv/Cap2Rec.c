@@ -33,19 +33,19 @@ static void Cap2Rec(char *rFile, char *wFile)
 		size = readValue(rfp);
 		subSize = readValue(rfp);
 
-		if(feof(rfp))
+		if (feof(rfp))
 		{
 			LOGPOS();
 			break;
 		}
-		if(size != subSize)
+		if (size != subSize)
 		{
 			LOGPOS();
 			break;
 		}
 		data = readBinaryBlock(rfp, size);
 
-		if(getSize(data) < size)
+		if (getSize(data) < size)
 		{
 			LOGPOS();
 			releaseAutoBlock(data);
@@ -71,12 +71,12 @@ int main(int argc, char **argv)
 	char *wFile;
 
 readArgs:
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		FirstRecPos = toValue64(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		RecSpan = toValue64(nextArg());
 		goto readArgs;

@@ -4,7 +4,7 @@ static void *REAL_memAlloc(uint size)
 {
 	void *block = malloc(size);
 
-	if(block == NULL)
+	if (block == NULL)
 	{
 		error();
 	}
@@ -14,7 +14,7 @@ static void *REAL_memRealloc(void *block, uint size)
 {
 	block = realloc(block, size);
 
-	if(block == NULL)
+	if (block == NULL)
 	{
 		error();
 	}
@@ -48,7 +48,7 @@ static uint SearchBlock(uchar *block)
 	{
 		index--;
 
-		if(Blocks[index] == block)
+		if (Blocks[index] == block)
 		{
 			return index;
 		}
@@ -102,7 +102,7 @@ static void *Inner_memRealloc(void *block, uint size)
 	uchar *retBlock;
 	uint index;
 
-	if(!block)
+	if (!block)
 		return memAlloc(size);
 
 	index = SearchBlock((uchar *)block);
@@ -117,7 +117,7 @@ static void Inner_memFree(void *block)
 {
 	uint index;
 
-	if(!block)
+	if (!block)
 		return;
 
 	index = SearchBlock((uchar *)block);
@@ -140,7 +140,7 @@ static void DebugOutputBlocks(void) // ïWèÄä÷êîÇÃÇ›Ç≈ÅAÅA
 
 	fp = fopen("C:\\temp\\memory.txt", "wt");
 
-	if(!fp)
+	if (!fp)
 		return;
 
 	for(index = 0; index < BlockCount; index++)
@@ -166,7 +166,7 @@ static void INIT(void)
 	{
 		static int inited;
 
-		if(inited)
+		if (inited)
 			return;
 
 		inited = 1;

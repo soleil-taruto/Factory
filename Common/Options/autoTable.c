@@ -129,7 +129,7 @@ void twistTable(autoTable_t *i) // [0][0] - [max][max] ‚ðŽ²‚É”½“]
 	uint x;
 	uint y;
 
-	if(getTableWidth(i) == getTableHeight(i))
+	if (getTableWidth(i) == getTableHeight(i))
 	{
 		for(x = 1; x < getTableWidth(i); x++)
 		for(y = 0; y < x; y++)

@@ -39,7 +39,7 @@ autoList_t *GetMailList(char *popServer, uint portno, char *user, char *pass)
 		uint64 size;
 		char *p;
 
-		if(!lineExp("<1,9,09> <1,19,09>", line))
+		if (!lineExp("<1,9,09> <1,19,09>", line))
 		{
 			coutJLine_x(xcout("不正な行を読み込みました。[%s]\n", line));
 			setCount(mails, 0);
@@ -50,7 +50,7 @@ autoList_t *GetMailList(char *popServer, uint portno, char *user, char *pass)
 		mailno = toValue(line);
 		size = toValue(p + 1);
 
-		if(mailno != index + 1)
+		if (mailno != index + 1)
 		{
 			cout("不正なメール番号を読み込みました。%u (%u)\n", mailno, index + 1);
 			setCount(mails, 0);
@@ -99,7 +99,7 @@ autoBlock_t *RecvMail(char *popServer, uint portno, char *user, char *pass, uint
 	{
 		uint64 mailSize = getFileSize(outFile);
 
-		if((uint64)mailSizeMax < mailSize)
+		if ((uint64)mailSizeMax < mailSize)
 		{
 			cout("受信メールが大きすぎます。%I64u (%u)\n", mailSize, mailSizeMax);
 			createFile(outFile); // 空にする。

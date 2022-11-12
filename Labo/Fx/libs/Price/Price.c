@@ -15,7 +15,7 @@ Price_t *CopyPrice(Price_t *i)
 }
 void ReleasePrice(Price_t *i)
 {
-	if(!i)
+	if (!i)
 		return;
 
 	memFree(i);

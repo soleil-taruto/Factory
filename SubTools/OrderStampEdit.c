@@ -33,7 +33,7 @@ static sint CompStamp(uint v1, uint v2)
 
 	ret = simpleComp64((uint64)a->Stamp, (uint64)b->Stamp);
 
-	if(ret)
+	if (ret)
 		return ret;
 
 	ret = strcmp(a->File, b->File);
@@ -72,7 +72,7 @@ static void EditOrder(autoList_t *fileInfos)
 	}
 	foreach(fileInfos, i,  index)
 	foreach(fileInfos, i2, index2)
-	if(index < index2)
+	if (index < index2)
 	{
 		errorCase_m(i->EO_Index == i2->EO_Index, "•ÒWƒGƒ‰[Fƒtƒ@ƒCƒ‹d•¡");
 	}
@@ -91,10 +91,10 @@ static uint CS_ChangeTest_L(autoList_t *fileInfos, uint index) // ƒXƒ^ƒ“ƒv•ÏXu
 
 		t--;
 
-		if(i->Stamp <= t) // ? •ÏX•s—v
+		if (i->Stamp <= t) // ? •ÏX•s—v
 			break;
 
-		if(i->Stamp == i->OldStamp) // ? •ÏX‚³‚ê‚Ä‚¢‚È‚¢B-- Šù‚É•ÏX‚³‚ê‚Ä‚¢‚ê‚Î•ÏX‚·‚éŒ”‚Æ‚µ‚ÄƒJƒEƒ“ƒg‚µ‚È‚¢B
+		if (i->Stamp == i->OldStamp) // ? •ÏX‚³‚ê‚Ä‚¢‚È‚¢B-- Šù‚É•ÏX‚³‚ê‚Ä‚¢‚ê‚Î•ÏX‚·‚éŒ”‚Æ‚µ‚ÄƒJƒEƒ“ƒg‚µ‚È‚¢B
 			ret++;
 	}
 	return ret;
@@ -110,7 +110,7 @@ static uint CS_ChangeTest_R(autoList_t *fileInfos, uint index) // ƒXƒ^ƒ“ƒv•ÏXu
 
 		t++;
 
-		if(t <= i->Stamp) // ? •ÏX•s—v
+		if (t <= i->Stamp) // ? •ÏX•s—v
 			break;
 
 		ret++;
@@ -127,7 +127,7 @@ static void CS_Change_L(autoList_t *fileInfos, uint index) // ƒXƒ^ƒ“ƒv•ÏX_‘O•ûŒ
 
 		t--;
 
-		if(i->Stamp <= t) // ? •ÏX•s—v
+		if (i->Stamp <= t) // ? •ÏX•s—v
 			break;
 
 		i->Stamp = t;
@@ -143,7 +143,7 @@ static void CS_Change_R(autoList_t *fileInfos, uint index) // ƒXƒ^ƒ“ƒv•ÏX_Œã•ûŒ
 
 		t++;
 
-		if(t <= i->Stamp) // ? •ÏX•s—v
+		if (t <= i->Stamp) // ? •ÏX•s—v
 			break;
 
 		i->Stamp = t;
@@ -155,7 +155,7 @@ static void ChangeStamps(autoList_t *fileInfos)
 	uint index;
 
 	foreach(fileInfos, i, index)
-	if(index)
+	if (index)
 	{
 		FileInfo_t *i1;
 		FileInfo_t *i2;
@@ -165,12 +165,12 @@ static void ChangeStamps(autoList_t *fileInfos)
 		i1 = (FileInfo_t *)getElement(fileInfos, ndx1);
 		i2 = i;
 
-		if(i2->Stamp <= i1->Stamp) // ? i1->Stamp < i2->Stamp ‚Å‚Í‚È‚¢ -> —vƒXƒ^ƒ“ƒv•ÏX
+		if (i2->Stamp <= i1->Stamp) // ? i1->Stamp < i2->Stamp ‚Å‚Í‚È‚¢ -> —vƒXƒ^ƒ“ƒv•ÏX
 		{
 			uint c1 = CS_ChangeTest_L(fileInfos, ndx2);
 			uint c2 = CS_ChangeTest_R(fileInfos, ndx1);
 
-			if(c1 < c2)
+			if (c1 < c2)
 				CS_Change_L(fileInfos, ndx2);
 			else
 				CS_Change_R(fileInfos, ndx1);
@@ -211,7 +211,7 @@ static void DoOrderStampEdit(void)
 		FileInfo_t *i;
 
 		foreach(fileInfos, i, index)
-		if(index)
+		if (index)
 		{
 			FileInfo_t *i1 = (FileInfo_t *)getElement(fileInfos, index - 1);
 			FileInfo_t *i2 = i;
@@ -226,7 +226,7 @@ static void DoOrderStampEdit(void)
 
 		foreach(fileInfos, i, index)
 		{
-			if(i->OldStamp != i->Stamp)
+			if (i->OldStamp != i->Stamp)
 			{
 				uint64 oldStamp = getFileStampByTime(i->OldStamp);
 				uint64 stamp    = getFileStampByTime(i->Stamp);
@@ -236,7 +236,7 @@ static void DoOrderStampEdit(void)
 				changing = 1;
 			}
 		}
-		if(!changing)
+		if (!changing)
 			cout("ƒ^ƒCƒ€ƒXƒ^ƒ“ƒv‚ÌXV‚Í‚ ‚è‚Ü‚¹‚ñB\n");
 	}
 
@@ -245,7 +245,7 @@ static void DoOrderStampEdit(void)
 		cout("ƒ^ƒCƒ€ƒXƒ^ƒ“ƒv‚ğXV‚µ‚Ü‚·B(‘S‚Ä‚Ìƒtƒ@ƒCƒ‹‚É setFileStamp ‚ğÀs‚µ‚Ü‚·)\n");
 		cout("‘±sH\n");
 
-		if(clearGetKey() == 0x1b)
+		if (clearGetKey() == 0x1b)
 			termination(0);
 
 		cout("‘±s‚µ‚Ü‚·B\n");

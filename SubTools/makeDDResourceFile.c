@@ -42,7 +42,7 @@ static int FF_FindStartPtn(autoList_t *startPtns, char *file)
 	uint stPtn_index;
 
 	foreach(startPtns, stPtn, stPtn_index)
-		if(startsWithICase(file, stPtn))
+		if (startsWithICase(file, stPtn))
 			return 1;
 
 	return 0;
@@ -54,8 +54,8 @@ static void FilesFilter(autoList_t *files)
 
 	foreach(files, file, index)
 	{
-		if(mbs_strstr(file, "\\_")) // '_' で始まる「ファイル・サブフォルダの配下」は DDResFile に含めない。
-//		if(*getLocal(file) == '_')  // '_' で始まる「ファイル」は DDResFile に含めない。// old
+		if (mbs_strstr(file, "\\_")) // '_' で始まる「ファイル・サブフォルダの配下」は DDResFile に含めない。
+//		if (*getLocal(file) == '_')  // '_' で始まる「ファイル」は DDResFile に含めない。// old
 		{
 			cout("_d: %s\n", file);
 
@@ -65,7 +65,7 @@ static void FilesFilter(autoList_t *files)
 	}
 	sortJLinesICase(files);
 
-	if(getCount(ResSubDirs)) // ? サブディレクトリ指定有り
+	if (getCount(ResSubDirs)) // ? サブディレクトリ指定有り
 	{
 		autoList_t *startPtns = newList();
 		char *subDir;
@@ -83,7 +83,7 @@ static void FilesFilter(autoList_t *files)
 		}
 		foreach(files, file, index)
 		{
-			if(FF_FindStartPtn(startPtns, file))
+			if (FF_FindStartPtn(startPtns, file))
 			{
 				cout("[○] %s\n", file);
 			}

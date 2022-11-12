@@ -19,7 +19,7 @@ static void Touch_File(char *file)
 }
 static void Touch(char *path)
 {
-	if(existDir(path))
+	if (existDir(path))
 	{
 		autoList_t *files = lssFiles(path);
 		char *file;
@@ -37,16 +37,16 @@ int main(int argc, char **argv)
 {
 	int waitOneSecFlag = 0;
 
-	if(argIs("/W1"))
+	if (argIs("/W1"))
 		waitOneSecFlag = 1;
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		do
 		{
 			Touch(nextArg());
 
-			if(waitOneSecFlag)
+			if (waitOneSecFlag)
 				sleep(1050); // ÇPïbÅ{É}Å[ÉWÉì -- ämé¿Ç…ÇPïbà»è„ä‘äuÇäJÇØÇΩÇ¢ÅB
 		}
 		while(hasArgs(1));

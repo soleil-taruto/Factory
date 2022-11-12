@@ -8,7 +8,7 @@ static void TryNext(uint startNum, uint currSum)
 {
 	uint count;
 
-	if(currSum == SUM_MAX)
+	if (currSum == SUM_MAX)
 	{
 		PtnNum++;
 		return;

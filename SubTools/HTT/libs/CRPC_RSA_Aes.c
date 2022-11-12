@@ -64,7 +64,7 @@ autoBlock_t *ServiceRPC(autoBlock_t *recvData, uint phase)
 	autoBlock_t *rawKey3;
 	autoBlock_t *rawKey4;
 
-	if(!phase) // ‰‰ñ
+	if (!phase) // ‰‰ñ
 	{
 		autoBlock_t *publicKey = recvData;
 		autoBlock_t *seed = makeCryptoRandBlock(128);

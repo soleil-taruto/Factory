@@ -36,30 +36,30 @@ static char *PTknsToFile(char *rootDir, autoList_t *ptkns) // ret == NULL: not f
 	{
 		cout("ptkn[%u]: %s\n", index, ptkn);
 
-		if(PATH_SIZE < strlen(ptkn))
+		if (PATH_SIZE < strlen(ptkn))
 		{
 			cout("長すぎるローカル名\n");
 			break;
 		}
-		if(!isFairLocalPath(ptkn, 0))
+		if (!isFairLocalPath(ptkn, 0))
 		{
 			cout("不正なローカル名\n");
 			break;
 		}
-		if(existFile(ptkn))
+		if (existFile(ptkn))
 		{
 			cout("ファイルを発見\n");
 			file = makeFullPath(ptkn);
 			break;
 		}
-		if(!existDir(ptkn))
+		if (!existDir(ptkn))
 		{
 			cout("存在しないローカル名\n");
 			break;
 		}
 		changeCwd(ptkn);
 	}
-	if(!file && existFile(INDEXFILE))
+	if (!file && existFile(INDEXFILE))
 	{
 		cout("インデックスファイルを発見\n");
 		file = makeFullPath(INDEXFILE);
@@ -94,13 +94,13 @@ static int Perform(int sock, uint dummy)
 
 		do
 		{
-			if(!KeepTheServer)
+			if (!KeepTheServer)
 			{
 				cout("サーバー停止(受信時)\n");
 				releaseAutoBlock(buffer);
 				return 0;
 			}
-			if(SockRecvSequ(sock, buffer, 2000) == -1)
+			if (SockRecvSequ(sock, buffer, 2000) == -1)
 			{
 				cout("受信エラー\n");
 				releaseAutoBlock(buffer);
@@ -108,7 +108,7 @@ static int Perform(int sock, uint dummy)
 			}
 			cout("recv-hdr: %u\n", getSize(buffer));
 
-			if(getSize(buffer) == 0) // これもキープアライブなのか、IE9で繋いで何もしない接続がしばしばある。
+			if (getSize(buffer) == 0) // これもキープアライブなのか、IE9で繋いで何もしない接続がしばしばある。
 			{
 				cout("リクエスト無し\n");
 				releaseAutoBlock(buffer);
@@ -139,14 +139,14 @@ static int Perform(int sock, uint dummy)
 	{
 		char *query = strchr(requrl, '?');
 
-		if(query)
+		if (query)
 			*query = '\0';
 	}
 
 	ptkns = tokenize(requrl, '/');
 	memFree(requrl);
 
-	if(3 <= getCount(ptkns) && getLine(ptkns, 1)[0] == '\0') // ? "<>//<>" -> ドメインまで削る。
+	if (3 <= getCount(ptkns) && getLine(ptkns, 1)[0] == '\0') // ? "<>//<>" -> ドメインまで削る。
 	{
 		memFree((void *)desertElement(ptkns, 0)); // プロトコル
 		memFree((void *)desertElement(ptkns, 0)); // "//" の間
@@ -158,7 +158,7 @@ static int Perform(int sock, uint dummy)
 
 	cout("file: %s\n", file ? file : "<NULL>");
 
-	if(file)
+	if (file)
 	{
 		mimeType = httpExtToContentType(getExt(file));
 		retBody = readBinary(file);
@@ -191,7 +191,7 @@ static int Perform(int sock, uint dummy)
 //		ab_addLine(buffer, "Cache-Control: no-cache" HTTP_NEWLINE);
 //		ab_addLine(buffer, "Last-Modified: Wed, 21 Jun 2006 07:00:25 GMT" HTTP_NEWLINE);
 
-		if(ExtraHeader)
+		if (ExtraHeader)
 		{
 			char *field;
 			uint index;
@@ -201,14 +201,14 @@ static int Perform(int sock, uint dummy)
 		}
 		ab_addLine(buffer, HTTP_NEWLINE);
 
-		if(reqcmd != 'H')
+		if (reqcmd != 'H')
 			addBytes(buffer, retBody);
 
 		releaseAutoBlock(retBody);
 
 		while(getSize(buffer)) // タイムアウト無し
 		{
-			if(!KeepTheServer)
+			if (!KeepTheServer)
 			{
 				cout("サーバー停止(送信時)\n");
 				releaseAutoBlock(buffer);
@@ -216,7 +216,7 @@ static int Perform(int sock, uint dummy)
 			}
 			cout("send-ret: %u\n", getSize(buffer));
 
-			if(SockSendSequ(sock, buffer, 2000) == -1)
+			if (SockSendSequ(sock, buffer, 2000) == -1)
 			{
 				cout("送信エラー\n");
 				releaseAutoBlock(buffer);
@@ -242,7 +242,7 @@ static int Idle(void)
 {
 	while(hasKey())
 	{
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 		{
 			cout("サーバー停止\n");
 			return 0;
@@ -256,12 +256,12 @@ int main(int argc, char **argv)
 	uint portno = 80;
 
 readArgs:
-	if(argIs("/P")) // Port
+	if (argIs("/P")) // Port
 	{
 		portno = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/H"))
+	if (argIs("/H"))
 	{
 		ExtraHeader = readLines(nextArg());
 		trimLines(ExtraHeader);
@@ -277,7 +277,7 @@ readArgs:
 		}
 		goto readArgs;
 	}
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		httpCharset = nextArg();
 		goto readArgs;

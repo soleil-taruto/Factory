@@ -11,10 +11,10 @@ static void BITxtIncrement_File(char *file)
 		{
 			int chr = readChar(fp);
 
-			if(chr == EOF)
+			if (chr == EOF)
 				break;
 
-			if(m_isdecimal(chr))
+			if (m_isdecimal(chr))
 				addByte(data, (uint)(chr - '0'));
 		}
 		fileClose(fp);

@@ -60,7 +60,7 @@ static void FSqDiv(char *srcdir, uint divnum)
 		char *wDir = getLine(destDirs, index % getCount(destDirs));
 		char *wFile;
 
-		if(index % progCyc == 0)
+		if (index % progCyc == 0)
 			Progress();
 
 		wFile = combine(wDir, getLocal(file));
@@ -69,7 +69,7 @@ static void FSqDiv(char *srcdir, uint divnum)
 	}
 	ProgressEnd(0);
 
-	if(T_Mode)
+	if (T_Mode)
 		Do_T(destRootDir);
 
 	coExecute_x(xcout("START %s", destRootDir));
@@ -84,7 +84,7 @@ int main(int argc, char **argv)
 	uint divnum;
 
 readArgs:
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		T_Mode = 1;
 		goto readArgs;

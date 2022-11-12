@@ -18,7 +18,7 @@ MvAvg_t *CreateMvAvg(uint fxTime, uint span, char *pair)
 }
 void ReleaseMvAvg(MvAvg_t *i)
 {
-	if(!i)
+	if (!i)
 		return;
 
 	memFree(i->Pair);
@@ -29,11 +29,11 @@ void ReleaseMvAvg(MvAvg_t *i)
 
 static void DoShift(MvAvg_t *i, uint fxTime)
 {
-	if(i->CurrFxTime)
-	if(fxTime < i->CurrFxTime - i->Span / 2 || i->CurrFxTime < fxTime - i->Span / 2)
+	if (i->CurrFxTime)
+	if (fxTime < i->CurrFxTime - i->Span / 2 || i->CurrFxTime < fxTime - i->Span / 2)
 		i->CurrFxTime = 0;
 
-	if(i->CurrFxTime)
+	if (i->CurrFxTime)
 	{
 		while(i->CurrFxTime < fxTime)
 		{

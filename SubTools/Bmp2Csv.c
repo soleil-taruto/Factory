@@ -20,7 +20,7 @@ static void Bmp2Csv(char *rFile, char *wFile)
 
 		foreach(rRow, dot, colidx)
 		{
-			if(ThreeCellMode)
+			if (ThreeCellMode)
 			{
 				addElement(wRow, (uint)xcout("%u", dot >> 8 * 2 & 0xff));
 				addElement(wRow, (uint)xcout("%u", dot >> 8 * 1 & 0xff));
@@ -50,7 +50,7 @@ static void Csv2Bmp(char *rFile, char *wFile)
 	{
 		wRow = newList();
 
-		if(ThreeCellMode)
+		if (ThreeCellMode)
 		{
 			for(colidx = 0; colidx < getCount(rRow) / 3; colidx++)
 			{
@@ -78,22 +78,22 @@ static void Csv2Bmp(char *rFile, char *wFile)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/3"))
+	if (argIs("/3"))
 	{
 		ThreeCellMode = 1;
 	}
 
-	if(argIs("/B2C"))
+	if (argIs("/B2C"))
 	{
 		Bmp2Csv(getArg(0), getArg(1));
 		return;
 	}
-	if(argIs("/C2B"))
+	if (argIs("/C2B"))
 	{
 		Csv2Bmp(getArg(0), getArg(1));
 		return;
 	}
-	if(argIs("/B2B"))
+	if (argIs("/B2B"))
 	{
 		char *midFile = makeTempPath(NULL);
 

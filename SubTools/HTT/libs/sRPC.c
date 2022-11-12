@@ -109,7 +109,7 @@ static void DeleteServiceNameFromHttRecvFile(void)
 
 		errorCase(chr == EOF);
 
-		if(!m_isRange(chr, 0x21, 0x7e)) // ? not ASCII
+		if (!m_isRange(chr, 0x21, 0x7e)) // ? not ASCII
 			break;
 
 		cout("%c", chr);
@@ -125,7 +125,7 @@ static autoBlock_t *ReadRecvData(void)
 	uint recvSize;
 	autoBlock_t *recvData;
 
-	if(recvFileSize < 4)
+	if (recvFileSize < 4)
 		return NULL;
 
 	fp = fileOpen(HttRecvFile, "rb");
@@ -133,7 +133,7 @@ static autoBlock_t *ReadRecvData(void)
 	cout("RPC_RECVSIZE: %u (MAX: %u)\n", recvSize, RPC_RecvSizeMax);
 	errorCase_m(RPC_RecvSizeMax < recvSize, "RPC_RECVSIZE_OVERFLOW");
 
-	if(recvFileSize - 4 < recvSize)
+	if (recvFileSize - 4 < recvSize)
 	{
 		fileClose(fp);
 		return NULL;
@@ -159,7 +159,7 @@ void ServiceMain(void)
 	int inited = existFile(PHASE_FILE);
 	uint phase;
 
-	if(inited)
+	if (inited)
 	{
 		phase = ReadValueFile(PHASE_FILE);
 		RPC_RecvSizeMax = ReadValueFile(RECVSIZEMAX_FILE);
@@ -186,8 +186,8 @@ void ServiceMain(void)
 		int rto = RPC_RecvTimeoutSec < LastRecvElapseTime;
 		int sto = RPC_SendTimeoutSec < LastSendElapseTime;
 
-		if(rto) cout("RPC_RECV_TIMEOUT ★片方だけならタイムアウトにならない！\n");
-		if(sto) cout("RPC_SEND_TIMEOUT ★片方だけならタイムアウトにならない！\n");
+		if (rto) cout("RPC_RECV_TIMEOUT ★片方だけならタイムアウトにならない！\n");
+		if (sto) cout("RPC_SEND_TIMEOUT ★片方だけならタイムアウトにならない！\n");
 
 		errorCase_m(rto && sto, "RPC_IO_TIMEOUT");
 	}
@@ -196,9 +196,9 @@ void ServiceMain(void)
 	errorCase_m(RPC_SendTimeoutSec < LastSendElapseTime, "RPC_SEND_TIMEOUT");
 #endif
 
-	if(!RPC_RecvSizeMax) // ? 送信し終えたら切断する。
+	if (!RPC_RecvSizeMax) // ? 送信し終えたら切断する。
 	{
-		if(getFileSize(HttSendFile) == 0) // ? 送信し終えた。
+		if (getFileSize(HttSendFile) == 0) // ? 送信し終えた。
 		{
 			cout("RECV_SIZE_0_SendEnd_DISCONNECT_OK\n");
 			ServiceDisconnect();
@@ -210,14 +210,14 @@ void ServiceMain(void)
 		autoBlock_t *recvData = ReadRecvData();
 		autoBlock_t *sendData;
 
-		if(!recvData)
+		if (!recvData)
 			goto noRecvData;
 
 		addCwd(MAIN_DIR);
 		sendData = ServiceRPC(recvData, phase);
 		unaddCwd();
 
-		if(!sendData)
+		if (!sendData)
 			ServiceDisconnect();
 
 		WriteSendData(sendData);

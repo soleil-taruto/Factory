@@ -7,7 +7,7 @@ static sint GetTimeZone(void)
 
 	ret = i->hour * 3600 + i->minute * 60 + i->second;
 
-	if(i->day == 1)
+	if (i->day == 1)
 		ret -= 86400;
 
 	return ret;
@@ -19,7 +19,7 @@ static char *GetStrTimeZone(void)
 	uint m;
 	uint s;
 
-	if(tz < 0)
+	if (tz < 0)
 	{
 		tz *= -1;
 		sign = -1;
@@ -35,11 +35,11 @@ static char *GetStrTimeZone(void)
 	{
 		char *ret = xcout("UTC%c%d:%02u:%02u", sign == -1 ? '-' : '+', tz, m, s);
 
-		if(!s)
+		if (!s)
 		{
 			ret[strlen(ret) - 3] = '\0';
 
-			if(!m)
+			if (!m)
 				ret[strlen(ret) - 3] = '\0';
 		}
 		return ret;

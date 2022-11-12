@@ -10,7 +10,7 @@ void RemoveGitPaths(autoList_t *paths)
 	uint index;
 
 	foreach(paths, path, index)
-		if(IsGitPath(path))
+		if (IsGitPath(path))
 			path[0] = '\0';
 
 	trimLines(paths);
@@ -46,7 +46,7 @@ void PostGitMaskFile(char *file)
 
 	// ディレクトリがあれば諦める。
 	// 既に作成済みの場合もある。
-	if(!accessible(maskedMarkFile))
+	if (!accessible(maskedMarkFile))
 		createFile(maskedMarkFile);
 
 	memFree(maskedMarkFile);
@@ -60,7 +60,7 @@ void PostGitIgnoreFile(char *file)
 
 	// ディレクトリがあれば諦める。
 	// 既に作成済みの場合もある。
-	if(!accessible(ignoredMarkFile))
+	if (!accessible(ignoredMarkFile))
 		createFile(ignoredMarkFile);
 
 	memFree(ignoredMarkFile);

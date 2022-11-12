@@ -91,17 +91,17 @@ static autoList_t *BinToText(autoBlock_t *block)
 		{
 			int chr = getByte(block, index + bidx);
 
-			if(bidx == 0 || bidx == BYTE_PER_LINE / 2)
+			if (bidx == 0 || bidx == BYTE_PER_LINE / 2)
 				line = addChar(line, ' ');
 
 			line = addLine_x(line, xcout(" %02x", chr));
 
-			if(chr == '\0')
+			if (chr == '\0')
 				chr = '_';
 
 			*text_p++ = chr;
 		}
-		if(AppendTextMode)
+		if (AppendTextMode)
 		{
 			*text_p = '\0';
 			line2JLine(text, 1, 0, 0, 1);
@@ -134,7 +134,7 @@ static autoBlock_t *TextToBin(autoList_t *lines)
 		strchrEnd(line, TEXT_SEP_CHAR)[0] = '\0'; // @ AppendTextMode
 		removeChar(line, ' ');
 
-		if(!lineExp("<09afAF>", line) || strlen(line) < 8 || strlen(line) % 2 != 0)
+		if (!lineExp("<09afAF>", line) || strlen(line) < 8 || strlen(line) % 2 != 0)
 		{
 			cout("”j‘¹ [%u]: %s\n", index + 1, line);
 			TTB_HasonCount++;
@@ -168,7 +168,7 @@ static void CompareBinFile(char *file1, char *file2)
 	releaseDim(lines1, 1);
 	releaseDim(lines2, 1);
 
-	if(getCount(report))
+	if (getCount(report))
 	{
 		cout("+--------------------+\n");
 		cout("| ˆê’v‚µ‚Ü‚¹‚ñ‚Å‚µ‚½ |\n");
@@ -199,12 +199,12 @@ reedit:
 	edLines = editLines(lines);
 	edBlock = TextToBin(edLines);
 
-	if(TTB_HasonCount)
+	if (TTB_HasonCount)
 	{
 		cout("‚Ç‚¤‚â‚ç”j‘¹‚µ‚Ä‚¢‚é‚æ‚¤‚Å‚·B\n");
 		cout("Ä•ÒWH\n");
 
-		if(clearGetKey() != 0x1b)
+		if (clearGetKey() != 0x1b)
 		{
 			releaseAutoBlock(edBlock);
 			releaseDim(lines, 1);
@@ -212,12 +212,12 @@ reedit:
 			goto reedit;
 		}
 	}
-	if(!isSameBlock(block, edBlock))
+	if (!isSameBlock(block, edBlock))
 	{
 		cout("‚Ç‚¤‚â‚çC³‚³‚ê‚½‚æ‚¤‚Å‚·B\n");
 		cout("ã‘‚«•Û‘¶H\n");
 
-		if(clearGetKey() != 0x1b)
+		if (clearGetKey() != 0x1b)
 		{
 			cout("‘‚«ž‚Ý’†...\n");
 			writeBinary(file, edBlock);
@@ -254,14 +254,14 @@ static void SimpleConvToText(char *file, char *outFile)
 	{
 		int chr = readChar(fp);
 
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
 		writeToken_x(outFp, xcout("%02x", chr));
 	}
 	fileClose(fp);
 
-	if(outFile)
+	if (outFile)
 		fileClose(outFp);
 }
 static void SimpleConvToBinary(char *file, char *outFile)
@@ -275,14 +275,14 @@ static void SimpleConvToBinary(char *file, char *outFile)
 	{
 		int chr = readChar(fp);
 
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
-		if(m_ishexadecimal(chr))
+		if (m_ishexadecimal(chr))
 		{
 			uint value = m_c2i(chr);
 
-			if(stockLead)
+			if (stockLead)
 				writeChar(outFp, stockValue << 4 | value);
 			else
 				stockValue = value;
@@ -300,7 +300,7 @@ static void DoMid(char *rFile, uint64 start, uint64 size, char *wFile) // wFile:
 	FILE *rfp;
 	FILE *wfp;
 
-	if(rFileSize < start)
+	if (rFileSize < start)
 	{
 		m_minim(size, rFileSize);
 		start = rFileSize - size;
@@ -311,7 +311,7 @@ static void DoMid(char *rFile, uint64 start, uint64 size, char *wFile) // wFile:
 	rfp = fileOpen(rFile, "rb");
 	fileSeek(rfp, SEEK_SET, start);
 
-	if(wFile)
+	if (wFile)
 	{
 		cout("< %s\n", rFile);
 		cout("# %I64u, %I64u\n", start, size);
@@ -339,7 +339,7 @@ static void DoMid(char *rFile, uint64 start, uint64 size, char *wFile) // wFile:
 			ret = putc(chr, stdout); // macro
 			errorCase(ret != chr);
 
-			if(lf)
+			if (lf)
 			{
 				ret = putc('\n', stdout); // macro
 				errorCase(ret != '\n');
@@ -354,13 +354,13 @@ int main(int argc, char **argv)
 	stdin_set_bin();
 
 readArgs:
-	if(argIs("/A"))
+	if (argIs("/A"))
 	{
 		AppendTextMode = 1;
 		goto readArgs;
 	}
 
-	if(argIs("/C")) // drop and Compare
+	if (argIs("/C")) // drop and Compare
 	{
 		char *file1;
 		char *file2;
@@ -378,11 +378,11 @@ readArgs:
 		}
 		error(); // dummy
 	}
-	if(argIs("/E")) // Edit
+	if (argIs("/E")) // Edit
 	{
 		char *file;
 
-		if(hasArgs(1))
+		if (hasArgs(1))
 			file = nextArg();
 		else
 			file = c_dropFile();
@@ -390,7 +390,7 @@ readArgs:
 		EditBinFile(file);
 		return;
 	}
-	if(argIs("/P")) // copy and Paste
+	if (argIs("/P")) // copy and Paste
 	{
 		char *file = makeTempFile("txt");
 
@@ -400,17 +400,17 @@ readArgs:
 		memFree(file);
 		return;
 	}
-	if(argIs("/SCT") || argIs("/B2T") || argIs("/B2H")) // Simple Conversion (to Text), Binary To Hex-Text
+	if (argIs("/SCT") || argIs("/B2T") || argIs("/B2H")) // Simple Conversion (to Text), Binary To Hex-Text
 	{
 		SimpleConvToText(getArg(0), hasArgs(2) ? getArg(1) : NULL);
 		return;
 	}
-	if(argIs("/SCB") || argIs("/T2B") || argIs("/H2B")) // Simple Conversion (to Binary), Hex-Text To Binary
+	if (argIs("/SCB") || argIs("/T2B") || argIs("/H2B")) // Simple Conversion (to Binary), Hex-Text To Binary
 	{
 		SimpleConvToBinary(getArg(0), getArg(1));
 		return;
 	}
-	if(argIs("/RNG"))
+	if (argIs("/RNG"))
 	{
 		char *rFile;
 		char *wFile;
@@ -431,7 +431,7 @@ readArgs:
 
 		errorCase(SINT64MAX < start);
 
-		if(!size)
+		if (!size)
 			size = UINT64MAX;
 
 		rfp = fileOpen(rFile, "rb");
@@ -443,7 +443,7 @@ readArgs:
 		{
 			int chr = readChar(rfp);
 
-			if(chr == EOF)
+			if (chr == EOF)
 				break;
 
 			writeChar(wfp, chr);
@@ -452,7 +452,7 @@ readArgs:
 		fileClose(wfp);
 		return;
 	}
-	if(argIs("/MID"))
+	if (argIs("/MID"))
 	{
 		char *rFile;
 		char *wFile = NULL;
@@ -463,13 +463,13 @@ readArgs:
 		start = toValue64(nextArg());
 		size = toValue64(nextArg());
 
-		if(hasArgs(1))
+		if (hasArgs(1))
 			wFile = nextArg();
 
 		DoMid(rFile, start, size, wFile);
 		return;
 	}
-	if(argIs("/HEAD"))
+	if (argIs("/HEAD"))
 	{
 		char *rFile;
 		char *wFile = NULL;
@@ -478,13 +478,13 @@ readArgs:
 		rFile = nextArg();
 		size = toValue64(nextArg());
 
-		if(hasArgs(1))
+		if (hasArgs(1))
 			wFile = nextArg();
 
 		DoMid(rFile, 0, size, wFile);
 		return;
 	}
-	if(argIs("/TAIL"))
+	if (argIs("/TAIL"))
 	{
 		char *rFile;
 		char *wFile = NULL;
@@ -493,18 +493,18 @@ readArgs:
 		rFile = nextArg();
 		size = toValue64(nextArg());
 
-		if(hasArgs(1))
+		if (hasArgs(1))
 			wFile = nextArg();
 
 		DoMid(rFile, UINT64MAX, size, wFile);
 		return;
 	}
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		DumpBinFile(c_dropFile());
 		return;
 	}
-	if(hasArgs(3))
+	if (hasArgs(3))
 	{
 		char *file = getArg(0);
 		FILE *fp;
@@ -514,7 +514,7 @@ readArgs:
 
 		errorCase(SINT64MAX < start);
 
-		if(!size)
+		if (!size)
 			size = UINT64MAX;
 
 		fp = fileOpen(file, "rb");
@@ -524,21 +524,21 @@ readArgs:
 		{
 			int chr = readChar(fp);
 
-			if(chr == EOF)
+			if (chr == EOF)
 				break;
 
-			if(count)
+			if (count)
 				cout("%c", count % 16 ? ' ' : '\n');
 
 			cout("%02x", chr);
 		}
-		if(count)
+		if (count)
 			cout("\n");
 
 		fileClose(fp);
 		return;
 	}
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		char *file1 = getArg(0);
 		char *file2 = getArg(1);
@@ -546,7 +546,7 @@ readArgs:
 		CompareBinFile(file1, file2);
 		return;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		DumpBinFile(nextArg());
 		return;

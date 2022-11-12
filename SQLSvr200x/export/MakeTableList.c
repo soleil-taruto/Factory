@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 		uint srIndex;
 
 		foreach(schemaRec, sRow, srIndex)
-			if(!strcmp(getLine(tRow, 0), getLine(sRow, 0))) // ? schema_id ˆê’v
+			if (!strcmp(getLine(tRow, 0), getLine(sRow, 0))) // ? schema_id ˆê’v
 				break;
 
 		errorCase(!sRow);

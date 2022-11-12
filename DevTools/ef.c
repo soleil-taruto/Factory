@@ -14,9 +14,9 @@ int main(int argc, char **argv)
 	files = readLines(FOUNDLISTFILE);
 	selfiles = selectLines(files);
 
-	if(getCount(selfiles))
+	if (getCount(selfiles))
 	{
-		if(isSameLines(files, selfiles, 0))
+		if (isSameLines(files, selfiles, 0))
 		{
 			cout("更新不要\n");
 		}

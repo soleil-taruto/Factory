@@ -116,13 +116,13 @@ static char *GetAutoComment(void) // ret: NULL == 未登録
 {
 	char *comment = NULL;
 
-	if(existFile(AUTO_COMMENT_FILE))
+	if (existFile(AUTO_COMMENT_FILE))
 	{
 		comment = readText(AUTO_COMMENT_FILE);
 		line2JLine(comment, 1, 0, 0, 1);
 		trim(comment, ' ');
 
-		if(!*comment)
+		if (!*comment)
 		{
 			memFree(comment);
 			comment = NULL;
@@ -212,7 +212,7 @@ static void PostRestoreFile(char *wFile)
 {
 	char *wExt = getExt(wFile);
 
-	if(
+	if (
 		!_stricmp(wExt, "DLL") ||
 		!_stricmp(wExt, "EXE") ||
 		!_stricmp(wExt, "LIB") ||
@@ -221,7 +221,7 @@ static void PostRestoreFile(char *wFile)
 	{
 		uint t = GetPETimeDateStamp(wFile);
 
-		if(t)
+		if (t)
 		{
 			uint64 stamp = getFileStampByTime((time_t)t);
 
@@ -253,10 +253,10 @@ static void EditComment(char *storeDir)
 
 		key = clearGetKey();
 
-		if(key == 0x1b)
+		if (key == 0x1b)
 			goto cancelled;
 
-		if(key == 0x0d)
+		if (key == 0x0d)
 			break;
 	}
 
@@ -265,7 +265,7 @@ static void EditComment(char *storeDir)
 		line2JLine(line, 1, 0, 0, 1);
 		trim(line, ' ');
 
-		if(*line)
+		if (*line)
 		{
 			char *stamp = line;
 			char *comment = "";
@@ -273,14 +273,14 @@ static void EditComment(char *storeDir)
 
 			p = strchr(stamp, '\x20');
 
-			if(p)
+			if (p)
 			{
 				*p = '\0';
 				comment = p + 1;
 			}
 			errorCase(!lineExp("<14,09>", stamp));
 
-			if(!*comment)
+			if (!*comment)
 				comment = DEFAULT_COMMENT;
 
 			cout("stamp: %s\n", stamp);
@@ -320,14 +320,14 @@ static void EraseDeletableRevisions(char *storeDir, int quietFlag)
 		unaddCwd();
 
 #if 0 // 廃止 @ 2021.3.16
-		if(!strcmp(comment, DELETABLE_COMMENT_01) || startsWith(comment, DELETABLE_COMMENT_02_START_PTN))
+		if (!strcmp(comment, DELETABLE_COMMENT_01) || startsWith(comment, DELETABLE_COMMENT_02_START_PTN))
 		{
 			cout("削除予定のリビジョンです。\n");
 			cout("%s\n", stamp);
 			cout("%s\n", comment);
 			cout("削除？\n");
 
-			if(quietFlag || clearGetKey() != 0x1b)
+			if (quietFlag || clearGetKey() != 0x1b)
 			{
 				cout("削除します。\n");
 				semiRemovePath(stamp);
@@ -377,14 +377,14 @@ static void EraseLostEntries(char *storeDir, int quietFlag)
 			hash = strx(entry);
 			*p = '\x20';
 
-			if(findLineCase(stockFiles, hash, 1) == getCount(stockFiles)) // ? not found
+			if (findLineCase(stockFiles, hash, 1) == getCount(stockFiles)) // ? not found
 			{
 				cout("エントリーの実体が失われています。\n");
 				cout("%s\n", stamp);
 				cout("%s\n", entry);
 				cout("削除？\n");
 
-				if(quietFlag || clearGetKey() != 0x1b)
+				if (quietFlag || clearGetKey() != 0x1b)
 				{
 					cout("削除します。\n");
 
@@ -394,10 +394,10 @@ static void EraseLostEntries(char *storeDir, int quietFlag)
 				}
 			}
 
-			if(pulseSec(2, NULL))
+			if (pulseSec(2, NULL))
 				cmdTitle_x(xcout("rum - E / %u(%u)_%u(%u)", entryIndex, getCount(entries), index, getCount(revisions)));
 		}
-		if(entriesModified)
+		if (entriesModified)
 		{
 			cout("エントリー更新中...\n");
 			semiRemovePath(FILE_REV_FILES);
@@ -457,12 +457,12 @@ static void TrimStoreDir(char *storeDir, int quietFlag)
 			errorCase(!lineExp("<32,09afAF>", line)); // 2bs
 
 			foundIndex = findLineCase(stockFiles, line, 1);
-			if(foundIndex < getCount(stockFiles))
+			if (foundIndex < getCount(stockFiles))
 			{
 				memFree((void *)fastDesertElement(stockFiles, foundIndex));
 			}
 
-			if(pulseSec(2, NULL))
+			if (pulseSec(2, NULL))
 				cmdTitle_x(xcout("rum - %u / %u(%u)_%u(%u)", getCount(stockFiles), lineIndex, getCount(stocks), index, getCount(revisions)));
 		}
 		memFree(filesFile);
@@ -472,7 +472,7 @@ static void TrimStoreDir(char *storeDir, int quietFlag)
 
 	addCwd(DIR_FILES);
 
-	if(getCount(stockFiles))
+	if (getCount(stockFiles))
 	{
 		foreach(stockFiles, stockFile, index)
 		{
@@ -480,7 +480,7 @@ static void TrimStoreDir(char *storeDir, int quietFlag)
 		}
 		cout("削除？\n");
 
-		if(quietFlag || clearGetKey() != 0x1b)
+		if (quietFlag || clearGetKey() != 0x1b)
 		{
 			cout("削除します。\n");
 
@@ -518,7 +518,7 @@ static void FileHistory(char *storeDir, int fromLastRevisionFlag, int lastFileOn
 	revisions = ls(DIR_REVISIONS);
 	rapidSortLines(revisions);
 
-	if(fromLastRevisionFlag)
+	if (fromLastRevisionFlag)
 	{
 		srchRevisions = newList();
 		addElement(srchRevisions, getLastElement(revisions));
@@ -526,7 +526,7 @@ static void FileHistory(char *storeDir, int fromLastRevisionFlag, int lastFileOn
 	else
 		srchRevisions = copyAutoList(revisions);
 
-	if(lastFileOnly)
+	if (lastFileOnly)
 		reverseElements(revisions);
 
 	foreach(srchRevisions, stamp, index)
@@ -554,7 +554,7 @@ static void FileHistory(char *storeDir, int fromLastRevisionFlag, int lastFileOn
 	allStock = autoDistinctJLinesICase(allStock);
 	selStocks = selectLines(allStock);
 
-	if(!getCount(selStocks))
+	if (!getCount(selStocks))
 		goto noSelStocks;
 
 	restoreRootDir = makeFreeDir();
@@ -592,14 +592,14 @@ static void FileHistory(char *storeDir, int fromLastRevisionFlag, int lastFileOn
 				errorCase(!*hash);
 				errorCase(!*stock);
 
-				if(!_stricmp(stock, selStock))
+				if (!_stricmp(stock, selStock))
 				{
 					int modified = !getCount(histHashes) || _stricmp(hash, getLine(histHashes, getCount(histHashes) - 1));
 					char *lclStamp = getLocal(stamp);
 
 					cout("# %s %s %s\n", lclStamp, hash, modified ? "新規または変更アリ" : "変更ナシ");
 
-					if(modified)
+					if (modified)
 					{
 						addElement(histRevs, (uint)strx(lclStamp));
 						addElement(histHashes, (uint)strx(hash));
@@ -610,7 +610,7 @@ static void FileHistory(char *storeDir, int fromLastRevisionFlag, int lastFileOn
 			memFree(filesFile);
 			releaseDim(stocks, 1);
 
-			if(lastFileOnly && getCount(histRevs))
+			if (lastFileOnly && getCount(histRevs))
 				break;
 		}
 		addCwd(DIR_FILES);
@@ -619,7 +619,7 @@ static void FileHistory(char *storeDir, int fromLastRevisionFlag, int lastFileOn
 		{
 			char *restoreFile;
 
-			if(lastFileOnly)
+			if (lastFileOnly)
 				restoreFile = combine(restoreRootDir, outStock);
 			else
 				restoreFile = combine_cx(restoreRootDir, xcout("%s_%s", stamp, outStock));
@@ -657,7 +657,7 @@ static void RemoveLastRevIfNoMod(char *storeDir, int quietFlag, int ignoreMessag
 	addCwd(DIR_REVISIONS);
 	revisions = ls(".");
 
-	if(getCount(revisions) < 2)
+	if (getCount(revisions) < 2)
 	{
 		cout("複数のリビジョンがありません。\n");
 		goto endFunc;
@@ -673,14 +673,14 @@ static void RemoveLastRevIfNoMod(char *storeDir, int quietFlag, int ignoreMessag
 	treeFile1 = combine(stamp1, FILE_REV_TREE);
 	treeFile2 = combine(stamp2, FILE_REV_TREE);
 
-	if(
+	if (
 		!isSameFile(filesFile1, filesFile2) ||
 		!isSameFile(treeFile1, treeFile2)
 		)
 	{
 		cout("最後のリビジョンは更新されています。\n");
 	}
-	else if(!ignoreMessage && strcmp(DEFAULT_COMMENT, GetComment(storeDir, stamp2))) // ? != DEFAULT_COMMENT
+	else if (!ignoreMessage && strcmp(DEFAULT_COMMENT, GetComment(storeDir, stamp2))) // ? != DEFAULT_COMMENT
 	{
 		cout("最後のリビジョンは更新されていませんが、コメントが記述されています。\n");
 	}
@@ -688,14 +688,14 @@ static void RemoveLastRevIfNoMod(char *storeDir, int quietFlag, int ignoreMessag
 	{
 		char *removeTargetDir = makeFullPath(stamp2);
 
-if(ignoreMessage) cout("ignoreMessage\n"); // test
+if (ignoreMessage) cout("ignoreMessage\n"); // test
 		cout("+--------------------------------------+\n");
 		cout("| 最後のリビジョンは更新されていません |\n");
 		cout("+--------------------------------------+\n");
 		cout("> %s\n", removeTargetDir);
 		cout("削除？\n");
 
-		if(quietFlag || clearGetKey() != 0x1b)
+		if (quietFlag || clearGetKey() != 0x1b)
 		{
 			cout("削除します。\n");
 			recurRemoveDir(removeTargetDir);
@@ -735,7 +735,7 @@ static void OneRestore(char *storeDir, char *targetStamp, char *restoreDir) // s
 
 	createDir(restoreDir);
 
-	if(RestoreListOnlyMode)
+	if (RestoreListOnlyMode)
 	{
 		autoList_t *lines = newList();
 
@@ -867,13 +867,13 @@ static void Checkout(char *dir) // dir: バックアップ先、存在するルートディレクト
 	}
 	cout("復元するスタンプ: %s\n", targetStamp);
 
-	if(existDir(restoreDir))
+	if (existDir(restoreDir))
 	{
 		eraseParent(restoreDir);
 		restoreDir = combine_xx(makeFreeDir(), restoreDir);
 		cout("次の復元先: %s\n", restoreDir);
 	}
-	if(RestoreFreeDirMode)
+	if (RestoreFreeDirMode)
 	{
 		memFree(restoreDir);
 		restoreDir = makeFreeDir();
@@ -907,7 +907,7 @@ static void Commit(char *dir) // dir: バックアップ元、存在するルートディレクトリ
 
 	// I/O Test
 	{
-		if(existDir(storeDir))
+		if (existDir(storeDir))
 		{
 			addCwd(storeDir);
 
@@ -936,7 +936,7 @@ static void Commit(char *dir) // dir: バックアップ元、存在するルートディレクトリ
 
 	// 廃止 @ 2020.10.7
 	/*
-	if(NoNestingCheck)
+	if (NoNestingCheck)
 	{
 		LOGPOS();
 		goto endNestingCheck;
@@ -951,14 +951,14 @@ static void Commit(char *dir) // dir: バックアップ元、存在するルートディレクトリ
 		{
 			parentDir = changeLocal_xc(parentDir, "");
 
-			if(strlen(parentDir) == 2) // ? ルートに達した。
+			if (strlen(parentDir) == 2) // ? ルートに達した。
 				break;
 
 			errorCase(strlen(parentDir) <= 3); // 2bs
 
 			parentDir = addExt(parentDir, EXT_STOREDIR);
 
-			if(existDir(parentDir))
+			if (existDir(parentDir))
 			{
 #if 1
 				error_m("親に .rum アリ");
@@ -982,7 +982,7 @@ static void Commit(char *dir) // dir: バックアップ元、存在するルートディレクトリ
 
 		foreach(subDirs, subDir, index)
 		{
-			if(!_stricmp(EXT_STOREDIR, getExt(subDir)))
+			if (!_stricmp(EXT_STOREDIR, getExt(subDir)))
 			{
 #if 1
 				error_m("子に .rum アリ");
@@ -999,35 +999,35 @@ static void Commit(char *dir) // dir: バックアップ元、存在するルートディレクトリ
 	}
 endNestingCheck:
 
-	if(!QuietMode)
+	if (!QuietMode)
 	{
 		comment = inputLine();
 		line2JLine(comment, 1, 0, 0, 1);
 		trim(comment, ' ');
 
-		if(!*comment)
+		if (!*comment)
 			comment = addLine(comment, DEFAULT_COMMENT);
 	}
 	else
 	{
 		comment = GetAutoComment();
 
-		if(!comment)
+		if (!comment)
 			comment = strx(DEFAULT_COMMENT);
 	}
 	cout("コメント: %s\n", comment);
 
-	if(!existDir(storeDir))
+	if (!existDir(storeDir))
 	{
 		cout("######################################\n");
 		cout("## 続行すると格納先を新規作成します ##\n");
 		cout("######################################\n");
 	}
-	if(!QuietMode)
+	if (!QuietMode)
 	{
 		cout("続行？\n");
 
-		if(clearGetKey() == 0x1b)
+		if (clearGetKey() == 0x1b)
 		{
 			ErrorLevel = 1;
 			goto cancelled;
@@ -1035,7 +1035,7 @@ endNestingCheck:
 		cout("続行します。\n");
 	}
 
-	if(!existDir(storeDir))
+	if (!existDir(storeDir))
 	{
 		createDir(storeDir);
 		execute_x(xcout("Compact.exe /C \"%s\"", storeDir)); // 圧縮
@@ -1056,20 +1056,20 @@ endNestingCheck:
 		char *file;
 		uint index;
 
-		if(WithoutExeObjMode)
+		if (WithoutExeObjMode)
 		{
 			uint dirKilledNum = 0;
 
 			foreach(paths, file, index)
 			{
 #if 0
-				if(index < lastDirCount)
+				if (index < lastDirCount)
 				{
 					1; // noop
 				}
 				else
 				{
-					if(
+					if (
 						!_stricmp("exe", getExt(file)) ||
 						!_stricmp("obj", getExt(file))
 						)
@@ -1078,9 +1078,9 @@ endNestingCheck:
 					}
 				}
 #else // tmp 配下は事前にクリアするようにした。-> Counter.txt が入ってしまうので復活。
-				if(index < lastDirCount)
+				if (index < lastDirCount)
 				{
-					if(startsWithICase(file, "C:\\Factory\\tmp\\")) // ? tmp 配下のディレクトリ
+					if (startsWithICase(file, "C:\\Factory\\tmp\\")) // ? tmp 配下のディレクトリ
 					{
 						file[0] = '\0';
 						dirKilledNum++;
@@ -1088,7 +1088,7 @@ endNestingCheck:
 				}
 				else
 				{
-					if(
+					if (
 						!_stricmp("exe", getExt(file)) ||
 						!_stricmp("obj", getExt(file)) ||
 						startsWithICase(file, "C:\\Factory\\tmp\\") // ? tmp 配下のファイル
@@ -1131,7 +1131,7 @@ endNestingCheck:
 		{
 			char *stockFile = md5_makeHexHashFile(file);
 
-			if(existFile(stockFile))
+			if (existFile(stockFile))
 			{
 				cout("* %s\n", file);
 #if 0 // 廃止 @ 2020.10.29
@@ -1167,7 +1167,7 @@ endNestingCheck:
 		createDir(targetStamp);
 		addCwd(targetStamp);
 
-		if(*comment)
+		if (*comment)
 			writeOneLine(FILE_REV_COMMENT, comment);
 
 		writeLines(FILE_REV_TREE, &dirs);
@@ -1216,7 +1216,7 @@ static void Rum(char *dir)
 	dir = makeFullPath(dir);
 	cout("対象: %s\n", dir);
 
-	if(InputDirExt)
+	if (InputDirExt)
 	{
 		dir = changeExt_xc(dir, InputDirExt);
 		cout("対Ⅱ: %s\n", dir);
@@ -1224,21 +1224,21 @@ static void Rum(char *dir)
 	errorCase(isAbsRootDir(dir));
 	errorCase(!existDir(dir));
 
-	if(!_stricmp(EXT_STOREDIR, getExt(dir)))
+	if (!_stricmp(EXT_STOREDIR, getExt(dir)))
 	{
-		if(EditCommentMode)
+		if (EditCommentMode)
 		{
 			EditComment(dir);
 		}
-		else if(TrimStoreDirMode)
+		else if (TrimStoreDirMode)
 		{
 			TrimStoreDir(dir, TrimStoreDirMode_QuietMode);
 		}
-		else if(FileHistoryMode)
+		else if (FileHistoryMode)
 		{
 			FileHistory(dir, FileHistoryMode_FromLastRevision, FileHistoryMode_LastFileOnly);
 		}
-		else if(RemoveLastRevIfNoModMode)
+		else if (RemoveLastRevIfNoModMode)
 		{
 			RemoveLastRevIfNoMod(dir, RemoveLastRevIfNoModMode_QuietMode, RemoveLastRevIfNoModMode_IgnoreMessage);
 		}
@@ -1255,76 +1255,76 @@ static void Rum(char *dir)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/E")) // Edit comment
+	if (argIs("/E")) // Edit comment
 	{
 		EditCommentMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/EE")) // erum 用
+	if (argIs("/EE")) // erum 用
 	{
 		EditCommentMode = 1;
 		InputDirExt = "rum";
 		goto readArgs;
 	}
-	if(argIs("/F")) // without .exe and .obj (Factory mode)
+	if (argIs("/F")) // without .exe and .obj (Factory mode)
 	{
 		WithoutExeObjMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/T")) // Trim store-dir
+	if (argIs("/T")) // Trim store-dir
 	{
 		TrimStoreDirMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/TT")) // MatomeMaker 用
+	if (argIs("/TT")) // MatomeMaker 用
 	{
 		TrimStoreDirMode = 1;
 		TrimStoreDirMode_QuietMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/HA")) // file History from All revision
+	if (argIs("/HA")) // file History from All revision
 	{
 		FileHistoryMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/H")) // file History from last revision
+	if (argIs("/H")) // file History from last revision
 	{
 		FileHistoryMode = 1;
 		FileHistoryMode_FromLastRevision = 1;
 		goto readArgs;
 	}
-	if(argIs("/1A")) // last file from All revision
+	if (argIs("/1A")) // last file from All revision
 	{
 		FileHistoryMode = 1;
 		FileHistoryMode_LastFileOnly = 1;
 		goto readArgs;
 	}
-	if(argIs("/1")) // last file from last revision
+	if (argIs("/1")) // last file from last revision
 	{
 		FileHistoryMode = 1;
 		FileHistoryMode_FromLastRevision = 1;
 		FileHistoryMode_LastFileOnly = 1;
 		goto readArgs;
 	}
-	if(argIs("/R")) // Remove last revison if no modifications
+	if (argIs("/R")) // Remove last revison if no modifications
 	{
 		RemoveLastRevIfNoModMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/RR")) // qrum 用
+	if (argIs("/RR")) // qrum 用
 	{
 		RemoveLastRevIfNoModMode = 1;
 		InputDirExt = "rum";
 		goto readArgs;
 	}
-	if(argIs("/RRR")) // qrum 用
+	if (argIs("/RRR")) // qrum 用
 	{
 		RemoveLastRevIfNoModMode = 1;
 		RemoveLastRevIfNoModMode_QuietMode = 1;
 		InputDirExt = "rum";
 		goto readArgs;
 	}
-	if(argIs("/RRRA")) // qrumall 用
+	if (argIs("/RRRA")) // qrumall 用
 	{
 		RemoveLastRevIfNoModMode = 1;
 		RemoveLastRevIfNoModMode_QuietMode = 1;
@@ -1332,22 +1332,22 @@ readArgs:
 		InputDirExt = "rum";
 		goto readArgs;
 	}
-	if(argIs("/Q")) // Quiet mode
+	if (argIs("/Q")) // Quiet mode
 	{
 		QuietMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/D")) // restore free Dir mode
+	if (argIs("/D")) // restore free Dir mode
 	{
 		RestoreFreeDirMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/L")) // restore List only mode
+	if (argIs("/L")) // restore List only mode
 	{
 		RestoreListOnlyMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/-COLL"))
+	if (argIs("/-COLL"))
 	{
 #if 1
 		error_m("/-COLL オプションは廃止されました。");
@@ -1356,7 +1356,7 @@ readArgs:
 		goto readArgs;
 #endif
 	}
-	if(argIs("/-NCHK"))
+	if (argIs("/-NCHK"))
 	{
 #if 1
 		error_m("/-NCHK オプションは廃止されました。");
@@ -1365,11 +1365,11 @@ readArgs:
 		goto readArgs;
 #endif
 	}
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		char *comment;
 
-		if(hasArgs(1))
+		if (hasArgs(1))
 			writeOneLineNoRet_b(AUTO_COMMENT_FILE, nextArg());
 		else
 			editTextFile(AUTO_COMMENT_FILE);
@@ -1379,13 +1379,13 @@ readArgs:
 
 		goto endProc;
 	}
-	if(argIs("/C-"))
+	if (argIs("/C-"))
 	{
 		removeFileIfExist(AUTO_COMMENT_FILE);
 		cout("自動コメントを削除しました。\n");
 		goto endProc;
 	}
-	if(argIs("/XR")) // rrum 用
+	if (argIs("/XR")) // rrum 用
 	{
 		InputDirExt = "rum";
 		goto readArgs;

@@ -14,11 +14,11 @@ static char *EncodeUrlMessage(char *message)
 
 	for(p = message; *p; p++)
 	{
-		if(*p == ' ')
+		if (*p == ' ')
 		{
 			addByte(lineBuff, '+');
 		}
-		else if(*p == '+' || *p == '%')
+		else if (*p == '+' || *p == '%')
 		{
 			ab_addLine_x(lineBuff, xcout("%%%02x", *p));
 		}
@@ -56,7 +56,7 @@ int main(int argc, char **argv)
 
 	domain = nextArg();
 
-	if(p = strchr(domain, ':'))
+	if (p = strchr(domain, ':'))
 	{
 		*p = '\0';
 		portno = toValue(p + 1);

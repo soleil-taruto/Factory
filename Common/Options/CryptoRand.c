@@ -9,9 +9,9 @@ uint getCryptoByte(void)
 	static uint poolSize = POOLSIZE_BGN;
 	static uint index    = POOLSIZE_BGN;
 
-	if(index == poolSize)
+	if (index == poolSize)
 	{
-		if(poolSize < POOLSIZE_MAX)
+		if (poolSize < POOLSIZE_MAX)
 		{
 			poolSize *= 2;
 			pool = memRealloc(pool, poolSize);
@@ -100,7 +100,7 @@ uint64 getCryptoRand64Range(uint64 minval, uint64 maxval) // ret: minval ` maxv
 {
 	errorCase(maxval < minval);
 
-	if(minval == 0 && maxval == UINT64MAX)
+	if (minval == 0 && maxval == UINT64MAX)
 	{
 		return getCryptoRand64();
 	}

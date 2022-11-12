@@ -6,7 +6,7 @@ static int KeepLoopRq = 1;
 static int Idle(void)
 {
 	while(hasKey())
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 			KeepLoopRq = 0;
 
 	return KeepLoopRq;
@@ -19,12 +19,12 @@ int main(int argc, char **argv)
 	char *upFile = makeTempPath("tmp");
 	uchar ip[4];
 
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		domain = nextArg();
 		portno = toValue(nextArg());
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		upFileSize = toValue(nextArg());
 	}
@@ -45,9 +45,9 @@ int main(int argc, char **argv)
 		dlFile = sockClient(ip, domain, portno, upFile, Idle);
 		cout("Request End\n");
 
-		if(!KeepLoopRq)
+		if (!KeepLoopRq)
 		{
-			if(dlFile)
+			if (dlFile)
 			{
 				removeFile(dlFile);
 				memFree(dlFile);

@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 
 		for(bit = 0; bit < 8; bit++)
 		{
-			if(My_IsJChar(chr + bit))
+			if (My_IsJChar(chr + bit))
 			{
 				bits |= 1 << bit;
 			}

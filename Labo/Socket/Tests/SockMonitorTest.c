@@ -8,12 +8,12 @@ static uint SelectNicIp(autoList_t *strNicIpList)
 */
 static uint SelectNicIp(autoList_t *strNicIpList)
 {
-	if(getCount(strNicIpList) == 0)
+	if (getCount(strNicIpList) == 0)
 	{
 		cout("NICを検出できませんでした。\n");
 		return UINTMAX;
 	}
-	if(getCount(strNicIpList) == 1)
+	if (getCount(strNicIpList) == 1)
 	{
 		return 0;
 	}
@@ -22,7 +22,7 @@ static uint SelectNicIp(autoList_t *strNicIpList)
 		char *line = selectLine(strNicIpList);
 		uint index;
 
-		if(!line)
+		if (!line)
 		{
 			cout("キャンセルしました。\n");
 			return UINTMAX;
@@ -52,7 +52,7 @@ static int IdleProc(void)
 
 	while(hasKey())
 	{
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 		{
 			cout("終了します。\n");
 			retval = 0;

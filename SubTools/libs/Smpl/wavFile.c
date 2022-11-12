@@ -8,7 +8,7 @@
 
 int main(int argc, char **argv)
 {
-	if(argIs("/W2C"))
+	if (argIs("/W2C"))
 	{
 		char *rFile;
 		char *wFile;
@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 		cout("lastWAV_Hz: %u\n", lastWAV_Hz);
 		return;
 	}
-	if(argIs("/C2W"))
+	if (argIs("/C2W"))
 	{
 		char *rFile;
 		char *wFile;

@@ -42,7 +42,7 @@ static char *Request(char *prmText)
 
 	ansFile = sockClient(ip, Domain, PortNo, prmFile, Idle);
 
-	if(ansFile)
+	if (ansFile)
 	{
 		ansText = readText_b(ansFile);
 		removeFile(ansFile);
@@ -65,7 +65,7 @@ static char *DoRequest(char *prmText)
 	{
 		ansText = Request(prmText);
 
-		if(ansText)
+		if (ansText)
 			break;
 	}
 	return ansText;
@@ -81,7 +81,7 @@ static void DoRemark(char *stamp, char *message)
 	prmText = xcout("REMARK\n%s\n%s", stamp, message);
 	ansText = DoRequest(prmText);
 
-	if(ansText && !strcmp(ansText, "REMARK_OK"))
+	if (ansText && !strcmp(ansText, "REMARK_OK"))
 		cout("メッセージを送信しました。\n");
 	else
 		cout("メッセージの送信に失敗しました。\n");
@@ -97,7 +97,7 @@ static char *GetTimeLine(char *bgnStmp, char *endStmp)
 	prmText = xcout("TIME-LINE\n%s\n%s", bgnStmp, endStmp);
 	ansText = DoRequest(prmText);
 
-	if(ansText)
+	if (ansText)
 		cout("タイムラインを取得しました。\n");
 	else
 		cout("タイムラインの取得に失敗しました。\n");
@@ -113,7 +113,7 @@ static char *Heartbeat(char *ident, char *message)
 	prmText = xcout("HEARTBEAT\n%s\n%s", ident, message);
 	ansText = DoRequest(prmText);
 
-	if(ansText)
+	if (ansText)
 		cout("ハートビートを送信しました。\n");
 	else
 		cout("ハートビートの送信に失敗しました。\n");
@@ -129,7 +129,7 @@ static void Logout(char *userName)
 	prmText = xcout("LOGOUT\n%s", userName);
 	ansText = DoRequest(prmText);
 
-	if(ansText && !strcmp(ansText, "LOGOUT_OK"))
+	if (ansText && !strcmp(ansText, "LOGOUT_OK"))
 		cout("ログアウトしました。\n");
 	else
 		cout("ログアウトに失敗しました。\n");
@@ -146,7 +146,7 @@ static sint ServerTimeDiff(void)
 	prmText = xcout("SERVER-TIME-DIFF\n%s", c_makeCompactStamp(NULL));
 	ansText = DoRequest(prmText);
 
-	if(ansText)
+	if (ansText)
 		serverTimeDiff = atoi(ansText);
 
 	cout("serverTimeDiff: %d\n", serverTimeDiff);
@@ -161,12 +161,12 @@ static sint ServerTimeDiff(void)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		Domain = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		PortNo = toValue(nextArg());
 		goto readArgs;
@@ -175,7 +175,7 @@ readArgs:
 	errorCase(m_isEmpty(Domain));
 	errorCase(!m_isRange(PortNo, 1, 65535));
 
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		char *stamp;
 		char *message;
@@ -186,7 +186,7 @@ readArgs:
 		DoRemark(stamp, message);
 		return;
 	}
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		char *bgnStmp;
 		char *endStmp;
@@ -196,16 +196,16 @@ readArgs:
 		bgnStmp = nextArg();
 		endStmp = nextArg();
 
-		if(hasArgs(1))
+		if (hasArgs(1))
 			outFile = nextArg();
 		else
 			outFile = NULL;
 
 		timeLine = GetTimeLine(bgnStmp, endStmp);
 
-		if(timeLine)
+		if (timeLine)
 		{
-			if(outFile)
+			if (outFile)
 				writeOneLineNoRet_b(outFile, timeLine);
 			else
 				cout("%s", timeLine);
@@ -214,7 +214,7 @@ readArgs:
 		}
 		return;
 	}
-	if(argIs("/H"))
+	if (argIs("/H"))
 	{
 		char *ident;
 		char *message;
@@ -224,16 +224,16 @@ readArgs:
 		ident = nextArg();
 		message = nextArg();
 
-		if(hasArgs(1))
+		if (hasArgs(1))
 			outFile = nextArg();
 		else
 			outFile = NULL;
 
 		members = Heartbeat(ident, message);
 
-		if(members)
+		if (members)
 		{
-			if(outFile)
+			if (outFile)
 				writeOneLineNoRet_b(outFile, members);
 			else
 				cout("%s", members);
@@ -242,7 +242,7 @@ readArgs:
 		}
 		return;
 	}
-	if(argIs("/O"))
+	if (argIs("/O"))
 	{
 		char *ident;
 
@@ -251,7 +251,7 @@ readArgs:
 		Logout(ident);
 		return;
 	}
-	if(argIs("/B"))
+	if (argIs("/B"))
 	{
 		char *message;
 		uint speedPml;
@@ -268,7 +268,7 @@ readArgs:
 		SendToBouyomichan(Domain, PortNo, message, speedPml, tonePml, volumePml, voice);
 		return;
 	}
-	if(argIs("/STD")) // server time diff
+	if (argIs("/STD")) // server time diff
 	{
 		char *outFile = nextArg();
 		sint ret = ServerTimeDiff();

@@ -18,7 +18,7 @@ static void MixBmp(char *rFile1, char *rFile2, char *wFile)
 	w2 = getTableWidth(bmp2);
 	h2 = getTableHeight(bmp2);
 
-	if(w1 != w2 || h1 != h2)
+	if (w1 != w2 || h1 != h2)
 	{
 		cout("サイズが違います。\n");
 		cout("1: %u %u\n", w1, h1);
@@ -94,15 +94,15 @@ static void MixBmp(char *rFile1, char *rFile2, char *wFile)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/B"))
+	if (argIs("/B"))
 	{
 		MixMode = 'B';
 	}
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		MixMode = 'S';
 	}
-	if(argIs("/X"))
+	if (argIs("/X"))
 	{
 		MixMode = 'X';
 	}

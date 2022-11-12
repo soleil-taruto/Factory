@@ -8,7 +8,7 @@ int main(int argc, char **argv)
 
 		cout("%02x\n", key);
 
-		if(key == 0x1b)
+		if (key == 0x1b)
 			break;
 	}
 }

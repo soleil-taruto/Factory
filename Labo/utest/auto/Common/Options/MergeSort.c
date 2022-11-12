@@ -123,10 +123,10 @@ static void DoTest2(int d1, int d2, int db, int s1, int s2, uint rowcnt1, uint r
 	copyFile(file101, file201);
 	copyFile(file102, file202);
 
-	if(s1)
+	if (s1)
 		SortTextFile(file101);
 
-	if(s2)
+	if (s2)
 		SortTextFile(file102);
 
 	MergeFileText(
@@ -155,9 +155,9 @@ static void DoTest2(int d1, int d2, int db, int s1, int s2, uint rowcnt1, uint r
 	removeFile(file102);
 	removeFile(file201);
 	removeFile(file202);
-	if(d1) removeFile(file111);
-	if(d2) removeFile(file112);
-	if(db) removeFile(file11B);
+	if (d1) removeFile(file111);
+	if (d2) removeFile(file112);
+	if (db) removeFile(file11B);
 	removeFile(file211);
 	removeFile(file212);
 	removeFile(file21B);

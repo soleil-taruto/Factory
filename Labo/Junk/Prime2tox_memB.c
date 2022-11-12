@@ -22,7 +22,7 @@ static uint Root(uint64 value)
 	{
 		uint r = root | bit;
 
-		if((uint64)r * r <= value)
+		if ((uint64)r * r <= value)
 		{
 			root = r;
 		}
@@ -37,18 +37,18 @@ static void DispSosu(void)
 
 	for(index = 3; index <= CountMax; index += 2)
 	{
-		if(index % 10000 == 1)
+		if (index % 10000 == 1)
 		{
 			while(hasKey())
 			{
-				if(getKey() == 0x1b)
+				if (getKey() == 0x1b)
 				{
 					cout("•\Ž¦‚ð’†Ž~‚µ‚Ü‚µ‚½B\n");
 					return;
 				}
 			}
 		}
-		if(!refBit(SosuMap, index / 2))
+		if (!refBit(SosuMap, index / 2))
 		{
 			cout("%I64u\n", index);
 		}
@@ -71,10 +71,10 @@ int main(int argc, char **argv)
 
 	for(count = 3; count <= rootCntMax; count += 2)
 	{
-		if(pulseSec(1, NULL))
+		if (pulseSec(1, NULL))
 			cmdTitle_x(xcout("Prime2tox_memB - %I64u ‚ ‚½‚è‚Ü‚ÅŒvŽZÏ‚Ý...", count * count));
 
-		if(!refBit(SosuMap, count / 2))
+		if (!refBit(SosuMap, count / 2))
 		{
 			for(wcnt = count * 3; wcnt <= CountMax; wcnt += count * 2)
 			{

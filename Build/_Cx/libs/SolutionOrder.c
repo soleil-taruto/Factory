@@ -13,7 +13,7 @@ autoList_t *GetReferenceSolutions(char *source)
 
 	cout("< %s\n", source);
 
-	if(!_stricmp(getExt(source), "sln"))
+	if (!_stricmp(getExt(source), "sln"))
 	{
 		char *projRootDir = changeLocal(source, "");
 		autoList_t *projDirs;
@@ -31,7 +31,7 @@ autoList_t *GetReferenceSolutions(char *source)
 			projFile = addLocal(projFile, projName);
 			projFile = addExt(projFile, "csproj");
 
-			if(existFile(projFile))
+			if (existFile(projFile))
 			{
 				autoList_t *lines = readLines(projFile);
 				char *line;
@@ -42,7 +42,7 @@ autoList_t *GetReferenceSolutions(char *source)
 
 				foreach(lines, line, index)
 				{
-					if(lineExpICase("/<HintPath><1,,>\\<1,,>\\bin\\Release\\<1,,>.dll/<//HintPath>", line))
+					if (lineExpICase("/<HintPath><1,,>\\<1,,>\\bin\\Release\\<1,,>.dll/<//HintPath>", line))
 					//                                 ~~~~~                ~~~~~
 					//                                   ^                    ^
 					//                                   |                    |
@@ -61,7 +61,7 @@ autoList_t *GetReferenceSolutions(char *source)
 						}
 						unaddCwd();
 
-						if(existFile(solution))
+						if (existFile(solution))
 						{
 							cout("> %s\n", solution);
 							addElement(solutions, (uint)strx(solution));
@@ -91,7 +91,7 @@ static uint FindLastReference(autoList_t *infos, SourceInfo_t *targInfo, uint in
 
 		for(i = 0; i < getCount(targInfo->RefSolutions); i++)
 		{
-			if(!_stricmp(info->Source, getLine(targInfo->RefSolutions, i)))
+			if (!_stricmp(info->Source, getLine(targInfo->RefSolutions, i)))
 			{
 				LOGPOS();
 				lastRefIndex = index;
@@ -127,7 +127,7 @@ void SolutionOrder(autoList_t *sources) // sources: 全てフルパスであることを想定
 
 		lastRefIndex = FindLastReference(infos, info, index);
 
-		if(lastRefIndex)
+		if (lastRefIndex)
 		{
 			LOGPOS();
 			insertElement(infos, lastRefIndex, desertElement(infos, index - 1));

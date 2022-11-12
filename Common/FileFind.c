@@ -23,10 +23,10 @@ autoList_t *lsInfos; // extra-prm
 
 static void AddPath(autoList_t *paths, char *path, FILE *extra_fp, void (*lsAction)(char *), autoList_t *infos)
 {
-	if(lsAction)
+	if (lsAction)
 		lsAction(path);
 
-	if(extra_fp)
+	if (extra_fp)
 	{
 		writeLine(extra_fp, path);
 		memFree(path);
@@ -34,7 +34,7 @@ static void AddPath(autoList_t *paths, char *path, FILE *extra_fp, void (*lsActi
 	else
 		addElement(paths, (uint)path);
 
-	if(infos)
+	if (infos)
 	{
 		lsInfo_t *i = (lsInfo_t *)memAlloc(sizeof(lsInfo_t));
 
@@ -92,53 +92,53 @@ autoList_t *ls(char *dir)
 	h = _findfirst(wCard, &lastFindData);
 	memFree(wCard);
 
-	if(h != -1)
+	if (h != -1)
 	{
 		do
 		{
 			name = lastFindData.name;
 
-			if(name[0] == '.' && (name[1] == '\0' || name[1] == '.' && name[2] == '\0')) // ".", ".." を除外
+			if (name[0] == '.' && (name[1] == '\0' || name[1] == '.' && name[2] == '\0')) // ".", ".." を除外
 			{
 				continue;
 			}
-			if(antiSubversion)
+			if (antiSubversion)
 			{
 				// .svn は SVN_ASP_DOT_NET_HACK=1 で _svn になるらしい。
-				if((!_stricmp(name, ".svn") || !_stricmp(name, "_svn")) && lastFindData.attrib & _A_SUBDIR)
+				if ((!_stricmp(name, ".svn") || !_stricmp(name, "_svn")) && lastFindData.attrib & _A_SUBDIR)
 				{
 					continue;
 				}
-				if(!_stricmp(getExt(name), "rum") && lastFindData.attrib & _A_SUBDIR)
+				if (!_stricmp(getExt(name), "rum") && lastFindData.attrib & _A_SUBDIR)
 				{
 					continue;
 				}
 			}
-			if(strchr(name, '?')) // ? 変な文字を含む
+			if (strchr(name, '?')) // ? 変な文字を含む
 			{
 				cout("<UTF-PATH>\n");
 				cout("%s\n", absDir);
 				cout("%s\n", name);
 
-				if(ignoreUtfPath)
+				if (ignoreUtfPath)
 					continue;
 
 				error();
 			}
-			if(findLimiter)
+			if (findLimiter)
 			{
-				if(findLimiter == 1)
+				if (findLimiter == 1)
 					continue;
 
 				findLimiter--;
 			}
-			if(findAcceptName && !findAcceptName(name))
+			if (findAcceptName && !findAcceptName(name))
 			{
 				continue;
 			}
 			path = combine(absDir, name);
 
-			if(lastFindData.attrib & _A_SUBDIR) // ? dir
+			if (lastFindData.attrib & _A_SUBDIR) // ? dir
 			{
 				AddPath(paths, path, DirsExtraFp, lsDirAction, lsInfos);
 			}
@@ -156,7 +156,7 @@ autoList_t *ls(char *dir)
 	addElements(paths, files);
 	fixElements(paths);
 
-	if(lsInfos)
+	if (lsInfos)
 	{
 		addElements(lsInfos, fileInfos);
 		fixElements(lsInfos);
@@ -212,9 +212,9 @@ void updateFindData(char *path)
 {
 	intptr_t h = _findfirst(path, &lastFindData);
 
-	if(h == -1)
+	if (h == -1)
 	{
-		if(isRootDir(path))
+		if (isRootDir(path))
 		{
 			memset(&lastFindData, 0x00, sizeof(struct _finddata_t));
 
@@ -235,7 +235,7 @@ int tryUpdateFindData(char *path)
 {
 	intptr_t h = _findfirst(path, &lastFindData);
 
-	if(h == -1)
+	if (h == -1)
 		return 0;
 
 	_findclose(h);
@@ -267,7 +267,7 @@ static autoList_t *GetPaths(char *dir, int intoSubDir, int filterDir)
 {
 	autoList_t *paths = ( !intoSubDir ? ls : lss )(dir);
 
-	if(!filterDir)
+	if (!filterDir)
 		rmtrimSubLines(paths, 0, lastDirCount);
 	else
 		rmtrimFollowLines(paths, lastDirCount);
@@ -356,12 +356,12 @@ void fileSearch(char *wCard, int (*action)(struct _finddata_t *))
 
 	h = _findfirst(wCard, &findData);
 
-	if(h == -1)
+	if (h == -1)
 		return;
 
 	do
 	{
-		if(!action(&findData))
+		if (!action(&findData))
 			break;
 	}
 	while(_findnext(h, &findData) == 0);
@@ -403,7 +403,7 @@ uint lsCount(char *dir)
 
 	dir = makeFullPath(dir);
 
-	if(existDir(dir))
+	if (existDir(dir))
 	{
 		char *wCard = combine(dir, WILDCARD);
 		intptr_t h;
@@ -411,7 +411,7 @@ uint lsCount(char *dir)
 
 		h = _findfirst(wCard, &findData);
 
-		if(h != -1)
+		if (h != -1)
 		{
 			do
 			{
@@ -419,7 +419,7 @@ uint lsCount(char *dir)
 				{
 					const char *name = findData.name;
 
-					if(name[0] == '.' && (name[1] == '\0' || name[1] == '.' && name[2] == '\0')) // ".", ".." を除外
+					if (name[0] == '.' && (name[1] == '\0' || name[1] == '.' && name[2] == '\0')) // ".", ".." を除外
 						continue;
 				}
 
@@ -469,10 +469,10 @@ static void CD_ExecBatch(char *dir, char *trailOpts, char *outFile)
 		char *line = readLine(rfp);
 		char *path;
 
-		if(!line)
+		if (!line)
 			break;
 
-		if(!*line) // これは無いはずだけど、念のため。
+		if (!*line) // これは無いはずだけど、念のため。
 		{
 			LOGPOS();
 			memFree(line);
@@ -519,7 +519,7 @@ void cmdDir_lss2File(char *dir, char *dirsFile, char *filesFile)
 	{
 		char *subDir = readLine(fp);
 
-		if(!subDir)
+		if (!subDir)
 			break;
 
 		cmdDir_ls2File_noClear(subDir, dirsFile, filesFile);
@@ -539,7 +539,7 @@ static autoList_t *CD_CallFunc(char *dir, void (*func)(char *, char *, char *), 
 		0 バイトのファイルを readLines() すると { } を返す。-> { "" } とか、空行を含むリストを返すことはない！
 	*/
 
-	if(dirMode)
+	if (dirMode)
 		ret = readLines(dirsFile);
 	else
 		ret = readLines(filesFile);

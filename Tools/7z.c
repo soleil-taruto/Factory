@@ -25,7 +25,7 @@ static char *Get7zExeFile(void) // ret: 空白を含まないパスであること。
 {
 	static char *file;
 
-	if(!file)
+	if (!file)
 		file = GetCollaboFile(FILE_7Z_EXE);
 
 	return file;
@@ -37,7 +37,7 @@ static char *GetSwitches(void)
 	memFree(ret);
 	ret = strx("");
 
-	if(Passphrase)
+	if (Passphrase)
 	{
 		errorCase_m(!lineExp("<1,100,--__09AZaz>", Passphrase), "パスフレーズに使える文字は - _ 0～9 A～Z a～z です。");
 
@@ -47,7 +47,7 @@ static char *GetSwitches(void)
 }
 static char *Unlittering(char *dir, char *file7z)
 {
-	if(2 <= lsCount(dir))
+	if (2 <= lsCount(dir))
 	{
 		char *wRtDir = makeFreeDir();
 		char *wDir;
@@ -81,7 +81,7 @@ static void DoTrimOneDir(char *wDir)
 
 		path = getLine(paths, 0);
 
-		if(!existDir(path))
+		if (!existDir(path))
 		{
 			releaseDim(paths, 1);
 			break;
@@ -91,7 +91,7 @@ static void DoTrimOneDir(char *wDir)
 		releaseAutoList(paths);
 		dove = 1;
 	}
-	if(dove)
+	if (dove)
 	{
 		char *midDir = strx(wDir);
 
@@ -110,7 +110,7 @@ static void DoTrimOneDir(char *wDir)
 }
 static void Post7z(char *dir)
 {
-	if(!AllowNoOutput)
+	if (!AllowNoOutput)
 	{
 		/*
 			/OAD を指定してアーカイブではないファイルをドロップしてしまうと、
@@ -131,7 +131,7 @@ static void Extract7z(char *file7z)
 	errorCase(!existFile(file7z));
 	errorCase(!*getExt(file7z)); // ? 拡張子ナシ
 
-	if(ExtractSameDir)
+	if (ExtractSameDir)
 	{
 		dir = changeExt(file7z, "");
 		dir = toCreatableTildaPath(dir, 10000);
@@ -144,7 +144,7 @@ static void Extract7z(char *file7z)
 		unaddCwd();
 		Post7z(dir);
 
-		if(TrimOneDir)
+		if (TrimOneDir)
 			DoTrimOneDir(dir);
 	}
 	else
@@ -160,7 +160,7 @@ static void Extract7z(char *file7z)
 		dir = Unlittering(dir, file7z);
 		execute_x(xcout("START %s", dir));
 	}
-	if(OutputAndDelete)
+	if (OutputAndDelete)
 	{
 		LOGPOS();
 		removeFile(file7z);
@@ -175,14 +175,14 @@ int main(int argc, char **argv)
 	cout("=======\n");
 
 readArgs:
-	if(argIs("/ANO"))
+	if (argIs("/ANO"))
 	{
 		cout("ALLOW-NO-OUTPUT\n");
 
 		AllowNoOutput = 1;
 		goto readArgs;
 	}
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		cout("+----------------+\n");
 		cout("| 同じ場所に展開 |\n");
@@ -191,14 +191,14 @@ readArgs:
 		ExtractSameDir = 1;
 		goto readArgs;
 	}
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		cout("TRIM-ONE-DIR\n");
 
 		TrimOneDir = 1;
 		goto readArgs;
 	}
-	if(argIs("/OAD"))
+	if (argIs("/OAD"))
 	{
 		cout("+-------------------+\n");
 		cout("| OUTPUT AND DELETE |\n");
@@ -207,13 +207,13 @@ readArgs:
 		OutputAndDelete = 1;
 		goto readArgs;
 	}
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		Passphrase = nextArg();
 		goto readArgs;
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		Extract7z(nextArg());
 		return;

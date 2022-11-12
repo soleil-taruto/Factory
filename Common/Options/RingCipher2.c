@@ -11,21 +11,21 @@ autoList_t *rngcphrCreateKeyTableList(autoBlock_t *rawKey)
 
 	errorCase_m(size < 16, "短すぎる鍵 @ RingCipher2.c");
 
-	if(size == 32)
+	if (size == 32)
 		return cphrCreateKeyTableList(rawKey, 16);
 
-	if(size % 32 == 0)
+	if (size % 32 == 0)
 		return cphrCreateKeyTableList(rawKey, 32);
 
-	if(size == 24)
+	if (size == 24)
 	{
 		cout("Warning: 鍵が1つしかない。24 bit @ RingCipher2.c\n");
 		return cphrCreateKeyTableList(rawKey, 24);
 	}
-	if(size % 24 == 0)
+	if (size % 24 == 0)
 		return cphrCreateKeyTableList(rawKey, 24);
 
-	if(size == 16)
+	if (size == 16)
 	{
 		cout("Warning: 鍵が1つしかない。16 bit @ RingCipher2.c\n");
 		return cphrCreateKeyTableList(rawKey, 16);
@@ -59,11 +59,11 @@ static void AddPadding(autoBlock_t *block)
 }
 static int UnaddPadding(autoBlock_t *block)
 {
-	if(getSize(block))
+	if (getSize(block))
 	{
 		uint padSize = unaddByte(block);
 
-		if(padSize <= getSize(block))
+		if (padSize <= getSize(block))
 		{
 			setSize(block, getSize(block) - padSize);
 			return 1;
@@ -87,7 +87,7 @@ static void AddRandPart(autoBlock_t *block)
 }
 static int UnaddRandPart(autoBlock_t *block)
 {
-	if(RANDPARTSIZE <= getSize(block))
+	if (RANDPARTSIZE <= getSize(block))
 	{
 		setSize(block, getSize(block) - RANDPARTSIZE);
 		return 1;
@@ -104,13 +104,13 @@ static void AddHash(autoBlock_t *block)
 }
 static int UnaddHash(autoBlock_t *block)
 {
-	if(64 <= getSize(block))
+	if (64 <= getSize(block))
 	{
 		autoBlock_t *hash = unaddBytes(block, 64);
 
 		sha512_makeHashBlock(block);
 
-		if(!memcmp(directGetBuffer(hash), sha512_hash, 64))
+		if (!memcmp(directGetBuffer(hash), sha512_hash, 64))
 		{
 			releaseAutoBlock(hash);
 			return 1;
@@ -132,7 +132,7 @@ static void CipherMain(autoBlock_t *block, autoList_t *keyTableList, int doEncry
 	errorCase(!keyTableList);
 	errorCase(!getCount(keyTableList));
 
-	if(getCount(keyTableList) < 2)
+	if (getCount(keyTableList) < 2)
 		cout("Warning: 鍵が2つ未満 @ RingCipher2.c\n");
 
 	for(index = 0; index < getCount(keyTableList); index++)
@@ -174,7 +174,7 @@ int rngcphrDecrypt(autoBlock_t *block, autoList_t *keyTableList)
 	errorCase(!keyTableList);
 	errorCase(!getCount(keyTableList));
 
-	if(
+	if (
 		getSize(block) < 16 + 64 + 64 + 64 ||
 //		getSize(block) < 256 + 64 + 64 + 64 || // while(size + padSize < 0xff); してなかった時の暗号文はこれより短い (最小padding 旧->新: 16->256)
 		getSize(block) % 16 != 0
@@ -183,7 +183,7 @@ int rngcphrDecrypt(autoBlock_t *block, autoList_t *keyTableList)
 
 	rngcphrDecryptBlock(block, keyTableList);
 
-	if(
+	if (
 		!UnaddRandPart(block) ||
 		!UnaddHash(block) ||
 		!UnaddRandPart(block) ||
@@ -230,7 +230,7 @@ static int F_UnaddPadding(char *file)
 	FILE *fp;
 	uint padSize;
 
-	if(fileSize < 1)
+	if (fileSize < 1)
 		return 0;
 
 	fp = fileOpen(file, "rb");
@@ -239,7 +239,7 @@ static int F_UnaddPadding(char *file)
 	fileClose(fp);
 	padSize++;
 
-	if(fileSize < padSize)
+	if (fileSize < padSize)
 		return 0;
 
 	fileSize -= padSize;
@@ -263,7 +263,7 @@ static int F_UnaddRandPart(char *file)
 {
 	uint64 fileSize = getFileSize(file);
 
-	if(fileSize < RANDPARTSIZE)
+	if (fileSize < RANDPARTSIZE)
 		return 0;
 
 	setFileSize(file, fileSize - RANDPARTSIZE);
@@ -289,7 +289,7 @@ static int F_UnaddHash(char *file)
 	uchar r_hash[64];
 	autoBlock_t gab;
 
-	if(fileSize < 64)
+	if (fileSize < 64)
 		return 0;
 
 	fp = fileOpen(file, "rb");
@@ -306,7 +306,7 @@ LOGPOS();
 	cout("再計算ハッシュ：%s\n", tmp = makeHexLine(gndBlockVar(sha512_hash, 64, gab))); memFree(tmp);
 	}
 
-	if(memcmp(sha512_hash, r_hash, 64)) // ? 生成したハッシュと読み込んだハッシュが違う。
+	if (memcmp(sha512_hash, r_hash, 64)) // ? 生成したハッシュと読み込んだハッシュが違う。
 	{
 LOGPOS();
 		return 0;
@@ -416,24 +416,24 @@ static void F_DecryptMain(char *file, camellia_keyTable_t *keyTable)
 		const uint M_PART = 320000;
 		const uint S_PART = 3200;
 
-		if(H_PART <= index)
+		if (H_PART <= index)
 		{
 			F_DecryptPart(fp, index, H_PART, keyTable);
 			index -= H_PART - 16;
 		}
-		else if(M_PART <= index)
+		else if (M_PART <= index)
 		{
 			F_DecryptPart(fp, index, M_PART, keyTable);
 			index -= M_PART - 16;
 		}
-		else if(S_PART <= index)
+		else if (S_PART <= index)
 		{
 			F_DecryptPart(fp, index, S_PART, keyTable);
 			index -= S_PART - 16;
 		}
 		else
 		{
-			if(32 <= index)
+			if (32 <= index)
 			{
 				fileSeek(fp, SEEK_SET, index - 32);
 				fileRead(fp, gndBlockVar(buff, 32, gab));
@@ -461,7 +461,7 @@ static int F_Decrypt(char *file, autoList_t *keyTableList)
 	camellia_keyTable_t *keyTable;
 	uint index;
 
-	if(
+	if (
 		fileSize < 16 + 64 + 64 + 64 ||
 //		fileSize < 256 + 64 + 64 + 64 || // while(fileSize + padSize < 0xff); してなかった時の暗号文はこれより短い (最小padding 旧->新: 16->256)
 		fileSize % 16 != 0
@@ -502,7 +502,7 @@ int rngcphrDecryptFile(char *file, autoList_t *keyTableList)
 	errorCase(!keyTableList);
 	errorCase(!getCount(keyTableList));
 
-	if(
+	if (
 		F_Decrypt(file, keyTableList) &&
 		F_UnaddRandPart(file) &&
 		F_UnaddHash(file) &&

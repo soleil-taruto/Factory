@@ -37,7 +37,7 @@ void ChangePETimeDateStamp(char *file, uint t)
 
 errorCase(optHedSize != 224); // HACK: これ以外のサイズに出会ったら、CheckSum の位置に問題無いことを確認した上で、新しいサイズを許可する｜このチェックを削除する。
 
-	if(0x44 <= optHedSize) // ? CheckSum までのサイズはある。
+	if (0x44 <= optHedSize) // ? CheckSum までのサイズはある。
 	{
 		fileSeek(fp, SEEK_CUR, 0x02 + 0x40); // COFF header 残り + optional header の CheckSum まで
 
@@ -56,7 +56,7 @@ void ChangeAllPETimeDateStamp(char *dir, uint t)
 
 	foreach(files, file, index)
 	{
-		if(
+		if (
 			!_stricmp("EXE", getExt(file)) //||
 //			!_stricmp("DLL", getExt(file))
 			)
@@ -76,7 +76,7 @@ uint GetPETimeDateStamp(char *file) // ret: 0 == 取得失敗
 
 	LOGPOS();
 
-	if(
+	if (
 		readChar(fp) != 'M' ||
 		readChar(fp) != 'Z'
 		)
@@ -88,7 +88,7 @@ uint GetPETimeDateStamp(char *file) // ret: 0 == 取得失敗
 
 	fileSeek(fp, SEEK_SET, peHedPos);
 
-	if(
+	if (
 		readChar(fp) != 'P' ||
 		readChar(fp) != 'E' ||
 		readChar(fp) != 0x00 ||

@@ -37,7 +37,7 @@ static void MakeReportFile(char *dir, char *repFile)
 			,lastFindData.attrib & _A_SYSTEM ? 'S' : ' '
 			);
 
-		if(existFile(path))
+		if (existFile(path))
 			line = addLine_x(line, xcout(
 				"%I64d %I64d %I64d "
 				,GetI64Stamp(lastFindData.time_create)

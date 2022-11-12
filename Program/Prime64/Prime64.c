@@ -20,7 +20,7 @@ static void WrUI64Flush(FILE *fp)
 {
 	uint size = (uint)WrPos - (uint)WrBuff;
 
-	if(fwrite(WrBuff, 1, size, fp) != size) // ? 失敗
+	if (fwrite(WrBuff, 1, size, fp) != size) // ? 失敗
 	{
 		// NTFS圧縮ファイルに書き込んでるストリームが47～49GBくらいになるとエラー。NTFS圧縮ファイルの制限っぽい。
 		// その場合の LastError は 0x299
@@ -31,7 +31,7 @@ static void WrUI64Flush(FILE *fp)
 
 		// このへん、https://en.wikipedia.org/wiki/NTFS#File_compression
 
-		if(GetLastError() == 0x299)
+		if (GetLastError() == 0x299)
 		{
 			error_m("ファイル出力に失敗しました。システムエラーコードは 665 (0x299) です。今回のエラーに関係あるか分かりませんが、NTFS圧縮ファイルは 50GB ～ 60GB (環境によってはそれ以下のサイズ) を超えた辺りで出力に失敗するようです。その場合は「出力ファイル分割」をお試し下さい。");
 		}
@@ -45,7 +45,7 @@ static void WrUI64(FILE *fp, uint64 value)
 	char *p = buff + 20;
 	uint s;
 
-	if(WrBuff + WR_BUFF_SIZE < WrPos + 21)
+	if (WrBuff + WR_BUFF_SIZE < WrPos + 21)
 		WrUI64Flush(fp);
 
 	do
@@ -71,7 +71,7 @@ static uint64 GetLowPrime(uint64 value)
 	{
 		value--;
 
-		if(A_IsPrime(value))
+		if (A_IsPrime(value))
 			return value;
 	}
 	return 0;
@@ -82,7 +82,7 @@ static uint64 GetHiPrime(uint64 value)
 	{
 		value++;
 
-		if(A_IsPrime(value))
+		if (A_IsPrime(value))
 			return value;
 	}
 	return 0;
@@ -92,7 +92,7 @@ static int IsShortRange(uint64 minval, uint64 maxval)
 	uint64 range = maxval - minval;
 	int ret;
 
-	if(UseMillerRabinTestMode)
+	if (UseMillerRabinTestMode)
 	{
 		ret = range < 11000;
 	}
@@ -121,9 +121,9 @@ static void PrimeRange(uint64 minval, uint64 maxval, char *outFile, char *cancel
 
 //	errorCase(setvbuf(fp, NULL, _IOFBF, 64 * 1024 * 1024)); // ? 失敗 // old
 
-	if(minval <= 2)
+	if (minval <= 2)
 	{
-		if(2 <= maxval)
+		if (2 <= maxval)
 			errorCase(fprintf(fp, "2\n") < 0);
 
 		minval = 3;
@@ -133,19 +133,19 @@ static void PrimeRange(uint64 minval, uint64 maxval, char *outFile, char *cancel
 
 	m_minim(maxval, PRIME_MAX);
 
-	if(IsShortRange(minval, maxval))
+	if (IsShortRange(minval, maxval))
 	{
 		for(value = minval; value <= maxval; value += 2)
-			if(A_IsPrime(value))
+			if (A_IsPrime(value))
 				WrUI64(fp, value);
 	}
 	else
 	{
 		for(value = minval; value <= maxval; value += 2)
 		{
-			if(value % 0x08000000 == 1)
+			if (value % 0x08000000 == 1)
 			{
-				if(handleWaitForMillis(cancelEv, 0))
+				if (handleWaitForMillis(cancelEv, 0))
 				{
 					WrUI64Flush(fp);
 					errorCase(fprintf(fp, "Break in %I64u\nOk\n", value - 1) < 0);
@@ -158,18 +158,18 @@ static void PrimeRange(uint64 minval, uint64 maxval, char *outFile, char *cancel
 
 				eventSet(reportEv);
 
-				if(divMode)
+				if (divMode)
 				{
 					sint64 size = _ftelli64(fp);
 
 					errorCase(size < 0I64);
 
-					if(2000000000 < size) // ? 2 GB <
+					if (2000000000 < size) // ? 2 GB <
 					{
 						WrUI64Flush(fp);
 						fileClose(fp);
 
-						if(!divrenflg)
+						if (!divrenflg)
 						{
 							outFile = strx(outFile); // g
 							outFile = toCreatableTildaPath(outFile, IMAX);
@@ -183,7 +183,7 @@ static void PrimeRange(uint64 minval, uint64 maxval, char *outFile, char *cancel
 					}
 				}
 			}
-			if(A_IsPrime_R(value))
+			if (A_IsPrime_R(value))
 //				errorCase(fprintf(fp, "%I64u\n", value) < 0); // 遅い！
 				WrUI64(fp, value);
 		}
@@ -210,9 +210,9 @@ static void PrimeCount(uint64 minval, uint64 maxval, char *outFile, char *cancel
 
 	removeFileIfExist(outFile);
 
-	if(minval <= 2)
+	if (minval <= 2)
 	{
-		if(2 <= maxval)
+		if (2 <= maxval)
 			count++;
 
 		minval = 3;
@@ -222,19 +222,19 @@ static void PrimeCount(uint64 minval, uint64 maxval, char *outFile, char *cancel
 
 	m_minim(maxval, PRIME_MAX);
 
-	if(IsShortRange(minval, maxval))
+	if (IsShortRange(minval, maxval))
 	{
 		for(value = minval; value <= maxval; value += 2)
-			if(A_IsPrime(value))
+			if (A_IsPrime(value))
 				count++;
 	}
 	else
 	{
 		for(value = minval; value <= maxval; value += 2)
 		{
-			if(value % 0x10000000 == 1)
+			if (value % 0x10000000 == 1)
 			{
-				if(handleWaitForMillis(cancelEv, 0))
+				if (handleWaitForMillis(cancelEv, 0))
 				{
 					cancelled = 1;
 					break;
@@ -246,11 +246,11 @@ static void PrimeCount(uint64 minval, uint64 maxval, char *outFile, char *cancel
 
 				eventSet(reportEv);
 			}
-			if(A_IsPrime_R(value))
+			if (A_IsPrime_R(value))
 				count++;
 		}
 	}
-	if(!cancelled)
+	if (!cancelled)
 		writeOneLine_cx(outFile, xcout("%I64u", count));
 
 	handleWaitForever(reportMtx);
@@ -306,7 +306,7 @@ static void DoBatch(int mode, char *rFile, char *wFile) // mode: "PFC"
 				cout("%I64u -> ", value);
 				addElement(wRow, (uint)xcout("%I64u", value));
 
-				if(A_IsPrime(value))
+				if (A_IsPrime(value))
 					ans = "1";
 				else
 					ans = "0";
@@ -394,7 +394,7 @@ static void Main2(void)
 	// ---- common options ----
 
 readArgs:
-	if(argIs("/UMRTM"))
+	if (argIs("/UMRTM"))
 	{
 		UseMillerRabinTestMode = 1;
 		goto readArgs;
@@ -402,18 +402,18 @@ readArgs:
 
 	// ----
 
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		uint64 value = ToValue_Check(nextArg());
 
-		if(A_IsPrime(value))
+		if (A_IsPrime(value))
 			cout("%sIS_PRIME\n", majorOutputLinePrefix);
 		else
 			cout("%sIS_NOT_PRIME\n", majorOutputLinePrefix);
 
 		return;
 	}
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		uint64 value = ToValue_Check(nextArg());
 		uint64 dest[64];
@@ -427,21 +427,21 @@ readArgs:
 		}
 		return;
 	}
-	if(argIs("/L"))
+	if (argIs("/L"))
 	{
 		uint64 value = ToValue_Check(nextArg());
 
 		cout("%s%I64u\n", majorOutputLinePrefix, GetLowPrime(value));
 		return;
 	}
-	if(argIs("/H"))
+	if (argIs("/H"))
 	{
 		uint64 value = ToValue_Check(nextArg());
 
 		cout("%s%I64u\n", majorOutputLinePrefix, GetHiPrime(value));
 		return;
 	}
-	if(argIs("/LH"))
+	if (argIs("/LH"))
 	{
 		uint64 value = ToValue_Check(nextArg());
 
@@ -449,7 +449,7 @@ readArgs:
 		cout("%s%I64u\n", majorOutputLinePrefix, GetHiPrime(value));
 		return;
 	}
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		uint64 minval;
 		uint64 maxval;
@@ -473,7 +473,7 @@ readArgs:
 			);
 		return;
 	}
-	if(argIs("/R2"))
+	if (argIs("/R2"))
 	{
 		uint64 minval;
 		uint64 maxval;
@@ -495,7 +495,7 @@ readArgs:
 		PrimeRange(minval, maxval, outFile, cancelEvName, reportEvName, reportMtxName, reportFile, divMode);
 		return;
 	}
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		uint64 minval;
 		uint64 maxval;
@@ -518,7 +518,7 @@ readArgs:
 			);
 		return;
 	}
-	if(argIs("/C2"))
+	if (argIs("/C2"))
 	{
 		uint64 minval;
 		uint64 maxval;
@@ -539,7 +539,7 @@ readArgs:
 		PrimeCount(minval, maxval, outFile, cancelEvName, reportEvName, reportMtxName, reportFile);
 		return;
 	}
-	if(argIs("/BP"))
+	if (argIs("/BP"))
 	{
 		char *rFile;
 		char *wFile;
@@ -550,7 +550,7 @@ readArgs:
 		DoBatch('P', rFile, wFile);
 		return;
 	}
-	if(argIs("/BF"))
+	if (argIs("/BF"))
 	{
 		char *rFile;
 		char *wFile;
@@ -561,7 +561,7 @@ readArgs:
 		DoBatch('F', rFile, wFile);
 		return;
 	}
-	if(argIs("/BC"))
+	if (argIs("/BC"))
 	{
 		char *rFile;
 		char *wFile;
@@ -579,17 +579,17 @@ readArgs:
 	US_MulColors = newList();
 
 us_readArgs:
-	if(argIs("/O"))
+	if (argIs("/O"))
 	{
 		US_OddMode = 1;
 		goto us_readArgs;
 	}
-	if(argIs("/O-5"))
+	if (argIs("/O-5"))
 	{
 		US_OddUn5Mode = 1;
 		goto us_readArgs;
 	}
-	if(argIs("/M"))
+	if (argIs("/M"))
 	{
 		uint mulNumb;
 		uint mulColor;
@@ -606,7 +606,7 @@ us_readArgs:
 
 	// ----
 
-	if(argIs("/US"))
+	if (argIs("/US"))
 	{
 		sint64 l;
 		sint64 t;
@@ -642,7 +642,7 @@ us_readArgs:
 			);
 		return;
 	}
-	if(argIs("/US2"))
+	if (argIs("/US2"))
 	{
 		sint64 l;
 		sint64 t;
@@ -686,7 +686,7 @@ us_readArgs:
 			);
 		return;
 	}
-	if(argIs("/USC"))
+	if (argIs("/USC"))
 	{
 		sint64 l;
 		sint64 t;
@@ -703,7 +703,7 @@ us_readArgs:
 		MakeUlamSpiral_Csv(l, t, r, b, 'P', outCsvFile);
 		return;
 	}
-	if(argIs("/USCN"))
+	if (argIs("/USCN"))
 	{
 		sint64 l;
 		sint64 t;

@@ -12,7 +12,7 @@ static void DispDiskFree(int drive, char *dir)
 	cout("利用不可領域 = %s バイト\n", c_thousandComma(xcout("%I64u", lastDiskFree - lastDiskFree_User)));
 	cout("利用可能領域 = %s バイト\n", c_thousandComma(xcout("%I64u", lastDiskFree_User)));
 
-	if(dir)
+	if (dir)
 	{
 		updateDiskSpace_Dir(dir);
 
@@ -21,22 +21,22 @@ static void DispDiskFree(int drive, char *dir)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("*"))
+	if (argIs("*"))
 	{
 		char drive[] = "_:\\";
 
 		for(drive[0] = 'A'; drive[0] <= 'Z'; drive[0]++)
-			if(existDir(drive))
+			if (existDir(drive))
 				DispDiskFree(drive[0], NULL);
 
 		return;
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		char *arg = nextArg();
 
-		if(strlen(arg) == 1)
+		if (strlen(arg) == 1)
 		{
 			DispDiskFree(arg[0], NULL);
 		}

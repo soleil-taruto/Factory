@@ -84,7 +84,7 @@ static int RequestAborted;
 
 static int Idle(void)
 {
-	if(pulseSec(3, NULL))
+	if (pulseSec(3, NULL))
 	{
 		uint64 prmcnt = GetSockFileCounter(sockClientStatus.PrmFile);
 		uint64 prmmax = GetSockFileCntrMax(sockClientStatus.PrmFile);
@@ -103,7 +103,7 @@ static int Idle(void)
 
 	while(hasKey())
 	{
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 		{
 			cout("ABORTED!\n");
 			RequestAborted = 1;
@@ -135,10 +135,10 @@ static void ClientRequest(void)
 	{
 		AnsFile = sockClient(ip, ServerDomain, ServerPort, PrmFile, Idle);
 
-		if(AnsFile && UnpadFile2(AnsFile, "NCP_Ans"))
+		if (AnsFile && UnpadFile2(AnsFile, "NCP_Ans"))
 			break;
 
-		if(RequestAborted || !RetryCount)
+		if (RequestAborted || !RetryCount)
 		{
 			cout("CREATE-ANS-DUMMY\n");
 			AnsFile = makeTempFile("ncp-ans-dummy");
@@ -154,15 +154,15 @@ static void ClientRequest(void)
 }
 static void CR_Fnlz(void)
 {
-	if(PrmFp) fileClose(PrmFp);
-	if(AnsFp) fileClose(AnsFp);
+	if (PrmFp) fileClose(PrmFp);
+	if (AnsFp) fileClose(AnsFp);
 
-	if(PrmFile) removeFile(PrmFile);
-	if(AnsFile) removeFile(AnsFile);
+	if (PrmFile) removeFile(PrmFile);
+	if (AnsFile) removeFile(AnsFile);
 
 	cmdTitle("ncp");
 
-	if(RequestAborted)
+	if (RequestAborted)
 	{
 		cout("+-------------------------+\n");
 		cout("| é∏îsÇ‹ÇΩÇÕíÜífÇµÇ‹ÇµÇΩÅB|\n");
@@ -178,7 +178,7 @@ static void WriteToPrmFp(uchar *buffer, uint size)
 
 	IOCounter += (uint64)size;
 
-	if(2 <= size)
+	if (2 <= size)
 	{
 		cmdTitle_x(xcout("ncp - %I64u bytes wrote", IOCounter));
 	}
@@ -188,11 +188,11 @@ static void ReadFromAnsFp(uchar *buffer, uint size)
 {
 	autoBlock_t *block = readBinaryBlock(AnsFp, size);
 
-	if(size == getSize(block))
+	if (size == getSize(block))
 	{
 		IOCounter += (uint64)size;
 
-		if(2 <= size)
+		if (2 <= size)
 		{
 			cmdTitle_x(xcout("ncp - %I64u bytes read", IOCounter));
 		}
@@ -228,27 +228,27 @@ int main(int argc, char **argv)
 	md5_interrupt = MD5Interrupt;
 
 readArgs:
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		ServerDomain = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		ServerPort = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		RetryCount = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		RetryWaitMillis = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		ForceOverwriteMode = 1;
 		goto readArgs;
@@ -256,7 +256,7 @@ readArgs:
 
 	CR_Init();
 
-	if(argIs("/UP") || argIs("UP")) // Upload
+	if (argIs("/UP") || argIs("UP")) // Upload
 	{
 		char *clientPath;
 		char *serverPath;
@@ -265,10 +265,10 @@ readArgs:
 
 		clientPath = nextArg();
 
-		if(clientPath[0] == '*')
+		if (clientPath[0] == '*')
 			clientPath = dropDirFile(); // g
 
-		if(hasArgs(1))
+		if (hasArgs(1))
 			serverPath = nextArg();
 		else
 			serverPath = getLocal(clientPath);
@@ -285,12 +285,12 @@ readArgs:
 		writeChar(PrmFp, 'U');
 		writeChar(PrmFp, ForceOverwriteMode ? 'F' : '-');
 
-		if(existDir(clientPath)) // Directory
+		if (existDir(clientPath)) // Directory
 		{
 			writeChar(PrmFp, 'D');
 			DirToStream(clientPath, WriteToPrmFp);
 		}
-		else if(existFile(clientPath)) // File
+		else if (existFile(clientPath)) // File
 		{
 			FILE *fp;
 
@@ -312,7 +312,7 @@ readArgs:
 		ClientRequest();
 		cout("SEND-END\n");
 	}
-	else if(argIs("/DL") || argIs("DL")) // Download
+	else if (argIs("/DL") || argIs("DL")) // Download
 	{
 		char *clientPath;
 		char *serverPath;
@@ -327,7 +327,7 @@ readArgs:
 		errorCase(!*clientPath);
 		errorCase(!*serverPath);
 
-		if(clientPath[0] == '*')
+		if (clientPath[0] == '*')
 			clientPath = combine(willOpenDir = makeFreeDir(), getLocal(serverPath)); // g
 
 		cout("> %s\n", clientPath);
@@ -346,12 +346,12 @@ readArgs:
 		ClientRequest();
 		cout("RECV-END\n");
 
-		if(RequestAborted)
+		if (RequestAborted)
 			goto cr_fnlz;
 
 		type = readChar(AnsFp);
 
-		if(type == 'D') // Directory
+		if (type == 'D') // Directory
 		{
 			createDir(clientPath);
 
@@ -359,7 +359,7 @@ readArgs:
 			StreamToDir(clientPath, ReadFromAnsFp);
 //			STD_TrustMode = 0;
 		}
-		else if(type == 'F') // File
+		else if (type == 'F') // File
 		{
 			FILE *fp;
 
@@ -370,13 +370,13 @@ readArgs:
 		else
 			cout("Error: bad type. %02x\n", type);
 
-		if(willOpenDir)
+		if (willOpenDir)
 		{
 			execute_x(xcout("START \"\" \"%s\"", willOpenDir));
 			memFree(willOpenDir);
 		}
 	}
-	else if(argIs("/SZ") || argIs("SZ")) // Size
+	else if (argIs("/SZ") || argIs("SZ")) // Size
 	{
 		char *serverPath = nextArg();
 		int type;
@@ -391,20 +391,20 @@ readArgs:
 
 		ClientRequest();
 
-		if(RequestAborted)
+		if (RequestAborted)
 			goto cr_fnlz;
 
 		type = readChar(AnsFp);
 
-		if(type == 'D')
+		if (type == 'D')
 		{
 			cout("%s byte(s) directory exists.\n", c_thousandComma(xcout("%I64u", readValue64(AnsFp))));
 		}
-		else if(type == 'F')
+		else if (type == 'F')
 		{
 			cout("%s byte(s) file exists.\n", c_thousandComma(xcout("%I64u", readValue64(AnsFp))));
 		}
-		else if(type == 'N')
+		else if (type == 'N')
 		{
 			cout("not exists.\n");
 		}
@@ -415,7 +415,7 @@ readArgs:
 			cout("+--------------+\n");
 		}
 	}
-	else if(argIs("/MV") || argIs("MV")) // Move
+	else if (argIs("/MV") || argIs("MV")) // Move
 	{
 		char *serverPath1;
 		char *serverPath2;
@@ -436,7 +436,7 @@ readArgs:
 
 		ClientRequest();
 	}
-	else if(argIs("/RM") || argIs("RM")) // Remove
+	else if (argIs("/RM") || argIs("RM")) // Remove
 	{
 		char *serverPath = nextArg();
 
@@ -452,11 +452,11 @@ readArgs:
 
 		ClientRequest();
 	}
-	else if(argIs("/LS") || argIs("LS")) // List
+	else if (argIs("/LS") || argIs("LS")) // List
 	{
 		char *path;
 
-		if(hasArgs(1))
+		if (hasArgs(1))
 		{
 			char *serverPath = nextArg();
 
@@ -483,7 +483,7 @@ readArgs:
 			memFree(path);
 		}
 	}
-	else if(argIs("/LSS") || argIs("LSS")) // List
+	else if (argIs("/LSS") || argIs("LSS")) // List
 	{
 		char *path;
 

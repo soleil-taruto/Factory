@@ -15,7 +15,7 @@ static void ReleaseTree(void)
 }
 static void INIT(void)
 {
-	if(Tree) // ? already inited
+	if (Tree) // ? already inited
 		return;
 
 	CreateTree();
@@ -37,7 +37,7 @@ MvAvg_t *MAC_GetMvAvg(uint fxTime, uint span, char *pair)
 
 	INIT();
 
-	if(!rbtHasKey(Tree, GetKey(span, pair)))
+	if (!rbtHasKey(Tree, GetKey(span, pair)))
 	{
 		i = CreateMvAvg(fxTime, span, pair); // ‚±‚Ì’†‚Å MAC_Clear() ‚ªŒÄ‚Î‚ê‚éê‡ƒAƒŠ
 		rbtAddValue(Tree, GetKey(span, pair), (uint)i);

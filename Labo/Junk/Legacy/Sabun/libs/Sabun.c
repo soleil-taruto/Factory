@@ -108,9 +108,9 @@ void makeSabun(char *sabunFile, char *beforeDir, char *afterDir, int correctAddD
 
 	mfiles = merge(files1, files2, (sint (*)(uint, uint))mbs_stricmp, (void (*)(uint))memFree);
 
-	if(!correctAddDelete)
+	if (!correctAddDelete)
 	{
-		if(getCount(files1) || getCount(files2))
+		if (getCount(files1) || getCount(files2))
 		{
 			fileClose(fp);
 			removeFile(sabunFile);
@@ -198,7 +198,7 @@ int sabunUpdate(char *sabunFile, char *targetDir) // ret: ? アップデートした。対
 
 		errorCase(!file);
 
-		if(!*file) // ? 終了
+		if (!*file) // ? 終了
 		{
 			memFree(file);
 			break;
@@ -208,7 +208,7 @@ int sabunUpdate(char *sabunFile, char *targetDir) // ret: ? アップデートした。対
 
 		rHash = existFile(file) ? md5_makeHexHashFile(file) : strx("*"); // ファイルが無い -> 常に不一致なハッシュ
 
-		if(strcmp(hash, rHash)) // ? ハッシュ不一致
+		if (strcmp(hash, rHash)) // ? ハッシュ不一致
 		{
 			memFree(file);
 			memFree(hash);
@@ -226,22 +226,22 @@ int sabunUpdate(char *sabunFile, char *targetDir) // ret: ? アップデートした。対
 		int chr = readChar(fp);
 		char *file;
 
-		if(chr == 'Z')
+		if (chr == 'Z')
 			break;
 
 		file = readLine(fp);
 		errorCase(!file);
 		errorCase(!*file);
 
-		if(chr == 'D') // 削除
+		if (chr == 'D') // 削除
 		{
 			removeFile(file);
 		}
-		else if(chr == 'A') // 追加
+		else if (chr == 'A') // 追加
 		{
 			writeBinary_cx(file, readBinaryBlock(fp, readValue(fp)));
 		}
-		else if(chr == 'U') // 更新
+		else if (chr == 'U') // 更新
 		{
 			autoBlock_t *fileImage = readBinary(file);
 			autoBlock_t *sabun = readBinaryBlock(fp, readValue(fp));
@@ -266,7 +266,7 @@ int sabunUpdate(char *sabunFile, char *targetDir) // ret: ? アップデートした。対
 		char *hash;
 		char *rHash;
 
-		if(!file) // ? 終了
+		if (!file) // ? 終了
 			break;
 
 		errorCase(!*file);

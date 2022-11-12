@@ -2,7 +2,7 @@
 
 int main(int argc, char **argv)
 {
-	if(argIs("/S2B"))
+	if (argIs("/S2B"))
 	{
 		char *sText;
 		autoBlock_t *text;
@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 		memFree(sB64);
 		return;
 	}
-	if(argIs("/B2S"))
+	if (argIs("/B2S"))
 	{
 		char *sB64;
 		autoBlock_t *b64;

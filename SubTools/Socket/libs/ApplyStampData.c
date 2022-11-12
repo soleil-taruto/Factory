@@ -21,7 +21,7 @@ void SlewApplyTimeData(time_t trueTime)
 
 	cout("%I64d -> %I64d\n", systemTime, trueTime); // systemTime から trueTime に近づける。
 
-	if(trueTime == systemTime) // 時刻が合っている。-> 何もしない。
+	if (trueTime == systemTime) // 時刻が合っている。-> 何もしない。
 	{
 		cout("+0.0\n");
 		goto endFunc;
@@ -36,12 +36,12 @@ void SlewApplyTimeData(time_t trueTime)
 
 	sleep(500); // systemTime + 1.5 まで待つ。
 
-	if(trueTime < systemTime) // システム時刻が進んでいる。-> 0.5 遅らせる。(systemTime + 1.5 -> systemTime + 1.0) == -0.5
+	if (trueTime < systemTime) // システム時刻が進んでいる。-> 0.5 遅らせる。(systemTime + 1.5 -> systemTime + 1.0) == -0.5
 	{
 		cout("-0.5\n");
 		ApplyStampData(getStampDataTime(systemTime + 1));
 	}
-	else if(systemTime < trueTime) // システム時刻が遅れている。-> 0.5 進める。(systemTime + 1.5 -> systemTime + 2.0) == +0.5
+	else if (systemTime < trueTime) // システム時刻が遅れている。-> 0.5 進める。(systemTime + 1.5 -> systemTime + 2.0) == +0.5
 	{
 		cout("+0.5\n");
 		ApplyStampData(getStampDataTime(systemTime + 2));

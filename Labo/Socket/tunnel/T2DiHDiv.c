@@ -23,7 +23,7 @@ static void CheckHeaderLine(char *line)
 	ucTrim(name);
 	ucTrim(value);
 
-	if(!_stricmp(name, "Content-Type"))
+	if (!_stricmp(name, "Content-Type"))
 		strzp(&ContentType, value);
 
 	releaseDim(tokens, 1);
@@ -50,7 +50,7 @@ static void ParseHTTPHdrBody(char *rFile)
 
 		errorCase_m(!line, "ヘッダが終わる前にファイルの終端に達しました。");
 
-		if(!*line)
+		if (!*line)
 		{
 			memFree(line);
 			break;

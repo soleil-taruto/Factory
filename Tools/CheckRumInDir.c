@@ -23,13 +23,13 @@ static void CollectRumDirs(char *rootDir, autoList_t *dest)
 
 	foreach(dirs, dir, index)
 	{
-		if(!_stricmp("rum", getExt(dir)))
+		if (!_stricmp("rum", getExt(dir)))
 		{
 			addElement(dest, (uint)strx(dir));
 		}
 		else
 		{
-			if(IntoSubDir)
+			if (IntoSubDir)
 				CollectRumDirs(dir, dest);
 		}
 	}
@@ -43,7 +43,7 @@ static void CheckRum(char *dir)
 
 	errorCase_m(!existDir(mastDir), "å«óßÇµÇƒÇ¢Ç‹Ç∑ÅB");
 
-	if(DoCheckRum)
+	if (DoCheckRum)
 	{
 		cout("CheckRum.exe Çé¿çsÇµÇ‹Ç∑ÅB\n");
 		execute_x(xcout("C:\\Factory\\Tools\\CheckRum.exe %s\"%s\"", NoStrict ? "/-S " : "", dir));
@@ -69,23 +69,23 @@ static void CheckRumInDir(char *rootDir)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		IntoSubDir = 1;
 		goto readArgs;
 	}
-	if(argIs("/CR"))
+	if (argIs("/CR"))
 	{
 		DoCheckRum = 1;
 		goto readArgs;
 	}
-	if(argIs("/-S"))
+	if (argIs("/-S"))
 	{
 		NoStrict = 1;
 		goto readArgs;
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		CheckRumInDir(nextArg());
 	}

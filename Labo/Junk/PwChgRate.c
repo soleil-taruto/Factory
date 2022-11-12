@@ -32,10 +32,10 @@ static void DoTest(double pwChgRate)
 			{
 				double r = mt19937_rnd(IMAX) / (double)IMAX;
 
-				if(r < pwChgRate)
+				if (r < pwChgRate)
 					pw = mt19937_rnd(PW_MAX);
 
-				if(attack == pw)
+				if (attack == pw)
 				{
 					succeed_cnt++;
 					break;

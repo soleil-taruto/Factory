@@ -15,41 +15,41 @@ int main(int argc, char **argv)
 	autoList_t *keyTableList;
 
 readArgs:
-	if(argIs("/K"))
+	if (argIs("/K"))
 	{
 		errorCase(rawKey);
 
 		rawKey = readBinary(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		errorCase(rData);
 
 		rData = readBinary(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/EB"))
+	if (argIs("/EB"))
 	{
 		mode = 'E';
 		goto readArgs;
 	}
-	if(argIs("/DB"))
+	if (argIs("/DB"))
 	{
 		mode = 'D';
 		goto readArgs;
 	}
-	if(argIs("/E"))
+	if (argIs("/E"))
 	{
 		mode = 'e';
 		goto readArgs;
 	}
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		mode = 'd';
 		goto readArgs;
 	}
-	if(argIs("/W"))
+	if (argIs("/W"))
 	{
 		errorCase(wFile);
 

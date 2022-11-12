@@ -27,9 +27,9 @@ static int CheckPw(char *pw, uint pwChrNum)
 	}
 	for(p = pw; *p; p++)
 	{
-		   if(m_isdecimal(*p)) dig = 1;
-		else if(m_isupper(*p)) upr = 1;
-		else if(m_islower(*p)) lwr = 1;
+		   if (m_isdecimal(*p)) dig = 1;
+		else if (m_isupper(*p)) upr = 1;
+		else if (m_islower(*p)) lwr = 1;
 	}
 	return dig && upr && lwr;
 }
@@ -45,37 +45,37 @@ int main(int argc, char **argv)
 	char *pw;
 	int chr;
 
-	if(argIs("/9"))
+	if (argIs("/9"))
 	{
 		pwChrNum = 10;
 //		pwLen = 39;
 		pwLen = 40; // åÖêîÇÃêÿÇËÇ™ó«Ç¢ÇÃÇ≈ÅAÇ±ÇøÇÁÇégÇ§ÅB
 	}
-	if(argIs("/9U"))
+	if (argIs("/9U"))
 	{
 		pwChrNum = 36;
 		pwLen = 25;
 	}
-	if(argIs("/9L"))
+	if (argIs("/9L"))
 	{
 		pwChrNum = 36;
 		pwLen = 25;
 		forceLower = 1;
 	}
-	if(argIs("/9UL") || argIs("/9A"))
+	if (argIs("/9UL") || argIs("/9A"))
 	{
 		pwChrNum = 62;
 		pwLen = 22;
 	}
-	if(argIs("/-C"))
+	if (argIs("/-C"))
 	{
 		noCheck = 1;
 	}
-	if(argIs("/-V"))
+	if (argIs("/-V"))
 	{
 		noView = 1;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		pwLen = toValue(nextArg());
 		errorCase(pwLen < 3);
@@ -103,20 +103,20 @@ int main(int argc, char **argv)
 
 			pw = addChar(pw, pwChrs[chrIdx]);
 		}
-		if(noCheck)
+		if (noCheck)
 			break;
 
-		if(CheckPw(pw, pwChrNum))
+		if (CheckPw(pw, pwChrNum))
 			break;
 
 		pw[0] = '\0';
 	}
-	if(forceLower)
+	if (forceLower)
 		toLowerLine(pw);
 
 	cout("%s\n", pw);
 
-	if(!noView)
+	if (!noView)
 		viewLine(pw);
 
 	memFree(pwChrs);

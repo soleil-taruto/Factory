@@ -57,7 +57,7 @@ static MediaInfo_t GetMediaInfo(char *file)
 		// ... Duration: 00:01:12.96, start: 0.000000, ...
 		// Stream #0:0(und): Video: h264 ... v420p, 512x384, 361 kb/s, ...
 
-		if(p = strstrNext(line, "Duration: "))
+		if (p = strstrNext(line, "Duration: "))
 		{
 			p = toknext(p, " ,");
 			errorCase(!p);
@@ -76,13 +76,13 @@ static MediaInfo_t GetMediaInfo(char *file)
 
 			errorCase(!m_isRange(ret.Centisec, 1, IMAX));
 		}
-		else if(startsWith(line, "Stream") && (p = strstrNext(line, "Video:")))
+		else if (startsWith(line, "Stream") && (p = strstrNext(line, "Video:")))
 		{
 			tokinit(p, " ,");
 
 			while(p = toknext(NULL, NULL))
 			{
-				if(lineExp("<1,,09>x<1,,09>", p))
+				if (lineExp("<1,,09>x<1,,09>", p))
 				{
 					ret.Width  = toValue(toknext(p, "x"));
 					ret.Height = toValue(toknext(NULL, ""));
@@ -109,7 +109,7 @@ static void MaskResImage_Main(char *file)
 
 	coExecute_x(xcout("START \"\" /B /WAIT \"%s\" /MASK-RESOURCE-IMAGE-NBC \"%s\" \"%s\"", FILE_TOOLKIT_EXE, file, midFile));
 
-	if(!_stricmp("png", getExt(file)))
+	if (!_stricmp("png", getExt(file)))
 	{
 		removeFile(file);
 		moveFile(midFile, file);
@@ -128,7 +128,7 @@ static void MaskResImage(char *file)
 {
 	char *cachedFile = GetCachedFile("image", file);
 
-	if(existFile(cachedFile))
+	if (existFile(cachedFile))
 	{
 		copyFile(cachedFile, file);
 		TouchFile(cachedFile);
@@ -178,7 +178,7 @@ static void MRS_MakeWavFile(char *file, uint length)
 }
 static void MRS_MakeSoundFile(char *rFile, char *wFile)
 {
-	if(!_stricmp("wav", getExt(wFile)))
+	if (!_stricmp("wav", getExt(wFile)))
 	{
 		moveFile(rFile, wFile);
 		createFile(rFile);
@@ -211,7 +211,7 @@ static void MaskResSound(char *file)
 {
 	char *cachedFile = GetCachedFile("sound", file);
 
-	if(existFile(cachedFile))
+	if (existFile(cachedFile))
 	{
 		copyFile(cachedFile, file);
 		TouchFile(cachedFile);
@@ -293,7 +293,7 @@ static void MaskResMovie(char *file)
 {
 	char *cachedFile = GetCachedFile("movie", file);
 
-	if(existFile(cachedFile))
+	if (existFile(cachedFile))
 	{
 		copyFile(cachedFile, file);
 		TouchFile(cachedFile);
@@ -327,25 +327,25 @@ static void MaskResourceFile(char *file)
 
 	cout("* %s\n", file);
 
-	     if(!_stricmp(ext, "bmp"  )) MaskResImage(file);
-	else if(!_stricmp(ext, "gif"  )) MaskResImage(file);
-	else if(!_stricmp(ext, "jpeg" )) MaskResImage(file);
-	else if(!_stricmp(ext, "jpg"  )) MaskResImage(file);
-	else if(!_stricmp(ext, "png"  )) MaskResImage(file);
+	     if (!_stricmp(ext, "bmp"  )) MaskResImage(file);
+	else if (!_stricmp(ext, "gif"  )) MaskResImage(file);
+	else if (!_stricmp(ext, "jpeg" )) MaskResImage(file);
+	else if (!_stricmp(ext, "jpg"  )) MaskResImage(file);
+	else if (!_stricmp(ext, "png"  )) MaskResImage(file);
 	//--
-	else if(!_stricmp(ext, "mp3"  )) MaskResSound(file);
-	else if(!_stricmp(ext, "wav"  )) MaskResSound(file);
+	else if (!_stricmp(ext, "mp3"  )) MaskResSound(file);
+	else if (!_stricmp(ext, "wav"  )) MaskResSound(file);
 	//--
-	else if(!_stricmp(ext, "mp4"  )) MaskResMovie(file);
-	else if(!_stricmp(ext, "mpeg" )) MaskResMovie(file);
-	else if(!_stricmp(ext, "mpg"  )) MaskResMovie(file);
+	else if (!_stricmp(ext, "mp4"  )) MaskResMovie(file);
+	else if (!_stricmp(ext, "mpeg" )) MaskResMovie(file);
+	else if (!_stricmp(ext, "mpg"  )) MaskResMovie(file);
 	//--
-	else if(!_stricmp(ext, "avi"  )) MaskResOther(file); // movie
-	else if(!_stricmp(ext, "csv"  )) MaskResOther(file);
-	else if(!_stricmp(ext, "ogg"  )) MaskResOther(file); // audio
-	else if(!_stricmp(ext, "ogv"  )) MaskResOther(file); // movie
-	else if(!_stricmp(ext, "otf"  )) MaskResOther(file); // open-type font
-	else if(!_stricmp(ext, "ttf"  )) MaskResOther(file); // true-type font
+	else if (!_stricmp(ext, "avi"  )) MaskResOther(file); // movie
+	else if (!_stricmp(ext, "csv"  )) MaskResOther(file);
+	else if (!_stricmp(ext, "ogg"  )) MaskResOther(file); // audio
+	else if (!_stricmp(ext, "ogv"  )) MaskResOther(file); // movie
+	else if (!_stricmp(ext, "otf"  )) MaskResOther(file); // open-type font
+	else if (!_stricmp(ext, "ttf"  )) MaskResOther(file); // true-type font
 	else
 		return;
 
@@ -373,14 +373,14 @@ void GitResourceMask(char *rootDir)
 
 	foreach(files, file, index)
 	{
-		if(!_stricmp(FLAG_FILE, getLocal(file)))
+		if (!_stricmp(FLAG_FILE, getLocal(file)))
 		{
 			char *prefix = addChar(changeLocal(file, ""), '\\');
 			char *subfile;
 			uint subfile_index;
 
 			foreach(files, subfile, subfile_index)
-				if(startsWithICase(subfile, prefix))
+				if (startsWithICase(subfile, prefix))
 					addElement(targets, (uint)subfile);
 
 			memFree(prefix);

@@ -60,7 +60,7 @@ int main(int argc, char **argv)
 
 			for(i = 0; i < m; i++)
 			{
-				if(map[i]) d++;
+				if (map[i]) d++;
 			}
 			cout("%f,", d / (double)m);
 		}

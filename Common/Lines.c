@@ -11,7 +11,7 @@ char *refLine(autoList_t *lines, uint index)
 {
 	char *line = (char *)refElement(lines, index);
 
-	if(!line)
+	if (!line)
 		line = "";
 
 	return line;
@@ -72,7 +72,7 @@ autoList_t *tokenizeMinMax(char *line, int delimiter, uint nummin, uint nummax, 
 
 	for(p = line; *p && (!nummax || getCount(tokens) < nummax - 1); p++)
 	{
-		if(*p == delimiter)
+		if (*p == delimiter)
 		{
 			addByte(token, '\0');
 			addElement(tokens, (uint)strx(directGetBuffer(token)));
@@ -81,7 +81,7 @@ autoList_t *tokenizeMinMax(char *line, int delimiter, uint nummin, uint nummax, 
 		else
 			addByte(token, *p);
 	}
-	if(*p)
+	if (*p)
 		ab_addLine(token, p);
 
 	addByte(token, '\0');
@@ -114,7 +114,7 @@ char *untokenize(autoList_t *tokens, char *separator)
 
 	foreach(tokens, token, index)
 	{
-		if(index)
+		if (index)
 			addBytes(buffLine, gndBlockLineVar(separator, tmpBlock));
 
 		addBytes(buffLine, gndBlockLineVar(token, tmpBlock));
@@ -133,7 +133,7 @@ void trimLines(autoList_t *lines)
 
 	foreach(lines, line, index)
 	{
-		if(!*line) // ? line == ""
+		if (!*line) // ? line == ""
 		{
 			memFree(line);
 			setElement(lines, index, 0);
@@ -178,7 +178,7 @@ void rmtrimFollowLines(autoList_t *lines, uint start)
 
 void shootingStarLines_CSP(autoList_t *lines, uint count, int starChr, int padChr) // count: 0 == UINTMAX
 {
-	if(!count)
+	if (!count)
 		count = UINTMAX;
 
 	for(; count; count--)
@@ -191,21 +191,21 @@ void shootingStarLines_CSP(autoList_t *lines, uint count, int starChr, int padCh
 		{
 			char *p = strchr(line, starChr);
 
-			if(p)
+			if (p)
 			{
 				uint i = (uint)p - (uint)line;
 
 				m_maxim(farthest, (sint)i);
 			}
 		}
-		if(farthest == -1)
+		if (farthest == -1)
 			break;
 
 		foreach(lines, line, index)
 		{
 			char *p = strchr(line, starChr);
 
-			if(p)
+			if (p)
 			{
 				uint i = (uint)p - (uint)line;
 				uint n = (uint)farthest - i;
@@ -231,13 +231,13 @@ void spacingStarLines_SP(autoList_t *lines, uint lenmin, int starChr, int padChr
 	{
 		char *p = strchr(line, starChr);
 
-		if(p)
+		if (p)
 		{
 			uint i = (uint)p - (uint)line;
 
 			line[i] = padChr;
 
-			if(strlen(line) < lenmin)
+			if (strlen(line) < lenmin)
 			{
 				uint n = lenmin - strlen(line);
 

@@ -17,76 +17,76 @@ int main(int argc, char **argv)
 	uint retrycnt = 2;
 
 readArgs:
-	if(argIs("/S")) // Server domain
+	if (argIs("/S")) // Server domain
 	{
 		serverDomain = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/P")) // server Port-no
+	if (argIs("/P")) // server Port-no
 	{
 		portno = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/PS")) // Proxy Server domain
+	if (argIs("/PS")) // Proxy Server domain
 	{
 		proxyServerDomain = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/PP")) // Proxy server Port-no
+	if (argIs("/PP")) // Proxy server Port-no
 	{
 		proxyPortno = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/R")) // Request path (and query)
+	if (argIs("/R")) // Request path (and query)
 	{
 		path = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/C")) // request Content
+	if (argIs("/C")) // request Content
 	{
 		content = readBinary(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/T")) // Timeout
+	if (argIs("/T")) // Timeout
 	{
 		timeout = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/O")) // Output file
+	if (argIs("/O")) // Output file
 	{
 		outFile = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/RET")) // RETry (0でリトライ無し)
+	if (argIs("/RET")) // RETry (0でリトライ無し)
 	{
 		retrycnt = toValue(nextArg());
 		goto readArgs;
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		char *p;
 
 		serverDomain = strx(nextArg());
 
-		if(p = strchr(serverDomain, '/'))
+		if (p = strchr(serverDomain, '/'))
 		{
 			path = strx(p);
 			*p = '\0';
 		}
-		if(p = strchr(serverDomain, ':'))
+		if (p = strchr(serverDomain, ':'))
 		{
 			portno = toValue(p + 1);
 			*p = '\0';
 		}
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 		outFile = nextArg();
 
-	if(!path)
+	if (!path)
 		path = "/";
 
-	if(outFile)
+	if (outFile)
 		remove(outFile);
 
 retry:
@@ -102,9 +102,9 @@ retry:
 	ProgressEnd(retContent ? 0 : 1);
 */
 
-	if(retContent)
+	if (retContent)
 	{
-		if(!outFile)
+		if (!outFile)
 		{
 			char *outStr = toPrintLine(retContent, 1);
 			cout("%s\n", outStr);
@@ -119,7 +119,7 @@ retry:
 	{
 		cout("失敗しました。\n");
 
-		if(retrycnt)
+		if (retrycnt)
 		{
 			cout("あと %u 回リトライします。\n", retrycnt);
 			retrycnt--;
@@ -127,6 +127,6 @@ retry:
 		}
 	}
 
-	if(content)
+	if (content)
 		releaseAutoBlock(content);
 }

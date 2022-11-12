@@ -36,7 +36,7 @@ static void Bokashi(char *file)
 			int rx = x + sx;
 			int ry = y + sy;
 
-			if(
+			if (
 				m_isRange(rx, 0, w - 1) &&
 				m_isRange(ry, 0, h - 1)
 				)
@@ -66,12 +66,12 @@ static void Bokashi(char *file)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/W"))
+	if (argIs("/W"))
 	{
 		BokaWidth = atoi(nextArg());
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		Bokashi(nextArg());
 	}

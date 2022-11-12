@@ -60,15 +60,15 @@ static rbTree_t *ResultCache;
 
 static void RegResult(autoList_t *result)
 {
-	if(!ResultCache)
+	if (!ResultCache)
 		ResultCache = rbCreateTree(RC_DuplKey, RC_CompKey, RC_FreeKey);
 
 	rbtAddValue(ResultCache, (uint)RC_GetKey(), (uint)copyAutoList(result));
 }
 static autoList_t *GetRegResult(void) // ret: NULL == –¢“o˜^
 {
-	if(ResultCache)
-		if(rbtHasKey(ResultCache, (uint)RC_GetKey()))
+	if (ResultCache)
+		if (rbtHasKey(ResultCache, (uint)RC_GetKey()))
 			return (autoList_t *)rbtGetLastAccessValue(ResultCache);
 
 	return NULL;
@@ -81,7 +81,7 @@ static autoList_t *GetRegResult(void) // ret: NULL == –¢“o˜^
 static int GetBall(int x, int y) // ret: -1=ŠO, 0=Empty, 1, 2
 {
 //LOGPOS();
-	if(m_isRange(x, 0, (int)XSize - 1) && m_isRange(y, 0, (int)YSize - 1))
+	if (m_isRange(x, 0, (int)XSize - 1) && m_isRange(y, 0, (int)YSize - 1))
 	{
 		return getElement(getList(Table, y), x);
 	}
@@ -99,7 +99,7 @@ static int TryPut(int x)
 
 	for(y = YSize - 1; 0 <= y; y--)
 	{
-		if(GetBall(x, y) == 0)
+		if (GetBall(x, y) == 0)
 		{
 			SetBall(x, y, NextPlayer);
 			return 1;
@@ -114,7 +114,7 @@ static void Unput(int x)
 
 	for(y = 0; y < YSize; y++)
 	{
-		if(1 <= GetBall(x, y))
+		if (1 <= GetBall(x, y))
 		{
 			SetBall(x, y, 0);
 			break;
@@ -127,7 +127,7 @@ static int IsGameSet_XY(int x, int y, int ax, int ay)
 	int count;
 //LOGPOS();
 
-	if(ball < 1)
+	if (ball < 1)
 		return 0;
 
 	for(count = 1; count < WinCount; count++)
@@ -135,7 +135,7 @@ static int IsGameSet_XY(int x, int y, int ax, int ay)
 		x += ax;
 		y += ay;
 
-		if(GetBall(x, y) != ball)
+		if (GetBall(x, y) != ball)
 			return 0;
 	}
 	return 1;
@@ -149,7 +149,7 @@ static int IsGameSet(void)
 	for(x = 0; x < XSize; x++)
 	for(y = 0; y < YSize; y++)
 	{
-		if(
+		if (
 			IsGameSet_XY(x, y, 1, 0) ||
 			IsGameSet_XY(x, y, 1, 1) ||
 			IsGameSet_XY(x, y, 0, 1) ||
@@ -188,7 +188,7 @@ static autoList_t *Simmulate(void)
 	{
 		result = GetRegResult();
 
-		if(result)
+		if (result)
 			return copyAutoList(result);
 	}
 	result = newList();
@@ -197,13 +197,13 @@ static autoList_t *Simmulate(void)
 	{
 		uint value = 1;
 
-		if(TryPut(colidx))
+		if (TryPut(colidx))
 		{
-			if(IsGameSet())
+			if (IsGameSet())
 			{
 				value = 2;
 			}
-			else if(!TesuuMax) // Žè”‚ÌãŒÀ
+			else if (!TesuuMax) // Žè”‚ÌãŒÀ
 			{
 				value = 1; // ‚»‚Ìæ‚Íƒhƒ[‚ÆŒ©‚È‚·B
 			}
@@ -263,27 +263,27 @@ int main(int argc, char **argv)
 	Table = newList();
 
 readArgs:
-	if(argIs("/W"))
+	if (argIs("/W"))
 	{
 		WinCount = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		TesuuMax = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/1"))
+	if (argIs("/1"))
 	{
 		NextPlayer = 1;
 		goto readArgs;
 	}
-	if(argIs("/2"))
+	if (argIs("/2"))
 	{
 		NextPlayer = 2;
 		goto readArgs;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		AddRow(nextArg());
 		goto readArgs;

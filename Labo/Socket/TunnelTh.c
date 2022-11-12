@@ -7,7 +7,7 @@
 
 static void DispData(autoBlock_t *block, int sock, int destSock, char *title)
 {
-	if(getSize(block))
+	if (getSize(block))
 	{
 		char *line = toPrintLine(block, 1);
 
@@ -48,34 +48,34 @@ static void ChannelTh(uint prm)
 
 		for(; ; )
 		{
-			if(SockRecvSequ(i->RecvSock, buffBlock, 1000) == -1)
+			if (SockRecvSequ(i->RecvSock, buffBlock, 1000) == -1)
 			{
 				*i->OtherSideSendSockDead = 1;
 				break;
 			}
-			if(!SilentMode)
+			if (!SilentMode)
 			{
 				DispData(buffBlock, i->RecvSock, i->SendSock, i->StrDirect);
 			}
 			for(index = 0; ; )
 			{
-				if(!KeepTheServer)
+				if (!KeepTheServer)
 				{
 					goto endLoop;
 				}
-				if(i->SendSockDead)
+				if (i->SendSockDead)
 				{
 					goto endLoop;
 				}
-				if(SessionTimeout && connectedTime + SessionTimeout < now())
+				if (SessionTimeout && connectedTime + SessionTimeout < now())
 				{
 					goto endLoop;
 				}
-				if(index == getSize(buffBlock))
+				if (index == getSize(buffBlock))
 				{
 					break;
 				}
-				if(SockSendISequ(i->SendSock, buffBlock, &index, 1000) == -1)
+				if (SockSendISequ(i->SendSock, buffBlock, &index, 1000) == -1)
 				{
 					goto endLoop;
 				}
@@ -99,7 +99,7 @@ static void PerformTh(int sock, char *strip)
 
 	cout("ê⁄ë±: %d -> %d\n", sock, fwdSock);
 
-	if(fwdSock == -1) goto endConnect;
+	if (fwdSock == -1) goto endConnect;
 
 	channels[0].StrDirect = "è„ÇË";
 	channels[0].RecvSock = sock;
@@ -133,7 +133,7 @@ static int IdleTh(void)
 {
 	while(hasKey())
 	{
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 		{
 			KeepTheServer = 0;
 			return 0;
@@ -148,35 +148,35 @@ int main(int argc, char **argv)
 
 readArgs:
 	// ì]ëóêÊ
-	if(argIs("/FD")) // Forward Domain
+	if (argIs("/FD")) // Forward Domain
 	{
 		FwdDomain = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/FP")) // Forward Port
+	if (argIs("/FP")) // Forward Port
 	{
 		FwdPort = toValue(nextArg());
 		goto readArgs;
 	}
 
 	// ë“ÇøéÛÇØ
-	if(argIs("/P")) // Port
+	if (argIs("/P")) // Port
 	{
 		portno = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/C")) // Connect max
+	if (argIs("/C")) // Connect max
 	{
 		connectmax = toValue(nextArg());
 		goto readArgs;
 	}
 
-	if(argIs("/S")) // Silent mode
+	if (argIs("/S")) // Silent mode
 	{
 		SilentMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/T")) // session Timeout
+	if (argIs("/T")) // session Timeout
 	{
 		SessionTimeout = toValue(nextArg());
 		goto readArgs;

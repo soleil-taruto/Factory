@@ -29,7 +29,7 @@ static void DoTest(uint n, uint testNum)
 	{
 		for(c = 0; c < n; c++)
 		{
-			if(inha[c] & 1)
+			if (inha[c] & 1)
 			{
 				inha[mato[c]] |= 2;
 			}
@@ -43,7 +43,7 @@ static void DoTest(uint n, uint testNum)
 
 		for(c = 0; c < n; c++)
 		{
-			if(inha[c])
+			if (inha[c])
 			{
 				numer++;
 			}

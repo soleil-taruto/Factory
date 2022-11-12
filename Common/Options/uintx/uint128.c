@@ -54,7 +54,7 @@ UI128_t UI128_Add(UI128_t a, UI128_t b, UI128_t ans[2])
 	UI64_t f[2];
 	UI128_t tmp[2];
 
-	if(!ans)
+	if (!ans)
 		ans = tmp;
 
 	UI64_Add(a.L, b.L, c);
@@ -89,7 +89,7 @@ UI128_t UI128_Mul(UI128_t a, UI128_t b, UI128_t ans[2])
 	uint i;
 	UI128_t tmp[2];
 
-	if(!ans)
+	if (!ans)
 		ans = tmp;
 
 	UI64_Mul(a.L, b.L, c);
@@ -130,12 +130,12 @@ static UI128_t DivSub(UI128_t a, UI128_t b, UI128_t ans[2], uint reti)
 
 	errorCase(UI128_IsZero(b));
 
-	if(!ans)
+	if (!ans)
 		ans = tmp;
 
 	ans[0] = UI128_0();
 
-	if(UI64_IsZero(b.H))
+	if (UI64_IsZero(b.H))
 	{
 		{
 			UI128_t dd;
@@ -173,7 +173,7 @@ static UI128_t DivSub(UI128_t a, UI128_t b, UI128_t ans[2], uint reti)
 	}
 	else
 	{
-		if(!UI64_IsFill(b.H))
+		if (!UI64_IsFill(b.H))
 		{
 			UI64_t c = UI64_Add(b.H, UI64_x(1), NULL);
 
@@ -182,7 +182,7 @@ static UI128_t DivSub(UI128_t a, UI128_t b, UI128_t ans[2], uint reti)
 				UI64_t d = UI64_Div(a.H, c, NULL);
 				UI128_t dd;
 
-				if(UI64_IsZero(d))
+				if (UI64_IsZero(d))
 					break;
 
 				dd.L = d;
@@ -222,7 +222,7 @@ sint UI128_Comp(UI128_t a, UI128_t b)
 {
 	sint ret = UI64_Comp(a.H, b.H);
 
-	if(!ret)
+	if (!ret)
 		ret = UI64_Comp(a.L, b.L);
 
 	return ret;

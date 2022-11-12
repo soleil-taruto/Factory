@@ -33,11 +33,11 @@ static void TransmitProc(SockStream_t *rss, SockStream_t *wss, char *header)
 		int chr;
 		int pchr;
 
-		if(
+		if (
 			!SockRecvCharWait(rss, 0) ||
 			!SockSendCharWait(wss, 0)
 			)
-			if(
+			if (
 				!SockRecvCharWait(rss, 100) ||
 				!SockSendCharWait(wss, 100)
 				)
@@ -45,28 +45,28 @@ static void TransmitProc(SockStream_t *rss, SockStream_t *wss, char *header)
 
 		chr = SockRecvChar(rss);
 
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
 		pchr = chr;
 		m_toHalf(pchr);
 		pLine = addChar(pLine, pchr);
 
-		if(chr == '\n')
+		if (chr == '\n')
 			pLine = addChar(pLine, '\n');
 
 		SockSendChar(wss, chr);
 	}
 	TrySockFlush(wss, 0);
 
-	if(*pLine)
+	if (*pLine)
 	{
 		char *p = strchr(pLine, '\0') - 1;
 
-		if(*p == '\n')
+		if (*p == '\n')
 			*p = '\0';
 
-		if(*pLine)
+		if (*pLine)
 		{
 			cout("%s\n", header);
 			cout("%s\n", pLine);
@@ -89,7 +89,7 @@ static void PerformTh(int sock, char *strip)
 
 	fwdSock = sockConnect(ip, FwdHost, FwdPortNo);
 
-	if(fwdSock == -1) // ? 失敗
+	if (fwdSock == -1) // ? 失敗
 	{
 		cout("転送先に接続できませんでした。\n");
 		return;
@@ -104,7 +104,7 @@ static void PerformTh(int sock, char *strip)
 		TransmitProc(ss, fss, "上り");
 		TransmitProc(fss, ss, "下り");
 
-		if(
+		if (
 			IsEOFSockStream(ss) ||
 			IsEOFSockStream(fss)
 			)
@@ -123,13 +123,13 @@ static void PerformTh(int sock, char *strip)
 static int IdleTh(void)
 {
 	while(hasKey())
-		if(getKey() == 0x1b) // ? エスケープキー押下 -> 停止要求
+		if (getKey() == 0x1b) // ? エスケープキー押下 -> 停止要求
 			StopServerRq = 1;
 
-	if(handleWaitForMillis(StopEventHdl, 0)) // ? 停止要求
+	if (handleWaitForMillis(StopEventHdl, 0)) // ? 停止要求
 		StopServerRq = 1;
 
-	if(!StopServerRq)
+	if (!StopServerRq)
 		return 1;
 
 	cout("停止します...\n");
@@ -150,12 +150,12 @@ int main(int argc, char **argv)
 	StopEventName = xcout(STOPEVENTUUID ".%u", PortNo);
 	StopEventHdl = eventOpen(StopEventName);
 
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		eventWakeupHandle(StopEventHdl);
 		return;
 	}
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		ConnectMax = toValue(nextArg());
 	}

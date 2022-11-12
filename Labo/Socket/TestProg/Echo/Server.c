@@ -20,7 +20,7 @@ static int Idle(void)
 {
 	while(hasKey())
 	{
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 		{
 			cout("I—¹\n");
 			return 0;

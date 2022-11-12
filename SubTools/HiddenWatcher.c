@@ -24,13 +24,13 @@ static void GR_MoveTo(char *repositoryName)
 	{
 		cout("* %s\n", path);
 
-		if(getLocal(path)[0] == '.') // ? .git ‚È‚Ç
+		if (getLocal(path)[0] == '.') // ? .git ‚È‚Ç
 		{
 			LOGPOS(); // noop
 		}
 		else
 		{
-			if(index < dirCount)
+			if (index < dirCount)
 			{
 				LOGPOS();
 				recurRemoveDir(path);
@@ -58,7 +58,7 @@ static void GR_MoveTo(char *repositoryName)
 	{
 		cout("< %s\n", path);
 
-		if(getLocal(path)[0] == '.') // ? .git ‚È‚ÇH
+		if (getLocal(path)[0] == '.') // ? .git ‚È‚ÇH
 		{
 			LOGPOS(); // noop
 		}
@@ -68,7 +68,7 @@ static void GR_MoveTo(char *repositoryName)
 
 			cout("> %s\n", wPath);
 
-			if(index < dirCount)
+			if (index < dirCount)
 			{
 				LOGPOS();
 				createDir(wPath);
@@ -165,17 +165,17 @@ static void Main2(void)
 
 		cout("file: %s\n", file);
 
-		if(!_stricmp(ext, "_gitrel_Denebola"))
+		if (!_stricmp(ext, "_gitrel_Denebola"))
 		{
 			GitRelease(file, "Denebola");
 		}
 		/*
-		else if(!_stricmp(ext, "_gitrel_Spica02"))
+		else if (!_stricmp(ext, "_gitrel_Spica02"))
 		{
 			GitRelease(file, "Spica02");
 		}
 		*/
-		else if(!_stricmp(ext, "_mochi_Spica02"))
+		else if (!_stricmp(ext, "_mochi_Spica02"))
 		{
 			Mochikaeri(file, "C:\\pleiades\\workspace\\Spica02\\src");
 		}

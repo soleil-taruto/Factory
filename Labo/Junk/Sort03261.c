@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 	{
 		lines = editTextLines_x(lines);
 
-		if(getCount(lines) == 0)
+		if (getCount(lines) == 0)
 		{
 			break;
 		}

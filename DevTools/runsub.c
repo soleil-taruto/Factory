@@ -32,7 +32,7 @@ static void Run(char *file)
 
 	BlueFish_Lock();
 	{
-		if(NonBlockingMode)
+		if (NonBlockingMode)
 			execute_x(xcout("START CMD /C \"%s\"", file));
 		else
 			execute(file);
@@ -42,7 +42,7 @@ static void Run(char *file)
 	cmdTitle("runsub");
 	cout("runsub: %s done\n", absPath);
 
-	if(TimeWaitMillis)
+	if (TimeWaitMillis)
 		coSleep(TimeWaitMillis);
 }
 int main(int argc, char **argv)
@@ -59,37 +59,37 @@ int main(int argc, char **argv)
 	uint index;
 
 readArgs:
-	if(argIs("/-B"))
+	if (argIs("/-B"))
 	{
 		NonBlockingMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/-S"))
+	if (argIs("/-S"))
 	{
 		intoSubDirMode = 0;
 		goto readArgs;
 	}
-	if(argIs("/-R"))
+	if (argIs("/-R"))
 	{
 		skipRootDir = 1;
 		goto readArgs;
 	}
-	if(argIs("/-O"))
+	if (argIs("/-O"))
 	{
 		ignoreObjDebug = 1;
 		goto readArgs;
 	}
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		rootDir = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		TimeWaitMillis = toValue(nextArg()) * 1000;
 		goto readArgs;
 	}
-	if(argIs("/TM"))
+	if (argIs("/TM"))
 	{
 		TimeWaitMillis = toValue(nextArg());
 		goto readArgs;
@@ -99,12 +99,12 @@ readArgs:
 	batch = addExt(strx(target), "bat");
 	execu = addExt(strx(target), "exe");
 
-	if(intoSubDirMode)
+	if (intoSubDirMode)
 	{
 		dirs = lssDirs(rootDir);
 		sortJLinesICase(dirs);
 
-		if(!skipRootDir)
+		if (!skipRootDir)
 			insertElement(dirs, 0, (uint)strx(rootDir));
 	}
 	else
@@ -112,15 +112,15 @@ readArgs:
 
 	foreach(dirs, dir, index)
 	{
-		if(!existDir(dir)) // Ç±ÇÍÇ‹Ç≈ÇÃ Run() Ç…ÇÊÇ¡ÇƒçÌèúÇ≥ÇÍÇÈÇ±Ç∆Ç‡Ç†ÇÈÅB
+		if (!existDir(dir)) // Ç±ÇÍÇ‹Ç≈ÇÃ Run() Ç…ÇÊÇ¡ÇƒçÌèúÇ≥ÇÍÇÈÇ±Ç∆Ç‡Ç†ÇÈÅB
 			continue;
 
-		if(ignoreObjDebug && (mbs_stristr(dir, "\\obj\\") || mbs_stristr(dir, "\\Debug\\")))
+		if (ignoreObjDebug && (mbs_stristr(dir, "\\obj\\") || mbs_stristr(dir, "\\Debug\\")))
 			continue;
 
 		addCwd(dir);
 
-		if(target[0] == '*')
+		if (target[0] == '*')
 		{
 			autoList_t *files = lsFiles(".");
 			char *file;
@@ -131,12 +131,12 @@ readArgs:
 
 			foreach(files, file, file_index)
 			{
-				if(
+				if (
 					!_stricmp("bat", getExt(file)) ||
 					!_stricmp("exe", getExt(file))
 					)
 				{
-					if(target[1] == '\0' || mbs_strstrCase(file, target + 1, 1))
+					if (target[1] == '\0' || mbs_strstrCase(file, target + 1, 1))
 					{
 						Run(file);
 					}
@@ -146,11 +146,11 @@ readArgs:
 		}
 		else
 		{
-			if(existFile(batch))
+			if (existFile(batch))
 			{
 				Run(batch);
 			}
-			if(existFile(execu))
+			if (existFile(execu))
 			{
 				Run(execu);
 			}

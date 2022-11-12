@@ -32,17 +32,17 @@ int main(int argc, char **argv)
 	int remove_mode = 0;
 
 readArgs:
-	if(argIs("/C") || argIs("/MD"))
+	if (argIs("/C") || argIs("/MD"))
 	{
 		create_mode = 1;
 		goto readArgs;
 	}
-	if(argIs("/V") || argIs("/MV"))
+	if (argIs("/V") || argIs("/MV"))
 	{
 		move_mode = 1;
 		goto readArgs;
 	}
-	if(argIs("/R") || argIs("/RM"))
+	if (argIs("/R") || argIs("/RM"))
 	{
 		remove_mode = 1;
 		goto readArgs;
@@ -51,14 +51,14 @@ readArgs:
 	srcDir  = nextArg();
 	destDir = nextArg();
 
-	if(create_mode)
+	if (create_mode)
 		createDir(destDir);
 
-	if(move_mode)
+	if (move_mode)
 	{
 		moveDir(srcDir, destDir);
 
-		if(remove_mode)
+		if (remove_mode)
 			removeDir(srcDir);
 	}
 	else

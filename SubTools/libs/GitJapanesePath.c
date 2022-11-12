@@ -14,7 +14,7 @@ static int HasJpn(char *str)
 	char *p;
 
 	for(p = str; *p; p++)
-		if(_ismbblead(*p))
+		if (_ismbblead(*p))
 			return 1;
 
 	return 0;
@@ -69,7 +69,7 @@ COPY abc d%%tmp%%f
 バッチを実行 -> d%tmp%f が作成される。
 
 	*/
-	if(
+	if (
 		strchr(path, ' ') ||
 		strchr(path, '&') ||
 		strchr(path, '+') ||
@@ -99,7 +99,7 @@ static void SolveJpnPath(char *rootDir, char *realRootDir)
 	{
 		char *localPath = getLocal(path);
 
-		if(HasJpn(localPath))
+		if (HasJpn(localPath))
 		{
 			char *dest = changeExt_xc(changeLocal(path, ESC_LOCALPATH), getExt(path));
 			char *relDest;
@@ -144,7 +144,7 @@ void SolveJapanesePath(char *rootDir)
 
 	SolveJpnPath(rootDir, rootDir);
 
-	if(getCount(RBLines))
+	if (getCount(RBLines))
 	{
 		LOGPOS();
 		reverseElements(RBLines);

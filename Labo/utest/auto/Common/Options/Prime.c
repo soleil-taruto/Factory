@@ -6,30 +6,30 @@ static int Test_IsPrime(uint64 value)
 {
 	uint64 denom;
 
-	if(value < 2)
+	if (value < 2)
 		return 0;
 
-	if(value == 2)
+	if (value == 2)
 		return 1;
 
-	if(value % 2 == 0)
+	if (value % 2 == 0)
 		return 0;
 
 	// by C:\Factory\Labo\Proof\Prime64Big.c @ 2015.6.26
 	{
-		if(value == 18446744073709551557) return 1;
-		if(value == 18446744073709551533) return 1;
-		if(value == 18446744073709551521) return 1;
+		if (value == 18446744073709551557) return 1;
+		if (value == 18446744073709551533) return 1;
+		if (value == 18446744073709551521) return 1;
 
-		if(UINT64MAX - 100 <= value) return 0;
+		if (UINT64MAX - 100 <= value) return 0;
 	}
 
 	for(denom = 3; denom <= UINTMAX; denom += 2)
 	{
-		if(value < denom * denom)
+		if (value < denom * denom)
 			break;
 
-		if(value % denom == 0)
+		if (value % denom == 0)
 			return 0;
 	}
 	return 1;

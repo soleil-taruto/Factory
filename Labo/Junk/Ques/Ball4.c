@@ -38,11 +38,11 @@ static int IsNaranderu(int x, int y, int xAdd, int yAdd, uint kind, uint num)
 	{
 		uint cell = Field[x][y];
 
-		if(cell == kind)
+		if (cell == kind)
 		{
 			count++;
 		}
-		else if(cell) // ? 別の石がある。
+		else if (cell) // ? 別の石がある。
 		{
 			return 0; // もう並べないので、却下
 		}
@@ -60,24 +60,24 @@ static uint GetNarabiCount(uint kind, uint num)
 	for(x = 0; x < Field_W; x++)
 	for(y = 0; y < Field_H; y++)
 	{
-		if(x + NARABI_RANGE <= Field_W) // 右方向
+		if (x + NARABI_RANGE <= Field_W) // 右方向
 		{
-			if(IsNaranderu(x, y, 1, 0, kind, num))
+			if (IsNaranderu(x, y, 1, 0, kind, num))
 				count++;
 		}
-		if(y + NARABI_RANGE <= Field_H) // 下方向
+		if (y + NARABI_RANGE <= Field_H) // 下方向
 		{
-			if(IsNaranderu(x, y, 0, 1, kind, num))
+			if (IsNaranderu(x, y, 0, 1, kind, num))
 				count++;
 		}
-		if(x + NARABI_RANGE <= Field_W && y + NARABI_RANGE <= Field_H) // 右下方向
+		if (x + NARABI_RANGE <= Field_W && y + NARABI_RANGE <= Field_H) // 右下方向
 		{
-			if(IsNaranderu(x, y, 1, 1, kind, num))
+			if (IsNaranderu(x, y, 1, 1, kind, num))
 				count++;
 		}
-		if(x + NARABI_RANGE <= Field_W && NARABI_RANGE - 1 <= y) // 右上方向
+		if (x + NARABI_RANGE <= Field_W && NARABI_RANGE - 1 <= y) // 右上方向
 		{
-			if(IsNaranderu(x, y, 1, -1, kind, num))
+			if (IsNaranderu(x, y, 1, -1, kind, num))
 				count++;
 		}
 	}
@@ -85,10 +85,10 @@ static uint GetNarabiCount(uint kind, uint num)
 }
 static uint GetWinner(void) // ret: (0-2: 無し, 自分, 相手)
 {
-	if(GetNarabiCount(1, 4))
+	if (GetNarabiCount(1, 4))
 		return 1;
 
-	if(GetNarabiCount(2, 4))
+	if (GetNarabiCount(2, 4))
 		return 2;
 
 	return 0;
@@ -101,7 +101,7 @@ static int IsTaboo(void)
 	for(x = 0; x + 5 <= Field_W; x++)
 	for(y = 0; y + 1 <= Field_H; y++)
 	{
-		if(
+		if (
 			Field[x + 0][y + 0] == 0 &&
 			Field[x + 1][y + 0] == 2 &&
 			Field[x + 2][y + 0] == 2 &&
@@ -115,7 +115,7 @@ static int IsTaboo(void)
 	for(x = 0; x + 5 <= Field_W; x++)
 	for(y = 0; y + 2 <= Field_H; y++)
 	{
-		if(
+		if (
 			// 上段
 			Field[x + 1][y + 1] == 2 &&
 			Field[x + 2][y + 1] == 2 &&
@@ -137,10 +137,10 @@ static uint GetCurrEval(void)
 	uint winner = GetWinner();
 	uint eval;
 
-	if(winner == 1)
+	if (winner == 1)
 		return 400000000;
 
-	if(winner == 2)
+	if (winner == 2)
 		return 1;
 
 	eval = 200000000;
@@ -149,7 +149,7 @@ static uint GetCurrEval(void)
 	eval += 9900 - GetNarabiCount(2, 3) * 100;
 	eval += 99   - GetNarabiCount(2, 3) * 1;
 
-	if(IsTaboo())
+	if (IsTaboo())
 		eval -= 100000000;
 
 	return eval;
@@ -163,7 +163,7 @@ static int PutStone(uint x, uint kind) // ret: ? 石を置けた。
 
 	for(y = 0; y < Field_H; y++)
 	{
-		if(!Field[x][y]) // ? 空き
+		if (!Field[x][y]) // ? 空き
 		{
 			Field[x][y] = kind;
 			return 1;
@@ -176,7 +176,7 @@ static void EraseStone(uint x)
 	uint y;
 
 	for(y = Field_H - 1; y; y--)
-		if(Field[x][y]) // ? ! 空き
+		if (Field[x][y]) // ? ! 空き
 			break;
 
 	Field[x][y] = 0;
@@ -206,17 +206,17 @@ static void *GetFieldHash(void) // ret: c_
 }
 static uint GetEvalCache(void *hash) // ret: 0 == キャッシュ無し
 {
-	if(!EvalCache)
+	if (!EvalCache)
 		return 0;
 
-	if(!rbtHasKey(EvalCache, (uint)hash))
+	if (!rbtHasKey(EvalCache, (uint)hash))
 		return 0;
 
 	return rbtGetLastAccessValue(EvalCache);
 }
 static void SetEvalCache(void *hash, uint eval)
 {
-	if(!EvalCache)
+	if (!EvalCache)
 		EvalCache = rbCreateTree((uint (*)(uint))strx, (sint (*)(uint, uint))strcmp, (void (*)(uint))memFree);
 
 	rbtAddValue(EvalCache, (uint)hash, eval);
@@ -238,7 +238,7 @@ static void GetNextEvals(uint *dest) // 次手の評価リスト -> dest
 
 	for(x = 0; x < Field_W; x++)
 	{
-		if(PutStone(x, kind))
+		if (PutStone(x, kind))
 		{
 			dest[x] = GetEval();
 			EraseStone(x); // 復帰
@@ -257,36 +257,36 @@ static uint Real_GetEval(void) // ret: この局面の評価, 0 は返さない。
 	uint ret;
 	uint index;
 
-	if(MaxDepth <= Depth) // ? 探索の上限に達した。-> これ以上先の手は読まない。
+	if (MaxDepth <= Depth) // ? 探索の上限に達した。-> これ以上先の手は読まない。
 		return GetCurrEval();
 
 	// 現局面で決着 -> これ以上先の手は読まない。
 	{
 		uint winner = GetWinner();
 
-		if(winner == 1)
+		if (winner == 1)
 			return 400000000 + 100 - Depth; // 早い勝利を高く評価
 
-		if(winner == 2)
+		if (winner == 2)
 			return 1;
 	}
 
 	GetNextEvals(evals);
 
 	for(index = 0; index < Field_W; index++)
-		if(evals[index])
+		if (evals[index])
 			break;
 
-	if(index == Field_W) // 次の手が無い -> 引き分け
+	if (index == Field_W) // 次の手が無い -> 引き分け
 	{
 		ret = 300000000;
 	}
-	else if(Depth % 2) // 相手の手番 -> (自分にとって)最悪手を選ぶ
+	else if (Depth % 2) // 相手の手番 -> (自分にとって)最悪手を選ぶ
 	{
 		ret = UINTMAX;
 
 		for(index = 0; index < Field_W; index++)
-			if(evals[index])
+			if (evals[index])
 				ret = m_min(ret, evals[index]);
 	}
 	else // 自分の手番 -> 最善手を選ぶ
@@ -294,11 +294,11 @@ static uint Real_GetEval(void) // ret: この局面の評価, 0 は返さない。
 		ret = 0;
 
 		for(index = 0; index < Field_W; index++)
-			if(evals[index])
+			if (evals[index])
 				ret = m_max(ret, evals[index]);
 	}
-	if(ret / 100000000 == 2) // ? 未決着コース
-		if(IsTaboo())
+	if (ret / 100000000 == 2) // ? 未決着コース
+		if (IsTaboo())
 			ret -= 100000000;
 
 	return ret;
@@ -311,7 +311,7 @@ static uint GetEval(void)
 {
 	uint ret = GetEvalCache(GetFieldHash());
 
-	if(!ret)
+	if (!ret)
 	{
 		ret = Real_GetEval();
 		SetEvalCache(GetFieldHash(), ret);
@@ -347,22 +347,22 @@ static void SetField(char *rawData) // rawData: 下 -> 上, 左 -> 右
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		MaxDepth = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/W"))
+	if (argIs("/W"))
 	{
 		Field_W = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/H"))
+	if (argIs("/H"))
 	{
 		Field_H = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		SetField(nextArg());
 		goto readArgs;
@@ -373,12 +373,12 @@ readArgs:
 	errorCase(!m_isRange(Field_H, 1, FIELD_H_MAX));
 
 readCmds:
-	if(argIs("/C")) // curr eval
+	if (argIs("/C")) // curr eval
 	{
 		cout("%u\n", GetEval());
 		goto readCmds;
 	}
-	if(argIs("/N")) // next eval
+	if (argIs("/N")) // next eval
 	{
 		uint evals[FIELD_W_MAX];
 		uint index;

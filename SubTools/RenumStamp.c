@@ -19,7 +19,7 @@ static char *HS_NamePtr;
 
 static int HasStamp(char *file)
 {
-	if(lineExp("<4,09>-<2,09>-<2,09>_<2,09>-<2,09>-<2,09>_<3,09><>", file))
+	if (lineExp("<4,09>-<2,09>-<2,09>_<2,09>-<2,09>-<2,09>_<3,09><>", file))
 	{
 		HS_NamePtr = file + 23;
 		return 1;
@@ -91,14 +91,14 @@ static void DoFRenumStmp(void)
 
 		errorCase(!*file); // 2bs
 
-		if(ToStampOnly)
+		if (ToStampOnly)
 			dest = xcout("%s%s", GetFStamp(file), getExtWithDot(file));
-		else if(HasStamp(file))
+		else if (HasStamp(file))
 			dest = xcout("%s%s", GetFStamp(file), HS_NamePtr);
 		else
 			dest = xcout("%s_%s", GetFStamp(file), file);
 
-		if(strcmp(file, dest)) // ? file != dest
+		if (strcmp(file, dest)) // ? file != dest
 		{
 			cout("< %s\n", file);
 			cout("> %s\n", dest);
@@ -117,11 +117,11 @@ static void DoFRenumStmp(void)
 	memFree(FStampsDir);
 	FStampsDir = NULL;
 
-	if(!BatchMode)
+	if (!BatchMode)
 	{
 		cout("Press R to renumber_stamp\n");
 
-		if(getKey() != 'R')
+		if (getKey() != 'R')
 			termination(0);
 	}
 
@@ -164,13 +164,13 @@ static void DoFRenumStmp(void)
 		{
 			char *wFile = getLine(destFiles, index);
 
-			if(existPath(wFile))
+			if (existPath(wFile))
 			{
 				cout("%s <Šù‚É‘¶Ý‚·‚é>\n", wFile);
 				errorFlag = 1;
 				break;
 			}
-			if(!creatable(wFile))
+			if (!creatable(wFile))
 			{
 				cout("%s <ì¬•s‰Â>\n", wFile);
 				errorFlag = 1;
@@ -178,7 +178,7 @@ static void DoFRenumStmp(void)
 			}
 		}
 
-		if(errorFlag)
+		if (errorFlag)
 		{
 			for(index = 0; index < getCount(files); index++) // •œŒ³
 				moveFile(
@@ -208,22 +208,22 @@ static void DoFRenumStmp(void)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/B"))
+	if (argIs("/B"))
 	{
 		BatchMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/N"))
+	if (argIs("/N"))
 	{
 		ToStampOnly = 1;
 		goto readArgs;
 	}
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		TimeKind = 'C';
 		goto readArgs;
 	}
-	if(argIs("/X"))
+	if (argIs("/X"))
 	{
 		TimeKind = 'X';
 		goto readArgs;

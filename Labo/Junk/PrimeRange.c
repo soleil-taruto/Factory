@@ -14,9 +14,9 @@ static int PrintPrimeOnlyFlag;
 
 static void PrintIsPrime(uint64 value)
 {
-	if(PrintPrimeOnlyFlag)
+	if (PrintPrimeOnlyFlag)
 	{
-		if(IsPrime_R(value))
+		if (IsPrime_R(value))
 			cout("%I64u\n", value);
 	}
 	else
@@ -26,7 +26,7 @@ static void PrimeRange(uint64 minval, uint64 maxval)
 {
 	uint64 count;
 
-	if(maxval == 0)
+	if (maxval == 0)
 		maxval = UINT64MAX - 1;
 
 	errorCase(maxval < minval);
@@ -39,11 +39,11 @@ static void PrimeRange(uint64 minval, uint64 maxval)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		PrintPrimeOnlyFlag = 1;
 	}
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		uint64 minval;
 		uint64 maxval;

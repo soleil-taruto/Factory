@@ -28,11 +28,11 @@ static void FindSame(char *targFile, char *searchDir)
 	{
 		uint64 size = getFileSize(file);
 
-		if(size == targSize)
+		if (size == targSize)
 		{
 			char *hash = md5Cache_makeHexHashFile(file);
 
-			if(!_stricmp(hash, targHash)) // ? found
+			if (!_stricmp(hash, targHash)) // ? found
 			{
 				cout("%s\n", file);
 				addElement(foundFiles, (uint)strx(file));
@@ -40,7 +40,7 @@ static void FindSame(char *targFile, char *searchDir)
 			memFree(hash);
 		}
 	}
-	if(getCount(foundFiles))
+	if (getCount(foundFiles))
 	{
 		writeLines(FOUNDLISTFILE, foundFiles);
 	}
@@ -55,11 +55,11 @@ static void FindSame(char *targFile, char *searchDir)
 }
 int main(int argc, char **argv)
 {
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		FindSame(getArg(0), getArg(1));
 	}
-	else if(hasArgs(1))
+	else if (hasArgs(1))
 	{
 		FindSame(getArg(0), c_dropDir());
 	}

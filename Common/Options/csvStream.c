@@ -5,20 +5,20 @@ char *readCSVCell(FILE *fp, int *p_termChr)
 	autoBlock_t *cellBuff = newBlock();
 	int chr = readChar(fp);
 
-	if(chr == '\"')
+	if (chr == '\"')
 	{
 		for(; ; )
 		{
 			chr = readChar(fp);
 
-			if(chr == EOF)
+			if (chr == EOF)
 				break;
 
-			if(chr == '\"')
+			if (chr == '\"')
 			{
 				chr = readChar(fp);
 
-				if(chr != '\"')
+				if (chr != '\"')
 					break;
 			}
 			addByte(cellBuff, chr);
@@ -28,14 +28,14 @@ char *readCSVCell(FILE *fp, int *p_termChr)
 	{
 		for(; ; )
 		{
-			if(chr == ',' || chr == '\n' || chr == EOF)
+			if (chr == ',' || chr == '\n' || chr == EOF)
 				break;
 
 			addByte(cellBuff, chr);
 			chr = readChar(fp);
 		}
 	}
-	if(p_termChr)
+	if (p_termChr)
 		*p_termChr = chr;
 
 	return unbindBlock2Line(cellBuff);
@@ -51,7 +51,7 @@ autoList_t *readCSVRow(FILE *fp)
 	}
 	while(termChr != '\n' && termChr != EOF);
 
-	if(termChr == EOF && getCount(row) == 1 && *getLine(row, 0) == '\0')
+	if (termChr == EOF && getCount(row) == 1 && *getLine(row, 0) == '\0')
 	{
 		releaseDim(row, 1);
 		row = NULL;
@@ -61,7 +61,7 @@ autoList_t *readCSVRow(FILE *fp)
 
 void writeCSVCell(FILE *fp, char *cell)
 {
-	if(strchr(cell, '\"') || strchr(cell, ',') || strchr(cell, '\n'))
+	if (strchr(cell, '\"') || strchr(cell, ',') || strchr(cell, '\n'))
 	{
 		char *p;
 
@@ -69,7 +69,7 @@ void writeCSVCell(FILE *fp, char *cell)
 
 		for(p = cell; *p; p++)
 		{
-			if(*p == '"')
+			if (*p == '"')
 			{
 				writeChar(fp, '"');
 				writeChar(fp, '"');
@@ -89,7 +89,7 @@ void writeCSVRow(FILE *fp, autoList_t *row)
 
 	foreach(row, cell, index)
 	{
-		if(index)
+		if (index)
 			writeChar(fp, ',');
 
 		writeCSVCell(fp, cell);

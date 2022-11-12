@@ -7,7 +7,7 @@
 
 int main(int argc, char **argv)
 {
-	if(argIs("/ToBase64"))
+	if (argIs("/ToBase64"))
 	{
 		autoBlock_t *text;
 		autoBlock_t *b64;
@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 		releaseAutoBlock(b64);
 		return;
 	}
-	if(argIs("/FromBase64"))
+	if (argIs("/FromBase64"))
 	{
 		autoBlock_t *b64;
 		autoBlock_t *text;

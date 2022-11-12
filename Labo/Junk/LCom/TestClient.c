@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 
 	while(waitKey(0) != 0x1b)
 	{
-		if(mt19937_rnd(2))
+		if (mt19937_rnd(2))
 		{
 			char *key = xcout("%u", mt19937_rnd(100));
 			char *value = xcout("%u", mt19937_rnd32());
@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 			{
 				uint keyidx = findLine(keys, key);
 
-				if(keyidx < getCount(keys))
+				if (keyidx < getCount(keys))
 				{
 					memFree((void *)fastDesertElement(keys, keyidx));
 					memFree((void *)fastDesertElement(values, keyidx));
@@ -46,7 +46,7 @@ int main(int argc, char **argv)
 			memFree(command);
 			memFree(result);
 		}
-		else if(getCount(keys))
+		else if (getCount(keys))
 		{
 			uint keyidx = mt19937_rnd(getCount(keys));
 			char *key;

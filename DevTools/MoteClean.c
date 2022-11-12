@@ -28,17 +28,17 @@ static void MoteClean(char *dir)
 		for(numb = 1; numb < 300; numb++)
 			chkPtn = replaceLine_xc(chkPtn, xcout(" - コピー (%u).", numb), ".", 1);
 
-		if(
+		if (
 			lineExp("<1,19><0,2,09>", chkPtn) ||
 			lineExp("<1,19><0,2,09>.<>", chkPtn) &&
 			lineExp("<1,19><0,2,09>.<>.<>", chkPtn) == 0
 			)
 			killFlag = 1;
 
-		if(lineExp("<>.tmp", chkPtn))
+		if (lineExp("<>.tmp", chkPtn))
 			killFlag = 1;
 
-		if(killFlag)
+		if (killFlag)
 		{
 			cout("* %s\n", path);
 			addElement(killPaths, (uint)strx(path));
@@ -47,12 +47,12 @@ static void MoteClean(char *dir)
 	}
 	releaseDim(paths, 1);
 
-	if(!ForceMode && getCount(killPaths))
+	if (!ForceMode && getCount(killPaths))
 	{
 		cout("削除？\n");
 
-		if(clearCoWaitKey(60000) == 0x1b) // GitReleaseAll.bat のとき止まらないように、
-//		if(clearGetKey() == 0x1b)
+		if (clearCoWaitKey(60000) == 0x1b) // GitReleaseAll.bat のとき止まらないように、
+//		if (clearGetKey() == 0x1b)
 			termination(0);
 
 		cout("削除する。\n");
@@ -66,7 +66,7 @@ static void MoteClean(char *dir)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		ForceMode = 1;
 	}

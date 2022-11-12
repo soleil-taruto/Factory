@@ -21,7 +21,7 @@ static void RecvHTTPHeader(SockStream_t *ss)
 	{
 		char *line = SockRecvLine(ss, 65536);
 
-		if(!*line)
+		if (!*line)
 		{
 			memFree(line);
 			break;
@@ -49,7 +49,7 @@ static int Perform(int sock, uint dummy)
 static int Idle(void)
 {
 	while(hasKey())
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 			return 0;
 
 	return 1;
@@ -90,18 +90,18 @@ static void Main_ResHTMLFile(char *file)
 
 int main(int argc, char **argv)
 {
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		PortNo = toValue(nextArg());
 	}
 
 	errorCase(!m_isRange(PortNo, 1, 65535));
 
-	if(argIs("/H"))
+	if (argIs("/H"))
 	{
 		Main_ResHTMLFile(nextArg());
 	}
-	else if(hasArgs(1))
+	else if (hasArgs(1))
 	{
 		Main_ResFile(nextArg());
 	}

@@ -44,12 +44,12 @@ static autoList_t *SelectAuto(autoList_t *files)
 
 	foreach(files, file, index)
 	{
-		if(_stricmp(getExt(file), EXT_GIT_ESCAPE) && !IsSourceFile(file))
+		if (_stricmp(getExt(file), EXT_GIT_ESCAPE) && !IsSourceFile(file))
 		{
 			char *file1 = changeExt(file, EXT_GIT_ESCAPE);
 			char *file2 = addExt(strx(file), EXT_GIT_ESCAPE);
 
-			if(
+			if (
 				findJLineICase(files, file1) < getCount(files) ||
 				findJLineICase(files, file2) < getCount(files)
 				)
@@ -82,7 +82,7 @@ static void Main2(char *repositoryName, int manualMode)
 
 			foreach(lines, line, index)
 			{
-				if(strchr(line, '\t'))
+				if (strchr(line, '\t'))
 				{
 					autoList_t *tokens;
 					uint token_index;
@@ -110,11 +110,11 @@ static void Main2(char *repositoryName, int manualMode)
 		foreach(files, file, index)
 			cout("削除対象 ⇒ %s\n", file);
 
-		if(manualMode)
+		if (manualMode)
 		{
 			cout("続行？\n");
 
-			if(clearGetKey() == 0x1b)
+			if (clearGetKey() == 0x1b)
 				termination(0);
 
 			cout("続行します。\n");
@@ -132,13 +132,13 @@ static void Main2(char *repositoryName, int manualMode)
 
 				restoreYen(realFile);
 
-				if(!isFairRelPath(realFile, strlen_x(getCwd())))
+				if (!isFairRelPath(realFile, strlen_x(getCwd())))
 				{
 					cout("★★★相対パスとして認識できないため削除しません。\n"); // 日本語を含むパスなど有り得る。
 				}
 				else
 				{
-					if(existFile(realFile))
+					if (existFile(realFile))
 						coExecute_x(xcout("DEL \"%s\"", realFile));
 				}
 				memFree(realFile);
@@ -166,7 +166,7 @@ static void Main2(char *repositoryName, int manualMode)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/AUTOALL"))
+	if (argIs("/AUTOALL"))
 	{
 		autoList_t *dirs = lsDirs("C:\\huge\\GitHub");
 		char *dir;
@@ -179,7 +179,7 @@ int main(int argc, char **argv)
 		releaseDim(dirs, 1);
 		return;
 	}
-	if(argIs("/AUTO"))
+	if (argIs("/AUTO"))
 	{
 		Main2(nextArg(), 0);
 		return;

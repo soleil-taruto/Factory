@@ -29,7 +29,7 @@ static int GetRngChar(char **pp)
 
 	errorCase(!chr);
 
-	if(chr == '/')
+	if (chr == '/')
 	{
 		++*pp;
 		chr = **pp;
@@ -37,8 +37,8 @@ static int GetRngChar(char **pp)
 //		errorCase(!chr);
 		errorCase(chr != '/' && chr != 'G' && chr != 'M');
 
-		     if(chr == 'G') chr = '>';
-		else if(chr == 'M') chr = ',';
+		     if (chr == 'G') chr = '>';
+		else if (chr == 'M') chr = ',';
 	}
 	++*pp;
 	return chr;
@@ -47,7 +47,7 @@ static int IsMatch(int chr, char *rngs)
 {
 	char *p;
 
-	if(*rngs == '\0') // rngs == "" -> 全マッチ
+	if (*rngs == '\0') // rngs == "" -> 全マッチ
 		return 1;
 
 	for(p = rngs; *p; )
@@ -60,7 +60,7 @@ static int IsMatch(int chr, char *rngs)
 
 		errorCase(max < min);
 
-		if(min <= chr && chr <= max)
+		if (min <= chr && chr <= max)
 		{
 			return 1;
 		}
@@ -82,24 +82,24 @@ int lineExp(char *format, char *line) // ret: ? マッチした。
 
 	for(; ; fp++, lp++)
 	{
-		if(*fp == '\0')
+		if (*fp == '\0')
 		{
-			if(*lp)
+			if (*lp)
 				goto nomatch;
 
 			break;
 		}
-		if(*fp == '/')
+		if (*fp == '/')
 		{
 			fp++;
 			errorCase(*fp != '/' && *fp != '<');
 
-			if(*fp != *lp)
+			if (*fp != *lp)
 			{
 				goto nomatch;
 			}
 		}
-		else if(*fp == '<')
+		else if (*fp == '<')
 		{
 			fp++;
 			p = strchr(fp, '>');
@@ -108,10 +108,10 @@ int lineExp(char *format, char *line) // ret: ? マッチした。
 			tmpl = strxl(fp, (uint)p - (uint)fp);
 			lnums = tokenize(tmpl, ',');
 
-			if(getCount(lnums) == 1)
+			if (getCount(lnums) == 1)
 				insertElement(lnums, 0, (uint)strx("")); // <r> to <,r>
 
-			if(getCount(lnums) == 2)
+			if (getCount(lnums) == 2)
 				insertElement(lnums, 1, (uint)strx(getLine(lnums, 0))); // <n,r> to <n,n,r>
 
 			errorCase(getCount(lnums) != 3);
@@ -120,7 +120,7 @@ int lineExp(char *format, char *line) // ret: ? マッチした。
 			nummax = toValue(getLine(lnums, 1));
 			rngs = strx(getLine(lnums, 2));
 
-			if(!nummax)
+			if (!nummax)
 				nummax = UINTMAX;
 
 			errorCase(nummax < nummin);
@@ -132,21 +132,21 @@ int lineExp(char *format, char *line) // ret: ? マッチした。
 
 			for(i = 0; ; i++)
 			{
-				if(nummin <= i)
-					if(lineExp(fp, lp))
+				if (nummin <= i)
+					if (lineExp(fp, lp))
 						break;
 
-				if(*lp == '\0' || !IsMatch(*lp, rngs))
+				if (*lp == '\0' || !IsMatch(*lp, rngs))
 					goto nomatch;
 
-				if(nummax <= i)
+				if (nummax <= i)
 					goto nomatch;
 
 				lp++;
 			}
 			break;
 		}
-		else if(*fp != *lp)
+		else if (*fp != *lp)
 		{
 			goto nomatch;
 		}

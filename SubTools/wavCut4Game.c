@@ -88,7 +88,7 @@ static void WavCut4Game(char *rFile, char *wFile)
 
 	errorCase(lastWAV_Hz != HZ);
 
-	if(FadeoutPos)
+	if (FadeoutPos)
 		Fadeout(FadeoutPos, FadeoutLen);
 
 	TrimEnd();
@@ -123,10 +123,10 @@ static uint StrToSec(char *str)
 	str = strx(str);
 	p = strchr(str, ':');
 
-	if(!p)
+	if (!p)
 		p = strchr(str, '.');
 
-	if(p)
+	if (p)
 	{
 		*p = '\0';
 		p++;
@@ -143,28 +143,28 @@ int main(int argc, char **argv)
 	uint fadeoutPos;
 
 readArgs:
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		FadeoutPos = StrToSec(nextArg()) * HZ;
 		goto readArgs;
 	}
-	if(argIs("/FL"))
+	if (argIs("/FL"))
 	{
 		FadeoutLen = (toValue(nextArg()) * HZ) / 1000;
 		goto readArgs;
 	}
-	if(argIs("/E"))
+	if (argIs("/E"))
 	{
 		SilentEndLen = (toValue(nextArg()) * HZ) / 1000;
 		goto readArgs;
 	}
-	if(argIs("/B"))
+	if (argIs("/B"))
 	{
 		SilentBgnLen = (toValue(nextArg()) * HZ) / 1000;
 		goto readArgs;
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		char *file = nextArg();
 

@@ -22,7 +22,7 @@ void error2(char *module, uint lineno, char *section, char *message);
 
 #define errorCase(cond) \
 	do { \
-	if((cond)) error(); \
+	if ((cond)) error(); \
 	} while(0)
 
 /*
@@ -30,5 +30,5 @@ void error2(char *module, uint lineno, char *section, char *message);
 */
 #define errorCase_m(cond, message) \
 	do { \
-	if((cond)) error_m((message)); \
+	if ((cond)) error_m((message)); \
 	} while(0)

@@ -34,14 +34,14 @@ static char *ChangeHeader(char *header) // ret: ? NULL == Ž¸”s
 
 	url = urlDecoder(url);
 
-	if(!*url)
+	if (!*url)
 		goto endfunc;
 
-	if(startsWith(url, "http://"))
+	if (startsWith(url, "http://"))
 	{
 		nameBgn = strchr(url + 7, '/');
 
-		if(!nameBgn)
+		if (!nameBgn)
 			goto endfunc;
 
 		nameBgn++;
@@ -51,7 +51,7 @@ static char *ChangeHeader(char *header) // ret: ? NULL == Ž¸”s
 
 	nameEnd = strchr(nameBgn, '/');
 
-	if(!nameEnd)
+	if (!nameEnd)
 		goto endfunc;
 
 	*nameEnd = '\0';
@@ -77,7 +77,7 @@ static uint GetIndexOf(autoBlock_t *buff, int chr)
 	uint index;
 
 	for(index = 0; index < getSize(buff); index++)
-		if(getByte(buff, index) == chr)
+		if (getByte(buff, index) == chr)
 			break;
 
 	return index;
@@ -88,7 +88,7 @@ static void HttpNamedChannelFltr(autoBlock_t *buff, uint prm)
 	char *header;
 	char *p;
 
-	if(i->HeaderSend)
+	if (i->HeaderSend)
 		return;
 
 	ab_addBytes(i->RecvBuff, buff);
@@ -96,9 +96,9 @@ static void HttpNamedChannelFltr(autoBlock_t *buff, uint prm)
 	header = ab_toLine(i->RecvBuff);
 	p = strchr(header, '\r');
 
-	if(!p)
+	if (!p)
 	{
-		if(HEADER_FIRST_LINE_LENMAX < getSize(i->RecvBuff))
+		if (HEADER_FIRST_LINE_LENMAX < getSize(i->RecvBuff))
 		{
 			cout("RECV TOO-LONG\n");
 			ab_swap(buff, i->RecvBuff);
@@ -110,7 +110,7 @@ static void HttpNamedChannelFltr(autoBlock_t *buff, uint prm)
 	*p = '\0';
 	p = ChangeHeader(header);
 
-	if(p)
+	if (p)
 	{
 		memFree(header);
 		header = p;

@@ -23,7 +23,7 @@ static void T2DivId(char *rFile)
 		int kind;
 		char *wFile;
 
-		if(!line)
+		if (!line)
 			break;
 
 		errorCase(!lineExp("<17,09>,<4,10,09>,<1,CDRS>,<>", line));
@@ -40,7 +40,7 @@ static void T2DivId(char *rFile)
 
 		kind = p[1];
 
-		if(!rbtHasKey(id2OutFile, id))
+		if (!rbtHasKey(id2OutFile, id))
 		{
 			wFile = getOutFile_x(xcout("%I64u.csv", stamp));
 			errorCase(existFile(wFile));
@@ -51,7 +51,7 @@ static void T2DivId(char *rFile)
 
 		addLine2File(wFile, line);
 
-		if(kind == 'D')
+		if (kind == 'D')
 		{
 			char *endWFile = changeExt(wFile, "");
 

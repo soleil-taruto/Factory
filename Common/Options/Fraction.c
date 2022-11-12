@@ -37,7 +37,7 @@ static void Reduction(void)
 	uint ni = 0;
 	uint di = 0;
 
-	if(N == 0)
+	if (N == 0)
 	{
 		N = 0;
 		D = 1;
@@ -53,10 +53,10 @@ static void Reduction(void)
 		uint nc = n_dest[ni];
 		uint dc = d_dest[di];
 
-		if(!nc || !dc)
+		if (!nc || !dc)
 			break;
 
-		if(nc == dc)
+		if (nc == dc)
 		{
 			n_dest[ni] = 1;
 			d_dest[di] = 1;
@@ -64,7 +64,7 @@ static void Reduction(void)
 			ni++;
 			di++;
 		}
-		else if(nc < dc)
+		else if (nc < dc)
 		{
 			ni++;
 		}
@@ -99,7 +99,7 @@ static void Normalize(void)
 		N >>= 1;
 		D >>= 1;
 
-		if(D == 0)
+		if (D == 0)
 		{
 			cout("Warning: 分母がゼロになりました。正規化を中止します。\n");
 
@@ -119,7 +119,7 @@ Fraction_t *Frct_Add(Fraction_t *a, Fraction_t *b)
 	CheckFraction(a);
 	CheckFraction(b);
 
-	if(a->Sign == -1)
+	if (a->Sign == -1)
 	{
 		a->Sign = 1;
 		ans = Frct_Sub(b, a);
@@ -127,7 +127,7 @@ Fraction_t *Frct_Add(Fraction_t *a, Fraction_t *b)
 
 		return ans;
 	}
-	if(b->Sign == -1)
+	if (b->Sign == -1)
 	{
 		b->Sign = 1;
 		ans = Frct_Sub(a, b);
@@ -152,7 +152,7 @@ Fraction_t *Frct_Sub(Fraction_t *a, Fraction_t *b)
 	CheckFraction(a);
 	CheckFraction(b);
 
-	if(a->Sign == -1)
+	if (a->Sign == -1)
 	{
 		a->Sign = 1;
 		ans = Frct_Add(a, b);
@@ -161,7 +161,7 @@ Fraction_t *Frct_Sub(Fraction_t *a, Fraction_t *b)
 
 		return ans;
 	}
-	if(b->Sign == -1)
+	if (b->Sign == -1)
 	{
 		b->Sign = 1;
 		ans = Frct_Add(a, b);
@@ -172,7 +172,7 @@ Fraction_t *Frct_Sub(Fraction_t *a, Fraction_t *b)
 	n1 = (uint64)a->Numer * (uint64)b->Denom;
 	n2 = (uint64)b->Numer * (uint64)a->Denom;
 
-	if(n1 < n2)
+	if (n1 < n2)
 	{
 		N = n2 - n1;
 		sign = -1;
@@ -261,26 +261,26 @@ static uint64 GetValue(char *line)
 	uint64 value = 0;
 	char *p;
 
-	if(!*line)
+	if (!*line)
 		cout("Warning: 空文字列です。\n");
 
 	GV_Sign = 1;
 
 	for(p = line; *p; p++)
 	{
-		if(*p == '-')
+		if (*p == '-')
 		{
 			GV_Sign = -1;
 		}
-		else if(*p == '.')
+		else if (*p == '.')
 		{
 			cout("Warning: 分子又は分母の小数点は無視します。\n");
 		}
-		else if(m_isdecimal(*p))
+		else if (m_isdecimal(*p))
 		{
 			uint n_val = *p - '0';
 
-			if((UINT64MAX - n_val) / 10 < value)
+			if ((UINT64MAX - n_val) / 10 < value)
 			{
 				cout("Warning: 分子又は分母が最大値を超えました。パースを中止します。[GV]\n");
 				break;
@@ -313,7 +313,7 @@ Fraction_t *Frct_FromLine(char *line)
 
 	errorCase(!line);
 
-	if(strchr(line, '/')) // ? 分数
+	if (strchr(line, '/')) // ? 分数
 		return Frct_FromFractionLine(line);
 
 	N = 0;
@@ -321,24 +321,24 @@ Fraction_t *Frct_FromLine(char *line)
 
 	for(p = line; *p; p++)
 	{
-		if(*p == '-')
+		if (*p == '-')
 		{
 			sign = -1;
 		}
-		else if(*p == '.')
+		else if (*p == '.')
 		{
 			d_mul = 10;
 		}
-		else if(m_isdecimal(*p))
+		else if (m_isdecimal(*p))
 		{
 			uint n_val = *p - '0';
 			uint c;
 
-			if((UINT64MAX - n_val) / 10 < N || UINT64MAX / d_mul < D)
+			if ((UINT64MAX - n_val) / 10 < N || UINT64MAX / d_mul < D)
 			{
 				Reduction();
 
-				if((UINT64MAX - n_val) / 10 < N || UINT64MAX / d_mul < D)
+				if ((UINT64MAX - n_val) / 10 < N || UINT64MAX / d_mul < D)
 				{
 					cout("Warning: 分子又は分母が最大値を超えました。パースを中止します。[FL]\n");
 					break;
@@ -364,7 +364,7 @@ char *Frct_ToLine(Fraction_t *i, uint basement)
 	CheckFraction(i);
 	errorCase(IMAX < basement); // 適当な上限
 
-	if(i->Sign == -1)
+	if (i->Sign == -1)
 		ans = addChar(ans, '-');
 
 	N = i->Numer;
@@ -377,13 +377,13 @@ char *Frct_ToLine(Fraction_t *i, uint basement)
 
 	for(rank = 0; rank < basement; )
 	{
-		if(N == 0)
+		if (N == 0)
 			break;
 
-		if(!rank)
+		if (!rank)
 			ans = addChar(ans, '.');
 
-		if(rank + 5 <= basement) // 高速, 5 桁
+		if (rank + 5 <= basement) // 高速, 5 桁
 		{
 			N *= 100000;
 			v = N / D;
@@ -410,9 +410,9 @@ char *Frct_ToLine(Fraction_t *i, uint basement)
 			rank++;
 		}
 	}
-	if(N == 0) // ? 割り切れた。
+	if (N == 0) // ? 割り切れた。
 	{
-		if(rank)
+		if (rank)
 		{
 			char *p = strchr(ans, '\0');
 
@@ -424,7 +424,7 @@ char *Frct_ToLine(Fraction_t *i, uint basement)
 	}
 	else // ? 割り切れない。
 	{
-		if(!rank)
+		if (!rank)
 			ans = addChar(ans, '.');
 
 		ans = addChar(ans, '*');

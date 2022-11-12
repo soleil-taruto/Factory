@@ -19,7 +19,7 @@ static void NormalizeMemRepoDir(char *memRepoDir)
 
 		wLocalPath = getLocal(wPath);
 
-		if(*wLocalPath == '.') // GitMemory の IsGitPath() 対策 -- 通常は無いはずだけど、念の為
+		if (*wLocalPath == '.') // GitMemory の IsGitPath() 対策 -- 通常は無いはずだけど、念の為
 		{
 			*wLocalPath = '_';
 			wPath = toCreatableTildaPath(wPath, IMAX);
@@ -45,7 +45,7 @@ static void NormalizeMemDir(char *memDir)
 
 	foreach(paths, path, index)
 	{
-		if(existFile(path))
+		if (existFile(path))
 		{
 			cout("!F %s", path); // ここにファイルを置いてはならない。
 			semiRemovePath(path);
@@ -57,7 +57,7 @@ static void NormalizeMemDir(char *memDir)
 
 			cout("G %s\n", gitDir);
 
-			if(!existDir(gitDir))
+			if (!existDir(gitDir))
 			{
 				cout("!R %s\n", path); // そんなリポジトリありません。
 				semiRemovePath(path);
@@ -135,11 +135,11 @@ int main(int argc, char **argv)
 	errorCase(!existDir(MEM_ROOTDIR));
 	errorCase(!existDir(PUB_ROOTDIR));
 
-	if(argIs("PUSH"))
+	if (argIs("PUSH"))
 	{
 		MemoryToPublic();
 	}
-	else if(argIs("PULL"))
+	else if (argIs("PULL"))
 	{
 		PublicToMemory();
 	}

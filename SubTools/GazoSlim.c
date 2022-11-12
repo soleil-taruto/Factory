@@ -34,7 +34,7 @@ static uint GetYenCount(char *str)
 	char *p;
 
 	for(p = str; *p; p = mbsNext(p))
-		if(*p == '\\')
+		if (*p == '\\')
 			count++;
 
 	return count;
@@ -47,17 +47,17 @@ static sint LineComp(uint a, uint b)
 
 	ret = memcmp(line1, line2, MD5_LEN);
 
-	if(ret)
+	if (ret)
 		return ret;
 
 	ret = (sint)GetYenCount(line1 + MD5_LEN) - (sint)GetYenCount(line2 + MD5_LEN);
 
-	if(ret)
+	if (ret)
 		return ret * (KeepPriorDeep ? -1 : 1);
 
 	ret = mbs_stricmp(line1 + MD5_LEN, line2 + MD5_LEN);
 
-	if(ret)
+	if (ret)
 		return ret * (KeepPriorRear ? -1 : 1);
 
 	return 0;
@@ -96,7 +96,7 @@ static void GazoSlim(char *dir)
 
 	foreach(lines, line, index)
 	{
-		if(!index || _strnicmp(getLine(lines, index - 1) + MD5_BGN, line + MD5_BGN, MD5_LEN))
+		if (!index || _strnicmp(getLine(lines, index - 1) + MD5_BGN, line + MD5_BGN, MD5_LEN))
 			line[0] = 'K'; // Keep
 		else
 			line[0] = 'D'; // Delete
@@ -116,18 +116,18 @@ static void GazoSlim(char *dir)
 	cout("---- delete only ----\n");
 
 	foreach(lines, line, index)
-		if(line[0] == 'D')
+		if (line[0] == 'D')
 			cout("%s\n", line);
 
 	cout("続行？\n");
 
-	if(getKey() == 0x1b)
+	if (getKey() == 0x1b)
 		termination(0);
 
 	cout("続行します。\n");
 
 	foreach(lines, line, index)
-		if(line[0] == 'D')
+		if (line[0] == 'D')
 			DoDeleteFile(line + MD5_BGN + MD5_LEN);
 
 	releaseDim(files, 1);
@@ -136,18 +136,18 @@ static void GazoSlim(char *dir)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		KeepPriorDeep = 1;
 		goto readArgs;
 	}
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		KeepPriorRear = 1;
 		goto readArgs;
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		GazoSlim(nextArg());
 		return;

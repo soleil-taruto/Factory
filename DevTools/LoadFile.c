@@ -7,7 +7,7 @@ static int IsSavedFile(char *saveDir, char *loadedFile)
 	uint index;
 
 	foreach(files, file, index)
-		if(isSameFile(file, loadedFile))
+		if (isSameFile(file, loadedFile))
 			break;
 
 	releaseDim(files, 1);
@@ -21,7 +21,7 @@ static char *SelectSavedFile(char *saveDir)
 	eraseParents(files);
 	file = selectLine(files);
 
-	if(file)
+	if (file)
 		file = combine_cx(saveDir, file);
 
 	return file;
@@ -36,9 +36,9 @@ static void LoadFile(char *saveDir, char *loadedFile)
 
 	savedFile = SelectSavedFile(saveDir);
 
-	if(savedFile)
+	if (savedFile)
 	{
-		if(existFile(loadedFile) && !IsSavedFile(saveDir, loadedFile))
+		if (existFile(loadedFile) && !IsSavedFile(saveDir, loadedFile))
 		{
 			cout("####################################################\n");
 			cout("既にロードされているファイルはセーブされていません。\n");
@@ -55,9 +55,9 @@ static void LoadFile(char *saveDir, char *loadedFile)
 		cout("保存するには何かキーを押して下さい。\n");
 		cout("エスケープキーを押すと保存せずに終了します。\n");
 
-		if(clearGetKey() == 0x1b) // ? 保存しない
+		if (clearGetKey() == 0x1b) // ? 保存しない
 		{
-			if(origLoadedFile && !IsSavedFile(saveDir, loadedFile))
+			if (origLoadedFile && !IsSavedFile(saveDir, loadedFile))
 			{
 				char *escDir = makeFreeDir();
 				char *escFile;
@@ -75,7 +75,7 @@ static void LoadFile(char *saveDir, char *loadedFile)
 
 		memFree(savedFile);
 	}
-	if(origLoadedFile)
+	if (origLoadedFile)
 	{
 		copyFile(origLoadedFile, loadedFile);
 		removeFile(origLoadedFile);

@@ -36,7 +36,7 @@ void md5_update(md5_t *i, autoBlock_t *text)
 {
 	uint textSize = getSize(text);
 
-	if(textSize)
+	if (textSize)
 	{
 		md5_Update(&i->Context, directGetBuffer(text), textSize);
 	}
@@ -78,10 +78,10 @@ autoBlock_t *md5_makeHashFileBuffSize(char *file, uint buffSize)
 	{
 		autoBlock_t *buff = readBinaryStream(fp, buffSize);
 
-		if(!buff)
+		if (!buff)
 			break;
 
-		if(md5_interrupt)
+		if (md5_interrupt)
 			md5_interrupt();
 
 		md5_update(i, buff);
@@ -103,31 +103,31 @@ autoBlock_t *md5_makeHashFile(char *file)
 autoBlock_t *c_md5_makeHash(md5_t *i)
 {
 	static autoBlock_t *stock;
-	if(stock) releaseAutoBlock(stock);
+	if (stock) releaseAutoBlock(stock);
 	return stock = md5_makeHash(i);
 }
 autoBlock_t *c_md5_makeHashBlock(autoBlock_t *text)
 {
 	static autoBlock_t *stock;
-	if(stock) releaseAutoBlock(stock);
+	if (stock) releaseAutoBlock(stock);
 	return stock = md5_makeHashBlock(text);
 }
 autoBlock_t *c_md5_makeHashLine(char *line)
 {
 	static autoBlock_t *stock;
-	if(stock) releaseAutoBlock(stock);
+	if (stock) releaseAutoBlock(stock);
 	return stock = md5_makeHashLine(line);
 }
 autoBlock_t *c_md5_makeHashFileBuffSize(char *file, uint buffSize)
 {
 	static autoBlock_t *stock;
-	if(stock) releaseAutoBlock(stock);
+	if (stock) releaseAutoBlock(stock);
 	return stock = md5_makeHashFileBuffSize(file, buffSize);
 }
 autoBlock_t *c_md5_makeHashFile(char *file)
 {
 	static autoBlock_t *stock;
-	if(stock) releaseAutoBlock(stock);
+	if (stock) releaseAutoBlock(stock);
 	return stock = md5_makeHashFile(file);
 }
 
@@ -161,25 +161,25 @@ autoBlock_t *md5_makeHashFile_x(char *file)
 autoBlock_t *c_md5_makeHashBlock_x(autoBlock_t *text)
 {
 	static autoBlock_t *stock;
-	if(stock) releaseAutoBlock(stock);
+	if (stock) releaseAutoBlock(stock);
 	return stock = md5_makeHashBlock_x(text);
 }
 autoBlock_t *c_md5_makeHashLine_x(char *line)
 {
 	static autoBlock_t *stock;
-	if(stock) releaseAutoBlock(stock);
+	if (stock) releaseAutoBlock(stock);
 	return stock = md5_makeHashLine_x(line);
 }
 autoBlock_t *c_md5_makeHashFileBuffSize_x(char *file, uint buffSize)
 {
 	static autoBlock_t *stock;
-	if(stock) releaseAutoBlock(stock);
+	if (stock) releaseAutoBlock(stock);
 	return stock = md5_makeHashFileBuffSize_x(file, buffSize);
 }
 autoBlock_t *c_md5_makeHashFile_x(char *file)
 {
 	static autoBlock_t *stock;
-	if(stock) releaseAutoBlock(stock);
+	if (stock) releaseAutoBlock(stock);
 	return stock = md5_makeHashFile_x(file);
 }
 

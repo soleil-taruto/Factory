@@ -44,7 +44,7 @@ autoBlock_t *ClientCRPC(SockStream_t *ss, autoBlock_t *sendData, autoBlock_t *ra
 
 	releaseAutoBlock(sendData);
 
-	if(
+	if (
 		!RCBCDecrypt(recvData, rawKey4) ||
 		!RCBCDecrypt(recvData, rawKey3) ||
 		!RCBCDecrypt(recvData, rawKey2) ||

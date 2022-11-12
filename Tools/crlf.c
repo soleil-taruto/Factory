@@ -21,7 +21,7 @@ static void CheckFile(char *file)
 
 	for(; ; )
 	{
-		if(backed)
+		if (backed)
 		{
 			backed = 0;
 			chr = backedChr;
@@ -29,14 +29,14 @@ static void CheckFile(char *file)
 		else
 			chr = readChar(fp);
 
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
-		if(chr == '\r')
+		if (chr == '\r')
 		{
 			chr = readChar(fp);
 
-			if(chr != '\n')
+			if (chr != '\n')
 			{
 				backed = 1;
 				backedChr = chr;
@@ -46,7 +46,7 @@ static void CheckFile(char *file)
 			else
 				num_crlf++;
 		}
-		else if(chr == '\n')
+		else if (chr == '\n')
 		{
 			num_lf++;
 		}
@@ -75,7 +75,7 @@ static void ConvFile(char *file)
 
 	cout("Conv: %s\n", file);
 
-	if(Conv_KeepTimeStamp)
+	if (Conv_KeepTimeStamp)
 		getFileStamp(file, &cTm, &aTm, &uTm);
 
 	rfp = fileOpen(file, "rb");
@@ -83,7 +83,7 @@ static void ConvFile(char *file)
 
 	for(; ; )
 	{
-		if(backed)
+		if (backed)
 		{
 			backed = 0;
 			chr = backedChr;
@@ -91,21 +91,21 @@ static void ConvFile(char *file)
 		else
 			chr = readChar(rfp);
 
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
-		if(chr == '\r')
+		if (chr == '\r')
 		{
 			chr = readChar(rfp);
 
-			if(chr != '\n')
+			if (chr != '\n')
 			{
 				backed = 1;
 				backedChr = chr;
 			}
 			writeToken(wfp, Conv_NewLine);
 		}
-		else if(chr == '\n')
+		else if (chr == '\n')
 		{
 			writeToken(wfp, Conv_NewLine);
 		}
@@ -121,13 +121,13 @@ static void ConvFile(char *file)
 	moveFile(midFile, file);
 	memFree(midFile);
 
-	if(Conv_KeepTimeStamp)
+	if (Conv_KeepTimeStamp)
 		setFileStamp(file, cTm, aTm, uTm);
 }
 
 static void FileAction(char *file)
 {
-	if(Conv_NewLine)
+	if (Conv_NewLine)
 		ConvFile(file);
 	else
 		CheckFile(file);
@@ -135,28 +135,28 @@ static void FileAction(char *file)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/CR"))
+	if (argIs("/CR"))
 	{
 		Conv_NewLine = "\r";
 		goto readArgs;
 	}
-	if(argIs("/CRLF"))
+	if (argIs("/CRLF"))
 	{
 		Conv_NewLine = "\r\n";
 		goto readArgs;
 	}
-	if(argIs("/LF"))
+	if (argIs("/LF"))
 	{
 		Conv_NewLine = "\n";
 		goto readArgs;
 	}
-	if(argIs("/K"))
+	if (argIs("/K"))
 	{
 		Conv_KeepTimeStamp = 1;
 		goto readArgs;
 	}
 
-	if(argIs("/LSS"))
+	if (argIs("/LSS"))
 	{
 		autoList_t *files = readLines(FOUNDLISTFILE);
 		char *file;

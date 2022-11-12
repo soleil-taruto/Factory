@@ -66,7 +66,7 @@ static void Found(uchar *msg, uint msgLen, uchar msgHash[HASH_SIZE])
 	memFree(h2);
 	memFree(pmsg);
 
-	if(!--RemHashCount)
+	if (!--RemHashCount)
 		termination(0);
 }
 static void Check(uchar *msg, uint msgLen, uchar msgHash[HASH_SIZE])
@@ -80,7 +80,7 @@ static void Check(uchar *msg, uint msgLen, uchar msgHash[HASH_SIZE])
 
 	foreach(hashes, hash, index)
 	{
-		if(!memcmp(hash, msgHash, HASH_SIZE))
+		if (!memcmp(hash, msgHash, HASH_SIZE))
 		{
 			Found(msg, msgLen, hash);
 
@@ -101,9 +101,9 @@ static void Search(uint msgLen)
 
 	for(; ; )
 	{
-		if(ahead)
+		if (ahead)
 		{
-			if(index < msgLen)
+			if (index < msgLen)
 			{
 				msg[index] = BChrMin;
 				ctxs[index + 1] = ctxs[index];
@@ -120,7 +120,7 @@ static void Search(uint msgLen)
 		}
 		else
 		{
-			if(msg[index] < BChrMax)
+			if (msg[index] < BChrMax)
 			{
 				msg[index]++;
 				ctxs[index + 1] = ctxs[index];
@@ -134,13 +134,13 @@ static void Search(uint msgLen)
 			}
 		}
 
-		if(ahead)
+		if (ahead)
 		{
 			index++;
 		}
 		else
 		{
-			if(!index)
+			if (!index)
 				break;
 
 			index--;
@@ -161,7 +161,7 @@ static void MD5Crack_Main(void)
 #else // old same
 static void Search(uchar *msg, uint msgLen, uint index, md5_CTX *baseCtx)
 {
-	if(index < msgLen)
+	if (index < msgLen)
 	{
 		uint bChr;
 
@@ -222,19 +222,19 @@ static void MD5Crack(char *line)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/A"))
+	if (argIs("/A"))
 	{
 		BChrMin = 0x20;
 		BChrMax = 0x7e;
 		goto readArgs;
 	}
-	if(argIs("/9"))
+	if (argIs("/9"))
 	{
 		BChrMin = '0';
 		BChrMax = '9';
 		goto readArgs;
 	}
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		char *chrs = nextArg();
 
@@ -246,13 +246,13 @@ readArgs:
 		goto readArgs;
 	}
 
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		MD5Crack_List(readLines(nextArg())); // g
 		return;
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		MD5Crack(nextArg());
 		return;

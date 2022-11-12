@@ -32,7 +32,7 @@ static void CreateRiotComponent(char *name)
 
 			dot = mbs_strchr(localName, '.');
 
-			if(dot)
+			if (dot)
 				*dot = '\0';
 
 			errorCase(!mbs_stricmp(name, localName));

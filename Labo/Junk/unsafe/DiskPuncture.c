@@ -55,7 +55,7 @@ static void CopyGarbageFiles(void)
 
 			cout("%u SEC\n", now() - startTime);
 
-			if(!existFile(outFile))
+			if (!existFile(outFile))
 			{
 				memFree(outFile);
 				break;
@@ -81,7 +81,7 @@ static void MakeGarbageFiles(void)
 
 		cout("> %s\n", file);
 
-		if(index)
+		if (index)
 		{
 			char *halfFile = getLine(GarbageFiles, getCount(GarbageFiles) - 1);
 
@@ -112,7 +112,7 @@ static DeleteGarbageFiles(void)
 
 	foreach(GarbageFiles, file, index)
 	{
-		if(sameDrv)
+		if (sameDrv)
 		{
 			char *outFile = GetOutputFile(OutputDir);
 
@@ -143,7 +143,7 @@ static void DiskPuncture(int drive)
 	cout("BORDER SIZE %I64u\n", BorderSize);
 	cout("DISK PUNCTURE %s CONTINUE?\n", TargetRootDir);
 
-	if(clearGetKey() == 0x1b)
+	if (clearGetKey() == 0x1b)
 		termination(0);
 
 	MakeGarbageFiles();
@@ -160,14 +160,14 @@ static void DiskPuncture(int drive)
 
 int main(int argc, char **argv)
 {
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		BorderSize = toValue64(nextArg());
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
-		if(getArg(0)[0] == '.')
+		if (getArg(0)[0] == '.')
 		{
 			DiskPuncture(c_getCwd()[0]);
 		}

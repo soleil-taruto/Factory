@@ -44,7 +44,7 @@ static autoList_t *MakeMatrix(void)
 
 	while(line = readLine(fp))
 	{
-		if(line[0] == '0')
+		if (line[0] == '0')
 		{
 			errorCase(!lineExp("0x<4,09AF>\t0x<4,09AF>\t0x<4,09AF>\t#<>", line));
 
@@ -66,7 +66,7 @@ static int (*GetMatrix(void))[3] // [S-JIS, X-JIS, UTF-16]
 {
 	static int (*mtx)[3];
 
-	if(!mtx)
+	if (!mtx)
 		mtx = (int (*)[3])unbindAutoList(MakeMatrix());
 
 	return mtx;
@@ -77,12 +77,12 @@ static uint FindChar(uint cset, int mbchr)
 	int (*mtx)[3] = GetMatrix();
 	uint index;
 
-	if(cset)
+	if (cset)
 	{
 		static autoList_t *subMtx[3];
 errorCase(2 < cset);
 
-		if(!subMtx[cset])
+		if (!subMtx[cset])
 		{
 			subMtx[cset] = newList();
 
@@ -95,7 +95,7 @@ errorCase(2 < cset);
 		index = binSearch(subMtx[cset], (uint)&mbchr, pSimpleComp);
 errorCase(RowCount < index);
 
-		if(index == getCount(subMtx[cset])) // ? not found
+		if (index == getCount(subMtx[cset])) // ? not found
 		{
 			return 0; // どこでもいいから返す。
 		}
@@ -113,7 +113,7 @@ errorCase(mtx[index][cset] != mbchr);
 		{
 			uint i = index | idxmsk;
 
-			if(i < RowCount && mtx[i][cset] <= mbchr)
+			if (i < RowCount && mtx[i][cset] <= mbchr)
 			{
 				index = i;
 			}
@@ -129,7 +129,7 @@ static int ConvChar(uint cset1, uint cset2, int mbchr)
 {
 	uint index = FindChar(cset1, mbchr);
 
-	if(GetMatrix()[index][cset1] != mbchr)
+	if (GetMatrix()[index][cset1] != mbchr)
 	{
 		return -1; // not found
 	}
@@ -139,7 +139,7 @@ static int ConvCharEC(uint cset1, uint cset2, int mbchr, int (*extraConv)(int))
 {
 	int ret = ConvChar(cset1, cset2, mbchr);
 
-	if(ret == -1)
+	if (ret == -1)
 	{
 		ret = extraConv(mbchr);
 	}
@@ -152,17 +152,17 @@ int isSJISChar(int mbchr)
 }
 int isNECSpecialChar(int mbchr)
 {
-	if(0x8740 <= mbchr && mbchr <= 0x879c) // NEC特殊文字の範囲
+	if (0x8740 <= mbchr && mbchr <= 0x879c) // NEC特殊文字の範囲
 	{
-		if(mbchr == 0x875e) // 未使用
+		if (mbchr == 0x875e) // 未使用
 		{
 			// noop
 		}
-		else if(0x8776 <= mbchr && mbchr <= 0x877d) // 未使用
+		else if (0x8776 <= mbchr && mbchr <= 0x877d) // 未使用
 		{
 			// noop
 		}
-		else if(mbchr == 0x877f) // 第２バイトの範囲外
+		else if (mbchr == 0x877f) // 第２バイトの範囲外
 		{
 			// noop
 		}
@@ -175,21 +175,21 @@ int isNECSpecialChar(int mbchr)
 }
 int isNECSelectIBMExtendChar(int mbchr)
 {
-	if(0xed40 <= mbchr && mbchr <= 0xeefc) // NEC選定IBM拡張文字の範囲
+	if (0xed40 <= mbchr && mbchr <= 0xeefc) // NEC選定IBM拡張文字の範囲
 	{
-		if(mbchr == 0xed7f) // 未使用
+		if (mbchr == 0xed7f) // 未使用
 		{
 			// noop
 		}
-		else if(0xedfd <= mbchr && mbchr <= 0xee3f) // 未使用 (広域)
+		else if (0xedfd <= mbchr && mbchr <= 0xee3f) // 未使用 (広域)
 		{
 			// noop
 		}
-		else if(mbchr == 0xee7f) // 未使用
+		else if (mbchr == 0xee7f) // 未使用
 		{
 			// noop
 		}
-		else if(0xeeed <= mbchr && mbchr <= 0xeeee) // 未使用
+		else if (0xeeed <= mbchr && mbchr <= 0xeeee) // 未使用
 		{
 			// noop
 		}
@@ -202,21 +202,21 @@ int isNECSelectIBMExtendChar(int mbchr)
 }
 int isIBMExtendChar(int mbchr)
 {
-	if(0xfa40 <= mbchr && mbchr <= 0xfc4b) // IBM拡張文字の範囲
+	if (0xfa40 <= mbchr && mbchr <= 0xfc4b) // IBM拡張文字の範囲
 	{
-		if(mbchr == 0xfa7f) // 未使用
+		if (mbchr == 0xfa7f) // 未使用
 		{
 			// noop
 		}
-		else if(0xfafd <= mbchr && mbchr <= 0xfb3f) // 未使用 (広域)
+		else if (0xfafd <= mbchr && mbchr <= 0xfb3f) // 未使用 (広域)
 		{
 			// noop
 		}
-		else if(mbchr == 0xfb7f) // 未使用
+		else if (mbchr == 0xfb7f) // 未使用
 		{
 			// noop
 		}
-		else if(0xfbfd <= mbchr && mbchr <= 0xfc3f) // 未使用
+		else if (0xfbfd <= mbchr && mbchr <= 0xfc3f) // 未使用
 		{
 			// noop
 		}
@@ -240,7 +240,7 @@ static int Conv932216(int mbchr, uint cset1, uint cset2)
 	static autoList_t *dict[2];
 	uint index;
 
-	if(!dict[0]) // init
+	if (!dict[0]) // init
 	{
 		char *file = innerResPathFltr(FILE_CP932);
 		autoList_t *lines;
@@ -249,7 +249,7 @@ static int Conv932216(int mbchr, uint cset1, uint cset2)
 		autoList_t *pairList = newList();
 		uint *p;
 
-		if(!existFile(file))
+		if (!existFile(file))
 		{
 			file = getLocal(file);
 		}
@@ -257,7 +257,7 @@ static int Conv932216(int mbchr, uint cset1, uint cset2)
 
 		foreach(lines, line, index)
 		{
-			if(line[0] == '0')
+			if (line[0] == '0')
 			{
 				autoList_t *tokens;
 				uint c;
@@ -270,7 +270,7 @@ static int Conv932216(int mbchr, uint cset1, uint cset2)
 
 				tokens = tokenize(line, '\t');
 
-				if(getLine(tokens, 1)[0] != ' ') // 対応する UTF-16 が無い。-> CP932 側でも文字ではないはず。
+				if (getLine(tokens, 1)[0] != ' ') // 対応する UTF-16 が無い。-> CP932 側でも文字ではないはず。
 				{
 					for(c = 0; c < 2; c++)
 					{
@@ -296,7 +296,7 @@ static int Conv932216(int mbchr, uint cset1, uint cset2)
 
 		foreach(dict[1], p, index)
 		{
-			if(index && *p == *(uint *)getElement(dict[1], index - 1))
+			if (index && *p == *(uint *)getElement(dict[1], index - 1))
 			{
 				desertElement(dict[1], index); // CP932 の大きい方を削除
 				index--;
@@ -305,7 +305,7 @@ static int Conv932216(int mbchr, uint cset1, uint cset2)
 	}
 	index = binSearch(dict[cset1], (uint)&mbchr, pSimpleComp);
 
-	if(index == getCount(dict[cset1]))
+	if (index == getCount(dict[cset1]))
 	{
 		return -1; // not found
 	}

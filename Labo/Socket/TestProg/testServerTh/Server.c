@@ -11,10 +11,10 @@ static void PerformTh(int sock, char *ip)
 	cout(">> %d (%u)\n", sock, ConnectCounter);
 
 	while((line = SockNextLine(buffer)) == NULL)
-		if(SockRecvSequ(sock, buffer, 3000) == -1)
+		if (SockRecvSequ(sock, buffer, 3000) == -1)
 			break;
 
-	if(!line)
+	if (!line)
 		goto endfunc;
 
 	reverseLine(line); // ãtÇ≥Ç…ÇµÇƒï‘Ç∑ÇæÇØÅB
@@ -23,7 +23,7 @@ static void PerformTh(int sock, char *ip)
 	ab_addLine_x(buffer, line);
 
 	while(getSize(buffer))
-		if(SockSendSequ(sock, buffer, 3000) == -1)
+		if (SockSendSequ(sock, buffer, 3000) == -1)
 			break;
 
 	cout("<< %d\n", sock);

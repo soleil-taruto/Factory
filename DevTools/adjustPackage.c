@@ -43,11 +43,11 @@ static void AdjustPackage(char *packageRootDir, char *srcDir)
 
 	cout("R %s\n", relSrcDir);
 
-	if(!BatchMode)
+	if (!BatchMode)
 	{
 		cout("続行？\n");
 
-		if(clearGetKey() == 0x1b)
+		if (clearGetKey() == 0x1b)
 			termination(0);
 
 		cout("続行します。\n");
@@ -56,7 +56,7 @@ static void AdjustPackage(char *packageRootDir, char *srcDir)
 
 	foreach(files, file, index)
 	{
-		if(!_stricmp("java", getExt(file)))
+		if (!_stricmp("java", getExt(file)))
 		{
 			autoList_t *lines = readLines(file);
 			char *line;
@@ -65,7 +65,7 @@ static void AdjustPackage(char *packageRootDir, char *srcDir)
 
 			foreach(lines, line, index)
 			{
-				if(startsWith(line, "package "))
+				if (startsWith(line, "package "))
 				{
 					char *oldPackage = GetPackageFromLine(line);
 					char *newPackage = GetPackageFromPath(packageRootDir, file);
@@ -73,7 +73,7 @@ static void AdjustPackage(char *packageRootDir, char *srcDir)
 					cout("< %s\n", oldPackage);
 					cout("> %s\n", newPackage);
 
-					if(strcmp(oldPackage, newPackage))
+					if (strcmp(oldPackage, newPackage))
 					{
 						LOGPOS();
 						memFree(line);
@@ -85,7 +85,7 @@ static void AdjustPackage(char *packageRootDir, char *srcDir)
 					memFree(newPackage);
 				}
 			}
-			if(modified)
+			if (modified)
 			{
 				LOGPOS();
 				semiRemovePath(file);
@@ -101,12 +101,12 @@ static void AdjustPackage(char *packageRootDir, char *srcDir)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/B"))
+	if (argIs("/B"))
 	{
 		BatchMode = 1;
 	}
 
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		AdjustPackage(getArg(0), getArg(1));
 		return;

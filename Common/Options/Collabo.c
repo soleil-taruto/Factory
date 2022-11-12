@@ -10,39 +10,39 @@ static char *S_GetCollaboPath(char *innerPath, int (*existFunc)(char *))
 
 	errorCase(m_isEmpty(innerPath));
 
-	if(isAbsPath(innerPath))
+	if (isAbsPath(innerPath))
 	{
-		if(isFactoryDirDisabled())
+		if (isFactoryDirDisabled())
 		{
 			path = combine(getSelfDir(), getLocal(innerPath));
 
 			errorCase(!_stricmp(path, getSelfFile()));
 
-			if(existFunc(path))
+			if (existFunc(path))
 				goto foundPath;
 
 			memFree(path);
 		}
 		path = makeFullPath(innerPath);
 
-		if(existFunc(path))
+		if (existFunc(path))
 			goto foundPath;
 	}
 	else
 	{
 		path = combine(getSelfDir(), innerPath);
 
-		if(existFunc(path))
+		if (existFunc(path))
 			goto foundPath;
 
-		if(isFactoryDirDisabled())
+		if (isFactoryDirDisabled())
 		{
 			memFree(path);
 			path = combine(getSelfDir(), getLocal(innerPath));
 
 			errorCase(!_stricmp(path, getSelfFile()));
 
-			if(existFunc(path))
+			if (existFunc(path))
 				goto foundPath;
 		}
 	}

@@ -17,7 +17,7 @@ static int Perform(int sock, uint prm)
 	char *exMessage;
 	int retval;
 
-	if(!SilentMode) cout("message: %s\n", message);
+	if (!SilentMode) cout("message: %s\n", message);
 
 	ClientCRPC_Begin(ss); // ★暗号通信の開始
 
@@ -26,9 +26,9 @@ static int Perform(int sock, uint prm)
 	ClientCRPC_End(); // ★暗号通信の終了
 
 	recvMessage = unbindBlock2Line(recvData);
-	if(!SilentMode) cout("recvMessage: %s\n", recvMessage);
+	if (!SilentMode) cout("recvMessage: %s\n", recvMessage);
 	exMessage = xcout("You sent [%s]", message);
-	if(!SilentMode) cout("exMessage: %s\n", exMessage);
+	if (!SilentMode) cout("exMessage: %s\n", exMessage);
 
 	retval = !strcmp(recvMessage, exMessage); // ? 想定した応答メッセージと一致する。
 
@@ -50,12 +50,12 @@ int main(int argc, char **argv)
 	errorCase(m_isEmpty(serverHost));
 	errorCase(!m_isRange(serverPort, 1, 0xffff));
 
-	if(argIs("/L")) // Loop
+	if (argIs("/L")) // Loop
 	{
 		uint count;
 		uint max;
 
-		if(hasArgs(1))
+		if (hasArgs(1))
 			max = toValue(nextArg());
 		else
 			max = 10000;

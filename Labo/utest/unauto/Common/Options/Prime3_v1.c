@@ -22,12 +22,12 @@ static void Test_01(void)
 		a1 = IsPrime(value);
 		a2 = IsPrime_M_K(value, TEST_K);
 
-		if(a1 ? a2 : !a2)
+		if (a1 ? a2 : !a2)
 			correctCount++;
 		else
 			incorrectCount++;
 
-		if(a1)
+		if (a1)
 			primeCount++;
 		else
 			notPrimeCount++;
@@ -54,7 +54,7 @@ static void Test_02b(uint64 value)
 	{
 		ProgressRate(c * 1.0 / CHECK_COUNT);
 
-		if(IsPrime_M_K(value, TEST_K) ? a : !a)
+		if (IsPrime_M_K(value, TEST_K) ? a : !a)
 		{
 			// ok
 		}

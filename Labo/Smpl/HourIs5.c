@@ -8,7 +8,7 @@ int main(int argc, char **argv)
 	h = getStampData(makeStamp(0))->hour;
 	cout("h: %u\n", h);
 
-	if(h == 5)
+	if (h == 5)
 		ret = 1;
 
 	cout("ret: %u\n", ret);

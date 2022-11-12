@@ -31,7 +31,7 @@ static void DoCopy(char *rDir, char *wDir)
 	{
 		char *rLDir = getLocal(rDir);
 
-		if(*rLDir)
+		if (*rLDir)
 			rLDir = strx(rLDir);
 		else
 			rLDir = xcout("%c$$", rDir[0]);
@@ -50,7 +50,7 @@ static void DoCopy(char *rDir, char *wDir)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		char *rDir;
 		char *wDir;
@@ -59,7 +59,7 @@ int main(int argc, char **argv)
 		cout("| コピー先を固定して複数コピー |\n");
 		cout("+------------------------------+\n");
 
-		if(hasArgs(1))
+		if (hasArgs(1))
 		{
 			wDir = strx(nextArg());
 		}
@@ -83,7 +83,7 @@ int main(int argc, char **argv)
 		return; // dummy
 	}
 
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		DoCopy(getArg(0), getArg(1));
 		return;

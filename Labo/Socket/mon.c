@@ -9,7 +9,7 @@ static uint GetPtnCount(char *text, char *ptn)
 	{
 		p = mbs_strstr(p, ptn);
 
-		if(!p)
+		if (!p)
 			break;
 
 		p += strlen(ptn);
@@ -57,7 +57,7 @@ int main(int argc, char **argv)
 		m_maxim(timeWaitNumPeak, timeWaitNum);
 		m_maxim(totalNumPeak, totalNum);
 
-		if(loopcnt % 30 == 0)
+		if (loopcnt % 30 == 0)
 		{
 			cout("-------------------------------------------------------------------------------\n");
 			cout("ESTABLISHED:%5u, LISTENING:%5u, TIME_WAIT:%5u, TOTAL:%5u *PEAK\n", establishedNumPeak, listeningNumPeak, timeWaitNumPeak, totalNumPeak);

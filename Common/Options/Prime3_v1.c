@@ -49,12 +49,12 @@ static uint64 ModPow(uint64 value, uint64 exponent, uint64 modulo)
 
 	for(; ; )
 	{
-		if(exponent % 2 == 1)
+		if (exponent % 2 == 1)
 			ret = ModMul(ret, value, modulo);
 
 		exponent /= 2;
 
-		if(exponent == 0)
+		if (exponent == 0)
 			break;
 
 		value = ModMul(value, value, modulo);
@@ -75,13 +75,13 @@ int IsPrime_M_K(uint64 value, uint k)
 	uint r;
 	uint c;
 
-	if(value <= 1)
+	if (value <= 1)
 		return 0;
 
-	if(value <= 3)
+	if (value <= 3)
 		return 1;
 
-	if(value % 2 == 0)
+	if (value % 2 == 0)
 		return 0;
 
 	d = value;
@@ -93,16 +93,16 @@ int IsPrime_M_K(uint64 value, uint k)
 	{
 		x = ModPow(getCryptoRand64Range(2, value - 2), d, value);
 
-		if(x != 1 && x != value - 1)
+		if (x != 1 && x != value - 1)
 		{
 			for(c = r; ; c--)
 			{
-				if(!c)
+				if (!c)
 					return 0;
 
 				x = ModPow(x, 2, value);
 
-				if(x == value - 1)
+				if (x == value - 1)
 					break;
 			}
 		}

@@ -72,7 +72,7 @@ static int CheckEcho(SockStream_t *ss)
 	SockSendLine(ss, ECHO_WORD_REQ);
 	ret = CheckRecv(ss, ECHO_WORD_ANS);
 
-	if(!ret)
+	if (!ret)
 		cout("fault echo!\n");
 
 	return ret;
@@ -85,7 +85,7 @@ static autoList_t *RecvLines(SockStream_t *ss)
 	{
 		char *line = SockRecvLine(ss, RECV_LINE_LENMAX);
 
-		if(!*line)
+		if (!*line)
 		{
 			memFree(line);
 			break;
@@ -141,12 +141,12 @@ static int Perform(int sock, uint dummyPrm)
 	// 最初のエコーのやり取りが成功するまでは、短いタイムアウトを設定しておく。
 	// それ以降は無制限
 
-	if(HelloPassword)
+	if (HelloPassword)
 		SockSendLine(ss, HelloPassword);
 
 	LOGPOS();
 
-	if(!CheckEcho(ss))
+	if (!CheckEcho(ss))
 	{
 		LOGPOS();
 		goto endFunc;
@@ -167,7 +167,7 @@ static int Perform(int sock, uint dummyPrm)
 	ServerDirs  = RecvLines(ss);
 	ServerFiles = RecvLines(ss);
 
-	if(!CheckEcho(ss))
+	if (!CheckEcho(ss))
 		goto endFunc;
 
 	BothDirs  = merge(ClientDirs,  ServerDirs,  (sint (*)(uint, uint))mbs_stricmp, (void (*)(uint))memFree);
@@ -179,7 +179,7 @@ static int Perform(int sock, uint dummyPrm)
 	{
 		cout("CD %s\n", dir);
 
-		if(PushMode) // PUSH
+		if (PushMode) // PUSH
 		{
 			cout("SEND-MD\n");
 			SockSendLine(ss, "MD");
@@ -187,7 +187,7 @@ static int Perform(int sock, uint dummyPrm)
 		}
 		else // PULL
 		{
-			if(PerfectMode)
+			if (PerfectMode)
 			{
 				cout("DEL-DIR\n");
 				NS_DeletePath(dir);
@@ -198,9 +198,9 @@ static int Perform(int sock, uint dummyPrm)
 	{
 		cout("SD %s\n", dir);
 
-		if(PushMode) // PUSH
+		if (PushMode) // PUSH
 		{
-			if(PerfectMode)
+			if (PerfectMode)
 			{
 				cout("SEND-DEL-DIR\n");
 				SockSendLine(ss, "Delete");
@@ -222,13 +222,13 @@ static int Perform(int sock, uint dummyPrm)
 	{
 		cout("CF %s\n", file);
 
-		if(PushMode) // PUSH
+		if (PushMode) // PUSH
 		{
 			NSC_SendFile(ss, file);
 		}
 		else // PULL
 		{
-			if(PerfectMode)
+			if (PerfectMode)
 			{
 				cout("DEL-FILE\n");
 				NS_DeletePath(file);
@@ -239,9 +239,9 @@ static int Perform(int sock, uint dummyPrm)
 	{
 		cout("SF %s\n", file);
 
-		if(PushMode) // PUSH
+		if (PushMode) // PUSH
 		{
-			if(PerfectMode)
+			if (PerfectMode)
 			{
 				cout("SEND-DEL-FILE\n");
 				SockSendLine(ss, "Delete");
@@ -268,14 +268,14 @@ static int Perform(int sock, uint dummyPrm)
 		serverCreateStamp = SockRecvValue64(ss);
 		serverWriteStamp  = SockRecvValue64(ss);
 
-		if(!CheckEcho(ss))
+		if (!CheckEcho(ss))
 			break;
 
 		getFileStamp(file, &clientCreateStamp, NULL, &clientWriteStamp);
 
-		if(!IsSameFileStamp(serverCreateStamp, serverWriteStamp, clientCreateStamp, clientWriteStamp))
+		if (!IsSameFileStamp(serverCreateStamp, serverWriteStamp, clientCreateStamp, clientWriteStamp))
 		{
-			if(PushMode) // PUSH
+			if (PushMode) // PUSH
 			{
 				NSC_SendFile(ss, file);
 			}
@@ -288,12 +288,12 @@ static int Perform(int sock, uint dummyPrm)
 
 	unaddCwd();
 
-	if(!CheckEcho(ss))
+	if (!CheckEcho(ss))
 		goto endFunc;
 
-	if(MoveMode)
+	if (MoveMode)
 	{
-		if(PushMode) // PUSH
+		if (PushMode) // PUSH
 		{
 			cout("CLEAR\n");
 			recurClearDir(ActiveDir);
@@ -336,22 +336,22 @@ static void Main2(void)
 	LockProcMtx(); // たまに同時に動かしてしまうことがあるので、ロック
 
 readArgs:
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		TimeMarginSec = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/TC"))
+	if (argIs("/TC"))
 	{
 		TimeCompMode = TIME_CREATE;
 		goto readArgs;
 	}
-	if(argIs("/TCW"))
+	if (argIs("/TCW"))
 	{
 		TimeCompMode = TIME_CREATE | TIME_WRITE;
 		goto readArgs;
 	}
-	if(argIs("/HPW"))
+	if (argIs("/HPW"))
 	{
 		HelloPassword = nextArg();
 		goto readArgs;
@@ -360,23 +360,23 @@ readArgs:
 	ServerDomain = nextArg();
 	ServerPort = toValue(nextArg());
 
-	if(argIs("PUSH"))
+	if (argIs("PUSH"))
 		PushMode = 1;
-	else if(argIs("PULL"))
+	else if (argIs("PULL"))
 		PushMode = 0;
 	else
 		error();
 
-	if(argIs("PERFECT"))
+	if (argIs("PERFECT"))
 		PerfectMode = 1;
-	else if(argIs("UPDATE"))
+	else if (argIs("UPDATE"))
 		PerfectMode = 0;
 	else
 		error();
 
-	if(argIs("COPY"))
+	if (argIs("COPY"))
 		MoveMode = 0;
-	else if(argIs("MOVE"))
+	else if (argIs("MOVE"))
 		MoveMode = 1;
 	else
 		error();
@@ -417,7 +417,7 @@ readArgs:
 	NS_AppTitle = "nSync";
 	cmdTitle(NS_AppTitle);
 
-	if(!SClient(ServerDomain, ServerPort, Perform, 0))
+	if (!SClient(ServerDomain, ServerPort, Perform, 0))
 	{
 #if 0
 		error_m("同期に失敗しました。");

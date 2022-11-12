@@ -31,12 +31,12 @@ static char *MakeEncParent(char *pathBase)
 
 	trimLines(tokens);
 
-	if(getCount(tokens))
+	if (getCount(tokens))
 		memFree((char *)unaddElement(tokens));
 
 	pathBase = untokenize_xx(tokens, xcout("%c", VIR_PATH_DLMTR));
 
-	if(*pathBase)
+	if (*pathBase)
 		pathBase = addChar(pathBase, VIR_PATH_DLMTR);
 
 	result = httpUrlEncoder(pathBase);
@@ -53,20 +53,20 @@ static void MakeEncUrlLabels(char *pathBase, autoList_t *subPaths, int dirMode, 
 	*p_encUrls = newList();
 	*p_labels = newList();
 
-	if(p_exts)
+	if (p_exts)
 		*p_exts = newList();
 
 	foreach(subPaths, subPath, index)
 	{
 		subPath = strx(subPath);
 
-		if(*subPath == '\0')
+		if (*subPath == '\0')
 			subPath = addLine(subPath, "----");
 
 		{
 			char *subPath2 = strx(subPath);
 
-			if(dirMode)
+			if (dirMode)
 				subPath2 = addChar(subPath2, VIR_PATH_DLMTR);
 
 			encSubPath = httpUrlEncoder(subPath2);
@@ -76,7 +76,7 @@ static void MakeEncUrlLabels(char *pathBase, autoList_t *subPaths, int dirMode, 
 		addElement(*p_encUrls, (uint)xcout("%s%s", encPathBase, encSubPath));
 		addElement(*p_labels, (uint)strx(subPath));
 
-		if(p_exts)
+		if (p_exts)
 			addElement(*p_exts, (uint)strx(getExt(subPath)));
 
 		memFree(subPath);
@@ -129,7 +129,7 @@ static autoBlock_t *MakeIndexBody(
 
 	ab_addLine_x(result, xcout("<div>%s</div>" HTTP_NEWLINE, uiPath));
 
-	if(strcmp(uiPath, "/") != 0) // ? not "/"
+	if (strcmp(uiPath, "/") != 0) // ? not "/"
 		ab_addLine_x(result, xcout("<div><a href=\"%s\">(PARENT)</a></div>" HTTP_NEWLINE, encParent));
 
 	foreach(encDirUrls, url, index)
@@ -142,7 +142,7 @@ static autoBlock_t *MakeIndexBody(
 
 		ab_addLine_x(result, xcout("<div><a href=\"%s\">%s</a>" HTTP_NEWLINE, url, getLine(fileLabels, index)));
 
-		if(
+		if (
 			!_stricmp("BMP", ext) ||
 			!_stricmp("GIF", ext) ||
 			!_stricmp("JPG", ext) ||
@@ -153,11 +153,11 @@ static autoBlock_t *MakeIndexBody(
 			const uint IMGMAX = 50;
 			const uint IMGSZMAX = 50 * 1024 * 1024;
 
-			if(IMGMAX <= imgcnt)
+			if (IMGMAX <= imgcnt)
 			{
 				ab_addLine_x(result, xcout("@(over %u images)" HTTP_NEWLINE, IMGMAX));
 			}
-			else if(IMGSZMAX <= imgszcnt)
+			else if (IMGSZMAX <= imgszcnt)
 			{
 				ab_addLine_x(result, xcout("@(over %u bytes)" HTTP_NEWLINE, IMGSZMAX));
 			}
@@ -189,10 +189,10 @@ static int DoLockPath(char *path)
 	{
 		cout("DoLockPath_count: %u\n", count);
 
-		if(HFS_LockPath(path, 0))
+		if (HFS_LockPath(path, 0))
 			return 1;
 
-		if(!count)
+		if (!count)
 			break;
 
 		inner_uncritical();
@@ -225,7 +225,7 @@ static void PerformTh(int sock, char *strip)
 	line2JLine(dlFile, 1, 0, 0, 1);
 	cout("dlFile_1: %s\n", dlFile);
 
-	if(*dlFile)
+	if (*dlFile)
 		dlFile = lineToFairLocalPath_x(dlFile, strlen(HFS_StoreDir));
 
 	cout("dlFile_2: %s\n", dlFile);
@@ -234,13 +234,13 @@ static void PerformTh(int sock, char *strip)
 	{
 		addCwd(HFS_StoreDir);
 
-		if(*dlFile && existFile(dlFile))
+		if (*dlFile && existFile(dlFile))
 		{
 			char *fp_dlFile = combine(HFS_StoreDir, dlFile);
 
 			HFS_MutexLeave(); // unlock
 			{
-				if(DoLockPath(fp_dlFile))
+				if (DoLockPath(fp_dlFile))
 				{
 					httpSendResponseFile(i, dlFile);
 					HFS_UnlockPath(fp_dlFile);
@@ -263,14 +263,14 @@ static void PerformTh(int sock, char *strip)
 
 			foreach(files, file, index)
 			{
-				if(mbsStartsWithICase(file, dlFile))
+				if (mbsStartsWithICase(file, dlFile))
 				{
 					char *lclFile = file + strlen(dlFile);
 					char *p;
 
 					p = strchr(lclFile, VIR_PATH_DLMTR);
 
-					if(p)
+					if (p)
 					{
 						*p = '\0';
 						addElement(subDirs, (uint)strx(lclFile));
@@ -337,7 +337,7 @@ static int IdleTh(void)
 {
 	while(hasKey())
 	{
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 		{
 			return 0;
 		}
@@ -349,7 +349,7 @@ int main(int argc, char **argv)
 {
 	uint portno = 80;
 
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		portno = toValue(nextArg());
 	}

@@ -13,7 +13,7 @@ static void Run_EE(char *file, int exeFlag, int escapedFlag)
 {
 	file = makeFullPath(file);
 
-	if(existFile(file))
+	if (existFile(file))
 	{
 		char *dir = getParent(file);
 		char *localFile = strx(getLocal(file));
@@ -22,7 +22,7 @@ static void Run_EE(char *file, int exeFlag, int escapedFlag)
 
 		addCwd(dir);
 		{
-			if(escapedFlag)
+			if (escapedFlag)
 			{
 				localFileOrig = localFile;
 				localFile     = changeExt(localFile, exeFlag ? "exe"      : "bat");
@@ -35,7 +35,7 @@ static void Run_EE(char *file, int exeFlag, int escapedFlag)
 			}
 			execute_x(xcout("\"%s\"", localFile));
 
-			if(escapedFlag)
+			if (escapedFlag)
 			{
 				moveFile(localFile, localFileDone);
 			}
@@ -51,19 +51,19 @@ static void Run_EE(char *file, int exeFlag, int escapedFlag)
 }
 static void Run(char *file)
 {
-	if(!_stricmp("bat", getExt(file)))
+	if (!_stricmp("bat", getExt(file)))
 	{
 		Run_EE(file, 0, 0);
 	}
-	else if(!_stricmp("bat_", getExt(file)))
+	else if (!_stricmp("bat_", getExt(file)))
 	{
 		Run_EE(file, 0, 1);
 	}
-	else if(!_stricmp("exe", getExt(file)))
+	else if (!_stricmp("exe", getExt(file)))
 	{
 		Run_EE(file, 1, 0);
 	}
-	else if(!_stricmp("exe_", getExt(file)))
+	else if (!_stricmp("exe_", getExt(file)))
 	{
 		Run_EE(file, 1, 1);
 	}

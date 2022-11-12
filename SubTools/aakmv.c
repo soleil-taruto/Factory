@@ -25,7 +25,7 @@ static void AAKMove(char *srcFile, char *destPath)
 	cout("< %s\n", srcFile);
 	cout("! %s\n", destPath);
 
-	if(existDir(destPath))
+	if (existDir(destPath))
 		destFile = combine(destPath, getLocal(srcFile));
 	else
 		destFile = strx(destPath);
@@ -38,7 +38,7 @@ static void AAKMove(char *srcFile, char *destPath)
 	{
 		coExecute_x(xcout("MOVE \"%s\" \"%s\"", srcFile, destFile));
 
-		if(existFile(destFile))
+		if (existFile(destFile))
 			break;
 
 		errorCase(RetryMax <= retrycnt);
@@ -52,11 +52,11 @@ static void AAKMove(char *srcFile, char *destPath)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		RetryMax = toValue(nextArg());
 	}
-	if(argIs("/RX"))
+	if (argIs("/RX"))
 	{
 		RetryMax = UINTMAX;
 	}

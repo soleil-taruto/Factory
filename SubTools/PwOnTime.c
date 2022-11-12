@@ -95,7 +95,7 @@ static void ShowPwOnTime(void)
 		sec2 = IDateTime2Sec(dt2);
 		secDiff = sec2 - sec1;
 
-		if(PwOffSec <= secDiff)
+		if (PwOffSec <= secDiff)
 		{
 			addElement(pwOffSpans, (uint)sDt1);
 			addElement(pwOffSpans, (uint)sDt2);
@@ -145,13 +145,13 @@ static void ShowPwOnTime(void)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/POS"))
+	if (argIs("/POS"))
 	{
 		PwOffSec = toValue64(nextArg());
 		goto readArgs;
 	}
 
-	if(argIs("/L")) // æŒŽ
+	if (argIs("/L")) // æŒŽ
 	{
 		char *stamp = makeCompactStamp(NULL);
 		uint y;
@@ -163,7 +163,7 @@ readArgs:
 		y = m / 100;
 		m %= 100;
 
-		if(m <= 1)
+		if (m <= 1)
 		{
 			y--;
 			m = 12;
@@ -180,7 +180,7 @@ readArgs:
 		return;
 	}
 
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		uint ym1;
 		uint ym2;
@@ -200,7 +200,7 @@ readArgs:
 		ShowPwOnTime();
 		return;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		uint ym = toValue(nextArg());
 

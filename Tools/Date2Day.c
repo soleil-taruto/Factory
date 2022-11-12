@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 	uint dd;
 	sint64 day;
 
-	if(hasArgs(6))
+	if (hasArgs(6))
 	{
 		uint64 tmp;
 		uint64 tmp2;
@@ -62,7 +62,7 @@ int main(int argc, char **argv)
 
 		cout("[B]‚Í[A]‚Ì%I64d“úŒã‚Å‚·\n", day);
 
-		if(sum % 2 == 1)
+		if (sum % 2 == 1)
 		{
 			cout("’†ŠÔ‚Ì“ú‚Í‚Q‚Â‚ ‚è‚Ü‚·\n");
 			cout("----\n");
@@ -87,7 +87,7 @@ int main(int argc, char **argv)
 			DispDate(yy, mm, dd);
 		}
 	}
-	if(hasArgs(4))
+	if (hasArgs(4))
 	{
 		y = toValue(nextArg());
 		m = toValue(nextArg());
@@ -103,7 +103,7 @@ int main(int argc, char **argv)
 
 		cout("----\n");
 
-		if(day < 0)
+		if (day < 0)
 		{
 			cout("0001”N01ŒŽ01“ú‚Ì%I64d“ú‘O‚Å‚·\n", -day);
 		}
@@ -114,7 +114,7 @@ int main(int argc, char **argv)
 		}
 		return;
 	}
-	if(hasArgs(3))
+	if (hasArgs(3))
 	{
 		y = toValue(nextArg());
 		m = toValue(nextArg());
@@ -124,7 +124,7 @@ int main(int argc, char **argv)
 
 		return;
 	}
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		y = toValue(nextArg());
 		m = toValue(nextArg());
@@ -134,7 +134,7 @@ int main(int argc, char **argv)
 
 		return;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		y = toValue(nextArg());
 

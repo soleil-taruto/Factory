@@ -15,12 +15,12 @@ static uint NextBit(void)
 {
 	uint bit;
 
-	if(RBitIndex == 8)
+	if (RBitIndex == 8)
 	{
 		RIndex++;
 		RBitIndex = 0;
 	}
-	if(RIndex < RSize)
+	if (RIndex < RSize)
 	{
 		bit = RData[RIndex] & 1 << 7 - RBitIndex;
 		RBitIndex++;
@@ -36,7 +36,7 @@ static uint NextValue(uint bitSize, char *name) // bitSize: 1-
 	uint c;
 
 	for(c = 0; c < bitSize; c++)
-		if(NextBit())
+		if (NextBit())
 			value |= 1 << bitSize - 1 - c;
 
 	cout("%s[%u]: ", name, bitSize);
@@ -48,7 +48,7 @@ static uint NextValue(uint bitSize, char *name) // bitSize: 1-
 	}
 	cout(" (%u)", value);
 
-	if(IsReadPostEnd())
+	if (IsReadPostEnd())
 		cout(" !");
 
 	cout("\n");
@@ -68,7 +68,7 @@ static void RecvDataProc(uchar *recvData, uint recvSize)
 	}
 	cout("#\n");
 
-	if(NextValue(4, "IP_VERSION") == 4)
+	if (NextValue(4, "IP_VERSION") == 4)
 	{
 		uint ihl = NextValue(4, "IP_INTERNET_HEADER_LENGTH");
 		uint protocol;
@@ -97,7 +97,7 @@ static void RecvDataProc(uchar *recvData, uint recvSize)
 			NextValue(32, name);
 			memFree(name);
 		}
-		if(protocol == 6) // ? TCP
+		if (protocol == 6) // ? TCP
 		{
 			uint dataOffset;
 
@@ -127,7 +127,7 @@ static void RecvDataProc(uchar *recvData, uint recvSize)
 				memFree(name);
 			}
 		}
-		else if(protocol == 17) // ? UDP
+		else if (protocol == 17) // ? UDP
 		{
 			NextValue(16, "UDP_SOURCE_PORT");
 			NextValue(16, "UDP_DESTINATION_PORT");
@@ -135,10 +135,10 @@ static void RecvDataProc(uchar *recvData, uint recvSize)
 			NextValue(16, "UDP_CHECKSUM");
 		}
 	}
-	if(m_isRange(RBitIndex, 1, 7)) // ? “r’†‚Ìƒrƒbƒg‚ÅŽ~‚Ü‚Á‚Ä‚éB
+	if (m_isRange(RBitIndex, 1, 7)) // ? “r’†‚Ìƒrƒbƒg‚ÅŽ~‚Ü‚Á‚Ä‚éB
 		NextValue(8 - RBitIndex, "ODD_DATA");
 
-	if(RBitIndex == 8)
+	if (RBitIndex == 8)
 		RIndex++;
 
 	cout("[DATA]\n");

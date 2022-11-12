@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 		}
 		uncritical();
 
-		if(key == 0x1b)
+		if (key == 0x1b)
 			break;
 
 		IntSleepInt();

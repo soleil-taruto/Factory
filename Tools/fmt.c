@@ -23,9 +23,9 @@ static FType_t GetFTypeByExt(char *file)
 {
 	char *ext = getExt(file);
 
-	if(!_stricmp(ext, "EXE")) return FT_EXE;
-	if(!_stricmp(ext, "ZIP")) return FT_ZIP;
-	if(!_stricmp(ext, "GZ"))  return FT_GZ;
+	if (!_stricmp(ext, "EXE")) return FT_EXE;
+	if (!_stricmp(ext, "ZIP")) return FT_ZIP;
+	if (!_stricmp(ext, "GZ"))  return FT_GZ;
 
 	return FT_UNKNOWN;
 }
@@ -39,7 +39,7 @@ static FType_t GetFTypeBySignature(char *file)
 	fDatTop = readBinaryBlock(fp, 1024);
 	fileClose(fp);
 
-	if(
+	if (
 		refByte(fDatTop, 0) == 'M' &&
 		refByte(fDatTop, 1) == 'Z'
 		)
@@ -48,7 +48,7 @@ static FType_t GetFTypeBySignature(char *file)
 		goto solved;
 	}
 
-	if(
+	if (
 		refByte(fDatTop, 0) == 'P' &&
 		refByte(fDatTop, 1) == 'K' &&
 		refByte(fDatTop, 2) == '\x03' &&
@@ -59,7 +59,7 @@ static FType_t GetFTypeBySignature(char *file)
 		goto solved;
 	}
 
-	if(
+	if (
 		refByte(fDatTop, 0) == 0x1f &&
 		refByte(fDatTop, 1) == 0x8b
 		)
@@ -87,7 +87,7 @@ static int CheckFileFormat(char *file) // ret: ? マッチした。
 	DispFType(fte);
 	DispFType(fts);
 
-	if(fte != fts)
+	if (fte != fts)
 	{
 		cout("############################################\n");
 		cout("## 拡張子とシグネチャがマッチしていません ##\n");
@@ -104,12 +104,12 @@ static void CheckDirFormat(char *dir)
 
 	foreach(files, file, index)
 	{
-		if(index)
+		if (index)
 			cout("\n");
 
 		cout("%s\n", file);
 
-		if(!CheckFileFormat(file))
+		if (!CheckFileFormat(file))
 		{
 			cout("stdn\n");
 			clearGetKey();
@@ -119,7 +119,7 @@ static void CheckDirFormat(char *dir)
 }
 static void CheckFormat(char *path)
 {
-	if(existFile(path))
+	if (existFile(path))
 	{
 		CheckFileFormat(path);
 	}
@@ -130,7 +130,7 @@ static void CheckFormat(char *path)
 }
 int main(int argc, char **argv)
 {
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		CheckFormat(nextArg());
 	}

@@ -8,16 +8,16 @@ static void DoSlim(char *rootDir)
 
 	foreach(paths, path, index)
 	{
-		if(existDir(path))
+		if (existDir(path))
 		{
-			if(!_stricmp(getExt(path), "rum"))
+			if (!_stricmp(getExt(path), "rum"))
 				coExecute_x(xcout("C:\\Factory\\Tools\\RDMD.exe /RD \"%s\"", path));
 			else
 				DoSlim(path);
 		}
 		else
 		{
-			if(!_stricmp(getLocal(path), "GitRelease.bat"))
+			if (!_stricmp(getLocal(path), "GitRelease.bat"))
 				coExecute_x(xcout("ren \"%s\" GitRelease.bat_", path));
 		}
 	}

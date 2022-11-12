@@ -10,10 +10,10 @@ int main(int argc, char **argv)
 	{
 		cout("%s\n", numb);
 
-		if(!strcmp(numb, "1"))
+		if (!strcmp(numb, "1"))
 			break;
 
-		if(strchr(numb, '\0')[-1] & 1) // ? Šï”
+		if (strchr(numb, '\0')[-1] & 1) // ? Šï”
 		{
 			numb = calc_xc(numb, '*', "3");
 			numb = calc_xc(numb, '+', "1");

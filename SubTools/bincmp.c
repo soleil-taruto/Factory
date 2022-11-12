@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 	cout("1:%s\n", file1);
 	cout("2:%s\n", file2);
 
-	if(isSameFile(file1, file2))
+	if (isSameFile(file1, file2))
 	{
 		cout("ˆê’v\n");
 		retval = 0;

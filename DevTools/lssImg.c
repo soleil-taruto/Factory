@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 	char *outFile = c_getOutFile("images.html");
 	FILE *fp;
 
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		mode ='F';
 	}

@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 	// ƒhƒ‰ƒCƒu‚Ìİ’è
 	strcpy(szRoot, "C:\\");
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		int drv = nextArg()[0];
 

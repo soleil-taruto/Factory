@@ -21,7 +21,7 @@ static void CsvRowColCount(char *csvFile)
 	{
 		autoList_t *row = readCSVRow(fp);
 
-		if(!row)
+		if (!row)
 			break;
 
 		index = getCount(row);
@@ -36,7 +36,7 @@ static void CsvRowColCount(char *csvFile)
 	fileClose(fp);
 
 	for(index = 0; index < COLCOUNT_MAX; index++)
-		if(0 < ColCounts[index])
+		if (0 < ColCounts[index])
 			cout("%06u %I64u\n", index + 1, ColCounts[index]);
 
 	cout("------\n");
@@ -47,7 +47,7 @@ static void CsvRowColCount(char *csvFile)
 }
 int main(int argc, char **argv)
 {
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		CsvRowColCount(nextArg());
 	}

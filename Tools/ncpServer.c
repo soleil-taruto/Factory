@@ -37,7 +37,7 @@ static int CheckFairRelPath(char *path)
 
 	foreach(ptkns, ptkn, index)
 	{
-		if(!isFairLocalPath(ptkn, 0))
+		if (!isFairLocalPath(ptkn, 0))
 		{
 			cout("INVALID PATH TOKEN %u\n", index);
 			retval = 0;
@@ -46,7 +46,7 @@ static int CheckFairRelPath(char *path)
 	}
 	releaseDim(ptkns, 1);
 
-	if(PATH_SIZE < RootDirLen + strlen(path))
+	if (PATH_SIZE < RootDirLen + strlen(path))
 	{
 		cout("INVALID PATH LENGTH\n");
 		retval = 0;
@@ -62,7 +62,7 @@ static void CreateParent(char *path)
 
 	foreach(ptkns, ptkn, index)
 	{
-		if(index + 1 < getCount(ptkns))
+		if (index + 1 < getCount(ptkns))
 		{
 			createDirIfNotExist(ptkn);
 			changeCwd(ptkn);
@@ -79,7 +79,7 @@ static void SSPInterrupt(void)
 		static uint lasttm;
 		uint currtm = now();
 
-		if(currtm <= lasttm + 2)
+		if (currtm <= lasttm + 2)
 			return;
 
 		lasttm = currtm;
@@ -95,7 +95,7 @@ static void UDReader(uchar *buffer, uint size)
 {
 	autoBlock_t *buff_ab = readBinaryBlock(UDFp, size);
 
-	if(getSize(buff_ab) == size)
+	if (getSize(buff_ab) == size)
 	{
 		memcpy(buffer, directGetBuffer(buff_ab), size);
 	}
@@ -110,14 +110,14 @@ static void UDReader(uchar *buffer, uint size)
 
 static int Pre_Upload(char *path) // ret: ? UP可
 {
-	if(existPath(path))
+	if (existPath(path))
 	{
-		if(!ForceOverwriteMode)
+		if (!ForceOverwriteMode)
 			return 0;
 
 		cout("FORCE REMOVE!\n");
 
-		if(existDir(path))
+		if (existDir(path))
 			recurRemoveDir(path);
 		else
 			removeFile(path);
@@ -126,7 +126,7 @@ static int Pre_Upload(char *path) // ret: ? UP可
 }
 static int UploadDir(char *dir, FILE *fp)
 {
-	if(!Pre_Upload(dir))
+	if (!Pre_Upload(dir))
 		return 0;
 
 	CreateParent(dir);
@@ -145,7 +145,7 @@ static int UploadFile(char *file, FILE *fp)
 	FILE *outFp;
 	autoBlock_t *buffer;
 
-	if(!Pre_Upload(file))
+	if (!Pre_Upload(file))
 		return 0;
 
 	CreateParent(file);
@@ -205,17 +205,17 @@ static int Perform(char *prmFile, char *ansFile)
 
 	cout("WELCOME %s %I64u\n", SockIp2Line(sockClientIp), getFileSize(prmFile));
 
-	if(!UnpadFile2(prmFile, "NCP_Prm"))
+	if (!UnpadFile2(prmFile, "NCP_Prm"))
 		goto endFunc;
 
 	fp = fileOpen(prmFile, "rb");
 	path = readLineLenMax(fp, PATH_SIZE);
 	subPath = readLineLenMax(fp, PATH_SIZE);
 
-	if(!CheckFairRelPath(path))
+	if (!CheckFairRelPath(path))
 		goto endPerform;
 
-	if(!CheckFairRelPath(subPath))
+	if (!CheckFairRelPath(subPath))
 		goto endPerform;
 
 	command = readChar(fp);
@@ -227,43 +227,43 @@ static int Perform(char *prmFile, char *ansFile)
 	cout("P1 %s\n", path);
 	cout("P2 %s\n", subPath);
 
-	if(command == 'U') // Upload
+	if (command == 'U') // Upload
 	{
 		int type = readChar(fp);
 
-		if(type == 'D') // Directory
+		if (type == 'D') // Directory
 		{
 			retval = UploadDir(path, fp);
 		}
-		else if(type == 'F') // File
+		else if (type == 'F') // File
 		{
 			retval = UploadFile(path, fp);
 		}
 	}
-	else if(command == 'D') // Download
+	else if (command == 'D') // Download
 	{
 		FILE *ansFp = fileOpen(ansFile, "wb");
 
-		if(existDir(path))
+		if (existDir(path))
 		{
 			retval = DownloadDir(path, ansFp);
 		}
-		else if(existFile(path))
+		else if (existFile(path))
 		{
 			retval = DownloadFile(path, ansFp);
 		}
 		fileClose(ansFp);
 	}
-	else if(command == 'S') // Size
+	else if (command == 'S') // Size
 	{
 		FILE *ansFp = fileOpen(ansFile, "wb");
 
-		if(existDir(path))
+		if (existDir(path))
 		{
 			writeChar(ansFp, 'D');
 			writeValue64(ansFp, getDirSize(path));
 		}
-		else if(existFile(path))
+		else if (existFile(path))
 		{
 			writeChar(ansFp, 'F');
 			writeValue64(ansFp, getFileSize(path));
@@ -275,16 +275,16 @@ static int Perform(char *prmFile, char *ansFile)
 		fileClose(ansFp);
 		retval = 1;
 	}
-	else if(command == 'M') // Move
+	else if (command == 'M') // Move
 	{
 		/*
 			path == subPath を考慮して path を後にチェック
 		*/
-		if(Pre_Upload(subPath) && existPath(path))
+		if (Pre_Upload(subPath) && existPath(path))
 		{
 			CreateParent(subPath);
 
-			if(existDir(path))
+			if (existDir(path))
 			{
 				createDir(subPath);
 				moveDir(path, subPath);
@@ -296,21 +296,21 @@ static int Perform(char *prmFile, char *ansFile)
 			retval = 1;
 		}
 	}
-	else if(command == 'X') // Remove
+	else if (command == 'X') // Remove
 	{
 		CreateParent(path);
 
-		if(existDir(path))
+		if (existDir(path))
 		{
 			recurRemoveDir(path);
 		}
-		else if(existFile(path))
+		else if (existFile(path))
 		{
 			removeFile(path);
 		}
 		retval = 1; // 存在しなかった場合も成功扱い。<- '念のため削除' を考慮
 	}
-	else if(command == 'J' || command == 'K' || command == 'L') // List
+	else if (command == 'J' || command == 'K' || command == 'L') // List
 	{
 		autoList_t *paths;
 //		char *path;
@@ -319,7 +319,7 @@ static int Perform(char *prmFile, char *ansFile)
 		switch(command)
 		{
 		case 'J':
-			if(existDir(path)) {
+			if (existDir(path)) {
 				paths = ls(path);
 			}
 			else {
@@ -342,7 +342,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 		foreach(paths, path, index)
 		{
-			if(index < lastDirCount)
+			if (index < lastDirCount)
 			{
 				path = addChar(path, '\\');
 				setElement(paths, index, (uint)path);
@@ -368,7 +368,7 @@ static int Idle(void)
 {
 	while(hasKey())
 	{
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 		{
 			cout("Exit the server.\n");
 			return 0;
@@ -388,28 +388,28 @@ int main(int argc, char **argv)
 	md5_interrupt = SSPInterrupt;
 
 readArgs:
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		portno = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		connectmax = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/X"))
+	if (argIs("/X"))
 	{
 		uploadmax = toValue64(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		rootDir = nextArg();
 		goto readArgs;
 	}
 
-	if(!rootDir)
+	if (!rootDir)
 	{
 		rootDir = makeFreeDir();
 		useFreeDir = 1;
@@ -425,7 +425,7 @@ readArgs:
 
 	unaddCwd();
 
-	if(useFreeDir)
+	if (useFreeDir)
 	{
 		recurRemoveDir(rootDir);
 		memFree(rootDir);

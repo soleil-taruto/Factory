@@ -27,9 +27,9 @@ static void Analysis(Numb_t *s, int snum)
 	int b;
 	int e;
 
-	if(snum == 1)
+	if (snum == 1)
 	{
-		if(s[0].Numer == s[0].Denom * 10) // ? == 10
+		if (s[0].Numer == s[0].Denom * 10) // ? == 10
 		{
 			cout("\t%s\n", s[0].Caption);
 		}
@@ -40,7 +40,7 @@ static void Analysis(Numb_t *s, int snum)
 	for(b = 0; b < snum; b++)
 	for(a = 0; a < snum; a++)
 	{
-		if(a != b)
+		if (a != b)
 		{
 			Numb_t *sa = s + a;
 			Numb_t *sb = s + b;
@@ -66,7 +66,7 @@ static void Analysis(Numb_t *s, int snum)
 				break;
 
 			case 3: // /
-				if(sb->Numer == 0) continue; // ? zero divide
+				if (sb->Numer == 0) continue; // ? zero divide
 				n = sa->Numer * sb->Denom;
 				d = sa->Denom * sb->Numer;
 				break;
@@ -83,7 +83,7 @@ static void Analysis(Numb_t *s, int snum)
 
 				for(si = 0; si < snum; si++)
 				{
-					if(si != a && si != b)
+					if (si != a && si != b)
 					{
 						t[ti++] = s[si];
 					}

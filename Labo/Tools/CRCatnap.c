@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 {
 	mt19937_initCRnd();
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		CRCatnap(toValue(nextArg()));
 	}

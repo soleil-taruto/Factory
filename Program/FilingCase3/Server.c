@@ -36,16 +36,16 @@ static int RecvPrmData(SockStream_t *ss, char *dataFile, uint64 dataSize) // ret
 		{
 			int chr = SockRecvChar(ss);
 
-			if(chr == EOF)
+			if (chr == EOF)
 				break;
 
 			writeChar(fp, chr);
 
-			if(count % 30000000ui64 == 0ui64) // 30 MB
+			if (count % 30000000ui64 == 0ui64) // 30 MB
 			{
 				updateDiskSpace_Dir(RootDir);
 
-				if(lastDiskFree < KeepDiskFree)
+				if (lastDiskFree < KeepDiskFree)
 				{
 					cout("実行に必要なディスクの空き領域が不足しているためデータ受信は失敗します。\n");
 					break;
@@ -74,13 +74,13 @@ static int SL_Action(struct _finddata_t *i)
 {
 	char *localPath;
 
-	if(
+	if (
 		!strcmp(i->name, ".") ||
 		!strcmp(i->name, "..")
 		)
 		goto endFunc;
 
-	if(i->attrib & _A_SUBDIR)
+	if (i->attrib & _A_SUBDIR)
 		localPath = xcout("%s\\", i->name);
 	else
 		localPath = strx(i->name);
@@ -110,7 +110,7 @@ static void SendResFile(SockStream_t *ss, char *relPath)
 {
 	char *file = combine(DataDir, relPath);
 
-	if(existFile(file))
+	if (existFile(file))
 	{
 		enterSemaphore(&SmphFileIO);
 		{
@@ -122,7 +122,7 @@ static void SendResFile(SockStream_t *ss, char *relPath)
 			{
 				autoBlock_t *buff = readBinaryStream(fp, 2000000); // 2 MB
 
-				if(!buff)
+				if (!buff)
 					break;
 
 				SockSendBlock(ss, directGetBuffer(buff), getSize(buff));
@@ -159,7 +159,7 @@ static void PerformTh(int sock, char *strip)
 		path      = SockRecvLine(ss, 1000);
 		sDataSize = SockRecvLine(ss, 30);
 
-		if(IsEOFSockStream(ss))
+		if (IsEOFSockStream(ss))
 		{
 			cout("切断されました。\n");
 			goto fault;
@@ -170,7 +170,7 @@ static void PerformTh(int sock, char *strip)
 
 		dataSize = toValue64(sDataSize);
 
-		if(!isFairRelPath(path, strlen(DataDir)))
+		if (!isFairRelPath(path, strlen(DataDir)))
 		{
 			char *tmp;
 
@@ -182,19 +182,19 @@ static void PerformTh(int sock, char *strip)
 		}
 		updateDiskSpace_Dir(RootDir);
 
-		if(lastDiskFree < KeepDiskFree)
+		if (lastDiskFree < KeepDiskFree)
 		{
 			cout("実行に必要なディスクの空き領域が不足しています。\n");
 			goto fault;
 		}
-		if(lastDiskFree - KeepDiskFree < dataSize)
+		if (lastDiskFree - KeepDiskFree < dataSize)
 		{
 			cout("ディスクの空き領域が要求データサイズに対して不足しています。\n");
 			goto fault;
 		}
 		dataFile = combine_cx(TempDir, MakeUUID(1));
 
-		if(!RecvPrmData(ss, dataFile, dataSize))
+		if (!RecvPrmData(ss, dataFile, dataSize))
 		{
 			cout("データの受信に失敗しました。\n");
 			goto fault2;
@@ -203,7 +203,7 @@ static void PerformTh(int sock, char *strip)
 		{
 			char *ender = SockRecvLine(ss, 30);
 
-			if(_stricmp(ender, "/SEND/e"))
+			if (_stricmp(ender, "/SEND/e"))
 			{
 				cout("不正な終端です。\n");
 				memFree(ender);
@@ -212,7 +212,7 @@ static void PerformTh(int sock, char *strip)
 			memFree(ender);
 		}
 
-		if(!_stricmp(command, "LIST"))
+		if (!_stricmp(command, "LIST"))
 		{
 			enterCritical(&CritCommand);
 			{
@@ -220,7 +220,7 @@ static void PerformTh(int sock, char *strip)
 			}
 			leaveCritical(&CritCommand);
 		}
-		else if(!_stricmp(command, "GET"))
+		else if (!_stricmp(command, "GET"))
 		{
 			enterCritical(&CritCommand);
 			{
@@ -228,7 +228,7 @@ static void PerformTh(int sock, char *strip)
 			}
 			leaveCritical(&CritCommand);
 		}
-		else if(!_stricmp(command, "POST"))
+		else if (!_stricmp(command, "POST"))
 		{
 			char *file = combine(DataDir, path);
 
@@ -250,7 +250,7 @@ static void PerformTh(int sock, char *strip)
 
 			FC3_SendLine(ss, "/POST/e");
 		}
-		else if(!_stricmp(command, "GET-POST"))
+		else if (!_stricmp(command, "GET-POST"))
 		{
 			char *file = combine(DataDir, path);
 
@@ -274,7 +274,7 @@ static void PerformTh(int sock, char *strip)
 
 			FC3_SendLine(ss, "/GET-POST/e");
 		}
-		else if(!_stricmp(command, "DELETE"))
+		else if (!_stricmp(command, "DELETE"))
 		{
 			char *file = combine(DataDir, path);
 
@@ -290,7 +290,7 @@ static void PerformTh(int sock, char *strip)
 
 			FC3_SendLine(ss, "/DELETE/e");
 		}
-		else if(!_stricmp(command, "HELLO"))
+		else if (!_stricmp(command, "HELLO"))
 		{
 			FC3_SendLine(ss, "/HELLO/e");
 		}
@@ -321,14 +321,14 @@ static int IdleTh(void)
 {
 	static int keep = 1;
 
-	if(EvStop && handleWaitForMillis(EvStop, 0))
+	if (EvStop && handleWaitForMillis(EvStop, 0))
 		keep = 0;
 
 	while(hasKey())
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 			keep = 0;
 
-	if(!keep)
+	if (!keep)
 		LOGPOS();
 
 	return keep;
@@ -343,7 +343,7 @@ static int HasOtherRootDirParent(char *dir)
 
 		cout("chk_sig: %s\n", file);
 
-		if(existFile(file))
+		if (existFile(file))
 		{
 			memFree(file);
 			memFree(dir);
@@ -351,7 +351,7 @@ static int HasOtherRootDirParent(char *dir)
 		}
 		memFree(file);
 
-		if(isAbsRootDir(dir))
+		if (isAbsRootDir(dir))
 			break;
 
 		dir= getParent_x(dir);
@@ -361,10 +361,10 @@ static int HasOtherRootDirParent(char *dir)
 }
 static void CheckRootDir(void)
 {
-	if(!existDir(RootDir))
+	if (!existDir(RootDir))
 		return;
 
-	if(accessible(SigFile))
+	if (accessible(SigFile))
 		return;
 
 	errorCase_m(lsCount(RootDir), "指定されたディレクトリは、別のアプリケーションによって使用されています。"); // ? 空ではない。
@@ -377,27 +377,27 @@ int main(int argc, char **argv)
 	uint connectMax = 100;
 
 readArgs:
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		portNo = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		connectMax = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		RootDir = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		KeepDiskFree = toValue64(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/E"))
+	if (argIs("/E"))
 	{
 		char *name = nextArg();
 
@@ -450,7 +450,7 @@ readArgs:
 	memFree(TempDir);
 	memFree(SigFile);
 
-	if(EvStop)
+	if (EvStop)
 		handleClose(EvStop);
 
 	fnlzSemaphore(&SmphFileIO);

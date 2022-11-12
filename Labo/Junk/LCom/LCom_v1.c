@@ -43,7 +43,7 @@ void LComRecvLoop(char *(*funcRecvEvent)(char *), uint id)
 
 	while(!hasKey() || getKey() != 0x1b)
 	{
-		if(handleWaitForMillis(eh, 100))
+		if (handleWaitForMillis(eh, 100))
 		{
 			char *line;
 			char *resLine;

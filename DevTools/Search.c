@@ -30,16 +30,16 @@ static void DispRange(FILE *fp, sint64 start, sint64 end, sint64 fileSize)
 
 	for(index = start; index <= end; index++)
 	{
-		if(0 <= index && index < fileSize)
+		if (0 <= index && index < fileSize)
 		{
-			if(!disped)
+			if (!disped)
 			{
 				disped = 1;
 				FSeek(fp, index);
 			}
 			chr = readChar(fp);
 
-			if(0x20 <= chr && chr <= 0x7e || 0xa1 <= chr && chr <= 0xdf)
+			if (0x20 <= chr && chr <= 0x7e || 0xa1 <= chr && chr <= 0xdf)
 			{
 				// noop
 			}
@@ -78,13 +78,13 @@ static void SearchFile(char *file)
 	char *ext;
 	uint extndx;
 
-	if(SpecExts)
+	if (SpecExts)
 	{
 		foreach(SpecExts, ext, extndx)
-			if(!_stricmp(ext, getExt(file)))
+			if (!_stricmp(ext, getExt(file)))
 				break;
 
-		if(!ext)
+		if (!ext)
 			return;
 	}
 	fileSize = getFileSize(file);
@@ -95,31 +95,31 @@ static void SearchFile(char *file)
 		chr = readChar(fp);
 		rIndex++;
 
-		if(IgnoreCase ? m_tolower(chr) == m_tolower(FindPattern[matchidx]) : chr == FindPattern[matchidx])
+		if (IgnoreCase ? m_tolower(chr) == m_tolower(FindPattern[matchidx]) : chr == FindPattern[matchidx])
 		{
 			matchidx++;
 
-			if(FindPattern[matchidx] == '\0')
+			if (FindPattern[matchidx] == '\0')
 			{
-				if(TokenOnlyMode)
+				if (TokenOnlyMode)
 				{
-					if(matchidx < rIndex) // ? マッチ部分の先頭は、ファイルの先頭ではない。
+					if (matchidx < rIndex) // ? マッチ部分の先頭は、ファイルの先頭ではない。
 					{
 						FSeek(fp, rIndex - matchidx - 1);
 						chr = readChar(fp);
 						FSeek(fp, rIndex);
 
-						if(IsTokenChar(chr)) // ? マッチ部分の先頭は、トークンの先頭ではない。
+						if (IsTokenChar(chr)) // ? マッチ部分の先頭は、トークンの先頭ではない。
 						{
 							goto resetmatch;
 						}
 					}
-					if(rIndex < fileSize) // ? マッチ部分の終端は、ファイルの終端 (最後の１バイト) ではない。
+					if (rIndex < fileSize) // ? マッチ部分の終端は、ファイルの終端 (最後の１バイト) ではない。
 					{
 						chr = readChar(fp);
 						FSeek(fp, rIndex);
 
-						if(IsTokenChar(chr)) // ? マッチ部分の終端は、トークンの終端ではない。
+						if (IsTokenChar(chr)) // ? マッチ部分の終端は、トークンの終端ではない。
 						{
 							goto resetmatch;
 						}
@@ -128,7 +128,7 @@ static void SearchFile(char *file)
 
 				// Found
 
-				if(!fndcnt)
+				if (!fndcnt)
 				{
 					cout("%s\n", file);
 					addElement(FoundFiles, (uint)strx(file));
@@ -169,7 +169,7 @@ static void SearchFile(char *file)
 				matchidx = 0;
 			}
 		}
-		else if(matchidx)
+		else if (matchidx)
 		{
 			rIndex -= matchidx;
 			matchidx = 0;
@@ -178,8 +178,8 @@ static void SearchFile(char *file)
 		}
 		else
 		{
-			     if(chr == '\r') crcnt++;
-			else if(chr == '\n') lfcnt++;
+			     if (chr == '\r') crcnt++;
+			else if (chr == '\n') lfcnt++;
 		}
 	}
 	fileClose(fp);
@@ -195,27 +195,27 @@ int main(int argc, char **argv)
 	antiSubversion = 1;
 
 readArgs:
-	if(argIs("/E")) // Extension
+	if (argIs("/E")) // Extension
 	{
 		SpecExts = tokenize(nextArg(), '.');
 		goto readArgs;
 	}
-	if(argIs("/I")) // Ignore case
+	if (argIs("/I")) // Ignore case
 	{
 		IgnoreCase = 1;
 		goto readArgs;
 	}
-	if(argIs("/T")) // Token only mode
+	if (argIs("/T")) // Token only mode
 	{
 		TokenOnlyMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/SVN")) // .svn の配下も探す。
+	if (argIs("/SVN")) // .svn の配下も探す。
 	{
 		antiSubversion = 0;
 		goto readArgs;
 	}
-	if(argIs("/8"))
+	if (argIs("/8"))
 	{
 		utf8mode = 1;
 		goto readArgs;
@@ -228,7 +228,7 @@ readArgs:
 
 	errorCase(FindPattern[0] == '\0');
 
-	if(utf8mode)
+	if (utf8mode)
 	{
 		char *tmpFile = makeTempPath(NULL);
 

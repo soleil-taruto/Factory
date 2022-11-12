@@ -10,13 +10,13 @@ static void TryCreateParent(char *path, int mkDirMode)
 	cout("> %s\n", parent);
 	cout("MD: %d\n", mkDirMode);
 
-	if(*parent && !isRootDir(parent))
+	if (*parent && !isRootDir(parent))
 	{
 		TryCreateParent(parent, 1);
 	}
 	memFree(parent);
 
-	if(mkDirMode)
+	if (mkDirMode)
 	{
 		createDirIfNotExist(path);
 	}
@@ -36,7 +36,7 @@ static void Interrupt(void)
 {
 	while(hasKey())
 	{
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 		{
 			cout("+---------------------------+\n");
 			cout("| ユーザーにより中断します。|\n");
@@ -49,7 +49,7 @@ static void Interrupt(void)
 }
 static int Idle(void)
 {
-	if(eqIntPulseSec(2, NULL))
+	if (eqIntPulseSec(2, NULL))
 	{
 		cmdTitle_x(xcout(
 			"%s %u %I64u %.2f %.2f"
@@ -93,7 +93,7 @@ static int Perform(void)
 
 	cout("AnswerFile: [%p]\n", AnswerFile);
 
-	if(!AnswerFile)
+	if (!AnswerFile)
 	{
 		AnswerFile = makeTempFile("dummy_ans");
 		retval = 0;
@@ -143,7 +143,7 @@ static char *ReadAnswerLine(void)
 {
 	char *line = readLineLenMax(AnswerFP, 1024);
 
-	if(line)
+	if (line)
 		line2JLine(line, 1, 0, 0, 1);
 
 	cout("Answer_line: %s\n", line ? line : "<NULL>");
@@ -161,7 +161,7 @@ static autoBlock_t *ReadAnswerBlock(void)
 	{
 		autoBlock_t *subBlock = ReadAnswerSubBlock(512 * 1024);
 
-		if(!subBlock)
+		if (!subBlock)
 			break;
 
 		ab_addBytes_x(block, subBlock);
@@ -178,7 +178,7 @@ static void GetDataList(char *file, char *command, int lsMode)
 
 	for(retrycnt = 0; retrycnt < 3; retrycnt++)
 	{
-		if(UserCancelled)
+		if (UserCancelled)
 			break;
 
 		cout("retrycnt: %u\n", retrycnt);
@@ -186,7 +186,7 @@ static void GetDataList(char *file, char *command, int lsMode)
 		OpenParamsFile();
 		WriteParamLine(command);
 
-		if(Perform())
+		if (Perform())
 		{
 			FILE *fp = fileOpen(file, "wt");
 
@@ -194,13 +194,13 @@ static void GetDataList(char *file, char *command, int lsMode)
 			{
 				char *ansLine = ReadAnswerLine();
 
-				if(!ansLine)
+				if (!ansLine)
 					break;
 
-				if(lsMode)
+				if (lsMode)
 					ansLine = lineToFairLocalPath_x(ansLine, 0);
 
-				if(*ansLine)
+				if (*ansLine)
 					writeLine(fp, ansLine);
 
 				memFree(ansLine);
@@ -234,7 +234,7 @@ static void UploadFile(char *file, char *svrPath)
 
 		cout("block: [%p]\n", block);
 
-		if(!block)
+		if (!block)
 			break;
 
 		while(!UserCancelled)
@@ -250,7 +250,7 @@ static void UploadFile(char *file, char *svrPath)
 
 			TransferCounter = startPos;
 
-			if(Perform())
+			if (Perform())
 			{
 				CloseAnswerFile();
 				break;
@@ -262,7 +262,7 @@ static void UploadFile(char *file, char *svrPath)
 	}
 	fileClose(fp);
 
-	if(UserCancelled)
+	if (UserCancelled)
 	{
 		cout("キャンセルにより、アップロード先を削除します。\n");
 
@@ -285,7 +285,7 @@ static void DownloadFile(char *file, char *svrPath, int autoCreateParentMode)
 
 	ProcCommand = "DL";
 
-	if(autoCreateParentMode)
+	if (autoCreateParentMode)
 		TryCreateParent(file, 0);
 
 	fp = fileOpen(midFile, "wb");
@@ -302,11 +302,11 @@ static void DownloadFile(char *file, char *svrPath, int autoCreateParentMode)
 
 		TransferCounter = startPos;
 
-		if(Perform())
+		if (Perform())
 		{
 			autoBlock_t *block = ReadAnswerBlock();
 
-			if(getSize(block) == 0)
+			if (getSize(block) == 0)
 			{
 				releaseAutoBlock(block);
 				CloseAnswerFile();
@@ -320,7 +320,7 @@ static void DownloadFile(char *file, char *svrPath, int autoCreateParentMode)
 	}
 	fileClose(fp);
 
-	if(!UserCancelled)
+	if (!UserCancelled)
 	{
 		file = strx(file);
 
@@ -330,7 +330,7 @@ static void DownloadFile(char *file, char *svrPath, int autoCreateParentMode)
 				ABC$DEF.dat$GHI.txt
 				ABC$DEF.dat
 		*/
-		if(existPath(file))
+		if (existPath(file))
 			file = addExt(file, "overlapped"); // 上限は適当、重複は多くて１組なので１回の回避で十分だと思う。(ファイルが先だとアウト...)
 
 		moveFile(midFile, file);
@@ -351,7 +351,7 @@ static void Prv_RemoveFile(char *svrPath)
 		WriteParamLine("RM");
 		WriteParamLine(svrPath);
 
-		if(Perform())
+		if (Perform())
 		{
 			CloseAnswerFile();
 			break;
@@ -370,7 +370,7 @@ static void Prv_MoveFile(char *svrPath, char *newSvrPath)
 		WriteParamLine(svrPath);
 		WriteParamLine(newSvrPath);
 
-		if(Perform())
+		if (Perform())
 		{
 			CloseAnswerFile();
 			break;
@@ -403,23 +403,23 @@ static void RunScript(char *file)
 		cout("svrPath: %s\n", svrPath);
 		cout("newSvrPath: %s\n", newSvrPath);
 
-		if(!strcmp(command, "UP"))
+		if (!strcmp(command, "UP"))
 		{
 			UploadFile(file, svrPath);
 		}
-		else if(!strcmp(command, "DL"))
+		else if (!strcmp(command, "DL"))
 		{
 			DownloadFile(file, svrPath, 0);
 		}
-		else if(!strcmp(command, "DL+P"))
+		else if (!strcmp(command, "DL+P"))
 		{
 			DownloadFile(file, svrPath, 1);
 		}
-		else if(!strcmp(command, "RM"))
+		else if (!strcmp(command, "RM"))
 		{
 			Prv_RemoveFile(svrPath);
 		}
-		else if(!strcmp(command, "MV"))
+		else if (!strcmp(command, "MV"))
 		{
 			Prv_MoveFile(svrPath, newSvrPath);
 		}
@@ -445,23 +445,23 @@ int main(int argc, char **argv)
 	SockStartup();
 
 readArgs:
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		ServerDomain = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		ServerPort = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/TBS"))
+	if (argIs("/TBS"))
 	{
 		TransferBlockSize = toValue(nextArg());
 		goto readArgs;
 	}
 
-	if(argIs("/CWD"))
+	if (argIs("/CWD"))
 	{
 		addCwd(nextArg());
 		goto readArgs;
@@ -470,47 +470,47 @@ readArgs:
 	errorCase(!ServerPort || 0xffff < ServerPort);
 	errorCase(!TransferBlockSize);
 
-	if(argIs("/LS"))
+	if (argIs("/LS"))
 	{
 		GetFileList(nextArg());
 		goto endFunc;
 	}
-	if(argIs("/ST"))
+	if (argIs("/ST"))
 	{
 		GetStatusList(nextArg());
 		goto endFunc;
 	}
-	if(argIs("/UP"))
+	if (argIs("/UP"))
 	{
 		UploadFile(getArg(0), getArg(1)); // file -> svrPath
 		goto endFunc;
 	}
-	if(argIs("/DL"))
+	if (argIs("/DL"))
 	{
 		DownloadFile(getArg(0), getArg(1), 0); // file <- svrPath
 		goto endFunc;
 	}
-	if(argIs("/DL+P"))
+	if (argIs("/DL+P"))
 	{
 		DownloadFile(getArg(0), getArg(1), 1); // file <- svrPath
 		goto endFunc;
 	}
-	if(argIs("/RM"))
+	if (argIs("/RM"))
 	{
 		Prv_RemoveFile(nextArg()); // svrPath
 		goto endFunc;
 	}
-	if(argIs("/MV"))
+	if (argIs("/MV"))
 	{
 		Prv_MoveFile(getArg(0), getArg(1)); // svrPath -> newSvrPath
 		goto endFunc;
 	}
-	if(argIs("/RES"))
+	if (argIs("/RES"))
 	{
 		RunScript(nextArg());
 		goto endFunc;
 	}
-	if(argIs("/RES-S")) // "/RES" + Delete Script
+	if (argIs("/RES-S")) // "/RES" + Delete Script
 	{
 		char *scriptFile = nextArg();
 

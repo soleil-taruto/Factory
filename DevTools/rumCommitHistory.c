@@ -25,7 +25,7 @@ static void Search(char *rootDir)
 
 	foreach(dirs, dir, index)
 	{
-		if(!_stricmp("rum", getExt(dir)))
+		if (!_stricmp("rum", getExt(dir)))
 		{
 			char *revRootDir = combine(dir, "revisions");
 			autoList_t *revDirs;
@@ -87,7 +87,7 @@ static void MultiSetComment(char *commentNew)
 		cout("... に設定します。\n");
 		cout("続行？\n");
 
-		if(clearGetKey() == 0x1b)
+		if (clearGetKey() == 0x1b)
 			termination(0);
 
 		cout("続行します。\n");
@@ -141,7 +141,7 @@ int main(int argc, char **argv)
 {
 	char *comment = NULL;
 
-	if(argIs("/E"))
+	if (argIs("/E"))
 	{
 		comment = nextArg();
 		errorCase(m_isEmpty(comment));
@@ -149,7 +149,7 @@ int main(int argc, char **argv)
 
 	errorCase(hasArgs(2)); // ? 多過ぎる。-> オプション指定ミスか？
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		Main2(nextArg());
 	}
@@ -158,7 +158,7 @@ int main(int argc, char **argv)
 		Main2(".");
 	}
 
-	if(comment)
+	if (comment)
 	{
 		MultiSetComment(comment);
 	}

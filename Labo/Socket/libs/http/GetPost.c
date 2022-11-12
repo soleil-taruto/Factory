@@ -36,7 +36,7 @@ void httpRecvRequestHeader(SockStream_t *i, char **pHeader, int *pChunked, uint 
 		一定時間通信が無い接続について、データが来たら即切断するというのを試してみたが、
 		IE9 は再接続してページを取得、何事も無かったようにページを表示したので、何も考えずぶった切っても問題無いだろう。
 	*/
-	if(!httpRecvRequestFirstWaitDisable &&
+	if (!httpRecvRequestFirstWaitDisable &&
 		SockWait(GetSockStreamSock(i), httpRecvRequestFirstWaitMillis, 0) != 1)
 	{
 		DestroySockStream(i);
@@ -45,17 +45,17 @@ void httpRecvRequestHeader(SockStream_t *i, char **pHeader, int *pChunked, uint 
 	i->Extra.RecvSizeLimiter = HEADERTOTALLENMAX;
 	header = SockRecvLine(i, HEADERLENMAX);
 
-	if(httpRecvedHeader)
+	if (httpRecvedHeader)
 		addElement(httpRecvedHeader, (uint)lineToPrintLine(header, 0));
 
 	for(; ; )
 	{
-		if(backedLine)
+		if (backedLine)
 			line = backedLine;
 		else
 			line = SockRecvLine(i, HEADERLENMAX);
 
-		if(!*line)
+		if (!*line)
 		{
 			memFree(line);
 			break;
@@ -65,13 +65,13 @@ void httpRecvRequestHeader(SockStream_t *i, char **pHeader, int *pChunked, uint 
 			char *trail = SockRecvLine(i, HEADERLENMAX);
 			char *p;
 
-			if(!*trail || ' ' < *trail)
+			if (!*trail || ' ' < *trail)
 			{
 				backedLine = trail;
 				break;
 			}
 			for(p = trail; *p; p++)
-				if(' ' < *p)
+				if (' ' < *p)
 					break;
 
 			line = addChar(line, ' ');
@@ -80,17 +80,17 @@ void httpRecvRequestHeader(SockStream_t *i, char **pHeader, int *pChunked, uint 
 			memFree(trail);
 		}
 
-		if(lineExpICase("<>Transfer-Encoding<>:<>chunked<>", line))
+		if (lineExpICase("<>Transfer-Encoding<>:<>chunked<>", line))
 		{
 			chunked = 1;
 		}
-		else if(lineExpICase("<>Content-Length<>:<><09><>", line))
+		else if (lineExpICase("<>Content-Length<>:<><09><>", line))
 		{
 			char *p = strchrNext(line, ':');
 
 			// 少なくとも IE8 では 2GB を超えると -((2 p 32) - cSize) / 10 という変な値になる。
 
-			if(strchr(p, '-')) // ? マイナス
+			if (strchr(p, '-')) // ? マイナス
 			{
 				cSize = 0;
 			}
@@ -99,30 +99,30 @@ void httpRecvRequestHeader(SockStream_t *i, char **pHeader, int *pChunked, uint 
 				cSize = toValue(p);
 			}
 		}
-		else if(lineExpICase("<>Host<>:<>", line))
+		else if (lineExpICase("<>Host<>:<>", line))
 		{
 			char *p = strchrNext(line, ':');
 
 			strchrEnd(p, ':')[0] = '\0'; // ポート番号を除去
 			ucTrimEdge(p);
 
-			if(HOSTLENMAX < strlen(p))
+			if (HOSTLENMAX < strlen(p))
 				p[HOSTLENMAX] = '\0';
 
 			reqHost = strz(reqHost, p);
 		}
 
-		if(httpRecvedHeader)
+		if (httpRecvedHeader)
 			addElement(httpRecvedHeader, (uint)lineToPrintLine(line, 0));
 
 		memFree(line);
 	}
-	if(httpRecvRequestHostValue)
+	if (httpRecvRequestHostValue)
 	{
 		{
 			char *p = reqHost;
 
-			if(p)
+			if (p)
 			{
 				p = strx(p);
 				line2JLine(p, 0, 0, 0, 0);
@@ -136,7 +136,7 @@ void httpRecvRequestHeader(SockStream_t *i, char **pHeader, int *pChunked, uint 
 			memFree(p);
 		}
 
-		if(!reqHost || _stricmp(reqHost, httpRecvRequestHostValue))
+		if (!reqHost || _stricmp(reqHost, httpRecvRequestHostValue))
 		{
 			DestroySockStream(i);
 		}
@@ -164,7 +164,7 @@ void httpRecvRequestMax(SockStream_t *i, char **pHeader, uchar **pContent, uint 
 
 	httpRecvRequestHeader(i, &header, &chunked, &cSize);
 
-	if(chunked)
+	if (chunked)
 	{
 		httpChunkedRecver_t *cr = httpCreateChunkedRecver(i);
 
@@ -175,11 +175,11 @@ void httpRecvRequestMax(SockStream_t *i, char **pHeader, uchar **pContent, uint 
 		{
 			autoBlock_t *block = httpRecvChunked(cr);
 
-			if(!block)
+			if (!block)
 			{
 				break;
 			}
-			if(contentSizeMax - cSize < getSize(block)) // Overflow -> 直ちに読み込み中断
+			if (contentSizeMax - cSize < getSize(block)) // Overflow -> 直ちに読み込み中断
 			{
 				releaseAutoBlock(block);
 				break;
@@ -215,13 +215,13 @@ void httpSendResponseHeader(SockStream_t *i, uint64 cSize, char *contentType)
 	SockSendToken(i, "Content-Length: ");
 	SockSendLine(i, sCSize);
 
-	if(i->Extra.SaveFile)
+	if (i->Extra.SaveFile)
 	{
 		SockSendToken(i, "Content-Disposition: attachment; filename=\"");
 		SockSendToken(i, i->Extra.SaveFile);
 		SockSendLine(i, "\"");
 	}
-	if(i->Extra.ServerName)
+	if (i->Extra.ServerName)
 	{
 		SockSendToken(i, "Server: ");
 		SockSendLine(i, i->Extra.ServerName);
@@ -258,15 +258,15 @@ void httpUrlDecoder(char *line)
 
 	for(p = line; *p; p++)
 	{
-		if(*p == '%')
+		if (*p == '%')
 		{
-			if(m_ishexadecimal(p[1]) && m_ishexadecimal(p[2]))
+			if (m_ishexadecimal(p[1]) && m_ishexadecimal(p[2]))
 			{
 				*p = c2i(p[1]) << 4 | c2i(p[2]);
 				copyLine(p + 1, p + 3);
 			}
 		}
-		else if(*p == '+')
+		else if (*p == '+')
 		{
 			*p = ' ';
 		}
@@ -291,10 +291,10 @@ void httpDecodeUrl(char *url, httpDecode_t *out)
 	uint index;
 	char *decPath;
 
-	if(path) path = strchrEnd(path + 3, '/');
+	if (path) path = strchrEnd(path + 3, '/');
 	else     path = url;
 
-	if(!*path)
+	if (!*path)
 		path = "/";
 
 	path = strx(path);
@@ -325,7 +325,7 @@ void httpDecodeQuery(char *query, httpDecode_t *out)
 	{
 		char *p = strchr(part, '=');
 
-		if(p)
+		if (p)
 		{
 			char *key;
 			char *value;
@@ -356,11 +356,11 @@ void httpDecode(char *header, uchar *content, httpDecode_t *out)
 
 	url = strxl(url, (uint)p - (uint)url);
 
-	if(m_toupper(header[0]) == 'G') // ? 'Get' Request
+	if (m_toupper(header[0]) == 'G') // ? 'Get' Request
 	{
 		p = strchr(url, '?');
 
-		if(p)
+		if (p)
 		{
 			*p = '\0';
 			p++;

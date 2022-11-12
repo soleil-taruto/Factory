@@ -43,7 +43,7 @@ static FltrInfo_t *GetFltrInfo(char *path, char *header)
 	i->SrcPtns = newList();
 	i->DestPtns = newList();
 
-	if(existDir(path))
+	if (existDir(path))
 	{
 		lines = lssFiles(path);
 		sortJLinesICase(lines);
@@ -90,20 +90,20 @@ static void StrmCharFltr(FltrInfo_t *i, autoBlock_t *dest, int chr)
 
 		foreach(i->SrcPtns, srcPtn, ptnndx)
 		{
-			if(size <= getSize(srcPtn))
+			if (size <= getSize(srcPtn))
 			{
 				void *q = directGetBuffer(srcPtn);
 
-				if(!memcmp(p, q, size))
+				if (!memcmp(p, q, size))
 				{
-					if(size == getSize(srcPtn))
+					if (size == getSize(srcPtn))
 						goto found;
 
 					minPos = sPos;
 				}
 			}
 		}
-		if(!sPos)
+		if (!sPos)
 			break;
 	}
 	addBytes(dest, gndSubBytesVar(i->Buff, 0, minPos, gab));
@@ -118,12 +118,12 @@ found:
 }
 static void CheckClogging(FltrInfo_t *i, autoBlock_t *dest)
 {
-	if(!CloggedTimeoutSec)
+	if (!CloggedTimeoutSec)
 		return;
 
-	if(getSize(i->Buff) && getSize(dest) == 0) // ? 詰まっている。
+	if (getSize(i->Buff) && getSize(dest) == 0) // ? 詰まっている。
 	{
-		if(i->CloggedTimeout < now()) // ? タイムアウト
+		if (i->CloggedTimeout < now()) // ? タイムアウト
 		{
 			cout("+---------------------+\n");
 			cout("| CLOGGING-UP TIMEOUT |\n");
@@ -171,17 +171,17 @@ static void Perform(int sock, int fwdSock)
 }
 static int ReadArgs(void)
 {
-	if(argIs("/SF"))
+	if (argIs("/SF"))
 	{
 		SendFltrInfo = GetFltrInfo(nextArg(), "[SEND]");
 		return 1;
 	}
-	if(argIs("/RF"))
+	if (argIs("/RF"))
 	{
 		RecvFltrInfo = GetFltrInfo(nextArg(), "[RECV]");
 		return 1;
 	}
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		CloggedTimeoutSec = toValue(nextArg());
 		return 1;

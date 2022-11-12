@@ -43,11 +43,11 @@ char *LComSendLine(char *line, uint id)
 			eq = existFile(CombineEx(PREF_FILE_REQUEST, id));
 			es = existFile(CombineEx(PREF_FILE_RESPONSE, id));
 
-			if(!eq && es) // ? ‰“šƒAƒŠ
+			if (!eq && es) // ? ‰“šƒAƒŠ
 			{
 				break;
 			}
-			if(eq && !es) // ? –¢ˆ—
+			if (eq && !es) // ? –¢ˆ—
 			{
 				// noop
 			}
@@ -80,14 +80,14 @@ void LComRecvLoop(char *(*funcRecvEvent)(char *), uint id)
 	for(; ; )
 	{
 		while(hasKey())
-			if(getKey() == 0x1b)
+			if (getKey() == 0x1b)
 				goto endLoop;
 
 		collectEvents(eh, 3000);
 
 		mutex();
 		{
-			if(existFile(CombineEx(PREF_FILE_REQUEST, id)))
+			if (existFile(CombineEx(PREF_FILE_REQUEST, id)))
 			{
 				char *line = readFirstLine(CombineEx(PREF_FILE_REQUEST, id));
 				char *resLine;

@@ -30,17 +30,17 @@ static char *JWeekDayList[] = {
 
 char *getEMonth(uint month)
 {
-	if(1 <= month && month <= 12) return MonthList[month - 1];
+	if (1 <= month && month <= 12) return MonthList[month - 1];
 	return "???";
 }
 char *getEWeekDay(uint weekday)
 {
-	if(weekday <= 6) return WeekDayList[weekday];
+	if (weekday <= 6) return WeekDayList[weekday];
 	return "???";
 }
 char *getJWeekDay(uint weekday)
 {
-	if(weekday <= 6) return JWeekDayList[weekday];
+	if (weekday <= 6) return JWeekDayList[weekday];
 	return "？";
 }
 
@@ -52,12 +52,12 @@ char *makeStamp(time_t t) // t == 0: 現時刻
 {
 	char *stamp;
 
-	if(!t)
+	if (!t)
 		t = time(NULL);
 
 	stamp = ctime(&t); // "Wed Jan 02 02:03:55 1980\n"
 
-	if(!stamp)
+	if (!stamp)
 		stamp = "Thu Jan 01 00:00:00 1970\n"; // 不正な t
 
 	stamp = strx(stamp);
@@ -130,10 +130,10 @@ char *makeJStamp(stampData_t *i, int nonWeekDay)
 {
 	char *stamp;
 
-	if(!i)
+	if (!i)
 		i = getStampDataTime(0);
 
-	if(!isAllowStampData(i))
+	if (!isAllowStampData(i))
 		return strx("1970/01/01 (木) 00:00:00"); // 不正な i
 
 	stamp = xcout(
@@ -149,7 +149,7 @@ char *makeJStamp(stampData_t *i, int nonWeekDay)
 
 	// "1980/01/02 (水) 02:03:55"
 
-	if(nonWeekDay)
+	if (nonWeekDay)
 	{
 		eraseLine(stamp + 11, 5); // "1980/01/02 02:03:55"
 	}
@@ -159,10 +159,10 @@ char *makeCompactStamp(stampData_t *i)
 {
 	char *stamp;
 
-	if(!i)
+	if (!i)
 		i = getStampDataTime(0);
 
-	if(!isAllowStampData(i))
+	if (!isAllowStampData(i))
 		return strx("19700101000000"); // 不正な i
 
 	stamp = xcout(
@@ -201,11 +201,11 @@ time_t compactStampToTime(char *stamp)
 		comp = strcmp(stamp, ms);
 		memFree(ms);
 
-		if(!comp) // ? stamp == ms
+		if (!comp) // ? stamp == ms
 		{
 			return mt;
 		}
-		if(comp < 0) // ? stamp < ms
+		if (comp < 0) // ? stamp < ms
 		{
 			ft = mt;
 		}

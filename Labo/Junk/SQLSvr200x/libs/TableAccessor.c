@@ -35,15 +35,15 @@ static void ExecSqlFile(char *sqlFile, char *redirFile)
 {
 	char *command = strx("sqlcmd -k");
 
-	if(TA_User)
+	if (TA_User)
 		command = addLine_x(command, xcout(" -U \"%s\"", TA_User));
 
-	if(TA_Pass)
+	if (TA_Pass)
 		command = addLine_x(command, xcout(" -P \"%s\"", TA_Pass));
 
 	command = addLine_x(command, xcout(" -i \"%s\"", sqlFile));
 
-	if(redirFile)
+	if (redirFile)
 		command = addLine_x(command, xcout(" -o \"%s\"", redirFile));
 
 	execute(command);
@@ -141,7 +141,7 @@ static char *GetValueList(autoList_t *values, char *kakko)
 
 	foreach(values, value, colidx)
 	{
-		if(colidx)
+		if (colidx)
 			result = addLine(result, ", ");
 
 		result = addChar(result, kakko[0]);
@@ -158,7 +158,7 @@ static char *GetKeyEqValueAndList(autoList_t *keys, autoList_t *values)
 
 	foreach(values, value, colidx)
 	{
-		if(colidx)
+		if (colidx)
 			result = addLine(result, " AND ");
 
 		result = xcout("[%s] = '%s'", getLine(keys, colidx), c_ValueFltr(value));
@@ -318,7 +318,7 @@ static void BulkInsert(char *tableName, autoList_t *colNames, autoList_t *rows)
 
 	CheckTableInput(tableName, colNames, rows);
 
-	if(getCount(rows) < 1)
+	if (getCount(rows) < 1)
 		return;
 
 	csvFile = makeTempFile("csv");
@@ -376,17 +376,17 @@ static void ExecCSVFile(
 
 	errorCase(isEmptyJTkn(csvFile));
 
-	if(!rowcntPerExec)
+	if (!rowcntPerExec)
 		rowcntPerExec = 100 * 1000 * 1000; // デフォルト
 
-	if(!rdszPerExec)
+	if (!rdszPerExec)
 		rdszPerExec = 100 * 1000 * 1000; // デフォルト
 
 	// tableName, colNames, csvFile(の内容) のエラーチェックは execMultiRow に任せる、この関数内ではスルー。
 
 	fp = fileOpen(csvFile, "rt");
 
-	if(!colNames)
+	if (!colNames)
 	{
 		colNames = CSVStreamToRow(fp);
 		errorCase(!colNames);
@@ -399,7 +399,7 @@ static void ExecCSVFile(
 		addElement(rows, (uint)row);
 		rowcnt = getCount(rows);
 
-		if(rowcntPerExec <= rowcnt || (rowcnt < 1000 || rowcnt % 1000 == 0) && lastseek + (uint64)rdszPerExec <= (uint64)_ftelli64(fp))
+		if (rowcntPerExec <= rowcnt || (rowcnt < 1000 || rowcnt % 1000 == 0) && lastseek + (uint64)rdszPerExec <= (uint64)_ftelli64(fp))
 		{
 			execMultiRow(tableName, colNames, rows);
 			execrowcnt += getCount(rows);
@@ -416,7 +416,7 @@ static void ExecCSVFile(
 
 	cout("(%u 行処理しました...終了しました)\n", execrowcnt);
 
-	if(hfc)
+	if (hfc)
 		releaseDim(colNames, 1);
 }
 void TA_InsertCSVFile(char *tableName, autoList_t *colNames, char *csvFile, uint rowcntPerExec, uint rdszPerExec)
@@ -450,7 +450,7 @@ void TA_TableDataFltr(char *csvFile, autoList_t *colNames, char *outCsvFile)
 	{
 		static autoList_t *DUMMY_ROWS;
 
-		if(!DUMMY_ROWS)
+		if (!DUMMY_ROWS)
 			DUMMY_ROWS = newList();
 
 		CheckTableInput("DUMMY_TABLE_NAME", colNames, DUMMY_ROWS);

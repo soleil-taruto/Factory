@@ -35,12 +35,12 @@ void SBN_CompressSabun(autoBlock_t *sabun)
 
 		for(zcnt = 0; index + zcnt < getSize(sabun); zcnt++)
 		{
-			if(getByte(sabun, index + zcnt) != 0x00)
+			if (getByte(sabun, index + zcnt) != 0x00)
 			{
 				break;
 			}
 		}
-		if(9 <= zcnt)
+		if (9 <= zcnt)
 		{
 			addElement(SqList, index);
 			addElement(SqList, zcnt);
@@ -71,7 +71,7 @@ void SBN_DecompressSabun(autoBlock_t *sabun)
 
 void SBN_KaisaDown(autoBlock_t *block)
 {
-	if(2 <= getSize(block))
+	if (2 <= getSize(block))
 	{
 		uint index;
 		uint sa;

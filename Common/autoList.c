@@ -189,20 +189,20 @@ void putElement(autoList_t *i, uint index, uint element)
 {
 	errorCase(!i);
 
-	if(i->Count <= index)
+	if (i->Count <= index)
 	{
 		uint newCount;
 
 		errorCase(UINTMAX / sizeof(uint) <= index); // ? Overflow
 		newCount = index + 1;
 
-		if(i->AllocCount < newCount)
+		if (i->AllocCount < newCount)
 		{
 			uint allocCount = newCount;
 
 			errorCase(i->Unresizable);
 
-			if(allocCount < 16)
+			if (allocCount < 16)
 			{
 				// noop
 			}
@@ -230,7 +230,7 @@ uint refElement(autoList_t *i, uint index)
 {
 	errorCase(!i);
 
-	if(i->Count <= index)
+	if (i->Count <= index)
 		return 0; // –¢’è‹`’l
 
 	return i->Elements[index];
@@ -324,7 +324,7 @@ void removeElement(autoList_t *i, uint target)
 
 	foreach(i, element, index)
 	{
-		if(element == target)
+		if (element == target)
 		{
 			i->Count--;
 			i->Elements[index] = i->Elements[i->Count];
@@ -362,9 +362,9 @@ void setCount(autoList_t *i, uint count)
 	errorCase(!i);
 	errorCase(UINTMAX / sizeof(uint) < count); // ? Overflow
 
-	if(i->Count < count)
+	if (i->Count < count)
 	{
-		if(i->AllocCount < count)
+		if (i->AllocCount < count)
 		{
 			errorCase(i->Unresizable);
 
@@ -377,14 +377,14 @@ void setCount(autoList_t *i, uint count)
 }
 void setCountFloor(autoList_t *i, uint count)
 {
-	if(getCount(i) < count)
+	if (getCount(i) < count)
 	{
 		setCount(i, count);
 	}
 }
 void setCountRoof(autoList_t *i, uint count)
 {
-	if(count < getCount(i))
+	if (count < getCount(i))
 	{
 		setCount(i, count);
 	}
@@ -418,7 +418,7 @@ void reverseElements(autoList_t *i)
 
 	errorCase(!i);
 
-	if(i->Count)
+	if (i->Count)
 	{
 		for(n = 0, f = i->Count - 1; n < f; n++, f--)
 		{
@@ -436,18 +436,18 @@ void removeZero(autoList_t *i)
 
 	for(n = 0; ; n++)
 	{
-		if(i->Count <= n)
+		if (i->Count <= n)
 		{
 			return;
 		}
-		if(i->Elements[n] == 0)
+		if (i->Elements[n] == 0)
 		{
 			break;
 		}
 	}
 	for(f = n + 1; f < i->Count; f++)
 	{
-		if(i->Elements[f])
+		if (i->Elements[f])
 		{
 			i->Elements[n] = i->Elements[f];
 			n++;
@@ -461,7 +461,7 @@ void removeTrailZero(autoList_t *i)
 
 	for(index = getCount(i); index; index--)
 	{
-		if(1 <= getElement(i, index - 1))
+		if (1 <= getElement(i, index - 1))
 		{
 			break;
 		}
@@ -470,7 +470,7 @@ void removeTrailZero(autoList_t *i)
 }
 void releaseDim_BR(void *block, uint depth, void (*blockReleaser)(void *))
 {
-	if(depth)
+	if (depth)
 	{
 		autoList_t *i = (autoList_t *)block;
 		uint index;
@@ -481,7 +481,7 @@ void releaseDim_BR(void *block, uint depth, void (*blockReleaser)(void *))
 		}
 		releaseAutoList(i);
 	}
-	else if(blockReleaser)
+	else if (blockReleaser)
 	{
 		blockReleaser(block);
 	}
@@ -507,7 +507,7 @@ uint findElement(autoList_t *i, uint target, sint (*funcComp)(uint, uint))
 
 	foreach(i, element, index)
 	{
-		if(!funcComp(element, target))
+		if (!funcComp(element, target))
 		{
 			break;
 		}
@@ -522,7 +522,7 @@ uint getCountElement(autoList_t *i, uint target, sint (*funcComp)(uint, uint))
 
 	foreach(i, element, index)
 	{
-		if(!funcComp(element, target))
+		if (!funcComp(element, target))
 		{
 			count++;
 		}
@@ -545,7 +545,7 @@ uint findPair(autoList_t *list, sint (*funcComp)(uint, uint))
 	{
 		for(faridx = index + 1; faridx < getCount(list); faridx++)
 		{
-			if(funcComp(element, getElement(list, faridx)) == 0)
+			if (funcComp(element, getElement(list, faridx)) == 0)
 			{
 				goto found;
 			}

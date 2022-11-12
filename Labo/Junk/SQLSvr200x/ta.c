@@ -21,68 +21,68 @@ int main(int argc, char **argv)
 	uint batchMode = 0;
 
 readArgs:
-	if(argIs("/U"))
+	if (argIs("/U"))
 	{
 		TA_User = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		TA_Pass = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/DB"))
+	if (argIs("/DB"))
 	{
 		TA_DBName = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/RPE"))
+	if (argIs("/RPE"))
 	{
 		rowcntPerExec = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/SPE"))
+	if (argIs("/SPE"))
 	{
 		rdszPerExec = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/BATCH"))
+	if (argIs("/BATCH"))
 	{
 		batchMode = 1;
 		goto readArgs;
 	}
 
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		TA_GetTableData(getArg(0), getArg(1));
 		return;
 	}
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		TA_GetTableSchema(getArg(0), getArg(1));
 		return;
 	}
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		TA_GetTableList(getArg(0));
 		return;
 	}
-	if(argIs("/INS"))
+	if (argIs("/INS"))
 	{
 		TA_InsertCSVFile(getArg(0), NULL, getArg(1), rowcntPerExec, rdszPerExec);
 		return;
 	}
-	if(argIs("/DEL"))
+	if (argIs("/DEL"))
 	{
 		TA_DeleteCSVFile(getArg(0), NULL, getArg(1), rowcntPerExec, rdszPerExec);
 		return;
 	}
-	if(argIs("/DELALL"))
+	if (argIs("/DELALL"))
 	{
 		TA_DeleteAll(nextArg());
 		return;
 	}
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		char *midFile = makeTempPath("mid");
 		char *tblnm;
@@ -104,13 +104,13 @@ readArgs:
 		return;
 	}
 
-	if(argIs("/BACKUP"))
+	if (argIs("/BACKUP"))
 	{
 		char *dir = nextArg();
 
 		errorCase(!existDir(dir));
 
-		if(hasArgs(1))
+		if (hasArgs(1))
 		{
 			while(hasArgs(1))
 			{
@@ -131,7 +131,7 @@ readArgs:
 			tblnms = readLines(nmsFile);
 			rapidSortLines(tblnms);
 
-			if(!batchMode)
+			if (!batchMode)
 				tblnms = selectLines_x(tblnms);
 
 			foreach(tblnms, tblnm, tblnmidx)
@@ -149,7 +149,7 @@ readArgs:
 		}
 		return;
 	}
-	if(argIs("/RESTORE"))
+	if (argIs("/RESTORE"))
 	{
 		autoList_t *files = lsFiles(nextArg());
 		char *file;
@@ -159,7 +159,7 @@ readArgs:
 		{
 			cmdTitle_x(xcout("ta - RESTORE %u / %u", index, getCount(files)));
 
-			if(!_stricmp("CSV", getExt(file)))
+			if (!_stricmp("CSV", getExt(file)))
 			{
 				char *tblnm = changeExt(getLocal(file), "");
 
@@ -177,7 +177,7 @@ readArgs:
 		return;
 	}
 
-	if(argIs("/SCHEMA"))
+	if (argIs("/SCHEMA"))
 	{
 		char *midFile = makeTempPath("mid");
 		char *nmsFile = makeTempPath("nms");

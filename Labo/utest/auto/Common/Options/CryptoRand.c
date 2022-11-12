@@ -13,7 +13,7 @@ static double GetSameByteRate(uchar *a, uchar *b, uint size)
 	cout("GSBR: %p, %p, %u\n", a, b, size);
 
 	for(index = 0; index < size; index++)
-		if(a[index] == b[index])
+		if (a[index] == b[index])
 			sameCnt++;
 
 	rate = (double)sameCnt / size;

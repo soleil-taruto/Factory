@@ -28,7 +28,7 @@ autoBlock_t *MakeEncCounter(autoBlock_t *clSeed, autoBlock_t *svSeed)
 	AES128_EncryptBlock(keyTable, encCounter, encCounter);
 	AES128_ReleaseKeyTable(keyTable);
 
-	if(encCounter)
+	if (encCounter)
 	{
 		cout("encCounter: %s\n", tmp = makeHexLine(encCounter));
 		memFree(tmp);
@@ -47,7 +47,7 @@ static void AddCounter(autoBlock_t *counter)
 
 	for(index = 0; index < 16; index++)
 	{
-		if(b_(counter)[index] < 0xff)
+		if (b_(counter)[index] < 0xff)
 		{
 			b_(counter)[index]++;
 			break;
@@ -65,7 +65,7 @@ void Crypt(autoBlock_t *data, autoBlock_t *rawKey, autoBlock_t *encCounter)
 	{
 		uint subPos = index % 16;
 
-		if(!subPos)
+		if (!subPos)
 		{
 			AES128_EncryptBlock(keyTable, encCounter, mask);
 			AddCounter(encCounter);
@@ -96,7 +96,7 @@ int UnputHash(autoBlock_t *data) // ret: ? 正常なデータ
 	autoBlock_t *hash2;
 	int retval;
 
-	if(getSize(data) < 16)
+	if (getSize(data) < 16)
 		return 0;
 
 	hash1 = getSubBytes(data, getSize(data) - 16, 16);
@@ -127,15 +127,15 @@ int Unadd_RandPart_Padding(autoBlock_t *block) // ret: ? 正常なデータ
 {
 	uint size;
 
-	if(getSize(block) < 1)
+	if (getSize(block) < 1)
 		return 0;
 
 	size = unaddByte(block);
 
-	if(size < 0x10)
+	if (size < 0x10)
 		return 0;
 
-	if(getSize(block) < size)
+	if (getSize(block) < size)
 		return 0;
 
 	setSize(block, getSize(block) - size);
@@ -184,10 +184,10 @@ int RCBCDecrypt(autoBlock_t *block, autoBlock_t *rawKey) // ret: ? 成功
 	errorCase(!rawKey);
 	errorCase(getSize(rawKey) != 16);
 
-	if(getSize(block) < 32)
+	if (getSize(block) < 32)
 		return 0;
 
-	if(getSize(block) % 16 != 0)
+	if (getSize(block) % 16 != 0)
 		return 0;
 
 	keyTable = AES128_CreateKeyTable(rawKey, 0);

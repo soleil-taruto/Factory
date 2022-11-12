@@ -50,14 +50,14 @@ void ReleaseSockStream(SockStream_t *i)
 }
 void SetSockStreamTimeout(SockStream_t *i, uint timeout) // timeout: 0 == ñ≥êßå¿
 {
-	if(timeout)
+	if (timeout)
 		i->Timeout = now() + timeout;
 	else
 		i->Timeout = UINTMAX;
 }
 uint GetSockStreamTimeout(SockStream_t *i) // ret: 0 == ñ≥êßå¿
 {
-	if(i->Timeout == UINTMAX)
+	if (i->Timeout == UINTMAX)
 		return 0;
 
 	return i->Timeout;
@@ -89,12 +89,12 @@ static int IsTimeout(SockStream_t *i, int blockFlag)
 {
 	uint nowTime = now();
 
-	if(i->Timeout < nowTime)
+	if (i->Timeout < nowTime)
 		return 1;
 
-	if(blockFlag && i->BlockTimeout)
+	if (blockFlag && i->BlockTimeout)
 	{
-		if(!i->CurrBlockTimeout)
+		if (!i->CurrBlockTimeout)
 			i->CurrBlockTimeout = nowTime + i->BlockTimeout;
 
 		{
@@ -104,7 +104,7 @@ static int IsTimeout(SockStream_t *i, int blockFlag)
 //			cout("BLOCK_TIMEOUT: %u -> %u (%u)\n", a, b, b - a);
 		}
 
-		if(i->CurrBlockTimeout < nowTime)
+		if (i->CurrBlockTimeout < nowTime)
 			return 1;
 	}
 	return 0;
@@ -119,7 +119,7 @@ void (*SockRecvInterlude)(void); // ì«Ç›çûÇ›ÉoÉbÉtÉ@Ç™êsÇ´ÇÈìxÇ…Ç…åƒÇ‘ÅB(R_BUFF_
 
 int SockRecvCharWait(SockStream_t *i, uint timeout) // ret: ? SockRecvChar() Ç™ï∂éöÇ© EOF ÇÇ∑ÇÆÇ…ï‘ÇπÇÈÅB
 {
-	if(IsTimeout(i, 0))
+	if (IsTimeout(i, 0))
 		i->Sock = -1;
 
 	return
@@ -131,15 +131,15 @@ int SockRecvChar(SockStream_t *i)
 {
 	int retval;
 
-	if(i->R_Buff.Index < i->R_Buff.Size)
+	if (i->R_Buff.Index < i->R_Buff.Size)
 	{
 		return i->R_Buff.Buffer[i->R_Buff.Index++];
 	}
-	if(SockRecvInterlude)
+	if (SockRecvInterlude)
 	{
 		SockRecvInterlude();
 	}
-	if(i->Sock == -1) // ? ñ≥å¯
+	if (i->Sock == -1) // ? ñ≥å¯
 	{
 		goto sockClosed;
 	}
@@ -147,26 +147,26 @@ int SockRecvChar(SockStream_t *i)
 
 	for(; ; )
 	{
-		if(IsTimeout(i, 1))
+		if (IsTimeout(i, 1))
 		{
 			break;
 		}
 		retval = SockTransmit(i->Sock, i->R_Buff.Buffer, R_BUFF_SIZE, R_TIMEOUT, 0);
 
-		if(retval == -1)
+		if (retval == -1)
 		{
 			break;
 		}
-		if(retval != 0)
+		if (retval != 0)
 		{
 			errorCase(retval < 1 || R_BUFF_SIZE < retval);
 
 			i->R_Buff.Size = retval;
 			i->R_Buff.Index = 1;
 
-			if(i->Extra.RecvSizeLimiter != 0UI64)
+			if (i->Extra.RecvSizeLimiter != 0UI64)
 			{
-				if(i->Extra.RecvSizeLimiter <= retval) // 0 Ç≈ï¬Ç∂ÇÈ <- 0 Ç…Ç»ÇÈÇ∆ñ≥å¯Ç…Ç»ÇÈÇÃÇ≈..
+				if (i->Extra.RecvSizeLimiter <= retval) // 0 Ç≈ï¬Ç∂ÇÈ <- 0 Ç…Ç»ÇÈÇ∆ñ≥å¯Ç…Ç»ÇÈÇÃÇ≈..
 					i->Sock = -1;
 				else
 					i->Extra.RecvSizeLimiter -= retval;
@@ -183,23 +183,23 @@ int TrySockFlush(SockStream_t *i, uint timeout) // ret: ? Ç±ÇÍà»è„ëóêMÇ∑ÇÈïKóvÇÕ
 {
 	int retval;
 
-	if(IsTimeout(i, 0))
+	if (IsTimeout(i, 0))
 	{
 		i->Sock = -1;
 		return 1;
 	}
-	if(i->Sock == -1)
+	if (i->Sock == -1)
 		return 1;
 
-	if(i->W_Buff.Size == 0)
+	if (i->W_Buff.Size == 0)
 		return 1;
 
-	if(SockSendInterlude)
+	if (SockSendInterlude)
 		SockSendInterlude();
 
 	retval = SockTransmit(i->Sock, i->W_Buff.Buffer, i->W_Buff.Size, timeout, 1);
 
-	if(retval == -1)
+	if (retval == -1)
 	{
 		i->Sock = -1;
 		return 1;
@@ -213,7 +213,7 @@ int TrySockFlush(SockStream_t *i, uint timeout) // ret: ? Ç±ÇÍà»è„ëóêMÇ∑ÇÈïKóvÇÕ
 }
 int SockSendCharWait(SockStream_t *i, uint timeout) // ret: ? SockSendChar() Ç™ÇPï∂éöèàóùÇµÇƒÇ∑ÇÆÇ…êßå‰Çï‘ÇπÇÈÇ©ÅAêÿífÇµÇΩÅEÇµÇƒÇ¢ÇÈÅB
 {
-	if(IsTimeout(i, 0))
+	if (IsTimeout(i, 0))
 		i->Sock = -1;
 
 	return
@@ -223,7 +223,7 @@ int SockSendCharWait(SockStream_t *i, uint timeout) // ret: ? SockSendChar() Ç™Ç
 }
 void SockSendChar(SockStream_t *i, int chr)
 {
-	if(i->W_Buff.Size == W_BUFF_SIZE)
+	if (i->W_Buff.Size == W_BUFF_SIZE)
 	{
 		SockFlush(i);
 	}
@@ -233,11 +233,11 @@ void SockFlush(SockStream_t *i)
 {
 	int retval;
 
-	if(SockSendInterlude)
+	if (SockSendInterlude)
 	{
 		SockSendInterlude();
 	}
-	if(i->Sock == -1) // ? ñ≥å¯
+	if (i->Sock == -1) // ? ñ≥å¯
 	{
 		goto writeEnd;
 	}
@@ -247,17 +247,17 @@ void SockFlush(SockStream_t *i)
 
 	for(; ; )
 	{
-		if(i->W_Buff.Index == i->W_Buff.Size)
+		if (i->W_Buff.Index == i->W_Buff.Size)
 		{
 			goto writeEnd;
 		}
-		if(IsTimeout(i, 1))
+		if (IsTimeout(i, 1))
 		{
 			break;
 		}
 		retval = SockTransmit(i->Sock, i->W_Buff.Buffer + i->W_Buff.Index, i->W_Buff.Size - i->W_Buff.Index, W_TIMEOUT, 1);
 
-		if(retval == -1)
+		if (retval == -1)
 		{
 			break;
 		}
@@ -299,15 +299,15 @@ char *SockRecvLine(SockStream_t *i, uint lenmax)
 	{
 		chr = SockRecvChar(i);
 
-		if(chr == '\r') // CR
+		if (chr == '\r') // CR
 		{
 			continue;
 		}
-		if(chr == EOF || chr == '\0' || chr == '\n') // LF
+		if (chr == EOF || chr == '\0' || chr == '\n') // LF
 		{
 			break;
 		}
-		if(lenmax <= getSize(buffer)) // Overflow -> â¸çsÇ∆å©Ç»Ç∑ÅB
+		if (lenmax <= getSize(buffer)) // Overflow -> â¸çsÇ∆å©Ç»Ç∑ÅB
 		{
 			break;
 		}
@@ -366,7 +366,7 @@ int SockRecvBlock(SockStream_t *i, void *block, uint blockSize) // ret: EOFÇì«Ç
 	{
 		int chr = SockRecvChar(i);
 
-		if(chr == EOF)
+		if (chr == EOF)
 		{
 			memset((uchar *)block + index, 0x00, blockSize - index);
 			SockRecvBlock_LastRecvSize = index;

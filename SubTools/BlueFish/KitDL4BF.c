@@ -13,12 +13,12 @@ static autoList_t *AppUrls;
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/U"))
+	if (argIs("/U"))
 	{
 		DLDir = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		DestDir = nextArg();
 		goto readArgs;
@@ -53,21 +53,21 @@ readArgs:
 
 		foreach(lines, line, index)
 		{
-			if(startsWith(line, "<div><a href=\""))
+			if (startsWith(line, "<div><a href=\""))
 			{
 				char *p = strchr(line, '"') + 1;
 				char *q;
 
 				q = strchr(p, '"');
 
-				if(q)
+				if (q)
 				{
 					char *appFile;
 
 					*q = '\0';
 					appFile = strx(p);
 
-					if(!_stricmp("zip", getExt(appFile)) && isFairLocalPath(appFile, 100))
+					if (!_stricmp("zip", getExt(appFile)) && isFairLocalPath(appFile, 100))
 					{
 						char *appName = changeExt(appFile, "");
 
@@ -120,7 +120,7 @@ readArgs:
 
 			coSleep(2000); // ‰½‚©’Í‚Ý‚Á‚Ï‚Å HGet ‚ðíœ‚Å‚«‚È‚¢‚ÆŒ™‚È‚Ì‚ÅA­‚µ‘Ò‚ÂB
 
-			if(existDir(wDir))
+			if (existDir(wDir))
 				semiRemovePath(wDir);
 
 			createDir(wDir);

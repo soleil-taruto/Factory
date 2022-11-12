@@ -35,10 +35,10 @@ static void DoTest_H(uchar *hash)
 
 	for(; ; )
 	{
-		if(count < 10000 || count % 10000 == 0)
+		if (count < 10000 || count % 10000 == 0)
 			cout("[%u] %s\n", count, c_makeHexLine(gndBlockVar(hash, 64, gab)));
 
-		if(rbtHasKey(hashes, (uint)hash))
+		if (rbtHasKey(hashes, (uint)hash))
 		{
 			cout("COLL @ %u\n", count);
 			break;

@@ -38,12 +38,12 @@ static void Csv2Bmp(char *rFile, char *wFile)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/B2C"))
+	if (argIs("/B2C"))
 	{
 		Bmp2Csv(getArg(0), getArg(1));
 		return;
 	}
-	if(argIs("/C2B"))
+	if (argIs("/C2B"))
 	{
 		Csv2Bmp(getArg(0), getArg(1));
 		return;

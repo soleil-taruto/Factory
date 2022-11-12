@@ -25,7 +25,7 @@ static char *Get7zExeFile(void) // ret: 空白を含まないパスであること。
 {
 	static char *file;
 
-	if(!file)
+	if (!file)
 		file = GetCollaboFile(FILE_7Z_EXE);
 
 	return file;
@@ -37,7 +37,7 @@ static char *GetSwitches(void)
 	memFree(ret);
 	ret = strx("");
 
-	if(Passphrase)
+	if (Passphrase)
 	{
 		errorCase_m(!lineExp("<1,100,--__09AZaz>", Passphrase), "パスフレーズに使える文字は - _ 0～9 A～Z a～z です。");
 
@@ -64,7 +64,7 @@ static char *GetWFile(char *path)
 		error();
 	}
 
-	if(OutputSameDir)
+	if (OutputSameDir)
 	{
 		file7z = addExt(strx(path), ext);
 		file7z = toCreatableTildaPath(file7z, IMAX);
@@ -102,7 +102,7 @@ static void Pack7z_Dir(char *dir)
 
 	file7z = GetWFile(dir);
 
-	if(TrimTopDir)
+	if (TrimTopDir)
 	{
 		autoList_t *subPaths = ls(dir);
 		char *subPath;
@@ -126,11 +126,11 @@ static void Pack7z(char *path)
 {
 	path = makeFullPath(path);
 
-	if(existFile(path))
+	if (existFile(path))
 	{
 		Pack7z_File(path);
 	}
-	else if(existDir(path))
+	else if (existDir(path))
 	{
 		Pack7z_Dir(path);
 	}
@@ -138,12 +138,12 @@ static void Pack7z(char *path)
 	{
 		error();
 	}
-	if(!OutputSameDir)
+	if (!OutputSameDir)
 	{
 		LOGPOS();
 		coExecute_x(xcout("START %s", LastOutputDir));
 	}
-	if(OutputAndDelete)
+	if (OutputAndDelete)
 	{
 		LOGPOS();
 		recurRemovePath(path);
@@ -159,7 +159,7 @@ int main(int argc, char **argv)
 	cout("=======\n");
 
 readArgs:
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		cout("+----------------+\n");
 		cout("| 同じ場所に作成 |\n");
@@ -168,17 +168,17 @@ readArgs:
 		OutputSameDir = 1;
 		goto readArgs;
 	}
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		TrimTopDir = 1;
 		goto readArgs;
 	}
-	if(argIs("/7"))
+	if (argIs("/7"))
 	{
 		WFileType = '7';
 		goto readArgs;
 	}
-	if(argIs("/OAD"))
+	if (argIs("/OAD"))
 	{
 		cout("+-------------------+\n");
 		cout("| OUTPUT AND DELETE |\n");
@@ -187,13 +187,13 @@ readArgs:
 		OutputAndDelete = 1;
 		goto readArgs;
 	}
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		Passphrase = nextArg();
 		goto readArgs;
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		Pack7z(nextArg());
 		return;

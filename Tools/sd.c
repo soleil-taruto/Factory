@@ -33,10 +33,10 @@ static char *GetAutoName(void)
 		for(; ; )
 		{
 			for(index = 0; index < getCount(lines); index += 2)
-				if(!_stricmp(sno, getLine(lines, index)))
+				if (!_stricmp(sno, getLine(lines, index)))
 					break;
 
-			if(index == getCount(lines))
+			if (index == getCount(lines))
 				break;
 
 			sno = xcout("%u", toValue_x(sno) + 1);
@@ -65,7 +65,7 @@ static sint SSD_Comp(uint v1, uint v2)
 
 		ret = r1 - r2;
 
-		if(ret)
+		if (ret)
 			return ret;
 	}
 
@@ -97,10 +97,10 @@ int main(int argc, char **argv)
 	name = nnNextArg();
 	dir  = nnNextArg();
 
-	if(!name)
+	if (!name)
 		name = GetAutoName(); // g
 
-	if(!dir)
+	if (!dir)
 		dir = GetAutoDir(); // g
 
 	line2JToken(name, 1, 1);
@@ -118,10 +118,10 @@ int main(int argc, char **argv)
 		uint index;
 
 		for(index = 0; index < getCount(lines); index += 2)
-			if(!_stricmp(name, getLine(lines, index)))
+			if (!_stricmp(name, getLine(lines, index)))
 				break;
 
-		if(index < getCount(lines))
+		if (index < getCount(lines))
 		{
 			strzp((char **)directGetPoint(lines, index + 0), name);
 			strzp((char **)directGetPoint(lines, index + 1), dir);

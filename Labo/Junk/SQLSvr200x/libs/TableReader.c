@@ -105,17 +105,17 @@ autoList_t *TR_SelectTop1WhereAnd(char *csvFile, autoList_t *whereColNames, auto
 	while(row = CSVStreamToRow(fp))
 	{
 		foreach(whereIndexes, colidx, index)
-			if(strcmp(refLine(row, colidx), getLine(whereColValues, index))) // ? not match
+			if (strcmp(refLine(row, colidx), getLine(whereColValues, index))) // ? not match
 				break;
 
-		if(index == getCount(whereIndexes)) // ? match
+		if (index == getCount(whereIndexes)) // ? match
 			break;
 
 		releaseDim(row, 1);
 	}
 	fileClose(fp);
 
-	if(row) // ? found
+	if (row) // ? found
 	{
 		autoList_t *row2 = newList();
 
@@ -160,10 +160,10 @@ uint64 TR_SelectWhereAnd(char *csvFile, autoList_t *whereColNames, autoList_t *w
 	while(row = CSVStreamToRow(fp))
 	{
 		foreach(whereIndexes, colidx, index)
-			if(strcmp(refLine(row, colidx), getLine(whereColValues, index))) // ? not match
+			if (strcmp(refLine(row, colidx), getLine(whereColValues, index))) // ? not match
 				break;
 
-		if(index == getCount(whereIndexes)) // ? match
+		if (index == getCount(whereIndexes)) // ? match
 		{
 			foreach(destIndexes, colidx, index)
 				writeLine(destfp, refLine(row, colidx));
@@ -207,10 +207,10 @@ uint64 TR_DeleteWhereAnd(char *csvFile, autoList_t *whereColNames, autoList_t *w
 	while(row = CSVStreamToRow(fp))
 	{
 		foreach(whereIndexes, colidx, index)
-			if(strcmp(refLine(row, colidx), getLine(whereColValues, index))) // ? not match
+			if (strcmp(refLine(row, colidx), getLine(whereColValues, index))) // ? not match
 				break;
 
-		if(index == getCount(whereIndexes)) // ? match
+		if (index == getCount(whereIndexes)) // ? match
 			delnum++;
 		else
 			RowToCSVStream(destfp, row);

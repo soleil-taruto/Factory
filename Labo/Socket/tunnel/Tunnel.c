@@ -34,7 +34,7 @@ static void Cout_WrLine(FILE *fp, char *line)
 }
 static void KeyEvent(int key)
 {
-	if(key == '+' && OutputFp)
+	if (key == '+' && OutputFp)
 	{
 		Cout_WrLine(OutputFp, "++++++++++++++++++++++++++");
 		Cout_WrLine(OutputFp, "++++++++++ PLUS ++++++++++");
@@ -46,11 +46,11 @@ static void PrintDataFltr(autoBlock_t *buff, uint header)
 	autoBlock_t *pBuff = newBlock();
 	char *pLine;
 
-	if(getSize(buff))
+	if (getSize(buff))
 	{
 		uint index;
 
-		if(OutputFp)
+		if (OutputFp)
 		{
 			writeToken(OutputFp, (char *)header);
 			writeChar(OutputFp, ' ');
@@ -61,17 +61,17 @@ static void PrintDataFltr(autoBlock_t *buff, uint header)
 			int chr = getByte(buff, index);
 			int pchr;
 
-			if(OutputFp)
+			if (OutputFp)
 				writeChar(OutputFp, chr);
 
 			pchr = chr;
 			m_toHalf(pchr);
 			addByte(pBuff, pchr);
 
-			if(chr == '\n')
+			if (chr == '\n')
 				addByte(pBuff, '\n');
 		}
-		if(OutputFp)
+		if (OutputFp)
 			writeChar(OutputFp, '\n');
 
 #if 0 // test
@@ -79,10 +79,10 @@ static void PrintDataFltr(autoBlock_t *buff, uint header)
 			static autoList_t *fpQueue;
 			thread_tls static FILE *fp;
 
-			if(!fpQueue)
+			if (!fpQueue)
 				fpQueue = newList();
 
-			if(!fp)
+			if (!fp)
 			{
 				static uint counter;
 				char *file;
@@ -91,7 +91,7 @@ static void PrintDataFltr(autoBlock_t *buff, uint header)
 				counter++;
 				fp = fileOpen(file, "wb");
 
-				if(30 < getCount(fpQueue))
+				if (30 < getCount(fpQueue))
 				{
 					fileClose((FILE *)desertElement(fpQueue, 0));
 				}
@@ -103,14 +103,14 @@ static void PrintDataFltr(autoBlock_t *buff, uint header)
 	}
 	pLine = unbindBlock2Line(pBuff);
 
-	if(*pLine)
+	if (*pLine)
 	{
 		char *p = strchr(pLine, '\0') - 1;
 
-		if(*p == '\n')
+		if (*p == '\n')
 			*p = '\0';
 
-		if(*pLine)
+		if (*pLine)
 		{
 			cout("%s\n", header);
 			cout("%s\n", pLine);
@@ -146,30 +146,30 @@ static void Perform(int sock, int fwdSock)
 }
 static int ReadArgs(void)
 {
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		OutputFile = nextArg();
 		OutputMode = "wb";
 		return 1;
 	}
-	if(argIs("/A"))
+	if (argIs("/A"))
 	{
 		OutputFile = nextArg();
 		OutputMode = "ab";
 		return 1;
 	}
-	if(argIs("/U"))
+	if (argIs("/U"))
 	{
 		DirectionMode = DM_UPLOAD_ONLY;
 		return 1;
 	}
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		DirectionMode = DM_DOWNLOAD_ONLY;
 		return 1;
 	}
 
-	if(OutputFile)
+	if (OutputFile)
 		OutputFp = fileOpen(OutputFile, OutputMode);
 
 	return 0;
@@ -179,6 +179,6 @@ int main(int argc, char **argv)
 	TunnelKeyEvent = KeyEvent;
 	TunnelMain(ReadArgs, Perform, "Tunnel", NULL);
 
-	if(OutputFp)
+	if (OutputFp)
 		fileClose(OutputFp);
 }

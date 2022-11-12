@@ -11,7 +11,7 @@ static int BackedChr;
 
 static int NextChar(void)
 {
-	if(Backed)
+	if (Backed)
 	{
 		Backed = 0;
 		return BackedChr;
@@ -39,14 +39,14 @@ static void DoEscape(char *rFile, char *wFile)
 		int chr2;
 		int mbChr;
 
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
 		chr2 = NextChar();
 		mbChr = chr << 8 | chr2;
 
-//		if(isJChar(mbChr))
-		if(isSJISChar(mbChr))
+//		if (isJChar(mbChr))
+		if (isSJISChar(mbChr))
 		{
 			WriteChar(chr);
 			WriteChar(chr2);
@@ -55,12 +55,12 @@ static void DoEscape(char *rFile, char *wFile)
 		{
 			BackChar(chr2);
 
-			if(chr == '\\')
+			if (chr == '\\')
 			{
 				WriteChar('\\');
 				WriteChar('\\');
 			}
-			else if(
+			else if (
 				chr == 0x09 ||
 				chr == 0x0a ||
 				0x20 <= chr && chr <= 0x7e ||
@@ -89,14 +89,14 @@ static void DoUnescape(char *rFile, char *wFile)
 	{
 		int chr = NextChar();
 
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
-		if(chr == '\\')
+		if (chr == '\\')
 		{
 			chr = NextChar();
 
-			if(chr != '\\')
+			if (chr != '\\')
 			{
 				int chr2 = NextChar();
 
@@ -110,20 +110,20 @@ static void DoUnescape(char *rFile, char *wFile)
 }
 static void DoEscapeMain(int doEscapeFlag, char *rFile, char *wFile)
 {
-	if(doEscapeFlag)
+	if (doEscapeFlag)
 		DoEscape(rFile, wFile);
 	else
 		DoUnescape(rFile, wFile);
 }
 static void EscapeMain(int doEscapeFlag)
 {
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		DoEscapeMain(doEscapeFlag, getArg(0), getArg(1));
 		return;
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		DoEscapeMain(doEscapeFlag, nextArg(), c_getOutFile("tescape_out.txt"));
 		openOutDir();
@@ -137,12 +137,12 @@ static void EscapeMain(int doEscapeFlag)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/E"))
+	if (argIs("/E"))
 	{
 		EscapeMain(1);
 		return;
 	}
-	if(argIs("/U"))
+	if (argIs("/U"))
 	{
 		EscapeMain(0);
 		return;

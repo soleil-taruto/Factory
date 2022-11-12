@@ -121,18 +121,18 @@ static void ChannelTh(uint prm)
 		autoBlock_t *recvBuffer = newBlock();
 		autoBlock_t *sendBuffer = newBlock();
 
-		if(SessionTimeout)
+		if (SessionTimeout)
 		{
 			i->Timeout = now() + SessionTimeout;
 		}
-		if(i->CarryRecvBuffer)
+		if (i->CarryRecvBuffer)
 		{
 			ab_addBytes(recvBuffer, i->CarryRecvBuffer);
 			nobSetSize(i->CarryRecvBuffer, 0);
 		}
 		while(KeepTheServer)
 		{
-			if(getSize(recvBuffer) || getSize(sendBuffer))
+			if (getSize(recvBuffer) || getSize(sendBuffer))
 				cout("[%c%c] %u -> %u R:%4u S:%4u\n"
 					,i->EncryptMode ? 'E' : 'D'
 					,ReverseMode ? 'S' : 'C'
@@ -142,22 +142,22 @@ static void ChannelTh(uint prm)
 					,getSize(sendBuffer)
 					);
 
-			if(i->Timeout && i->Timeout < now())
+			if (i->Timeout && i->Timeout < now())
 			{
 				cout("セッションタイムアウト\n");
 				break;
 			}
-			if(getSize(sendBuffer))
+			if (getSize(sendBuffer))
 			{
-				if(SockSendSequ(i->SendSock, sendBuffer, 1000) == -1)
+				if (SockSendSequ(i->SendSock, sendBuffer, 1000) == -1)
 				{
 					break;
 				}
 				continue;
 			}
-			if(i->EncryptMode)
+			if (i->EncryptMode)
 			{
-				if(getSize(recvBuffer))
+				if (getSize(recvBuffer))
 				{
 					uint sendSize = m_min(getSize(recvBuffer), SEND_MAX);
 
@@ -179,11 +179,11 @@ static void ChannelTh(uint prm)
 			}
 			else // ? Decrypt mode
 			{
-				if(2 <= getSize(recvBuffer))
+				if (2 <= getSize(recvBuffer))
 				{
 					uint recvSize = getByte(recvBuffer, 1) << 8 | getByte(recvBuffer, 0);
 
-					if(recvSize <= getSize(recvBuffer) - 2)
+					if (recvSize <= getSize(recvBuffer) - 2)
 					{
 						uint64 rc2[2];
 
@@ -193,12 +193,12 @@ static void ChannelTh(uint prm)
 
 						i->Counter2[0]++;
 
-						if(!rcphrDecryptorBlock(sendBuffer, KeyTableList, rc2))
+						if (!rcphrDecryptorBlock(sendBuffer, KeyTableList, rc2))
 						{
 							cout("復号エラー(復号データのハッシュが不一致)\n");
 							break;
 						}
-						if(rc2[0] != i->Counter2[0] || rc2[1] != i->Counter2[1])
+						if (rc2[0] != i->Counter2[0] || rc2[1] != i->Counter2[1])
 						{
 							cout("同期エラー(復号データのカウンタが不一致)\n");
 							break;
@@ -207,11 +207,11 @@ static void ChannelTh(uint prm)
 					}
 				}
 			}
-			if(SockRecvSequ(i->RecvSock, recvBuffer, 1000) == -1)
+			if (SockRecvSequ(i->RecvSock, recvBuffer, 1000) == -1)
 			{
 				break;
 			}
-			if(getSize(recvBuffer) == 0 && i->Death)
+			if (getSize(recvBuffer) == 0 && i->Death)
 			{
 				break;
 			}
@@ -249,7 +249,7 @@ LOGPOS(); // test
 	inner_critical();
 LOGPOS(); // test
 
-	if(ReverseMode)
+	if (ReverseMode)
 	{
 LOGPOS(); // test
 		fwdSock = -1; // ダミー
@@ -261,7 +261,7 @@ LOGPOS(); // test
 		fwdSock = sockConnect(ip, FwdDomain, FwdPort);
 		cout("接続: %d -> %d\n", sock, fwdSock);
 
-		if(fwdSock == -1)
+		if (fwdSock == -1)
 			goto endfunc;
 	}
 LOGPOS(); // test
@@ -287,7 +287,7 @@ LOGPOS(); // test
 		uint64 wc2[2];
 		int fault;
 
-		if(ReverseMode)
+		if (ReverseMode)
 		{
 			encChannel = channels + 1;
 			decChannel = channels + 0;
@@ -363,7 +363,7 @@ LOGPOS(); // test
 		rippedBuffer = SockRipRecvBuffer(ss);
 		ReleaseSockStream(ss);
 
-		if(fault)
+		if (fault)
 		{
 			cout("不正な接続(鍵の不一致)\n");
 			goto endnegotiated;
@@ -371,12 +371,12 @@ LOGPOS(); // test
 	}
 	// < negotiate
 
-	if(ReverseMode)
+	if (ReverseMode)
 	{
 		fwdSock = sockConnect(ip, FwdDomain, FwdPort);
 		cout("接続: %d -> %d\n", sock, fwdSock);
 
-		if(fwdSock == -1)
+		if (fwdSock == -1)
 			goto endnegotiated;
 
 		channels[0].SendSock = fwdSock;
@@ -396,7 +396,7 @@ LOGPOS(); // test
 	inner_critical();
 
 endnegotiated:
-	if(fwdSock != -1)
+	if (fwdSock != -1)
 		sockDisconnect(fwdSock);
 
 	releaseAutoBlock(rippedBuffer);
@@ -409,12 +409,12 @@ static int IdleTh(void)
 {
 	while(hasKey())
 	{
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 		{
 			KeepTheServer = 0;
 		}
 	}
-	if(collectEvents(StopServerEventHandle, 0))
+	if (collectEvents(StopServerEventHandle, 0))
 	{
 		KeepTheServer = 0;
 	}
@@ -430,52 +430,52 @@ int main(int argc, char **argv)
 
 readArgs:
 	// 転送先
-	if(argIs("/FD")) // Forward Domain
+	if (argIs("/FD")) // Forward Domain
 	{
 		FwdDomain = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/FP")) // Forward Port
+	if (argIs("/FP")) // Forward Port
 	{
 		FwdPort = toValue(nextArg());
 		goto readArgs;
 	}
 
 	// 待ち受け
-	if(argIs("/P")) // Port
+	if (argIs("/P")) // Port
 	{
 		portno = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/C")) // Connect max
+	if (argIs("/C")) // Connect max
 	{
 		connectmax = toValue(nextArg());
 		goto readArgs;
 	}
 
-	if(argIs("/R")) // Reverse mode
+	if (argIs("/R")) // Reverse mode
 	{
 		ReverseMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/T")) // session Timeout
+	if (argIs("/T")) // session Timeout
 	{
 		SessionTimeout = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/XT")) // eXtra Timeout
+	if (argIs("/XT")) // eXtra Timeout
 	{
 		ConnectWait = toValue(nextArg());
 		NegotiateTimeout = toValue(nextArg());
 		SuicideTimeout = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/KB")) // Key Bundle file
+	if (argIs("/KB")) // Key Bundle file
 	{
 		KeyBundleFile = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/KW")) // Key Width
+	if (argIs("/KW")) // Key Width
 	{
 		KeyWidth = toValue(nextArg());
 		goto readArgs;
@@ -483,7 +483,7 @@ readArgs:
 
 	ssen = xcout("cerulean.charlotte Factory crypTunnel stop server event object %u", portno);
 
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		eventWakeup(ssen);
 		return;

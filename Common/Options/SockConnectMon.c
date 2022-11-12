@@ -13,23 +13,23 @@ void sockConnectMonUpdated(void)
 
 	sockConnectedRate = (double)sockConnectedCount / sockConnectMax;
 
-	     if(0.9 < sockConnectedRate) level = 2;
-	else if(0.6 < sockConnectedRate) level = 1;
+	     if (0.9 < sockConnectedRate) level = 2;
+	else if (0.6 < sockConnectedRate) level = 1;
 	else                             level = 0;
 
-	if(level == 2)
+	if (level == 2)
 		cout("[sockConnectMon] %u / %u = %.6f\n", sockConnectedCount, sockConnectMax, sockConnectedRate);
 
-	if(10 <= sockConnectMax)
+	if (10 <= sockConnectMax)
 	{
 		static uint lastLevel;
 
-		if(level != lastLevel)
+		if (level != lastLevel)
 		{
 			static uint lastChanged;
 			uint nowTime = now();
 
-			if(lastChanged + 2 < nowTime)
+			if (lastChanged + 2 < nowTime)
 			{
 				switch(level)
 				{

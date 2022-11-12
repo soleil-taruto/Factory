@@ -36,7 +36,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 	LOGPOS();
 
-	if(!UnpadFile2(prmFile, "nrun_Prm"))
+	if (!UnpadFile2(prmFile, "nrun_Prm"))
 		goto endFunc;
 
 	fp = fileOpen(prmFile, "rb");
@@ -54,14 +54,14 @@ static int Perform(char *prmFile, char *ansFile)
 	cout("batFile: %s\n", batFile);
 	cout("exeFile: %s\n", exeFile);
 
-	if(findLine(ReqIdHistory, reqId) < getCount(ReqIdHistory))
+	if (findLine(ReqIdHistory, reqId) < getCount(ReqIdHistory))
 	{
 		cout("FOUND_REQID\n");
 		retval = 1;
 		goto makeAns;
 	}
 
-	if(existFile(batFile))
+	if (existFile(batFile))
 	{
 		BlueFish_Lock();
 		{
@@ -69,7 +69,7 @@ static int Perform(char *prmFile, char *ansFile)
 		}
 		BlueFish_Unlock();
 	}
-	else if(existFile(exeFile))
+	else if (existFile(exeFile))
 	{
 		BlueFish_Lock();
 		{
@@ -86,7 +86,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 	addElement(ReqIdHistory, (uint)strx(reqId));
 
-	if(REQIDHISTORY_MAX < getCount(ReqIdHistory))
+	if (REQIDHISTORY_MAX < getCount(ReqIdHistory))
 	{
 		LOGPOS();
 		memFree((char *)desertElement(ReqIdHistory, 0));
@@ -115,7 +115,7 @@ static int Idle(void)
 {
 	while(hasKey())
 	{
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 		{
 			cout("nrunServer_END\n");
 			return 0;
@@ -130,12 +130,12 @@ int main(int argc, char **argv)
 	uint connectmax = 10;
 
 readArgs:
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		portno = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		connectmax = toValue(nextArg());
 		goto readArgs;

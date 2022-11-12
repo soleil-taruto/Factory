@@ -17,10 +17,10 @@ static void DoTestOnce(uint n)
 		uint c;
 
 		for(c = 0; c < n; c++)
-			if(!mt19937_rnd(n))
+			if (!mt19937_rnd(n))
 				break;
 
-		if(c == n) // ? n回の試行で1回も起こらなかった。
+		if (c == n) // ? n回の試行で1回も起こらなかった。
 			nu++;
 
 		de++;

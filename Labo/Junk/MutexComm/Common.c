@@ -41,9 +41,9 @@ void M_Set(uint index, uint status)
 	errorCase(M_NUM <= index);
 	errorCase(2 <= status);
 
-	if(Statuses[index] != status)
+	if (Statuses[index] != status)
 	{
-		if(status)
+		if (status)
 			handleWaitForever(Mtxs[index]);
 		else
 			mutexRelease(Mtxs[index]);
@@ -58,7 +58,7 @@ uint M_Get(uint index)
 
 	errorCase(Statuses[index]); // 2bs, ©•ª‚Å Set ‚µ‚Ä‚¢‚é‚â‚Â‚Í Get ‚µ‚È‚¢‚Í‚¸I
 
-	if(handleWaitForMillis(Mtxs[index], 0))
+	if (handleWaitForMillis(Mtxs[index], 0))
 	{
 		mutexRelease(Mtxs[index]);
 		return 0;

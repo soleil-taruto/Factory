@@ -27,7 +27,7 @@ static uint RecvEhlo(SockStream_t *ss)
 	{
 		char *line = RecvLineDisp(ss);
 
-		if(lineExp("250 <>", line))
+		if (lineExp("250 <>", line))
 		{
 			memFree(line);
 			return 1;
@@ -66,32 +66,32 @@ static void Perform(int sock)
 
 	LOGPOS_T();
 
-	if(RecvStatus(ss) != 220)
+	if (RecvStatus(ss) != 220)
 		goto endfunc;
 
 	SendLineDisp(ss, "EHLO localhost"); // ñ{ìñÇÕé©ï™ÇÃipÇëóÇÈÇÁÇµÇ¢ÇÊÅH
 
-	if(!RecvEhlo(ss))
+	if (!RecvEhlo(ss))
 		goto endfunc;
 
 	SendLineDisp(ss, "RSET");
 
-	if(RecvStatus(ss) != 250)
+	if (RecvStatus(ss) != 250)
 		goto endfunc;
 
 	SendLineDisp_x(ss, xcout("MAIL FROM:%s", MailFrom));
 
-	if(RecvStatus(ss) != 250)
+	if (RecvStatus(ss) != 250)
 		goto endfunc;
 
 	SendLineDisp_x(ss, xcout("RCPT TO:%s", MailTo));
 
-	if(RecvStatus(ss) != 250)
+	if (RecvStatus(ss) != 250)
 		goto endfunc;
 
 	SendLineDisp(ss, "DATA");
 
-	if(RecvStatus(ss) != 354)
+	if (RecvStatus(ss) != 354)
 		goto endfunc;
 
 	foreach(MailData, line, index)
@@ -99,7 +99,7 @@ static void Perform(int sock)
 
 	SendLineDisp(ss, ".");
 
-	if(RecvStatus(ss) != 250)
+	if (RecvStatus(ss) != 250)
 		goto endfunc;
 
 	SendLineDisp(ss, "QUIT");
@@ -145,13 +145,13 @@ int sendMailEx(char *smtpServer, uint portno, char *sendFrom, char *sendTo, auto
 
 	for(; ; retrycnt--)
 	{
-		if(sendMail(smtpServer, portno, sendFrom, sendTo, mail))
+		if (sendMail(smtpServer, portno, sendFrom, sendTo, mail))
 		{
 			return 1;
 		}
 		cout("sendMail() Fault... retrycnt: %u\n", retrycnt);
 
-		if(!retrycnt)
+		if (!retrycnt)
 		{
 			return 0;
 		}

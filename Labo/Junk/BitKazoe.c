@@ -7,7 +7,7 @@ static uint BitKazoe_Test(uint64 value)
 	uint count = 0;
 
 	for(bit = 1ui64 << 63; bit != 0; bit /= 2)
-		if((value & bit) != 0)
+		if ((value & bit) != 0)
 			count++;
 
 	return count;
@@ -62,7 +62,7 @@ static void MakeMap(void)
 		uint bit;
 
 		for(bit = 1 << 7; bit; bit /= 2)
-			if(index & bit)
+			if (index & bit)
 				count++;
 
 		Map[index] = count;
@@ -97,7 +97,7 @@ static void MakeMap16(void)
 		uint bit;
 
 		for(bit = 1 << 15; bit; bit /= 2)
-			if(index & bit)
+			if (index & bit)
 				count++;
 
 		Map16[index] = count;

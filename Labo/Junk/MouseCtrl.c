@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	ClipCursor(NULL); // 画面上どこでも行けるようにする。
 
 argsLoop:
-	if(argIs("/P")) // マウス移動
+	if (argIs("/P")) // マウス移動
 	{
 		int x;
 		int y;
@@ -37,27 +37,27 @@ argsLoop:
 
 		goto argsLoop;
 	}
-	if(argIs("/LD")) // 左ボタン下げ
+	if (argIs("/LD")) // 左ボタン下げ
 	{
 		mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
 		goto argsLoop;
 	}
-	if(argIs("/LU")) // 左ボタン上げ
+	if (argIs("/LU")) // 左ボタン上げ
 	{
 		mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 		goto argsLoop;
 	}
-	if(argIs("/RD")) // 右ボタン下げ
+	if (argIs("/RD")) // 右ボタン下げ
 	{
 		mouse_event(MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, 0);
 		goto argsLoop;
 	}
-	if(argIs("/RU")) // 右ボタン上げ
+	if (argIs("/RU")) // 右ボタン上げ
 	{
 		mouse_event(MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0);
 		goto argsLoop;
 	}
-	if(argIs("/W")) // ウェイト
+	if (argIs("/W")) // ウェイト
 	{
 		int slpcnt = toValue(nextArg());
 		errorCase(!m_isRange(slpcnt, 0, 60000)); // 0 ～ 1分
@@ -68,7 +68,7 @@ argsLoop:
 
 	// ----
 
-	if(argIs("/FLC")) // フラッシュ？左クリック
+	if (argIs("/FLC")) // フラッシュ？左クリック
 	{
 		int x;
 		int y;

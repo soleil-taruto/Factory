@@ -18,16 +18,16 @@ uint64 toValue64Digits(char *line, char *digits)
 
 		dp = strchr(digits, d);
 
-		if(!dp)
+		if (!dp)
 			dp = strchr(digits, m_islower(d) ? m_nctoupper(d) : m_tolower(d));
 
-		if(dp)
+		if (dp)
 		{
 			value *= radix;
 			value += (uint)dp - (uint)digits;
 		}
 		/*
-		else if(d == '.') // ? è¨êîì_
+		else if (d == '.') // ? è¨êîì_
 		{
 			break;
 		}
@@ -54,7 +54,7 @@ sint64 toInt64Digits(char *line, char *digits)
 
 	m_minim(value, SINT64MAX);
 
-	if(strchr(line, '-'))
+	if (strchr(line, '-'))
 		return -(sint64)value;
 
 	return (sint64)value;
@@ -85,7 +85,7 @@ char *toLineValue64Digits(uint64 value, char *digits)
 		*p = digits[(uint)(value % (uint64)radix)];
 		value /= (uint64)radix;
 	}
-	if(p == buff)
+	if (p == buff)
 		*p++ = digits[0];
 
 	*p = '\0';
@@ -114,7 +114,7 @@ uint iSqrt64(uint64 value)
 	{
 		uint tRet = ret | nBit;
 
-		if((uint64)tRet * tRet <= value)
+		if ((uint64)tRet * tRet <= value)
 			ret = tRet;
 	}
 	return ret;
@@ -140,13 +140,13 @@ uint iRoot64(uint64 value, uint extend)
 
 		for(e = extend - 1; e; e--)
 		{
-			if(UINT64MAX / p < tRet)
+			if (UINT64MAX / p < tRet)
 			{
 				goto overflow;
 			}
 			p *= tRet;
 		}
-		if(p <= value)
+		if (p <= value)
 		{
 			ret = tRet;
 		}
@@ -164,23 +164,23 @@ double dPow(double value, uint extend)
 #if 1
 	double answer;
 
-	if(!extend)
+	if (!extend)
 		return 1.0;
 
-	if(extend == 1)
+	if (extend == 1)
 		return value;
 
 	answer = dPow(value, extend / 2);
 	answer *= answer;
 
-	if(extend & 1)
+	if (extend & 1)
 		answer *= value;
 
 	return answer;
 #else // old
 	double answer;
 
-	if(!extend)
+	if (!extend)
 		return 1.0;
 
 	answer = value;

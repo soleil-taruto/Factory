@@ -47,12 +47,12 @@ static void DCE_SetLine(char *line)
 		memFree(tmp);
 	}
 
-	if(enter)
+	if (enter)
 	{
 		errorCase(DCE_DisCmtEntered);
 		DCE_DisCmtEntered = 1;
 	}
-	else if(leave)
+	else if (leave)
 	{
 		errorCase(!DCE_DisCmtEntered);
 		DCE_DisCmtEntered = 0;
@@ -90,65 +90,65 @@ static void AutoComment(autoList_t *ranges)
 		nn_strstr(line, "//")[0] = '\0'; // インラインコメントの除去
 		trimTrail(line, ' ');
 
-		if(startsWith(line, "class "))
+		if (startsWith(line, "class "))
 			classEntered = 1;
 
-		if(!strcmp(line, "};"))
+		if (!strcmp(line, "};"))
 			classEntered = 0;
 
-		if(!strcmp(line, "}"))
+		if (!strcmp(line, "}"))
 			classEntered = 0;
 
 		// set insCmt >
 
-		if(classEntered)
+		if (classEntered)
 		{
 			insCmt = line[0] == '\t' && (m_isalpha(line[1]) || line[1] == '_' || line[1] == '~');
 
-			if(startsWith(line, "#define "))
+			if (startsWith(line, "#define "))
 				insCmt = 1;
 
-			if(index && !strcmp(getLine(range, index - 1), "\t*/"))
+			if (index && !strcmp(getLine(range, index - 1), "\t*/"))
 				insCmt = 0;
 
-			if(index && startsWith(getLine(range, index - 1), "#define "))
+			if (index && startsWith(getLine(range, index - 1), "#define "))
 				insCmt = 0;
 
-			if(!strcmp(line, "\t/*"))
+			if (!strcmp(line, "\t/*"))
 				insCmt = 1;
 		}
 		else
 		{
 			insCmt = m_isalpha(line[0]) || line[0] == '_';
 
-			if(startsWith(line, "#define "))
+			if (startsWith(line, "#define "))
 				insCmt = 1;
 
-			if(index && !strcmp(getLine(range, index - 1), "}") && endsWith(line, ";")) // typedef など
+			if (index && !strcmp(getLine(range, index - 1), "}") && endsWith(line, ";")) // typedef など
 				insCmt = 0;
 
-			if(index && !strcmp(getLine(range, index - 1), "*/"))
+			if (index && !strcmp(getLine(range, index - 1), "*/"))
 				insCmt = 0;
 
-			if(index && startsWith(getLine(range, index - 1), "template <"))
+			if (index && startsWith(getLine(range, index - 1), "template <"))
 				insCmt = 0;
 
-			if(!strcmp(line, "/*"))
+			if (!strcmp(line, "/*"))
 				insCmt = 1;
 		}
 
-		if(endsWith(line, ":"))
+		if (endsWith(line, ":"))
 			insCmt = 0;
 
-		if(commentEntered)
+		if (commentEntered)
 			insCmt = 0;
 
-		if(!range_index && !index)
+		if (!range_index && !index)
 			insCmt = 1;
 
 		// < set insCmt
 
-		if(insCmt && DCE_IsOutDisCmt() && range_index % 2 != 1) // ? .. && .. && アプリ固有コード以外
+		if (insCmt && DCE_IsOutDisCmt() && range_index % 2 != 1) // ? .. && .. && アプリ固有コード以外
 		{
 			char *comment;
 			uint comment_index;
@@ -165,17 +165,17 @@ static void AutoComment(autoList_t *ranges)
 
 			ucTrim(tmp);
 
-			if(commentEntered)
+			if (commentEntered)
 			{
-				if(!strcmp(tmp, "*/"))
+				if (!strcmp(tmp, "*/"))
 					commentEntered = 0;
 
-				if(!strcmp(tmp, "//*/")) // LOG_ENABLED んとことかの /* ～ /*/ ～ //*/
+				if (!strcmp(tmp, "//*/")) // LOG_ENABLED んとことかの /* ～ /*/ ～ //*/
 					commentEntered = 0;
 			}
 			else
 			{
-				if(!strcmp(tmp, "/*"))
+				if (!strcmp(tmp, "/*"))
 					commentEntered = 1;
 			}
 			memFree(tmp);
@@ -205,8 +205,8 @@ static void AutoComment_CS(autoList_t *ranges)
 
 		DCE_SetLine(line);
 
-		if(!startsWith(prevLine, "\t/// "))
-		if(
+		if (!startsWith(prevLine, "\t/// "))
+		if (
 			startsWith(line, "\t/// ") ||
 			startsWith(line, "\tpublic class ") ||
 			startsWith(line, "\tpublic static class ") ||
@@ -214,10 +214,10 @@ static void AutoComment_CS(autoList_t *ranges)
 			)
 			insCmtIndent = "\t";
 
-		if(!startsWith(prevLine, "\t\t/// "))
-		if(!startsWith(prevLine, "\t\t[DllImport"))
-		if(!startsWith(prevLine, "\t\t[StructLayout"))
-		if(
+		if (!startsWith(prevLine, "\t\t/// "))
+		if (!startsWith(prevLine, "\t\t[DllImport"))
+		if (!startsWith(prevLine, "\t\t[StructLayout"))
+		if (
 			startsWith(line, "\t\t/// ") ||
 			startsWith(line, "\t\t[DllImport") ||
 			startsWith(line, "\t\t[StructLayout") ||
@@ -227,7 +227,7 @@ static void AutoComment_CS(autoList_t *ranges)
 			)
 			insCmtIndent = "\t\t";
 
-		if(insCmtIndent && DCE_IsOutDisCmt() && range_index % 2 != 1) // ? .. && .. && アプリ固有コード以外
+		if (insCmtIndent && DCE_IsOutDisCmt() && range_index % 2 != 1) // ? .. && .. && アプリ固有コード以外
 		{
 			char *comment;
 			uint comment_index;
@@ -269,7 +269,7 @@ static autoList_t *ReadCommonAndAppSpecRanges(char *file)
 
 		errorCase(enter && leave);
 
-		if(leave)
+		if (leave)
 		{
 			errorCase(!appSpecEntered);
 			appSpecEntered = 0;
@@ -279,7 +279,7 @@ static autoList_t *ReadCommonAndAppSpecRanges(char *file)
 		}
 		addElement(lines, (uint)line);
 
-		if(enter)
+		if (enter)
 		{
 			errorCase(appSpecEntered);
 			appSpecEntered = 1;
@@ -311,7 +311,7 @@ static int IsEmptyRange(autoList_t *ranges, uint rangeIndex)
 
 	foreach(range, line, index)
 	{
-		if(!lineExp("<\t\t  >", line)) // ? ! (空行 || 空白のみの行)
+		if (!lineExp("<\t\t  >", line)) // ? ! (空行 || 空白のみの行)
 		{
 			cout("コードの記述有り\n");
 			return 0;
@@ -350,7 +350,7 @@ static void WeldAllEmptyRange(autoList_t *ranges)
 
 		coutJLine_x(xcout("h: %s", h));
 
-		if(IsEmptyRange(ranges, index - 1))
+		if (IsEmptyRange(ranges, index - 1))
 		{
 			cout("コードの記述無し -> 削除\n");
 
@@ -378,7 +378,7 @@ static void WeldAllNewlyAddedRange(autoList_t *rRanges, autoList_t *wRanges)
 	{
 		cout("index: %u\n", index);
 
-		if(index < getCount(wRanges))
+		if (index < getCount(wRanges))
 		{
 			char *r = (char *)getLastElement(getList(rRanges, index - 2));
 			char *w = (char *)getLastElement(getList(wRanges, index - 2));
@@ -386,7 +386,7 @@ static void WeldAllNewlyAddedRange(autoList_t *rRanges, autoList_t *wRanges)
 			coutJLine_x(xcout("r: %s", r));
 			coutJLine_x(xcout("w: %s", w));
 
-			if(!strcmp(r, w))
+			if (!strcmp(r, w))
 			{
 				cout("同じアプリ固有コード\n");
 
@@ -477,7 +477,7 @@ static void DoCopyLib(char *rDir, char *wDir, int testMode)
 	DCL_ExistNewFile = 1 <= getCount(rFiles);
 
 	foreach(rSubDirs, dir, index)
-		if(!testMode)
+		if (!testMode)
 			createPath_x(combine(wDir, dir), 'D');
 
 	foreach(rFiles, file, index)
@@ -488,7 +488,7 @@ static void DoCopyLib(char *rDir, char *wDir, int testMode)
 		cout("R %s\n", rFile);
 		cout("> %s\n", wFile);
 
-		if(!testMode)
+		if (!testMode)
 			copyFile(rFile, wFile);
 
 		memFree(rFile);
@@ -513,9 +513,9 @@ static void DoCopyLib(char *rDir, char *wDir, int testMode)
 			releaseDim(ranges, 2);
 		}
 
-		if(!testMode)
+		if (!testMode)
 		{
-			if(csMode)
+			if (csMode)
 				removeFile(wFile);
 			else
 				writeOneLine(wFile, "// deleted"); // 削除すると .vcxproj のエントリーを消せなくなるので、削除しない。
@@ -560,7 +560,7 @@ static void DoCopyLib(char *rDir, char *wDir, int testMode)
 			for(index = 0; index < getCount(rRanges); index++)
 				addElements(lines, getList(index % 2 ? wRanges : rRanges, index));
 
-			if(!testMode)
+			if (!testMode)
 			{
 //				semiRemovePath(wFile); // zantei
 				writeLines(wFile, lines);
@@ -574,7 +574,7 @@ static void DoCopyLib(char *rDir, char *wDir, int testMode)
 		releaseDim(wRanges, 2);
 	}
 	foreach(wSubDirs, dir, index)
-		if(!testMode)
+		if (!testMode)
 			removeDirIfEmpty_x(combine(wDir, dir)); // .cpp の場合ファイルを削除しないのでDIRを削除できない場合もある。
 
 	releaseDim(rSubDirs, 1);
@@ -601,7 +601,7 @@ static void CopyLib(char *rDir, char *wDir)
 	DoCopyLib(rDir, wDir, 0);
 	LOGPOS();
 
-	if(DCL_ExistNewFile) // 新規追加ファイルがあった場合は２回行う必要がある。新規追加ファイルには AutoComment が適用されない。
+	if (DCL_ExistNewFile) // 新規追加ファイルがあった場合は２回行う必要がある。新規追加ファイルには AutoComment が適用されない。
 	{
 		LOGPOS();
 		DoCopyLib(rDir, wDir, 1);
@@ -632,7 +632,7 @@ int main(int argc, char **argv)
 
 	CopyLib(getArg(0), getArg(1));
 
-	if(!IsNoPause())
+	if (!IsNoPause())
 	{
 		cout("Press any key to continue ...");
 		getKey();

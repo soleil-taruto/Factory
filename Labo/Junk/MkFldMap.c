@@ -47,14 +47,14 @@ static void MkFldMap(uint mapW, uint mapH, uint noChgMax)
 			xx %= mapW;
 			yy %= mapH;
 
-			if(getTableCell(map, xx, yy) == CELL_BLACK)
+			if (getTableCell(map, xx, yy) == CELL_BLACK)
 			{
 				black++;
 			}
 		}
 		cell = black < 5 ? CELL_WHITE : CELL_BLACK;
 
-		if(getTableCell(map, x, y) != cell)
+		if (getTableCell(map, x, y) != cell)
 			setTableCell(map, x, y, cell);
 		else
 			noChgCnt++;

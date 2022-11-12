@@ -175,7 +175,7 @@ static void FB_Test(autoList_t *list, uint target, uint bound[2])
 
 #if 0
 	foreach(list, element, index)
-		if(target <= element)
+		if (target <= element)
 			break;
 
 	bound[0] = index;
@@ -183,12 +183,12 @@ static void FB_Test(autoList_t *list, uint target, uint bound[2])
 	bound[0] = 0;
 
 	foreach(list, element, index)
-		if(element < target)
+		if (element < target)
 			bound[0] = index + 1;
 #endif
 
 	foreach(list, element, index)
-		if(target < element)
+		if (target < element)
 			break;
 
 	bound[1] = index;
@@ -260,16 +260,16 @@ static int GB_Test(autoList_t *list, uint target, uint bound[2])
 	uint index;
 
 	for(index = 0; index < getCount(list); index++)
-		if(getElement(list, index) == target)
+		if (getElement(list, index) == target)
 			break;
 
-	if(index == getCount(list))
+	if (index == getCount(list))
 		return 0;
 
 	bound[0] = index;
 
 	while(++index < getCount(list))
-		if(getElement(list, index) != target)
+		if (getElement(list, index) != target)
 			break;
 
 	bound[1] = index - 1;
@@ -304,7 +304,7 @@ static void GB_DoTest(uint count, uint minval, uint maxval) // 1 <= minval <= ma
 
 		errorCase(ret1 != ret2);
 
-		if(ret1)
+		if (ret1)
 		{
 			cout("bounds: %u %u %u %u\n", bound1[0], bound1[1], bound2[0], bound2[1]);
 

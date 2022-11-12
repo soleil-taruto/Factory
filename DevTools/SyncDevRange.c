@@ -55,7 +55,7 @@ static char *LastRangeName;
 
 static int GetLineKind(char *line) // ret: "SE-"
 {
-	if(lineExpICase("<\1 >////<\1 >sync<\1 >><>", line)) // ? StartSymLine らしい
+	if (lineExpICase("<\1 >////<\1 >sync<\1 >><>", line)) // ? StartSymLine らしい
 	{
 		errorCase(!lineExp("<\t\t>//// sync > @ <1,,__09AZaz>", line)); // ? StartSymLine ではない。
 
@@ -65,7 +65,7 @@ static int GetLineKind(char *line) // ret: "SE-"
 
 		return 'S';
 	}
-	if(lineExpICase("<\1 >////<\1 >/<<\1 >sync<>", line)) // ? EndSymLine らしい
+	if (lineExpICase("<\1 >////<\1 >/<<\1 >sync<>", line)) // ? EndSymLine らしい
 	{
 		errorCase(!lineExp("<\t\t>//// /< sync", line)); // ? EndSymLine ではない。
 
@@ -95,10 +95,10 @@ static char *EscapeIndentRangeLine(char *line, uint indentLen) // ret: strx()
 	uint index;
 
 	for(index = 0; index < indentLen; index++)
-		if(line[index] != '\t')
+		if (line[index] != '\t')
 			break;
 
-	if(index == indentLen)
+	if (index == indentLen)
 		line = xcout("%c%s", CHR_ESC_RANGE_INDENT, line + indentLen);
 	else
 		line = strx(line);
@@ -116,7 +116,7 @@ static void Search_File(char *file)
 	{
 		int kind = GetLineKind(line);
 
-		if(kind == 'S')
+		if (kind == 'S')
 		{
 			errorCase(range);
 
@@ -125,7 +125,7 @@ static void Search_File(char *file)
 			range->Lines = newList();
 			range->StartSymLineIndex = index;
 		}
-		else if(kind == 'E')
+		else if (kind == 'E')
 		{
 			errorCase(!range);
 
@@ -140,7 +140,7 @@ static void Search_File(char *file)
 
 			range = NULL;
 		}
-		else if(range)
+		else if (range)
 		{
 			errorCase(!IsFairRangeLine(line));
 
@@ -164,7 +164,7 @@ static void Search(void)
 	sortJLinesICase(files);
 
 	foreach(files, file, index)
-	if(findLineCase(TargetExts, getExt(file), 1) < getCount(TargetExts))
+	if (findLineCase(TargetExts, getExt(file), 1) < getCount(TargetExts))
 	{
 		cout("file: %s\n", file);
 
@@ -185,7 +185,7 @@ static void DispAllRange_GroupByName(void)
 	uint index;
 	uint idx;
 
-	if(!getCount(Ranges))
+	if (!getCount(Ranges))
 	{
 		cout("+--------------------------------------+\n");
 		cout("| // sync > ～ // sync < が１つも無い。|\n");
@@ -196,7 +196,7 @@ static void DispAllRange_GroupByName(void)
 //	errorCase_m(!getCount(Ranges), "// sync > ～ // sync < が１つも無い。"); // old
 
 	foreach(Ranges, range, index)
-		if(findLine(names, range->Name) == getCount(names))
+		if (findLine(names, range->Name) == getCount(names))
 			addElement(names, (uint)range->Name);
 
 	rapidSortLines(names);
@@ -208,7 +208,7 @@ static void DispAllRange_GroupByName(void)
 		uint count = 0;
 
 		foreach(Ranges, range, idx)
-		if(!strcmp(range->Name, name))
+		if (!strcmp(range->Name, name))
 		{
 			count++;
 		}
@@ -223,9 +223,9 @@ static void DispAllRange_GroupByName(void)
 		int needSync;
 
 		foreach(Ranges, range, idx)
-		if(!strcmp(range->Name, name))
+		if (!strcmp(range->Name, name))
 		{
-			if(findLine(md5s, range->TextMD5) == getCount(md5s))
+			if (findLine(md5s, range->TextMD5) == getCount(md5s))
 				addElement(md5s, (uint)range->TextMD5);
 		}
 
@@ -233,11 +233,11 @@ static void DispAllRange_GroupByName(void)
 
 		cout("%s %u %s\n", needSync ? "■要同期" : "□同期済", getCount(md5s), name);
 
-		if(needSync)
+		if (needSync)
 			addElement(NeedSyncRangeNames, (uint)name);
 
 #if 0 // test
-		if(needSync)
+		if (needSync)
 		{
 			addCwd("C:\\temp");
 			{
@@ -246,7 +246,7 @@ static void DispAllRange_GroupByName(void)
 				addCwd(name);
 				{
 					foreach(Ranges, range, idx)
-					if(!strcmp(range->Name, name))
+					if (!strcmp(range->Name, name))
 					{
 						writeOneLineNoRet(range->TextMD5, range->Text);
 					}
@@ -289,7 +289,7 @@ static void Confirm(void)
 
 	cout("続行？\n");
 
-	if(clearGetKey() == 0x1b)
+	if (clearGetKey() == 0x1b)
 		termination(0);
 
 	cout("続行します。\n");
@@ -311,7 +311,7 @@ static char *SRG_UnescapeIndentRangeText(char *text, uint indentLen)
 
 	for(p = text; *p; p++)
 	{
-		if(*p == CHR_ESC_RANGE_INDENT)
+		if (*p == CHR_ESC_RANGE_INDENT)
 			SRG_AddIndent(buff, indentLen);
 		else
 			addByte(buff, *p);
@@ -358,7 +358,7 @@ static sint Comp_RangeSSLIDesc(uint v1, uint v2)
 
 	ret = m_simpleComp(a->StartSymLineIndex, b->StartSymLineIndex) * -1;
 
-	if(!ret)
+	if (!ret)
 		ret = strcmp(a->File, b->File);
 
 	return ret;
@@ -389,7 +389,7 @@ static void SyncRangeGroup(autoList_t *rangeGroup)
 
 		cout("続行？\n");
 
-		if(clearGetKey() == 0x1b)
+		if (clearGetKey() == 0x1b)
 			termination(0);
 
 		cout("続行します。\n");
@@ -397,7 +397,7 @@ static void SyncRangeGroup(autoList_t *rangeGroup)
 
 	foreach(rangeGroup, targetRange, index)
 	{
-		if(!strcmp(masterRange->TextMD5, targetRange->TextMD5)) // ? 同じ -> 更新不要
+		if (!strcmp(masterRange->TextMD5, targetRange->TextMD5)) // ? 同じ -> 更新不要
 		{
 			LOGPOS();
 		}
@@ -430,7 +430,7 @@ static sint Comp_RangeTextMD5(uint v1, uint v2)
 
 	ret = strcmp(a->TextMD5, b->TextMD5);
 
-	if(!ret)
+	if (!ret)
 		ret = strcmp(a->File, b->File);
 
 	return ret;
@@ -471,7 +471,7 @@ static void DispRangeGroup(autoList_t *rangeGroup)
 		rapidSort(tmp_rangeGroup, Comp_RangeTextMD5);
 
 		foreach(tmp_rangeGroup, range, index)
-		if(!index || strcmp(range->TextMD5, ((Range_t *)getElement(tmp_rangeGroup, index - 1))->TextMD5))
+		if (!index || strcmp(range->TextMD5, ((Range_t *)getElement(tmp_rangeGroup, index - 1))->TextMD5))
 		{
 			cout("%s %s\n", range->TextMD5, range->File);
 			writeLine(foundList_fp, range->File);
@@ -494,16 +494,16 @@ static sint Comp_RangeStampDesc(uint v1, uint v2)
 		sint et2 = IsRangeEmptyText(b) ? 1 : 0;
 
 		ret = et1 - et2;
-		if(ret)
+		if (ret)
 			return ret;
 	}
 
 	ret = m_simpleComp(a->Stamp, b->Stamp) * -1;
-	if(ret)
+	if (ret)
 		return ret;
 
 	ret = strcmp(a->File, b->File);
-	if(ret)
+	if (ret)
 		return ret;
 
 	ret = m_simpleComp(a->StartSymLineIndex, b->StartSymLineIndex);
@@ -518,14 +518,14 @@ static int IsRangeGroupExpectedCond_Case1(autoList_t *rangeGroup) // 1ヶ所だけ修
 		Range_t *r1 = (Range_t *)getElement(rangeGroup, index - 1);
 		Range_t *r2 = (Range_t *)getElement(rangeGroup, index - 0);
 
-		if(index == 1)
+		if (index == 1)
 		{
-			if(!strcmp(r1->TextMD5, r2->TextMD5)) // 最初と2番目は異なるはず。
+			if (!strcmp(r1->TextMD5, r2->TextMD5)) // 最初と2番目は異なるはず。
 				return 0;
 		}
 		else
 		{
-			if(strcmp(r1->TextMD5, r2->TextMD5)) // それ以降は同じはず。
+			if (strcmp(r1->TextMD5, r2->TextMD5)) // それ以降は同じはず。
 				return 0;
 		}
 	}
@@ -540,9 +540,9 @@ static int IsRangeGroupExpectedCond_Case2(autoList_t *rangeGroup) // 1ヶ所以上、
 		Range_t *r1 = (Range_t *)getElement(rangeGroup, index - 1);
 		Range_t *r2 = (Range_t *)getElement(rangeGroup, index - 0);
 
-		if(strcmp(r1->TextMD5, r2->TextMD5)) // 基本的に同じはず。
+		if (strcmp(r1->TextMD5, r2->TextMD5)) // 基本的に同じはず。
 		{
-			if(!IsRangeEmptyText(r2)) // 異なる場合は、少なくとも後側が空っぽのはず。
+			if (!IsRangeEmptyText(r2)) // 異なる場合は、少なくとも後側が空っぽのはず。
 			{
 				return 0;
 			}
@@ -562,11 +562,11 @@ static void ProcRangeGroup(autoList_t *rangeGroup)
 
 	DispRangeGroup(rangeGroup);
 
-	if(!IsRangeGroupExpectedCond(rangeGroup))
+	if (!IsRangeGroupExpectedCond(rangeGroup))
 	{
 		cout("★★★想定外の修正状態です。続行？\n");
 
-		if(clearGetKey() == 0x1b)
+		if (clearGetKey() == 0x1b)
 			termination(0);
 
 		cout("続行します。\n");
@@ -587,7 +587,7 @@ static void ProcAllRange(void)
 		setCount(rangeGroup, 0);
 
 		foreach(Ranges, range, range_index)
-			if(!strcmp(range->Name, name))
+			if (!strcmp(range->Name, name))
 				addElement(rangeGroup, (uint)range);
 
 		ProcRangeGroup(rangeGroup);
@@ -607,19 +607,19 @@ int main(int argc, char **argv)
 	NeedSyncRangeNames = newList();
 
 readArgs:
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		addElement(RootDirs, (uint)nextArg());
 		goto readArgs;
 	}
-	if(argIs("/E"))
+	if (argIs("/E"))
 	{
 		S_TargetExts = nextArg();
 		goto readArgs;
 	}
 	errorCase(hasArgs(1)); // 不明なコマンド引数
 
-	if(!getCount(RootDirs))
+	if (!getCount(RootDirs))
 	{
 		addElement(RootDirs, (uint)DEF_ROOT_DIR_01);
 		addElement(RootDirs, (uint)DEF_ROOT_DIR_02);

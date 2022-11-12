@@ -69,7 +69,7 @@ static void DirSize(char *dir)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/S")) // Simple mode
+	if (argIs("/S")) // Simple mode
 	{
 		char *sSize = xcout("%I64u", getDirSize(nextArg()));
 
@@ -78,7 +78,7 @@ int main(int argc, char **argv)
 		memFree(sSize);
 		return;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		DirSize(nextArg());
 		cout("\\e\n");

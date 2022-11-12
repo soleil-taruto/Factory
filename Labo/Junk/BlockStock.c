@@ -24,7 +24,7 @@ static Block_t *TakeBlock(void)
 	errorCase(BLOCK_MAX <= BlockStockIndex);
 	pp = BlockStock + BlockStockIndex;
 
-	if(!*pp)
+	if (!*pp)
 		*pp = BlockSequence + BlockStockIndex;
 	else
 		memset(*pp, 0x00, sizeof(Block_t)); // as memCalloc()
@@ -66,7 +66,7 @@ int main(int argc, char **argv)
 
 		cout("%3u: %p (%3u)\n", bindex, block, GetBlockCount());
 
-		if(block == NULL) // add
+		if (block == NULL) // add
 		{
 			block = TakeBlock();
 

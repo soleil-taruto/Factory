@@ -15,7 +15,7 @@ static void Recv_Th(uint prm)
 
 		while(!i->DeadFlag)
 		{
-			if(getSize(i->RecvBuff) < BUFF_FULL)
+			if (getSize(i->RecvBuff) < BUFF_FULL)
 			{
 				/*
 					i->RecvBuff ÇÕéÛêMë“ã@íÜÇ…ïœçXÇ≥ÇÍÇÈâ¬î\ê´Ç™Ç†ÇÈÇÃÇ≈ SockRecvSequ() Ç…ÇÕìnÇ≥Ç»Ç¢ÅB
@@ -24,7 +24,7 @@ static void Recv_Th(uint prm)
 				ret = SockRecvSequ(i->Sock, tmpBuff, waitMillis);
 				ab_addBytes_x(i->RecvBuff, tmpBuff);
 
-				if(ret == -1)
+				if (ret == -1)
 				{
 					cout("RecvLoopDead: %u, LastByte: %02x\n", getSize(i->RecvBuff), getSize(i->RecvBuff) ? getByte(i->RecvBuff, getSize(i->RecvBuff) - 1) : 0x00);
 
@@ -33,7 +33,7 @@ static void Recv_Th(uint prm)
 					i->DeadFlag = 1;
 					break;
 				}
-				if(ret)
+				if (ret)
 					waitMillis = 0;
 				else
 					waitMillis = m_min(waitMillis + 1, 2000);
@@ -67,7 +67,7 @@ static void Send_Th(uint prm)
 
 		while(!i->SockClosedFlag)
 		{
-			if(getSize(i->SendBuff))
+			if (getSize(i->SendBuff))
 			{
 				/*
 					i->SendBuff ÇÕëóêMë“ã@íÜÇ…ïœçXÇ≥ÇÍÇÈâ¬î\ê´Ç™Ç†ÇÈÇÃÇ≈ SockSendSequ() Ç…ÇÕìnÇ≥Ç»Ç¢ÅB
@@ -78,10 +78,10 @@ static void Send_Th(uint prm)
 				ab_addBytes_x(tmpBuff, i->SendBuff);
 				i->SendBuff = tmpBuff;
 
-				if(i->DeadFlag)
+				if (i->DeadFlag)
 					cout("DeadFlaggedSend_ret: %d (%u, %u)\n", ret, getSize(i->SendBuff), waitMillis);
 
-				if(ret == -1)
+				if (ret == -1)
 				{
 					LOGPOS();
 
@@ -89,22 +89,22 @@ static void Send_Th(uint prm)
 					i->DeadFlag = 1;
 					break;
 				}
-				if(i->DeadFlag)
+				if (i->DeadFlag)
 				{
-					if(i->KillFlag)
+					if (i->KillFlag)
 						break;
 
-					if(abortTime == UINTMAX)
+					if (abortTime == UINTMAX)
 						abortTime = DOSTimeoutSec ? now() + DOSTimeoutSec : UINTMAX - 1;
 
-					if(now() < abortTime)
+					if (now() < abortTime)
 					{
 						cout("ÅöÅöÅöëóêMÉ^ÉCÉÄÉAÉEÉg_Comm_size: %u\n", getSize(i->SendBuff));
 						break;
 					}
 					cout("ÅôÅôÅôComm_T %u\n", getSize(i->SendBuff));
 
-					if(ret)
+					if (ret)
 						waitMillis = 0;
 					else
 						waitMillis = 100;
@@ -114,7 +114,7 @@ static void Send_Th(uint prm)
 			}
 			else
 			{
-				if(i->DeadFlag)
+				if (i->DeadFlag)
 					break;
 
 				inner_uncritical();
@@ -148,7 +148,7 @@ Comm_t *CreateComm(int sock)
 }
 void EndCommThread(Comm_t *i)
 {
-	if(i->ThreadEndedFlag)
+	if (i->ThreadEndedFlag)
 		return;
 
 	i->DeadFlag = 1;
@@ -178,19 +178,19 @@ autoBlock_t *GetCommRecvData(Comm_t *i, uint size)
 {
 	autoBlock_t *data;
 
-	if(IsCommDead(i) && !i->SockRecvClosedFlag && getSize(i->RecvBuff) < BUFF_FULL)
+	if (IsCommDead(i) && !i->SockRecvClosedFlag && getSize(i->RecvBuff) < BUFF_FULL)
 	{
 		int ret = SockRecvSequ(i->Sock, i->RecvBuff, 0);
 
 		cout("ÉXÉåÉbÉhèIóπå„ÇÃéÛêM_ret: %d\n", ret);
 
-		if(ret <= 0)
+		if (ret <= 0)
 			i->SockRecvClosedFlag = 1;
 	}
 
 	data = desertBytes(i->RecvBuff, 0, m_min(size, getSize(i->RecvBuff)));
 
-	if(getSize(data))
+	if (getSize(data))
 		IntSleepInt();
 
 	return data;
@@ -199,25 +199,25 @@ int AddCommSendData(Comm_t *i, autoBlock_t *data, int forceMode) // ret: ? í«â¡Ç
 {
 	int retval = 0;
 
-	if(IsCommDead(i))
+	if (IsCommDead(i))
 	{
 		LOGPOS();
 		return 1;
 	}
 
-	if(getSize(i->SendBuff) < BUFF_FULL || forceMode)
+	if (getSize(i->SendBuff) < BUFF_FULL || forceMode)
 	{
 		addBytes(i->SendBuff, data);
 		retval = 1;
 	}
-	if(getSize(i->SendBuff))
+	if (getSize(i->SendBuff))
 		IntSleepInt();
 
 	return retval;
 }
 int IsCommDead(Comm_t *i)
 {
-	if(i->DeadFlag)
+	if (i->DeadFlag)
 	{
 		EndCommThread(i);
 		return 1;

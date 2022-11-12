@@ -104,7 +104,7 @@ static int GetArea_1(void)
 	for(t = 0; t < TT; t++)
 	for(n = 0; n < NN; n++)
 	{
-		if(Map[n][t])
+		if (Map[n][t])
 		{
 			ret++;
 			break; // next t
@@ -121,7 +121,7 @@ static int GA_AtLeastNMsk(int t) // ret: ? Map[][t] ‚É‚Â‚¢‚ÄANMsk[n] == 1 ‚È‚ç 
 	int n;
 
 	for(n = 0; n < NN; n++)
-		if(NMsk[n] && !Map[n][t])
+		if (NMsk[n] && !Map[n][t])
 			return 0;
 
 	return 1;
@@ -133,11 +133,11 @@ static void GA_Main(void)
 	int t;
 
 	for(n = 0; n < NN; n++)
-		if(NMsk[n])
+		if (NMsk[n])
 			cnt++;
 
 	for(t = 0; t < TT; t++)
-		if(GA_AtLeastNMsk(t))
+		if (GA_AtLeastNMsk(t))
 			ALst[cnt]++;
 }
 static int GA_Next(void)
@@ -146,7 +146,7 @@ static int GA_Next(void)
 
 	for(n = 0; n < NN; n++)
 	{
-		if(!NMsk[n])
+		if (!NMsk[n])
 		{
 			NMsk[n] = 1;
 			return 1;
@@ -173,7 +173,7 @@ static int GetArea_2(void)
 
 	for(n = 1; n <= NN; n++)
 	{
-		if(n % 2)
+		if (n % 2)
 			ret += ALst[n];
 		else
 			ret -= ALst[n];
@@ -187,7 +187,7 @@ static void DoTest_2(int n, int t, double r)
 
 	LOGPOS();
 
-	if(waitKey(0))
+	if (waitKey(0))
 		termination(0);
 
 	NN = n;

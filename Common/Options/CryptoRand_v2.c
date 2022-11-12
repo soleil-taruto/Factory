@@ -89,7 +89,7 @@
 
 static void GetCryptoSeed(uchar *seed, uint seed_size, char *seed_file)
 {
-	if(isFactoryDirEnabled())
+	if (isFactoryDirEnabled())
 	{
 		autoBlock_t gab;
 
@@ -97,7 +97,7 @@ static void GetCryptoSeed(uchar *seed, uint seed_size, char *seed_file)
 
 		// zantei >
 
-		if(existFile(seed_file) && getFileSize(seed_file) != (uint64)seed_size)
+		if (existFile(seed_file) && getFileSize(seed_file) != (uint64)seed_size)
 		{
 			cout("#########################################################\n");
 			cout("## SEED_FILE SIZE ERROR -- Ç«Ç¡Ç©Ç…å√Ç¢ exe Ç™Ç†ÇÈÇ≈ÅI ##\n");
@@ -108,7 +108,7 @@ static void GetCryptoSeed(uchar *seed, uint seed_size, char *seed_file)
 
 		// < zantei
 
-		if(existFile(seed_file))
+		if (existFile(seed_file))
 		{
 			FILE *fp;
 			uint index;
@@ -119,7 +119,7 @@ static void GetCryptoSeed(uchar *seed, uint seed_size, char *seed_file)
 
 			for(index = 0; index < seed_size; index++)
 			{
-				if(seed[index] < 0xff)
+				if (seed[index] < 0xff)
 				{
 					seed[index]++;
 					break;
@@ -153,7 +153,7 @@ static void GetCryptoBlock(uchar *buffer)
 	static uchar dest[16];
 	uint index;
 
-	if(!cam_kt[0]) // èâä˙âª
+	if (!cam_kt[0]) // èâä˙âª
 	{
 		uchar (*cam_seed)[SEEDSIZE] = (uchar (*)[SEEDSIZE])memAlloc(SEEDSIZE * 4);
 		autoBlock_t gab;
@@ -180,7 +180,7 @@ static void GetCryptoBlock(uchar *buffer)
 		for(index = 0; ; index++)
 //		for(index = 0; index < 16; index++)
 		{
-			if(counter[index] < 0xff)
+			if (counter[index] < 0xff)
 			{
 				counter[index]++;
 				break;
@@ -208,7 +208,7 @@ uint getCryptoByte(void)
 	static uchar buffer[BUFFERSIZE];
 	static uint index = BUFFERSIZE;
 
-	if(index == BUFFERSIZE)
+	if (index == BUFFERSIZE)
 	{
 		GetCryptoBlock(buffer);
 		index = 0;

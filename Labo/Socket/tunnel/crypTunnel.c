@@ -49,7 +49,7 @@ static void IncrementCounter(uchar counter[COUNTER_SIZE])
 
 	for(index = 0; index < COUNTER_SIZE; index++)
 	{
-		if(counter[index] < 0xff)
+		if (counter[index] < 0xff)
 		{
 			counter[index]++;
 			break;
@@ -63,7 +63,7 @@ static void EncryptFltr_Real(autoBlock_t *buff, uint encCounter)
 	autoBlock_t *nBuff;
 	uint origSize;
 
-	if(!SendZeroBytesMode && !getSize(buff))
+	if (!SendZeroBytesMode && !getSize(buff))
 		return;
 
 	origSize = getSize(buff);
@@ -87,7 +87,7 @@ static void EncryptFltr_Real(autoBlock_t *buff, uint encCounter)
 }
 static void EncryptFltr(autoBlock_t *buff, uint encCounter)
 {
-	if(BlockSizeLimit && BlockSizeLimit < getSize(buff))
+	if (BlockSizeLimit && BlockSizeLimit < getSize(buff))
 	{
 		autoBlock_t *dest = newBlock();
 		uint rPos;
@@ -98,7 +98,7 @@ static void EncryptFltr(autoBlock_t *buff, uint encCounter)
 			uint size = buffSize - rPos;
 			autoBlock_t *tmp;
 
-			if(BlockSizeLimit < size)
+			if (BlockSizeLimit < size)
 			{
 				size = (uint)(getCryptoRand64() % BlockSizeLimit);
 				m_maxim(size, BlockSizeMin);
@@ -128,29 +128,29 @@ static void DecryptFltr(autoBlock_t *buff, uint decInfo)
 	setSize(buff, 0);
 
 restart:
-	if(sizeof(uint) <= getSize(wBuff))
+	if (sizeof(uint) <= getSize(wBuff))
 	{
 		uint size = ab_getValue(wBuff, 0);
 
-		if(BLOCKSIZEMAX < size)
+		if (BLOCKSIZEMAX < size)
 		{
 			ChannelDeadFlag = 1;
 		}
-		else if(sizeof(uint) + size <= getSize(wBuff))
+		else if (sizeof(uint) + size <= getSize(wBuff))
 		{
 			autoBlock_t *buffPart = ab_makeSubBytes(wBuff, sizeof(uint), size);
 
 			ChannelDeadFlag = 1;
 			removeBytes(wBuff, 0, sizeof(uint) + size);
 
-			if(
+			if (
 				rngcphrDecrypt(buffPart, KeyTableList) &&
 				COUNTER_SIZE <= getSize(buffPart)
 				)
 			{
 				autoBlock_t *wc = unaddBytes(buffPart, COUNTER_SIZE);
 
-				if(!memcmp(decCounter, directGetBuffer(wc), COUNTER_SIZE))
+				if (!memcmp(decCounter, directGetBuffer(wc), COUNTER_SIZE))
 				{
 					cout("D %u -> %u\n", size, getSize(buffPart));
 
@@ -162,7 +162,7 @@ restart:
 			}
 			releaseAutoBlock(buffPart);
 
-			if(!ChannelDeadFlag)
+			if (!ChannelDeadFlag)
 				goto restart;
 		}
 	}
@@ -195,7 +195,7 @@ static int NgtRecvBlockLoop(int sock, autoBlock_t *block) // ret: ? ê¨å˜
 
 	LOGPOS();
 
-	if(SockRecvSequLoop(sock, szBlock, GetNegotiationTimeoutMillis(), 1) == 1)
+	if (SockRecvSequLoop(sock, szBlock, GetNegotiationTimeoutMillis(), 1) == 1)
 	{
 		uint size = getByte(szBlock, 0) * 16;
 
@@ -216,23 +216,23 @@ static void PerformTh(int sock, char *strip)
 	uchar decCounter[COUNTER_SIZE];
 	uchar encCounter[COUNTER_SIZE];
 
-	if(CliVerifyPtn)
+	if (CliVerifyPtn)
 	{
 		static autoBlock_t *rvBlock;
 
 		LOGPOS();
 
-		if(!rvBlock)
+		if (!rvBlock)
 			rvBlock = newBlock();
 
 		setSize(rvBlock, 0);
 
-		if(SockRecvSequLoop(sock, rvBlock, 2000, getSize(CliVerifyPtn)) != getSize(CliVerifyPtn))
+		if (SockRecvSequLoop(sock, rvBlock, 2000, getSize(CliVerifyPtn)) != getSize(CliVerifyPtn))
 		{
 			LOGPOS();
 			return;
 		}
-		if(!isSameBlock(CliVerifyPtn, rvBlock))
+		if (!isSameBlock(CliVerifyPtn, rvBlock))
 		{
 			LOGPOS();
 			return;
@@ -240,7 +240,7 @@ static void PerformTh(int sock, char *strip)
 		LOGPOS();
 	}
 
-	if(ReverseMode)
+	if (ReverseMode)
 	{
 		encSock = sock;
 	}
@@ -250,7 +250,7 @@ static void PerformTh(int sock, char *strip)
 
 		fwdSock = sockConnect(ip, FwdHost, FwdPortNo);
 
-		if(fwdSock == -1)
+		if (fwdSock == -1)
 			goto disconnect;
 
 		encSock = fwdSock;
@@ -266,7 +266,7 @@ static void PerformTh(int sock, char *strip)
 		memcpy(decCounter, directGetBuffer(dc), COUNTER_SIZE);
 		rngcphrEncrypt(dc, KeyTableList);
 
-		if(
+		if (
 			!NgtSendBlockLoop(encSock, dc) ||
 			!NgtRecvBlockLoop(encSock, ec) ||
 			!rngcphrDecrypt(ec, KeyTableList) ||
@@ -279,7 +279,7 @@ static void PerformTh(int sock, char *strip)
 		memcpy(directGetBuffer(ec), encCounter, COUNTER_SIZE);
 		rngcphrEncrypt(ec, KeyTableList);
 
-		if(
+		if (
 			!NgtSendBlockLoop(encSock, ec) ||
 			!NgtRecvBlockLoop(encSock, wc) ||
 			!rngcphrDecrypt(wc, KeyTableList) ||
@@ -289,7 +289,7 @@ static void PerformTh(int sock, char *strip)
 
 		IncrementCounter(decCounter);
 
-		if(memcmp(decCounter, directGetBuffer(wc), COUNTER_SIZE))
+		if (memcmp(decCounter, directGetBuffer(wc), COUNTER_SIZE))
 			goto disconnect;
 
 		releaseAutoBlock(dc);
@@ -301,13 +301,13 @@ static void PerformTh(int sock, char *strip)
 		wc = NULL;
 	}
 
-	if(ReverseMode)
+	if (ReverseMode)
 	{
 		uchar ip[4] = { 0 };
 
 		fwdSock = sockConnect(ip, FwdHost, FwdPortNo);
 
-		if(fwdSock == -1)
+		if (fwdSock == -1)
 			goto disconnect;
 
 		noEncSock = fwdSock;
@@ -328,52 +328,52 @@ static void PerformTh(int sock, char *strip)
 	}
 
 disconnect:
-	if(fwdSock != -1)
+	if (fwdSock != -1)
 		sockDisconnect(fwdSock);
 
-	if(dc)
+	if (dc)
 		releaseAutoBlock(dc);
 
-	if(ec)
+	if (ec)
 		releaseAutoBlock(ec);
 
-	if(wc)
+	if (wc)
 		releaseAutoBlock(wc);
 }
 static int ReadArgs(void)
 {
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		ReverseMode = 1;
 		return 1;
 	}
-	if(argIs("/KW"))
+	if (argIs("/KW"))
 	{
 		KeyWidth = toValue(nextArg());
 		return 1;
 	}
-	if(argIs("/0"))
+	if (argIs("/0"))
 	{
 		SendZeroBytesMode = 1;
 		return 1;
 	}
-	if(argIs("/BSL"))
+	if (argIs("/BSL"))
 	{
 		BlockSizeLimit = toValue(nextArg());
 		return 1;
 	}
-	if(argIs("/T")) // geTunnel combination mode
+	if (argIs("/T")) // geTunnel combination mode
 	{
 		BlockSizeLimit = 5000;
 		return 1;
 	}
-	if(argIs("/T2")) // for BlueFish
+	if (argIs("/T2")) // for BlueFish
 	{
 		BlockSizeLimit = 60000;
 		BlockSizeMin   = 50000;
 		return 1;
 	}
-	if(argIs("/CVP")) // for Hechima etc.
+	if (argIs("/CVP")) // for Hechima etc.
 	{
 		CliVerifyPtn = ab_makeBlockLine(nextArg());
 		return 1;

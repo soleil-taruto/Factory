@@ -4,7 +4,7 @@ public class $P {
 	private static $P _i = null;
 
 	public static $P i() {
-		if(_i == null) {
+		if (_i == null) {
 			_i = new $P();
 		}
 		return _i;

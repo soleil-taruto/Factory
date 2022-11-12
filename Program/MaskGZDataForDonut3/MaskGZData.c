@@ -6,7 +6,7 @@
 
 static void MGZE_MaskSignature(autoBlock_t *data)
 {
-	if(2 <= getSize(data))
+	if (2 <= getSize(data))
 	{
 		setByte(data, 0, getByte(data, 0) ^ 0x1f ^ 'D');
 		setByte(data, 1, getByte(data, 1) ^ 0x8b ^ '3');

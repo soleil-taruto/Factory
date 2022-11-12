@@ -6,15 +6,15 @@ int main(int argc, char **argv)
 	FILE *rfp;
 	FILE *wfp;
 
-	if(argIs("/CR"))
+	if (argIs("/CR"))
 	{
 		newLine = "\r";
 	}
-	if(argIs("/LF"))
+	if (argIs("/LF"))
 	{
 		newLine = "\n";
 	}
-	if(argIs("/CRLF"))
+	if (argIs("/CRLF"))
 	{
 		newLine = "\r\n";
 	}
@@ -27,18 +27,18 @@ int main(int argc, char **argv)
 		int chr = readChar(rfp);
 
 	charProc:
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
-		if(chr == '\r')
+		if (chr == '\r')
 		{
 			writeToken(wfp, newLine);
 			chr = readChar(rfp);
 
-			if(chr != '\n')
+			if (chr != '\n')
 				goto charProc;
 		}
-		else if(chr == '\n')
+		else if (chr == '\n')
 		{
 			writeToken(wfp, newLine);
 		}

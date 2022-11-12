@@ -15,9 +15,9 @@ static void WAT_PadFile(char *file)
 }
 static void WAT_UnpadFile(char *file)
 {
-	if(existFile(file))
+	if (existFile(file))
 	{
-		if(!UnpadFile2(file, PAD_LABEL))
+		if (!UnpadFile2(file, PAD_LABEL))
 		{
 			removeFile(file);
 		}
@@ -33,7 +33,7 @@ static int IsParentAlive(void)
 	int alive = 1;
 	uint hdl = mutexOpen(ParentProcMonitorName);
 
-	if(handleWaitForMillis(hdl, 0)) // ? ロックできた。== ロックされていない。-> 親プロセス停止中
+	if (handleWaitForMillis(hdl, 0)) // ? ロックできた。== ロックされていない。-> 親プロセス停止中
 	{
 		alive = 0;
 		mutexRelease(hdl);
@@ -49,17 +49,17 @@ static int IsProcessAlive(uint targetProcId)
 
 	hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
 
-	if(hSnapshot != INVALID_HANDLE_VALUE)
+	if (hSnapshot != INVALID_HANDLE_VALUE)
 	{
 		pe32.dwSize = sizeof(PROCESSENTRY32);
 
-		if(Process32First(hSnapshot, &pe32))
+		if (Process32First(hSnapshot, &pe32))
 		{
 			do
 			{
 				int procId = (int)pe32.th32ProcessID;
 
-				if(procId == targetProcId)
+				if (procId == targetProcId)
 					alive = 1;
 			}
 			while(Process32Next(hSnapshot, &pe32));
@@ -77,31 +77,31 @@ static int HdlWaitForMillisEx(int hdl, uint millis)
 
 	for(; ; )
 	{
-		if(millis == INFINITE)
+		if (millis == INFINITE)
 		{
-			if(handleWaitForMillis(hdl, 2000))
+			if (handleWaitForMillis(hdl, 2000))
 				return 1;
 		}
 		else
 		{
 			uint m = m_min(2000, millis - elapse);
 
-			if(handleWaitForMillis(hdl, m))
+			if (handleWaitForMillis(hdl, m))
 				return 1;
 
 			elapse += m;
 
-			if(millis <= elapse)
+			if (millis <= elapse)
 				break;
 		}
-		if(!IsParentAlive())
+		if (!IsParentAlive())
 			break;
 	}
 	return 0;
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/MUTEX-WAIT-ONE"))
+	if (argIs("/MUTEX-WAIT-ONE"))
 	{
 		char *targetName;
 		uint millis;
@@ -123,7 +123,7 @@ int main(int argc, char **argv)
 		beganEvent = eventOpen(beganName);
 		endEvent = eventOpen(endName);
 
-		if(HdlWaitForMillisEx(targetMutex, millis))
+		if (HdlWaitForMillisEx(targetMutex, millis))
 		{
 			createFile(wObj0File);
 			eventSet(beganEvent);
@@ -140,7 +140,7 @@ int main(int argc, char **argv)
 		handleClose(endEvent);
 		return;
 	}
-	if(argIs("/EVENT-CREATE"))
+	if (argIs("/EVENT-CREATE"))
 	{
 		char *targetName;
 		char *beganName;
@@ -166,7 +166,7 @@ int main(int argc, char **argv)
 		handleClose(endEvent);
 		return;
 	}
-	if(argIs("/EVENT-SET"))
+	if (argIs("/EVENT-SET"))
 	{
 		char *targetName;
 		uint targetEvent;
@@ -180,7 +180,7 @@ int main(int argc, char **argv)
 		handleClose(targetEvent);
 		return;
 	}
-	if(argIs("/EVENT-WAIT-ONE"))
+	if (argIs("/EVENT-WAIT-ONE"))
 	{
 		char *targetName;
 		uint millis;
@@ -197,7 +197,7 @@ int main(int argc, char **argv)
 		handleClose(targetEvent);
 		return;
 	}
-	if(argIs("/GET-ENV"))
+	if (argIs("/GET-ENV"))
 	{
 		char *envName;
 		char *envValFile;
@@ -211,7 +211,7 @@ int main(int argc, char **argv)
 		writeOneLineNoRet(envValFile, envVal);
 		return;
 	}
-	if(argIs("/DEAD-AND-REMOVE"))
+	if (argIs("/DEAD-AND-REMOVE"))
 	{
 		char *beganName;
 		char *deadName;
@@ -243,7 +243,7 @@ int main(int argc, char **argv)
 		handleClose(mtx);
 		return;
 	}
-	if(argIs("/DELETE-DELAY-UNTIL-REBOOT"))
+	if (argIs("/DELETE-DELAY-UNTIL-REBOOT"))
 	{
 		char *targetPath;
 		char *delayFile;
@@ -262,7 +262,7 @@ int main(int argc, char **argv)
 //		MoveFileEx(targetPath, NULL, MOVEFILE_DELAY_UNTIL_REBOOT); // old
 		return;
 	}
-	if(argIs("/CHECK-PROCESS-ALIVE"))
+	if (argIs("/CHECK-PROCESS-ALIVE"))
 	{
 		uint targetProcId;
 		char *trueFile;
@@ -270,12 +270,12 @@ int main(int argc, char **argv)
 		targetProcId = toValue(nextArg());
 		trueFile = nextArg();
 
-		if(IsProcessAlive(targetProcId))
+		if (IsProcessAlive(targetProcId))
 			createFile(trueFile);
 
 		return;
 	}
-	if(argIs("/CHECK-MUTEX-LOCKED"))
+	if (argIs("/CHECK-MUTEX-LOCKED"))
 	{
 		char *targetName;
 		char *trueFile;
@@ -286,7 +286,7 @@ int main(int argc, char **argv)
 
 		mtx = mutexOpen(targetName);
 
-		if(handleWaitForMillis(mtx, 0))
+		if (handleWaitForMillis(mtx, 0))
 			mutexRelease(mtx);
 		else
 			createFile(trueFile);
@@ -294,7 +294,7 @@ int main(int argc, char **argv)
 		handleClose(mtx);
 		return;
 	}
-	if(argIs("/SEND-TO-FORTEWAVE"))
+	if (argIs("/SEND-TO-FORTEWAVE"))
 	{
 		char *identHash;
 		char *dir;
@@ -311,7 +311,7 @@ int main(int argc, char **argv)
 				char *file = combine_cx(dir, xcout("%04u", index));
 				autoBlock_t *sendData;
 
-				if(!existFile(file))
+				if (!existFile(file))
 				{
 					memFree(file);
 					break;
@@ -327,7 +327,7 @@ int main(int argc, char **argv)
 		removeDir(dir);
 		return;
 	}
-	if(argIs("/RECV-FROM-FORTEWAVE"))
+	if (argIs("/RECV-FROM-FORTEWAVE"))
 	{
 		char *identHash;
 		char *dir;
@@ -351,7 +351,7 @@ int main(int argc, char **argv)
 				autoBlock_t *recvData = Frtwv_Recv(i, index ? 0 : millis);
 				char *file;
 
-				if(!recvData)
+				if (!recvData)
 					break;
 
 				file = combine_cx(dir, xcout("%04u", index));
@@ -364,7 +364,7 @@ int main(int argc, char **argv)
 		}
 		return;
 	}
-	if(argIs("/EXTRACT"))
+	if (argIs("/EXTRACT"))
 	{
 		char *rFile;
 		char *wFile;
@@ -386,7 +386,7 @@ int main(int argc, char **argv)
 
 			// ? 最後に展開したときから2日以上経過してからPCを起動して最初にここへ到達した。-> 展開する。
 			// 時刻調整や誤差を考慮してマージンとしての2日
-			if(
+			if (
 				!existFile(lastExtractedTimeFile) ||
 				getFileSize(lastExtractedTimeFile) != 8 ||
 				readFirstValue64(lastExtractedTimeFile) + 86400 * 2 < bootTime
@@ -401,7 +401,7 @@ int main(int argc, char **argv)
 
 				WAT_UnpadFile(delayFile);
 
-				if(existFile(delayFile)) // 次の再起動時まで待たされた削除を実行する。
+				if (existFile(delayFile)) // 次の再起動時まで待たされた削除を実行する。
 				{
 					FILE *fp = fileOpen(delayFile, "rt");
 
@@ -409,7 +409,7 @@ int main(int argc, char **argv)
 					{
 						char *targetPath = readLine(fp);
 
-						if(!targetPath)
+						if (!targetPath)
 							break;
 
 						remove(targetPath);
@@ -427,7 +427,7 @@ int main(int argc, char **argv)
 		memFree(lastExtractedTimeFile);
 		return;
 	}
-	if(argIs("/MONITOR"))
+	if (argIs("/MONITOR"))
 	{
 		uint parentProcId;
 		uint hdl;

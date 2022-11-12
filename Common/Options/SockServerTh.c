@@ -99,11 +99,11 @@ void sockServerTh(void (*funcTransmit)(int, char *), uint portno, uint connectma
 	sa.sin_addr.s_addr = htonl(INADDR_ANY);
 	sa.sin_port = htons((unsigned short)portno);
 
-	if(bind(sock, (struct sockaddr *)&sa, sizeof(sa)) != 0) // ? == -1
+	if (bind(sock, (struct sockaddr *)&sa, sizeof(sa)) != 0) // ? == -1
 	{
 		error_m("TCPポートのバインドに失敗しました。");
 	}
-	if(listen(sock, SOMAXCONN) != 0) // ? == -1
+	if (listen(sock, SOMAXCONN) != 0) // ? == -1
 	{
 		error();
 	}
@@ -134,11 +134,11 @@ void sockServerTh(void (*funcTransmit)(int, char *), uint portno, uint connectma
 		{
 //			SockCurrTime = time(NULL);
 
-			if(funcIdle() == 0) // ? サーバー停止
+			if (funcIdle() == 0) // ? サーバー停止
 			{
 				shutdownTheServer = 1;
 			}
-			else if(TransInfoStockCount)
+			else if (TransInfoStockCount)
 			{
 				int hasConnect;
 
@@ -166,7 +166,7 @@ void sockServerTh(void (*funcTransmit)(int, char *), uint portno, uint connectma
 					et = now();
 					dt = et - st;
 
-					if(2 < dt)
+					if (2 < dt)
 					{
 						cout("Warning: 待ち受けポートの接続待ちに %u 秒掛かりました。hasConnect: %d\n", dt, hasConnect);
 						cout("SockWait_T1: %u\n", SockWait_T1);
@@ -178,7 +178,7 @@ void sockServerTh(void (*funcTransmit)(int, char *), uint portno, uint connectma
 				}
 #endif
 
-				if(hasConnect) // ? 接続あり
+				if (hasConnect) // ? 接続あり
 				{
 					tmpval = sizeof(clsa);
 					clsock = accept(sock, (struct sockaddr *)&clsa, &tmpval);
@@ -218,9 +218,9 @@ void sockServerTh(void (*funcTransmit)(int, char *), uint portno, uint connectma
 			}
 			TransInfoDeadCount = 0;
 
-			if(shutdownTheServer)
+			if (shutdownTheServer)
 			{
-				if(TransInfoStockCount == connectmax)
+				if (TransInfoStockCount == connectmax)
 					break;
 
 				goto waitForTransmitEnd;
@@ -233,7 +233,7 @@ void sockServerTh(void (*funcTransmit)(int, char *), uint portno, uint connectma
 
 	SockPreClose(sock);
 
-	if(closesocket(sock) != 0) // ? fault
+	if (closesocket(sock) != 0) // ? fault
 	{
 		error();
 	}

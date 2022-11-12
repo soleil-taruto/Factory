@@ -17,7 +17,7 @@ void DeleteFileDataPart(char *file, uint64 beginPos, uint64 delSize)
 	errorCase(size < beginPos);
 	errorCase(size - beginPos < delSize);
 
-	if(delSize == 0)
+	if (delSize == 0)
 		return;
 
 	rfp = fileOpen(file, "rb");

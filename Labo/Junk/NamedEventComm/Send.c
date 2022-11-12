@@ -22,9 +22,9 @@ static void DoSendBit(uint bit)
 	uint evBit_1 = eventOpen(EV_BIT_1);
 	int result;
 
-	if(handleWaitForMillis(evReady, 5000))
+	if (handleWaitForMillis(evReady, 5000))
 	{
-		if(bit)
+		if (bit)
 			eventSet(evBit_1);
 		else
 			eventSet(evBit_0);
@@ -59,7 +59,7 @@ static void DoSend(char *message)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		char *text = readText(nextArg());
 
@@ -67,7 +67,7 @@ int main(int argc, char **argv)
 		memFree(text);
 		return;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		DoSend(nextArg());
 		return;

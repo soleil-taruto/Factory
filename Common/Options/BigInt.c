@@ -8,7 +8,7 @@ static void AddInt(autoList_t *out, uint index, uint64 value)
 		putElement(out, index, (uint)value);
 		value >>= 32;
 
-		if(!value)
+		if (!value)
 		{
 			break;
 		}
@@ -43,7 +43,7 @@ autoList_t *subBigInt(autoList_t *i, autoList_t *j) // i < j ÇÃÇ∆Ç´ NULL Çï‘Ç∑Å
 	{
 		AddInt(out, index, ((uint64)1 << 32) + refElement(i, index) - refElement(j, index) - (index ? 1 : 0));
 	}
-	if(!refElement(out, bound)) // ? i < j
+	if (!refElement(out, bound)) // ? i < j
 	{
 		releaseAutoList(out);
 		return NULL;
@@ -58,13 +58,13 @@ int compBigInt(autoList_t *i, autoList_t *j) // ret: (-1, 0, 1) as strcmp()-ly c
 	autoList_t *out = subBigInt(i, j);
 	uint count;
 
-	if(!out)
+	if (!out)
 		return -1; // i < j
 
 	count = getCount(out);
 	releaseAutoList(out);
 
-	if(!count)
+	if (!count)
 		return 0; // i == j
 
 	return 1; // i > j
@@ -91,7 +91,7 @@ autoList_t *idivBigInt(autoList_t *i, uint j, uint *remain) // remain == NULL: ñ
 
 	errorCase(!j); // É[ÉçèúéZ
 
-	if(getCount(i))
+	if (getCount(i))
 	{
 		for(index = getCount(i) - 1; ; index--)
 		{
@@ -99,14 +99,14 @@ autoList_t *idivBigInt(autoList_t *i, uint j, uint *remain) // remain == NULL: ñ
 			putElement(out, index, (uint)(mixer / j));
 			mixer %= j;
 
-			if(!index)
+			if (!index)
 				break;
 
 			mixer <<= 32;
 		}
 		removeTrailZero(out);
 	}
-	if(remain)
+	if (remain)
 		*remain = (uint)mixer;
 
 	return out;
@@ -144,7 +144,7 @@ autoList_t *divBigInt(autoList_t *i, autoList_t *j, autoList_t **remain)
 
 		wout = subBigInt(i, j);
 
-		if(wout)
+		if (wout)
 		{
 			releaseAutoList(i);
 			i = wout;
@@ -154,7 +154,7 @@ autoList_t *divBigInt(autoList_t *i, autoList_t *j, autoList_t **remain)
 	}
 	removeTrailZero(out);
 
-	if(remain)
+	if (remain)
 		*remain = i;
 	else
 		releaseAutoList(i);
@@ -188,27 +188,27 @@ autoList_t *modPowerBigInt(autoList_t *i, autoList_t *j, autoList_t *mod) // mod
 		{
 			bit--;
 
-			if(getElement(j, index) & (1 << bit))
+			if (getElement(j, index) & (1 << bit))
 			{
 				wout = mulBigInt(out, i);
 				releaseAutoList(out);
 				out = wout;
 
-				if(mod)
+				if (mod)
 				{
 					wout = modBigInt(out, mod);
 					releaseAutoList(out);
 					out = wout;
 				}
 			}
-			if(!bit && !index)
+			if (!bit && !index)
 				goto endLoop;
 
 			wout = mulBigInt(out, out);
 			releaseAutoList(out);
 			out = wout;
 
-			if(mod)
+			if (mod)
 			{
 				wout = modBigInt(out, mod);
 				releaseAutoList(out);

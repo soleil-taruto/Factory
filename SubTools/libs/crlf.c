@@ -12,7 +12,7 @@ void CRLF_CheckFile(char *file, uint *p_num_cr, uint *p_num_crlf, uint *p_num_lf
 
 	for(; ; )
 	{
-		if(backed)
+		if (backed)
 		{
 			backed = 0;
 			chr = backedChr;
@@ -20,14 +20,14 @@ void CRLF_CheckFile(char *file, uint *p_num_cr, uint *p_num_crlf, uint *p_num_lf
 		else
 			chr = readChar(fp);
 
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
-		if(chr == '\r')
+		if (chr == '\r')
 		{
 			chr = readChar(fp);
 
-			if(chr != '\n')
+			if (chr != '\n')
 			{
 				backed = 1;
 				backedChr = chr;
@@ -37,16 +37,16 @@ void CRLF_CheckFile(char *file, uint *p_num_cr, uint *p_num_crlf, uint *p_num_lf
 			else
 				num_crlf++;
 		}
-		else if(chr == '\n')
+		else if (chr == '\n')
 		{
 			num_lf++;
 		}
 	}
 	fileClose(fp);
 
-	if(p_num_cr)   *p_num_cr   = num_cr;
-	if(p_num_crlf) *p_num_crlf = num_crlf;
-	if(p_num_lf)   *p_num_lf   = num_lf;
+	if (p_num_cr)   *p_num_cr   = num_cr;
+	if (p_num_crlf) *p_num_crlf = num_crlf;
+	if (p_num_lf)   *p_num_lf   = num_lf;
 }
 uint CRLF_GetTopFile(char *file)
 {
@@ -56,14 +56,14 @@ uint CRLF_GetTopFile(char *file)
 
 	CRLF_CheckFile(file, &num_cr, &num_crlf, &num_lf);
 
-	if(num_cr < num_lf)
+	if (num_cr < num_lf)
 	{
-		if(num_crlf < num_lf)
+		if (num_crlf < num_lf)
 			return NEWLINE_LF;
 	}
 	else
 	{
-		if(num_crlf < num_cr)
+		if (num_crlf < num_cr)
 			return NEWLINE_CR;
 	}
 	return NEWLINE_CRLF;
@@ -78,7 +78,7 @@ void CRLF_ConvFile(char *rFile, char *wFile, char *newLine) // newLine: "\r", "\
 
 	for(; ; )
 	{
-		if(backed)
+		if (backed)
 		{
 			backed = 0;
 			chr = backedChr;
@@ -86,21 +86,21 @@ void CRLF_ConvFile(char *rFile, char *wFile, char *newLine) // newLine: "\r", "\
 		else
 			chr = readChar(rfp);
 
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
-		if(chr == '\r')
+		if (chr == '\r')
 		{
 			chr = readChar(rfp);
 
-			if(chr != '\n')
+			if (chr != '\n')
 			{
 				backed = 1;
 				backedChr = chr;
 			}
 			writeToken(wfp, newLine);
 		}
-		else if(chr == '\n')
+		else if (chr == '\n')
 		{
 			writeToken(wfp, newLine);
 		}

@@ -17,7 +17,7 @@ DirSabun_t *CreateDirSabun(char *path, DirSabunKind_t kind, autoList_t *lDiff, a
 }
 void ReleaseDirSabun(DirSabun_t *i)
 {
-	if(!i)
+	if (!i)
 		return;
 
 	memFree(i->Path);
@@ -27,7 +27,7 @@ void ReleaseDirSabun(DirSabun_t *i)
 }
 void ReleaseDirSabunList(autoList_t *list)
 {
-	if(!list)
+	if (!list)
 		return;
 
 	callAllElement(list, (void (*)(uint))ReleaseDirSabun);
@@ -49,9 +49,9 @@ static void AddBothExist(autoList_t *dest, autoList_t *paths, char *lParent, cha
 		lIsDir = existDir(lPath);
 		rIsDir = existDir(rPath);
 
-		if(lIsDir ? !rIsDir : rIsDir) // ? lIsDir != rIsDir
+		if (lIsDir ? !rIsDir : rIsDir) // ? lIsDir != rIsDir
 		{
-			if(lIsDir)
+			if (lIsDir)
 			{
 				addElement(dest, (uint)CreateDirSabun(strx(path), DSK_LONLY_DIR, NULL, NULL));
 				addElement(dest, (uint)CreateDirSabun(strx(path), DSK_RONLY_FILE, NULL, NULL));
@@ -64,7 +64,7 @@ static void AddBothExist(autoList_t *dest, autoList_t *paths, char *lParent, cha
 		}
 		else
 		{
-			if(lIsDir)
+			if (lIsDir)
 			{
 				addElement(dest, (uint)CreateDirSabun(strx(path), DSK_BOTH_DIR, NULL, NULL));
 			}
@@ -98,7 +98,7 @@ static void AddOnlyExist(autoList_t *dest, autoList_t *paths, char *parent, int 
 	{
 		DirSabunKind_t kind;
 
-		if(existDir(path))
+		if (existDir(path))
 			kind = isLeft ? DSK_LONLY_DIR : DSK_RONLY_DIR;
 		else
 			kind = isLeft ? DSK_LONLY_FILE : DSK_RONLY_FILE;

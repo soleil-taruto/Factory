@@ -38,7 +38,7 @@ static void Upload(SockStream_t *ss, char *laneDir)
 	createDirIfNotExist(laneDir);
 	LOGPOS();
 
-	if(LANE_NUM_LMT < lsCount(ROOTDIR))
+	if (LANE_NUM_LMT < lsCount(ROOTDIR))
 	{
 		cout("★★★レーンが多すぎる！\n");
 		SockSendLine(ss, "NG");
@@ -60,26 +60,26 @@ static void Upload(SockStream_t *ss, char *laneDir)
 		SockSendLine(ss, "READY-NEXT-FILE");
 		LOGPOS();
 
-		if(SockRecvChar(ss) != 'B')
+		if (SockRecvChar(ss) != 'B')
 			break;
 
 		LOGPOS();
 		fileSize = SockRecvValue64(ss);
 		cout("fileSize: %I64u\n", fileSize);
 
-		if(FILE_NUM_LMT < lsCount(laneDir))
+		if (FILE_NUM_LMT < lsCount(laneDir))
 		{
 			cout("★★★ファイルが多すぎる！\n");
 			SockSendLine(ss, "NG");
 			goto netError;
 		}
-		if(TOTAL_SIZE_LMT < fileSize)
+		if (TOTAL_SIZE_LMT < fileSize)
 		{
 			cout("★★★ファイルが大きすぎる！\n");
 			SockSendLine(ss, "NG");
 			goto netError;
 		}
-		if(TOTAL_SIZE_LMT - totalSize < fileSize)
+		if (TOTAL_SIZE_LMT - totalSize < fileSize)
 		{
 			cout("★★★総ファイルサイズが大きすぎる！\n");
 			SockSendLine(ss, "NG");
@@ -100,7 +100,7 @@ static void Upload(SockStream_t *ss, char *laneDir)
 		{
 			uint recvSize = (uint)m_min((uint64)BUFFSIZE, fileSize);
 
-			if(!SockRecvBlock(ss, Buff, recvSize))
+			if (!SockRecvBlock(ss, Buff, recvSize))
 			{
 				cout("★★★ファイルデータ受信エラー！\n");
 				errorFlag = 1;
@@ -115,14 +115,14 @@ static void Upload(SockStream_t *ss, char *laneDir)
 
 		// memo: !SockRecvBlock() になった場合 Sock == -1 なので、以降送受信しないはず。
 
-		if(SockRecvChar(ss) != 'E')
+		if (SockRecvChar(ss) != 'E')
 		{
 			cout("★★★ファイル終端符受信エラー！\n");
 			errorFlag = 1;
 		}
 		LOGPOS();
 
-		if(errorFlag)
+		if (errorFlag)
 		{
 			LOGPOS();
 			removeFile(file);
@@ -133,7 +133,7 @@ static void Upload(SockStream_t *ss, char *laneDir)
 		memFree(name);
 		LOGPOS();
 
-		if(errorFlag)
+		if (errorFlag)
 			goto netError;
 
 		LOGPOS();
@@ -189,7 +189,7 @@ static void Download(SockStream_t *ss, char *laneDir)
 		SockFlush(ss);
 		LOGPOS();
 
-		if(SockRecvChar(ss) != 'C')
+		if (SockRecvChar(ss) != 'C')
 		{
 			cout("★★★ファイル送信エラー！\n");
 			goto netError;
@@ -232,11 +232,11 @@ static int Perform(int sock, uint dummyPrm)
 	laneDir = combine(ROOTDIR, lane);
 	cout("laneDir: %s\n", laneDir);
 
-	if(!strcmp(command, COMMAND_PREFIX "u"))
+	if (!strcmp(command, COMMAND_PREFIX "u"))
 	{
 		Upload(ss, laneDir);
 	}
-	else if(!strcmp(command, COMMAND_PREFIX "d"))
+	else if (!strcmp(command, COMMAND_PREFIX "d"))
 	{
 		Download(ss, laneDir);
 	}
@@ -254,7 +254,7 @@ static int Perform(int sock, uint dummyPrm)
 static int Idle(void)
 {
 	while(hasKey())
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 			return 0;
 
 	return 1;

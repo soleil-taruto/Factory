@@ -20,7 +20,7 @@ char *combine(char *dir, char *file)
 {
 	char *dirFile;
 
-	if(dir[0] && dir[1] == ':' && dir[2] == '\0') // ? "X:" -> "X:."
+	if (dir[0] && dir[1] == ':' && dir[2] == '\0') // ? "X:" -> "X:."
 	{
 		static char buff[] = "?:.";
 		buff[0] = dir[0];
@@ -48,7 +48,7 @@ static char *GetLocalEx(char *path, uint plus_index)
 {
 	char *p = mbs_strrchr(path, '\\');
 
-	if(!p)
+	if (!p)
 		return path;
 
 	return p + plus_index;
@@ -63,7 +63,7 @@ static char *GetExtEx(char *path, uint plus_index)
 	/*
 		.gitignore ‚È‚ÇAÅ‰‚Ì '.' ‚ÍŠg’£q‚ÌƒfƒŠƒ~ƒ^‚Æ‚ÍŒ©‚È‚³‚È‚¢B".aaabbbccc" ‚ÍŠg’£q–³‚µB"z.aaabbbccc" ‚ÌŠg’£q‚Í "aaabbbccc"
 	*/
-	if(!p || p == local)
+	if (!p || p == local)
 		return strchr(local, '\0');
 
 	return p + plus_index;
@@ -92,7 +92,7 @@ char *changeLocal(char *path, char *newLocal)
 {
 	path = strxm(path, strlen(newLocal));
 
-	if(*newLocal)
+	if (*newLocal)
 	{
 		strcpy(getLocal(path), newLocal);
 	}
@@ -106,11 +106,11 @@ char *getParent(char *path) // ret: path ‚ª‘¶İ‚·‚éƒfƒBƒŒƒNƒgƒŠ‚ğ path ‚ğŒ³‚É¶
 {
 	path = changeLocal(path, "");
 
-	if(!*path)
+	if (!*path)
 	{
 		path = addChar(path, '.');
 	}
-	else if(path[1] == ':' && !path[2])
+	else if (path[1] == ':' && !path[2])
 	{
 		path = addChar(path, '\\');
 	}
@@ -120,7 +120,7 @@ char *changeExt(char *path, char *newExt)
 {
 	path = strxm(path, 1 + strlen(newExt));
 
-	if(*newExt)
+	if (*newExt)
 	{
 		char *ext = getExtWithDot(path);
 
@@ -143,7 +143,7 @@ void eraseExt(char *path)
 }
 char *addLocal(char *path, char *newLocal) // strr() ’ˆÓ
 {
-	if(*newLocal)
+	if (*newLocal)
 	{
 		path = addChar(path, '\\');
 		path = addLine(path, newLocal);
@@ -152,7 +152,7 @@ char *addLocal(char *path, char *newLocal) // strr() ’ˆÓ
 }
 char *addExt(char *path, char *newExt) // strr() ’ˆÓ
 {
-	if(*newExt)
+	if (*newExt)
 	{
 		path = addChar(path, '.');
 		path = addLine(path, newExt);
@@ -196,11 +196,11 @@ char *makeFullPath(char *path)
 	/*
 		_fullpath() ‚Í "C:\\ABC\\DEF\\" ‚ÌÅŒã‚Ì '\\' ‚ğæ‚Á‚Ä‚­‚ê‚È‚¢B
 	*/
-	if(!isAbsRootDir(retPath))
+	if (!isAbsRootDir(retPath))
 	{
 		escapeYen(retPath);
 
-		if(strchr(retPath, '\0')[-1] == '/')
+		if (strchr(retPath, '\0')[-1] == '/')
 		{
 			*(strchr(retPath, '\0') - 1) = '\0';
 		}
@@ -221,7 +221,7 @@ char *getFullPath(char *path, char *baseDir)
 {
 	char *retPath;
 
-	if(!baseDir)
+	if (!baseDir)
 		baseDir = ".";
 
 	errorCase(m_isEmpty(path));
@@ -262,7 +262,7 @@ int existPath(char *path) // path: NULL -> •s‰Â(w’è‚µ‚Ä‚Í‚È‚ç‚È‚¢)
 		ƒpƒX‚Ì’¼Œã‚É1‚ÂˆÈã‚Ì '.' ‚ª‚ ‚é‚ÆA‚»‚ê‚ğæ‚èœ‚¢‚½ê‡‚Æ“¯‚¶Œ‹‰Ê‚ğ•Ô‚·B_access("abc.txt") == _access("abc.txt...")
 		–{ŠÖ”‚Í‚±‚ê‚ğ”F‚ß‚È‚¢B’A‚µAƒJƒŒƒ“ƒgDIR‚âeDIR‚ğw‚· ".", ".." ‚Í”F‚ß‚éB
 	*/
-	if(*path && strchr(path, '\0')[-1] == '.' && !lineExp("<>//<1,2,..>", path) && !lineExp("<1,2,..>", path))
+	if (*path && strchr(path, '\0')[-1] == '.' && !lineExp("<>//<1,2,..>", path) && !lineExp("<1,2,..>", path))
 	{
 		return 0;
 	}
@@ -272,7 +272,7 @@ int existPath(char *path) // path: NULL -> •s‰Â(w’è‚µ‚Ä‚Í‚È‚ç‚È‚¢)
 		ƒ‹[ƒgƒfƒBƒŒƒNƒgƒŠˆÈŠO‚Å‚àƒpƒX‚ÌÅŒã‚É '\\' ‚ª‚ ‚Á‚Ä‚à—Ç‚¢B_access("C:\\abc\\def") == _access("C:\\abc\\def\\")
 		–{ŠÖ”‚Íƒtƒ@ƒCƒ‹‚ÆƒTƒuƒfƒBƒŒƒNƒgƒŠ‚ÌÅŒã‚É '\\' ‚ª•t‚­‚±‚Æ‚ğ”F‚ß‚È‚¢B
 	*/
-	if(*path && strchr(path, '\0')[-1] == '/' && !lineExp("<1,AZaz>://", path) && strcmp(path, "/"))
+	if (*path && strchr(path, '\0')[-1] == '/' && !lineExp("<1,AZaz>://", path) && strcmp(path, "/"))
 	{
 		return 0;
 	}
@@ -282,7 +282,7 @@ int existPath(char *path) // path: NULL -> •s‰Â(w’è‚µ‚Ä‚Í‚È‚ç‚È‚¢)
 		'\\' ‚ğ2‚ÂˆÈã‘±‚¯‚Ä‘‚¢‚Ä‚à—Ç‚¢‚æ‚¤‚¾B_access("C:\\Dir\\Sub") == _access("C:\\\\Dir\\\\\\Sub")
 		–{ŠÖ”‚Í—]Œv‚È '\\' ‚ğ”F‚ß‚È‚¢B‚Â‚¢‚Å‚Éƒlƒbƒgƒ[ƒNƒpƒX‚à‚±‚±‚Å‘j~‚·‚éB
 	*/
-	if(mbs_strstr(path, "//"))
+	if (mbs_strstr(path, "//"))
 	{
 		return 0;
 	}
@@ -311,8 +311,8 @@ sint dirFileComp(char *path1, char *path2) // ƒ\[ƒg—pAƒfƒBƒŒƒNƒgƒŠ -> ƒtƒ@ƒCƒ‹
 	int d1 = existDir(path1);
 	int d2 = existDir(path2);
 
-	if(d1 && !d2) return -1;
-	if(d2 && !d1) return 1;
+	if (d1 && !d2) return -1;
+	if (d2 && !d1) return 1;
 
 	return mbs_stricmp(path1, path2);
 }
@@ -337,7 +337,7 @@ void dirFileSortDirCount(autoList_t *paths, uint dirCount)
 int mkdirEx(char *dir) // ret: ? ¸”s
 {
 #if 1
-	if(CreateDirectory(dir, NULL) == 0) // ? ¸”s
+	if (CreateDirectory(dir, NULL) == 0) // ? ¸”s
 	{
 		uint c;
 
@@ -348,12 +348,12 @@ int mkdirEx(char *dir) // ret: ? ¸”s
 			sleep(100);
 			LOGPOS();
 
-			if(existDir(dir))
+			if (existDir(dir))
 				break;
 
 			LOGPOS();
 
-			if(5 <= c)
+			if (5 <= c)
 			{
 				LOGPOS();
 				return 1;
@@ -367,13 +367,13 @@ int mkdirEx(char *dir) // ret: ? ¸”s
 	}
 	return 0;
 #elif 1
-	if(CreateDirectory(dir, NULL) == 0) // ? ¸”s
+	if (CreateDirectory(dir, NULL) == 0) // ? ¸”s
 	{
 		return 1;
 	}
 	return 0;
 #else
-	if(_mkdir(dir)) // ? ¸”s
+	if (_mkdir(dir)) // ? ¸”s
 	{
 		return 1;
 	}
@@ -383,12 +383,12 @@ int mkdirEx(char *dir) // ret: ? ¸”s
 
 int creatable(char *path)
 {
-	if(accessible(path))
+	if (accessible(path))
 		return 0;
 
 	// accessible ‚Å‚Í‚È‚¢ì¬•s‰Â”\‚ÈƒpƒX‚ğ creatable() ‚ÅŒŸ¸‚·‚é‚±‚Æ‚Í‘½•ª–³‚¢B‚¾‚©‚ç‘½­ƒŠƒgƒ‰ƒC‚ÅŠÔŠ|‚¯‚Ä‚à—Ç‚¢B@ 2019.1.24
 
-	if(mkdirEx(path)) // ? ¸”s
+	if (mkdirEx(path)) // ? ¸”s
 		return 0;
 
 	removeDir(path);
@@ -400,7 +400,7 @@ int overwritable(char *path)
 }
 void createDir(char *dir)
 {
-	if(mkdirEx(dir)) // ? ¸”s
+	if (mkdirEx(dir)) // ? ¸”s
 	{
 		error();
 	}
@@ -411,14 +411,14 @@ void createFile(char *file)
 }
 void createDirIfNotExist(char *dir)
 {
-	if(!existDir(dir))
+	if (!existDir(dir))
 	{
 		createDir(dir);
 	}
 }
 void createFileIfNotExist(char *file)
 {
-	if(!existFile(file))
+	if (!existFile(file))
 	{
 		createFile(file);
 	}
@@ -429,7 +429,7 @@ void removeDir(char *dir)
 
 	for(c = 1; ; c++)
 	{
-		if(!_rmdir(dir)) // ? ¬Œ÷
+		if (!_rmdir(dir)) // ? ¬Œ÷
 			break;
 
 		cout("Failed _rmdir \"%s\", %u-th trial. LastError: %08x\n", dir, c, GetLastError());
@@ -443,7 +443,7 @@ void removeFile(char *file)
 
 	for(c = 1; ; c++)
 	{
-		if(!remove(file)) // ? ¬Œ÷
+		if (!remove(file)) // ? ¬Œ÷
 			break;
 
 		cout("Failed remove() \"%s\", %u-th trial. LastError: %08x\n", file, c, GetLastError());
@@ -453,28 +453,28 @@ void removeFile(char *file)
 }
 void removeDirIfExist(char *dir)
 {
-	if(existDir(dir))
+	if (existDir(dir))
 	{
 		removeDir(dir);
 	}
 }
 void removeDirIfExistEmpty(char *dir)
 {
-	if(existDir(dir))
+	if (existDir(dir))
 	{
 		removeDirIfEmpty(dir);
 	}
 }
 void removeDirIfEmpty(char *dir)
 {
-	if(!lsCount(dir))
+	if (!lsCount(dir))
 	{
 		removeDir(dir);
 	}
 }
 void removeFileIfExist(char *file)
 {
-	if(existFile(file))
+	if (existFile(file))
 	{
 		removeFile(file);
 	}
@@ -509,7 +509,7 @@ void recurRemoveDir(char *dir)
 }
 void recurRemoveDirIfExist(char *dir)
 {
-	if(existDir(dir))
+	if (existDir(dir))
 	{
 		recurRemoveDir(dir);
 	}
@@ -540,7 +540,7 @@ void createPath(char *path, int mode)
 	path = makeFullPath(path);
 	cout("CREATE_PATH_%c: [%s]\n", mode, path);
 
-	if(isAbsRootDir(path))
+	if (isAbsRootDir(path))
 		goto endFunc;
 
 	escapeYen(path);
@@ -554,7 +554,7 @@ void createPath(char *path, int mode)
 		path = addChar(path, '\\');
 		path = addLine(path, getLine(ptkns, index));
 
-		if(index == getCount(ptkns) - 1)
+		if (index == getCount(ptkns) - 1)
 			break;
 
 		createDirIfNotExist(path);
@@ -593,7 +593,7 @@ char *getCwd(void)
 	char *dirBuff = _getcwd(NULL, 0);
 	char *dir;
 
-	if(!dirBuff)
+	if (!dirBuff)
 	{
 		error();
 	}
@@ -606,7 +606,7 @@ void changeCwd(char *dir)
 	/*
 		_chdir("") -> !0 (¸”s) ‚ğ•Ô‚·B
 	*/
-	if(_chdir(dir)) // ? ¸”s
+	if (_chdir(dir)) // ? ¸”s
 	{
 		error();
 	}
@@ -616,7 +616,7 @@ static autoList_t *CwdStack;
 
 void addCwd(char *dir)
 {
-	if(!CwdStack)
+	if (!CwdStack)
 		CwdStack = createAutoList(1);
 
 	addElement(CwdStack, (uint)getCwd());
@@ -671,13 +671,13 @@ void eraseRoots(autoList_t *pathList, char *root)
 char *changeRoot(char *path, char *root, char *newRoot) // ret: newRoot == NULL ? path : strr(path)
 {
 	// ƒ‹[ƒg‚Ìíœ
-	if(root)
+	if (root)
 	{
 		copyLine(path, eraseRoot(path, root));
 	}
 
 	// ƒ‹[ƒg‚Ì’Ç‰Á
-	if(newRoot)
+	if (newRoot)
 	{
 		path = combine_cx(newRoot, path);
 	}
@@ -695,10 +695,10 @@ void changeRoots(autoList_t *pathList, char *root, char *newRoot)
 }
 void changeRootsAbs(autoList_t *pathList, char *root, char *newRoot)
 {
-	if(root)
+	if (root)
 		root = makeFullPath(root);
 
-	if(newRoot)
+	if (newRoot)
 		newRoot = makeFullPath(newRoot);
 
 	changeRoots(pathList, root, newRoot);
@@ -750,13 +750,13 @@ static void CopyFile_DM(char *srcFile, char *destFile, char *destMode)
 	rfp = fileOpen(srcFile, "rb");
 	wfp = fileOpen(destFile, destMode);
 
-	if(buffSize)
+	if (buffSize)
 	{
 		for(; ; )
 		{
 			autoBlock_t *block = readBinaryStream(rfp, buffSize);
 
-			if(!block)
+			if (!block)
 				break;
 
 			writeBinaryBlock(wfp, block);
@@ -787,7 +787,7 @@ static void CopyDir_Abs(char *srcDir, char *destDir) // destDir ‚Íì¬‚³‚ê‚Ä‚¢‚é
 	{
 		char *dir = getLine(destPaths, index);
 
-		if(!existDir(dir)) // ã‘‚«‚É‘Î‰‚µ‚Ä‚İ‚éB
+		if (!existDir(dir)) // ã‘‚«‚É‘Î‰‚µ‚Ä‚İ‚éB
 			createDir(dir);
 	}
 	for(; index < getCount(srcPaths); index++)
@@ -819,7 +819,7 @@ static int DoCmdMove(char *srcPath, char *destPath) // ret: ? ¬Œ÷
 
 	coExecute_x(xcout("MOVE /Y \"%s\" \"%s\"", srcPath, destPath));
 
-	if(existPath(srcPath)) // ? ¸”s
+	if (existPath(srcPath)) // ? ¸”s
 	{
 		LOGPOS();
 		errorCase(existPath(destPath));
@@ -847,10 +847,10 @@ void moveFile(char *srcFile, char *destFile)
 	for(c = 1; ; c++)
 	{
 #if 0 // rename(), MOVE ‹¤‚É LastError=5 ‚Åí‚É¸”s‚µ‚Ä‚µ‚Ü‚¤BPCÄ‹N“®‚µ‚½‚ç’¼‚Á‚½B‰½‚¾‚Á‚½‚ñ‚¾... @ 2020.12.15
-		if(DoCmdMove(srcFile, destFile)) // ? ¬Œ÷
+		if (DoCmdMove(srcFile, destFile)) // ? ¬Œ÷
 			break;
 #else
-		if(!rename(srcFile, destFile)) // ? ¬Œ÷
+		if (!rename(srcFile, destFile)) // ? ¬Œ÷
 			break;
 #endif
 
@@ -872,7 +872,7 @@ static void MoveDir_Abs(char *srcDir, char *destDir) // destDir ‚Íì¬‚³‚ê‚Ä‚¢‚é
 	{
 		char *dir = getLine(destPaths, index);
 
-		if(!existDir(dir)) // ã‘‚«‚É‘Î‰‚µ‚Ä‚İ‚éB
+		if (!existDir(dir)) // ã‘‚«‚É‘Î‰‚µ‚Ä‚İ‚éB
 			createDir(dir);
 	}
 	for(; index < getCount(srcPaths); index++)
@@ -880,7 +880,7 @@ static void MoveDir_Abs(char *srcDir, char *destDir) // destDir ‚Íì¬‚³‚ê‚Ä‚¢‚é
 		char *srcFile = getLine(srcPaths, index);
 		char *destFile = getLine(destPaths, index);
 
-		if(existFile(destFile)) // ã‘‚«‚É‘Î‰‚µ‚Ä‚İ‚éB
+		if (existFile(destFile)) // ã‘‚«‚É‘Î‰‚µ‚Ä‚İ‚éB
 			semiRemovePath(destFile);
 
 		moveFile(srcFile, destFile);
@@ -909,7 +909,7 @@ void copyPath(char *rPath, char *wPath)
 	errorCase(m_isEmpty(rPath));
 	errorCase(m_isEmpty(wPath));
 
-	if(existDir(rPath))
+	if (existDir(rPath))
 	{
 		createDirIfNotExist(wPath);
 		recurClearDir(wPath);
@@ -923,7 +923,7 @@ void movePath(char *rPath, char *wPath)
 	errorCase(m_isEmpty(rPath));
 	errorCase(m_isEmpty(wPath));
 
-	if(existDir(rPath))
+	if (existDir(rPath))
 	{
 		createDirIfNotExist(wPath);
 		moveDir(rPath, wPath);
@@ -951,7 +951,7 @@ void setFileSize(char *file, uint64 size)
 		_chsize_s
 			ƒtƒ@ƒCƒ‹‚ªŠg’£‚³‚ê‚éê‡AŠg’£•”•ª‚É‚Í 0x00 ‚ª•â“U‚³‚ê‚éB
 	*/
-	if(_chsize_s(fh, (sint64)size) != 0) // ? ¸”s
+	if (_chsize_s(fh, (sint64)size) != 0) // ? ¸”s
 	{
 		error();
 	}
@@ -961,13 +961,13 @@ uint64 getFileSizeFP(FILE *fp)
 {
 	sint64 size;
 
-	if(_fseeki64(fp, 0I64, SEEK_END) != 0) // ? ¸”s
+	if (_fseeki64(fp, 0I64, SEEK_END) != 0) // ? ¸”s
 	{
 		error();
 	}
 	size = _ftelli64(fp);
 
-	if(size < 0I64)
+	if (size < 0I64)
 	{
 		error();
 	}
@@ -977,7 +977,7 @@ uint64 getFileSizeFPSS(FILE *fp)
 {
 	uint64 size = getFileSizeFP(fp);
 
-	if(_fseeki64(fp, 0I64, SEEK_SET) != 0) // ? ¸”s
+	if (_fseeki64(fp, 0I64, SEEK_SET) != 0) // ? ¸”s
 	{
 		error();
 	}
@@ -1035,7 +1035,7 @@ autoList_t *editTextLines(autoList_t *lines)
 
 	editTextFile(file);
 
-	if(!existFile(file)) createFile(file); // GŠÛ‚Í‹ó‚É‚µ‚Ä•Û‘¶‚Åíœ‚Å‚«‚é
+	if (!existFile(file)) createFile(file); // GŠÛ‚Í‹ó‚É‚µ‚Ä•Û‘¶‚Åíœ‚Å‚«‚é
 	retLines = readLines(file);
 	removeFile(file);
 	memFree(file);
@@ -1068,7 +1068,7 @@ void semiRemovePath(char *path)
 	static uint destCount;
 	char *destPath;
 
-	if(!destDir)
+	if (!destDir)
 	{
 		destDir = makeFreeDir();
 
@@ -1090,14 +1090,14 @@ void removeFileAtTermination(char *file)
 {
 	errorCase(m_isEmpty(file));
 
-	if(!RFAT_Files)
+	if (!RFAT_Files)
 		RFAT_Files = newList();
 
 	addElement(RFAT_Files, (uint)makeFullPath(file));
 }
 void termination_scheduledRemoveFile(void)
 {
-	if(RFAT_Files)
+	if (RFAT_Files)
 	{
 		char *file;
 		uint index;

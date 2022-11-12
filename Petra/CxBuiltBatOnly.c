@@ -10,7 +10,7 @@ int main(int argc, char **argv)
 	{
 		addCwd(dir);
 		{
-			if(existFile("Built.bat"))
+			if (existFile("Built.bat"))
 			{
 				coExecute("cx **");
 			}

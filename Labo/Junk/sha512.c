@@ -3,7 +3,7 @@
 
 int main(int argc, char **argv)
 {
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		sha512_makeHashBlock(c_makeBlockHexLine(nextArg()));
 		sha512_makeHexHash();

@@ -25,11 +25,11 @@ static char *GetJadFile(void)
 {
 	static char *file;
 
-	if(!file)
+	if (!file)
 	{
 		file = JAD_LOCAL_FILE;
 
-		if(!existFile(file))
+		if (!existFile(file))
 		{
 			file = JAD_FILE;
 			errorCase_m(!existFile(file), "[" JAD_FILE "]Ç™å©Ç¬Ç©ÇËÇ‹ÇπÇÒÅB");
@@ -57,7 +57,7 @@ static void ClassToJava(char *classFile, char *javaFile)
 	{
 		autoList_t *files = lsFiles(".");
 
-		if(getCount(files) == 1)
+		if (getCount(files) == 1)
 		{
 			moveFile(getLine(files, 0), javaFile);
 		}
@@ -88,7 +88,7 @@ static void ClassToJava(char *classFile, char *javaFile)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		char *classFile;
 		char *javaFile;
@@ -101,7 +101,7 @@ int main(int argc, char **argv)
 		memFree(javaFile);
 		return;
 	}
-	if(argIs("/DJ"))
+	if (argIs("/DJ"))
 	{
 		char *classFile;
 		char *javaFile;

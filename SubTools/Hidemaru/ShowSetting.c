@@ -22,7 +22,7 @@ static char *GetValue(char *path)
 	uint index;
 
 	for(index = 0; index < getCount(RTLines); index += RTL_SIZE)
-		if(!strcmp(path, getLine(RTLines, index + RTL_PATH)))
+		if (!strcmp(path, getLine(RTLines, index + RTL_PATH)))
 			return getLine(RTLines, index + RTL_VALUE);
 
 	return NULL;
@@ -65,7 +65,7 @@ static void Main2(char *regTextFile)
 	{
 		char *value = GetValue("HKCU\\Software\\Hidemaruo\\Hidemaru\\Default\\ColorSet");
 
-		if(!value)
+		if (!value)
 		{
 			cout("強調表示の設定がありません。\n");
 		}
@@ -90,7 +90,7 @@ static void Main2(char *regTextFile)
 	{
 		char *value = GetValue("HKCU\\Software\\Hidemaruo\\Hidemaru\\Default\\HilightWord");
 
-		if(!value)
+		if (!value)
 		{
 			cout("単語の設定がありません。\n");
 		}

@@ -20,7 +20,7 @@ void mmpc_addPart_xxx(char *text, char *fileName, autoBlock_t *body)
 	errorCase(!fileName);
 	errorCase(!body);
 
-	if(!TextList)
+	if (!TextList)
 	{
 		TextList = newList();
 		FileNameList = newList();
@@ -62,11 +62,11 @@ static int IsIncludeBoundary(char *boundary) // boundary: [0] ÇÕ [1] à»ç~Ç…ë∂ç›Ç
 		{
 			int chr = getByte(body, index);
 
-			if(chr == *p_bdr)
+			if (chr == *p_bdr)
 			{
 				p_bdr++;
 
-				if(!*p_bdr)
+				if (!*p_bdr)
 				{
 					return 1;
 				}
@@ -112,7 +112,7 @@ autoBlock_t *makeMultiPartContent(void)
 		ab_addLine(content, getLine(TextList, index));
 		ab_addLine(content, "\"");
 
-		if(*getLine(FileNameList, index))
+		if (*getLine(FileNameList, index))
 		{
 			ab_addLine(content, " filename=\"");
 			ab_addLine(content, getLine(FileNameList, index));

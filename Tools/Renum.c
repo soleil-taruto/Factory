@@ -32,10 +32,10 @@ static int IsNumbered(char *file)
 
 	for(p = file; *p; p++)
 	{
-		if(*p == '.' || *p == '_')
+		if (*p == '.' || *p == '_')
 			break;
 
-		if(!m_isdecimal(*p))
+		if (!m_isdecimal(*p))
 			return 0;
 	}
 	IN_NamePtr = p;
@@ -54,7 +54,7 @@ static void DoFRenum(void)
 	eraseParents(files);
 	sortJLinesICase(files);
 
-	if(ReverseMode)
+	if (ReverseMode)
 		reverseElements(files);
 
 	foreach(files, file, index)
@@ -63,14 +63,14 @@ static void DoFRenum(void)
 
 		errorCase(!*file); // 2bs
 
-		if(ToNumOnly)
+		if (ToNumOnly)
 			dest = xcout("%s%s", ZeroPad(no), getExtWithDot(file));
-		else if(IsNumbered(file))
+		else if (IsNumbered(file))
 			dest = xcout("%s%s", ZeroPad(no), IN_NamePtr);
 		else
 			dest = xcout("%s_%s", ZeroPad(no), file);
 
-		if(strcmp(file, dest)) // ? file != dest
+		if (strcmp(file, dest)) // ? file != dest
 		{
 			cout("< %s\n", file);
 			cout("> %s\n", dest);
@@ -89,7 +89,7 @@ static void DoFRenum(void)
 
 	cout("Press R to renumber\n");
 
-	if(getKey() != 'R')
+	if (getKey() != 'R')
 		termination(0);
 
 	LOGPOS();
@@ -131,13 +131,13 @@ static void DoFRenum(void)
 		{
 			char *wFile = getLine(destFiles, index);
 
-			if(existPath(wFile))
+			if (existPath(wFile))
 			{
 				cout("%s <Šù‚É‘¶Ý‚·‚é>\n", wFile);
 				errorFlag = 1;
 				break;
 			}
-			if(!creatable(wFile))
+			if (!creatable(wFile))
 			{
 				cout("%s <ì¬•s‰Â>\n", wFile);
 				errorFlag = 1;
@@ -145,7 +145,7 @@ static void DoFRenum(void)
 			}
 		}
 
-		if(errorFlag)
+		if (errorFlag)
 		{
 			for(index = 0; index < getCount(files); index++) // •œŒ³
 				moveFile(
@@ -175,17 +175,17 @@ static void DoFRenum(void)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		ReverseMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/N"))
+	if (argIs("/N"))
 	{
 		ToNumOnly = 1;
 		goto readArgs;
 	}
-	if(argIs("/K"))
+	if (argIs("/K"))
 	{
 		Ketasuu = toValue(nextArg());
 		goto readArgs;

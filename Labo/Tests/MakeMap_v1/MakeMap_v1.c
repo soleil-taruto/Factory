@@ -41,7 +41,7 @@ static void MakeMap(int w, int h, int seed, int permil, int count)
 			int sx = x + xc;
 			int sy = y + yc;
 
-			if(
+			if (
 				LoopMode ||
 				0 <= sx && sx < w &&
 				0 <= sy && sy < h
@@ -53,14 +53,14 @@ static void MakeMap(int w, int h, int seed, int permil, int count)
 				ctr[getTableCell(map, sx, sy)]++;
 			}
 		}
-		if(ctr[0] != ctr[1])
+		if (ctr[0] != ctr[1])
 		{
 			setTableCell(map, x, y, ctr[0] < ctr[1] ? 1 : 0);
 		}
 		count--;
 	}
 
-	if(LoopMode)
+	if (LoopMode)
 	{
 		resizeTable(map, w * 3, h * 3);
 
@@ -73,7 +73,7 @@ static void MakeMap(int w, int h, int seed, int permil, int count)
 			for(xc = 0; xc < 3; xc++)
 			for(yc = 0; yc < 3; yc++)
 			{
-				if(xc || yc)
+				if (xc || yc)
 					setTableCell(map, w * xc + x, h * yc + y, getTableCell(map, x, y));
 			}
 		}
@@ -101,7 +101,7 @@ static void MakeMap(int w, int h, int seed, int permil, int count)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/L"))
+	if (argIs("/L"))
 	{
 		LoopMode = 1;
 	}

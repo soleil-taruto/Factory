@@ -75,10 +75,10 @@ static void AddToCr2(autoBlock_t *cr2, autoBlock_t *seed, uint v1, uint v2, uint
 
 	ab_addBytes(text, seed);
 
-	if(1 <= v_num)
+	if (1 <= v_num)
 		addByte(text, v1);
 
-	if(2 <= v_num)
+	if (2 <= v_num)
 		addByte(text, v2);
 
 	sha512_makeHashBlock(text);

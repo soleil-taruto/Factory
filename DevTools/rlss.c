@@ -20,11 +20,11 @@ static int IsMatch(char *relPath, autoList_t *searchPtns)
 	uint index;
 	int found = 0;
 
-	if(getCount(searchPtns))
+	if (getCount(searchPtns))
 	{
 		foreach(searchPtns, searchPtn, index)
 		{
-			if(mbs_stristr(path_a, searchPtn))
+			if (mbs_stristr(path_a, searchPtn))
 			{
 				found = 1;
 				break;
@@ -39,7 +39,7 @@ static int IsMatch(char *relPath, autoList_t *searchPtns)
 }
 static void DispList_RelPath(char *rumDir, char *revision, char *relPath, autoList_t *searchPtns)
 {
-	if(IsMatch(relPath, searchPtns))
+	if (IsMatch(relPath, searchPtns))
 	{
 		cout("%s<%s>%s\n", rumDir, revision, relPath);
 		FoundFlag = 1;
@@ -61,7 +61,7 @@ static void DispList_RumDir(char *rumDir, autoList_t *searchPtns)
 	{
 		char *revision = getLocal(revDir);
 
-		if(DirFileMode != 'D') // ディレクトリを表示
+		if (DirFileMode != 'D') // ディレクトリを表示
 		{
 			char *treeFile = combine(revDir, FILE_TREE);
 			autoList_t *lines;
@@ -76,7 +76,7 @@ static void DispList_RumDir(char *rumDir, autoList_t *searchPtns)
 			releaseDim(lines, 1);
 			memFree(treeFile);
 		}
-		if(DirFileMode != 'F') // ファイルを表示
+		if (DirFileMode != 'F') // ファイルを表示
 		{
 			char *filesFile = combine(revDir, FILE_FILES);
 			autoList_t *lines;
@@ -97,14 +97,14 @@ static void DispList_RumDir(char *rumDir, autoList_t *searchPtns)
 	memFree(revsDir);
 	releaseDim(revDirs, 1);
 
-	if(FoundFlag)
+	if (FoundFlag)
 		addElement(FoundRumDirs, (uint)strx(rumDir));
 }
 static void DispList(char *targetDir, autoList_t *searchPtns)
 {
 	targetDir = makeFullPath(targetDir);
 
-	if(!_stricmp(RUM_DIR_EXT, getExt(targetDir)))
+	if (!_stricmp(RUM_DIR_EXT, getExt(targetDir)))
 	{
 		DispList_RumDir(targetDir, searchPtns);
 	}
@@ -115,7 +115,7 @@ static void DispList(char *targetDir, autoList_t *searchPtns)
 		uint index;
 
 		foreach(dirs, dir, index)
-			if(!_stricmp(RUM_DIR_EXT, getExt(dir)))
+			if (!_stricmp(RUM_DIR_EXT, getExt(dir)))
 				DispList_RumDir(dir, searchPtns);
 
 		releaseDim(dirs, 1);
@@ -125,12 +125,12 @@ static void DispList(char *targetDir, autoList_t *searchPtns)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		DirFileMode = 'D';
 		goto readArgs;
 	}
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		DirFileMode = 'F';
 		goto readArgs;
@@ -138,7 +138,7 @@ readArgs:
 
 	FoundRumDirs = newList();
 
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		DispList(getArg(0), getFollowArgs(1));
 	}

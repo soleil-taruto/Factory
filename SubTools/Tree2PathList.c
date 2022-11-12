@@ -12,7 +12,7 @@ static void WrPath(FILE *wfp)
 
 	foreach(NodeStk, node, index)
 	{
-		if(index)
+		if (index)
 			writeToken(wfp, Separator);
 
 		writeToken(wfp, node);
@@ -32,12 +32,12 @@ static void Tree2PathList(char *rFile, char *wFile)
 		char *line = readLine(rfp);
 		char *p;
 
-		if(!line)
+		if (!line)
 			break;
 
 		for(p = line; *p && *p <= ' '; p++);
 
-		if(*p)
+		if (*p)
 		{
 			char *node = strx(p);
 			uint deep = (uint)p - (uint)line;
@@ -63,7 +63,7 @@ static void Tree2PathList(char *rFile, char *wFile)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		Separator = nextArg();
 		goto readArgs;

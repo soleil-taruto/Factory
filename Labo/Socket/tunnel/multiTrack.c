@@ -67,7 +67,7 @@ static void PreDataFltr(autoBlock_t *buff, uint uPData)
 {
 	char **pData = (char **)uPData;
 
-	if(*pData)
+	if (*pData)
 	{
 		autoBlock_t *b = newBlock();
 
@@ -90,7 +90,7 @@ static void TransmitTh(int sock, char *fwdHost, uint fwdPortNo, char *data)
 
 	fwdSock = sockConnect(ip, fwdHost, fwdPortNo);
 
-	if(fwdSock == -1)
+	if (fwdSock == -1)
 		return;
 
 	CrossChannel(sock, fwdSock, PreDataFltr, (uint)&data, NULL, 0);
@@ -109,17 +109,17 @@ static void PerformTh(int sock, char *strip)
 
 		retval = SockTransmit(sock, cBuff, 1, 100, 0);
 
-		if(retval == -1)
+		if (retval == -1)
 			goto disconnect;
 
-		if(retval == 1)
+		if (retval == 1)
 		{
-			if(cBuff[0] == 0x00) // HACK: トラック名の部分に '\0' がある場合は未対応 -> デフォルト転送せずに切断
+			if (cBuff[0] == 0x00) // HACK: トラック名の部分に '\0' がある場合は未対応 -> デフォルト転送せずに切断
 				goto disconnect;
 
 			buff = addChar(buff, cBuff[0]);
 
-			if(endsWith(buff, "\r\n"))
+			if (endsWith(buff, "\r\n"))
 			{
 				TrackInfo_t *i;
 				uint index;
@@ -129,7 +129,7 @@ static void PerformTh(int sock, char *strip)
 
 				foreach(TrackInfoList, i, index)
 				{
-					if(!_stricmp(i->TrackName, trackName))
+					if (!_stricmp(i->TrackName, trackName))
 					{
 						TransmitTh(sock, i->FwdHost, i->FwdPortNo, NULL);
 						goto disconnect;
@@ -137,10 +137,10 @@ static void PerformTh(int sock, char *strip)
 				}
 				break;
 			}
-			if(TRACKNAME_LENMAX + 2 <= strlen(buff))
+			if (TRACKNAME_LENMAX + 2 <= strlen(buff))
 				break;
 		}
-		if(abortTime < now())
+		if (abortTime < now())
 			break;
 	}
 
@@ -150,27 +150,27 @@ static void PerformTh(int sock, char *strip)
 		memFree(tmp);
 	}
 
-	if(!strcmp(FwdHost, HOST_NONE))
+	if (!strcmp(FwdHost, HOST_NONE))
 	{
 		cout("デフォルトの転送先は無効です。\n");
 	}
-	else if(!strcmp(FwdHost, HOST_REDIRECT))
+	else if (!strcmp(FwdHost, HOST_REDIRECT))
 	{
 		char *fwdHost;
 		uint fwdPortNo;
 
-		if(!trackName)
+		if (!trackName)
 			goto disconnect;
 
 		fwdHost = trackName;
 
-		if(*fwdHost)
+		if (*fwdHost)
 			line2csym_ext(fwdHost, "-.:");
 
 		{
 			char *p = strchr(fwdHost, ':');
 
-			if(p)
+			if (p)
 			{
 				*p = '\0';
 				fwdPortNo = toValue(p + 1);
@@ -181,7 +181,7 @@ static void PerformTh(int sock, char *strip)
 
 		cout("リダイレクトされた転送先は [%s] ポート番号 %u です。\n", fwdHost, fwdPortNo);
 
-		if(*fwdHost && m_isRange(fwdPortNo, 1, 65535))
+		if (*fwdHost && m_isRange(fwdPortNo, 1, 65535))
 			TransmitTh(sock, fwdHost, fwdPortNo, NULL);
 		else
 			cout("★転送先に問題があるため、切断します。\n");
@@ -197,7 +197,7 @@ disconnect:
 }
 static int ReadArgs(void)
 {
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		autoList_t *lines = readResourceLines(nextArg());
 		char *line;
@@ -220,7 +220,7 @@ static int ReadArgs(void)
 		releaseDim(lines, 1);
 		return 1;
 	}
-	if(hasArgs(3))
+	if (hasArgs(3))
 	{
 		AddTrackInfo(
 			getArg(0),
@@ -232,13 +232,13 @@ static int ReadArgs(void)
 		return 1;
 	}
 
-	if(!strcmp(FwdHost, HOST_NONE))
+	if (!strcmp(FwdHost, HOST_NONE))
 	{
 		cout("+---------------------------------------+\n");
 		cout("| デフォルト転送は無効に指定されました。|\n");
 		cout("+---------------------------------------+\n");
 	}
-	else if(!strcmp(FwdHost, HOST_REDIRECT))
+	else if (!strcmp(FwdHost, HOST_REDIRECT))
 	{
 		cout("+-------------------------------------------------------+\n");
 		cout("| デフォルト転送はリダイレクト・モードに指定されました。|\n");

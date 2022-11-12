@@ -19,7 +19,7 @@ static void Listener(int command, HWND hwnd, uint prm, int callType)
 {
 	cout("%c %p %08x %c\n", command, hwnd, prm, callType);
 
-	if(command == 'C')
+	if (command == 'C')
 	{
 		HCURSOR cursor = GetCursor();
 
@@ -38,7 +38,7 @@ static void Monitor(int code, WPARAM prm_wParam, LPARAM prm_lParam, int callType
 	HANDLE prop;
 LOGPOS();
 
-	if(code != HC_ACTION)
+	if (code != HC_ACTION)
 		return;
 
 	info    = (CWPSTRUCT *)prm_lParam;
@@ -72,7 +72,7 @@ LOGPOS();
 
 	case WM_HSCROLL:
 	case WM_VSCROLL:
-		if((int)LOWORD(wParam) == SB_THUMBTRACK || (int)LOWORD(wParam) == SB_ENDSCROLL)
+		if ((int)LOWORD(wParam) == SB_THUMBTRACK || (int)LOWORD(wParam) == SB_ENDSCROLL)
 		{
 			Listener('W', hwnd, message, callType);
 		}
@@ -80,7 +80,7 @@ LOGPOS();
 
 	case WM_WINDOWPOSCHANGING:
 	case WM_DESTROY:
-		if(GetWindowRect(hwnd, &rect))
+		if (GetWindowRect(hwnd, &rect))
 		{
 			Listener('R', hwnd, (uint)&rect, callType);
 		}
@@ -156,8 +156,8 @@ cout("* %u\n", GetLastError());
 	getKey();
 	LOGPOS();
 
-	if(H_CWP)  UnhookWindowsHookEx(H_CWP);
-	if(H_CWPR) UnhookWindowsHookEx(H_CWPR);
-	if(H_GM)   UnhookWindowsHookEx(H_GM);
-	if(H_SMF)  UnhookWindowsHookEx(H_SMF);
+	if (H_CWP)  UnhookWindowsHookEx(H_CWP);
+	if (H_CWPR) UnhookWindowsHookEx(H_CWPR);
+	if (H_GM)   UnhookWindowsHookEx(H_GM);
+	if (H_SMF)  UnhookWindowsHookEx(H_SMF);
 }

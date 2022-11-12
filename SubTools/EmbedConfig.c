@@ -9,7 +9,7 @@ static uint GetHeaderPos(autoBlock_t *fileData, uint startPos)
 
 	for(index = startPos; index + strlen(HEADER) <= getSize(fileData); index++)
 	{
-		if(!memcmp((uchar *)directGetBuffer(fileData) + index, HEADER, strlen(HEADER)))
+		if (!memcmp((uchar *)directGetBuffer(fileData) + index, HEADER, strlen(HEADER)))
 		{
 			cout("foundHeader: %u\n", index);
 			return index;
@@ -32,7 +32,7 @@ static void ChangeEmbedConfig_File(char *file, uint cfgPos, int cfgVal)
 		uint index;
 
 		for(index = 0; ; index++)
-			if(getByte(fileData, embPos + index) == 0x00)
+			if (getByte(fileData, embPos + index) == 0x00)
 				break;
 
 		embLen = index;
@@ -65,22 +65,22 @@ static void ChangeEmbedConfig(uint cfgPos, int cfgVal)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("--factory-dir-disabled"))
+	if (argIs("--factory-dir-disabled"))
 	{
 		ChangeEmbedConfig(EMBCFG_FACTORY_DIR_DISABLED, 'D');
 		return;
 	}
-	if(argIs("--dummy-01"))
+	if (argIs("--dummy-01"))
 	{
 		ChangeEmbedConfig(EMBCFG_DUMMY_01, 'Z');
 		return;
 	}
-	if(argIs("--dummy-02"))
+	if (argIs("--dummy-02"))
 	{
 		ChangeEmbedConfig(EMBCFG_DUMMY_02, 'Z');
 		return;
 	}
-	if(argIs("--dummy-03"))
+	if (argIs("--dummy-03"))
 	{
 		ChangeEmbedConfig(EMBCFG_DUMMY_03, 'Z');
 		return;

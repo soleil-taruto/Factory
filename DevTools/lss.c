@@ -17,21 +17,21 @@ static void DispList(char *targetDir, autoList_t *searchPtns)
 	uint index;
 	uint coPathBgnPos;
 
-	if(IgnoreSubDir)
+	if (IgnoreSubDir)
 	{
-		     if(DirFileMode == 'D') paths = lsDirs(targetDir);
-		else if(DirFileMode == 'F') paths = lsFiles(targetDir);
+		     if (DirFileMode == 'D') paths = lsDirs(targetDir);
+		else if (DirFileMode == 'F') paths = lsFiles(targetDir);
 		else                        paths = ls(targetDir);
 	}
 	else
 	{
-		     if(DirFileMode == 'D') paths = lssDirs(targetDir);
-		else if(DirFileMode == 'F') paths = lssFiles(targetDir);
+		     if (DirFileMode == 'D') paths = lssDirs(targetDir);
+		else if (DirFileMode == 'F') paths = lssFiles(targetDir);
 		else                        paths = lss(targetDir);
 	}
 	sortJLinesICase(paths);
 
-	if(NoParentMode)
+	if (NoParentMode)
 	{
 		path = makeFullPath(targetDir);
 		path = putYen(path);
@@ -45,7 +45,7 @@ static void DispList(char *targetDir, autoList_t *searchPtns)
 	{
 		int found;
 
-		if(getCount(searchPtns))
+		if (getCount(searchPtns))
 		{
 			char *path_a = xcout("%s*", path);
 			char *searchPtn;
@@ -55,7 +55,7 @@ static void DispList(char *targetDir, autoList_t *searchPtns)
 
 			foreach(searchPtns, searchPtn, ndx)
 			{
-				if(mbs_stristr(path_a, searchPtn))
+				if (mbs_stristr(path_a, searchPtn))
 				{
 					found = 1;
 					break;
@@ -66,17 +66,17 @@ static void DispList(char *targetDir, autoList_t *searchPtns)
 		else
 			found = 1;
 
-		if(found)
+		if (found)
 		{
 			cout("%s\n", path + coPathBgnPos);
 
-			if(AddDirToFilesMode || existFile(path))
+			if (AddDirToFilesMode || existFile(path))
 			{
 				addElement(foundFiles, (uint)strx(path));
 			}
 		}
 	}
-	if(getCount(foundFiles))
+	if (getCount(foundFiles))
 	{
 		writeLines(FOUNDLISTFILE, foundFiles);
 	}
@@ -88,43 +88,43 @@ int main(int argc, char **argv)
 	antiSubversion = 1;
 
 readArgs:
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		DirFileMode = 'D';
 		goto readArgs;
 	}
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		DirFileMode = 'F';
 		goto readArgs;
 	}
-	if(argIs("/SVN"))
+	if (argIs("/SVN"))
 	{
 		antiSubversion = 0;
 		goto readArgs;
 	}
-	if(argIs("/D+"))
+	if (argIs("/D+"))
 	{
 		AddDirToFilesMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/-S"))
+	if (argIs("/-S"))
 	{
 		IgnoreSubDir = 1;
 		goto readArgs;
 	}
-	if(argIs("/B"))
+	if (argIs("/B"))
 	{
 		NoParentMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/-U"))
+	if (argIs("/-U"))
 	{
 		ignoreUtfPath = 1;
 		goto readArgs;
 	}
 
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		DispList(getArg(0), getFollowArgs(1));
 	}

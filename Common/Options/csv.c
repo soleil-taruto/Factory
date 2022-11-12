@@ -19,20 +19,20 @@ autoList_t *readCSVFile(char *file)
 	{
 		autoBlock_t *cellBuff = newBlock();
 
-		if(chr == '"')
+		if (chr == '"')
 		{
 			for(; ; )
 			{
 				chr = readChar(fp);
 
-				if(chr == EOF) // セルの途中でファイルが終了した。-> セルとファイルの終端と見なす。
+				if (chr == EOF) // セルの途中でファイルが終了した。-> セルとファイルの終端と見なす。
 					break;
 
-				if(chr == '"')
+				if (chr == '"')
 				{
 					chr = readChar(fp);
 
-					if(chr != '"')
+					if (chr != '"')
 					{
 //						errorCase(chr != CSVCellDelimiter && chr != '\n' && chr != EOF);
 						break;
@@ -45,25 +45,25 @@ autoList_t *readCSVFile(char *file)
 		{
 			for(; ; )
 			{
-				if(chr == CSVCellDelimiter || chr == '\n')
+				if (chr == CSVCellDelimiter || chr == '\n')
 					break;
 
 				addByte(cellBuff, chr);
 				chr = readChar(fp);
 
-				if(chr == EOF)
+				if (chr == EOF)
 					break;
 			}
 		}
 		addElement(row, (uint)unbindBlock2Line(cellBuff));
 
-		if(chr == '\n')
+		if (chr == '\n')
 		{
 			addElement(table, (uint)row);
 			row = newList();
 		}
 	}
-	if(getCount(row))
+	if (getCount(row))
 		addElement(table, (uint)row);
 	else
 		releaseDim(row, 1);
@@ -99,10 +99,10 @@ void writeCSVFile(char *file, autoList_t *table)
 		{
 			char *cell = (char *)getElement(row, colidx);
 
-			if(colidx)
+			if (colidx)
 				writeChar(fp, CSVCellDelimiter);
 
-			if(strchr(cell, '"') || strchr(cell, ',') || strchr(cell, '\t') || strchr(cell, '\n')) // ? "" 必要
+			if (strchr(cell, '"') || strchr(cell, ',') || strchr(cell, '\t') || strchr(cell, '\n')) // ? "" 必要
 			{
 				char *p;
 
@@ -110,7 +110,7 @@ void writeCSVFile(char *file, autoList_t *table)
 
 				for(p = cell; *p; p++)
 				{
-					if(*p == '"')
+					if (*p == '"')
 					{
 						writeChar(fp, '"');
 						writeChar(fp, '"');
@@ -139,7 +139,7 @@ void csvTrim(autoList_t *table)
 		{
 			char *cell = getLine(row, getCount(row) - 1);
 
-			if(*cell) // ? 空セルではない
+			if (*cell) // ? 空セルではない
 				break;
 
 			memFree((void *)unaddElement(row));
@@ -149,12 +149,12 @@ void csvTrim(autoList_t *table)
 	{
 		row = (autoList_t *)getElement(table, getCount(table) - 1);
 
-		if(getCount(row)) // ? 空行ではない
+		if (getCount(row)) // ? 空行ではない
 			break;
 
 		releaseAutoList((autoList_t *)unaddElement(table));
 	}
-	if(getCount(table) == 0) // (0 x 0) を回避する。-> (1 x 1) にする。
+	if (getCount(table) == 0) // (0 x 0) を回避する。-> (1 x 1) にする。
 	{
 		addElement(table, (uint)createOneElement((uint)strx("")));
 	}
@@ -187,7 +187,7 @@ void csvSquare(autoList_t *table)
 	rowcnt = getCount(table);
 	colcnt = getCount((autoList_t *)getElement(table, 0));
 
-	if(rowcnt < colcnt)
+	if (rowcnt < colcnt)
 	{
 		while(rowcnt < colcnt)
 		{
@@ -202,7 +202,7 @@ void csvSquare(autoList_t *table)
 			rowcnt++;
 		}
 	}
-	else if(colcnt < rowcnt)
+	else if (colcnt < rowcnt)
 	{
 		autoList_t *row;
 		uint rowidx;
@@ -280,7 +280,7 @@ char *LSrchComp(autoList_t *table, uint colidxFind, uint retColidx, char *cellFi
 
 	foreach(table, row, rowidx)
 	{
-		if(!funcComp(cellFind, refLine(row, colidxFind)))
+		if (!funcComp(cellFind, refLine(row, colidxFind)))
 		{
 			return refLine(row, retColidx);
 		}

@@ -117,12 +117,12 @@ void createResourceCluster(autoList_t *files, char *rootDir, autoBlock_t *rawKey
 	{
 		foreach(entFiles, eFile, eIndex)
 		{
-			if(isSameFile(eFile, file))
+			if (isSameFile(eFile, file))
 			{
 				break;
 			}
 		}
-		if(!eFile)
+		if (!eFile)
 		{
 			addElement(entFiles, (uint)file);
 		}
@@ -187,16 +187,16 @@ static char *GetExt(autoBlock_t *image) // 超テキトー
 	mptn[2] = refByte(image, 10);
 	mptn[3] = refByte(image, 11);
 
-	if(!memcmp(sptn, "RIFF", 4) && !memcmp(mptn, "WAVE", 4))
+	if (!memcmp(sptn, "RIFF", 4) && !memcmp(mptn, "WAVE", 4))
 		return "wav";
 
-	if(!memcmp(sptn, "ID3", 3))
+	if (!memcmp(sptn, "ID3", 3))
 		return "mp3";
 
-	if(!memcmp(sptn + 1, "PNG", 3))
+	if (!memcmp(sptn + 1, "PNG", 3))
 		return "png";
 
-	if(!memcmp(sptn, "BM", 2))
+	if (!memcmp(sptn, "BM", 2))
 		return "bmp";
 
 	return "bin";

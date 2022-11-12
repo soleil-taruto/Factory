@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 		{
 			int chr = index << 5 | bit;
 
-			if(isJChar(chr))
+			if (isJChar(chr))
 			{
 				sBits[bit] = '1';
 				value |= 1u << bit;

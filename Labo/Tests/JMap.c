@@ -18,7 +18,7 @@ static void MakeBmp(void)
 		int chr = c1 * 256 + c2;
 		uint color;
 
-		if(isJChar(chr))
+		if (isJChar(chr))
 			color = 0x0000ff;
 		else
 			color = 0xffffff;

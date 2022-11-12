@@ -21,7 +21,7 @@ static void ShowSettingOutputToHilight(char *rFile, char *wFile)
 
 	foreach(lines, line, index)
 	{
-		if(lineExp("大文字小文字区別:<1,NNYY> 単語の検索:<1,NNYY> 正規表現:<1,NNYY> 強調表示<1,18> <1,,>", line))
+		if (lineExp("大文字小文字区別:<1,NNYY> 単語の検索:<1,NNYY> 正規表現:<1,NNYY> 強調表示<1,18> <1,,>", line))
 		{
 			int oomojiKomojiKubetsu = line[17] == 'Y';
 			int tangoNoKensaku      = line[30] == 'Y';
@@ -67,7 +67,7 @@ static void MkTestData(char *wFile)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		MkTestData(nextArg());
 		return;

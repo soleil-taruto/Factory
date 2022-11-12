@@ -34,7 +34,7 @@ static void Perform_o(SockStream_t *ss)
 			{
 				autoBlock_t *block = readBinaryStream(fp, 4 * 1024 * 1024);
 
-				if(!block)
+				if (!block)
 					break;
 
 				SockSendBlock(ss, directGetBuffer(block), getSize(block));
@@ -63,11 +63,11 @@ static int Perform(int sock, uint dummyPrm)
 
 	SetSockStreamTimeout(ss, 3600); // otoÇÃëóêM(DL,z9ÇµÇƒÇ¢ÇÈä‘ÇÃë“Çø)Ç™Ç†ÇÈÇÃÇ≈ÅAí∑ÇﬂÇ…
 
-	if(!strcmp(command, COMMAND_PREFIX "o"))
+	if (!strcmp(command, COMMAND_PREFIX "o"))
 	{
 		Perform_o(ss);
 	}
-	else if(!strcmp(command, COMMAND_PREFIX "C"))
+	else if (!strcmp(command, COMMAND_PREFIX "C"))
 	{
 		Perform_C(ss);
 	}
@@ -83,7 +83,7 @@ static int Perform(int sock, uint dummyPrm)
 static int Idle(void)
 {
 	while(hasKey())
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 			return 0;
 
 	return 1;

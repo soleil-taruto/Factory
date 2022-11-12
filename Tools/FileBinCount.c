@@ -22,10 +22,10 @@ static void FileBinCount(char *file)
 	{
 		int chr = readChar(fp);
 
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
-		if(chr == b_(TargetPtn)[0])
+		if (chr == b_(TargetPtn)[0])
 		{
 			uint index;
 
@@ -33,13 +33,13 @@ static void FileBinCount(char *file)
 			{
 				chr = readChar(fp);
 
-				if(chr == EOF)
+				if (chr == EOF)
 					goto endLoop;
 
-				if(chr != getByte(TargetPtn, index))
+				if (chr != getByte(TargetPtn, index))
 					break;
 			}
-			if(index < getSize(TargetPtn)) // ? コレジャナイ
+			if (index < getSize(TargetPtn)) // ? コレジャナイ
 			{
 				fileSeek(fp, SEEK_CUR, -(sint64)(index - 1));
 			}
@@ -56,7 +56,7 @@ endLoop:
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		TargetPtn = ab_makeBlockLine(nextArg()); // "JKL" -> { 0x4a, 0x4b, 0x4c }
 	}
@@ -68,7 +68,7 @@ int main(int argc, char **argv)
 
 	errorCase(!getSize(TargetPtn));
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		FileBinCount(nextArg());
 	}

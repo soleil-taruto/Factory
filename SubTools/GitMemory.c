@@ -41,11 +41,11 @@ static void MemoryMain_MD(char *memDir)
 			cout("<# %s\n", path);
 			cout("># %s\n", wPath);
 
-			if(IsGitPath(path))
+			if (IsGitPath(path))
 			{
 				cout("ignore git file!\n");
 			}
-			else if(existDir(path))
+			else if (existDir(path))
 			{
 				createDir(wPath);
 				copyDir(path, wPath);
@@ -93,7 +93,7 @@ static void FlushMain(void)
 {
 	autoList_t *memDirs = lsDirs(MEM_ROOTDIR);
 
-	if(getCount(memDirs) == 0)
+	if (getCount(memDirs) == 0)
 	{
 		cout("no more memory!\n");
 		EndCode = 1;
@@ -131,7 +131,7 @@ static void FlushMain(void)
 			{
 				cout("! %s\n", path);
 
-				if(IsGitPath(path))
+				if (IsGitPath(path))
 				{
 					cout("ignore git file!\n");
 				}
@@ -157,7 +157,7 @@ static void FlushMain(void)
 
 				errorCase(IsGitPath(path)); // Ç†ÇÈÇÕÇ∏Ç»Ç¢ÅB
 
-				if(existDir(path))
+				if (existDir(path))
 				{
 					createDir(wPath);
 					copyDir(path, wPath);
@@ -204,7 +204,7 @@ static void TrimMain(void)
 		cout("1 %s\n", memDir1);
 		cout("2 %s\n", memDir2);
 
-		if(isSameDir(memDir1, memDir2, 1))
+		if (isSameDir(memDir1, memDir2, 1))
 		{
 			LOGPOS();
 			addElement(deletableDirs, (uint)strx(memDir2));
@@ -228,19 +228,19 @@ int main(int argc, char **argv)
 	errorCase(!existDir(MEM_ROOTDIR));
 	errorCase(!existDir(RUM_ROOTDIR));
 
-	if(argIs("MEMORY"))
+	if (argIs("MEMORY"))
 	{
 		MemoryMain();
 	}
-	else if(argIs("RUM"))
+	else if (argIs("RUM"))
 	{
 		RumMain();
 	}
-	else if(argIs("FLUSH"))
+	else if (argIs("FLUSH"))
 	{
 		FlushMain();
 	}
-	else if(argIs("TRIM"))
+	else if (argIs("TRIM"))
 	{
 		TrimMain();
 	}

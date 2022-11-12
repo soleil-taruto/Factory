@@ -75,7 +75,7 @@ static autoList_t *ConnectList;
 
 static int BeforeJoin(ConnectInfo_t *i)
 {
-	if(i->R)
+	if (i->R)
 	{
 		autoBlock_t *buff = newBlock();
 		int retval;
@@ -84,14 +84,14 @@ static int BeforeJoin(ConnectInfo_t *i)
 		retval = SockSendSequLoop(i->Sock, buff, SEND_C_TIMEOUT_MILLIS);
 		releaseAutoBlock(buff);
 
-		if(retval != 1)
+		if (retval != 1)
 			return 0;
 	}
 	return 1;
 }
 static void JoinMain(ConnectInfo_t *i, ConnectInfo_t *osi)
 {
-	if(
+	if (
 		BeforeJoin(i) &&
 		BeforeJoin(osi)
 		)
@@ -113,7 +113,7 @@ static void PerformTh(int sock, char *strip)
 	ConnectInfo_t *osi;
 	uint index;
 
-	if(!trackName)
+	if (!trackName)
 		return;
 
 	tnTkns = tokenizeMinMax(trackName, ':', 2, 2, DEF_POLE);
@@ -130,7 +130,7 @@ static void PerformTh(int sock, char *strip)
 	line2JLine(i->Name, 1, 0, 0, 0);
 	line2JLine(i->Pole, 1, 0, 0, 0);
 
-	if(endsWith(i->Pole, ".R") || endsWith(i->Pole, ".r"))
+	if (endsWith(i->Pole, ".R") || endsWith(i->Pole, ".r"))
 	{
 		i->Pole[strlen(i->Pole) - 2] = '\0';
 		i->R = 1;
@@ -138,9 +138,9 @@ static void PerformTh(int sock, char *strip)
 
 	foreach(ConnectList, osi, index)
 	{
-		if(!_stricmp(i->Name, osi->Name))
+		if (!_stricmp(i->Name, osi->Name))
 		{
-			if(_stricmp(i->Pole, osi->Pole) || !_stricmp(i->Pole, DEF_POLE) && !_stricmp(osi->Pole, DEF_POLE))
+			if (_stricmp(i->Pole, osi->Pole) || !_stricmp(i->Pole, DEF_POLE) && !_stricmp(osi->Pole, DEF_POLE))
 			{
 LOGPOS();
 				fastDesertElement(ConnectList, index); // remove osi
@@ -163,11 +163,11 @@ LOGPOS();
 			}
 			inner_critical();
 
-			if(tmoutTime != UINTMAX && tmoutTime < now()) // ? Joinタイムアウト
+			if (tmoutTime != UINTMAX && tmoutTime < now()) // ? Joinタイムアウト
 			{
 				uint iPos = findElement(ConnectList, (uint)i, simpleComp);
 
-				if(iPos < getCount(ConnectList)) // ? 見つかった。-> Joinしていない。
+				if (iPos < getCount(ConnectList)) // ? 見つかった。-> Joinしていない。
 				{
 					fastDesertElement(ConnectList, iPos); // remove i
 					break;

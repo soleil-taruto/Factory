@@ -38,7 +38,7 @@ static int IsKnownUrl(char *url)
 	uint index;
 
 	foreach(knownUrls, knownUrl, index)
-		if(!strcmp(url, knownUrl))
+		if (!strcmp(url, knownUrl))
 			break;
 
 	releaseDim(knownUrls, 1);
@@ -80,7 +80,7 @@ static int IsKnownHash(char *hash)
 	uint index;
 
 	foreach(knownHashes, knownHash, index)
-		if(!strcmp(hash, knownHash))
+		if (!strcmp(hash, knownHash))
 			break;
 
 	releaseDim(knownHashes, 1);
@@ -116,7 +116,7 @@ static char *HGetExeFile(void)
 {
 	static char *file;
 
-	if(!file)
+	if (!file)
 		file = GetCollaboFile("C:\\app\\Kit\\HGet\\HGet.exe");
 
 	return file;
@@ -125,15 +125,15 @@ static uint GetMinNotZero(uint p, uint q)
 {
 	cout("GMNZ < %08x, %08x\n", p, q);
 
-	if(!p)
+	if (!p)
 		p = UINTMAX;
 
-	if(!q)
+	if (!q)
 		q = UINTMAX;
 
 	p = m_min(p, q);
 
-	if(p == UINTMAX)
+	if (p == UINTMAX)
 		p = 0;
 
 	cout("GMNZ > %08x\n", p);
@@ -159,7 +159,7 @@ static autoList_t *ParseUrls(char *resBodyFile)
 		p = strstr(p, "GraphImage"); // __typename == GraphImage, GraphVideo がある。GraphVideo を除外する。
 		cout("GI: %p\n", p);
 
-		if(!p)
+		if (!p)
 			break;
 
 		q  = strstr(p, "display_src");
@@ -167,17 +167,17 @@ static autoList_t *ParseUrls(char *resBodyFile)
 
 		q = (char *)GetMinNotZero((uint)q, (uint)q2);
 
-		if(!q)
+		if (!q)
 			break;
 
 		r = strstr(q + 13, "http");
 
-		if(!r)
+		if (!r)
 			break;
 
 		s = strchr(r + 4, '"');
 
-		if(!s)
+		if (!s)
 			break;
 
 		*s = '\0';
@@ -207,7 +207,7 @@ static void Downloaded(autoBlock_t *imageData)
 	memFree(imgLocal);
 	memFree(imgFile);
 
-	if(DownloadedEventCommand)
+	if (DownloadedEventCommand)
 		coExecute(DownloadedEventCommand);
 }
 static int CheckDownloaded(autoBlock_t *imageData) // ret: ? 保存する。
@@ -217,7 +217,7 @@ static int CheckDownloaded(autoBlock_t *imageData) // ret: ? 保存する。
 
 	cout("hash: %s\n", hash);
 
-	if(IsKnownHash(hash))
+	if (IsKnownHash(hash))
 	{
 		cout("■■■■■■■■■■■■■■■■■■■■■\n");
 		cout("■既知のファイルであるため保存しません！■\n");
@@ -272,11 +272,11 @@ static int Download(char *url) // ret: ? successful
 
 	coExecute_x(xcout("START \"\" /B /WAIT \"%s\" //R \"%s\"", HGetExeFile(), prmFile));
 
-	if(existFile(successfulFlag))
+	if (existFile(successfulFlag))
 	{
 		autoBlock_t *imageData = readBinary(resBodyFile);
 
-		if(CheckDownloaded(imageData))
+		if (CheckDownloaded(imageData))
 			Downloaded(imageData);
 
 		releaseAutoBlock(imageData);
@@ -301,7 +301,7 @@ static void Main2(void)
 	char *resHeaderFile = makeTempPath(NULL);
 	char *resBodyFile = makeTempPath(NULL);
 
-	if(argIs("/DLE"))
+	if (argIs("/DLE"))
 	{
 		DownloadedEventCommand = nextArg();
 	}
@@ -341,7 +341,7 @@ static void Main2(void)
 		,Account
 		));
 
-	if(existFile(successfulFlag))
+	if (existFile(successfulFlag))
 	{
 		autoList_t *urls = ParseUrls(resBodyFile);
 		char *url;
@@ -350,7 +350,7 @@ static void Main2(void)
 		LOGPOS();
 
 		foreach(urls, url, index)
-			if(IsKnownUrl(url))
+			if (IsKnownUrl(url))
 				break;
 
 		while(index)
@@ -358,7 +358,7 @@ static void Main2(void)
 			LOGPOS();
 			url = getLine(urls, --index);
 
-			if(!Download(url))
+			if (!Download(url))
 				break;
 
 			AddKnownUrl(url);

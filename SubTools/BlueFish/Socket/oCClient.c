@@ -18,7 +18,7 @@ static int Perform(int sock, uint prm)
 
 	LOGPOS();
 
-	if(command[0] == 'o')
+	if (command[0] == 'o')
 	{
 		FILE *fp = fileOpen("oto.clu", "wb");
 //		FILE *fp = fileOpen("oto.clu.gz.enc", "wb");
@@ -38,10 +38,10 @@ static int Perform(int sock, uint prm)
 		{
 			int chr = SockRecvChar(ss);
 
-			if(chr == EOF)
+			if (chr == EOF)
 				break;
 
-			if(eqIntPulseSec(5, NULL))
+			if (eqIntPulseSec(5, NULL))
 				cmdTitle_x(xcout("oCClient - wrote %I64u bytes", wroteByteCount));
 
 			writeChar(fp, chr);
@@ -65,7 +65,7 @@ int main(int argc, char **argv)
 
 	sockConnectTimeoutSec = 2; // ÉçÅ[ÉJÉãì‡Ç»ÇÃÇ≈
 
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		portNo = toValue(nextArg());
 	}

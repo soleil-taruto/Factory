@@ -21,7 +21,7 @@ static char *GetContentType(void)
 	// DEF_HTTP_DAT_FILE ‚ÍÄŒ`¬‚È‚Ì‚ÅA‚«‚Á‚¿‚è KEY + ": " + VALUE ‚É‚È‚Á‚Ä‚¢‚é‚Í‚¸B
 
 	foreach(HttpDat.Header, line, index)
-		if(startsWithICase(line, "Content-Type: "))
+		if (startsWithICase(line, "Content-Type: "))
 			return strchr(line, ':') + 2;
 
 	return ""; // not found
@@ -35,7 +35,7 @@ int main(int argc, char **argv)
 	char *outDir;
 	char *outFile;
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 		outDir = nextArg();
 	else
 		outDir = "C:\\temp";

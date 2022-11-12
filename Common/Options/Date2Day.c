@@ -17,7 +17,7 @@ uint64 Date2Day(uint y, uint m, uint d)
 	uint64 day;
 
 	// ? ‘Î‰ž‚Å‚«‚È‚¢“ú•t
-	if(y < 1 || m < 1 || d < 1)
+	if (y < 1 || m < 1 || d < 1)
 		return 0;
 
 	y64 = y;
@@ -30,7 +30,7 @@ uint64 Date2Day(uint y, uint m, uint d)
 		m++;
 	}
 
-	if(m <= 2)
+	if (m <= 2)
 		y64--;
 
 	day = y64 / 400;
@@ -42,7 +42,7 @@ uint64 Date2Day(uint y, uint m, uint d)
 	day += y / 4;
 	day -= y / 100;
 
-	if(2 < m)
+	if (2 < m)
 	{
 		day -= 31 * 10 - 4;
 		m -= 3;
@@ -82,7 +82,7 @@ void Day2Date(uint64 day, uint *py, uint *pm, uint *pd)
 	y64 += day / 366;
 	day %= 366;
 
-	if(60 <= day)
+	if (60 <= day)
 	{
 		m += 2;
 		day -= 60;
@@ -94,7 +94,7 @@ void Day2Date(uint64 day, uint *py, uint *pm, uint *pd)
 	m += day / 31;
 	day %= 31;
 
-	if(UINTMAX < y64) // overflow
+	if (UINTMAX < y64) // overflow
 	{
 		y = 0xffffffff;
 		m = 12;
@@ -113,9 +113,9 @@ void Day2Date(uint64 day, uint *py, uint *pm, uint *pd)
 		d < 1 || 31 < m
 		);
 
-	if(py) *py = y;
-	if(pm) *pm = m;
-	if(pd) *pd = d;
+	if (py) *py = y;
+	if (pm) *pm = m;
+	if (pd) *pd = d;
 }
 int CheckDate(uint y, uint m, uint d)
 {
@@ -138,7 +138,7 @@ uint GetEndOfMonth(uint y, uint m)
 	uint d;
 
 	for(d = 31; 28 < d ; d--)
-		if(CheckDate(y, m, d))
+		if (CheckDate(y, m, d))
 			break;
 
 	return d;
@@ -255,7 +255,7 @@ uint IDate2Day(uint date)
 	date /= 100;
 	y = date;
 
-	if(
+	if (
 		y < 1000 || 9999 < y ||
 		m < 1 || 12 < m ||
 		d < 1 || 31 < d
@@ -272,10 +272,10 @@ uint Day2IDate(uint day)
 
 	Day2Date(day, &y, &m, &d);
 
-	if(y < 1000)
+	if (y < 1000)
 		return 10000101; // dummy date
 
-	if(9999 < y)
+	if (9999 < y)
 		return 99991231; // dummy date
 
 	// 2bs
@@ -307,7 +307,7 @@ uint64 IDateTime2Sec(uint64 dateTime)
 	uint m;
 	uint s;
 
-	if(!m_isRange(dateTime, 10000101000000ui64, 99991231235959ui64))
+	if (!m_isRange(dateTime, 10000101000000ui64, 99991231235959ui64))
 		return 0ui64; // dummy sec
 
 	s = dateTime % 100;
@@ -325,10 +325,10 @@ uint64 Sec2IDateTime(uint64 sec)
 	uint m;
 	uint s;
 
-	if(sec < SEC_10000101000000)
+	if (sec < SEC_10000101000000)
 		return 10000101000000ui64; // dummy date time
 
-	if(SEC_99991231235959 < sec)
+	if (SEC_99991231235959 < sec)
 		return 99991231235959ui64; // dummy date time
 
 	s = sec % 60;

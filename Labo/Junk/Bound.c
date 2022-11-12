@@ -26,7 +26,7 @@ static uint SLGetLowestIndex(uint value)
 		uint c = (p + q) / 2;
 		sint r = m_simpleComp(getElement(SubList, SLGetRealIndex(c)), value);
 
-		if(r) // ? [c] != value
+		if (r) // ? [c] != value
 		{
 			p = c + 1;
 		}
@@ -47,11 +47,11 @@ static uint GetIndex(autoList_t *list, uint value)
 		uint c = (p + q) / 2;
 		sint r = m_simpleComp(getElement(list, c), value);
 
-		if(r < 0) // ? [c] < value
+		if (r < 0) // ? [c] < value
 		{
 			p = c + 1;
 		}
-		else if(0 < r) // ? value < [c]
+		else if (0 < r) // ? value < [c]
 		{
 			q = c;
 		}
@@ -66,7 +66,7 @@ static void GetBound(autoList_t *list, uint value, uint *p_ndx1, uint *p_ndx2)
 {
 	uint index = GetIndex(list, value);
 
-	if(index == UINTMAX)
+	if (index == UINTMAX)
 	{
 		*p_ndx1 = UINTMAX;
 		*p_ndx2 = UINTMAX;
@@ -114,7 +114,7 @@ static void DoTest(uint maxnum)
 	AddValueNum(list, 2, num2);
 	AddValueNum(list, 3, num3);
 
-	if(num2)
+	if (num2)
 	{
 		exp1 = num1;
 		exp2 = num1 + num2 - 1;
@@ -156,15 +156,15 @@ static void DoTest2(uint num, uint valmax)
 		uint index;
 
 		foreach(list, value, index)
-			if(value == targetVal)
+			if (value == targetVal)
 				break;
 
-		if(index < getCount(list))
+		if (index < getCount(list))
 		{
 			exp1 = index;
 
 			while(++index < getCount(list))
-				if(getElement(list, index) != targetVal)
+				if (getElement(list, index) != targetVal)
 					break;
 
 			exp2 = index - 1;

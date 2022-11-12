@@ -163,7 +163,7 @@ static void SlimByTotal(void)
 
 		foreach(DirInfos, i, index)
 		{
-			if(1 <= getCount(i->FileInfos))
+			if (1 <= getCount(i->FileInfos))
 			{
 				FileInfo_t *fi = (FileInfo_t *)desertElement(i->FileInfos, 0);
 
@@ -181,17 +181,17 @@ static void SlimByTotal(void)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/TSX"))
+	if (argIs("/TSX"))
 	{
 		TotalSizeMax = toValue64(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/SX"))
+	if (argIs("/SX"))
 	{
 		DirSizeMax = toValue64(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/CX"))
+	if (argIs("/CX"))
 	{
 		DirFileCountMax = toValue(nextArg());
 		goto readArgs;

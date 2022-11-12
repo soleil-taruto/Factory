@@ -54,7 +54,7 @@ UI$BIT_t UI$BIT_Add(UI$BIT_t a, UI$BIT_t b, UI$BIT_t ans[2])
 	UI$hBIT_t f[2];
 	UI$BIT_t tmp[2];
 
-	if(!ans)
+	if (!ans)
 		ans = tmp;
 
 	UI$hBIT_Add(a.L, b.L, c);
@@ -89,7 +89,7 @@ UI$BIT_t UI$BIT_Mul(UI$BIT_t a, UI$BIT_t b, UI$BIT_t ans[2])
 	uint i;
 	UI$BIT_t tmp[2];
 
-	if(!ans)
+	if (!ans)
 		ans = tmp;
 
 	UI$hBIT_Mul(a.L, b.L, c);
@@ -130,12 +130,12 @@ static UI$BIT_t DivSub(UI$BIT_t a, UI$BIT_t b, UI$BIT_t ans[2], uint reti)
 
 	errorCase(UI$BIT_IsZero(b));
 
-	if(!ans)
+	if (!ans)
 		ans = tmp;
 
 	ans[0] = UI$BIT_0();
 
-	if(UI$hBIT_IsZero(b.H))
+	if (UI$hBIT_IsZero(b.H))
 	{
 		{
 			UI$BIT_t dd;
@@ -173,7 +173,7 @@ static UI$BIT_t DivSub(UI$BIT_t a, UI$BIT_t b, UI$BIT_t ans[2], uint reti)
 	}
 	else
 	{
-		if(!UI$hBIT_IsFill(b.H))
+		if (!UI$hBIT_IsFill(b.H))
 		{
 			UI$hBIT_t c = UI$hBIT_Add(b.H, UI$hBIT_x(1), NULL);
 
@@ -182,7 +182,7 @@ static UI$BIT_t DivSub(UI$BIT_t a, UI$BIT_t b, UI$BIT_t ans[2], uint reti)
 				UI$hBIT_t d = UI$hBIT_Div(a.H, c, NULL);
 				UI$BIT_t dd;
 
-				if(UI$hBIT_IsZero(d))
+				if (UI$hBIT_IsZero(d))
 					break;
 
 				dd.L = d;
@@ -222,7 +222,7 @@ sint UI$BIT_Comp(UI$BIT_t a, UI$BIT_t b)
 {
 	sint ret = UI$hBIT_Comp(a.H, b.H);
 
-	if(!ret)
+	if (!ret)
 		ret = UI$hBIT_Comp(a.L, b.L);
 
 	return ret;

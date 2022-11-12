@@ -25,7 +25,7 @@ static char *TrackName;
 
 static void NamedChannelFltr(autoBlock_t *buff, uint p_nsFlag)
 {
-	if(!*(int *)p_nsFlag)
+	if (!*(int *)p_nsFlag)
 	{
 		autoBlock_t *nb = newBlock();
 

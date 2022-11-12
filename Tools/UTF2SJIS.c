@@ -51,12 +51,12 @@ static Enc_t WEnc;
 
 static Enc_t GetEnc(char *str)
 {
-	if(!_stricmp(str, "SJIS"))          return ENC_SJIS;
-	if(!_stricmp(str, "UTF16"))         return ENC_UTF16;
-	if(!_stricmp(str, "UTF16-NOBOM"))   return ENC_UTF16_NOBOM;
-	if(!_stricmp(str, "UTF16BE"))       return ENC_UTF16BE;
-	if(!_stricmp(str, "UTF16BE-NOBOM")) return ENC_UTF16BE_NOBOM;
-	if(!_stricmp(str, "UTF8"))          return ENC_UTF8;
+	if (!_stricmp(str, "SJIS"))          return ENC_SJIS;
+	if (!_stricmp(str, "UTF16"))         return ENC_UTF16;
+	if (!_stricmp(str, "UTF16-NOBOM"))   return ENC_UTF16_NOBOM;
+	if (!_stricmp(str, "UTF16BE"))       return ENC_UTF16BE;
+	if (!_stricmp(str, "UTF16BE-NOBOM")) return ENC_UTF16BE_NOBOM;
+	if (!_stricmp(str, "UTF8"))          return ENC_UTF8;
 
 	error();
 	return -1;
@@ -80,7 +80,7 @@ static void DoConv3(char *rFile, char *wFile)
 	UTF_BE = 0;
 	UTF_NoWriteBOM = 0;
 
-	if(REnc == ENC_SJIS)
+	if (REnc == ENC_SJIS)
 	{
 		switch(WEnc)
 		{
@@ -135,12 +135,12 @@ static void DoConv3(char *rFile, char *wFile)
 }
 static int IsNeedConv(char *rFile, char *wFile, char *rFile2)
 {
-	if(!isSameFile(rFile, rFile2))
+	if (!isSameFile(rFile, rFile2))
 	{
 		cout("読み込み文字コードが違うようです。\n");
 		return 0;
 	}
-	if(isSameFile(rFile, wFile))
+	if (isSameFile(rFile, wFile))
 	{
 		cout("変化無し。\n");
 		return 0;
@@ -151,7 +151,7 @@ static int DoConv2(char *rFile, char *wFile)
 {
 	int ret = 1;
 
-	if(SafeMode)
+	if (SafeMode)
 	{
 		char *midFile = makeTempPath(NULL);
 		char *retFile = makeTempPath(NULL);
@@ -161,7 +161,7 @@ static int DoConv2(char *rFile, char *wFile)
 		DoConv3(midFile, retFile);
 		m_swap(REnc, WEnc, uint); // 復元
 
-		if(!IsNeedConv(rFile, midFile, retFile))
+		if (!IsNeedConv(rFile, midFile, retFile))
 		{
 			removeFile(midFile);
 			ret = 0;
@@ -189,11 +189,11 @@ static void DoConv(autoList_t *files)
 
 	cout("文字コード変換: %s -> %s\n", GetSEnc(REnc), GetSEnc(WEnc));
 
-	if(!BatchMode)
+	if (!BatchMode)
 	{
 		cout("続行？\n");
 
-		if(clearGetKey() == 0x1b)
+		if (clearGetKey() == 0x1b)
 			termination(0);
 
 		cout("続行します。\n");
@@ -212,7 +212,7 @@ static void DoConv(autoList_t *files)
 
 		cout("<%u> %s\n", index, file);
 
-		if(DoConv2(file, midFile))
+		if (DoConv2(file, midFile))
 		{
 			LOGPOS();
 			removeFile(file);
@@ -233,7 +233,7 @@ static void DoConv_File(char *file)
 }
 static void DoConv_Path(char *path)
 {
-	if(existDir(path))
+	if (existDir(path))
 	{
 		autoList_t *files = (IntoSubDir ? lssFiles : lsFiles)(path);
 
@@ -246,17 +246,17 @@ static void DoConv_Path(char *path)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/B"))
+	if (argIs("/B"))
 	{
 		BatchMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		IntoSubDir = 1;
 		goto readArgs;
 	}
-	if(argIs("/SF"))
+	if (argIs("/SF"))
 	{
 		LOGPOS();
 		SafeMode = 1;
@@ -270,7 +270,7 @@ readArgs:
 	errorCase(REnc == ENC_UTF16BE_NOBOM);
 	errorCase(REnc != ENC_SJIS && WEnc != ENC_SJIS);
 
-	if(argIs("/LSS"))
+	if (argIs("/LSS"))
 	{
 		autoList_t *files = readLines(FOUNDLISTFILE);
 
@@ -279,7 +279,7 @@ readArgs:
 		return;
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		DoConv_Path(nextArg());
 		return;

@@ -10,10 +10,10 @@ static char *GetCommonPathPrefixWithStar(autoList_t *paths, char *exceptPath)
 
 	foreach(paths, path, index)
 	{
-		if(!mbs_stricmp(path, exceptPath))
+		if (!mbs_stricmp(path, exceptPath))
 			continue;
 
-		if(!pfx)
+		if (!pfx)
 		{
 			pfx = strx(path);
 		}
@@ -23,9 +23,9 @@ static char *GetCommonPathPrefixWithStar(autoList_t *paths, char *exceptPath)
 
 			for(i = 0; pfx[i] && m_toupper(pfx[i]) == m_toupper(path[i]); i++);
 
-			if(!pfx[i])
+			if (!pfx[i])
 			{
-				if(path[i])
+				if (path[i])
 					star = 1;
 			}
 			else
@@ -39,7 +39,7 @@ static char *GetCommonPathPrefixWithStar(autoList_t *paths, char *exceptPath)
 
 	line2JLine(pfx, 1, 0, 0, 1); // 全角文字の途中で区切られるかもしれないので
 
-	if(star)
+	if (star)
 		pfx = addChar(pfx, '*');
 
 	return pfx;
@@ -60,7 +60,7 @@ isJChar(0); // res: C:\Factory\Resource\JIS0208.txt 対策
 
 	selLine = selectLine(lines);
 
-	if(!selLine)
+	if (!selLine)
 		termination(0);
 
 	selFile = strx(selLine + 33);
@@ -76,12 +76,12 @@ isJChar(0); // res: C:\Factory\Resource\JIS0208.txt 対策
 		cout("### 確認のため %s と入力してね。### (ignore case)\n", CFM_PTN);
 		cfmInput = coInputLine();
 
-		if(!*cfmInput)
+		if (!*cfmInput)
 		{
 			memFree(cfmInput);
 			termination(0);
 		}
-		if(!_stricmp(cfmInput, CFM_PTN)) // ? 一致した。
+		if (!_stricmp(cfmInput, CFM_PTN)) // ? 一致した。
 		{
 			memFree(cfmInput);
 			break;
@@ -91,7 +91,7 @@ isJChar(0); // res: C:\Factory\Resource\JIS0208.txt 対策
 
 	foreach(files, file, index)
 	{
-		if(!mbs_stricmp(file, selFile))
+		if (!mbs_stricmp(file, selFile))
 			continue;
 
 		cout("< %s\n", selFile);

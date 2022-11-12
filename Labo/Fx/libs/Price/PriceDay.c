@@ -10,7 +10,7 @@ autoList_t *GetPriceDay(uint date, char *pair)
 	static int inited;
 	static uint lastSnapshotTime;
 
-	if(!inited) // init
+	if (!inited) // init
 	{
 		FixedCache    = CreatePriceDayCache();
 		SnapshotCache = CreatePriceDayCache();
@@ -24,10 +24,10 @@ autoList_t *GetPriceDay(uint date, char *pair)
 	{
 		autoList_t *ret = PDC_GetPriceDay(FixedCache, date, pair);
 
-		if(ret)
+		if (ret)
 			return ret;
 
-		if(HasFixedPriceDay(date, pair))
+		if (HasFixedPriceDay(date, pair))
 		{
 			ret = GetFixedPriceDay(date, pair);
 			PDC_AddPriceDay(FixedCache, date, pair, ret);
@@ -35,7 +35,7 @@ autoList_t *GetPriceDay(uint date, char *pair)
 		}
 	}
 
-	if(lastSnapshotTime + 30 < now()) // ? snapshot time-out
+	if (lastSnapshotTime + 30 < now()) // ? snapshot time-out
 	{
 		ExecuteSnapshot();
 		PDC_Clear(SnapshotCache);
@@ -52,10 +52,10 @@ autoList_t *GetPriceDay(uint date, char *pair)
 	{
 		autoList_t *ret = PDC_GetPriceDay(SnapshotCache, date, pair);
 
-		if(ret)
+		if (ret)
 			return ret;
 
-		if(HasSnapshotPriceDay(date, pair))
+		if (HasSnapshotPriceDay(date, pair))
 		{
 			ret = GetSnapshotPriceDay(date, pair);
 			PDC_AddPriceDay(SnapshotCache, date, pair, ret);

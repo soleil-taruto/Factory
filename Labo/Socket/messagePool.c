@@ -85,7 +85,7 @@ static char *DecodeUrlMessage(char *line) // ret: strr(line)
 
 	for(p = line; *p; p++)
 	{
-		if(*p == '%' && m_ishexadecimal(p[1]) && m_ishexadecimal(p[2]))
+		if (*p == '%' && m_ishexadecimal(p[1]) && m_ishexadecimal(p[2]))
 		{
 			swrk = strxl(p + 1, 2);
 			*p = toValueDigits(swrk, hexadecimal);
@@ -93,7 +93,7 @@ static char *DecodeUrlMessage(char *line) // ret: strr(line)
 
 			copyLine(p + 1, p + 3);
 		}
-		else if(*p == '+')
+		else if (*p == '+')
 		{
 			*p = ' ';
 		}
@@ -101,7 +101,7 @@ static char *DecodeUrlMessage(char *line) // ret: strr(line)
 	line2JLine(line, 1, 0, 0, 1);
 	trim(line, ' ');
 
-	if(MESSAGE_SIZE < strlen(line))
+	if (MESSAGE_SIZE < strlen(line))
 	{
 		line[MESSAGE_SIZE] = '\0';
 		line2JLine(line, 1, 0, 0, 1);
@@ -123,7 +123,7 @@ static int GetSameMessageCount(char *line, uint lbnd)
 	{
 		char *lmess = MessageList[index].Message;
 
-		if(!strcmp(lmess, line))
+		if (!strcmp(lmess, line))
 		{
 			num++;
 		}
@@ -145,7 +145,7 @@ static void SaveHistMessageList(uint index)
 	fileWrite(fp, gndBlockVar(HistMessageList, sizeof(HistMessageList), gab));
 	fileClose(fp);
 
-	if(index == HistCount)
+	if (index == HistCount)
 		HistCount++;
 }
 static void LoadHistMessageList(uint index)
@@ -177,7 +177,7 @@ static void AddToMessageList(char *message)
 
 	MessageIndex++;
 
-	if(MessageIndex == MESSAGE_MAX)
+	if (MessageIndex == MESSAGE_MAX)
 	{
 		memcpy(HistMessageList, MessageList, MESSAGE_BUNDLE_SIZE * sizeof(Message_t));
 		memcpy(MessageList, MessageList + MESSAGE_BUNDLE_SIZE, MESSAGE_BUNDLE_SIZE * sizeof(Message_t));
@@ -213,21 +213,21 @@ static int Perform(int sock, uint prm)
 	cout("Perform: %p %s [%s]\n", i, swrk = makeStamp(0), SockIp2Line(sockClientIp));
 	memFree(swrk);
 
-	if(TIMEOUT_SEC <= SockCurrTime - i->ConnectTime) // ? time-out
+	if (TIMEOUT_SEC <= SockCurrTime - i->ConnectTime) // ? time-out
 	{
 		cout("time-out\n");
 		return 0;
 	}
-	if(i->SendData)
+	if (i->SendData)
 	{
-		if(SockSendSequ(sock, i->SendData, 1) == -1)
+		if (SockSendSequ(sock, i->SendData, 1) == -1)
 		{
 			cout("送信エラー\n");
 			return 0;
 		}
 		cout("送信残り: %u\n", getSize(i->SendData));
 
-		if(!getSize(i->SendData))
+		if (!getSize(i->SendData))
 		{
 			cout("送信完了\n");
 			return 0;
@@ -235,7 +235,7 @@ static int Perform(int sock, uint prm)
 		return 1;
 	}
 
-	if(SockRecvSequ(sock, i->RecvData, 1) == -1)
+	if (SockRecvSequ(sock, i->RecvData, 1) == -1)
 	{
 		cout("受信エラー\n");
 		return 0;
@@ -243,16 +243,16 @@ static int Perform(int sock, uint prm)
 	cout("受信サイズ: %u\n", getSize(i->RecvData));
 
 	line = SockNextLine(i->RecvData);
-	if(!line)
+	if (!line)
 	{
-		if(HDRHDR_LENMAX < getSize(i->RecvData))
+		if (HDRHDR_LENMAX < getSize(i->RecvData))
 		{
 			cout("最初の行、長すぎ (BIN)\n");
 			return 0;
 		}
 		return 1;
 	}
-	if(HDRHDR_LENMAX < strlen(line))
+	if (HDRHDR_LENMAX < strlen(line))
 	{
 		cout("最初の行、長すぎ (STR)\n");
 		memFree(line);
@@ -268,11 +268,11 @@ static int Perform(int sock, uint prm)
 	cout("Req-URL: %s\n", line);
 
 	lreq = line;
-	if(swrk = strstr(lreq, "//")) // ? ホスト名有り
+	if (swrk = strstr(lreq, "//")) // ? ホスト名有り
 	{
 		lreq = strchrEnd(swrk + 2, '/'); // ホスト名まで削る。
 	}
-	if(lreq[0] == '/')
+	if (lreq[0] == '/')
 	{
 		lreq++;
 	}
@@ -280,7 +280,7 @@ static int Perform(int sock, uint prm)
 
 	divList = newList();
 
-	if(lineExp("<5,09><>", lreq)) // more
+	if (lineExp("<5,09><>", lreq)) // more
 	{
 		cout("過去ログ参照\n");
 
@@ -290,7 +290,7 @@ static int Perform(int sock, uint prm)
 
 		cout("index: %u\n", index);
 
-		if(index < HistCount)
+		if (index < HistCount)
 		{
 			LoadHistMessageList(index);
 
@@ -306,12 +306,12 @@ static int Perform(int sock, uint prm)
 		}
 		addElement(divList, (uint)MkLinkDiv("q", "no-data"));
 	}
-	else if(swrk = strchr(lreq, '?')) // submit
+	else if (swrk = strchr(lreq, '?')) // submit
 	{
 		cout("メッセージ入力\n");
 
 		swrk = strchr(lreq, '=');
-		if(!swrk)
+		if (!swrk)
 		{
 			goto ret_index;
 		}
@@ -320,7 +320,7 @@ static int Perform(int sock, uint prm)
 
 		cout("メッセージ: %s\n", swrk);
 
-		if(*swrk &&
+		if (*swrk &&
 			GetSameMessageCount(swrk, 0) < SAME_MESSAGE_MAX &&
 			GetSameMessageCount(swrk, m_max((sint)MessageIndex - SAME_MESSAGE_DISTANCE, 0)) < SAME_MESSAGE_DISTANCE_MAX
 			)
@@ -380,7 +380,7 @@ static int Perform(int sock, uint prm)
 	add_more:
 		index = (index + HIST_MAX - 1) % HIST_MAX;
 
-		if(index < HistCount)
+		if (index < HistCount)
 		{
 			addElement(divList, (uint)MkLinkDiv(swrk = xcout("%05u", index), "more"));
 			memFree(swrk);
@@ -411,7 +411,7 @@ static int Perform(int sock, uint prm)
 	line = replaceLine(line, "*back-color*", BackColor, 1);
 	line = replaceLine(line, "*div-list*", sDivList, 1);
 
-	if(doPutOnload)
+	if (doPutOnload)
 		line = replaceLine(line,
 			"<body>",
 			"<body onload=\"document.q.q.focus()\">", 1);
@@ -455,7 +455,7 @@ static void ReleaseInfo(uint prm)
 	cout("Dtor: %p [%s]\n", i, SockIp2Line(sockClientIp));
 
 	releaseAutoBlock(i->RecvData);
-	if(i->SendData) releaseAutoBlock(i->SendData);
+	if (i->SendData) releaseAutoBlock(i->SendData);
 
 	memFree(i);
 }
@@ -463,7 +463,7 @@ static int Idle(void)
 {
 	while(hasKey())
 	{
-		if(getKey() == 'Q')
+		if (getKey() == 'Q')
 		{
 			cout("Q osareta!\n");
 			return 0;
@@ -478,38 +478,38 @@ int main(int argc, char **argv)
 	uint portno = 80;
 
 readArgs:
-	if(argIs("/T")) // Title
+	if (argIs("/T")) // Title
 	{
 		Title = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/F")) // Fore-color
+	if (argIs("/F")) // Fore-color
 	{
 		ForeColor = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/B")) // Back-color
+	if (argIs("/B")) // Back-color
 	{
 		BackColor = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/P")) // Prompt
+	if (argIs("/P")) // Prompt
 	{
 		Prompt = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/S")) // Submit-button title
+	if (argIs("/S")) // Submit-button title
 	{
 		SubmitBtnText = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/R")) // Reset-button title
+	if (argIs("/R")) // Reset-button title
 	{
 		ResetBtnText = nextArg();
 		goto readArgs;
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		portno = toValue(nextArg());
 	}

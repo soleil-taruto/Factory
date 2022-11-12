@@ -16,7 +16,7 @@
 
 static char *TrySkipWord(char *p, char *word)
 {
-	if(strncmp(p, word, strlen(word)))
+	if (strncmp(p, word, strlen(word)))
 		return NULL;
 
 	return p + strlen(word);
@@ -67,7 +67,7 @@ static void BookmarkToText(char *file)
 		char *p = strstr(line, "<DT><A");
 		char *q;
 
-		if(p)
+		if (p)
 		{
 			char *href;
 			char *addDate;
@@ -90,7 +90,7 @@ static void BookmarkToText(char *file)
 			errorCase(*p);
 
 			// .url をカットする。win7には無い！
-			if(!_stricmp(getExt(title), "url"))
+			if (!_stricmp(getExt(title), "url"))
 			{
 				p = mbs_strrchr(title, '.');
 				errorCase(!p);
@@ -109,7 +109,7 @@ static void BookmarkToText(char *file)
 		}
 		p = strstr(line, "<DT><H");
 
-		if(p)
+		if (p)
 		{
 			char *addDate;
 			char *title;
@@ -122,7 +122,7 @@ static void BookmarkToText(char *file)
 			*/
 			q = TrySkipWord(p, "<DT><H3 FOLDED ADD_DATE=\"");
 
-			if(!q)
+			if (!q)
 				q = SkipWord(p, "<DT><H3 ADD_DATE=\""); // chrome
 
 			p = q;
@@ -153,7 +153,7 @@ static void BookmarkToText(char *file)
 		}
 		p = strstr(line, " </DL>"); // 最終の </DL> を避けるため
 
-		if(p)
+		if (p)
 		{
 			errorCase(!*dlAddDates);
 			p = strchr(dlAddDates, '\0') - 1;
@@ -194,7 +194,7 @@ int main(int argc, char **argv)
 {
 	char *file = dropFile();
 
-	if(argIs("/SJIS"))
+	if (argIs("/SJIS"))
 	{
 		BookmarkToText(file);
 	}

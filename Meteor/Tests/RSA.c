@@ -103,7 +103,7 @@ static void Test_02(void)
 	ShowBlock(badEncryptData, "BAD_ENCRYPT_DATA");
 	ShowBlock(badDecryptData, "BAD_DECRYPT_DATA");
 
-	if(badDecryptData) // ? •œ†‚Å‚«‚½...
+	if (badDecryptData) // ? •œ†‚Å‚«‚½...
 	{
 		errorCase(isSameBlock(plainData, badDecryptData)); // ? •œ†¬Œ÷
 		releaseAutoBlock(badDecryptData);
@@ -127,7 +127,7 @@ static void Test_02(void)
 	ShowBlock(badEncryptData, "BAD_ENCRYPT_DATA");
 	ShowBlock(badDecryptData, "BAD_DECRYPT_DATA");
 
-	if(badDecryptData) // ? •œ†‚Å‚«‚½...
+	if (badDecryptData) // ? •œ†‚Å‚«‚½...
 	{
 		errorCase(isSameBlock(plainData, badDecryptData)); // ? •œ†¬Œ÷
 		releaseAutoBlock(badDecryptData);
@@ -151,7 +151,7 @@ static void Test_02(void)
 	ShowBlock(badEncryptData, "BAD_ENCRYPT_DATA");
 	ShowBlock(badDecryptData, "BAD_DECRYPT_DATA");
 
-	if(badDecryptData) // ? •œ†‚Å‚«‚½...
+	if (badDecryptData) // ? •œ†‚Å‚«‚½...
 	{
 		errorCase(isSameBlock(plainData, badDecryptData)); // ? •œ†¬Œ÷
 		releaseAutoBlock(badDecryptData);
@@ -172,7 +172,7 @@ static void Test_02(void)
 	ShowBlock(badEncryptData, "BAD_ENCRYPT_DATA");
 	ShowBlock(badDecryptData, "BAD_DECRYPT_DATA");
 
-	if(badDecryptData) // ? •œ†‚Å‚«‚½...
+	if (badDecryptData) // ? •œ†‚Å‚«‚½...
 	{
 		errorCase(isSameBlock(plainData, badDecryptData)); // ? •œ†¬Œ÷
 		releaseAutoBlock(badDecryptData);
@@ -230,7 +230,7 @@ static void Test_03(void)
 	ShowBlock(anotherEncryptData, "ANOTHER_ENCRYPT_DATA");
 	ShowBlock(anotherDecryptData, "ANOTHER_DECRYPT_DATA");
 
-	if(anotherDecryptData) // ? •œ†‚Å‚«‚½...
+	if (anotherDecryptData) // ? •œ†‚Å‚«‚½...
 	{
 		errorCase(isSameBlock(plainData, anotherDecryptData)); // ? •œ†¬Œ÷
 		releaseAutoBlock(anotherDecryptData);

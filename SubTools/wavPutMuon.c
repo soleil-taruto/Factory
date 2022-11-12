@@ -150,7 +150,7 @@ int main(int argc, char **argv)
 	errorCase(!m_isRange(FrontMuonMillis, 0, IMAX));
 	errorCase(!m_isRange(EndMuonMillis,   0, IMAX));
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		char *file = nextArg();
 

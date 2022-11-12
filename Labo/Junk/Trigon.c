@@ -44,7 +44,7 @@ static char *GetMidSine(char *sine1, char *sine2, char *rate1, char *rate2)
 	midSine   = calcLine_xc(midSine,   '/', rRate, 10, Basement);
 //	midCosine = calcLine_xc(midCosine, '/', rRate, 10, Basement);
 
-	if(compCalcLine(sine2, midSine, 10) == -1) // ? sine2 < midSine ... 丸め誤差により次(上)の値を上回ってしまった。
+	if (compCalcLine(sine2, midSine, 10) == -1) // ? sine2 < midSine ... 丸め誤差により次(上)の値を上回ってしまった。
 	{
 		memFree(midSine);
 		midSine = strx(sine2);
@@ -79,7 +79,7 @@ static void Expand(uint prn_accur)
 
 	for(index = getCount(RateList) - 1; index; index--)
 	{
-		if(eqIntPulseSec(2, NULL))
+		if (eqIntPulseSec(2, NULL))
 		{
 			cmdTitle_x(xcout("Trigon - %u %u", prn_accur, index));
 		}
@@ -172,12 +172,12 @@ static void Trigon(uint accur)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/B"))
+	if (argIs("/B"))
 	{
 		Basement = toValue(nextArg());
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		Trigon(toValue(nextArg()));
 		return;

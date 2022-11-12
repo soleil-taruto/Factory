@@ -21,25 +21,25 @@ int main(int argc, char **argv)
 	mt19937_init();
 
 readArgs:
-	if(argIs("/S")) // Seed
+	if (argIs("/S")) // Seed
 	{
 		mt19937_init32(toValue(nextArg()));
 		goto readArgs;
 	}
 
-	if(argIs("/CB")) // Char Bina-decimal
+	if (argIs("/CB")) // Char Bina-decimal
 	{
 		MRLChrSet = binadecimal;
 		MRLGetChar = MRLGetCharSet;
 		goto readArgs;
 	}
-	if(argIs("/CO")) // Char Octo-decimal
+	if (argIs("/CO")) // Char Octo-decimal
 	{
 		MRLChrSet = octodecimal;
 		MRLGetChar = MRLGetCharSet;
 		goto readArgs;
 	}
-	if(argIs("/CD")) // Char Decimal
+	if (argIs("/CD")) // Char Decimal
 	{
 #if 1
 		MRLChrSet = decimal;
@@ -51,13 +51,13 @@ readArgs:
 #endif
 		goto readArgs;
 	}
-	if(argIs("/CH")) // Char Hexa-decimal
+	if (argIs("/CH")) // Char Hexa-decimal
 	{
 		MRLChrSet = hexadecimal;
 		MRLGetChar = MRLGetCharSet;
 		goto readArgs;
 	}
-	if(argIs("/CS")) // Char enable-Space
+	if (argIs("/CS")) // Char enable-Space
 	{
 		MRLChrLow = 0x20;
 		MRLChrUpper = 0x7e;
@@ -65,7 +65,7 @@ readArgs:
 		goto readArgs;
 	}
 
-	if(argIs("/CC")) // Char Char-set
+	if (argIs("/CC")) // Char Char-set
 	{
 		char *cs = nextArg();
 
@@ -75,7 +75,7 @@ readArgs:
 		MRLGetChar = MRLGetCharSet;
 		goto readArgs;
 	}
-	if(argIs("/CR")) // Char Range
+	if (argIs("/CR")) // Char Range
 	{
 		uint r1;
 		uint r2;
@@ -93,7 +93,7 @@ readArgs:
 		goto readArgs;
 	}
 
-	if(argIs("/B")) // Binary mode
+	if (argIs("/B")) // Binary mode
 	{
 		char *file;
 		uint64 size;
@@ -106,7 +106,7 @@ readArgs:
 		cout("バイナリで作成しました。\n");
 		return;
 	}
-	if(argIs("/T")) // Text mode
+	if (argIs("/T")) // Text mode
 	{
 		char *file;
 		uint64 row;
@@ -116,7 +116,7 @@ readArgs:
 		row = toValue64(nextArg());
 		column = toValue(nextArg());
 
-		if(hasArgs(1))
+		if (hasArgs(1))
 		{
 			MakeRandTextFileRange(file, row, column, toValue(nextArg())); // max < min のとき mt19937_range() でエラーになってくれる。
 		}

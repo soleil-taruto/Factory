@@ -35,7 +35,7 @@ static int ReadLine(FILE *rfp)
 	char *line = readLine(rfp);
 	char *p;
 
-	if(!line)
+	if (!line)
 		return 0;
 
 	errorCase(!lineExp("<17,09>,<4,10,09>,<1,CDRS>,\"<>\"", line));
@@ -52,7 +52,7 @@ static int ReadLine(FILE *rfp)
 
 	Kind = p[1];
 
-	if(RawData)
+	if (RawData)
 		releaseAutoBlock(RawData);
 
 	RawData = newBlock();
@@ -63,7 +63,7 @@ static int ReadLine(FILE *rfp)
 
 		errorCase(!*p);
 
-		if(*p == '\\' && p[1] && p[2])
+		if (*p == '\\' && p[1] && p[2])
 		{
 			int v1 = m_c2i(p[1]);
 			int v2 = m_c2i(p[2]);
@@ -93,7 +93,7 @@ static void UnloadFile(void)
 	char *file;
 	uint index;
 
-	if(!SendStamps) // ? ! loaded
+	if (!SendStamps) // ? ! loaded
 		return;
 
 	foreach(SendFiles, file, index)
@@ -123,7 +123,7 @@ static void LoadFile(char *rFile)
 	{
 		errorCase(Id < 1000);
 
-		if(ConId)
+		if (ConId)
 			errorCase(ConId != Id);
 		else
 			ConId = Id;
@@ -171,16 +171,16 @@ static int R_ReadChar(void)
 
 	for(; ; )
 	{
-		if(!R_Fp)
+		if (!R_Fp)
 		{
-			if(getCount(R_Files) <= R_Index)
+			if (getCount(R_Files) <= R_Index)
 				return EOF;
 
 			R_Fp = fileOpen(getLine(R_Files, R_Index), "rb");
 		}
 		chr = readChar(R_Fp);
 
-		if(chr != EOF)
+		if (chr != EOF)
 			break;
 
 		fileClose(R_Fp);
@@ -191,11 +191,11 @@ static int R_ReadChar(void)
 }
 static uint64 R_GetStamp(void)
 {
-	if(R_Index < getCount(R_Stamps))
+	if (R_Index < getCount(R_Stamps))
 	{
 		return *(uint64 *)getElement(R_Stamps, R_Index);
 	}
-	if(getCount(R_Stamps))
+	if (getCount(R_Stamps))
 	{
 		return *(uint64 *)getLastElement(R_Stamps);
 	}
@@ -231,11 +231,11 @@ static int W_ReadChar(void)
 {
 	int chr = R_ReadChar();
 
-	if(chr != EOF)
+	if (chr != EOF)
 	{
 		writeChar(W_Fp, chr);
 
-		if(!W_Wrote)
+		if (!W_Wrote)
 		{
 			W_Wrote = 1;
 			W_StartStamp = R_GetStamp();
@@ -251,22 +251,22 @@ static char *W_ReadLine(void)
 	{
 		int chr = W_ReadChar();
 
-		if(chr == EOF)
+		if (chr == EOF)
 		{
-			if(!getSize(buff))
+			if (!getSize(buff))
 			{
 				releaseAutoBlock(buff);
 				return NULL;
 			}
 			break;
 		}
-		if(chr == '\r')
+		if (chr == '\r')
 			continue;
 
-		if(chr == '\n')
+		if (chr == '\n')
 			break;
 
-		if(W_LINELENMAX <= getSize(buff))
+		if (W_LINELENMAX <= getSize(buff))
 		{
 			cout("Warning: over W_LINELENMAX\n");
 			break;
@@ -322,17 +322,17 @@ static void PHRR_Parse(void)
 		char *name;
 		char *value;
 
-		if(!line)
+		if (!line)
 			break;
 
-		if(!*line)
+		if (!*line)
 		{
 			memFree(line);
 			break;
 		}
 		p = strchr(line, ':');
 
-		if(p)
+		if (p)
 		{
 			*p = '\0';
 			name = strx(line);
@@ -341,11 +341,11 @@ static void PHRR_Parse(void)
 			ucTrimEdge(name);
 			ucTrimEdge(value);
 
-			if(!_stricmp(name, "Content-Length"))
+			if (!_stricmp(name, "Content-Length"))
 			{
 				contentLength = toValue64(value);
 			}
-			else if(!_stricmp(name, "Transfer-Encoding") && !_stricmp(value, "chunked"))
+			else if (!_stricmp(name, "Transfer-Encoding") && !_stricmp(value, "chunked"))
 			{
 				chunked = 1;
 			}
@@ -354,7 +354,7 @@ static void PHRR_Parse(void)
 		}
 		memFree(line);
 	}
-	if(chunked)
+	if (chunked)
 	{
 		for(; ; )
 		{
@@ -362,18 +362,18 @@ static void PHRR_Parse(void)
 			uint size;
 			uint count;
 
-			if(!line)
+			if (!line)
 				break;
 
 			strchrEnd(line, ';')[0] = '\0'; // chunk-extension íœ
 			size = toValueDigits(line, hexadecimal);
 			memFree(line);
 
-			if(!size)
+			if (!size)
 				break;
 
 			for(count = 0; count < size; count++)
-				if(W_ReadChar() == EOF)
+				if (W_ReadChar() == EOF)
 					break;
 
 			W_ReadChar(); // CR
@@ -383,10 +383,10 @@ static void PHRR_Parse(void)
 		{
 			char *line = W_ReadLine();
 
-			if(!line)
+			if (!line)
 				break;
 
-			if(!*line)
+			if (!*line)
 			{
 				memFree(line);
 				break;
@@ -399,7 +399,7 @@ static void PHRR_Parse(void)
 		uint64 count;
 
 		for(count = 0; count < contentLength; count++)
-			if(W_ReadChar() == EOF)
+			if (W_ReadChar() == EOF)
 				break;
 	}
 }
@@ -413,7 +413,7 @@ static void PHRR_Main(char *direction)
 
 		PHRR_Parse();
 
-		if(!W_Wrote)
+		if (!W_Wrote)
 		{
 			W_Destroy();
 			break;

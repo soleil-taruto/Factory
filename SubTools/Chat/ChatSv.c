@@ -90,12 +90,12 @@ static char *StampPlusOneSec(char *stamp)
 
 	s++; // plus one sec
 
-	if(s == 60)
+	if (s == 60)
 	{
 		s = 0;
 		m++;
 
-		if(m == 60)
+		if (m == 60)
 		{
 			m = 0;
 			t++;
@@ -134,7 +134,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 	cout("command: %s\n", command);
 
-	if(!strcmp(command, "REMARK"))
+	if (!strcmp(command, "REMARK"))
 	{
 		char *stamp   = strx(refLine(lines, 1));
 		char *message = strx(refLine(lines, 2));
@@ -153,14 +153,14 @@ static int Perform(char *prmFile, char *ansFile)
 			char *realStamp = makeCompactStamp(NULL);
 			int okFlag = 0;
 
-			if(lineExp("<14,09>", stamp))
+			if (lineExp("<14,09>", stamp))
 			{
 				time_t diff = _abs64(compactStampToTime(stamp) - compactStampToTime(realStamp));
 
-				if(diff < 5)
+				if (diff < 5)
 					okFlag = 1;
 			}
-			if(!okFlag)
+			if (!okFlag)
 			{
 				memFree(stamp);
 				stamp = realStamp;
@@ -168,14 +168,14 @@ static int Perform(char *prmFile, char *ansFile)
 			else
 				memFree(realStamp);
 		}
-		if(getCount(TimeLine)) // 前の発言と同じ・より過去にならないように矯正する。
+		if (getCount(TimeLine)) // 前の発言と同じ・より過去にならないように矯正する。
 		{
 			char *lastStamp = ((Remark_t *)getLastElement(TimeLine))->Stamp;
 			char *availableStamp;
 
 			availableStamp = StampPlusOneSec(lastStamp);
 
-			if(strcmp(stamp, availableStamp) < 0) // ? stamp < availableStamp
+			if (strcmp(stamp, availableStamp) < 0) // ? stamp < availableStamp
 			{
 				memFree(stamp);
 				stamp = strx(availableStamp);
@@ -195,7 +195,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 		writeOneLineNoRet(ansFile, "REMARK_OK");
 	}
-	else if(!strcmp(command, "TIME-LINE"))
+	else if (!strcmp(command, "TIME-LINE"))
 	{
 		char *bgnStmp = refLine(lines, 1);
 		char *endStmp = refLine(lines, 2);
@@ -213,7 +213,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 		foreach(TimeLine, remark, remark_index)
 		{
-			if(strcmp(bgnStmp, remark->Stamp) < 0 && strcmp(remark->Stamp, endStmp) < 0) // ? bgnStmp ～ endStmp, (bgnStmp, endStmp) は含まない。
+			if (strcmp(bgnStmp, remark->Stamp) < 0 && strcmp(remark->Stamp, endStmp) < 0) // ? bgnStmp ～ endStmp, (bgnStmp, endStmp) は含まない。
 			{
 				cout("[%s] %s\n", remark->Stamp, remark->Message);
 
@@ -229,7 +229,7 @@ static int Perform(char *prmFile, char *ansFile)
 //		memFree(bgnStmp); // del_dbg @ 2016.12.3
 //		memFree(endStmp); // del_dbg @ 2016.12.3
 	}
-	else if(!strcmp(command, "HEARTBEAT"))
+	else if (!strcmp(command, "HEARTBEAT"))
 	{
 		char *ident   = refLine(lines, 1);
 		char *message = refLine(lines, 2);
@@ -239,14 +239,14 @@ static int Perform(char *prmFile, char *ansFile)
 		autoBlock_t *buff = newBlock();
 
 		foreach(Members, member, index)
-			if(!strcmp(member->Ident, ident))
+			if (!strcmp(member->Ident, ident))
 				break;
 
-		if(member)
+		if (member)
 		{
 			Member_Removed(member);
 
-			if(strcmp(member->Message, message)) // ? メッセージが変更された。
+			if (strcmp(member->Message, message)) // ? メッセージが変更された。
 			{
 				cout("★★★ MESSAGE CHANGED [%s]\n", ident);
 
@@ -276,7 +276,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 		foreach(Members, member, index)
 		{
-			if(member->LastTime + 300 < currTime) // ? timeout
+			if (member->LastTime + 300 < currTime) // ? timeout
 			{
 				cout("TIMEOUT MEMBER [%s]\n", member->Ident);
 
@@ -297,7 +297,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 			foreach(Members, member, index)
 			{
-				if(member->LastTime < oldestTime)
+				if (member->LastTime < oldestTime)
 				{
 					oldestPos = index;
 					oldestTime = member->LastTime;
@@ -330,7 +330,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 		writeBinary_cx(ansFile, buff);
 	}
-	else if(!strcmp(command, "LOGOUT"))
+	else if (!strcmp(command, "LOGOUT"))
 	{
 		char *ident = refLine(lines, 1);
 		Member_t *member;
@@ -340,7 +340,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 		foreach(Members, member, index)
 		{
-			if(!strcmp(member->Ident, ident))
+			if (!strcmp(member->Ident, ident))
 			{
 				cout("LOGOUT OK\n");
 
@@ -353,7 +353,7 @@ static int Perform(char *prmFile, char *ansFile)
 		removeZero(Members);
 		writeOneLineNoRet(ansFile, "LOGOUT_OK");
 	}
-	else if(!strcmp(command, "SERVER-TIME-DIFF"))
+	else if (!strcmp(command, "SERVER-TIME-DIFF"))
 	{
 		char *clStamp = refLine(lines, 1);
 		char *svStamp = makeCompactStamp(NULL);
@@ -386,11 +386,11 @@ static uint StopEv;
 
 static int Idle(void)
 {
-	if(handleWaitForMillis(StopEv, 0))
+	if (handleWaitForMillis(StopEv, 0))
 		return 0;
 
 	while(hasKey())
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 			return 0;
 
 	return 1;
@@ -400,15 +400,15 @@ int main(int argc, char **argv)
 	int stopFlag = 0;
 	uint portno = 59999;
 
-	if(argIs("/S"))
+	if (argIs("/S"))
 		stopFlag = 1;
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 		portno = toValue(nextArg());
 
 	StopEvName = xcout(STOP_EV_UUID "_%u", portno);
 
-	if(stopFlag)
+	if (stopFlag)
 	{
 		LOGPOS();
 		eventWakeup(StopEvName);

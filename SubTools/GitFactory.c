@@ -24,7 +24,7 @@ static void CleanupGitDir(char *dir)
 
 	foreach(paths, path, index)
 	{
-		if(
+		if (
 			!_stricmp(path, ".git") ||
 			!_stricmp(path, ".gitattributes") ||
 			!_stricmp(path, ".gitignore")
@@ -51,7 +51,7 @@ static void FoundIgnoreFile(autoList_t *files, char *ignFile)
 
 	foreach(files, file, index)
 	{
-		if(
+		if (
 #if 0 // フォルダごと消す。
 			!_stricmp(file, ignPtn) ||
 			startsWithICase(file, ignPtnYen)
@@ -75,7 +75,7 @@ static void RemoveIgnoreFiles(autoList_t *files)
 	uint index;
 
 	foreach(files, file, index)
-		if(!_stricmp(getLocal(file), IGNORE_FILE))
+		if (!_stricmp(getLocal(file), IGNORE_FILE))
 			FoundIgnoreFile(files, file);
 
 	trimLines(files);
@@ -113,12 +113,12 @@ static void SolveEncoding(char *rootDir)
 	{
 		char *localFile = getLocal(file);
 
-		if(!_stricmp("txt", getExt(localFile)))
-//		if(!_stricmp("Readme.txt", localFile) || !_stricmp("_source.txt", localFile)) // old
+		if (!_stricmp("txt", getExt(localFile)))
+//		if (!_stricmp("Readme.txt", localFile) || !_stricmp("_source.txt", localFile)) // old
 		{
 			cout("SE_file: %s\n", file);
 
-			if(GF_SE_IsSJISFile(file))
+			if (GF_SE_IsSJISFile(file))
 			{
 				SJISToUTF8File(file, file);
 			}
@@ -141,7 +141,7 @@ static void SolveEmptyDir(char *rootDir)
 
 	foreach(dirs, dir, index)
 	{
-		if(!lsCount(dir)) // ? 空のDIR
+		if (!lsCount(dir)) // ? 空のDIR
 		{
 			char *dmyfile = combine(dir, "_this-folder-is-empty");
 
@@ -170,7 +170,7 @@ static void GitFactory(char *rDir, char *wDir, int allowOverwrite)
 
 	errorCase(!existDir(rDir));
 
-	if(existPath(wDir))
+	if (existPath(wDir))
 	{
 		errorCase(!allowOverwrite);
 		CleanupGitDir(wDir);
@@ -194,25 +194,25 @@ static void GitFactory(char *rDir, char *wDir, int allowOverwrite)
 		char *rFile = combine(rDir, file);
 		char *wFile = combine(wDir, file);
 
-		if(existDir(rFile))
+		if (existDir(rFile))
 		{
 			createDir(wFile);
 		}
 		else
 		{
-			if(startsWithICase(file, "tmp\\"))
+			if (startsWithICase(file, "tmp\\"))
 				goto skipfile;
 
-			if(!_stricmp("obj", getExt(file)))
+			if (!_stricmp("obj", getExt(file)))
 				goto skipfile;
 
-			if(!_stricmp("exe", getExt(file)))
+			if (!_stricmp("exe", getExt(file)))
 				goto skipfile;
 
 			copyFile(rFile, wFile);
 		}
 
-		if(!_stricmp(getLocal(wFile), IGNORE_FILE))
+		if (!_stricmp(getLocal(wFile), IGNORE_FILE))
 		{
 			char *dmyfile = changeLocal(wFile, "*");
 
@@ -229,7 +229,7 @@ static void GitFactory(char *rDir, char *wDir, int allowOverwrite)
 	{
 		char *dir = combine(wDir, "tmp");
 
-		if(existDir(dir))
+		if (existDir(dir))
 		{
 			file = combine(dir, "1.tmp");
 			createFile(file);
@@ -256,18 +256,18 @@ int main(int argc, char **argv)
 	int allowOverwrite = 0;
 
 readArgs:
-	if(argIs("/OW"))
+	if (argIs("/OW"))
 	{
 		allowOverwrite = 1;
 		goto readArgs;
 	}
 
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		GitFactory(getArg(0), getArg(1), allowOverwrite);
 		return;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		GitFactory("C:\\Factory", nextArg(), allowOverwrite);
 		return;

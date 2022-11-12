@@ -45,18 +45,18 @@ void sockUDPSendBlock(int sock, uchar ip[4], char *domain, uint portno, uchar *d
 	struct sockaddr_in sa;
 	int retval;
 
-	if(!dataSize) // ? 空データ -> 送信しない。
+	if (!dataSize) // ? 空データ -> 送信しない。
 		return;
 
-	if(!ip)
+	if (!ip)
 		ip = GetDefIP(domain);
 
-	if(!*(uint *)ip) // ? 0.0.0.0
+	if (!*(uint *)ip) // ? 0.0.0.0
 	{
 		errorCase(!domain);
 		sockLookup(ip, domain);
 
-		if(!*(uint *)ip)
+		if (!*(uint *)ip)
 		{
 			cout("Warning: UDP send ip == 0.0.0.0\n");
 			return;
@@ -71,7 +71,7 @@ void sockUDPSendBlock(int sock, uchar ip[4], char *domain, uint portno, uchar *d
 
 	retval = sendto(sock, data, dataSize, 0, (struct sockaddr *)&sa, sizeof(sa));
 
-	if(retval != dataSize)
+	if (retval != dataSize)
 		cout("Warning: UDP sendto() %u -> %u\n", dataSize, retval);
 }
 void sockUDPSend(int sock, uchar ip[4], char *domain, uint portno, autoBlock_t *block)
@@ -84,7 +84,7 @@ uint sockUDPRecvBlock(int sock, uint millis, uchar *buff, uint buffSize)
 
 	retval = SockTransmit(sock, buff, buffSize, millis, 0);
 
-	if(retval == -1) // ? 空データ（空のUDPパケット？）を受信したとき -1 になるっぽい。
+	if (retval == -1) // ? 空データ（空のUDPパケット？）を受信したとき -1 になるっぽい。
 		return 0;
 
 	errorCase(!m_isRange(retval, 0, buffSize));
@@ -95,12 +95,12 @@ autoBlock_t *sockUDPRecv(int sock, uint millis)
 	static uchar *buff;
 	uint recvSize;
 
-	if(!buff)
+	if (!buff)
 		buff = memAlloc(RECV_BUFF_SIZE);
 
 	recvSize = sockUDPRecvBlock(sock, millis, buff, RECV_BUFF_SIZE);
 
-	if(recvSize)
+	if (recvSize)
 		return recreateBlock(buff, recvSize);
 
 	return NULL;

@@ -6,7 +6,7 @@ static char *GetCacheDir(void)
 {
 	static char *dir;
 
-	if(!dir)
+	if (!dir)
 	{
 		char *tmpDir = "C:\\Factory\\tmp";
 //		char *tmpDir = "C:\\tmp";
@@ -39,7 +39,7 @@ static char *GetOrSetCache_NoLock(char *sHPath, char *sHInfo, char *sHash)
 	{
 		static int oncePerProc;
 
-		if(!oncePerProc)
+		if (!oncePerProc)
 		{
 			oncePerProc = 1;
 
@@ -50,14 +50,14 @@ static char *GetOrSetCache_NoLock(char *sHPath, char *sHInfo, char *sHash)
 				time_t currTime = time(NULL);
 				int cancel = 0;
 
-				if(existFile(EXPIRE_TIME_FILE))
+				if (existFile(EXPIRE_TIME_FILE))
 				{
 					time_t expireTime = (time_t)toValue64_x(readText_b(EXPIRE_TIME_FILE));
 
-					if(currTime < expireTime)
+					if (currTime < expireTime)
 						cancel = 1;
 				}
-				if(!cancel)
+				if (!cancel)
 				{
 					time_t nextExpireTime = currTime + PERIOD_SEC;
 
@@ -79,7 +79,7 @@ static char *GetOrSetCache_NoLock(char *sHPath, char *sHInfo, char *sHash)
 	dirHP = combine(dirG4, sHPath);
 	dirHI = combine(dirHP, sHInfo);
 
-	if(sHash) // Set
+	if (sHash) // Set
 	{
 		char *symDir = combine(dirHI, sHash);
 
@@ -95,7 +95,7 @@ static char *GetOrSetCache_NoLock(char *sHPath, char *sHInfo, char *sHash)
 
 		memFree(symDir);
 	}
-	else if(existDir(dirHI)) // Get
+	else if (existDir(dirHI)) // Get
 	{
 		autoList_t *symDirs = lsDirs(dirHI);
 
@@ -141,7 +141,7 @@ char *md5Cache_makeHexHashFile(char *file)
 	sHInfo = md5_makeHexHashLine(sInfo);
 	sHash = GetOrSetCache(sHPath, sHInfo, NULL);
 
-	if(!sHash)
+	if (!sHash)
 	{
 		sHash = md5_makeHexHashFile(file);
 		GetOrSetCache(sHPath, sHInfo, sHash);

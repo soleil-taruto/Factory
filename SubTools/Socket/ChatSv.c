@@ -58,7 +58,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 	command = refLine(lines, 0);
 
-	if(!strcmp(command, "REMARK"))
+	if (!strcmp(command, "REMARK"))
 	{
 		char *userName = refLine(lines, 1);
 		char *message = refLine(lines, 2);
@@ -90,7 +90,7 @@ static int Perform(char *prmFile, char *ansFile)
 		// userName
 		// message
 	}
-	else if(!strcmp(command, "TIME-LINE"))
+	else if (!strcmp(command, "TIME-LINE"))
 	{
 		char *bgnStmp = refLine(lines, 1);
 		char *endStmp = refLine(lines, 2);
@@ -105,7 +105,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 		foreach(TimeLine, remark, remark_index)
 		{
-			if(strcmp(bgnStmp, remark->Stamp) < 0 && strcmp(remark->Stamp, endStmp) < 0) // ? bgnStmp ` endStmp, (bgnStmp, endStmp) ‚ÍŠÜ‚Ü‚È‚¢B
+			if (strcmp(bgnStmp, remark->Stamp) < 0 && strcmp(remark->Stamp, endStmp) < 0) // ? bgnStmp ` endStmp, (bgnStmp, endStmp) ‚ÍŠÜ‚Ü‚È‚¢B
 			{
 				cout("+ %s (%s) %s\n", remark->Stamp, remark->UserName, remark->Message);
 
@@ -123,7 +123,7 @@ static int Perform(char *prmFile, char *ansFile)
 		memFree(bgnStmp);
 		memFree(endStmp);
 	}
-	else if(!strcmp(command, "HEARTBEAT"))
+	else if (!strcmp(command, "HEARTBEAT"))
 	{
 		char *userName = refLine(lines, 1);
 		Member_t *member;
@@ -134,10 +134,10 @@ static int Perform(char *prmFile, char *ansFile)
 		userName = lineToJDocMax(userName, 0, USERNAME_LENMAX);
 
 		foreach(Members, member, index)
-			if(!strcmp(member->UserName, userName))
+			if (!strcmp(member->UserName, userName))
 				break;
 
-		if(!member)
+		if (!member)
 		{
 			cout("LOGIN MEMBER [%s]\n", userName);
 
@@ -151,7 +151,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 		foreach(Members, member, index)
 		{
-			if(member->LastBeatTime + 60 < currTime) // ? timeout
+			if (member->LastBeatTime + 60 < currTime) // ? timeout
 			{
 				cout("TIMEOUT MEMBER [%s]\n", member->UserName);
 
@@ -170,7 +170,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 			foreach(Members, member, index)
 			{
-				if(member->LastBeatTime < oldestTime)
+				if (member->LastBeatTime < oldestTime)
 				{
 					oldestPos = index;
 					oldestTime = member->LastBeatTime;
@@ -199,7 +199,7 @@ static int Perform(char *prmFile, char *ansFile)
 		writeBinary_cx(ansFile, buff);
 		memFree(userName);
 	}
-	else if(!strcmp(command, "LOGOUT"))
+	else if (!strcmp(command, "LOGOUT"))
 	{
 		char *userName = refLine(lines, 1);
 		Member_t *member;
@@ -211,7 +211,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 		foreach(Members, member, index)
 		{
-			if(!strcmp(member->UserName, userName))
+			if (!strcmp(member->UserName, userName))
 			{
 				cout("LOGOUT OK\n");
 
@@ -234,11 +234,11 @@ static uint StopEv;
 
 static int Idle(void)
 {
-	if(handleWaitForMillis(StopEv, 0))
+	if (handleWaitForMillis(StopEv, 0))
 		return 0;
 
 	while(hasKey())
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 			return 0;
 
 	return 1;
@@ -248,15 +248,15 @@ int main(int argc, char **argv)
 	int stopFlag = 0;
 	uint portno = 59998;
 
-	if(argIs("/S"))
+	if (argIs("/S"))
 		stopFlag = 1;
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 		portno = toValue(nextArg());
 
 	StopEvName = xcout(STOP_EV_UUID "_%u", portno);
 
-	if(stopFlag)
+	if (stopFlag)
 	{
 		LOGPOS();
 		eventWakeup(StopEvName);

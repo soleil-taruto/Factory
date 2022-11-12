@@ -45,13 +45,13 @@ static int IsMatchBmpArea(autoTable_t *bmp, uint l, uint t)
 	uint y;
 
 	for(i = 0; i < FCDNum; i++)
-		if(!IsSameDot(getTableCell(bmp, l + FCDXs[i], t + FCDYs[i]), getTableCell(TrgBmp, FCDXs[i], FCDYs[i])))
+		if (!IsSameDot(getTableCell(bmp, l + FCDXs[i], t + FCDYs[i]), getTableCell(TrgBmp, FCDXs[i], FCDYs[i])))
 			return 0;
 
 	for(x = 0; x < TrgBmp_W; x++)
 	for(y = 0; y < TrgBmp_H; y++)
 	{
-		if(!IsSameDot(getTableCell(bmp, l + x, t + y), getTableCell(TrgBmp, x, y)))
+		if (!IsSameDot(getTableCell(bmp, l + x, t + y), getTableCell(TrgBmp, x, y)))
 			return 0;
 	}
 	return 1;
@@ -66,7 +66,7 @@ static int FindBmp_Bmp(autoTable_t *bmp)
 	for(x = 0; x + TrgBmp_W <= w; x++)
 	for(y = 0; y + TrgBmp_H <= h; y++)
 	{
-		if(IsMatchBmpArea(bmp, x, y))
+		if (IsMatchBmpArea(bmp, x, y))
 			return 1;
 	}
 	return 0;
@@ -97,7 +97,7 @@ static int FindBmpOnScreen(void)
 
 	foreach(bmps, bmp, index)
 	{
-		if(FindBmp_Screen(bmp))
+		if (FindBmp_Screen(bmp))
 		{
 			ret = 1;
 			break;
@@ -121,7 +121,7 @@ static void InitFCD(void)
 		uint i;
 
 		for(i = 0; i < FCDNum; i++)
-			if(IsSameDot(getTableCell(TrgBmp, FCDXs[i], FCDYs[i]), getTableCell(TrgBmp, x, y)))
+			if (IsSameDot(getTableCell(TrgBmp, FCDXs[i], FCDYs[i]), getTableCell(TrgBmp, x, y)))
 				goto nextLoop;
 
 		cout("FCDX_Ys: %u, %u\n", x, y);
@@ -130,7 +130,7 @@ static void InitFCD(void)
 		FCDYs[FCDNum] = y;
 		FCDNum++;
 
-		if(FCDNUMMAX <= FCDNum)
+		if (FCDNUMMAX <= FCDNum)
 			goto endLoop;
 
 	nextLoop:;
@@ -142,12 +142,12 @@ int main(int argc, char **argv)
 	int waitLoopMode = 0;
 
 readArgs:
-	if(argIs("/W"))
+	if (argIs("/W"))
 	{
 		waitLoopMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/M"))
+	if (argIs("/M"))
 	{
 		ColorLvMargin = toValue(nextArg());
 		goto readArgs;
@@ -161,7 +161,7 @@ readArgs:
 
 	InitFCD();
 
-	if(waitLoopMode)
+	if (waitLoopMode)
 	{
 		uint sec = 0;
 
@@ -169,12 +169,12 @@ readArgs:
 
 		while(!FindBmpOnScreen())
 		{
-			if(sec < 20)
+			if (sec < 20)
 				sec++;
 
 			LOGPOS();
 
-			if(waitKey(sec * 1000) == 0x1b)
+			if (waitKey(sec * 1000) == 0x1b)
 			{
 				cout("ESCAPE key pressed.\n");
 				termination(1);

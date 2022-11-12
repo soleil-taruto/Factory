@@ -33,14 +33,14 @@ char *incrementColumnDigits(char *column, char *digits) // ret: strr(column)
 
 		dp = strchr(digits, d);
 
-		if(!dp)
+		if (!dp)
 		{
-			if(!p[1])
+			if (!p[1])
 				column = addChar(column, COLDIG_DLMTR); // column の最後に digits が無い -> column と digits のデリミタを付加
 
 			break;
 		}
-		if(dp < enddp)
+		if (dp < enddp)
 		{
 			*p = dp[1];
 			goto endfunc;
@@ -50,7 +50,7 @@ char *incrementColumnDigits(char *column, char *digits) // ret: strr(column)
 	column = addChar(column, digits[0]);
 
 	for(p = strchr(column, '\0') - 1; column < p; p--)
-		if(p[-1] != digits[0])
+		if (p[-1] != digits[0])
 			break;
 
 	*p = digits[1];
@@ -107,7 +107,7 @@ char *toCreatablePath(char *path, uint faultCountMax) // ret: strr(path)
 */
 char *toCreatableTildaPath(char *path, uint faultCountMax) // ret: strr(path)
 {
-	if(existPath(path))
+	if (existPath(path))
 	{
 		{
 			char *ext = strx(getExtWithDot(path));
@@ -192,13 +192,13 @@ autoBlock_t *makeBlockHexLine_x(char *line)
 autoBlock_t *c_makeBlockHexLine(char *line)
 {
 	static autoBlock_t *stock;
-	if(stock) releaseAutoBlock(stock);
+	if (stock) releaseAutoBlock(stock);
 	return stock = makeBlockHexLine(line);
 }
 autoBlock_t *c_makeBlockHexLine_x(char *line)
 {
 	static autoBlock_t *stock;
-	if(stock) releaseAutoBlock(stock);
+	if (stock) releaseAutoBlock(stock);
 	return stock = makeBlockHexLine_x(line);
 }
 
@@ -210,7 +210,7 @@ void line2csym_ext(char *line, char *extra)
 
 	errorCase(!*line); // "" 不可
 
-	if(!altchrs)
+	if (!altchrs)
 	{
 		altchrs = strx("");
 
@@ -227,7 +227,7 @@ void line2csym_ext(char *line, char *extra)
 	{
 		chr = *p;
 
-		if('0' <= chr && chr <= '9' || 'A' <= chr && chr <= 'Z' || 'a' <= chr && chr <= 'z' || chr == '_' || extra && strchr(extra, chr))
+		if ('0' <= chr && chr <= '9' || 'A' <= chr && chr <= 'Z' || 'a' <= chr && chr <= 'z' || chr == '_' || extra && strchr(extra, chr))
 		{
 			// noop
 		}
@@ -278,7 +278,7 @@ char *toPrintLine(autoBlock_t *block, int insRet)
 		// ? (LF || CR + not LF) && 終端ではない。
 		doInsRet = insRet && (chr == '\n' || chr == '\r' && refByte(block, index + 1) != '\n') && index + 1 < getSize(block);
 
-		if(0x20 <= chr && chr <= 0x7e || 0xa1 <= chr && chr <= 0xdf)
+		if (0x20 <= chr && chr <= 0x7e || 0xa1 <= chr && chr <= 0xdf)
 		{
 			// noop
 		}
@@ -288,7 +288,7 @@ char *toPrintLine(autoBlock_t *block, int insRet)
 		}
 		addByte(lineBuff, chr);
 
-		if(doInsRet)
+		if (doInsRet)
 			addByte(lineBuff, '\n');
 	}
 	return unbindBlock2Line(lineBuff);
@@ -325,11 +325,11 @@ void line2JLine(char *line, int okJpn, int okRet, int okTab, int okSpc)
 	{
 //LOGPOS(); // test
 //cout("%02x%02x\n", p[0], p[1]); // test
-//		if(_ismbblead(p[0]) && _ismbbtrail(p[1]))
-		if(isJChar(p[0] << 8 | p[1]))
+//		if (_ismbblead(p[0]) && _ismbbtrail(p[1]))
+		if (isJChar(p[0] << 8 | p[1]))
 		{
 //LOGPOS(); // test
-			if(!okJpn)
+			if (!okJpn)
 			{
 //LOGPOS(); // test
 				p[0] = (p[0] & 0x1f) | 0xc0;
@@ -338,7 +338,7 @@ void line2JLine(char *line, int okJpn, int okRet, int okTab, int okSpc)
 //LOGPOS(); // test
 			p++;
 		}
-		else if(0xf0 <= p[0] && p[1] && okJpn) // 0xf000 - 0xffff -> 外字と見なす。本当の外字の範囲は F040 ～ F9FF らしい。
+		else if (0xf0 <= p[0] && p[1] && okJpn) // 0xf000 - 0xffff -> 外字と見なす。本当の外字の範囲は F040 ～ F9FF らしい。
 		{
 			const char defMBChr[] = "外";
 
@@ -348,33 +348,33 @@ void line2JLine(char *line, int okJpn, int okRet, int okTab, int okSpc)
 			p[1] = defMBChr[1];
 			p++;
 		}
-		else if(*p == '\r') // CR-LF または CR のみを LF と見なす。
+		else if (*p == '\r') // CR-LF または CR のみを LF と見なす。
 		{
-			if(p[1] == '\n') // LF
+			if (p[1] == '\n') // LF
 			{
 				copyLine(p + 1, p + 2);
 			}
 			*p = '\n';
 			goto found_lf;
 		}
-		else if(*p == '\n') // LF
+		else if (*p == '\n') // LF
 		{
 		found_lf:
-			if(!okRet) { goto enc_char; }
+			if (!okRet) { goto enc_char; }
 		}
-		else if(*p == '\t')
+		else if (*p == '\t')
 		{
-			if(!okTab) { goto enc_char; }
+			if (!okTab) { goto enc_char; }
 		}
-		else if(*p == '\x20')
+		else if (*p == '\x20')
 		{
-			if(!okSpc) { goto enc_char; }
+			if (!okSpc) { goto enc_char; }
 		}
 		else
 		{
 			int chr = *p;
 
-			if(0x21 <= chr && chr <= 0x7e || 0xa1 <= chr && chr <= 0xdf)
+			if (0x21 <= chr && chr <= 0x7e || 0xa1 <= chr && chr <= 0xdf)
 			{
 				// noop
 			}
@@ -434,11 +434,11 @@ char *lineToJDoc(char *line, int okRet)
 	releaseDim(lines, 1);
 
 	/*
-	if(!*line)
+	if (!*line)
 		line = addChar(line, DEFCHR);
 	*/
 
-	if(!okRet)
+	if (!okRet)
 		replaceChar(line, '\n', ' ');
 
 	return line;
@@ -462,7 +462,7 @@ static autoList_t *GetWindowsReservedNodeList(void)
 	static autoList_t *nodes;
 	uint i;
 
-	if(nodes)
+	if (nodes)
 		goto endfunc;
 
 	nodes = newList();
@@ -511,7 +511,7 @@ char *lineToFairLocalPath(char *line, uint dirSize)
 
 	line = strx(line);
 
-	if(lenmax < strlen(line))
+	if (lenmax < strlen(line))
 	{
 		line[lenmax] = '\0';
 	}
@@ -523,13 +523,13 @@ char *lineToFairLocalPath(char *line, uint dirSize)
 	{
 		trimEdge(node, ' ');
 
-		if(!index && findLineCase(winResNodes, node, 1) < getCount(winResNodes))
+		if (!index && findLineCase(winResNodes, node, 1) < getCount(winResNodes))
 		{
 			*node = L2FLP_DEFCHR;
 		}
 		for(p = node; *p; p = mbsNext(p))
 		{
-			if(strchr(L2FLP_NGCHRS, *p))
+			if (strchr(L2FLP_NGCHRS, *p))
 			{
 				*p = L2FLP_DEFCHR;
 			}
@@ -538,13 +538,13 @@ char *lineToFairLocalPath(char *line, uint dirSize)
 	line = untokenize(nodes, ".");
 	releaseDim(nodes, 1);
 
-	if(!*line)
+	if (!*line)
 	{
 		line = addChar(line, L2FLP_DEFCHR);
 	}
 	p = strchr(line, '\0') - 1;
 
-	if(*p == '.')
+	if (*p == '.')
 	{
 		*p = L2FLP_DEFCHR;
 	}
@@ -586,7 +586,7 @@ char *lineToFairRelPath(char *line, uint dirSize)
 	line = untokenize(tokens, "\\");
 	releaseDim(tokens, 1);
 
-	if(!*line || PATH_SIZE < dirSize + strlen(line))
+	if (!*line || PATH_SIZE < dirSize + strlen(line))
 		line = lineToFairLocalPath_x(line, dirSize);
 
 	return line;
@@ -615,16 +615,16 @@ int isFairHrefPath(char *path, int pathDelim) // pathDelim: "/\\"
 	char *token;
 	uint index;
 
-	if(1000 < strlen(path)) // ? いくらなんでも長すぎる。
+	if (1000 < strlen(path)) // ? いくらなんでも長すぎる。
 		return 0;
 
-	if(pathDelim == '/')
+	if (pathDelim == '/')
 	{
 		tokens = tokenize(path, '/');
 	}
-	else if(pathDelim == '\\')
+	else if (pathDelim == '\\')
 	{
-		if(strchr(path, '/'))
+		if (strchr(path, '/'))
 			return 0;
 
 		tokens = tokenizeYen(path);
@@ -633,7 +633,7 @@ int isFairHrefPath(char *path, int pathDelim) // pathDelim: "/\\"
 		error();
 
 	foreach(tokens, token, index)
-		if(strcmp(token, ".") && strcmp(token, "..") && !isFairLocalPath(token, 0))
+		if (strcmp(token, ".") && strcmp(token, "..") && !isFairLocalPath(token, 0))
 			break;
 
 	releaseDim(tokens, 1);
@@ -652,12 +652,12 @@ char *toFairFullPathFltr(char *path) // path が不正な場合は error();
 
 	path = strx(path);
 
-	if(lineExp("<1,AZaz>:<>", path)) // ? ドライブ名付き
+	if (lineExp("<1,AZaz>:<>", path)) // ? ドライブ名付き
 	{
 		drvchr = path[0];
 		eraseLine(path, 2);
 
-		if(!*path)
+		if (!*path)
 			path = addChar(path, '.'); // "" -> "."
 	}
 	else // ? ドライブ名無し
@@ -668,7 +668,7 @@ char *toFairFullPathFltr(char *path) // path が不正な場合は error();
 		memFree(wkcwd);
 	}
 
-	if(*path != '\\') // ? 相対パス
+	if (*path != '\\') // ? 相対パス
 	{
 		char *wkcwd;
 
@@ -676,7 +676,7 @@ char *toFairFullPathFltr(char *path) // path が不正な場合は error();
 		wkcwd = getCwd(); // drvchr が { 存在しない || 準備できていない } -> ここで error();
 		unaddCwd();
 
-		if(!isAbsRootDir(wkcwd))
+		if (!isAbsRootDir(wkcwd))
 		{
 			path = insertChar(path, 0, '\\');
 			path = insertLine(path, 0, wkcwd + 3);
@@ -686,7 +686,7 @@ char *toFairFullPathFltr(char *path) // path が不正な場合は error();
 	else
 		eraseChar(path);
 
-	if(*path)
+	if (*path)
 	{
 		escapeYen(path);
 		ptkns = tokenize(path, '/');
@@ -698,11 +698,11 @@ char *toFairFullPathFltr(char *path) // path が不正な場合は error();
 	{
 		ptkn = getLine(ptkns, ptknidx);
 
-		if(!strcmp(ptkn, "."))
+		if (!strcmp(ptkn, "."))
 		{
 			memFree((char *)desertElement(ptkns, ptknidx));
 		}
-		else if(!strcmp(ptkn, ".."))
+		else if (!strcmp(ptkn, ".."))
 		{
 			errorCase(!ptknidx);
 
@@ -716,7 +716,7 @@ char *toFairFullPathFltr(char *path) // path が不正な場合は error();
 	}
 	foreach(ptkns, ptkn, ptknidx)
 	{
-		if(!isFairLocalPath(ptkn, 0))
+		if (!isFairLocalPath(ptkn, 0))
 		{
 			cout("Incorrected %u-th path token. \"%s\"\n", ptknidx + 1, lineToFairLocalPath(ptkn, 0));
 			error();
@@ -749,10 +749,10 @@ void autoIndent(autoList_t *lines)
 	for(; ; )
 	{
 		foreach(lines, line, index)
-			if(strchr(line, '\t'))
+			if (strchr(line, '\t'))
 				break;
 
-		if(!line)
+		if (!line)
 			break;
 
 		maxTabIndent = 0;
@@ -761,7 +761,7 @@ void autoIndent(autoList_t *lines)
 		{
 			p = strchr(line, '\t');
 
-			if(p)
+			if (p)
 			{
 				tabIndent = (uint)p - (uint)line;
 				maxTabIndent = m_max(maxTabIndent, tabIndent);
@@ -771,7 +771,7 @@ void autoIndent(autoList_t *lines)
 		{
 			p = strchr(line, '\t');
 
-			if(p)
+			if (p)
 			{
 				*p = ' ';
 
@@ -795,7 +795,7 @@ void autoLeftIndent(autoList_t *lines, uint span)
 	foreach(lines, line, index)
 	{
 		for(p = line; *p; p++)
-			if(*p != '\t')
+			if (*p != '\t')
 				break;
 
 		tabnum = (uint)p - (uint)line;
@@ -810,12 +810,12 @@ char *constrfltr(char *str)
 	static autoList_t *strtbl;
 	uint index;
 
-	if(!strtbl)
+	if (!strtbl)
 		strtbl = newList();
 
 	index = findLine(strtbl, str);
 
-	if(index == getCount(strtbl))
+	if (index == getCount(strtbl))
 		addElement(strtbl, (uint)strx(str));
 
 	return getLine(strtbl, index);
@@ -891,7 +891,7 @@ autoBlock_t *encodeBase64(autoBlock_t *src)
 	}
 	remaining = getSize(src) - index;
 
-	if(remaining == 2)
+	if (remaining == 2)
 	{
 		value =
 			getByte(src, index + 0) << 8 |
@@ -908,7 +908,7 @@ autoBlock_t *encodeBase64(autoBlock_t *src)
 		addByte(dest, BASE64_CHARS[value >> 12 & 63]);
 		addByte(dest, BASE64_PAD);
 	}
-	else if(remaining == 1)
+	else if (remaining == 1)
 	{
 		value = getByte(src, index);
 
@@ -958,7 +958,7 @@ autoBlock_t *decodeBase64(autoBlock_t *src)
 	}
 	remaining = src_size - index;
 
-	if(remaining == 3)
+	if (remaining == 3)
 	{
 		b1 = getByte(src, index + 0);
 		b2 = getByte(src, index + 1);
@@ -979,7 +979,7 @@ autoBlock_t *decodeBase64(autoBlock_t *src)
 		addByte(dest, value >> 8 & 0xff);
 		addByte(dest, value >> 0 & 0xff);
 	}
-	else if(remaining == 2)
+	else if (remaining == 2)
 	{
 		b1 = getByte(src, index + 0);
 		b2 = getByte(src, index + 1);

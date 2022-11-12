@@ -12,7 +12,7 @@ char *GetTmp(void)
 {
 	static char *dir;
 
-	if(!dir)
+	if (!dir)
 		dir = strx(getEnvLine("TMP"));
 
 	return dir;

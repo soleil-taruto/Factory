@@ -134,21 +134,21 @@ static void ChannelTh(uint prm)
 		{
 			for(index = 0; ; )
 			{
-				if(!KeepTheServer)
+				if (!KeepTheServer)
 					goto endLoop;
 
-				if(i->SendSockDead)
+				if (i->SendSockDead)
 					goto endLoop;
 
-				if(index == getSize(buffBlock))
+				if (index == getSize(buffBlock))
 					break;
 
-				if(SockSendISequ(i->SendSock, buffBlock, &index, 1000) == -1)
+				if (SockSendISequ(i->SendSock, buffBlock, &index, 1000) == -1)
 					goto endLoop;
 			}
 			setSize(buffBlock, 0);
 
-			if(SockRecvSequ(i->RecvSock, buffBlock, 1000) == -1)
+			if (SockRecvSequ(i->RecvSock, buffBlock, 1000) == -1)
 			{
 				*i->OtherSideSendSockDead = 1;
 				break;
@@ -211,11 +211,11 @@ static void WaitClient(int sock, char *name, autoBlock_t *blockSend)
 		inner_critical();
 		cout("D");
 
-		if(i->Connected)
+		if (i->Connected)
 			break;
 	}
 	cout("d");
-	if(!i->Connected)
+	if (!i->Connected)
 	{
 		removeElement(WaitInfos, (uint)i);
 		releaseAutoBlock(i->SendBuffer);
@@ -249,7 +249,7 @@ static void PerformTh(int sock, char *strip)
 
 	cout("Ú‘±: %d\n", sock);
 
-	if(ServerMode)
+	if (ServerMode)
 	{
 		SockStream_t *ss = CreateSockStream(sock, 60);
 		TrackInfo_t *i;
@@ -258,7 +258,7 @@ static void PerformTh(int sock, char *strip)
 
 		name = SockRecvLine(ss, TRACKNAME_LENMAX);
 
-		if(!strcmp(name, REFLUX_TRACKNAME))
+		if (!strcmp(name, REFLUX_TRACKNAME))
 		{
 			cout("’†Œp‰ñû\n");
 			refluxMode = 1;
@@ -276,15 +276,15 @@ static void PerformTh(int sock, char *strip)
 			memFree(p_name);
 		}
 
-		if(refluxMode)
+		if (refluxMode)
 		{
 			WaitInfo_t *wi;
 
 			foreach(WaitInfos, wi, index)
-				if(!strcmp(wi->Name, name))
+				if (!strcmp(wi->Name, name))
 					break;
 
-			if(wi)
+			if (wi)
 			{
 				removeElement(WaitInfos, (uint)wi);
 
@@ -306,10 +306,10 @@ static void PerformTh(int sock, char *strip)
 			goto endConnect;
 		}
 		foreach(TrackInfos, i, index)
-			if(!strcmp(name, i->Name))
+			if (!strcmp(name, i->Name))
 				break;
 
-		if(i == NULL)
+		if (i == NULL)
 		{
 			WaitClient(sock, name, blockSend);
 			goto endConnect;
@@ -338,7 +338,7 @@ static void PerformTh(int sock, char *strip)
 
 	cout("“]‘—æÚ‘±: %d\n", fwdSock);
 
-	if(fwdSock == -1)
+	if (fwdSock == -1)
 		goto endConnect;
 
 	channels[0].SendBuffer = blockSend;
@@ -395,11 +395,11 @@ static void RefluxPerform(uint connectmax)
 	{
 		for(; ; )
 		{
-			if(getCount(thhdls) < connectmax)
+			if (getCount(thhdls) < connectmax)
 			{
 				int sock = sockConnect(ip, Domain, Port);
 
-				if(sock != -1) // ? Ú‘±
+				if (sock != -1) // ? Ú‘±
 				{
 					SockStream_t *ss = CreateSockStream(sock, 60);
 					uchar signal[1];
@@ -411,11 +411,11 @@ static void RefluxPerform(uint connectmax)
 
 					retval = SockTransmit(sock, signal, 1, REFLUX_POLLING_CYCLE * 3, 0); // I‚Å2‰ñ‘Ò‚Â‚Ì‚ÅA3‰ñ•ª‘Ò‚Ä‚Î\•ª‚Å‚µ‚åB
 
-					if(retval == 1 && signal[0] == REFLUX_CONNECTED_SIGNAL)
+					if (retval == 1 && signal[0] == REFLUX_CONNECTED_SIGNAL)
 					{
 						int fwdSock = sockConnect(fwdip, ForwardDomain, ForwardPort);
 
-						if(fwdSock != -1) // ? Ú‘±
+						if (fwdSock != -1) // ? Ú‘±
 						{
 							int *socks = (int *)memAlloc(2 * sizeof(int));
 
@@ -440,7 +440,7 @@ static void RefluxPerform(uint connectmax)
 
 			while(hasKey())
 			{
-				if(getKey() == 0x1b)
+				if (getKey() == 0x1b)
 				{
 					KeepTheServer = 0;
 					goto endLoop;
@@ -468,7 +468,7 @@ static int IdleTh(void)
 {
 	while(hasKey())
 	{
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 		{
 			KeepTheServer = 0;
 			return 0;
@@ -492,34 +492,34 @@ int main(int argc, char **argv)
 	WaitInfos = newList();
 
 readArgs:
-	if(argIs("/S")) // Server mode
+	if (argIs("/S")) // Server mode
 	{
 		ServerMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/R")) // Reflux mode
+	if (argIs("/R")) // Reflux mode
 	{
 		RefluxMode = 1;
 		goto readArgs;
 	}
 
-	if(argIs("/FD")) // Forward Domain
+	if (argIs("/FD")) // Forward Domain
 	{
 		ForwardDomain = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/FP")) // Forward Port
+	if (argIs("/FP")) // Forward Port
 	{
 		ForwardPort = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/N")) // Name of track
+	if (argIs("/N")) // Name of track
 	{
 		TrackName = nextArg();
 		goto readArgs;
 	}
 
-	if(argIs("/F")) // Forward
+	if (argIs("/F")) // Forward
 	{
 		TrackInfo_t *i = (TrackInfo_t *)memAlloc(sizeof(TrackInfo_t));
 
@@ -535,17 +535,17 @@ readArgs:
 		goto readArgs;
 	}
 
-	if(argIs("/D")) // Domain
+	if (argIs("/D")) // Domain
 	{
 		Domain = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/P")) // Port
+	if (argIs("/P")) // Port
 	{
 		Port = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/C")) // Connect max
+	if (argIs("/C")) // Connect max
 	{
 		connectmax = toValue(nextArg());
 		goto readArgs;
@@ -553,7 +553,7 @@ readArgs:
 
 	errorCase(ServerMode && RefluxMode);
 
-	if(RefluxMode)
+	if (RefluxMode)
 	{
 		cout("‹t—¬ƒ‚[ƒh\n");
 		cout("“]‘—I: %s\n", ForwardDomain);
@@ -566,7 +566,7 @@ readArgs:
 		RefluxPerform(connectmax);
 		return;
 	}
-	if(!ServerMode)
+	if (!ServerMode)
 	{
 		cout("ƒNƒ‰ƒCƒAƒ“ƒgƒ‚[ƒh\n");
 		cout("“]‘—I: %s\n", ForwardDomain);

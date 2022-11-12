@@ -18,7 +18,7 @@ static char *GetContentType(void)
 
 	foreach(HttpDat.H_Keys, key, index)
 	{
-		if(!_stricmp(key, "Content-Type"))
+		if (!_stricmp(key, "Content-Type"))
 		{
 			return getLine(HttpDat.H_Values, index);
 		}

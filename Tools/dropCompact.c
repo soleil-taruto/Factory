@@ -8,7 +8,7 @@ int main(int argc, char **argv)
 {
 	char *path;
 
-	if(argIs("/U"))
+	if (argIs("/U"))
 	{
 		for(; ; )
 		{
@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 
 			path = dropDirFile();
 
-			if(existDir(path))
+			if (existDir(path))
 			{
 				coExecute_x(xcout("Compact.exe /U /S:\"%s\"", path));
 			}
@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 
 			path = dropDirFile();
 
-			if(existDir(path))
+			if (existDir(path))
 			{
 				coExecute_x(xcout("Compact.exe /C /S:\"%s\"", path));
 			}

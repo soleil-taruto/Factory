@@ -54,7 +54,7 @@ UI2048_t UI2048_Add(UI2048_t a, UI2048_t b, UI2048_t ans[2])
 	UI1024_t f[2];
 	UI2048_t tmp[2];
 
-	if(!ans)
+	if (!ans)
 		ans = tmp;
 
 	UI1024_Add(a.L, b.L, c);
@@ -89,7 +89,7 @@ UI2048_t UI2048_Mul(UI2048_t a, UI2048_t b, UI2048_t ans[2])
 	uint i;
 	UI2048_t tmp[2];
 
-	if(!ans)
+	if (!ans)
 		ans = tmp;
 
 	UI1024_Mul(a.L, b.L, c);
@@ -130,12 +130,12 @@ static UI2048_t DivSub(UI2048_t a, UI2048_t b, UI2048_t ans[2], uint reti)
 
 	errorCase(UI2048_IsZero(b));
 
-	if(!ans)
+	if (!ans)
 		ans = tmp;
 
 	ans[0] = UI2048_0();
 
-	if(UI1024_IsZero(b.H))
+	if (UI1024_IsZero(b.H))
 	{
 		{
 			UI2048_t dd;
@@ -173,7 +173,7 @@ static UI2048_t DivSub(UI2048_t a, UI2048_t b, UI2048_t ans[2], uint reti)
 	}
 	else
 	{
-		if(!UI1024_IsFill(b.H))
+		if (!UI1024_IsFill(b.H))
 		{
 			UI1024_t c = UI1024_Add(b.H, UI1024_x(1), NULL);
 
@@ -182,7 +182,7 @@ static UI2048_t DivSub(UI2048_t a, UI2048_t b, UI2048_t ans[2], uint reti)
 				UI1024_t d = UI1024_Div(a.H, c, NULL);
 				UI2048_t dd;
 
-				if(UI1024_IsZero(d))
+				if (UI1024_IsZero(d))
 					break;
 
 				dd.L = d;
@@ -222,7 +222,7 @@ sint UI2048_Comp(UI2048_t a, UI2048_t b)
 {
 	sint ret = UI1024_Comp(a.H, b.H);
 
-	if(!ret)
+	if (!ret)
 		ret = UI1024_Comp(a.L, b.L);
 
 	return ret;

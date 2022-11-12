@@ -38,7 +38,7 @@ static int ProcOneRemFile(char *remFile, autoList_t *outFiles) // ret: ? ’Ç‰Á‚µ‚
 
 	eo = mbs_strchr(text, ChrEnumOpen);
 
-	if(!eo)
+	if (!eo)
 		goto endfunc;
 
 	*eo = '\0';
@@ -51,19 +51,19 @@ static int ProcOneRemFile(char *remFile, autoList_t *outFiles) // ret: ? ’Ç‰Á‚µ‚
 	{
 		errorCase(!*p);
 
-		if(*p == ChrEnumDlmtr && enest == 0)
+		if (*p == ChrEnumDlmtr && enest == 0)
 		{
 			*p = '\0';
 			addElement(tokens, (uint)strx(token));
 			token = p + 1;
 		}
-		else if(*p == ChrEnumOpen)
+		else if (*p == ChrEnumOpen)
 		{
 			enest++;
 		}
-		else if(*p == ChrEnumClose)
+		else if (*p == ChrEnumClose)
 		{
-			if(enest == 0)
+			if (enest == 0)
 			{
 				break;
 			}
@@ -103,7 +103,7 @@ static void ProcRemFiles(void)
 	{
 		char *remFile = getLine(RemFiles, index);
 
-		if(ProcOneRemFile(remFile, RemFiles))
+		if (ProcOneRemFile(remFile, RemFiles))
 		{
 			removeFile(remFile);
 		}
@@ -130,22 +130,22 @@ static void StoreCmpltFiles(void)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/L")) // ’PŒêƒŠƒXƒg‚Ì¶Š‡ŒÊ
+	if (argIs("/L")) // ’PŒêƒŠƒXƒg‚Ì¶Š‡ŒÊ
 	{
 		ChrEnumOpen = nextArg()[0];
 		goto readArgs;
 	}
-	if(argIs("/R")) // ’PŒêƒŠƒXƒg‚Ì‰EŠ‡ŒÊ
+	if (argIs("/R")) // ’PŒêƒŠƒXƒg‚Ì‰EŠ‡ŒÊ
 	{
 		ChrEnumClose = nextArg()[0];
 		goto readArgs;
 	}
-	if(argIs("/D")) // ’PŒêƒŠƒXƒg‚ÌƒfƒŠƒ~ƒ^
+	if (argIs("/D")) // ’PŒêƒŠƒXƒg‚ÌƒfƒŠƒ~ƒ^
 	{
 		ChrEnumDlmtr = nextArg()[0];
 		goto readArgs;
 	}
-	if(argIs("/B")) // o—Íƒtƒ@ƒCƒ‹‚Ìƒx[ƒX–¼
+	if (argIs("/B")) // o—Íƒtƒ@ƒCƒ‹‚Ìƒx[ƒX–¼
 	{
 		OutBasePath = nextArg();
 		goto readArgs;
@@ -169,7 +169,7 @@ readArgs:
 		{
 			char *path = nextArg();
 
-			if(existDir(path))
+			if (existDir(path))
 			{
 				autoList_t *subFiles = lsFiles(path);
 

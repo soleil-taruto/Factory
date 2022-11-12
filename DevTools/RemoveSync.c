@@ -17,7 +17,7 @@ static void SZTEL_ZeroToEmptyLine(autoList_t *lines)
 	uint index;
 
 	foreach(lines, line, index)
-		if(!line)
+		if (!line)
 			setElement(lines, index, (uint)strx(""));
 }
 static void SZTEL_RemoveZeroBracket(autoList_t *lines)
@@ -27,35 +27,35 @@ static void SZTEL_RemoveZeroBracket(autoList_t *lines)
 
 restart:
 	foreach(lines, line, index)
-	if(!line)
+	if (!line)
 	{
 		int removeFlag = 0;
 
-		if(index)
+		if (index)
 		{
 			char *tmp = strx(getLine(lines, index - 1));
 
 			ucTrim(tmp);
 
-			if(!strcmp(tmp, "{"))
+			if (!strcmp(tmp, "{"))
 			{
 				removeFlag = 1;
 			}
 			memFree(tmp);
 		}
-		if(index + 1 < getCount(lines))
+		if (index + 1 < getCount(lines))
 		{
 			char *tmp = strx(getLine(lines, index + 1));
 
 			ucTrim(tmp);
 
-			if(!strcmp(tmp, "}"))
+			if (!strcmp(tmp, "}"))
 			{
 				removeFlag = 1;
 			}
 			memFree(tmp);
 		}
-		if(removeFlag)
+		if (removeFlag)
 		{
 			desertElement(lines, index);
 
@@ -70,7 +70,7 @@ static void SZTEL_SqZeroToZero(autoList_t *lines)
 restart:
 	for(index = 1; index < getCount(lines); index++)
 	{
-		if(
+		if (
 			!getElement(lines, index - 1) &&
 			!getElement(lines, index - 0)
 			)
@@ -95,8 +95,8 @@ static void RemoveAroundEmptyLines(autoList_t *lines)
 restart:
 	foreach(lines, line, index)
 	{
-		if(line && !*line) // ? 空行
-		if(
+		if (line && !*line) // ? 空行
+		if (
 			index && !getElement(lines, index - 1) ||
 			index + 1 < getCount(lines) && !getElement(lines, index + 1)
 			)
@@ -123,7 +123,7 @@ static uint FindEnd(autoList_t *lines, uint index, uint startTabIndent)
 			eraseChar(tLine);
 			tabIndent++;
 		}
-		if(!strcmp(tLine, "// < sync"))
+		if (!strcmp(tLine, "// < sync"))
 		{
 			errorCase(tabIndent != startTabIndent); // ? 開始・終了インデント幅が違う。
 			goto endFunc;
@@ -155,7 +155,7 @@ static void RemoveSync_File(char *file)
 			eraseChar(tLine);
 			tabIndent++;
 		}
-		if(!strcmp(tLine, targTLine))
+		if (!strcmp(tLine, targTLine))
 		{
 			uint end = FindEnd(lines, index + 1, tabIndent);
 
@@ -174,7 +174,7 @@ static void RemoveSync_File(char *file)
 		memFree(targTLine);
 	}
 	foreach(lines, line, index) // SyncDevUsing -- // ^ sync @ xxx
-	if(line)
+	if (line)
 	{
 		char *tLine = strx(line);
 		uint tabIndent = 0;
@@ -185,7 +185,7 @@ static void RemoveSync_File(char *file)
 			eraseChar(tLine);
 			tabIndent++;
 		}
-		if(!strcmp(tLine, targTLine))
+		if (!strcmp(tLine, targTLine))
 		{
 			memFree(line);
 			setElement(lines, index, 0);
@@ -197,7 +197,7 @@ static void RemoveSync_File(char *file)
 		memFree(tLine);
 		memFree(targTLine);
 	}
-	if(modified)
+	if (modified)
 	{
 		cout("> %s\n", file);
 
@@ -205,7 +205,7 @@ static void RemoveSync_File(char *file)
 
 		SqZeroToEmptyLine(lines);
 
-		if(!PseudoMode)
+		if (!PseudoMode)
 		{
 			cout("DELETE\n");
 
@@ -222,7 +222,7 @@ static void RemoveSync(void)
 	uint index;
 
 	foreach(files, file, index)
-	if(findLineCase(TargetExts, getExt(file), 1) < getCount(TargetExts))
+	if (findLineCase(TargetExts, getExt(file), 1) < getCount(TargetExts))
 	{
 		RemoveSync_File(file);
 	}
@@ -248,7 +248,7 @@ int main(int argc, char **argv)
 		cout("RangeName: %s\n", RangeName);
 		cout("続行？\n");
 
-		if(clearGetKey() == 0x1b)
+		if (clearGetKey() == 0x1b)
 			termination(0);
 
 		cout("続行します。\n");

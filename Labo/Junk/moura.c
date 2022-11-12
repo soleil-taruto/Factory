@@ -15,7 +15,7 @@ static double Moura(uint num, double rate)
 		setByte(map, mt19937_rnd(num), 1);
 
 	for(index = 0; index < num; index++)
-		if(getByte(map, index))
+		if (getByte(map, index))
 			count++;
 
 	ansRate = (double)count / num;
@@ -27,7 +27,7 @@ static void MouraTest(uint num, double rate)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/1"))
+	if (argIs("/1"))
 	{
 #if 1
 		MouraTest(10000000, 1.0); // 1/e

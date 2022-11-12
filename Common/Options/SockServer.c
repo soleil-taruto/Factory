@@ -128,36 +128,36 @@ static void ReleaseTransmission(Transmission_t *i)
 	SockReleaseFile(i->AnsFile);
 	SockReleaseBlock(i->AnsAck);
 
-	if(i->UserInfoInited)
+	if (i->UserInfoInited)
 		FuncReleaseUserInfo(i->UserInfo);
 
 	memFree(i);
 }
 static void PerformTransmit(Transmission_t *t, uint waitMillis)
 {
-	if(t->Signature->Counter < t->Signature->BlockSize)
+	if (t->Signature->Counter < t->Signature->BlockSize)
 	{
 		t->Death = SockTransmitBlock(t->Sock, t->Signature, waitMillis, 0) == -1;
 
-		if(t->Death) return;
-		if(t->Signature->Counter < t->Signature->BlockSize) return;
+		if (t->Death) return;
+		if (t->Signature->Counter < t->Signature->BlockSize) return;
 
 		t->Death = memcmp(t->Signature->Block, SOCK_SIGNATURE, t->Signature->BlockSize); // ? 不正なシグネチャ
 
-		if(t->Death) return;
+		if (t->Death) return;
 	}
-	if(t->PrmSize->Counter < t->PrmSize->BlockSize)
+	if (t->PrmSize->Counter < t->PrmSize->BlockSize)
 	{
 		uint64 size;
 
 		t->Death = SockTransmitBlock(t->Sock, t->PrmSize, waitMillis, 0) == -1;
 
-		if(t->Death) return;
-		if(t->PrmSize->Counter < t->PrmSize->BlockSize) return;
+		if (t->Death) return;
+		if (t->PrmSize->Counter < t->PrmSize->BlockSize) return;
 
 		size = blockToValue64(t->PrmSize->Block);
 
-		if(PrmFileSizeMax < size)
+		if (PrmFileSizeMax < size)
 		{
 			cout("+----------------------------------------------+\n");
 			cout("| 受信データファイルサイズが制限を超えています |\n");
@@ -171,23 +171,23 @@ static void PerformTransmit(Transmission_t *t, uint waitMillis)
 		}
 		t->PrmFile->FileSize = size;
 	}
-	if(t->PrmFile->Counter < t->PrmFile->FileSize)
+	if (t->PrmFile->Counter < t->PrmFile->FileSize)
 	{
 		t->Death = SockRecvFile(t->Sock, t->PrmFile, waitMillis) == -1;
 
-		if(t->Death) return;
-		if(t->PrmFile->Counter < t->PrmFile->FileSize) return;
+		if (t->Death) return;
+		if (t->PrmFile->Counter < t->PrmFile->FileSize) return;
 	}
-	if(!t->PerformComplete)
+	if (!t->PerformComplete)
 	{
 		uint64 fileSize;
 
-		if(InterruptMode) // funcPerform() 再帰呼び出し防止
+		if (InterruptMode) // funcPerform() 再帰呼び出し防止
 			return;
 
 		*(uint *)sockClientIp = *(uint *)t->ClientIp;
 
-		if(FuncPerform(t->PrmFile->File, t->AnsFile->File) == 0) // ? エラーまたは失敗
+		if (FuncPerform(t->PrmFile->File, t->AnsFile->File) == 0) // ? エラーまたは失敗
 		{
 			t->Death = 1;
 			return;
@@ -198,26 +198,26 @@ static void PerformTransmit(Transmission_t *t, uint waitMillis)
 		value64ToBlock(t->AnsSize->Block, fileSize);
 		t->AnsFile->FileSize = fileSize;
 	}
-	if(t->AnsSize->Counter < t->AnsSize->BlockSize)
+	if (t->AnsSize->Counter < t->AnsSize->BlockSize)
 	{
 		t->Death = SockTransmitBlock(t->Sock, t->AnsSize, waitMillis, 1) == -1;
 
-		if(t->Death) return;
-		if(t->AnsSize->Counter < t->AnsSize->BlockSize) return;
+		if (t->Death) return;
+		if (t->AnsSize->Counter < t->AnsSize->BlockSize) return;
 	}
-	if(t->AnsFile->Counter < t->AnsFile->FileSize)
+	if (t->AnsFile->Counter < t->AnsFile->FileSize)
 	{
 		t->Death = SockSendFile(t->Sock, t->AnsFile, waitMillis) == -1;
 
-		if(t->Death) return;
-		if(t->AnsFile->Counter < t->AnsFile->FileSize) return;
+		if (t->Death) return;
+		if (t->AnsFile->Counter < t->AnsFile->FileSize) return;
 	}
-	if(t->AnsAck->Counter < t->AnsAck->Counter)
+	if (t->AnsAck->Counter < t->AnsAck->Counter)
 	{
 		t->Death = SockTransmitBlock(t->Sock, t->AnsAck, waitMillis, 0) == -1; // ここで死んでも正常
 
-		if(t->Death) return;
-		if(t->AnsAck->Counter < t->AnsAck->BlockSize) return;
+		if (t->Death) return;
+		if (t->AnsAck->Counter < t->AnsAck->BlockSize) return;
 	}
 	t->Death = 1;
 }
@@ -228,14 +228,14 @@ static void Transmission(void)
 
 	foreach(Transmissions, t, index)
 	{
-		if(FuncTransmit)
+		if (FuncTransmit)
 		{
 			errorCase(!t);
 
 			*(uint *)sockClientIp = *(uint *)t->ClientIp;
 			sockUserTransmitIndex = index;
 
-			if(!t->UserInfoInited)
+			if (!t->UserInfoInited)
 			{
 				t->UserInfoInited = 1;
 				t->UserInfo = FuncCreateUserInfo();
@@ -244,17 +244,17 @@ static void Transmission(void)
 		}
 		else
 		{
-			if(!t)
+			if (!t)
 				continue; // ここへ到達するケース：切断があってから sockServerPerformInterrupt() から再帰的に呼び出された。
 
 			PerformTransmit(t, index || InterruptMode ? 0 : MILLIS_TIMEOUT_SELECT_SEND_RECV);
 
-			if(t->ConnectedTime + SECOND_TIMEOUT_TRANSMISSION < SockCurrTime)
+			if (t->ConnectedTime + SECOND_TIMEOUT_TRANSMISSION < SockCurrTime)
 			{
 				t->Death = 1;
 			}
 		}
-		if(t->Death)
+		if (t->Death)
 		{
 			ReleaseTransmission(t);
 			setElement(Transmissions, index, 0);
@@ -274,8 +274,8 @@ void sockServerPerformInterrupt(void)
 {
 	uint index = findElement(Transmissions, 0, simpleComp);
 
-	if(index < SSPIConnectMax)
-		if(SockWait(SSPISock, 0, 0)) // ? 接続あり
+	if (index < SSPIConnectMax)
+		if (SockWait(SSPISock, 0, 0)) // ? 接続あり
 			putElement(Transmissions, index, (uint)CreateTransmissionEx(SSPISock));
 
 	InterruptMode = 1; // PerformTransmit() から再帰的に funcPerform を呼び出さないように
@@ -392,20 +392,20 @@ void sockServerEx(int (*funcPerform)(char *, char *),
 
 		SockCurrTime = time(NULL);
 
-		if(funcIdle() == 0) // ? サーバー停止
+		if (funcIdle() == 0) // ? サーバー停止
 			break;
 
 		Transmission();
 		removeZero(Transmissions);
 
-		if(getCount(Transmissions) < connectmax)
+		if (getCount(Transmissions) < connectmax)
 		{
-			if(SockWait(sock, getCount(Transmissions) ? 0 : MILLIS_TIMEOUT_SELECT_ACCEPT, 0)) // ? 接続あり
+			if (SockWait(sock, getCount(Transmissions) ? 0 : MILLIS_TIMEOUT_SELECT_ACCEPT, 0)) // ? 接続あり
 				addElement(Transmissions, (uint)CreateTransmissionEx(sock));
 
 			xcRchd = 0;
 		}
-		else if(!xcRchd)
+		else if (!xcRchd)
 		{
 			cout("Reached the maximum number of connections.\n");
 			xcRchd = 1;

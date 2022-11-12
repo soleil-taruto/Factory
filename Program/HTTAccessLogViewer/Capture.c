@@ -9,7 +9,7 @@ static int OutputAndDelete;
 
 static void AddLogFile(autoList_t *lines, char *logFile)
 {
-	if(existFile(logFile))
+	if (existFile(logFile))
 		addElements_x(lines, readLines(logFile));
 }
 static void RemoveLogFile(char *logFile)
@@ -121,7 +121,7 @@ static void ParseLogLine(char *line)
 
 	q = strchr(p, '\0');
 
-	if(p < q && q[-1] == '"')
+	if (p < q && q[-1] == '"')
 		q--;
 
 	*q = '\0';
@@ -144,7 +144,7 @@ static void ParseLogLine2(char *line)
 
 	q = strchr(p, '\0');
 
-	if(p < q && q[-1] == '"')
+	if (p < q && q[-1] == '"')
 		q--;
 
 	*q = '\0';
@@ -174,25 +174,25 @@ static void CaptureMain(void)
 	{
 		char *line = getLine(lines, index);
 
-		if(m_isdecimal(line[0]))
+		if (m_isdecimal(line[0]))
 		{
 			char *line2 = NULL;
 			char *line3 = NULL;
 
-			if(refLine(lines, index + 1)[0] == 'D')
+			if (refLine(lines, index + 1)[0] == 'D')
 			{
 				line2 = getLine(lines, ++index);
 
-				if(refLine(lines, index + 1)[0] == 'S')
+				if (refLine(lines, index + 1)[0] == 'S')
 					line3 = getLine(lines, ++index);
 			}
 			ClearLogLine();
 			ParseLogLine(line);
 
-			if(line2)
+			if (line2)
 				ParseLogLine2(line2);
 
-			if(line3)
+			if (line3)
 				ParseLogLine3(line3);
 
 			WriteLogLine(fp);
@@ -201,7 +201,7 @@ static void CaptureMain(void)
 	releaseDim(lines, 1);
 	fileClose(fp);
 
-	if(OutputAndDelete)
+	if (OutputAndDelete)
 	{
 		addCwd(HTTDir);
 		{
@@ -216,7 +216,7 @@ int main(int argc, char **argv)
 	uint mtx;
 
 readArgs:
-	if(argIs("/OAD"))
+	if (argIs("/OAD"))
 	{
 		LOGPOS();
 		OutputAndDelete = 1;

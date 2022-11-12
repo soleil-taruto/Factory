@@ -31,13 +31,13 @@ static void MulN(int n) {
 		}
 		bn = b->Next;
 
-		if(!bn) {
-			if(!v) {
+		if (!bn) {
+			if (!v) {
 				break;
 			}
 			bn = (B_t *)calloc(1, sizeof(B_t));
 
-			if(!bn)
+			if (!bn)
 				exit(1);
 
 			b->Next = bn;

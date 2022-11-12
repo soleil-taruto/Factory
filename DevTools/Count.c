@@ -17,14 +17,14 @@ static uint CountLineFromStdin(void)
 	{
 		int chr = readChar(stdin);
 
-		if(chr == '\n')
+		if (chr == '\n')
 		{
 			entFlg = 0;
 			count++;
 		}
-		else if(chr == EOF)
+		else if (chr == EOF)
 		{
-			if(entFlg)
+			if (entFlg)
 				count++;
 
 			break;
@@ -49,22 +49,22 @@ int main(int argc, char **argv)
 {
 	int ignoreSubDir = 0;
 
-	if(argIs("/-S"))
+	if (argIs("/-S"))
 	{
 		ignoreSubDir = 1;
 	}
 
-	if(argIs("/LSS"))
+	if (argIs("/LSS"))
 	{
 		DispCount(GetCountLines_x(readLines(FOUNDLISTFILE)));
 		return;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		char *path = nextArg();
 		autoList_t *lines;
 
-		if(existDir(path))
+		if (existDir(path))
 			lines = (ignoreSubDir ? ls : lss)(path);
 		else
 			lines = readLines(path);

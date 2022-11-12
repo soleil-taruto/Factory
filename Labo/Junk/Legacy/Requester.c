@@ -43,14 +43,14 @@ static int DoLock(void)
 	{
 		cout("MUTEX FAULT!\n");
 
-		if(collectEvents(StopAppEventHandle, 0))
+		if (collectEvents(StopAppEventHandle, 0))
 			return 0;
 	}
 	return 1;
 }
 static int Idle(void)
 {
-	if(collectEvents(StopAppEventHandle, 0))
+	if (collectEvents(StopAppEventHandle, 0))
 	{
 		StopAppEventCaught = 1;
 		return 0;
@@ -61,7 +61,7 @@ static void MainLoop(void)
 {
 	uint ip = 0;
 
-	if(!DoLock())
+	if (!DoLock())
 		return;
 
 	removeFileIfExist(ParamsFile);
@@ -76,14 +76,14 @@ static void MainLoop(void)
 	{
 		collectEvents(StartEventHandle, 3000);
 
-		if(!DoLock())
+		if (!DoLock())
 			break;
 
-		if(existFile(ParamsFile))
+		if (existFile(ParamsFile))
 		{
 			char *ansFile;
 
-			if(Serializer)
+			if (Serializer)
 			{
 				char *wrkFile = makeTempFile(NULL);
 
@@ -99,9 +99,9 @@ static void MainLoop(void)
 			ansFile = sockClient((uchar *)&ip, ServerDomain, ServerPort, ParamsFile, Idle);
 			cout("REQUEST END %p\n", ansFile);
 
-			if(StopAppEventCaught || !DoLock())
+			if (StopAppEventCaught || !DoLock())
 			{
-				if(ansFile)
+				if (ansFile)
 				{
 					removeFile(ansFile);
 					memFree(ansFile);
@@ -110,9 +110,9 @@ static void MainLoop(void)
 			}
 			removeFileIfExist(AnswerFile); // Cleanup (2bs)
 
-			if(ansFile)
+			if (ansFile)
 			{
-				if(Deserializer)
+				if (Deserializer)
 				{
 					Deserializer(ansFile, AnswerFile);
 					removeFile(ansFile);
@@ -131,7 +131,7 @@ static void MainLoop(void)
 	cout("END\n");
 	SockCleanup();
 
-	if(handleWaitForMillis(MutexHandle, 2000))
+	if (handleWaitForMillis(MutexHandle, 2000))
 	{
 		// Cleanup
 		removeFileIfExist(ParamsFile);
@@ -163,25 +163,25 @@ int main(int argc, char **argv)
 	AnswerEventHandle = eventOpen(AnswerEventName);
 	StopAppEventHandle = eventOpen_x(xcout("cerulean.charlotte Factory Requester stop app event object %s %u", c_md5_makeHexHashLine(ServerDomain), ServerPort));
 
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		Serializer = TextFltr;
 		Deserializer = TextFltr;
 	}
-	if(argIs("/TS") || argIs("/TP"))
+	if (argIs("/TS") || argIs("/TP"))
 	{
 		Serializer = TextFltr;
 	}
-	if(argIs("/TD") || argIs("/TA"))
+	if (argIs("/TD") || argIs("/TA"))
 	{
 		Deserializer = TextFltr;
 	}
 
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		eventSet(StopAppEventHandle);
 	}
-	else if(argIs("/1"))
+	else if (argIs("/1"))
 	{
 		error(); // HACK: request once
 	}

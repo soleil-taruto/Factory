@@ -45,7 +45,7 @@ uint runThread(void (*userFunc)(uint), uint userInfo)
 
 	errorCase(!userFunc);
 
-	if(!Infos)
+	if (!Infos)
 		Infos = na_(Info_t, INFO_MAX);
 
 	info = Infos + InfoIndex;
@@ -60,7 +60,7 @@ uint runThread(void (*userFunc)(uint), uint userInfo)
 
 	hdl = (uint)_beginthreadex(0, 0, Perform, info, 0, 0);
 
-	if(hdl == 0) // ? 失敗
+	if (hdl == 0) // ? 失敗
 	{
 		error();
 	}
@@ -78,7 +78,7 @@ void waitThread(uint hdl) // ts_
 }
 int waitThreadEx(uint hdl, uint millis) // ts_ ret: ? 終了した。
 {
-	if(WaitForSingleObject((HANDLE)hdl, millis) != WAIT_TIMEOUT)
+	if (WaitForSingleObject((HANDLE)hdl, millis) != WAIT_TIMEOUT)
 	{
 		critical();
 		{
@@ -96,7 +96,7 @@ void collectDeadThreads(autoList_t *hdls)
 
 	foreach(hdls, hdl, n)
 	{
-		if(waitThreadEx(hdl, 0))
+		if (waitThreadEx(hdl, 0))
 		{
 			setElement(hdls, n, 0);
 		}
@@ -145,7 +145,7 @@ thread_tls static uint InnerLockCountList[INNER_UNLOCK_MAX];
 
 #define CritErrorCase(cond) \
 	do { \
-	if((cond)) { \
+	if ((cond)) { \
 		critical(); \
 		error(); \
 	} \
@@ -162,9 +162,9 @@ static void CritAfterLeave(void)
 
 void critical(void)
 {
-	if(!CritCommonLockCount)
+	if (!CritCommonLockCount)
 	{
-		if(!CritCommonInited) // 遅くとも最初の runThread() 呼び出し前(＝最初のスレッド生成前)に呼ばれる。<- 初期化はクリティカルに行われる。
+		if (!CritCommonInited) // 遅くとも最初の runThread() 呼び出し前(＝最初のスレッド生成前)に呼ばれる。<- 初期化はクリティカルに行われる。
 		{
 			CritCommonInited = 1;
 			initCritical(&CritCommon);
@@ -179,7 +179,7 @@ void uncritical(void)
 
 	CritCommonLockCount--;
 
-	if(!CritCommonLockCount)
+	if (!CritCommonLockCount)
 	{
 		leaveCritical(&CritCommon);
 		CritAfterLeave();
@@ -189,7 +189,7 @@ void inner_uncritical(void)
 {
 	CritErrorCase(INNER_UNLOCK_MAX <= InnerUnlockCount);
 
-	if(CritCommonLockCount)
+	if (CritCommonLockCount)
 	{
 		leaveCritical(&CritCommon);
 		CritAfterLeave();
@@ -206,7 +206,7 @@ void inner_critical(void)
 	InnerUnlockCount--;
 	CritCommonLockCount = InnerLockCountList[InnerUnlockCount];
 
-	if(CritCommonLockCount)
+	if (CritCommonLockCount)
 	{
 		enterCritical(&CritCommon);
 	}
@@ -234,14 +234,14 @@ void enterSemaphore(semaphore_t *i)
 		}
 		inner_critical();
 
-		if(2 <= i->Count)
+		if (2 <= i->Count)
 			eventSet(i->EvLeave);
 	}
 	i->Count--;
 }
 void leaveSemaphore(semaphore_t *i)
 {
-	if(!i->Count)
+	if (!i->Count)
 	{
 		eventSet(i->EvLeave);
 	}

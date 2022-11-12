@@ -2,7 +2,7 @@
 
 static int DoLock(uint mtx)
 {
-	if(!handleWaitForMillis(mtx, 3000))
+	if (!handleWaitForMillis(mtx, 3000))
 	{
 		cout("MUTEX FAULT!\n");
 		return 0;
@@ -35,7 +35,7 @@ void ReceptorLoop(
 	startEvent = eventOpen(startEventName);
 	answerEvent = eventOpen(answerEventName);
 
-	if(DoLock(mtx)) // Cleanup
+	if (DoLock(mtx)) // Cleanup
 	{
 		removeFileIfExist(prmFile);
 		removeFileIfExist(ansFile);
@@ -46,9 +46,9 @@ void ReceptorLoop(
 	{
 		collectEvents(startEvent, 3000); // 要求待ち
 
-		if(DoLock(mtx))
+		if (DoLock(mtx))
 		{
-			if(existFile(prmFile)) // ? 要求アリ
+			if (existFile(prmFile)) // ? 要求アリ
 			{
 				char *filePrm = makeTempPath(NULL);
 				char *fileAns = makeTempPath(NULL);
@@ -67,13 +67,13 @@ void ReceptorLoop(
 				errorCase(!existFile(fileAns));
 
 				while(!DoLock(mtx))
-					if(!idle())
+					if (!idle())
 						goto endFunc;
 
 				removeFileIfExist(prmFile); // あるはず
 				removeFileIfExist(ansFile); // ないはず
 
-				if(retval)
+				if (retval)
 					moveFile(fileAns, ansFile);
 
 				mutexRelease(mtx);
@@ -90,7 +90,7 @@ void ReceptorLoop(
 				mutexRelease(mtx);
 		}
 	}
-	if(DoLock(mtx)) // Cleanup
+	if (DoLock(mtx)) // Cleanup
 	{
 		removeFileIfExist(prmFile);
 		removeFileIfExist(ansFile);
@@ -106,7 +106,7 @@ void ReceptorLoopResFile(char *resFile, int (*perform)(char *prmFile, char *ansF
 {
 	autoList_t *resLines;
 
-	if(!resFile)
+	if (!resFile)
 		resFile = "Adapter.conf"; // default
 
 	resLines = readResourceLines(innerResPathFltr(resFile));

@@ -14,7 +14,7 @@ static int Perform(char *prmFile, char *ansFile)
 {
 	int retval;
 
-	if(HFS_UnpadFile(prmFile, 0))
+	if (HFS_UnpadFile(prmFile, 0))
 	{
 		retval = HFS_Perform(prmFile, ansFile);
 		HFS_PadFile(ansFile, 1);
@@ -50,12 +50,12 @@ int main(int argc, char **argv)
 	errorCase(!argIs("/StoreDirAutoClean")); // 2bs
 
 readArgs:
-	if(argIs("/DFSM"))
+	if (argIs("/DFSM"))
 	{
 		HFS_DiskFreeSpaceMin = toValue64(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/SDSX"))
+	if (argIs("/SDSX"))
 	{
 		HFS_StoreDirSizeMax = toValue64(nextArg());
 		goto readArgs;

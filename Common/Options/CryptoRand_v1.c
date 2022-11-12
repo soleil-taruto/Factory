@@ -103,7 +103,7 @@
 
 static void GetCryptoSeed(uchar *seed, uint seed_size, char *seed_file)
 {
-	if(isFactoryDirEnabled())
+	if (isFactoryDirEnabled())
 	{
 		autoBlock_t gab;
 
@@ -111,7 +111,7 @@ static void GetCryptoSeed(uchar *seed, uint seed_size, char *seed_file)
 
 		// zantei >
 
-		if(existFile(seed_file) && getFileSize(seed_file) != (uint64)seed_size)
+		if (existFile(seed_file) && getFileSize(seed_file) != (uint64)seed_size)
 		{
 			cout("#########################################################\n");
 			cout("## SEED_FILE SIZE ERROR -- Ç«Ç¡Ç©Ç…å√Ç¢ exe Ç™Ç†ÇÈÇ≈ÅI ##\n");
@@ -122,7 +122,7 @@ static void GetCryptoSeed(uchar *seed, uint seed_size, char *seed_file)
 
 		// < zantei
 
-		if(existFile(seed_file))
+		if (existFile(seed_file))
 		{
 			FILE *fp;
 			uint index;
@@ -133,7 +133,7 @@ static void GetCryptoSeed(uchar *seed, uint seed_size, char *seed_file)
 
 			for(index = 0; index < seed_size; index++)
 			{
-				if(seed[index] < 0xff)
+				if (seed[index] < 0xff)
 				{
 					seed[index]++;
 					break;
@@ -159,7 +159,7 @@ static void GetCryptoBlock(uchar *buffer)
 
 	sha512_localize();
 
-	if(!ctx)
+	if (!ctx)
 	{
 		uchar seed[SEEDSIZE];
 		autoBlock_t gab;
@@ -175,7 +175,7 @@ static void GetCryptoBlock(uchar *buffer)
 		static autoBlock_t *tremor;
 		sha512_t *ictx = sha512_copy(ctx);
 
-		if(!tremor)
+		if (!tremor)
 			tremor = newBlock();
 
 		// tremorçXêV
@@ -186,14 +186,14 @@ static void GetCryptoBlock(uchar *buffer)
 			{
 				uint byteVal = getByte(tremor, index);
 
-				if(byteVal < 0xff)
+				if (byteVal < 0xff)
 				{
 					setByte(tremor, index, byteVal + 1);
 					break;
 				}
 				setByte(tremor, index, 0x00);
 			}
-			if(index == getSize(tremor))
+			if (index == getSize(tremor))
 			{
 				addByte(tremor, 0x00);
 			}
@@ -219,7 +219,7 @@ static uchar *Ca_GetCryptoBlock(void)
 	static uchar counter[16];
 	static uchar dest[2][16];
 
-	if(!cam_kt[0])
+	if (!cam_kt[0])
 	{
 		uchar cam_seed[2][SEEDSIZE];
 		autoBlock_t gab;
@@ -250,7 +250,7 @@ static uchar *Ca_GetCryptoBlock(void)
 
 		for(index = 0; index < 16; index++)
 		{
-			if(counter[index] < 0xff)
+			if (counter[index] < 0xff)
 			{
 				counter[index]++;
 				break;
@@ -274,7 +274,7 @@ uint getCryptoByte(void)
 	static uchar buffer[BUFFERSIZE];
 	static uint index = BUFFERSIZE;
 
-	if(index == BUFFERSIZE)
+	if (index == BUFFERSIZE)
 	{
 		GetCryptoBlock(buffer);
 		Ca_XorCryptoBlock(buffer);

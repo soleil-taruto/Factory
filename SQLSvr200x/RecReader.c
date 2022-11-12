@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 	char *csvFile;
 	autoList_t *table;
 
-	if(argIs("/-H"))
+	if (argIs("/-H"))
 		noHeader = 1;
 
 	recFile = nextArg();
@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 
 	table = SqlRecReader(recFile);
 
-	if(noHeader)
+	if (noHeader)
 		releaseDim((autoList_t *)desertElement(table, 0), 1);
 
 	writeCSVFile_cx(csvFile, table);

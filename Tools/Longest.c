@@ -30,12 +30,12 @@ static void DispLongest_Lines_x(autoList_t *lines)
 	{
 		uint clen = strlen(line);
 
-		if(clen < minlen && ShortestMin <= clen)
+		if (clen < minlen && ShortestMin <= clen)
 		{
 			minlen = clen;
 			cout("< %u:%s\n", minlen, line);
 		}
-		if(maxlen < clen)
+		if (maxlen < clen)
 		{
 			maxlen = clen;
 			cout("> %u:%s\n", maxlen, line);
@@ -51,7 +51,7 @@ static void DispLongest(char *path, int ignoreSubDir)
 {
 	autoList_t *lines;
 
-	if(existDir(path))
+	if (existDir(path))
 	{
 		lines = (ignoreSubDir ? ls : lss)(path);
 		insertElement(lines, 0, (uint)makeFullPath(path));
@@ -70,24 +70,24 @@ int main(int argc, char **argv)
 	int ignoreSubDir = 0;
 
 readArgs:
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		ShortestMin = toValue(nextArg());
 		cout("Shortest-Min: %u\n", ShortestMin);
 		goto readArgs;
 	}
-	if(argIs("/-S"))
+	if (argIs("/-S"))
 	{
 		ignoreSubDir = 1;
 		goto readArgs;
 	}
 
-	if(argIs("/LSS"))
+	if (argIs("/LSS"))
 	{
 		DispLongest_LSS();
 		return;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		DispLongest(nextArg(), ignoreSubDir);
 		return;
@@ -96,7 +96,7 @@ readArgs:
 	{
 		char *path = dropPath();
 
-		if(!path)
+		if (!path)
 			break;
 
 		DispLongest(path, ignoreSubDir);

@@ -20,11 +20,11 @@ autoList_t *merge(autoList_t *list1, autoList_t *list2, sint (*funcComp)(uint, u
 	{
 		int comp = funcComp(getLastElement(list1), getLastElement(list2));
 
-		if(comp < 0) // <
+		if (comp < 0) // <
 		{
 			addElement(aList2, unaddElement(list2));
 		}
-		else if(0 < comp) // >
+		else if (0 < comp) // >
 		{
 			addElement(aList1, unaddElement(list1));
 		}
@@ -92,7 +92,7 @@ reedit:
 	cout("テキストエディタが終了しました。\n");
 
 	// 秀丸は、空にして保存すると削除できる。
-	if(!existFile(selfile))
+	if (!existFile(selfile))
 		createFile(selfile);
 
 	lLines = copyLines(lines);
@@ -171,13 +171,13 @@ char *selectLine(autoList_t *lines) // ret == NULL: キャンセルした。
 	{
 		autoList_t *selLines = selectLines(lines);
 
-		if(getCount(selLines) == 0)
+		if (getCount(selLines) == 0)
 		{
 			releaseDim(selLines, 1);
 			retLine = NULL;
 			break;
 		}
-		if(getCount(selLines) == 1)
+		if (getCount(selLines) == 1)
 		{
 			retLine = getLine(selLines, 0);
 			releaseAutoList(selLines);
@@ -205,16 +205,16 @@ void merge2(autoList_t *list1, autoList_t *list2, sint (*funcComp)(uint, uint), 
 		uint e2 = q == getCount(list2);
 		sint comp;
 
-		if(e1 && e2)
+		if (e1 && e2)
 		{
 			break;
 		}
 
-		if(e1)
+		if (e1)
 		{
 			comp = 1; // p > q
 		}
-		else if(e2)
+		else if (e2)
 		{
 			comp = -1; // p < q
 		}
@@ -223,17 +223,17 @@ void merge2(autoList_t *list1, autoList_t *list2, sint (*funcComp)(uint, uint), 
 			comp = funcComp(getElement(list1, p), getElement(list2, q));
 		}
 
-		if(comp < 0) // p < q
+		if (comp < 0) // p < q
 		{
-			if(onlyExist1)
+			if (onlyExist1)
 			{
 				addElement(onlyExist1, getElement(list1, p));
 			}
 			p++;
 		}
-		else if(0 < comp) // p > q
+		else if (0 < comp) // p > q
 		{
-			if(onlyExist2)
+			if (onlyExist2)
 			{
 				addElement(onlyExist2, getElement(list2, q));
 			}
@@ -241,11 +241,11 @@ void merge2(autoList_t *list1, autoList_t *list2, sint (*funcComp)(uint, uint), 
 		}
 		else // p == q
 		{
-			if(bothExist)
+			if (bothExist)
 			{
 				addElement(bothExist, getElement(list1, p));
 			}
-			if(merge2_bothExist2)
+			if (merge2_bothExist2)
 			{
 				addElement(merge2_bothExist2, getElement(list2, q));
 			}
@@ -278,14 +278,14 @@ void distinct(autoList_t *list, sint (*funcComp)(uint, uint), autoList_t *result
 
 	for(index = 0; index < getCount(list); index++)
 	{
-		if(index == 0 || funcComp(getElement(list, index), getElement(list, index - 1)))
+		if (index == 0 || funcComp(getElement(list, index), getElement(list, index - 1)))
 		{
-			if(result)
+			if (result)
 				addElement(result, getElement(list, index));
 		}
 		else
 		{
-			if(others)
+			if (others)
 				addElement(others, getElement(list, index));
 		}
 	}
@@ -341,7 +341,7 @@ void distinct2(autoList_t *list, sint (*funcComp)(uint, uint), void (*funcReleas
 
 	for(index = 1; index < getCount(list); index++)
 	{
-		if(!funcComp(getElement(list, wi - 1), getElement(list, index)))
+		if (!funcComp(getElement(list, wi - 1), getElement(list, index)))
 			funcRelease(getElement(list, index));
 		else
 			setElement(list, wi++, getElement(list, index));

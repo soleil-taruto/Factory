@@ -23,7 +23,7 @@ static void Init(void)
 }
 static void PostGenWFile(char *rFile)
 {
-	if(OutputAndDelete)
+	if (OutputAndDelete)
 //		semiRemovePath(rFile);
 		removeFile(rFile);
 }
@@ -57,7 +57,7 @@ static void DoDecode(char *rFile, char *wFile)
 }
 static void DoEncode_NWF(char *rFile, char *wFile)
 {
-	if(!wFile)
+	if (!wFile)
 	{
 		wFile = addExt(strx(rFile), EXT_ENCODED);
 		wFile = toCreatablePath(wFile, IMAX);
@@ -73,7 +73,7 @@ static void DoEncode_NWF(char *rFile, char *wFile)
 }
 static void DoDecode_NWF(char *rFile, char *wFile)
 {
-	if(!wFile)
+	if (!wFile)
 	{
 		wFile = changeExt(rFile, "");
 		wFile = toCreatablePath(wFile, IMAX);
@@ -90,7 +90,7 @@ static void DoDecode_NWF(char *rFile, char *wFile)
 static void Main2(void)
 {
 readArgs:
-	if(argIs("/OAD"))
+	if (argIs("/OAD"))
 	{
 		cout("+-------------------+\n");
 		cout("| OUTPUT AND DELETE |\n");
@@ -100,12 +100,12 @@ readArgs:
 		goto readArgs;
 	}
 
-	if(argIs("/E"))
+	if (argIs("/E"))
 	{
 		char *rFile;
 		char *wFile;
 
-		if(hasArgs(2))
+		if (hasArgs(2))
 		{
 			rFile = nextArg();
 			wFile = nextArg();
@@ -118,12 +118,12 @@ readArgs:
 		DoEncode_NWF(rFile, wFile);
 		return;
 	}
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		char *rFile;
 		char *wFile;
 
-		if(hasArgs(2))
+		if (hasArgs(2))
 		{
 			rFile = nextArg();
 			wFile = nextArg();
@@ -141,7 +141,7 @@ readArgs:
 	{
 		char *rFile = c_dropFile();
 
-		if(!_stricmp(getExt(rFile), EXT_ENCODED))
+		if (!_stricmp(getExt(rFile), EXT_ENCODED))
 			DoDecode_NWF(rFile, NULL);
 		else
 			DoEncode_NWF(rFile, NULL);

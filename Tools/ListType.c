@@ -6,11 +6,11 @@ static void ListType(autoList_t *files, char *wFile)
 	char *file;
 	uint index;
 
-	if(existFile(wFile))
+	if (existFile(wFile))
 	{
 		cout("ã‘‚«H\n");
 
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 			termination(0);
 
 		cout("ã‘‚«‚·‚éB\n");
@@ -28,7 +28,7 @@ static void ListType(autoList_t *files, char *wFile)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/L"))
+	if (argIs("/L"))
 	{
 		autoList_t *files = lsFiles(nextArg());
 		sortJLinesICase(files);

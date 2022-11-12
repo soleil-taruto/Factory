@@ -8,7 +8,7 @@ void ProgressBegin(void)
 }
 void Progress(void)
 {
-	if(79 <= StarCount)
+	if (79 <= StarCount)
 	{
 		uint index;
 
@@ -39,7 +39,7 @@ void ProgressRate(double rate) // rate 0.0 - 1.0
 }
 void ProgressEnd(int cancelled)
 {
-	if(cancelled)
+	if (cancelled)
 		cout("\r-------------------------------------------------------------------------------\n");
 	else
 		cout("\r*******************************************************************************\n");

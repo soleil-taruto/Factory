@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 	foreach(row, cell, colidx)
 		cout("%5uçs%5uóÒñ⁄=%s\n", rowidx, colidx, cell);
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 		SaveCsv(nextArg(), rows);
 
 	releaseDim(rows, 2);

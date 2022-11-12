@@ -32,14 +32,14 @@ static void Monitor(void)
 		double rate;
 		double rateLmt;
 
-		if(key == 0x1b)
+		if (key == 0x1b)
 			break;
 
 		updateDiskSpace(TargetDrive);
 		diskFree = lastDiskFree_User;
 		diskSize = lastDiskSize;
 
-		if(key == 'T')
+		if (key == 'T')
 		{
 			cout("########################\n");
 			cout("## コマンドテスト実行 ##\n");
@@ -47,14 +47,14 @@ static void Monitor(void)
 
 			diskFree = 0ui64;
 		}
-		else if(key)
+		else if (key)
 		{
 			cout("+---------------------+\n");
 			cout("| ESC ⇒ モニター終了 |\n");
 			cout("| T ⇒ コマンドテスト |\n");
 			cout("+---------------------+\n");
 		}
-		if(loopCount % 10 == 0)
+		if (loopCount % 10 == 0)
 		{
 			cout("----\n");
 			cout("%s\n", c_makeJStamp(NULL, 0));
@@ -63,15 +63,15 @@ static void Monitor(void)
 		rate    = diskFree      * 1.0 / diskSize;
 		rateLmt = DiskFreeLimit * 1.0 / diskSize;
 
-		     if(rateLmt * 10.0 < rate) { waitMillis = 20000; }
-		else if(rateLmt *  7.5 < rate) { waitMillis = 15000; }
-		else if(rateLmt *  5.0 < rate) { waitMillis = 10000; }
-		else if(rateLmt *  2.5 < rate) { waitMillis =  5000; }
+		     if (rateLmt * 10.0 < rate) { waitMillis = 20000; }
+		else if (rateLmt *  7.5 < rate) { waitMillis = 15000; }
+		else if (rateLmt *  5.0 < rate) { waitMillis = 10000; }
+		else if (rateLmt *  2.5 < rate) { waitMillis =  5000; }
 		else                           { waitMillis =  2000; }
 
 		cout("DiskFree: %I64u / %I64u, rate: %.3f / %.3f, wait: %u\n", diskFree, DiskFreeLimit, rate, rateLmt, waitMillis);
 
-		if(diskFree < DiskFreeLimit)
+		if (diskFree < DiskFreeLimit)
 		{
 			cout("コマンド実行 @ %s\n", c_makeJStamp(NULL, 0));
 			coExecute(YellowCommand);

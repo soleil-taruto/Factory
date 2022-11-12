@@ -23,7 +23,7 @@ static int StopFlag;
 
 static void CheckStop(void)
 {
-	if(handleWaitForMillis(EvStop, 0))
+	if (handleWaitForMillis(EvStop, 0))
 	{
 		cout("停止イベントを拾いました。");
 		StopFlag = 1;
@@ -37,7 +37,7 @@ static int Perform(char *prmFile, char *ansFile)
 
 	LOGPOS();
 
-	if(StopFlag)
+	if (StopFlag)
 		goto endFunc;
 
 	prmData = readBinary(prmFile);
@@ -54,7 +54,7 @@ static int Perform(char *prmFile, char *ansFile)
 	{
 		ansData = Frtwv_Recv(RecvPipe, 2000);
 
-		if(ansData)
+		if (ansData)
 		{
 			cout("< %u\n", getSize(ansData));
 
@@ -65,7 +65,7 @@ static int Perform(char *prmFile, char *ansFile)
 		}
 		CheckStop();
 
-		if(StopFlag)
+		if (StopFlag)
 			break;
 	}
 endFunc:
@@ -77,12 +77,12 @@ int Idle(void)
 	int ret = 1;
 
 	while(hasKey())
-		if(getKey() == 27) // escape
+		if (getKey() == 27) // escape
 			ret = 0;
 
 	CheckStop();
 
-	if(StopFlag)
+	if (StopFlag)
 		ret = 0;
 
 	return ret;

@@ -17,13 +17,13 @@ static int EncodeMode;
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/E"))
+	if (argIs("/E"))
 	{
 		EncodeMode = 1;
 		goto readArgs;
 	}
 
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		char *rFile;
 		char *wFile;
@@ -35,10 +35,10 @@ readArgs:
 
 		rText = unbindBlock2Line(readBinary(rFile));
 
-		if(!*rText)
+		if (!*rText)
 			termination(0);
 
-		if(EncodeMode)
+		if (EncodeMode)
 			wText = urlEncoder(rText);
 		else
 			wText = urlDecoder(rText);
@@ -49,7 +49,7 @@ readArgs:
 		memFree(wText);
 		return;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		char *rFile = nextArg();
 		char *wFile;
@@ -58,12 +58,12 @@ readArgs:
 
 		rText = unbindBlock2Line(readBinary(rFile));
 
-		if(!*rText)
+		if (!*rText)
 			termination(0);
 
 		wFile = getOutFile("urlDecOut.txt");
 
-		if(EncodeMode)
+		if (EncodeMode)
 			wText = urlEncoder(rText);
 		else
 			wText = urlDecoder(rText);
@@ -82,12 +82,12 @@ readArgs:
 		char *wText;
 		char *wFile;
 
-		if(!*rText)
+		if (!*rText)
 			termination(0);
 
 		wFile = getOutFile("urlDecOut.txt");
 
-		if(EncodeMode)
+		if (EncodeMode)
 			wText = urlEncoder(rText);
 		else
 			wText = urlDecoder(rText);

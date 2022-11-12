@@ -30,7 +30,7 @@ static char *Request(char *prmText)
 
 	ansFile = sockClient(ip, Domain, PortNo, prmFile, Idle);
 
-	if(ansFile)
+	if (ansFile)
 	{
 		ansText = readText(ansFile);
 		removeFile(ansFile);
@@ -53,7 +53,7 @@ static char *DoRequest(char *prmText)
 	{
 		ansText = Request(prmText);
 
-		if(ansText)
+		if (ansText)
 			break;
 	}
 	return ansText;
@@ -67,7 +67,7 @@ static void DoRemark(char *userName, char *message)
 
 	ansText = DoRequest(prmText);
 
-	if(ansText && !strcmp(ansText, "REMARK_OK"))
+	if (ansText && !strcmp(ansText, "REMARK_OK"))
 		cout("メッセージを送信しました。\n");
 	else
 		cout("メッセージの送信に失敗しました。\n");
@@ -85,7 +85,7 @@ static autoList_t *GetTimeLine(char *bgnStmp, char *endStmp)
 
 	ansText = DoRequest(prmText);
 
-	if(ansText)
+	if (ansText)
 	{
 		timeLine = tokenize(ansText, '\n');
 		memFree(ansText);
@@ -109,7 +109,7 @@ static autoList_t *Heartbeat(char *userName)
 
 	ansText = DoRequest(prmText);
 
-	if(ansText)
+	if (ansText)
 	{
 		members = tokenize(ansText, '\n');
 		memFree(ansText);
@@ -132,7 +132,7 @@ static void Logout(char *userName)
 
 	ansText = DoRequest(prmText);
 
-	if(ansText && !strcmp(ansText, "LOGOUT_OK"))
+	if (ansText && !strcmp(ansText, "LOGOUT_OK"))
 		cout("ログアウト成功\n");
 	else
 		cout("ログアウトに失敗しました。\n");
@@ -154,7 +154,7 @@ static void PrintRemark(char *stamp, char *userName, char *message)
 }
 static void ChatMain(void)
 {
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		UserName = nextArg();
 	}
@@ -166,7 +166,7 @@ static void ChatMain(void)
 
 		UserName = coInputLine();
 
-		if(!*UserName)
+		if (!*UserName)
 		{
 			cout("ユーザー名が空です。\n");
 			return;
@@ -181,13 +181,13 @@ static void ChatMain(void)
 		cmdTitle_x(xcout("Chat - ユーザー名=[%s] %u / %u", UserName, GetTLCount, GetTLPeriod));
 		GetTLCount++;
 
-		if(GetTLPeriod < GetTLCount)
+		if (GetTLPeriod < GetTLCount)
 		{
 			autoList_t *timeLine = GetTimeLine(LastStamp, "Z");
 
 			GetTLCount = 0;
 
-			if(timeLine && getCount(timeLine))
+			if (timeLine && getCount(timeLine))
 			{
 				char *line;
 				uint index;
@@ -207,7 +207,7 @@ static void ChatMain(void)
 
 					PrintRemark(stamp, userName, message);
 
-					if(index + 1 == getCount(timeLine))
+					if (index + 1 == getCount(timeLine))
 					{
 						memFree(LastStamp);
 						LastStamp = strx(stamp);
@@ -218,13 +218,13 @@ static void ChatMain(void)
 			}
 			else
 			{
-				if(GetTLPeriod < 10)
+				if (GetTLPeriod < 10)
 					GetTLPeriod++;
 			}
 		}
 		for(c = 5; c; c--)
 		{
-			if(hasKey())
+			if (hasKey())
 			{
 				char *message;
 
@@ -235,7 +235,7 @@ static void ChatMain(void)
 				{
 					int chr = getKey();
 
-					if(chr == 0x1b)
+					if (chr == 0x1b)
 						goto endLoop;
 
 					ungetKey(chr);
@@ -260,12 +260,12 @@ endLoop:
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		Domain = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		PortNo = toValue(nextArg());
 		goto readArgs;
@@ -274,7 +274,7 @@ readArgs:
 	errorCase(m_isEmpty(Domain));
 	errorCase(!m_isRange(PortNo, 1, 65535));
 
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		char *userName;
 		char *message;
@@ -285,7 +285,7 @@ readArgs:
 		DoRemark(userName, message);
 		return;
 	}
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		char *bgnStmp;
 		char *endStmp;
@@ -297,16 +297,16 @@ readArgs:
 		bgnStmp = nextArg();
 		endStmp = nextArg();
 
-		if(hasArgs(1))
+		if (hasArgs(1))
 			outFile = nextArg();
 		else
 			outFile = NULL;
 
 		timeLine = GetTimeLine(bgnStmp, endStmp);
 
-		if(timeLine)
+		if (timeLine)
 		{
-			if(outFile)
+			if (outFile)
 			{
 				writeLines(outFile, timeLine);
 			}
@@ -319,7 +319,7 @@ readArgs:
 		}
 		return;
 	}
-	if(argIs("/H"))
+	if (argIs("/H"))
 	{
 		char *userName;
 		char *outFile;
@@ -329,16 +329,16 @@ readArgs:
 
 		userName = nextArg();
 
-		if(hasArgs(1))
+		if (hasArgs(1))
 			outFile = nextArg();
 		else
 			outFile = NULL;
 
 		members = Heartbeat(userName);
 
-		if(members)
+		if (members)
 		{
-			if(outFile)
+			if (outFile)
 			{
 				writeLines(outFile, members);
 			}
@@ -351,7 +351,7 @@ readArgs:
 		}
 		return;
 	}
-	if(argIs("/O"))
+	if (argIs("/O"))
 	{
 		char *userName;
 

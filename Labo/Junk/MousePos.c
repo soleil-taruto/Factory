@@ -19,9 +19,9 @@ int main(int argc, char **argv)
 		x = (uint)pos.x;
 		y = (uint)pos.y;
 
-		if(lastX == x && lastY == y) // ? not moved
+		if (lastX == x && lastY == y) // ? not moved
 		{
-			if(slpcnt < 300)
+			if (slpcnt < 300)
 				slpcnt++;
 		}
 		else // ? moved

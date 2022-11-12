@@ -67,16 +67,16 @@ static void RPCPerform(char *program)
 	{
 		char *ansFile = sockClient(ip, ServerHost, ServerPort, prmFile, Idle);
 
-		if(ansFile)
+		if (ansFile)
 		{
-			if(UnpadFile2(ansFile, "nrun_Ans"))
+			if (UnpadFile2(ansFile, "nrun_Ans"))
 			{
 				char *ansLine = readFirstLine(ansFile);
 
 				removeFile(prmFile);
 				removeFile(ansFile);
 
-				if(strcmp(ansLine, "OK"))
+				if (strcmp(ansLine, "OK"))
 					error_m("nrun_WRONG_PROGRAM");
 
 				memFree(ansLine);
@@ -90,7 +90,7 @@ static void RPCPerform(char *program)
 		{
 			uint nowTime = now();
 
-			if(deadTime < nowTime)
+			if (deadTime < nowTime)
 				error_m("nrun_TIME-OUT");
 
 			cout("nrun_RETRY: %u (%u)\n", deadTime - nowTime, RetryMax - retryNum);
@@ -113,10 +113,10 @@ static void RPCPerform(char *program)
 			}
 		}
 
-		if(RetryMax < UINTMAX)
+		if (RetryMax < UINTMAX)
 			retryNum++;
 
-		if(RetryMax < retryNum)
+		if (RetryMax < retryNum)
 		{
 			cout("nrun_OVER_RETRY-MAX\n");
 			ErrorLevel = 2;
@@ -142,22 +142,22 @@ int main(int argc, char **argv)
 	RetryMax = getAppDataEnv32("NRUN_RETRY", UINTMAX);
 
 readArgs:
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		ServerHost = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		ServerPort = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		TimeoutSec = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		RetryMax = toValue(nextArg());
 		goto readArgs;

@@ -80,7 +80,7 @@ static uint GetModify(autoList_t *hashes) // ret == getCount(hashes): (conflict 
 
 	for(index = 1; index < getCount(hashes); index++)
 	{
-		if(_stricmp(getLine(hashes, 0), getLine(hashes, index))) // ? •sˆê’v
+		if (_stricmp(getLine(hashes, 0), getLine(hashes, index))) // ? •sˆê’v
 		{
 			goto found_mod;
 		}
@@ -100,7 +100,7 @@ found_mod:
 		trlidx < getCount(hashes)
 		)
 	{
-		if(_stricmp(baseHash, getLine(hashes, trlidx))) // ? •sˆê’v
+		if (_stricmp(baseHash, getLine(hashes, trlidx))) // ? •sˆê’v
 		{
 			goto found_mod2nd;
 		}
@@ -122,7 +122,7 @@ static void Synchronize(autoList_t *files, uint modindex)
 
 	foreach(files, file, index)
 	{
-		if(index != modindex)
+		if (index != modindex)
 		{
 			cout("< %s\n", modfile);
 			cout("> %s\n", file);
@@ -158,13 +158,13 @@ static void SyncFile(autoList_t *dirs, char *sharedFile)
 	}
 	modindex = GetModify(hashes);
 
-	if(modindex < getCount(hashes))
+	if (modindex < getCount(hashes))
 	{
 		cout("modify: [%u]\n", modindex);
 		Synchronize(files, modindex);
 		SFModCount++;
 	}
-	else if(Conflicted)
+	else if (Conflicted)
 	{
 		cout("conflict!\n");
 		error();
@@ -208,7 +208,7 @@ static void SyncFiles(autoList_t *dirs)
 	}
 	cout("%u file(s) synchronized.\n", SFModCount);
 
-	if(SFAutoCopy)
+	if (SFAutoCopy)
 	{
 		cout("\n");
 
@@ -222,12 +222,12 @@ static void SyncFiles(autoList_t *dirs)
 		}
 		cout("auto copy ok.\n");
 	}
-	if(SFAutoDelete)
+	if (SFAutoDelete)
 	{
 		cout("\n");
 		cout("if you want to delete some files, press 'D' key while 3 seconds...\n");
 
-		if(waitKey(3000) == 'D')
+		if (waitKey(3000) == 'D')
 		{
 			autoList_t *files = lsFiles(getLine(dirs, 0));
 			autoList_t *delFiles;
@@ -261,17 +261,17 @@ int main(int argc, char **argv)
 	autoList_t *dirs = newList();
 
 readArgs:
-	if(argIs("/C")) // auto Copy
+	if (argIs("/C")) // auto Copy
 	{
 		SFAutoCopy = 1;
 		goto readArgs;
 	}
-	if(argIs("/D")) // auto Delete
+	if (argIs("/D")) // auto Delete
 	{
 		SFAutoDelete = 1;
 		goto readArgs;
 	}
-	if(argIs("/F")) // dirs from File
+	if (argIs("/F")) // dirs from File
 	{
 		autoList_t *lines = readResourceLines(nextArg());
 		char *dir;

@@ -35,15 +35,15 @@ static void EditSame(char *baseFile, autoList_t *files)
 
 	editTextFile(baseFile);
 
-	if(!existFile(baseFile)) // ? 秀丸によって削除された。-> 復元
+	if (!existFile(baseFile)) // ? 秀丸によって削除された。-> 復元
 		copyFile(escBaseFile, baseFile);
 
-	if(!isSameFile(baseFile, escBaseFile) || S_HasDifferentFile)
+	if (!isSameFile(baseFile, escBaseFile) || S_HasDifferentFile)
 	{
 		cout("編集を適用します。%d\n", S_HasDifferentFile);
 		cout("続行？\n");
 
-		if(clearGetKey() == 0x1b)
+		if (clearGetKey() == 0x1b)
 			termination(0);
 
 		cout("続行します。\n");
@@ -88,11 +88,11 @@ static void EditSame_LSS(int userSelectMode)
 
 	sortJLinesICase(files);
 
-	if(userSelectMode)
+	if (userSelectMode)
 	{
 		baseFile = selectLine(files);
 
-		if(!baseFile)
+		if (!baseFile)
 			termination(0);
 
 		baseFileIndex = findLine(files, baseFile);
@@ -104,15 +104,15 @@ static void EditSame_LSS(int userSelectMode)
 	// 1ファイルのみ違っていて(編集済み)で、それ以外同じ(未編集)である場合を想定して、
 	// 編集済みのファイルを採用する。
 	//
-	else if(3 <= getCount(files))
+	else if (3 <= getCount(files))
 	{
 		for(index = 1; index < getCount(files); index++)
-			if(!isSameFile(getLine(files, 0), getLine(files, index)))
+			if (!isSameFile(getLine(files, 0), getLine(files, index)))
 				break;
 
-		if(index == 1)
+		if (index == 1)
 			baseFileIndex = isSameFile(getLine(files, 0), getLine(files, 2)) ? 1 : 0;
-		else if(index == getCount(files))
+		else if (index == getCount(files))
 			baseFileIndex = 0;
 		else
 			baseFileIndex = index;
@@ -127,15 +127,15 @@ static void EditSame_LSS(int userSelectMode)
 	{
 		cout("%s %s\n", c_md5_makeHexHashFile(file), file);
 
-		if(!isSameFile(file, baseFile))
+		if (!isSameFile(file, baseFile))
 			hasDifferentFile = 1;
 	}
-	if(hasDifferentFile)
+	if (hasDifferentFile)
 	{
 		cout("内容の異なるファイルが含まれています。\n");
 		cout("続行？\n");
 
-		if(clearGetKey() == 0x1b)
+		if (clearGetKey() == 0x1b)
 			termination(0);
 
 		cout("続行します。\n");
@@ -158,7 +158,7 @@ static void EditSame_File(char *baseFile)
 	errorCase_m(findJLineICase(files, baseFile) == getCount(files), "指定されたファイルはカレントディレクトリの配下に在りません。");
 
 	foreach(files, file, index)
-		if(!mbs_stricmp(file, baseFile) || !isSameFile(file, baseFile)) // ? baseFile である || baseFile と内容が異なる。-> 除外
+		if (!mbs_stricmp(file, baseFile) || !isSameFile(file, baseFile)) // ? baseFile である || baseFile と内容が異なる。-> 除外
 			*file = '\0';
 
 	trimLines(files);
@@ -183,7 +183,7 @@ int main(int argc, char **argv)
 {
 	antiSubversion = 1;
 
-	if(argIs("/LSS"))
+	if (argIs("/LSS"))
 	{
 		EditSame_LSS(argIs("/E"));
 	}

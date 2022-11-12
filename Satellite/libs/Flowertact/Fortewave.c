@@ -65,11 +65,11 @@ static uint GMR_NextNo;
 
 static void GetMessageRange(Frtwv_t *i)
 {
-	if(existDir(i->MessageDir))
+	if (existDir(i->MessageDir))
 	{
 		autoList_t *files = lsFiles(i->MessageDir);
 
-		if(getCount(files))
+		if (getCount(files))
 		{
 			char *file;
 			uint index;
@@ -118,7 +118,7 @@ static void Renumber(Frtwv_t *i)
 }
 static void TryRenumber(Frtwv_t *i)
 {
-	if(1000 < GMR_FirstNo) // ? ディレクトリが有る。&& ファイルが有る。&& 欠番が十分にある。
+	if (1000 < GMR_FirstNo) // ? ディレクトリが有る。&& ファイルが有る。&& 欠番が十分にある。
 	{
 		Renumber(i);
 	}
@@ -161,7 +161,7 @@ void Frtwv_Send(Frtwv_t *i, autoBlock_t *sendData)
 		GetMessageRange(i);
 		TryRenumber(i);
 
-		if(!GMR_NextNo)
+		if (!GMR_NextNo)
 			createDir(i->MessageDir);
 
 		file = combine_cx(i->MessageDir, xcout("%04u", GMR_NextNo));
@@ -183,7 +183,7 @@ void *Frtwv_RecvOL(Frtwv_t *i, uint depth, uint millis)
 
 	recvData = Frtwv_Recv(i, millis);
 
-	if(!recvData)
+	if (!recvData)
 		return NULL;
 
 	ret = Stllt_Deserializer(recvData, depth);
@@ -198,7 +198,7 @@ static autoBlock_t *TryRecv(Frtwv_t *i)
 	{
 		GetMessageRange(i);
 
-		if(GMR_NextNo) // ? ! no data
+		if (GMR_NextNo) // ? ! no data
 		{
 			char *file = combine_cx(i->MessageDir, xcout("%04u", GMR_FirstNo));
 
@@ -206,7 +206,7 @@ static autoBlock_t *TryRecv(Frtwv_t *i)
 			removeFile(file);
 			memFree(file);
 
-			if(GMR_FirstNo + 1 == GMR_NextNo)
+			if (GMR_FirstNo + 1 == GMR_NextNo)
 				removeDir(i->MessageDir);
 		}
 	}
@@ -223,7 +223,7 @@ autoBlock_t *Frtwv_Recv(Frtwv_t *i, uint millis)
 
 	recvData = TryRecv(i);
 
-	if(!recvData && millis) // 待ち時間 0 なら 2 回も TryRecv しない。
+	if (!recvData && millis) // 待ち時間 0 なら 2 回も TryRecv しない。
 	{
 #if 1 // マルチスレッド対応
 		inner_uncritical();

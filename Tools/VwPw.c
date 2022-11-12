@@ -9,7 +9,7 @@ static void ViewPassword(char *pw)
 	uint pwLen = strlen(pw);
 	uint index;
 
-	if(!pwLen)
+	if (!pwLen)
 		return;
 
 	errorCase(!isAsciiLine(pw, 0, 0, 0));
@@ -18,7 +18,7 @@ static void ViewPassword(char *pw)
 
 	for(index = 0; index < pwLen; index++)
 	{
-		if(index && index % 4 == 0)
+		if (index && index % 4 == 0)
 			cout(" ");
 
 		cout("%c", pw[index]);
@@ -30,7 +30,7 @@ static void ViewPassword(char *pw)
 		uint c = index % 8 / 4;
 		uint d = index / 8 % 2;
 
-		if(index && index % 4 == 0)
+		if (index && index % 4 == 0)
 			cout(" ");
 
 		cout("%c", "=- "[c ? d : 2]);
@@ -41,7 +41,7 @@ static void ViewPassword(char *pw)
 	{
 		uint c = index % 16 / 12;
 
-		if(index && index % 4 == 0)
+		if (index && index % 4 == 0)
 			cout(" ");
 
 		cout("%c", " #"[c]);
@@ -50,7 +50,7 @@ static void ViewPassword(char *pw)
 }
 int main(int argc, char **argv)
 {
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		ViewPassword(nextArg());
 	}

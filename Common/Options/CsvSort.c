@@ -24,7 +24,7 @@ static sint DefCompRow(autoList_t *row1, autoList_t *row2)
 	{
 		sint ret = strcmp(getLine(row1, colidx), getLine(row2, colidx));
 
-		if(ret)
+		if (ret)
 			return ret;
 	}
 	return (sint)colcnt1 - (sint)colcnt2;
@@ -37,7 +37,7 @@ static sint CompRow(uint row1, uint row2)
 
 	ret = SortComp(cell1, cell2);
 
-	if(!ret)
+	if (!ret)
 		ret = DefCompRow((autoList_t *)row1, (autoList_t *)row2);
 
 	return ret;

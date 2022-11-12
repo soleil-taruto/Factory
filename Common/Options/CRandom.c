@@ -5,7 +5,7 @@ char *MakeUUID(int bracket)
 	char *buff = strx("");
 	char *p;
 
-	if(bracket)
+	if (bracket)
 	{
 		buff = addChar(buff, '{');
 	}
@@ -33,7 +33,7 @@ char *MakeUUID(int bracket)
 			error();
 		}
 	}
-	if(bracket)
+	if (bracket)
 	{
 		buff = addChar(buff, '}');
 	}
@@ -78,7 +78,7 @@ autoBlock_t *GetConcreteRawKey(void)
 {
 	static autoBlock_t *rawKey;
 
-	if(!rawKey)
+	if (!rawKey)
 		rawKey = ab_fromLine("DancingStarsOnMe"); // 16 bytes
 
 	return rawKey;

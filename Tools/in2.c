@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 	eraseParents(dirs);
 	selDir = selectLine(dirs);
 
-	if(selDir)
+	if (selDir)
 		writeOneLine_cx(BATCH_FILE, xcout("CD \"%s\"", selDir));
 
 	releaseDim(dirs, 1);

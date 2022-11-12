@@ -5,7 +5,7 @@ static void CharRecved(int chr)
 {
 	static int stock;
 
-	if(stock)
+	if (stock)
 	{
 		char str[3];
 
@@ -20,12 +20,12 @@ static void CharRecved(int chr)
 		stock = 0;
 		return;
 	}
-	if(_ismbblead(chr))
+	if (_ismbblead(chr))
 	{
 		stock = chr;
 		return;
 	}
-	if(chr == '\n')
+	if (chr == '\n')
 	{
 		cout("\n");
 		return;
@@ -43,7 +43,7 @@ static void BitRecved(uint bit)
 
 	bIndex++;
 
-	if(bIndex == 8)
+	if (bIndex == 8)
 	{
 		CharRecved((int)chr);
 		chr = 0;
@@ -58,9 +58,9 @@ static void TryRecv(uint m0, uint m1, uint m2)
 	{
 		static uint millis;
 
-		if(!M_Get(M_MUTEX_0 + m2)) // ? 全てロック可能 == 送信中ではない。-> ウェイトを入れる。
+		if (!M_Get(M_MUTEX_0 + m2)) // ? 全てロック可能 == 送信中ではない。-> ウェイトを入れる。
 		{
-			if(millis < 200)
+			if (millis < 200)
 				millis++;
 
 			sleep(millis);
@@ -68,17 +68,17 @@ static void TryRecv(uint m0, uint m1, uint m2)
 		else
 			millis = 0;
 
-		if(pulseSec(1, NULL))
+		if (pulseSec(1, NULL))
 			cmdTitle_x(xcout("Recv - %u", millis));
 	}
 
 	M_Set(M_MUTEX_0 + m0, 0);
 
-	if(M_Get(M_BIT_0_0 + m1))
+	if (M_Get(M_BIT_0_0 + m1))
 	{
 		BitRecved(0);
 	}
-	if(M_Get(M_BIT_1_0 + m1))
+	if (M_Get(M_BIT_1_0 + m1))
 	{
 		BitRecved(1);
 	}
@@ -99,7 +99,7 @@ static void DoRecv(void)
 		TryRecv(2, 0, 1);
 
 		while(hasKey())
-			if(getKey() == 0x1b)
+			if (getKey() == 0x1b)
 				death = 1;
 	}
 	LOGPOS();

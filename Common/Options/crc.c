@@ -12,7 +12,7 @@ static uint CRC_FileFltr(char *file, uint (*startFunc)(void), uint (*updateFunc)
 		counter = updateFunc(counter, directGetBuffer(block), getSize(block));
 		releaseAutoBlock(block);
 
-		if(buffSize < 1024 * 1024 * 128)
+		if (buffSize < 1024 * 1024 * 128)
 			buffSize <<= 1;
 	}
 	fileClose(fp);
@@ -26,7 +26,7 @@ static uint CRC_FileFltr(char *file, uint (*startFunc)(void), uint (*updateFunc)
 #define Rot8(counter) \
 	do { \
 	counter <<= 1; \
-	if(counter & 0x100) { \
+	if (counter & 0x100) { \
 		counter ^= 0x107; \
 	} \
 	} while(0)
@@ -49,7 +49,7 @@ static uchar *RefSwap8Table(void)
 	static uchar *table;
 	uint counter;
 
-	if(!table)
+	if (!table)
 	{
 		table = (uchar *)memAlloc(0x100);
 
@@ -120,7 +120,7 @@ static uint16 *RefSwap16Table(void)
 	static uint16 *table;
 	uint i;
 
-	if(!table)
+	if (!table)
 	{
 		table = (uint16 *)memAlloc(256 * sizeof(uint16));
 
@@ -131,7 +131,7 @@ static uint16 *RefSwap16Table(void)
 
 			for(c = 0; c < 8; c++)
 			{
-				if(crc & 1)
+				if (crc & 1)
 				{
 					crc ^= CRC16_POLY << 1 | 1;
 				}
@@ -227,7 +227,7 @@ uint crc32UpdateBlock(uint counter, void *block, uint blockSize)
 {
 	uint index;
 
-	if(!CRC32Table)
+	if (!CRC32Table)
 		CRC32Table = MakeCRC32Table();
 
 	for(index = 0; index < blockSize; index++)

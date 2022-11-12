@@ -12,7 +12,7 @@ Sabun_t *CreateSabun(uint pos, uint length, uchar *data)
 }
 void ReleaseSabun(Sabun_t *i)
 {
-	if(!i)
+	if (!i)
 		return;
 
 	memFree(i->Data);
@@ -20,7 +20,7 @@ void ReleaseSabun(Sabun_t *i)
 }
 void ReleaseSabunList(autoList_t *list)
 {
-	if(!list)
+	if (!list)
 		return;
 
 	callAllElement(list, (void (*)(uint))ReleaseSabun);
@@ -42,7 +42,7 @@ static void FindSameArea(void)
 	SPos = getSize(&SBlock);
 	BPos = getSize(&BBlock);
 
-	if(!bound)
+	if (!bound)
 		return;
 
 	errorCase(UINTMAX - SPos < BPos); // 2bs
@@ -50,14 +50,14 @@ static void FindSameArea(void)
 	for(sndx = 0; sndx + bound < getSize(&SBlock); sndx += bound)
 	for(bndx = 0; bndx + bound < getSize(&BBlock); bndx++)
 	{
-		if(SPos + BPos <= sndx + bndx) // ? 既知の差分より大きいか同じになる。-> next sndx
+		if (SPos + BPos <= sndx + bndx) // ? 既知の差分より大きいか同じになる。-> next sndx
 			break;
 
 		for(index = 0; index < bound; index++)
-			if(getByte(&SBlock, sndx) != getByte(&BBlock, bndx)) // ? 不一致
+			if (getByte(&SBlock, sndx) != getByte(&BBlock, bndx)) // ? 不一致
 				break;
 
-		if(index == bound) // ? found
+		if (index == bound) // ? found
 		{
 			SPos = sndx;
 			BPos = bndx;
@@ -68,7 +68,7 @@ static void FindSameBegin(void)
 {
 	while(SPos && BPos)
 	{
-		if(getByte(&SBlock, SPos - 1) != getByte(&BBlock, BPos - 1)) // ? 差分の終端
+		if (getByte(&SBlock, SPos - 1) != getByte(&BBlock, BPos - 1)) // ? 差分の終端
 			break;
 
 		SPos--;
@@ -85,7 +85,7 @@ static int FindDiffBegin(void)
 {
 	while(LIndex < getSize(LBlock) && RIndex < getSize(RBlock))
 	{
-		if(getByte(LBlock, LIndex) != getByte(RBlock, RIndex))
+		if (getByte(LBlock, LIndex) != getByte(RBlock, RIndex))
 			break;
 
 		LIndex++;
@@ -100,7 +100,7 @@ static void FindDiffEnd(void)
 	SBlock = gndFollowBytes(LBlock, LIndex);
 	BBlock = gndFollowBytes(RBlock, RIndex);
 
-	if(getSize(&BBlock) < getSize(&SBlock))
+	if (getSize(&BBlock) < getSize(&SBlock))
 	{
 		swapBlock(&SBlock, &BBlock, sizeof(autoBlock_t));
 		swapped = 1;
@@ -111,7 +111,7 @@ static void FindDiffEnd(void)
 	FindSameArea();
 	FindSameBegin();
 
-	if(swapped)
+	if (swapped)
 		m_swap(SPos, BPos, uint);
 
 	errorCase(getSize(LBlock) - LIndex < SPos); // 2bs
@@ -128,7 +128,7 @@ static void AddSabun(autoList_t *diff, autoBlock_t *block, uint begin, uint end,
 
 	i = CreateSabun(begin, length, NULL);
 
-	if(withData)
+	if (withData)
 		i->Data = (uchar *)unbindBlock(ab_makeSubBytes(block, begin, length));
 
 	addElement(diff, (uint)i);

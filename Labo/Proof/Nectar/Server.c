@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 	{
 		autoBlock_t *message = NectarReceipt(i);
 
-		if(message)
+		if (message)
 		{
 			Recved(message);
 			releaseAutoBlock(message);

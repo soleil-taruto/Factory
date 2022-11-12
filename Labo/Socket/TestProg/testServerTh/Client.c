@@ -18,11 +18,11 @@ static void Perform(int sock)
 	ab_addLine(buffer, "\r\n");
 
 	while(getSize(buffer))
-		if(SockSendSequ(sock, buffer, 3000) == -1)
+		if (SockSendSequ(sock, buffer, 3000) == -1)
 			error();
 
 	while(getSize(buffer) < strlen(message))
-		if(SockRecvSequ(sock, buffer, 3000) == -1)
+		if (SockRecvSequ(sock, buffer, 3000) == -1)
 			error();
 
 	retMessage = unbindBlock(buffer);
@@ -48,19 +48,19 @@ int main(int argc, char **argv)
 
 	addFinalizer(KeyWaitExit);
 
-	if(argIs("/R"))
+	if (argIs("/R"))
 		mt19937_init32(toValue(nextArg()));
 	else
 		mt19937_init();
 
 	*(uint *)ip = 0;
 
-	if(hasArgs(2))
+	if (hasArgs(2))
 		sockClientUserTransmit(ip, getArg(0), toValue(getArg(1)), Perform);
 	else
 		sockClientUserTransmit(ip, "localhost", 59999, Perform);
 
-	if(!Connected)
+	if (!Connected)
 		error();
 
 	sleep(500); // ˆêu‚Å•Â‚¶‚Ä‚µ‚Ü‚¤‚Ì‚ÅB

@@ -10,12 +10,12 @@ static void AntiSVN(char *targetDir)
 {
 	targetDir = makeFullPath(targetDir);
 
-	if(!ForceMode)
+	if (!ForceMode)
 	{
 		cout("%s\n", targetDir);
 		cout("ANTI-SVN PROCEED? [Any/ESC]\n");
 
-		if(clearGetKey() == 0x1b)
+		if (clearGetKey() == 0x1b)
 			termination(1);
 
 		cout("GO!\n");
@@ -29,7 +29,7 @@ static void AntiSVN(char *targetDir)
 
 		foreach(dirs, dir, index)
 		{
-			if(
+			if (
 				!_stricmp(".svn", getLocal(dir)) ||
 				!_stricmp("_svn", getLocal(dir))
 				)
@@ -40,7 +40,7 @@ static void AntiSVN(char *targetDir)
 		}
 		releaseDim(dirs, 1);
 
-		if(!found)
+		if (!found)
 			break;
 
 		coSleep(1000);
@@ -49,11 +49,11 @@ static void AntiSVN(char *targetDir)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		ForceMode = 1;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		AntiSVN(nextArg());
 		return;

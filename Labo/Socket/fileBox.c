@@ -44,7 +44,7 @@ static void ReleaseInfo(uint prm)
 {
 	Info_t *i = (Info_t *)prm;
 
-	if(i->DLBuffer)
+	if (i->DLBuffer)
 		releaseAutoBlock(i->DLBuffer);
 
 	releaseAutoBlock(i->UpBuffer);
@@ -56,13 +56,13 @@ static int Perform(int sock, uint prm)
 	FILE *fp;
 	static char *line;
 
-	if(i->DLBuffer)
+	if (i->DLBuffer)
 	{
-		if(!getSize(i->DLBuffer))
+		if (!getSize(i->DLBuffer))
 		{
 			uint64 upFileSize = getFileSize(UpFile);
 
-			if(upFileSize <= i->ReadIndex) // ? 読み込み終了 || UpFile が更新されて ReadIndex より短くなった。
+			if (upFileSize <= i->ReadIndex) // ? 読み込み終了 || UpFile が更新されて ReadIndex より短くなった。
 				return 0;
 
 			nobSetSize(i->DLBuffer, m_min((uint64)READ_BUFF_SIZE, upFileSize - i->ReadIndex));
@@ -76,11 +76,11 @@ static int Perform(int sock, uint prm)
 		}
 		return SockSendSequ(sock, i->DLBuffer, 1) != -1;
 	}
-	if(i->UpMode)
+	if (i->UpMode)
 	{
 		setSize(i->UpBuffer, 0);
 
-		if(SockRecvSequ(sock, i->UpBuffer, 1) == -1 ||
+		if (SockRecvSequ(sock, i->UpBuffer, 1) == -1 ||
 			UpSizeMax < getFileSize(UpFile) + getSize(i->UpBuffer)) // Out of 'UpSizeMax' range
 			return 0;
 
@@ -89,20 +89,20 @@ static int Perform(int sock, uint prm)
 		fileClose(fp);
 		return 1;
 	}
-	if(SockCurrTime < i->ConnectTime + 2L) // 機械的に URLPhrase を探られないように、少し待つ
+	if (SockCurrTime < i->ConnectTime + 2L) // 機械的に URLPhrase を探られないように、少し待つ
 	{
 		Sleep(1);
 		return 1;
 	}
-	if(SockRecvSequ(sock, i->UpBuffer, 1) == -1)
+	if (SockRecvSequ(sock, i->UpBuffer, 1) == -1)
 		return 0;
 
-	if(line)
+	if (line)
 		memFree(line);
 
 	line = SockNextLine(i->UpBuffer);
 
-	if(!line)
+	if (!line)
 		return getSize(i->UpBuffer) < HDRHDR_LENMAX + 2;
 
 	{
@@ -111,11 +111,11 @@ static int Perform(int sock, uint prm)
 	}
 	cout("[%s] %s\n", SockIp2Line(sockClientIp), line);
 
-	if(HDRHDR_LENMAX < strlen(line) ||
+	if (HDRHDR_LENMAX < strlen(line) ||
 		!strstr(line, URLPhrase)) // URLPhrase を URL に入れてね。
 		return 0;
 
-	if(line[0] == '!') // ? upload mode
+	if (line[0] == '!') // ? upload mode
 	{
 		writeBinary(UpFile, i->UpBuffer);
 		i->UpMode = 1;
@@ -135,7 +135,7 @@ static int Idle(void)
 {
 	while(hasKey())
 	{
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 		{
 			cout("Exit.\n");
 			return 0;
@@ -149,17 +149,17 @@ int main(int argc, char **argv)
 	uint portno = 10080;
 
 readArgs:
-	if(argIs("/P")) // Port
+	if (argIs("/P")) // Port
 	{
 		portno = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/U")) // URL-phrase
+	if (argIs("/U")) // URL-phrase
 	{
 		URLPhrase = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/X")) // maX upload file size
+	if (argIs("/X")) // maX upload file size
 	{
 		UpSizeMax = toValue64(nextArg());
 		goto readArgs;

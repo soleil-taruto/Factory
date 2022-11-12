@@ -24,7 +24,7 @@ PriceDayCache_t *CreatePriceDayCache(void)
 }
 void ReleasePriceDayCache(PriceDayCache_t *i)
 {
-	if(!i)
+	if (!i)
 		return;
 
 	ReleaseTree(i);
@@ -44,7 +44,7 @@ static uint GetKey(uint date, char *pair)
 
 autoList_t *PDC_GetPriceDay(PriceDayCache_t *i, uint date, char *pair) // ret: NULL == not found
 {
-	if(!rbtHasKey(i->Tree, GetKey(date, pair)))
+	if (!rbtHasKey(i->Tree, GetKey(date, pair)))
 		return NULL;
 
 	return (autoList_t *)rbtGetLastAccessValue(i->Tree);

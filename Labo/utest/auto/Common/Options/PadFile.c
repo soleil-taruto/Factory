@@ -18,13 +18,13 @@ static void DoTest2(uint64 size, uint breakMode)
 
 	PadFileLine(file, "PAD-TEST-FOOTER");
 
-	if(breakMode)
+	if (breakMode)
 		RandXorOneBitFile(file);
 
 	retval = UnpadFileLine(file, "PAD-TEST-FOOTER");
 	cout("retval: %u\n", retval);
 
-	if(!breakMode)
+	if (!breakMode)
 	{
 		errorCase(!retval);
 		errorCase(!isSameFile(file, eFile));

@@ -18,7 +18,7 @@ static int IsMatchCodeLines(autoList_t *lines, uint line_index, autoList_t *code
 	lineLen     = strlen(line);
 	codeLineLen = strlen(codeLine);
 
-	if(lineLen < codeLineLen)
+	if (lineLen < codeLineLen)
 		return 0;
 
 	indent = lineLen - codeLineLen;
@@ -28,21 +28,21 @@ static int IsMatchCodeLines(autoList_t *lines, uint line_index, autoList_t *code
 		line     = getLine(lines, line_index + index);
 		codeLine = getLine(codeLines, index);
 
-		if(*codeLine)
+		if (*codeLine)
 		{
-			if(strlen(line) != indent + strlen(codeLine))
+			if (strlen(line) != indent + strlen(codeLine))
 				return 0;
 
 			for(i = 0; i < indent; i++)
-				if(line[i] != '\t')
+				if (line[i] != '\t')
 					return 0;
 
-			if(strcmp(line + indent, codeLine))
+			if (strcmp(line + indent, codeLine))
 				return 0;
 		}
 		else
 		{
-			if(*line)
+			if (*line)
 				return 0;
 		}
 	}
@@ -54,7 +54,7 @@ int main(int argc, char **argv)
 	autoList_t *codeLines;
 	autoList_t *codeLines_utf8;
 
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		rootDir = nextArg();
 	}
@@ -100,7 +100,7 @@ int main(int argc, char **argv)
 		{
 			char *ext = getExt(file);
 
-			if(
+			if (
 				!_stricmp(ext, "h") ||
 				!_stricmp(ext, "c") ||
 				!_stricmp(ext, "cs") ||
@@ -112,7 +112,7 @@ int main(int argc, char **argv)
 
 				for(line_index = 0; line_index + getCount(codeLines) <= getCount(lines); line_index++)
 				{
-					if(
+					if (
 						IsMatchCodeLines(lines, line_index, codeLines) ||
 						IsMatchCodeLines(lines, line_index, codeLines_utf8)
 						)

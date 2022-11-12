@@ -41,9 +41,9 @@ static int RecvStream(SockStream_t *i, FILE *fp, uint recvSize) // ret: errored
 		subSize = m_min(recvSize, CONTENT_BUFF_SIZE);
 		subBlock = nobCreateBlock(subSize);
 
-		if(!SockRecvBlock(i, directGetBuffer(subBlock), subSize))
+		if (!SockRecvBlock(i, directGetBuffer(subBlock), subSize))
 		{
-			if(httpM4UServerMode)
+			if (httpM4UServerMode)
 			{
 				setSize(subBlock, SockRecvBlock_LastRecvSize);
 				writeBinaryBlock(fp, subBlock);
@@ -83,7 +83,7 @@ void httpRecvRequestFile(SockStream_t *i, char **pHeader, char *contentFile)
 
 	httpRecvRequestHeader(i, pHeader, &chunked, &cSize);
 
-	if(chunked)
+	if (chunked)
 	{
 		httpChunkedRecver_t *cr = httpCreateChunkedRecver(i);
 
@@ -93,10 +93,10 @@ void httpRecvRequestFile(SockStream_t *i, char **pHeader, char *contentFile)
 		{
 			autoBlock_t *subBlock = httpRecvChunked(cr);
 
-			if(!subBlock)
+			if (!subBlock)
 				break;
 
-			if(httpMultiPartContentLenMax - cSize < getSize(subBlock)) // Overflow
+			if (httpMultiPartContentLenMax - cSize < getSize(subBlock)) // Overflow
 			{
 				releaseAutoBlock(subBlock);
 				errored = 1;
@@ -110,14 +110,14 @@ void httpRecvRequestFile(SockStream_t *i, char **pHeader, char *contentFile)
 	}
 	else
 	{
-		if(httpMultiPartContentLenMax < cSize) // Overflow
+		if (httpMultiPartContentLenMax < cSize) // Overflow
 			errored = 1;
 		else
 			errored = RecvStream(i, conFp, cSize);
 	}
 	fileClose(conFp);
 
-	if(errored)
+	if (errored)
 		createFile(contentFile);
 }
 
@@ -136,15 +136,15 @@ static void RNP_ReadBoundary(FILE *conFp)
 	{
 		int chr = readChar(conFp);
 
-		if(chr == EOF) // Invalid EOF
+		if (chr == EOF) // Invalid EOF
 			break;
 
-		if(chr == '\r') // CR
+		if (chr == '\r') // CR
 		{
 			readChar(conFp); // LF
 			break;
 		}
-		if(BOUNDARY_LENMAX <= getSize(boundary)) // ? Overflow
+		if (BOUNDARY_LENMAX <= getSize(boundary)) // ? Overflow
 			break;
 
 		addByte(boundary, chr);
@@ -156,7 +156,7 @@ static char *RNP_GetValue(char *line, char *leader)
 {
 	char *p = mbs_stristr(line, leader);
 
-	if(!p)
+	if (!p)
 		return strx("<未定義>");
 
 	p[0] = '\0'; // 'filename=' を 'name=' として読まないように、、、
@@ -165,7 +165,7 @@ static char *RNP_GetValue(char *line, char *leader)
 
 	line2JLine(p, 1, 0, 0, 1);
 
-	if(!*p)
+	if (!*p)
 		p = "<無効>"; // 空文字列の回避
 
 	p = strx(p);
@@ -180,15 +180,15 @@ static void RNP_ReadHeader(FILE *conFp)
 	{
 		char *line = readLineLenMax(conFp, PARTLINE_LENMAX); // CR-LF まで読み込む
 
-		if(!line) // Invalid EOF
+		if (!line) // Invalid EOF
 			break;
 
-		if(!*line)
+		if (!*line)
 		{
 			memFree(line);
 			break;
 		}
-		if(startsWithICase(line, "Content-Disposition:"))
+		if (startsWithICase(line, "Content-Disposition:"))
 		{
 			memFree(name);
 			memFree(localFile);
@@ -197,8 +197,8 @@ static void RNP_ReadHeader(FILE *conFp)
 		}
 		memFree(line);
 	}
-	if(!name)      name      = strx("<未検出>");
-	if(!localFile) localFile = strx("<未検出>");
+	if (!name)      name      = strx("<未検出>");
+	if (!localFile) localFile = strx("<未検出>");
 
 //	memFree(RNP_Name);
 //	memFree(RNP_LocalFile);
@@ -218,22 +218,22 @@ static void ReadNextPart(FILE *conFp)
 	{
 		int chr = buffReadChar(conBp);
 
-		if(chr == EOF) // Invalid EOF
+		if (chr == EOF) // Invalid EOF
 			break;
 
 	recheck:
-		if(chr == RNP_Boundary[bCount])
+		if (chr == RNP_Boundary[bCount])
 		{
 			bCount++;
 
-			if(RNP_Boundary[bCount] == '\0')
+			if (RNP_Boundary[bCount] == '\0')
 			{
 				break;
 			}
 		}
 		else
 		{
-			if(bCount)
+			if (bCount)
 			{
 				autoBlock_t gab;
 
@@ -269,7 +269,7 @@ autoList_t *httpDivideContent(char *contentFile) // ret: 1 <= getCount(ret)
 	{
 		httpPart_t *part;
 
-		if(PART_NUMMAX <= getCount(parts)) // ? Overflow
+		if (PART_NUMMAX <= getCount(parts)) // ? Overflow
  			break;
 
 		RNP_ReadHeader(fp);
@@ -310,7 +310,7 @@ httpPart_t *httpGetPart(autoList_t *parts, char *name)
 
 	foreach(parts, part, index)
 	{
-		if(!_stricmp(part->Name, name))
+		if (!_stricmp(part->Name, name))
 		{
 			return part;
 		}
@@ -337,7 +337,7 @@ char *httpGetPartLine(autoList_t *parts, char *name)
 	httpPart_t *part = httpGetPart(parts, name);
 	char *line;
 
-	if(PARTLINE_LENMAX < getFileSize(part->BodyFile))
+	if (PARTLINE_LENMAX < getFileSize(part->BodyFile))
 	{
 		return strx("<サイズ上限超過>");
 	}

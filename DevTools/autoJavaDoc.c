@@ -14,7 +14,7 @@ static uint GetIndexFromPtn2(autoList_t *lines, uint index, char *ptn1, char *pt
 	char *ptn = xcout("%s%s", ptn1, ptn2);
 
 	for(; index < getCount(lines); index++)
-		if(!strcmp(ptn, getLine(lines, index)))
+		if (!strcmp(ptn, getLine(lines, index)))
 			break;
 
 	memFree(ptn);
@@ -30,7 +30,7 @@ static void DoAutoJavaDoc_File(char *file)
 
 	foreach(lines, line, index)
 	{
-		if(
+		if (
 			lineExp("<0,100,\t\t>public <>", line) ||
 			lineExp("<0,100,\t\t>private <>", line) ||
 			lineExp("<0,100,\t\t>protected <>", line)
@@ -41,17 +41,17 @@ static void DoAutoJavaDoc_File(char *file)
 
 			*ne_strchr(indentPtn, 'p') = '\0';
 
-			if(index && lineExp("<0,100,\t\t>@<>", getLine(lines, index - 1)))
+			if (index && lineExp("<0,100,\t\t>@<>", getLine(lines, index - 1)))
 			{
 				index--;
 				indexDec++;
 			}
 			// ? メソッド又はクラスがコメントアウトされている。
-			if(index && lineExp("<0,100,\t\t>//*<>", getLine(lines, index - 1))) // エスケープ注意 / -> //
+			if (index && lineExp("<0,100,\t\t>//*<>", getLine(lines, index - 1))) // エスケープ注意 / -> //
 			{
 				uint i = GetIndexFromPtn2(lines, index, indentPtn, "}"); // メソッド又はクラスの終端が見つかれば、そこまで進む。
 
-				if(i < getCount(lines))
+				if (i < getCount(lines))
 				{
 					index = i;
 					indexDec = 0;
@@ -59,7 +59,7 @@ static void DoAutoJavaDoc_File(char *file)
 				goto endAddJavaDoc;
 			}
 			// ? 既にコメントがある。
-			if(index && lineExp("<0,100,\t\t> *//", getLine(lines, index - 1))) // エスケープ注意 / -> //
+			if (index && lineExp("<0,100,\t\t> *//", getLine(lines, index - 1))) // エスケープ注意 / -> //
 			{
 				goto endAddJavaDoc;
 			}
@@ -68,7 +68,7 @@ static void DoAutoJavaDoc_File(char *file)
 				char *javaDocLine;
 				uint javaDocLineIndex;
 
-				if(index && *getLine(lines, index - 1))
+				if (index && *getLine(lines, index - 1))
 					insertElement(lines, index++, (uint)strx(""));
 
 				foreach(JavaDoc, javaDocLine, javaDocLineIndex)
@@ -88,12 +88,12 @@ static void Confirm(void)
 {
 	LOGPOS();
 
-	if(BatchMode)
+	if (BatchMode)
 		return;
 
 	cout("続行？\n");
 
-	if(clearGetKey() == 0x1b)
+	if (clearGetKey() == 0x1b)
 		termination(0);
 
 	cout("続行します。\n");
@@ -127,7 +127,7 @@ static void DoAutoJavaDoc(char *dir)
 	Confirm();
 
 	foreach(files, file, index)
-		if(!_stricmp("java", getExt(file)))
+		if (!_stricmp("java", getExt(file)))
 			DoAutoJavaDoc_File(file);
 
 	releaseDim(files, 1);
@@ -137,17 +137,17 @@ int main(int argc, char **argv)
 	char *javaDocFile = changeExt(getSelfFile(), "txt");
 
 readArgs:
-	if(argIs("/B"))
+	if (argIs("/B"))
 	{
 		BatchMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		IntoSubDir = 1;
 		goto readArgs;
 	}
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		javaDocFile = nextArg();
 		goto readArgs;
@@ -155,12 +155,12 @@ readArgs:
 
 	JavaDoc = readLines(javaDocFile);
 
-	if(argIs("/LSS"))
+	if (argIs("/LSS"))
 	{
 		DoAutoJavaDoc_List(readLines(FOUNDLISTFILE)); // g
 		return;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		DoAutoJavaDoc(nextArg());
 		return;

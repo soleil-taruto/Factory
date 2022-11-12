@@ -21,9 +21,9 @@ static void ApplyPara(autoList_t *lines, uint openTagLineIndex, uint closeTagLin
 
 		// line は UTF-8 なので updateTagRng は使えない。-> updateAsciiTagRng を使う。
 
-		if(updateAsciiTagRng(line, "<para>", "</para>"))
+		if (updateAsciiTagRng(line, "<para>", "</para>"))
 		{
-			if(oneLineComment)
+			if (oneLineComment)
 			{
 				copyLine(lastTagRng.innerEnd, lastTagRng.end);
 				copyLine(lastTagRng.bgn, lastTagRng.innerBgn);
@@ -31,7 +31,7 @@ static void ApplyPara(autoList_t *lines, uint openTagLineIndex, uint closeTagLin
 		}
 		else
 		{
-			if(!oneLineComment)
+			if (!oneLineComment)
 			{
 				char *p = strchr(line, '/');
 
@@ -59,7 +59,7 @@ static void AutoCSCommentPara(char *targetDir)
 	files = lssFiles(targetDir);
 
 	foreach(files, file, index)
-		if(_stricmp(getExt(file), "cs") || endsWithICase(file, ".Designer.cs") || !_stricmp(getLocal(file), "AssemblyInfo.cs")) // ? .cs ファイルではない || .Designer.cs ファイル || AssemblyInfo.cs ファイル
+		if (_stricmp(getExt(file), "cs") || endsWithICase(file, ".Designer.cs") || !_stricmp(getLocal(file), "AssemblyInfo.cs")) // ? .cs ファイルではない || .Designer.cs ファイル || AssemblyInfo.cs ファイル
 			*file = '\0';
 
 	trimLines(files);
@@ -70,7 +70,7 @@ static void AutoCSCommentPara(char *targetDir)
 	foreach(files, file, index)
 	{
 		/*
-		if(30 <= index)
+		if (30 <= index)
 		{
 			cout("...\n");
 			break;
@@ -82,7 +82,7 @@ static void AutoCSCommentPara(char *targetDir)
 	{
 		cout("続行？\n");
 
-		if(clearGetKey() == 0x1b)
+		if (clearGetKey() == 0x1b)
 			termination(0);
 
 		cout("続行します。\n");
@@ -102,7 +102,7 @@ static void AutoCSCommentPara(char *targetDir)
 
 		foreach(lines, line, line_index)
 		{
-			if(lineExp("<1,,\t\t>////// /<//<1,,>>", line)) // ? コメント・タグの終了
+			if (lineExp("<1,,\t\t>////// /<//<1,,>>", line)) // ? コメント・タグの終了
 			{
 				errorCase(openTagLineIndex == UINTMAX);
 				LOGPOS();
@@ -111,13 +111,13 @@ static void AutoCSCommentPara(char *targetDir)
 				openTagLineIndex = UINTMAX;
 				modified = 1;
 			}
-			else if(lineExp("<1,,\t\t>////// /<<1,,>>", line) && !lineExp("<>><>/<//<>", line)) // ? コメント・タグの開始 && この行でタグが完結していない。
+			else if (lineExp("<1,,\t\t>////// /<<1,,>>", line) && !lineExp("<>><>/<//<>", line)) // ? コメント・タグの開始 && この行でタグが完結していない。
 			{
 				errorCase(openTagLineIndex != UINTMAX);
 				LOGPOS();
 				openTagLineIndex = line_index;
 			}
-			else if(lineExp("<1,,\t\t>////// <1,,>", line)) // ? コメント・タグの途中
+			else if (lineExp("<1,,\t\t>////// <1,,>", line)) // ? コメント・タグの途中
 			{
 				// noop
 			}
@@ -126,7 +126,7 @@ static void AutoCSCommentPara(char *targetDir)
 				errorCase(openTagLineIndex != UINTMAX);
 			}
 		}
-		if(modified)
+		if (modified)
 		{
 			cout("> %s\n", file);
 			writeLines(file, lines);
@@ -141,7 +141,7 @@ static void AutoCSCommentPara(char *targetDir)
 }
 int main(int argc, char **argv)
 {
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		AutoCSCommentPara(nextArg());
 		return;

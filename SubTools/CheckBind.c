@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 {
 	uint portno = 80;
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 		portno = toValue(nextArg());
 
 	cout("É|Å[Égî‘çÜ [%u]\n", portno);

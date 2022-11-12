@@ -89,7 +89,7 @@ void putByte(autoBlock_t *i, uint index, uint byte)
 {
 	errorCase(!i);
 
-	if(i->Size <= index)
+	if (i->Size <= index)
 	{
 		errorCase(BLOCK_SIZE_MAX <= index); // ? ブロックサイズの上限を超える。
 		setSize(i, index + 1);
@@ -100,7 +100,7 @@ uint refByte(autoBlock_t *i, uint index)
 {
 	errorCase(!i);
 
-	if(i->Size <= index)
+	if (i->Size <= index)
 		return 0x00;
 
 	return i->Block[index];
@@ -122,13 +122,13 @@ void swapByte(autoBlock_t *i, uint index1, uint index2)
 
 static void Resize(autoBlock_t *i, uint newSize)
 {
-	if(i->BaseSize == BASE_SIZE_UNRESIZABLE)
+	if (i->BaseSize == BASE_SIZE_UNRESIZABLE)
 	{
 		errorCase(i->AllocSize < newSize);
 	}
-	else if(i->BaseSize == BASE_SIZE_EXPAND_ONLY)
+	else if (i->BaseSize == BASE_SIZE_EXPAND_ONLY)
 	{
-		if(i->AllocSize < newSize)
+		if (i->AllocSize < newSize)
 		{
 			void *bkBlock = i->Block;
 
@@ -142,14 +142,14 @@ static void Resize(autoBlock_t *i, uint newSize)
 	}
 	else
 	{
-		if(newSize < i->BaseSize || i->AllocSize < newSize)
+		if (newSize < i->BaseSize || i->AllocSize < newSize)
 		{
-			if(newSize < 16)
+			if (newSize < 16)
 			{
 				i->BaseSize  = newSize;
 				i->AllocSize = newSize;
 			}
-			else if(newSize < EXPAND_SPAN * 2)
+			else if (newSize < EXPAND_SPAN * 2)
 			{
 				i->BaseSize  = newSize / 2;
 				i->AllocSize = newSize + newSize / 2; // newSize * 1.5
@@ -192,7 +192,7 @@ void insertBytes(autoBlock_t *i, uint index, autoBlock_t *bytes)
 	errorCase(i->Size < index);
 	errorCase(BLOCK_SIZE_MAX - i->Size < bytes->Size); // ? ブロックサイズの上限を超える。
 
-	if(bytes->Size)
+	if (bytes->Size)
 	{
 		uint n;
 
@@ -213,7 +213,7 @@ void insertBytes(autoBlock_t *i, uint index, autoBlock_t *bytes)
 		while(1)
 		{
 			i->Block[n] = bytes->Block[n - index];
-			if(n == index) break;
+			if (n == index) break;
 			n--;
 		}
 #endif
@@ -225,7 +225,7 @@ void insertByteRepeat(autoBlock_t *i, uint index, uint byte, uint count)
 	errorCase(i->Size < index);
 	errorCase(BLOCK_SIZE_MAX - i->Size < count); // ? ブロックサイズの上限を超える。
 
-	if(count)
+	if (count)
 	{
 		uint n;
 
@@ -246,7 +246,7 @@ void insertByteRepeat(autoBlock_t *i, uint index, uint byte, uint count)
 		while(1)
 		{
 			i->Block[n] = byte;
-			if(n == index) break;
+			if (n == index) break;
 			n--;
 		}
 #endif
@@ -344,7 +344,7 @@ void setSize(autoBlock_t *i, uint size)
 	oldSize = i->Size;
 	Resize(i, size);
 
-	if(oldSize < i->Size)
+	if (oldSize < i->Size)
 	{
 		memset(i->Block + oldSize, 0x00, i->Size - oldSize); // 未定義部をゼロで整地する。
 	}
@@ -448,7 +448,7 @@ void reverseBytes(autoBlock_t *i)
 
 	errorCase(!i);
 
-	if(i->Size)
+	if (i->Size)
 	{
 		for(n = 0, f = i->Size - 1; n < f; n++, f--)
 		{
@@ -551,7 +551,7 @@ uint findByteMatch(autoBlock_t *i, int (*match)(uint))
 	uint index;
 
 	for(index = 0; index < i->Size; index++)
-		if(match(i->Block[index]))
+		if (match(i->Block[index]))
 			break;
 
 	return index;

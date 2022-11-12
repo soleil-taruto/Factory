@@ -25,7 +25,7 @@ static void Test_mt19937_range_Range(uint minval, uint maxval)
 			errorCase(r < minval);
 			errorCase(maxval < r);
 
-			if(r == count)
+			if (r == count)
 			{
 				break;
 			}

@@ -97,11 +97,11 @@ static char *GetZip7File(void)
 {
 	static char *file;
 
-	if(!file)
+	if (!file)
 	{
 		file = ZIP7_LOCAL_FILE;
 
-		if(!existFile(file))
+		if (!existFile(file))
 		{
 			file = ZIP7_FILE;
 			errorCase_m(!existFile(file), "[" ZIP7_FILE "]が見つかりません。");
@@ -117,7 +117,7 @@ static char *IntoIfOneDir(char *dir)
 	{
 		autoList_t *paths = ls(dir);
 
-		if(getCount(paths) != 1 || !existDir(getLine(paths, 0)))
+		if (getCount(paths) != 1 || !existDir(getLine(paths, 0)))
 		{
 			releaseDim(paths, 1);
 			break;
@@ -149,7 +149,7 @@ static void PackZipFile(char *zipFile, char *srcDir)
 	cout("| %s |\n", md5 = md5_makeHexHashFile(zipFile));
 	cout("+----------------------------------+\n");
 
-	if(isFactoryDirEnabled()) // history
+	if (isFactoryDirEnabled()) // history
 	{
 		autoList_t *lines = existFile(ZIP_MD5_HISTORY_FILE) ?
 			readLines(ZIP_MD5_HISTORY_FILE) :
@@ -173,7 +173,7 @@ static uint InputVersion(void) // ret: 0 == cancel, 1 ～ 999 == "0.01" ～ "9.99"
 	char *sVersion;
 	uint version;
 
-	if(IsBatchMode())
+	if (IsBatchMode())
 	{
 		LOGPOS();
 		return VER_CALENDAR;
@@ -184,7 +184,7 @@ static uint InputVersion(void) // ret: 0 == cancel, 1 ～ 999 == "0.01" ～ "9.99"
 
 	sVersion = coInputLine();
 
-	if(*sVersion)
+	if (*sVersion)
 	{
 		version = toValue(sVersion);
 		m_range(version, 0, 999);
@@ -203,14 +203,14 @@ static uint FindStringInExe(autoBlock_t *text, char *ptnString) // ret: UINTMAX 
 	for(index = 0; index < getSize(text); index++)
 	{
 	recheck:
-		if(getByte(text, index) == ptnString[rPos]) // 最後の '\0' まで一致するか判定する。
+		if (getByte(text, index) == ptnString[rPos]) // 最後の '\0' まで一致するか判定する。
 		{
-			if(ptnString[rPos] == '\0') // ? found
+			if (ptnString[rPos] == '\0') // ? found
 				return index - rPos;
 
 			rPos++;
 		}
-		else if(rPos)
+		else if (rPos)
 		{
 			rPos = 0;
 			goto recheck;
@@ -250,7 +250,7 @@ static char *MakeRev(void)
 	char *revFile = makeTempPath(NULL);
 	char *rev;
 
-	if(MakeRev_GameExeMode) // add @ 2022.6.11
+	if (MakeRev_GameExeMode) // add @ 2022.6.11
 	{
 		uint t;
 
@@ -270,7 +270,7 @@ static char *MakeRev(void)
 	errorCase(!lineExp("<14,09>", rev)); // 2bs
 	removeFile_x(revFile);
 
-//	if(rev[13] == '0') // 最後の文字が '0' になるのが嫌なので... // del @ 2022.6.11
+//	if (rev[13] == '0') // 最後の文字が '0' になるのが嫌なので... // del @ 2022.6.11
 //		rev[13] = '1';
 
 	cout("%s <- rev\n", rev);
@@ -282,7 +282,7 @@ static char *GetRev(void) // c_
 {
 	static char *rev;
 
-	if(!rev)
+	if (!rev)
 		rev = MakeRev();
 
 	return rev;
@@ -327,7 +327,7 @@ static void ReplaceVersion(char *dir, uint version) // version: 1 ～ 999, VER_CA
 	char *manVersion;
 	char *exeVersion;
 
-	if(version == VER_CALENDAR)
+	if (version == VER_CALENDAR)
 	{
 		manVersion = strx(GetRev_Dot());
 //		manVersion = xcout("BETA_%s", GetRev()); // old
@@ -342,13 +342,13 @@ static void ReplaceVersion(char *dir, uint version) // version: 1 ～ 999, VER_CA
 
 	foreach(files, file, index)
 	{
-		if(
+		if (
 			!_stricmp("Readme.txt", getLocal(file)) ||
 			!_stricmp("Manual.txt", getLocal(file)) ||
 			!_stricmp("マニュアル.txt", getLocal(file)) ||
 			!_stricmp("Properties.dat", getLocal(file))
 			)
-//		if(!_stricmp("txt", getExt(file))) // old @ 2017.8.5
+//		if (!_stricmp("txt", getExt(file))) // old @ 2017.8.5
 		{
 			char *text = readText(file);
 			char *newText;
@@ -358,7 +358,7 @@ static void ReplaceVersion(char *dir, uint version) // version: 1 ～ 999, VER_CA
 
 			LOGPOS();
 
-			if(strcmp(text, newText)) // ? text != newText
+			if (strcmp(text, newText)) // ? text != newText
 			{
 				LOGPOS();
 				writeOneLineNoRet(file, newText);
@@ -366,7 +366,7 @@ static void ReplaceVersion(char *dir, uint version) // version: 1 ～ 999, VER_CA
 			memFree(text);
 			memFree(newText);
 		}
-		else if(!ReplaceVersionExeFileDisabled && !_stricmp("exe", getExt(file)))
+		else if (!ReplaceVersionExeFileDisabled && !_stricmp("exe", getExt(file)))
 		{
 			static char *CONCERT_PTN = "{a9a54906-791d-4e1a-8a71-a4c69359cf68}:0.00"; // shared_uuid@g
 			autoBlock_t *text = readBinary(file);
@@ -376,7 +376,7 @@ static void ReplaceVersion(char *dir, uint version) // version: 1 ～ 999, VER_CA
 
 			LOGPOS();
 
-			if(conPos != UINTMAX)
+			if (conPos != UINTMAX)
 			{
 				LOGPOS();
 #if 1
@@ -410,7 +410,7 @@ static char *GetPathTailVer(uint version) // c_
 
 	memFree(pathTail);
 
-	if(version == VER_CALENDAR)
+	if (version == VER_CALENDAR)
 		pathTail = xcout("_v%s", GetRev_Hyp());
 //		pathTail = xcout("_BETA_%s", GetRev()); // old
 	else
@@ -425,16 +425,16 @@ static void PackZipFileEx_K1D(char *zipFile, char *srcDir, int srcDirRmFlag, cha
 
 	srcDir = strx(srcDir);
 
-	if(!keepOneDir)
+	if (!keepOneDir)
 		srcDir = IntoIfOneDir(srcDir);
 
 	destDir = strx(workDir);
 
-	if(baseName)
+	if (baseName)
 	{
 		char *tmpbn;
 
-		if(!strcmp(baseName, BASENAME_AUTO))
+		if (!strcmp(baseName, BASENAME_AUTO))
 		{
 			tmpbn = changeExt(getLocal(zipFile), "");
 			cout("baseName: %s -> %s\n", BASENAME_AUTO, tmpbn);
@@ -445,12 +445,12 @@ static void PackZipFileEx_K1D(char *zipFile, char *srcDir, int srcDirRmFlag, cha
 		destDir = combine_xc(destDir, tmpbn);
 		memFree(tmpbn);
 
-		if(version)
+		if (version)
 			destDir = addLine(destDir, GetPathTailVer(version));
 
 		createDir(destDir);
 	}
-	if(srcDirRmFlag)
+	if (srcDirRmFlag)
 	{
 		moveDir(srcDir, destDir);
 		removeDir(srcDir);
@@ -458,7 +458,7 @@ static void PackZipFileEx_K1D(char *zipFile, char *srcDir, int srcDirRmFlag, cha
 	else
 		copyDir(srcDir, destDir);
 
-	if(version)
+	if (version)
 		ReplaceVersion(destDir, version);
 
 	PackZipFile(zipFile, workDir);
@@ -490,7 +490,7 @@ static void RepackAllZipFile(char *rootDir)
 
 	foreach(files, file, index)
 	{
-		if(!_stricmp("ZIP", getExt(file)))
+		if (!_stricmp("ZIP", getExt(file)))
 		{
 			char *baseName = getLocal(file);
 
@@ -512,12 +512,12 @@ static int ChangePEDisabled;
 
 static void AdjustAllPETimeDateStamp(char *dir)
 {
-	if(!ChangePEDisabled)
+	if (!ChangePEDisabled)
 		ChangeAllPETimeDateStamp(dir, 0x5aaaaaaa);
 }
 static char *x_ProjNameFilter(char *projName)
 {
-	if(!strcmp(projName, PROJNAME_AUTO))
+	if (!strcmp(projName, PROJNAME_AUTO))
 	{
 		char *tmppn = getCwd();
 
@@ -539,24 +539,24 @@ int main(int argc, char **argv)
 	errorCase_m(!existFile(ZIP7_LOCAL_FILE) && !existFile(ZIP7_FILE), "7zさんが居ません。");
 
 readArgs:
-	if(argIs("/PE-"))
+	if (argIs("/PE-"))
 	{
 		LOGPOS();
 		ChangePEDisabled = 1;
 		goto readArgs;
 	}
-	if(argIs("/RVE-"))
+	if (argIs("/RVE-"))
 	{
 		LOGPOS();
 		ReplaceVersionExeFileDisabled = 1;
 		goto readArgs;
 	}
-	if(argIs("/B")) // カレンダー・バージョンを使用する。
+	if (argIs("/B")) // カレンダー・バージョンを使用する。
 	{
 		autoVersion = VER_CALENDAR;
 		goto readArgs;
 	}
-	if(argIs("/V")) // バージョン番号を指定する。
+	if (argIs("/V")) // バージョン番号を指定する。
 	{
 		autoVersion = toValue(nextArg());
 		errorCase(!m_isRange(autoVersion, 1, 999));
@@ -567,7 +567,7 @@ readArgs:
 		★★★ パスはこの関数内でフルパスにすること。★★★
 	*/
 
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		char *zipFile;
 		char *srcDir;
@@ -589,7 +589,7 @@ readArgs:
 		memFree(baseName);
 		return;
 	}
-	if(argIs("/PK"))
+	if (argIs("/PK"))
 	{
 		char *zipFile;
 		char *srcDir;
@@ -611,7 +611,7 @@ readArgs:
 		memFree(baseName);
 		return;
 	}
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		char *zipFile;
 		char *baseName;
@@ -629,7 +629,7 @@ readArgs:
 		memFree(baseName);
 		return;
 	}
-	if(argIs("/RB"))
+	if (argIs("/RB"))
 	{
 		char *zipFile;
 		char *baseName;
@@ -649,7 +649,7 @@ readArgs:
 		memFree(baseName);
 		return;
 	}
-	if(argIs("/RBD"))
+	if (argIs("/RBD"))
 	{
 		char *rootDir = makeFullPath(nextArg());
 
@@ -661,7 +661,7 @@ readArgs:
 		memFree(rootDir);
 		return;
 	}
-	if(argIs("/O")) // C:\Dev のリリース向け
+	if (argIs("/O")) // C:\Dev のリリース向け
 	{
 		char *outDir;
 		char *projName;
@@ -694,7 +694,7 @@ readArgs:
 		memFree(midZipFile);
 		return;
 	}
-	if(argIs("/G")) // C:\Dev のゲーム（バージョン番号付きアプリ）のリリース向け
+	if (argIs("/G")) // C:\Dev のゲーム（バージョン番号付きアプリ）のリリース向け
 	{
 		char *outDir;
 		char *projName;
@@ -709,7 +709,7 @@ readArgs:
 		destZipFile = combine_cx(outDir, addExt(xcout("%s%s", projName, GetPathTailVer(version)), "zip"));
 		midZipFile = makeTempPath("zip");
 
-		if(version)
+		if (version)
 		{
 			cout("[Pack(Game)]\n");
 			cout("outDir: %s\n", outDir);
@@ -744,7 +744,7 @@ readArgs:
 		memFree(midZipFile);
 		return;
 	}
-	if(argIs("/X"))
+	if (argIs("/X"))
 	{
 		char *zipFile;
 		char *outDir;
@@ -754,7 +754,7 @@ readArgs:
 
 		errorCase(!existFile(zipFile));
 
-		if(!existDir(outDir))
+		if (!existDir(outDir))
 			createPath(outDir, 'D');
 
 		ExtractZipFile(zipFile, outDir);
@@ -763,7 +763,7 @@ readArgs:
 		memFree(outDir);
 		return;
 	}
-	if(argIs("/U"))
+	if (argIs("/U"))
 	{
 		char *zipFile;
 		char *outDir;
@@ -775,7 +775,7 @@ readArgs:
 
 		errorCase(!existFile(zipFile));
 
-		if(!existDir(outDir))
+		if (!existDir(outDir))
 			createPath(outDir, 'D');
 
 		midDir = makeFreeDir();

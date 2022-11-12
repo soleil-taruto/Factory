@@ -26,7 +26,7 @@ static void SendUpFile(int sock)
 	cout("Header\n");
 
 	while(getSize(buffer))
-		if(SockSendSequ(sock, buffer, 3000) == -1)
+		if (SockSendSequ(sock, buffer, 3000) == -1)
 			return;
 
 	cout("Header End\n");
@@ -40,16 +40,16 @@ static void SendUpFile(int sock)
 
 	for(; ; )
 	{
-		if(getSize(buffer) < UFBUFF_SIZE)
+		if (getSize(buffer) < UFBUFF_SIZE)
 			ab_addBytes_x(buffer, readBinaryBlock(fp, UFBUFF_SIZE));
 
-		if(getSize(buffer) == 0)
+		if (getSize(buffer) == 0)
 			break;
 
-		if(SockSendSequ(sock, buffer, 1) == -1)
+		if (SockSendSequ(sock, buffer, 1) == -1)
 			return;
 
-		if(pulseSec(10, NULL))
+		if (pulseSec(10, NULL))
 		{
 			char *strw = xcout("%I64d", _ftelli64(fp));
 			char *strx;
@@ -74,12 +74,12 @@ int main(int argc, char **argv)
 
 	domain = strx(nextArg());
 
-	if(p = strchr(domain, '/'))
+	if (p = strchr(domain, '/'))
 	{
 		*p = '\0';
 		URLPhrase = p + 1;
 	}
-	if(p = strchr(domain, ':'))
+	if (p = strchr(domain, ':'))
 	{
 		*p = '\0';
 		portno = toValue(p + 1);
@@ -88,7 +88,7 @@ int main(int argc, char **argv)
 	cout("港: %u\n", portno);
 	cout("URL-phrase: %s\n", URLPhrase);
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		UpFile = makeFullPath(nextArg());
 		cout("ファイル: %s\n", UpFile);
@@ -100,7 +100,7 @@ int main(int argc, char **argv)
 	*(uint *)ip = 0;
 	sockClientUserTransmit(ip, domain, portno, SendUpFile);
 
-	if(!SUFSuccessful)
+	if (!SUFSuccessful)
 		error();
 
 	cout("送信完了\n");

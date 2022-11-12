@@ -10,7 +10,7 @@ static char *GetToolkitExeFile(void)
 {
 	static char *file;
 
-	if(!file)
+	if (!file)
 		file = GetCollaboFile("C:\\app\\Kit\\Toolkit\\Toolkit.exe");
 
 	return file;
@@ -56,7 +56,7 @@ int main(int argc, char **argv)
 	errorCase(!existFile(JihoWavFile));
 	errorCase(_stricmp(getExt(JihoWavFile), "wav"));
 
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		PlayJiho();
 		return;
@@ -69,23 +69,23 @@ int main(int argc, char **argv)
 		uint rem = (3600 - (uint)((time(NULL) + MUON_SEC + JIHO_DELAY_SEC) % 3600)) % 3600;
 		uint millis;
 
-		if(rem == 0)
+		if (rem == 0)
 		{
 			PlayJiho();
 		}
-		else if(rem == 1)
+		else if (rem == 1)
 		{
 			millis = 100;
 		}
-		else if(rem == 2)
+		else if (rem == 2)
 		{
 			millis = 300;
 		}
-		else if(rem == 3)
+		else if (rem == 3)
 		{
 			millis = 500;
 		}
-		else if(rem <= 10)
+		else if (rem <= 10)
 		{
 			millis = 1000;
 		}
@@ -100,10 +100,10 @@ int main(int argc, char **argv)
 		{
 			int key = waitKey(millis);
 
-			if(key == 0x1b)
+			if (key == 0x1b)
 				break;
 
-			if(key == 0x0d)
+			if (key == 0x0d)
 			{
 				cout("################\n");
 				cout("## ƒeƒXƒgŽž•ñ ##\n");

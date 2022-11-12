@@ -51,10 +51,10 @@ static void LoadDir(char *name)
 	uint index;
 
 	for(index = 0; index < getCount(lines); index += 2)
-		if(!_stricmp(name, getLine(lines, index)))
+		if (!_stricmp(name, getLine(lines, index)))
 			break;
 
-	if(index < getCount(lines))
+	if (index < getCount(lines))
 	{
 		writeOneLine_cx(BATCH_FILE, xcout("CD /D \"%s\"", getLine(lines, index + 1)));
 	}
@@ -70,10 +70,10 @@ static void OpenDir(char *name)
 	uint index;
 
 	for(index = 0; index < getCount(lines); index += 2)
-		if(!_stricmp(name, getLine(lines, index)))
+		if (!_stricmp(name, getLine(lines, index)))
 			break;
 
-	if(index < getCount(lines))
+	if (index < getCount(lines))
 	{
 		coExecute_x(xcout("START \"\" \"%s\"", getLine(lines, index + 1)));
 	}
@@ -89,10 +89,10 @@ static void ForgetDir(char *name)
 	uint index;
 
 	for(index = 0; index < getCount(lines); index += 2)
-		if(!_stricmp(name, getLine(lines, index)))
+		if (!_stricmp(name, getLine(lines, index)))
 			break;
 
-	if(index < getCount(lines))
+	if (index < getCount(lines))
 	{
 		memFree((char *)desertElement(lines, index)); // NAME
 		memFree((char *)desertElement(lines, index)); // ディレクトリ
@@ -109,9 +109,9 @@ int main(int argc, char **argv)
 	createFileIfNotExist(SAVE_FILE);
 	removeFileIfExist(BATCH_FILE);
 
-	if(argIs("/C")) // Clear
+	if (argIs("/C")) // Clear
 	{
-		if(hasArgs(1))
+		if (hasArgs(1))
 		{
 			ForgetDir(nextArg());
 			return;
@@ -123,7 +123,7 @@ int main(int argc, char **argv)
 				"続行？\n"
 				);
 
-			if(getKey() == 0x1b)
+			if (getKey() == 0x1b)
 				termination(0);
 
 			cout("続行！\n");
@@ -132,9 +132,9 @@ int main(int argc, char **argv)
 		removeFile(SAVE_FILE);
 		return;
 	}
-	if(argIs("/O")) // Open
+	if (argIs("/O")) // Open
 	{
-		if(hasArgs(1))
+		if (hasArgs(1))
 		{
 			OpenDir(nextArg());
 		}
@@ -144,7 +144,7 @@ int main(int argc, char **argv)
 		}
 		return;
 	}
-	if(argIs("/CZ")) // Clear 0 ～ 999
+	if (argIs("/CZ")) // Clear 0 ～ 999
 	{
 		uint n;
 
@@ -159,7 +159,7 @@ int main(int argc, char **argv)
 		return;
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		LoadDir(nextArg());
 	}

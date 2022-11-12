@@ -22,7 +22,7 @@ static int MarumeCell(autoTable_t *map, int x, int y)
 		int sx = x + xc;
 		int sy = y + yc;
 
-		if(
+		if (
 			0 <= sx && sx < w &&
 			0 <= sy && sy < h
 			)
@@ -33,7 +33,7 @@ static int MarumeCell(autoTable_t *map, int x, int y)
 			ctr[getTableCell(map, sx, sy)]++;
 		}
 	}
-	if(ctr[0] != ctr[1])
+	if (ctr[0] != ctr[1])
 	{
 		setTableCell(map, x, y, ctr[0] < ctr[1] ? 1 : 0);
 	}
@@ -67,7 +67,7 @@ static void MakeMap(int w, int h, int seed, int count)
 		count--;
 	}
 
-	if(WipeMode)
+	if (WipeMode)
 	{
 		int c;
 
@@ -102,7 +102,7 @@ LOGPOS();
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/W"))
+	if (argIs("/W"))
 	{
 		WipeMode = 1;
 	}

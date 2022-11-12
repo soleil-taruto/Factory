@@ -24,21 +24,21 @@ static void ImageEditor(void)
 	{
 		char *command = coInputLinePrn(CommandPrint);
 
-		if(!_stricmp(command, "q"))
+		if (!_stricmp(command, "q"))
 		{
 			memFree(command);
 			break;
 		}
-		if(!*command)
+		if (!*command)
 		{
 			// noop
 		}
-		else if(!_stricmp(command, "s!"))
+		else if (!_stricmp(command, "s!"))
 		{
 			cout("Save: %s\n", ImgFile);
 			SaveImageFile(ImgFile);
 		}
-		else if(!_stricmp(command, "s"))
+		else if (!_stricmp(command, "s"))
 		{
 			char *file = toCreatableTildaPath(strx(ImgFile), IMAX);
 
@@ -60,7 +60,7 @@ int main(int argc, char **argv)
 {
 	isJChar(0); // preloading
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 		ImgFile = nextArg();
 	else
 		ImgFile = c_dropFile();

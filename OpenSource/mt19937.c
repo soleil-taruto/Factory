@@ -70,7 +70,7 @@ uint mt19937_range(uint minval, uint maxval) // ret: minval Å` maxval
 {
 	errorCase(maxval < minval);
 
-	if(minval == 0 && maxval == UINTMAX)
+	if (minval == 0 && maxval == UINTMAX)
 	{
 		return mt19937_rnd32();
 	}
@@ -104,7 +104,7 @@ uint64 mt19937_range64(uint64 minval, uint64 maxval) // ret: minval Å` maxval
 {
 	errorCase(maxval < minval);
 
-	if(minval == 0 && maxval == UINT64MAX)
+	if (minval == 0 && maxval == UINT64MAX)
 	{
 		return mt19937_rnd64();
 	}
@@ -118,7 +118,7 @@ void mt19937_rndBlock(void *block, uint size)
 	{
 		((uint *)block)[index] = mt19937_rnd32();
 	}
-	if(size & 3)
+	if (size & 3)
 	{
 		uint value = mt19937_rnd32();
 

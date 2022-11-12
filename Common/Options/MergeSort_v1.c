@@ -48,7 +48,7 @@ static void MergePart(
 
 	while(element1 && element2)
 	{
-		if(compElement(element1, element2) <= 0) // ? element1 <= element2
+		if (compElement(element1, element2) <= 0) // ? element1 <= element2
 		{
 			writeElement_x(wfp, element1);
 			element1 = readElement(rfp1);
@@ -64,7 +64,7 @@ static void MergePart(
 		FILE *tfp;
 		uint tElement;
 
-		if(element1)
+		if (element1)
 		{
 			tfp = rfp1;
 			tElement = element1;
@@ -135,7 +135,7 @@ void MergeSort(
 	FILE *fp;
 	uint64 startPos = 0;
 
-	if(textMode)
+	if (textMode)
 	{
 		rMode = "rt";
 		wMode = "wt";
@@ -152,10 +152,10 @@ void MergeSort(
 		uint element = readElement(fp);
 		uint64 currPos;
 
-		if(!element)
+		if (!element)
 			break;
 
-		if(!elements)
+		if (!elements)
 			elements = createAutoList(partSize / 100 + 1);
 
 		addElement(elements, element);
@@ -163,7 +163,7 @@ void MergeSort(
 		currPos = _ftelli64(fp);
 		errorCase(currPos < 0);
 
-		if(startPos + partSize <= currPos || partSize / 100 < getCount(elements))
+		if (startPos + partSize <= currPos || partSize / 100 < getCount(elements))
 		{
 			CommitPart(partFiles, wMode, writeElement_x, compElement, elements);
 			elements = NULL;
@@ -181,7 +181,7 @@ void MergeSort(
 			}
 		}
 	}
-	if(elements)
+	if (elements)
 		CommitPart(partFiles, wMode, writeElement_x, compElement, elements);
 
 	fileClose(fp);

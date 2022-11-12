@@ -8,12 +8,12 @@ static void ExecuteQuery(char *query)
 	char *line;
 	uint index;
 
-	if(!getCount(rows))
+	if (!getCount(rows))
 	{
 		cout("no-rows\n");
 		goto noData;
 	}
-	if(!getCount(getList(rows, 0)))
+	if (!getCount(getList(rows, 0)))
 	{
 		cout("no-cols\n");
 		goto noData;
@@ -74,7 +74,7 @@ noData:;
 }
 int main(int argc, char **argv)
 {
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		char *query = untokenize(getFollowArgs(0), " ");
 
@@ -88,7 +88,7 @@ int main(int argc, char **argv)
 	{
 		char *query = coInputLine();
 
-		if(!*query)
+		if (!*query)
 		{
 			memFree(query);
 			break;

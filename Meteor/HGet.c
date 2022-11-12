@@ -4,7 +4,7 @@ static char *GetHGetFile(void)
 {
 	static char *file;
 
-	if(!file)
+	if (!file)
 		file = GetCollaboFile("C:\\app\\Kit\\HGet\\HGet.exe");
 
 	return file;
@@ -46,22 +46,22 @@ void HGet_Reset(void)
 	NoTrafficTimeoutMillis  = 15000;
 	strzp(&Url, "http://localhost/");
 	HTTPVersion = 11;
-	if(Header)    { releaseDim(Header, 2);    }
-	if(ResHeader) { releaseDim(ResHeader, 2); }
+	if (Header)    { releaseDim(Header, 2);    }
+	if (ResHeader) { releaseDim(ResHeader, 2); }
 	Header = newList();
 	ResHeader = newList();
-	if(Body1) { releaseAutoBlock(Body1); }
+	if (Body1) { releaseAutoBlock(Body1); }
 	memFree(Body2File);
-	if(Body3) { releaseAutoBlock(Body3); }
+	if (Body3) { releaseAutoBlock(Body3); }
 	Body1 = NULL;
 	Body2File = NULL;
 	Body3 = NULL;
-	if(!Body1TmpFile)   { Body1TmpFile   = makeTempPath("HGet_Body1.tmp");          }
-	if(!Body3TmpFile)   { Body3TmpFile   = makeTempPath("HGet_Body3.tmp");          }
-	if(!SuccessfulFile) { SuccessfulFile = makeTempPath("HGet_Successful.flg.tmp"); }
-	if(!ResHeaderFile)  { ResHeaderFile  = makeTempPath("HGet_ResHeader.tmp");      }
-	if(!ResBodyFile)    { ResBodyFile    = makeTempPath("HGet_ResBody.tmp");        }
-	if(!ParamFile)      { ParamFile      = makeTempPath("HGet_Param.tmp");          }
+	if (!Body1TmpFile)   { Body1TmpFile   = makeTempPath("HGet_Body1.tmp");          }
+	if (!Body3TmpFile)   { Body3TmpFile   = makeTempPath("HGet_Body3.tmp");          }
+	if (!SuccessfulFile) { SuccessfulFile = makeTempPath("HGet_Successful.flg.tmp"); }
+	if (!ResHeaderFile)  { ResHeaderFile  = makeTempPath("HGet_ResHeader.tmp");      }
+	if (!ResBodyFile)    { ResBodyFile    = makeTempPath("HGet_ResBody.tmp");        }
+	if (!ParamFile)      { ParamFile      = makeTempPath("HGet_Param.tmp");          }
 	ResBodySizeMax = IMAX_64;
 	Resetted = 1;
 
@@ -146,7 +146,7 @@ static void SetBody1(autoBlock_t *body)
 	errorCase(!Resetted);
 	errorCase(!body);
 
-	if(Body1)
+	if (Body1)
 		releaseAutoBlock(Body1);
 
 	Body1 = copyAutoBlock(body);
@@ -164,7 +164,7 @@ static void SetBody3(autoBlock_t *body)
 	errorCase(!Resetted);
 	errorCase(!body);
 
-	if(Body3)
+	if (Body3)
 		releaseAutoBlock(Body3);
 
 	Body3 = copyAutoBlock(body);
@@ -262,19 +262,19 @@ static int Perform(int method) // method: "HGP"
 		writeLine(fp, asLine(getLine(pair, 0)));
 		writeLine(fp, asLine(getLine(pair, 1)));
 	}
-	if(Body1)
+	if (Body1)
 	{
 		writeBinary(Body1TmpFile, Body1);
 
 		writeLine(fp, "/B");
 		writeLine(fp, Body1TmpFile);
 	}
-	if(Body2File)
+	if (Body2File)
 	{
 		writeLine(fp, "/F");
 		writeLine(fp, Body2File);
 	}
-	if(Body3)
+	if (Body3)
 	{
 		writeBinary(Body3TmpFile, Body3);
 
@@ -304,7 +304,7 @@ static int Perform(int method) // method: "HGP"
 
 	coExecute_x(xcout("START \"\" /B /WAIT \"%s\" //R \"%s\"", GetHGetFile(), ParamFile));
 
-	if(!existFile(SuccessfulFile)) // ? é∏îsÇµÇΩÅB
+	if (!existFile(SuccessfulFile)) // ? é∏îsÇµÇΩÅB
 	{
 		removeFileIfExist(ResBodyFile); // é∏îsÇµÇΩÇÁ res-body ÇÕïKÇ∏ãÛÅB
 		return 0;
@@ -315,7 +315,7 @@ static int Perform(int method) // method: "HGP"
 	{
 		line = readLine(fp);
 
-		if(!line)
+		if (!line)
 			break;
 
 		p = strstr(line, ": ");
@@ -375,7 +375,7 @@ void HGet_MvResBodyFile(char *destFile)
 {
 	errorCase(!Resetted);
 
-	if(!existFile(ResBodyFile))
+	if (!existFile(ResBodyFile))
 		createFile(destFile);
 
 	moveFile(ResBodyFile, destFile);
@@ -384,7 +384,7 @@ autoBlock_t *HGet_GetResBody(void)
 {
 	errorCase(!Resetted);
 
-	if(!existFile(ResBodyFile))
+	if (!existFile(ResBodyFile))
 		return newBlock();
 
 	return readBinary(ResBodyFile);

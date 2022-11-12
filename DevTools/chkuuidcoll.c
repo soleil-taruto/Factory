@@ -34,12 +34,12 @@ static void Line2Fmt(char *line)
 
 	for(p = line; *p; p++)
 	{
-		if(isMbc(p))
+		if (isMbc(p))
 		{
 			*p++ = 'K';
 			*p = 'K';
 		}
-		else if(m_ishexadecimal(*p))
+		else if (m_ishexadecimal(*p))
 		{
 			*p = '9';
 		}
@@ -56,12 +56,12 @@ static char *GetProject(char *file)
 	{
 		path = getParent_x(path);
 
-		if(isAbsRootDir(path))
+		if (isAbsRootDir(path))
 			break;
 
 		rumDir = addExt(strx(path), "rum");
 
-		if(existDir(rumDir))
+		if (existDir(rumDir))
 		{
 			memFree(rumDir);
 			break;
@@ -87,7 +87,7 @@ static void CollectUUIDByFile(char *file)
 		{
 			char *uuidP = line + ((uint)p - (uint)fmt);
 
-			if(!startsWith(uuidP, UUID_FMT)) // ? not UUID_FMT
+			if (!startsWith(uuidP, UUID_FMT)) // ? not UUID_FMT
 			{
 				UUID_t *i = nb_(UUID_t);
 				char *pp;
@@ -100,26 +100,26 @@ static void CollectUUIDByFile(char *file)
 //				i->SharedNum = 0;
 				i->Project = GetProject(file);
 
-				if(pp)
+				if (pp)
 				{
 					pp += strlen(SHARED_PTN);
 
-					if(startsWith(pp, GLOBAL_SFX)) // グローバル指定
+					if (startsWith(pp, GLOBAL_SFX)) // グローバル指定
 					{
 						i->GlobalFlag = 1;
 					}
-					else if(startsWith(pp, IGNORE_SFX)) // このUUIDの存在を無視する。
+					else if (startsWith(pp, IGNORE_SFX)) // このUUIDの存在を無視する。
 					{
 						goto ignoreThisUUID; // gomi: i
 					}
-					else if(*pp == NUM_JOINT_CHR) // 個数指定
+					else if (*pp == NUM_JOINT_CHR) // 個数指定
 					{
 						char *q;
 
 						pp++;
 
 						for(q = pp; *q; q++)
-							if(!m_isdecimal(*q))
+							if (!m_isdecimal(*q))
 								break;
 
 						errorCase(q == pp); // 個数が記述されていない。
@@ -150,14 +150,14 @@ static int IsTargetFile(char *file)
 }
 static void CollectUUIDByPath(char *path)
 {
-	if(existDir(path))
+	if (existDir(path))
 	{
 		autoList_t *files = lssFiles(path);
 		char *file;
 		uint index;
 
 		foreach(files, file, index)
-			if(IsTargetFile(file))
+			if (IsTargetFile(file))
 				CollectUUIDByFile(file);
 
 		releaseDim(files, 1);
@@ -169,7 +169,7 @@ static void CollectUUID(void)
 {
 	UUIDList = newList();
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		while(hasArgs(1))
 		{
@@ -205,7 +205,7 @@ static sint CompUUIDByUUID(uint i, uint j)
 {
 	sint ret = _stricmp(((UUID_t *)i)->UUID, ((UUID_t *)j)->UUID);
 
-	if(ret)
+	if (ret)
 		return ret;
 
 	return mbs_stricmp(((UUID_t *)i)->File, ((UUID_t *)j)->File);
@@ -221,15 +221,15 @@ static void DispAllUUID_2(char *title)
 	{
 		char *sflg;
 
-		if(!i->SharedFlag)
+		if (!i->SharedFlag)
 		{
 			sflg = strx("-");
 		}
-		else if(i->GlobalFlag)
+		else if (i->GlobalFlag)
 		{
 			sflg = strx("G");
 		}
-		else if(!i->SharedNum)
+		else if (!i->SharedNum)
 		{
 			sflg = strx("S");
 		}
@@ -263,7 +263,7 @@ static uint GetProjectCountUUID(char *target)
 	uint count;
 
 	foreach(UUIDList, i, index)
-		if(!_stricmp(i->UUID, target)) // 大文字小文字だけ違うUUID -> 同じと見なす。
+		if (!_stricmp(i->UUID, target)) // 大文字小文字だけ違うUUID -> 同じと見なす。
 			addElement(prjs, (uint)strx(i->Project));
 
 	prjs = autoDistinctJLinesICase(prjs);
@@ -278,7 +278,7 @@ static uint GetUUIDCount(char *target)
 	uint count = 0;
 
 	foreach(UUIDList, i, index)
-		if(!_stricmp(i->UUID, target)) // 大文字小文字だけ違うUUID -> 同じと見なす。
+		if (!_stricmp(i->UUID, target)) // 大文字小文字だけ違うUUID -> 同じと見なす。
 			count++;
 
 	return count;
@@ -290,7 +290,7 @@ static void DispAllWarning(void)
 
 	foreach(UUIDList, i, index)
 	{
-		if(i->SharedFlag && GetUUIDCount(i->UUID) < 2)
+		if (i->SharedFlag && GetUUIDCount(i->UUID) < 2)
 		{
 			cout("----\n");
 			cout("共有指定されているけど共有されていない。\n");
@@ -308,11 +308,11 @@ static void DispAllUUIDError(void)
 	foreach(UUIDList, i, index_i)
 	foreach(UUIDList, j, index_j)
 	{
-		if(
+		if (
 			index_i != index_j &&
 			!strcmp(i->UUID, j->UUID)
 			)
-		if(
+		if (
 			m_01(i->SharedFlag) != m_01(j->SharedFlag) ||
 			m_01(i->GlobalFlag) != m_01(j->GlobalFlag) ||
 			i->SharedNum != j->SharedNum
@@ -331,7 +331,7 @@ static void DispAllSharedNumError(void)
 
 	foreach(UUIDList, i, index)
 	{
-		if(i->SharedFlag && i->SharedNum && i->SharedNum != GetUUIDCount(i->UUID))
+		if (i->SharedFlag && i->SharedNum && i->SharedNum != GetUUIDCount(i->UUID))
 		{
 			cout("----\n");
 			cout("【警告】個数が合わない。\n");
@@ -350,7 +350,7 @@ static void DispAllCollisionInterProject(void)
 
 	foreach(UUIDList, i, index)
 	{
-		if(!i->GlobalFlag && 2 <= GetProjectCountUUID(i->UUID))
+		if (!i->GlobalFlag && 2 <= GetProjectCountUUID(i->UUID))
 		{
 			cout("----\n");
 			cout("【警告】プロジェクト間で重複している。\n");
@@ -367,7 +367,7 @@ static void DispAllCollision(void)
 
 	foreach(UUIDList, i, index)
 	{
-		if(!i->SharedFlag && 2 <= GetUUIDCount(i->UUID))
+		if (!i->SharedFlag && 2 <= GetUUIDCount(i->UUID))
 		{
 			cout("----\n");
 			cout("【警告】重複している。\n");

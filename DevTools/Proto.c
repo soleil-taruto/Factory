@@ -13,7 +13,7 @@ static autoList_t *MakeProtoList(char *file)
 
 	foreach(lines, line, index)
 	{
-		if(line[0] &&
+		if (line[0] &&
 			line[0] != '\t' &&
 			line[0] != ' ' &&
 			line[0] != '#' &&
@@ -24,7 +24,7 @@ static autoList_t *MakeProtoList(char *file)
 			!strstr(line, "static")
 			)
 		{
-			if(strchr(line, '=') || strchr(line, ';')) // ? •Ï”
+			if (strchr(line, '=') || strchr(line, ';')) // ? •Ï”
 			{
 				strchrEnd(line, '=')[0] = '\0';
 				strchrEnd(line, ';')[0] = '\0';

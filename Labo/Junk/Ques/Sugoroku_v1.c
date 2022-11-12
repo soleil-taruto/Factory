@@ -34,10 +34,10 @@ int main(int argc, char **argv)
 
 		for(c = 0; c < testcnt; c++)
 		{
-			if(c % 1000 == 0)
+			if (c % 1000 == 0)
 				cmdTitle_x(xcout("Sugoroku - %d", c));
 
-			if(TestOnce_VeryFar())
+			if (TestOnce_VeryFar())
 				enactcnt++;
 		}
 		cout("%d / %d = %f -> * 7 = %f\n"
@@ -56,10 +56,10 @@ int main(int argc, char **argv)
 
 		for(c = 0; c < testcnt; c++)
 		{
-			if(c % 1000 == 0)
+			if (c % 1000 == 0)
 				cmdTitle_x(xcout("Sugoroku - %d", c));
 
-			if(TestOnce(d))
+			if (TestOnce(d))
 				enactcnt++;
 		}
 		cout("%2d: %d / %d = %f\n"

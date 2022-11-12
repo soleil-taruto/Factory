@@ -14,11 +14,11 @@ autoTable_t *tReadCSVFile(char *file)
 
 	h = getCount(table);
 
-	if(h)
+	if (h)
 	{
 		w = getCount(getList(table, 0));
 
-		if(w)
+		if (w)
 		{
 			resizeTable(csv, w, h);
 
@@ -51,7 +51,7 @@ void tWriteCSVFile(char *file, autoTable_t *csv)
 		{
 			char *cell = (char *)getTableCell(csv, x, y);
 
-			if(!cell)
+			if (!cell)
 				cell = ""; // NULLƒZƒ‹‚Ì‘ã‘Ö’l
 
 			addElement(row, (uint)cell);

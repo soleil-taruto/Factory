@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 {
 	autoList_t *paths = newList();
 
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		FileOnlyMode = 1;
 	}
@@ -21,10 +21,10 @@ int main(int argc, char **argv)
 	{
 		char *path = dropPath();
 
-		if(!path)
+		if (!path)
 			break;
 
-		if(FileOnlyMode && existDir(path))
+		if (FileOnlyMode && existDir(path))
 		{
 			autoList_t *files = lssFiles(path);
 			sortJLinesICase(files);

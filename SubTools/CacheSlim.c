@@ -67,16 +67,16 @@ static void SlimFile(FileInfo_t *i)
 
 	cout("%s\n", i->File);
 
-	if(timeOld < 3600)
+	if (timeOld < 3600)
 		cout("%I64d 秒", timeOld);
-	else if(timeOld < 86400)
+	else if (timeOld < 86400)
 		cout("%.3f 時間", timeOld / 3600.0);
 	else
 		cout("%.3f 日", timeOld / 86400.0);
 
 	cout("前に生成・更新されたファイルです。\n");
 
-	if(TimeoutSec <= timeOld)
+	if (TimeoutSec <= timeOld)
 	{
 		cout("削除します。\n");
 		removeFile(i->File);
@@ -102,12 +102,12 @@ static void SlimFiles(void)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		TimeoutSec = toValue64(nextArg()) * 86400;
 		goto readArgs;
 	}
-	if(argIs("/H"))
+	if (argIs("/H"))
 	{
 		TimeoutSec = toValue64(nextArg()) * 3600;
 		goto readArgs;

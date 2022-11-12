@@ -24,7 +24,7 @@ $P_t *Create$P(void)
 }
 void Release$P($P_t *i)
 {
-	if(!i)
+	if (!i)
 		return;
 
 	memFree(i);

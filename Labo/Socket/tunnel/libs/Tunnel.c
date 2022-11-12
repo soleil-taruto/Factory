@@ -24,7 +24,7 @@ static void PerformTh(int sock, char *strip)
 
 	fwdSock = sockConnect_NB(ip, FwdHost, FwdPortNo);
 
-	if(fwdSock == -1)
+	if (fwdSock == -1)
 		return;
 
 	errorCase(!UserPerform);
@@ -40,13 +40,13 @@ static int IdleTh(void)
 	{
 		int key = getKey();
 
-		if(key == 0x20)
+		if (key == 0x20)
 			clsFlag = 1;
 
-		if(key == 0x1b) // ? エスケープキー押下 -> 停止要求
+		if (key == 0x1b) // ? エスケープキー押下 -> 停止要求
 			ProcDeadFlag = 1;
 
-		if(key == '1')
+		if (key == '1')
 			setDefConsoleColor();
 
 		// この場所で '0' ～ '9' を予約
@@ -55,13 +55,13 @@ static int IdleTh(void)
 
 		TunnelKeyEvent(key);
 	}
-	if(handleWaitForMillis(StopEventHdl, 0)) // ? 停止要求
+	if (handleWaitForMillis(StopEventHdl, 0)) // ? 停止要求
 		ProcDeadFlag = 1;
 
-	if(clsFlag)
+	if (clsFlag)
 		execute("CLS");
 
-	if(!ProcDeadFlag)
+	if (!ProcDeadFlag)
 		return 1;
 
 	cout("停止します...\n");
@@ -95,27 +95,27 @@ void TunnelMain(int (*userReadArgs)(void), void (*userPerform)(int sock, int fwd
 	StopEventHdl = eventOpen(StopEventName);
 
 readArgs:
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		eventWakeupHandle(StopEventHdl);
 		return;
 	}
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		ConnectMax = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/DOSTO")) // HACK コメントに記載
+	if (argIs("/DOSTO")) // HACK コメントに記載
 	{
 		DOSTimeoutSec = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/CCNDTO")) // HACK コメントに記載
+	if (argIs("/CCNDTO")) // HACK コメントに記載
 	{
 		CC_NoDataTimeoutSec = toValue(nextArg());
 		goto readArgs;
 	}
-	if(userReadArgs())
+	if (userReadArgs())
 	{
 		goto readArgs;
 	}
@@ -137,20 +137,20 @@ readArgs:
 
 static int IsTight_Main(void)
 {
-	if(10 <= sockConnectMax)
+	if (10 <= sockConnectMax)
 		return 0.8999 < sockConnectedRate;
 
-	if(4 <= sockConnectMax)
+	if (4 <= sockConnectMax)
 		return sockConnectMax - 1 <= sockConnectedCount;
 
-	if(2 <= sockConnectMax)
+	if (2 <= sockConnectMax)
 		return sockConnectMax <= sockConnectedCount;
 
 	return 0;
 }
 int IsTight(void)
 {
-	if(IsTight_Main())
+	if (IsTight_Main())
 	{
 		cout("TIGHT!\n");
 		return 1;

@@ -21,7 +21,7 @@ static void Perform(int sock, int fwdSock)
 	int endFlag = 0;
 	uint connectNo = ConnectNoCounter;
 
-	if(ConnectNoCounter == UINTMAX)
+	if (ConnectNoCounter == UINTMAX)
 		ConnectNoCounter = 0;
 	else
 		ConnectNoCounter++;
@@ -39,7 +39,7 @@ static void Perform(int sock, int fwdSock)
 		AddCommSendData(b, aToB, 1);
 		AddCommSendData(a, bToA, 1);
 
-		if(getSize(aToB) || getSize(bToA))
+		if (getSize(aToB) || getSize(bToA))
 			waitMillis = 0;
 		else
 			waitMillis = m_min(waitMillis + 1, 2000);
@@ -49,7 +49,7 @@ static void Perform(int sock, int fwdSock)
 		releaseAutoBlock(aToB);
 		releaseAutoBlock(bToA);
 
-		if(m_01(IsCommDead(a)) | m_01(IsCommDead(b))) // 両方実行したい。
+		if (m_01(IsCommDead(a)) | m_01(IsCommDead(b))) // 両方実行したい。
 			break;
 
 		inner_uncritical();
@@ -73,10 +73,10 @@ static void Perform(int sock, int fwdSock)
 		releaseAutoBlock(aToB);
 		releaseAutoBlock(bToA);
 
-		if(endFlag)
+		if (endFlag)
 			break;
 
-		if(m_01(IsCommDead(a)) & m_01(IsCommDead(b))) // 両方実行したい。
+		if (m_01(IsCommDead(a)) & m_01(IsCommDead(b))) // 両方実行したい。
 			break;
 	}
 

@@ -18,7 +18,7 @@ static void DecodeJP(char *file)
 
 		for(index = 0; index + 2 <= getSize(text); index += 2)
 		{
-			if(
+			if (
 				index + 4 <= getSize(text) &&
 				b_(text)[index + 0] == '\\' && b_(text)[index + 1] == 0x00 &&
 				b_(text)[index + 2] == '\\' && b_(text)[index + 3] == 0x00
@@ -31,7 +31,7 @@ static void DecodeJP(char *file)
 
 				index += 2;
 			}
-			else if(
+			else if (
 				index + 12 <= getSize(text) &&
 				b_(text)[index + 0] == '\\' && b_(text)[index + 1] == 0x00 &&
 				b_(text)[index + 2] == 'u'  && b_(text)[index + 3] == 0x00 &&
@@ -86,7 +86,7 @@ static void EncodeJP(char *file)
 		{
 			uint u16ch = b_(text)[index] | b_(text)[index + 1] << 8;
 
-			if(
+			if (
 				u16ch == '\t' ||
 				u16ch == '\r' ||
 				u16ch == '\n' ||
@@ -141,7 +141,7 @@ static void Main2(void)
 
 	editTextFile(wkFile);
 
-	if(!isSameFile(wkFile, bkFile))
+	if (!isSameFile(wkFile, bkFile))
 	{
 		cout("•ÒW‚³‚ê‚½‚Ì‚Å•Û‘¶‚µ‚Ü‚·B\n");
 

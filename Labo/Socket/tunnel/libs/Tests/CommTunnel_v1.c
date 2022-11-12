@@ -21,7 +21,7 @@ static void Perform(int sock, int fwdSock)
 	int endFlag = 0;
 	uint connectNo = ConnectNoCounter;
 
-	if(ConnectNoCounter == UINTMAX)
+	if (ConnectNoCounter == UINTMAX)
 		ConnectNoCounter = 0;
 	else
 		ConnectNoCounter++;
@@ -49,9 +49,9 @@ static void Perform(int sock, int fwdSock)
 
 		cout("[%u] %u %u (%d %u)\n", connectNo, aToBSize, bToASize, endFlag ? 1 : 0, waitMillis);
 
-		if(!aToBSize && !bToASize)
+		if (!aToBSize && !bToASize)
 		{
-			if(endFlag)
+			if (endFlag)
 				break;
 
 			waitMillis = m_min(waitMillis + 1, 2000);

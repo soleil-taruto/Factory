@@ -84,7 +84,7 @@ static void Test01(void)
 			UI64_t tc;
 			uint64 cc;
 
-			if(a != 0 && UINT64MAX / a < b)
+			if (a != 0 && UINT64MAX / a < b)
 				b = mt19937_rnd64Mod(UINT64MAX / a);
 
 			c = a * b;

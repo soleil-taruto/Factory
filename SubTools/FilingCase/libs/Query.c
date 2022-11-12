@@ -58,12 +58,12 @@ static char *TryNextQryToken(void)
 	Quoted = 0;
 
 	for(; IsBlank(*QryRdr); QryRdr++)
-		if(*QryRdr == '\0')
+		if (*QryRdr == '\0')
 			return NULL;
 
 	buff = newBlock();
 
-	if(*QryRdr == '\'')
+	if (*QryRdr == '\'')
 	{
 		Quoted = 1;
 
@@ -73,12 +73,12 @@ static char *TryNextQryToken(void)
 
 			errorCase(chr == '\0');
 
-			if(chr == '\'')
+			if (chr == '\'')
 			{
 				QryRdr++;
 				break;
 			}
-			if(chr == '\\')
+			if (chr == '\\')
 			{
 				chr = *++QryRdr;
 
@@ -110,7 +110,7 @@ static char *TryNextQryToken(void)
 					break;
 				}
 			}
-			else if(isMbc(QryRdr))
+			else if (isMbc(QryRdr))
 			{
 				addByte(buff, chr);
 				chr = *++QryRdr;
@@ -132,17 +132,17 @@ char *FC_Retoken(char *token) // ret: strx()
 
 	for(p = token; *p; p++)
 	{
-		if(isJCharP(p))
+		if (isJCharP(p))
 		{
 			addByte(buff, *p++);
 			addByte(buff, *p);
 		}
-		else if(*p == '\\')
+		else if (*p == '\\')
 		{
 			addByte(buff, '\\');
 			addByte(buff, '\\');
 		}
-		else if(m_isasciikana(*p))
+		else if (m_isasciikana(*p))
 		{
 			addByte(buff, *p);
 		}
@@ -167,7 +167,7 @@ static int NextQryTokenIs(char *spell)
 	char *token = NextQryToken();
 	int ret;
 
-	if(token)
+	if (token)
 	{
 		ret = !_stricmp(token, spell);
 		memFree(token);
@@ -195,15 +195,15 @@ static void ExecuteSelect(void)
 	{
 		char *column = NextQryToken();
 
-		if(!Quoted)
+		if (!Quoted)
 		{
-			if(!strcmp(column, "*"))
+			if (!strcmp(column, "*"))
 			{
 				starColumn = 1;
 				memFree(column);
 				continue;
 			}
-			if(!_stricmp(column, "FROM"))
+			if (!_stricmp(column, "FROM"))
 			{
 				memFree(column);
 				break;
@@ -218,7 +218,7 @@ static void ExecuteSelect(void)
 	whereValue = NextQryToken();
 	errorCase(TryNextQryToken());
 
-	if(starColumn)
+	if (starColumn)
 	{
 		addElements_x(retColumns, FC_GetAllColumnId(table));
 	}
@@ -257,7 +257,7 @@ static void ExecuteInsert(void)
 	{
 		column = NextQryToken();
 
-		if(!Quoted && !_stricmp(column, "VALUES"))
+		if (!Quoted && !_stricmp(column, "VALUES"))
 		{
 			memFree(column);
 			break;
@@ -303,7 +303,7 @@ static void ExecuteUpdate(void)
 	{
 		char *column = NextQryToken();
 
-		if(!Quoted && !_stricmp(column, "WHERE"))
+		if (!Quoted && !_stricmp(column, "WHERE"))
 		{
 			memFree(column);
 			break;
@@ -572,64 +572,64 @@ autoList_t *FC_ExecuteQuery(char *query) // ret: bind
 	QryRdr = query;
 	method = NextQryToken();
 
-	if(Ret)
+	if (Ret)
 		releaseDim(Ret, 2);
 
 	Ret = newList();
 
-	if(!_stricmp(method, "SELECT"))
+	if (!_stricmp(method, "SELECT"))
 	{
 		ExecuteSelect();
 	}
-	else if(!_stricmp(method, "INSERT"))
+	else if (!_stricmp(method, "INSERT"))
 	{
 		ExecuteInsert();
 	}
-	else if(!_stricmp(method, "UPDATE"))
+	else if (!_stricmp(method, "UPDATE"))
 	{
 		ExecuteUpdate();
 	}
-	else if(!_stricmp(method, "DELETE"))
+	else if (!_stricmp(method, "DELETE"))
 	{
 		ExecuteDelete();
 	}
-	else if(!_stricmp(method, "LGET"))
+	else if (!_stricmp(method, "LGET"))
 	{
 		ExecuteLGet();
 	}
-	else if(!_stricmp(method, "LSET"))
+	else if (!_stricmp(method, "LSET"))
 	{
 		ExecuteLSet();
 	}
-	else if(!_stricmp(method, "RGET"))
+	else if (!_stricmp(method, "RGET"))
 	{
 		ExecuteRGet();
 	}
-	else if(!_stricmp(method, "RSET"))
+	else if (!_stricmp(method, "RSET"))
 	{
 		ExecuteRSet();
 	}
-	else if(!_stricmp(method, "MKID"))
+	else if (!_stricmp(method, "MKID"))
 	{
 		ExecuteMkId();
 	}
-	else if(!_stricmp(method, "DELTBL"))
+	else if (!_stricmp(method, "DELTBL"))
 	{
 		ExecuteDelTbl();
 	}
-	else if(!_stricmp(method, "DELCOL"))
+	else if (!_stricmp(method, "DELCOL"))
 	{
 		ExecuteDelCol();
 	}
-	else if(!_stricmp(method, "TBLS"))
+	else if (!_stricmp(method, "TBLS"))
 	{
 		ExecuteTbls();
 	}
-	else if(!_stricmp(method, "COLS"))
+	else if (!_stricmp(method, "COLS"))
 	{
 		ExecuteCols();
 	}
-	else if(!_stricmp(method, "ROWS"))
+	else if (!_stricmp(method, "ROWS"))
 	{
 		ExecuteRows();
 	}

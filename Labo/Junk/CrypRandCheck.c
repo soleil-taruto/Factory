@@ -16,7 +16,7 @@ static void LoadCBytes(void)
 
 	for(index = 0; index < CPART_NUM; index++)
 	{
-		if(eqIntPulseSec(2, NULL))
+		if (eqIntPulseSec(2, NULL))
 			cout("LOAD %u\n", index);
 
 		execute_x(xcout("start /b /wait \"\" \"%s\" /GET-CBYTES %u \"%s\"", getSelfFile(), CPART_LEN, outFile));
@@ -37,10 +37,10 @@ static void CheckCBytes(void)
 	for(lPos = 0;        lPos + CHK_SZ + 1 <= getSize(CBytes); lPos++)
 	for(rPos = lPos + 1; rPos + CHK_SZ     <= getSize(CBytes); rPos++)
 	{
-		if(eqIntPulseSec(2, NULL))
+		if (eqIntPulseSec(2, NULL))
 			cout("CHECK %u %u\n", lPos, rPos);
 
-		if(!memcmp(b_(CBytes) + lPos, b_(CBytes) + rPos, CHK_SZ))
+		if (!memcmp(b_(CBytes) + lPos, b_(CBytes) + rPos, CHK_SZ))
 		{
 			cout("FOUND %u %u\n", lPos, rPos);
 			error();
@@ -50,7 +50,7 @@ static void CheckCBytes(void)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/GET-CBYTES"))
+	if (argIs("/GET-CBYTES"))
 	{
 		uint size;
 		char *outFile;

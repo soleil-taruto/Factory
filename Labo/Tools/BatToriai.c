@@ -26,10 +26,10 @@ static char *GetNextBatFile(void)
 		sortJLinesICase(files);
 
 		foreach(files, file, index)
-			if(!_stricmp(EXT_UNDONE, getExt(file)))
+			if (!_stricmp(EXT_UNDONE, getExt(file)))
 				break;
 
-		if(file)
+		if (file)
 		{
 			batFile = changeExt(getLocal(file), EXT_BAT);
 			moveFile(file, batFile);
@@ -62,7 +62,7 @@ static void BatToriai(void)
 	{
 		char *batFile = GetNextBatFile();
 
-		if(!batFile)
+		if (!batFile)
 			break;
 
 		coExecute(batFile);
@@ -84,7 +84,7 @@ static void BatToriai_Stop(void)
 
 		foreach(files, file, index)
 		{
-			if(!_stricmp(EXT_UNDONE, getExt(file)))
+			if (!_stricmp(EXT_UNDONE, getExt(file)))
 			{
 				char *zzzFile = changeExt(file, EXT_ZZZ);
 
@@ -100,11 +100,11 @@ int main(int argc, char **argv)
 {
 	addCwd(nextArg());
 
-	if(argIs("/L"))
+	if (argIs("/L"))
 	{
 		createFile(LOCK_FILE);
 	}
-	else if(argIs("/S"))
+	else if (argIs("/S"))
 	{
 		BatToriai_Stop();
 	}

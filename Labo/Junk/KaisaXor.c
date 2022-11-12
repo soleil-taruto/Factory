@@ -9,7 +9,7 @@ restart:
 	for(d = 1; d < getCount(kaisa); d++)
 	for(c = 0; c < d; c++)
 	{
-		if(getElement(kaisa, c) == getElement(kaisa, d))
+		if (getElement(kaisa, c) == getElement(kaisa, d))
 		{
 			fastDesertElement(kaisa, d);
 			fastDesertElement(kaisa, c);

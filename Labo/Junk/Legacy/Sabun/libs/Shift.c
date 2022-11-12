@@ -7,7 +7,7 @@ static uint GetDiffStart(autoBlock_t *block1, autoBlock_t *block2)
 
 	for(index = 0; index < size; index++)
 	{
-		if(getByte(block1, index) != getByte(block2, index))
+		if (getByte(block1, index) != getByte(block2, index))
 		{
 			break;
 		}
@@ -25,11 +25,11 @@ void SBN_ShiftBlock(autoBlock_t *block, autoBlock_t *subBlock)
 	size   = getSize(block)    - diffstart;
 	sbsize = getSize(subBlock) - diffstart;
 
-	if(size * 2 <= sbsize || size == sbsize)
+	if (size * 2 <= sbsize || size == sbsize)
 	{
 		mvsize = 0;
 	}
-	else if(size < sbsize)
+	else if (size < sbsize)
 	{
 		mvsize = sbsize - size;
 	}
@@ -41,7 +41,7 @@ void SBN_ShiftBlock(autoBlock_t *block, autoBlock_t *subBlock)
 	insertBytes(block, diffstart, mvblock);
 	releaseAutoBlock(mvblock);
 
-	if(mvsize)
+	if (mvsize)
 	{
 		ab_addValue(block, diffstart);
 	}
@@ -53,7 +53,7 @@ void SBN_UnshiftBlock(autoBlock_t *block)
 	uint fromidx;
 	autoBlock_t *mvblock;
 
-	if(!mvsize)
+	if (!mvsize)
 		return;
 
 	fromidx = ab_unaddValue(block);

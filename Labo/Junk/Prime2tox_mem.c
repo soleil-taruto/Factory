@@ -36,7 +36,7 @@ static uint Root(uint value)
 	{
 		uint r = root | bit;
 
-		if(r * r <= value)
+		if (r * r <= value)
 		{
 			root = r;
 		}
@@ -65,7 +65,7 @@ static void WriteSosuMap(void)
 	uint index;
 	uint size = CountMax + 1;
 
-	if(SOSUMAP_SIZE < size)
+	if (SOSUMAP_SIZE < size)
 	{
 		for(index = SOSUMAP_SIZE; index + SOSUMAP_SIZE < size; index += SOSUMAP_SIZE)
 		{
@@ -84,18 +84,18 @@ static void DispSosu(void)
 	}
 	for(index = 29; index <= CountMax; index++)
 	{
-		if(index % 10000 == 0)
+		if (index % 10000 == 0)
 		{
 			while(hasKey())
 			{
-				if(getKey() == 0x1b)
+				if (getKey() == 0x1b)
 				{
 					cout("•\Ž¦‚ð’†Ž~‚µ‚Ü‚µ‚½B\n");
 					return;
 				}
 			}
 		}
-		if(SosuMap[index])
+		if (SosuMap[index])
 		{
 			cout("%u\n", index);
 		}
@@ -120,11 +120,11 @@ int main(int argc, char **argv)
 
 	for(count = 29; count <= rootCntMax; count++)
 	{
-		if(count < 100 || count % 100 == 0)
-			if(pulseSec(1, NULL))
+		if (count < 100 || count % 100 == 0)
+			if (pulseSec(1, NULL))
 				cmdTitle_x(xcout("Prime2tox - %u ‚ ‚½‚è‚Ü‚ÅŒvŽZÏ‚Ý...", count * count));
 
-		if(SosuMap[count])
+		if (SosuMap[count])
 		{
 			for(wcnt = (uint64)count * 3; wcnt <= CountMax; wcnt += (uint64)count * 2)
 			{

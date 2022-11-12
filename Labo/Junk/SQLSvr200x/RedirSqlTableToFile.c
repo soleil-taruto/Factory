@@ -28,21 +28,21 @@ static void ToConsole(char *file)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		CSVMode = 1;
 	}
-	if(argIs("/-H")) // no Header
+	if (argIs("/-H")) // no Header
 	{
 		RSTR_NoHeaderMode = 1;
 	}
 
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		ToFile(getArg(0), getArg(1));
 		return;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		ToConsole(nextArg());
 		return;

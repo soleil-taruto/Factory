@@ -63,7 +63,7 @@ static int TrueHasKey(void)
 	/*
 	static int called;
 
-	if(!called)
+	if (!called)
 	{
 		cout("Caution: Used CRT _kbhit().\n");
 		called = 1;
@@ -75,7 +75,7 @@ static int TrueGetKey(void)
 {
 	int key = _getch();
 
-	if(!InputJTextMode && (key == 0x00 || key == 0xe0) && TrueHasKey())
+	if (!InputJTextMode && (key == 0x00 || key == 0xe0) && TrueHasKey())
 	{
 		key ^= 0xff; // to 0xff?? or 0x1f??
 		key <<= 8;
@@ -98,7 +98,7 @@ void setAllProcPoundKey(int key)
 
 	mutex();
 	{
-		if(key)
+		if (key)
 			writeOneValue(ALL_PROC_POUND_KEY_FILE, (uint)key);
 		else
 			removeFileIfExist(ALL_PROC_POUND_KEY_FILE);
@@ -107,20 +107,20 @@ void setAllProcPoundKey(int key)
 }
 static void CheckAllProcPoundKey(void)
 {
-	if(ignoreAllProcPoundKey)
+	if (ignoreAllProcPoundKey)
 		return;
 
-	if(isFactoryDirDisabled())
+	if (isFactoryDirDisabled())
 		return;
 
 	{
 		static uint lastPassedTime;
 		uint nowTime = now();
 
-		if(!lastPassedTime)
+		if (!lastPassedTime)
 			lastPassedTime = nowTime; // 最初の2秒間は通さない。
 
-		if(nowTime < lastPassedTime + 2) // 2秒に1回通過
+		if (nowTime < lastPassedTime + 2) // 2秒に1回通過
 			return;
 
 		lastPassedTime = nowTime;
@@ -128,7 +128,7 @@ static void CheckAllProcPoundKey(void)
 
 	mutex();
 	{
-		if(existFile(ALL_PROC_POUND_KEY_FILE) && !BackKeyStack)
+		if (existFile(ALL_PROC_POUND_KEY_FILE) && !BackKeyStack)
 		{
 			int key = (int)readFirstValue(ALL_PROC_POUND_KEY_FILE);
 
@@ -144,11 +144,11 @@ int getKey(void)
 {
 	CheckAllProcPoundKey();
 
-	if(BackKeyStack)
+	if (BackKeyStack)
 	{
 		int key = (int)unaddElement(BackKeyStack);
 
-		if(!getCount(BackKeyStack))
+		if (!getCount(BackKeyStack))
 		{
 			releaseAutoList(BackKeyStack);
 			BackKeyStack = NULL;
@@ -159,7 +159,7 @@ int getKey(void)
 }
 void ungetKey(int key)
 {
-	if(!BackKeyStack)
+	if (!BackKeyStack)
 		BackKeyStack = createAutoList(1);
 
 	addElement(BackKeyStack, (uint)key);
@@ -194,7 +194,7 @@ int clearCoWaitKey(uint millis)
 int checkKey(int key)
 {
 	while(hasKey())
-		if(getKey() == key)
+		if (getKey() == key)
 			return 1;
 
 	return 0;
@@ -205,11 +205,11 @@ int waitKey(uint millis)
 
 	for(; ; )
 	{
-		if(hasKey())
+		if (hasKey())
 		{
 			return getKey();
 		}
-		if(!millis)
+		if (!millis)
 		{
 			break;
 		}
@@ -228,14 +228,14 @@ int coWaitKey(uint millis)
 
 	for(; ; )
 	{
-		if(hasKey())
+		if (hasKey())
 		{
 			uint key = getKey();
 
 			cout("押されたキー=%02x\n", key);
 			return key;
 		}
-		if(elapse == millis)
+		if (elapse == millis)
 			break;
 
 		m = m_min(millis - elapse, SLEEP_NICK_MILLIS);
@@ -251,14 +251,14 @@ autoList_t *editLines(autoList_t *lines) // ret: newList(), not NULL
 {
 	char *file = makeTempPath("txt");
 
-	if(getCount(lines) == 1)
+	if (getCount(lines) == 1)
 		writeOneLineNoRet(file, getLine(lines, 0));
 	else
 		writeLines(file, lines);
 
 	execute(file); // ブロッキングで編集する。
 
-	if(existFile(file))
+	if (existFile(file))
 	{
 		lines = readLines(file);
 		removeFile(file);
@@ -331,7 +331,7 @@ void viewLineNoRet_NB(char *line, int nonBlockingMode)
 	writeToken(fp, line);
 	fileClose(fp);
 
-	if(!nonBlockingMode)
+	if (!nonBlockingMode)
 	{
 		execute(file);
 		removeFile(file);
@@ -366,12 +366,12 @@ char *coInputLinePrn(void (*printFunc)(char *jbuffer))
 		jbuffer = strx(buffer);
 		line2JLine(jbuffer, 1, 0, 0, 1);
 
-		if(printFunc)
+		if (printFunc)
 			printFunc(jbuffer);
 		else
 			cout("\r%79s\r%s", "", jbuffer);
 
-		if(inputEnded)
+		if (inputEnded)
 			break;
 
 		memFree(jbuffer);
@@ -381,14 +381,14 @@ char *coInputLinePrn(void (*printFunc)(char *jbuffer))
 		{
 			int chr = getKey();
 
-			if(chr == 0x0d) // ENTER
+			if (chr == 0x0d) // ENTER
 			{
 				inputEnded = 1;
 				break;
 			}
-			if(chr == 0x1b) // ESCAPE
+			if (chr == 0x1b) // ESCAPE
 			{
-				if(!buffer[0])
+				if (!buffer[0])
 				{
 					coil_esc = 1;
 					inputEnded = 1;
@@ -396,7 +396,7 @@ char *coInputLinePrn(void (*printFunc)(char *jbuffer))
 				}
 				buffer[0] = '\0';
 			}
-			else if(chr == 0x08) // BS
+			else if (chr == 0x08) // BS
 			{
 				char *mp = buffer;
 				char *p;
@@ -446,7 +446,7 @@ static char *DropPath_Win10(void)
 
 	mutexUnlock(mtxHdl);
 
-	if(existFile(outFile))
+	if (existFile(outFile))
 	{
 		path = readText_b(outFile);
 		cout("%s</D>\n", path);
@@ -476,7 +476,7 @@ char *dropPath(void)
 {
 	char *path;
 
-	if(isWindows10orLater())
+	if (isWindows10orLater())
 		return DropPath_Win10();
 
 	path = strx("");
@@ -492,7 +492,7 @@ char *dropPath(void)
 	InputJTextMode = 0;
 	trimEdge(path, '"');
 
-	if(path[0] && !path[1]) // ? 打鍵した。
+	if (path[0] && !path[1]) // ? 打鍵した。
 	{
 		cout("</D>\n");
 		goto cancelled;
@@ -500,12 +500,12 @@ char *dropPath(void)
 	cout("%s</D>\n", path);
 
 	// フルパスかどうか
-	if(!m_isalpha(path[0]) ||
+	if (!m_isalpha(path[0]) ||
 		path[1] != ':' ||
 		path[2] != '\\')
 		error();
 
-	if(!existPath(path))
+	if (!existPath(path))
 		error();
 
 	return path;
@@ -518,7 +518,7 @@ char *dropFile(void) // ファイル以外 -> プログラム終了
 {
 	char *file = dropPath();
 
-	if(!file || !existFile(file))
+	if (!file || !existFile(file))
 	{
 		termination(0);
 	}
@@ -528,7 +528,7 @@ char *dropDir(void) // ディレクトリ以外 -> プログラム終了
 {
 	char *dir = dropPath();
 
-	if(!dir || !existDir(dir))
+	if (!dir || !existDir(dir))
 	{
 		termination(0);
 	}
@@ -538,8 +538,8 @@ char *dropDirFile(void) // ディレクトリ・ファイル以外 -> プログラム終了
 {
 	char *path = dropPath();
 
-	if(!path)
-//	if(!path || !existDir(path) && !existDir(path))
+	if (!path)
+//	if (!path || !existDir(path) && !existDir(path))
 	{
 		termination(0);
 	}

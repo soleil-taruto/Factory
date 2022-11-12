@@ -12,7 +12,7 @@ static void DoType(char *file)
 	FILE *fp = fileOpen(file, "rt");
 	char *line;
 
-	if(ShowPathMode)
+	if (ShowPathMode)
 	{
 		cout("===============================================================================\n");
 		cout("* %s\n", file);
@@ -53,18 +53,18 @@ static void TypeAll_ListFile(char *listFile)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		ShowPathMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		IntoSubDirMode = 1;
 		goto readArgs;
 	}
 
-	if(argIs("/LSS"))
+	if (argIs("/LSS"))
 	{
 		TypeAll_ListFile(FOUNDLISTFILE);
 		return;

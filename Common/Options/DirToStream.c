@@ -20,7 +20,7 @@ void VTreeToStream(VTree_t *vt, void (*streamWriter)(uchar *, uint))
 
 		streamWriter(file, strlen(file) + 1);
 
-		if(vt->IsDir(index))
+		if (vt->IsDir(index))
 		{
 			buffer[0] = SIGN_DIR;
 			streamWriter(buffer, 1);
@@ -68,7 +68,7 @@ void DirToStream(char *dir, void (*streamWriter)(uchar *, uint))
 enterDir:
 	addCwd(dir);
 
-	if(withInfo)
+	if (withInfo)
 	{
 		lsInfos = newList();
 		paths = ls(".");
@@ -80,7 +80,7 @@ enterDir:
 
 	eraseParents(paths);
 
-	if(withInfo)
+	if (withInfo)
 	{
 		char *path;
 		uint index;
@@ -112,13 +112,13 @@ enterDir:
 			FILE *fp;
 			autoBlock_t *block;
 
-			if(DTS_AcceptPath)
+			if (DTS_AcceptPath)
 			{
 				char *absPath = makeFullPath(path);
 
-				if(!DTS_AcceptPath(absPath))
+				if (!DTS_AcceptPath(absPath))
 				{
-					if(withInfo)
+					if (withInfo)
 						memFree((void *)unaddElement(infos));
 
 					memFree(path);
@@ -129,7 +129,7 @@ enterDir:
 			}
 			streamWriter(path, strlen(path) + 1);
 
-			if(withInfo)
+			if (withInfo)
 			{
 				lsInfo_t *info = (lsInfo_t *)unaddElement(infos);
 
@@ -146,7 +146,7 @@ enterDir:
 				memFree(info);
 				streamWriter(buffer, 26);
 			}
-			if(existDir(path))
+			if (existDir(path))
 			{
 				buffer[0] = SIGN_DIR;
 				streamWriter(buffer, 1);
@@ -154,7 +154,7 @@ enterDir:
 				dir = path;
 				addElement(pathsStack, (uint)paths);
 
-				if(withInfo)
+				if (withInfo)
 					addElement(infosStack, (uint)infos);
 
 				goto enterDir;
@@ -179,13 +179,13 @@ enterDir:
 		buffer[0] = SIGN_ENDDIR;
 		streamWriter(buffer, 1);
 
-		if(!getCount(pathsStack))
+		if (!getCount(pathsStack))
 		{
 			break;
 		}
 		paths = (autoList_t *)unaddElement(pathsStack);
 
-		if(withInfo)
+		if (withInfo)
 			infos = (autoList_t *)unaddElement(infosStack);
 
 		unaddCwd();
@@ -202,11 +202,11 @@ static void (*STD_StreamReader)(uchar *, uint);
 
 static void STD_ReadStream(uchar *block, uint size)
 {
-	if(!STD_ReadStop)
+	if (!STD_ReadStop)
 	{
 		STD_StreamReader(block, size);
 
-		if(!STD_ReadStop)
+		if (!STD_ReadStop)
 		{
 			return;
 		}
@@ -231,7 +231,7 @@ static time_t CheckAndAdjustCAWTime(time_t t, char *uiKind)
 {
 	time_t ta = AdjustCAWTime(t);
 
-	if(t != ta)
+	if (t != ta)
 	{
 		cout("##################################\n");
 		cout("## タイムスタンプを矯正しました ##\n");
@@ -273,17 +273,17 @@ void StreamToDir(char *dir, void (*streamReader)(uchar *, uint))
 		{
 			STD_ReadStream(buffer, 1);
 
-			if(buffer[0] == '\0')
+			if (buffer[0] == '\0')
 				break;
 
 			path = addChar(path, buffer[0]);
 		}
 
-		if(path[0] == '\0') // ? == SIGN_ENDDIR
+		if (path[0] == '\0') // ? == SIGN_ENDDIR
 		{
 			unaddCwd();
 
-			if(!dirDepth)
+			if (!dirDepth)
 			{
 				memFree(path);
 				break;
@@ -292,7 +292,7 @@ void StreamToDir(char *dir, void (*streamReader)(uchar *, uint))
 		}
 		else
 		{
-			if(STD_TrustMode)
+			if (STD_TrustMode)
 			{
 				/*
 					STD_TrustMode != 0 のときはどのようなパス名も許可されるが、
@@ -307,7 +307,7 @@ void StreamToDir(char *dir, void (*streamReader)(uchar *, uint))
 #if 1
 				char *newPath = lineToFairLocalPath(path, strlen_x(getCwd()));
 
-				if(strcmp(newPath, path))
+				if (strcmp(newPath, path))
 				{
 					line2JLine(path, 1, 0, 0, 1);
 
@@ -327,7 +327,7 @@ void StreamToDir(char *dir, void (*streamReader)(uchar *, uint))
 			}
 			STD_ReadStream(buffer, 1);
 
-			if(buffer[0] == SIGN_INFO)
+			if (buffer[0] == SIGN_INFO)
 			{
 				int af;
 
@@ -348,7 +348,7 @@ void StreamToDir(char *dir, void (*streamReader)(uchar *, uint))
 				STD_ReadStream(buffer, 8);
 				info.writeTime = blockToValue64(buffer);
 
-				if(!STD_TrustMode)
+				if (!STD_TrustMode)
 				{
 					info.createTime = CheckAndAdjustCAWTime(info.createTime, "Create");
 					info.accessTime = CheckAndAdjustCAWTime(info.accessTime, "Access");
@@ -357,11 +357,11 @@ void StreamToDir(char *dir, void (*streamReader)(uchar *, uint))
 				infoRdy = 1;
 				STD_ReadStream(buffer, 1); // 再読込
 			}
-			if(buffer[0] == SIGN_DIR)
+			if (buffer[0] == SIGN_DIR)
 			{
 				createDir(path);
 
-				if(infoRdy)
+				if (infoRdy)
 				{
 					setFileAttr(
 						path,
@@ -378,7 +378,7 @@ void StreamToDir(char *dir, void (*streamReader)(uchar *, uint))
 				addCwd(path);
 				dirDepth++;
 			}
-			else if(buffer[0] == SIGN_FILE)
+			else if (buffer[0] == SIGN_FILE)
 			{
 				uint64 count;
 				FILE *fp;
@@ -400,7 +400,7 @@ void StreamToDir(char *dir, void (*streamReader)(uchar *, uint))
 				}
 				fileClose(fp);
 
-				if(infoRdy)
+				if (infoRdy)
 				{
 					// 書き込み禁止にすると日時を設定できなくなるので、先に！
 					setFileStamp(

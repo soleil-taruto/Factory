@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 
 	mt19937_initCRnd();
 
-	if(argIs("NOW"))
+	if (argIs("NOW"))
 	{
 		cout("%s\n", c_makeJStamp(NULL, 0));
 		goto endFunc;

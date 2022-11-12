@@ -18,34 +18,34 @@ int main(int argc, char **argv)
 	int restoreMode = 0;
 
 readArgs:
-	if(argIs("/L"))
+	if (argIs("/L"))
 	{
 		resListFile = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		rootDir = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/K"))
+	if (argIs("/K"))
 	{
 		rawKey = makeBlockHexLine(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		clusterFile = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/RES"))
+	if (argIs("/RES"))
 	{
 		restoreMode = 1;
 		goto readArgs;
 	}
 	errorCase(hasArgs(1));
 
-	if(!restoreMode)
+	if (!restoreMode)
 	{
 		autoList_t *files;
 

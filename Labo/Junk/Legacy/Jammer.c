@@ -16,7 +16,7 @@ static void Jammer3(autoBlock_t *block, uint mode)
 {
 	uint index;
 
-	if(mode)
+	if (mode)
 	{
 		for(index = 1; index < getSize(block); index++)
 		{
@@ -37,7 +37,7 @@ static void Jammer2(autoBlock_t *block, uint mode, uint j_num)
 
 	for(count = 0; count < j_num; count++)
 	{
-		if(count)
+		if (count)
 			reverseBytes(block);
 
 		Jammer3(block, mode);

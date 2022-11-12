@@ -137,7 +137,7 @@ static void MarumeDot(int x, int y, int w, int h)
 		int sx = x + xc;
 		int sy = y + yc;
 
-		if(
+		if (
 			0 <= sx && sx < w &&
 			0 <= sy && sy < h
 			)
@@ -145,7 +145,7 @@ static void MarumeDot(int x, int y, int w, int h)
 			ctr[getTableCell(Map, sx, sy)]++;
 		}
 	}
-	if(ctr[0] != ctr[1])
+	if (ctr[0] != ctr[1])
 	{
 		setTableCell(Map, x, y, ctr[0] < ctr[1] ? 1 : 0);
 	}
@@ -187,9 +187,9 @@ static void WipeMarumeMap(int count, int mode) // mode: 0 - 7
 			int xc = x;
 			int yc = y;
 
-			if(mode & 1) xc = w - 1 - xc;
-			if(mode & 2) yc = h - 1 - yc;
-			if(mode & 4)
+			if (mode & 1) xc = w - 1 - xc;
+			if (mode & 2) yc = h - 1 - yc;
+			if (mode & 4)
 			{
 				int tmp = xc;
 				xc = yc;
@@ -260,7 +260,7 @@ static void BoxMap(int x, int y, int boxW, int boxH, int flag)
 		int sx = x + xc;
 		int sy = y + yc;
 
-		if(
+		if (
 			0 <= sx && sx < w &&
 			0 <= sy && sy < h
 			)
@@ -287,7 +287,7 @@ static void FM_Put2x2Tree(autoTable_t *newMap, int origX, int origY)
 		for(xc = 0; xc < 2; xc++)
 		for(yc = 0; yc < 2; yc++)
 		{
-			if(getTableCell(Map, x + xc, y + yc)) flag = 1;
+			if (getTableCell(Map, x + xc, y + yc)) flag = 1;
 		}
 		for(xc = 0; xc < 2; xc++)
 		for(yc = 0; yc < 2; yc++)
@@ -329,13 +329,13 @@ int main(int argc, char **argv)
 {
 	Map = newTable(getZero, noop_u);
 
-	if(argIs("/S"))
+	if (argIs("/S"))
 		mt19937_initRnd(toValue(nextArg()));
 	else
 		mt19937_initRnd(1);
 
 readArgs:
-	if(argIs("/I"))
+	if (argIs("/I"))
 	{
 		InitMap(
 			toValue(getArg(0)),
@@ -345,12 +345,12 @@ readArgs:
 		skipArg(3);
 		goto readArgs;
 	}
-	if(argIs("/E"))
+	if (argIs("/E"))
 	{
 		ExpandMap(toValue(nextArg()));
 		goto readArgs;
 	}
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		RandomizeMap(
 			toValue(getArg(0)),
@@ -359,12 +359,12 @@ readArgs:
 		skipArg(2);
 		goto readArgs;
 	}
-	if(argIs("/M"))
+	if (argIs("/M"))
 	{
 		MarumeMap(toValue(nextArg()));
 		goto readArgs;
 	}
-	if(argIs("/W"))
+	if (argIs("/W"))
 	{
 		WipeMarumeMap(
 			toValue(getArg(0)),
@@ -373,7 +373,7 @@ readArgs:
 		skipArg(2);
 		goto readArgs;
 	}
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		FrameMap(
 			toValue(getArg(0)),
@@ -389,7 +389,7 @@ readArgs:
 		skipArg(9);
 		goto readArgs;
 	}
-	if(argIs("/Box"))
+	if (argIs("/Box"))
 	{
 		BoxMap(
 			toValue(getArg(0)),
@@ -401,17 +401,17 @@ readArgs:
 		skipArg(5);
 		goto readArgs;
 	}
-	if(argIs("/Forest"))
+	if (argIs("/Forest"))
 	{
 		ForestMap();
 		goto readArgs;
 	}
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		execute("START " OUTPUT_BMPFILE);
 		goto readArgs;
 	}
-	if(argIs("/N"))
+	if (argIs("/N"))
 	{
 		LoadMap();
 		SaveMap();

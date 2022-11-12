@@ -36,7 +36,7 @@ static void RemoveIndentedLines(autoList_t *lines)
 	{
 		index--;
 
-		if(getLine(lines, index)[0] == '\t')
+		if (getLine(lines, index)[0] == '\t')
 		{
 			do
 			{
@@ -54,7 +54,7 @@ static void CheckAutoRelease(char *dir)
 
 	addCwd(dir);
 
-	if(!existFile(LOCAL_AUTO_RELEASE_BAT))
+	if (!existFile(LOCAL_AUTO_RELEASE_BAT))
 	{
 		FoundError(LOCAL_AUTO_RELEASE_BAT " が見つかりません。");
 	}
@@ -65,26 +65,26 @@ static void CheckAutoRelease(char *dir)
 
 			RemoveIndentedLines(lines);
 
-			if(!isSameLines(lines, AutoReleaseBatTemplateLines, 0))
+			if (!isSameLines(lines, AutoReleaseBatTemplateLines, 0))
 			{
 				FoundError(LOCAL_AUTO_RELEASE_BAT " の内容に問題があります。");
 			}
 			releaseDim(lines, 1);
 		}
 
-		if(existFile(LOCAL_LEGACY_RELEASE_BAT))
+		if (existFile(LOCAL_LEGACY_RELEASE_BAT))
 		{
 			FoundError(LOCAL_LEGACY_RELEASE_BAT " が存在します。");
 		}
-		if(existFile(LOCAL_LEGACY_CLEAN_BAT))
+		if (existFile(LOCAL_LEGACY_CLEAN_BAT))
 		{
 			FoundError(LOCAL_LEGACY_CLEAN_BAT " が存在します。");
 		}
-		if(!existFile(LOCAL_RELEASE_BAT))
+		if (!existFile(LOCAL_RELEASE_BAT))
 		{
 			FoundError(LOCAL_RELEASE_BAT " が見つかりません。");
 		}
-		if(!existFile(LOCAL_CLEAN_BAT))
+		if (!existFile(LOCAL_CLEAN_BAT))
 		{
 			FoundError(LOCAL_CLEAN_BAT " が見つかりません。");
 		}
@@ -93,7 +93,7 @@ static void CheckAutoRelease(char *dir)
 	{
 		char *rumDir = addExt(getCwd(), "rum");
 
-		if(!existDir(rumDir))
+		if (!existDir(rumDir))
 		{
 			FoundError(".rum が見つかりません。");
 		}
@@ -111,7 +111,7 @@ static void CheckAutoRelease(char *dir)
 			lastCommentFile = combine(lastRevDir, "comment.txt");
 			lastComment = readFirstLine(lastCommentFile);
 
-			if(
+			if (
 				CheckLastCommentFlag &&
 				strcmp(lastComment, "rel") &&
 				!startsWith(lastComment, "rel, ")
@@ -130,7 +130,7 @@ static void CheckAutoRelease(char *dir)
 
 	unaddCwd();
 
-	if(ErrorFound)
+	if (ErrorFound)
 		addElement(ErrorFiles, (uint)combine(dir, LOCAL_AUTO_RELEASE_BAT));
 
 	memFree(dir);
@@ -154,7 +154,7 @@ static void CheckDir(char *dir)
 {
 	char *autoReleaseBat = combine(dir, LOCAL_AUTO_RELEASE_BAT);
 
-	if(existFile(autoReleaseBat))
+	if (existFile(autoReleaseBat))
 	{
 		CheckAutoRelease(dir);
 	}
@@ -169,7 +169,7 @@ int main(int argc, char **argv)
 	AutoReleaseBatTemplateLines = readLines(AUTO_RELEASE_BAT_TEMPLATE_FILE);
 	ErrorFiles = newList();
 
-	if(argIs("/CLC"))
+	if (argIs("/CLC"))
 	{
 		CheckLastCommentFlag = 1;
 	}
@@ -177,11 +177,11 @@ int main(int argc, char **argv)
 	errorCase_m(argIs("/C"),  "廃止オプション"); // zantei
 	errorCase_m(argIs("/-C"), "廃止オプション"); // zantei
 
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		CheckAutoRelease(nextArg());
 	}
-	else if(hasArgs(1))
+	else if (hasArgs(1))
 	{
 		CheckDir(nextArg());
 	}
@@ -192,7 +192,7 @@ int main(int argc, char **argv)
 
 	cout("\n");
 
-	if(getCount(ErrorFiles))
+	if (getCount(ErrorFiles))
 	{
 		cout("★★★ [ %u ] 件のエラーが見つかりました。\n", getCount(ErrorFiles));
 	}

@@ -4,13 +4,13 @@
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		cout("CREATE\n");
 		createKeyContainer();
 		goto readArgs;
 	}
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		cout("DELETE\n");
 		deleteKeyContainer();

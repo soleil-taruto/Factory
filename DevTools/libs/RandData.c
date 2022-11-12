@@ -123,7 +123,7 @@ void RandXorOneBitFile_RW(char *rFile, char *wFile)
 	{
 		int chr = readChar(rfp);
 
-		if(count == index)
+		if (count == index)
 		{
 			chr ^= 0x01 << bit;
 		}

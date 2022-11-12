@@ -26,7 +26,7 @@ static char *x_DirFilter(char *dir)
 }
 static void CheckWDir(char *wDir)
 {
-	if(!existDir(wDir))
+	if (!existDir(wDir))
 	{
 		cout("出力側ディレクトリを作成します。\n");
 		cout("wDir: %s\n", wDir);
@@ -41,7 +41,7 @@ static void RemoveOldZip(char *wDir)
 	uint index;
 
 	foreach(files, file, index)
-		if(!_stricmp(getExt(file), "zip"))
+		if (!_stricmp(getExt(file), "zip"))
 			removeFile(file);
 
 	releaseDim(files, 1);
@@ -53,7 +53,7 @@ static char *GetFirstZipFile(char *rDir)
 	uint index;
 
 	foreach(files, file, index)
-		if(!_stricmp(getExt(file), "zip"))
+		if (!_stricmp(getExt(file), "zip"))
 			break;
 
 	errorCase_m(!file, ".zip ファイルが見つかりません。");

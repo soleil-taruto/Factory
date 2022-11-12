@@ -17,16 +17,16 @@ static uint LastMulColor;
 
 static int IsMulNumb(uint64 numb)
 {
-	if(US_MulNumbs)
+	if (US_MulNumbs)
 	{
 		uint index;
 		uint mulNumb;
 
 		foreach(US_MulNumbs, mulNumb, index)
-			if(numb % mulNumb == 0)
+			if (numb % mulNumb == 0)
 				break;
 
-		if(index < getCount(US_MulNumbs))
+		if (index < getCount(US_MulNumbs))
 		{
 			LastMulColor = getElement(US_MulColors, index);
 			return 1;
@@ -57,17 +57,17 @@ static uint64 XYToNumb_True(sint64 x, sint64 y) // ret: 2^64 ˆÈã‚Ì‚Æ‚« 0 ‚ð•Ô‚·
 	__int64 r;
 	uint64 numb;
 
-	if(y == Y_MIN)
+	if (y == Y_MIN)
 	{
-		if(x == X_MIN)
+		if (x == X_MIN)
 			return 0;
 
 		return UINT64MAX - (x - X_MIN) + 1;
 	}
-	if(x == X_MAX)
+	if (x == X_MAX)
 		return UINT64MAX - UINTMAX - (y - Y_MIN) + 1;
 
-	if(x == 0 && y == 0)
+	if (x == 0 && y == 0)
 		return 1;
 
 	ax = _abs64(x);
@@ -79,17 +79,17 @@ static uint64 XYToNumb_True(sint64 x, sint64 y) // ret: 2^64 ˆÈã‚Ì‚Æ‚« 0 ‚ð•Ô‚·
 	numb++;
 	numb *= numb;
 
-	if(ax <= y) // ‰º
+	if (ax <= y) // ‰º
 		return numb - (r - x);
 
 	numb -= r * 2;
 
-	if(x <= -ay) // ¶
+	if (x <= -ay) // ¶
 		return numb - (r - y);
 
 	numb -= r * 2;
 
-	if(y <= -ax) // ã
+	if (y <= -ax) // ã
 		return numb - (x - (-r));
 
 	numb -= r * 2;
@@ -99,16 +99,16 @@ static uint64 XYToNumb(sint64 x, sint64 y)
 {
 	uint64 numb = XYToNumb_True(x, y);
 
-	if(US_OddMode)
+	if (US_OddMode)
 	{
-		if(m_isRange(numb, 1, 0x8000000000000000))
+		if (m_isRange(numb, 1, 0x8000000000000000))
 			numb = (numb - 1) * 2 + 1;
 		else
 			numb = 0;
 	}
-	else if(US_OddUn5Mode)
+	else if (US_OddUn5Mode)
 	{
-		if(m_isRange(numb, 1, 7378697629483820646))
+		if (m_isRange(numb, 1, 7378697629483820646))
 			numb = ((numb + (numb + 1) / 4) - 1) * 2 + 1;
 		else
 			numb = 0;
@@ -151,7 +151,7 @@ void MakeUlamSpiral(
 	errorCase(m_isEmpty(reportMtxName));
 	errorCase(m_isEmpty(reportFile));
 
-	if(US_MulNumbs) // check US_MulNumbs, US_MulColors
+	if (US_MulNumbs) // check US_MulNumbs, US_MulColors
 	{
 		uint mulNumb;
 		uint index;
@@ -194,9 +194,9 @@ void MakeUlamSpiral(
 			uint64 numb;
 			static uint ps_nextSec;
 
-			if(pulseSec(2, &ps_nextSec))
+			if (pulseSec(2, &ps_nextSec))
 			{
-				if(handleWaitForMillis(cancelEv, 0))
+				if (handleWaitForMillis(cancelEv, 0))
 				{
 					goto cancelled;
 				}
@@ -209,15 +209,15 @@ void MakeUlamSpiral(
 			}
 			numb = XYToNumb(rx, ry);
 
-			if(numb == 1)
+			if (numb == 1)
 			{
 				setElement(row, x, centerColor);
 			}
-			else if(IsMulNumb(numb))
+			else if (IsMulNumb(numb))
 			{
 				setElement(row, x, LastMulColor);
 			}
-			else if(A_IsPrime(numb))
+			else if (A_IsPrime(numb))
 			{
 				setElement(row, x, primeColor);
 			}
@@ -269,7 +269,7 @@ void MakeUlamSpiral_Csv(sint64 l, sint64 t, sint64 r, sint64 b, int mode, char *
 		{
 			static uint ps_nextSec;
 
-			if(pulseSec(2, &ps_nextSec))
+			if (pulseSec(2, &ps_nextSec))
 			{
 				cout("ulam_csv %u %u now...\n", x, y);
 			}

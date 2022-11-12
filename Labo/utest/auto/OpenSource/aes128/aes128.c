@@ -43,11 +43,11 @@ static void Test_TestVector(void)
 
 	while(line = readLine(fp))
 	{
-		if(startsWith(line, "K No."))
+		if (startsWith(line, "K No."))
 		{
 			char *p = strchr(line, ':');
 
-			if(rawkey)
+			if (rawkey)
 				releaseAutoBlock(rawkey);
 
 			errorCase(!p);
@@ -57,7 +57,7 @@ static void Test_TestVector(void)
 
 			cout("Key Changed\n");
 		}
-		else if(startsWith(line, "P No."))
+		else if (startsWith(line, "P No."))
 		{
 			autoBlock_t *plain;
 			autoBlock_t *cipher;

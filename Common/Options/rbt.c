@@ -20,7 +20,7 @@ static rbtNode_t *GetNode(rbtTree_t *tree, void *element)
 {
 	rbtNode_t *node;
 
-	if(tree->LastAccessNode && tree->FuncComp(tree->LastAccessNode->Element, element, tree->ExtraData) == 0)
+	if (tree->LastAccessNode && tree->FuncComp(tree->LastAccessNode->Element, element, tree->ExtraData) == 0)
 		return tree->LastAccessNode;
 
 	LastParent = NULL;
@@ -32,7 +32,7 @@ static rbtNode_t *GetNode(rbtTree_t *tree, void *element)
 	{
 		sint ret_comp = tree->FuncComp(node->Element, element, tree->ExtraData);
 
-		if(!ret_comp)
+		if (!ret_comp)
 			break;
 
 		LastParent = node;
@@ -71,7 +71,7 @@ void rbtReleaseTree(rbtTree_t *tree)
 	{
 		rbtNode_t *node = (rbtNode_t *)unaddElement(nodes);
 
-		if(node)
+		if (node)
 		{
 			addElement(nodes, (uint)node->Children[0]);
 			addElement(nodes, (uint)node->Children[1]);
@@ -99,7 +99,7 @@ static void Rotate(rbtTree_t *tree, rbtNode_t *node, uint direct)
 
 	cc = c->Children[1 - direct];
 
-	if(p)
+	if (p)
 	{
 		p->Children[p->Children[0] == node ? 0 : 1] = c;
 	}
@@ -114,7 +114,7 @@ static void Rotate(rbtTree_t *tree, rbtNode_t *node, uint direct)
 	node->Parent = c;
 	node->Children[direct] = cc;
 
-	if(cc)
+	if (cc)
 	{
 		cc->Parent = node;
 	}
@@ -128,7 +128,7 @@ void rbtAddElement(rbtTree_t *tree, void *element)
 	errorCase(!element);
 	errorCase(GetNode(tree, element)); // ? 既存の要素と重複する。
 
-	if(LastParent)
+	if (LastParent)
 	{
 		node = CreateNode(element, 1, LastParent);
 
@@ -136,19 +136,19 @@ void rbtAddElement(rbtTree_t *tree, void *element)
 		tree->LastAccessNode = node;
 
 	restart:
-		if(LastParent->Red)
+		if (LastParent->Red)
 		{
 			rbtNode_t *pp = LastParent->Parent;
 			rbtNode_t *pc;
 
 			pc = pp->Children[pp->Children[0] == LastParent ? 1 : 0];
 
-			if(pc && pc->Red)
+			if (pc && pc->Red)
 			{
 				LastParent->Red = 0;
 				pc->Red = 0;
 
-				if(pp->Parent)
+				if (pp->Parent)
 				{
 					pp->Red = 1;
 					LastParent = pp->Parent;
@@ -159,7 +159,7 @@ void rbtAddElement(rbtTree_t *tree, void *element)
 			}
 			else
 			{
-				if(pp->Children[LastDirect] == pc)
+				if (pp->Children[LastDirect] == pc)
 				{
 					Rotate(tree, LastParent, LastDirect);
 					LastParent = node;
@@ -183,7 +183,7 @@ int rbtHasElement(rbtTree_t *tree, void *element) // ret: element が見つかれば (
 {
 	errorCase(!tree);
 
-	if(!element)
+	if (!element)
 		return (uint)tree->LastAccessNode;
 
 	return (uint)GetNode(tree, element);
@@ -208,13 +208,13 @@ static uint GetNearestLeaf(rbtTree_t *tree, rbtNode_t *node, uint direct) // ret
 {
 	LastNode = node->Children[direct];
 
-	if(LastNode)
+	if (LastNode)
 	{
 		for(; ; )
 		{
 			node = LastNode->Children[1 - direct];
 
-			if(!node)
+			if (!node)
 				break;
 
 			LastNode = node;
@@ -238,7 +238,7 @@ void rbtRemoveElement(rbtTree_t *tree, void *element) // element == NULL のとき 
 		node->Element = LastNode->Element;
 		node = LastNode;
 	}
-	if(!node->Red)
+	if (!node->Red)
 	{
 		rbtNode_t *n = node;
 		rbtNode_t *pc;
@@ -248,13 +248,13 @@ void rbtRemoveElement(rbtTree_t *tree, void *element) // element == NULL のとき 
 	restart:
 		p = n->Parent;
 
-		if(p)
+		if (p)
 		{
 			pcDirect = p->Children[0] == n ? 1 : 0;
 		pcReset:
 			pc = p->Children[pcDirect];
 
-			if(pc->Red)
+			if (pc->Red)
 			{
 				Rotate(tree, p, pcDirect);
 				p->Red = 1;
@@ -263,7 +263,7 @@ void rbtRemoveElement(rbtTree_t *tree, void *element) // element == NULL のとき 
 			}
 			pcc = pc->Children[1 - pcDirect];
 
-			if(pcc && pcc->Red)
+			if (pcc && pcc->Red)
 			{
 				Rotate(tree, pc, 1 - pcDirect);
 				pc->Red = 1;
@@ -272,7 +272,7 @@ void rbtRemoveElement(rbtTree_t *tree, void *element) // element == NULL のとき 
 			}
 			pcc = pc->Children[pcDirect];
 
-			if(pcc && pcc->Red)
+			if (pcc && pcc->Red)
 			{
 				Rotate(tree, p, pcDirect);
 				pc->Red = p->Red;
@@ -283,7 +283,7 @@ void rbtRemoveElement(rbtTree_t *tree, void *element) // element == NULL のとき 
 			{
 				pc->Red = 1;
 
-				if(!p->Red)
+				if (!p->Red)
 				{
 					n = p;
 					goto restart;
@@ -294,7 +294,7 @@ void rbtRemoveElement(rbtTree_t *tree, void *element) // element == NULL のとき 
 	}
 	p = node->Parent;
 
-	if(p)
+	if (p)
 	{
 		p->Children[p->Children[0] == node ? 0 : 1] = NULL;
 	}
@@ -328,7 +328,7 @@ void rbtSeekForEndElement(rbtTree_t *tree, uint direct) // direct == 0: Left, 1:
 	{
 		tmpNode = node->Children[direct];
 
-		if(!tmpNode)
+		if (!tmpNode)
 		{
 			break;
 		}
@@ -359,14 +359,14 @@ void rbtSeekElement(rbtTree_t *tree, uint direct) // direct == 0: Left, 1: Right
 
 	tmpNode = node->Children[direct];
 
-	if(tmpNode)
+	if (tmpNode)
 	{
 		for(; ; )
 		{
 			node = tmpNode;
 			tmpNode = node->Children[1 - direct];
 
-			if(!tmpNode)
+			if (!tmpNode)
 			{
 				break;
 			}
@@ -378,7 +378,7 @@ void rbtSeekElement(rbtTree_t *tree, uint direct) // direct == 0: Left, 1: Right
 		{
 			tmpNode = node->Parent;
 
-			if(!tmpNode || tmpNode->Children[1 - direct] == node)
+			if (!tmpNode || tmpNode->Children[1 - direct] == node)
 			{
 				break;
 			}
@@ -389,7 +389,7 @@ void rbtSeekElement(rbtTree_t *tree, uint direct) // direct == 0: Left, 1: Right
 
 	// node == NULL のとき、(左端のノードから左 || 右端のノードから右) にシークした。-> 位置そのまま
 
-	if(node)
+	if (node)
 	{
 		tree->LastAccessNode = node;
 	}

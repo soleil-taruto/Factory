@@ -13,7 +13,7 @@ static autoList_t *CutBmp(autoList_t *bmp, uint l, uint t, uint w, uint h)
 		autoList_t *row = (autoList_t *)refElement(bmp, t + y);
 		uint dot = 0;
 
-		if(row)
+		if (row)
 			dot = refElement(row, l + x);
 
 		putElement(refList(cBmp, y), x, dot);
@@ -25,7 +25,7 @@ static void CutBmpFile(char *rFile, uint l, uint t, uint w, uint h, char *wFile)
 	autoList_t *bmp;
 	autoList_t *cBmp;
 
-	if(!wFile)
+	if (!wFile)
 	{
 		wFile = changeExt(rFile, "");
 		wFile = addLine(wFile, "_cut.bmp");
@@ -48,7 +48,7 @@ static void CutBmpFile(char *rFile, uint l, uint t, uint w, uint h, char *wFile)
 
 int main(int argc, char **argv)
 {
-	if(hasArgs(6))
+	if (hasArgs(6))
 	{
 		CutBmpFile(
 			getArg(0),
@@ -61,7 +61,7 @@ int main(int argc, char **argv)
 
 		return;
 	}
-	if(hasArgs(5))
+	if (hasArgs(5))
 	{
 		CutBmpFile(
 			getArg(0),
@@ -74,7 +74,7 @@ int main(int argc, char **argv)
 
 		return;
 	}
-	if(hasArgs(4))
+	if (hasArgs(4))
 	{
 		uint l = toValue(getArg(0));
 		uint t = toValue(getArg(1));

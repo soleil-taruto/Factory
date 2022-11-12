@@ -39,15 +39,15 @@ void ReleaseNectar(Nectar_t *i)
 
 static int SendBit(Nectar_t *i, int data, int ctrl) // ret: ? 成功
 {
-	if(data)
+	if (data)
 		eventSet(i->EvData);
 
-	if(ctrl)
+	if (ctrl)
 		eventSet(i->EvCtrl);
 
 	eventSet(i->EvSend);
 
-	if(!handleWaitForMillis(i->EvRecv, 30000)) // 30 秒 -- 受信側が存在すること前提なので、長め。
+	if (!handleWaitForMillis(i->EvRecv, 30000)) // 30 秒 -- 受信側が存在すること前提なので、長め。
 	{
 		cout("Warning: Nectar_送信タイムアウト\n");
 
@@ -81,22 +81,22 @@ static void Send(Nectar_t *i, autoBlock_t *message)
 		int chr = getByte(message, index);
 
 		for(bit = 1 << 7; bit; bit >>= 1)
-			if(!SendBit(i, chr & bit, 0))
+			if (!SendBit(i, chr & bit, 0))
 				return;
 	}
 	SendBit(i, 1, 1);
 }
 static int RecvBit(Nectar_t *i, uint *p_ret)
 {
-	if(!handleWaitForMillis(i->EvSend, 2000)) // 2 秒 -- タイムアウトしても送信中のメッセージは維持される。interrupt 確保のため、短め。
+	if (!handleWaitForMillis(i->EvSend, 2000)) // 2 秒 -- タイムアウトしても送信中のメッセージは維持される。interrupt 確保のため、短め。
 		return 0;
 
 	*p_ret = 0;
 
-	if(handleWaitForMillis(i->EvData, 0))
+	if (handleWaitForMillis(i->EvData, 0))
 		*p_ret |= 1;
 
-	if(handleWaitForMillis(i->EvCtrl, 0))
+	if (handleWaitForMillis(i->EvCtrl, 0))
 		*p_ret |= 2;
 
 	eventSet(i->EvRecv);
@@ -114,29 +114,29 @@ static autoBlock_t *Recv(Nectar_t *i) // ret: NULL == 受信タイムアウト || サイズ
 	{
 		uint ret;
 
-		if(!RecvBit(i, &ret))
+		if (!RecvBit(i, &ret))
 		{
-			if(buff)
+			if (buff)
 			{
 				releaseAutoBlock(buff);
 				buff = NULL;
 			}
 			break;
 		}
-		else if(ret == 2)
+		else if (ret == 2)
 		{
-			if(!buff)
+			if (!buff)
 				buff = newBlock();
 
 			setSize(buff, 0);
 			chr = 0;
 			bit = 0;
 		}
-		else if(!buff)
+		else if (!buff)
 		{
 			// noop
 		}
-		else if(ret == 3)
+		else if (ret == 3)
 		{
 			retBuff = buff;
 			buff = NULL;
@@ -148,9 +148,9 @@ static autoBlock_t *Recv(Nectar_t *i) // ret: NULL == 受信タイムアウト || サイズ
 			chr |= ret;
 			bit++;
 
-			if(bit == 8)
+			if (bit == 8)
 			{
-				if(RECV_SIZE_MAX <= getSize(buff))
+				if (RECV_SIZE_MAX <= getSize(buff))
 				{
 					releaseAutoBlock(buff);
 					buff = NULL;
@@ -191,7 +191,7 @@ autoBlock_t *NectarRecv(Nectar_t *i)
 	{
 		message = Recv(i);
 
-		if(message)
+		if (message)
 			break;
 	}
 	return message;

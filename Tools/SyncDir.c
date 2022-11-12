@@ -140,11 +140,11 @@ static void EraseNoChangeFiles(char *rRootDir, char *wRootDir, autoList_t *files
 			rTime = m_max(rTimeC, rTimeW);
 			wTime = m_max(wTimeC, wTimeW);
 
-			if(wTime < rTime)
+			if (wTime < rTime)
 				chged = 1;
 		}
 
-		if(!chged) // ? 変更ナシ
+		if (!chged) // ? 変更ナシ
 		{
 			cout("☆変更ナシ☆\n");
 			setElement(files, index, 0);

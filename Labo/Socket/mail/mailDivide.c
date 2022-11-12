@@ -38,7 +38,7 @@ static autoList_t *MakeMailData(char *destAddr, autoList_t *mail)
 	ADD_HEADER(hdr_name, c_RefMailHeader(mail, hdr_name))
 
 	CPY_HEADER("Date");
-	if(KeepSender) CPY_HEADER("From");
+	if (KeepSender) CPY_HEADER("From");
 	else           ADD_HEADER("From", SelfMailAddress);
 	ADD_HEADER("To", destAddr);
 	CPY_HEADER("Subject");
@@ -62,7 +62,7 @@ static void RecvEvent(autoList_t *mail)
 	autoList_t *mailAddrList;
 	char *mailAddr;
 
-	if(!from)
+	if (!from)
 		return;
 
 	foreach(FromPatternsList, ptns, index)
@@ -74,7 +74,7 @@ static void RecvEvent(autoList_t *mail)
 		{
 			cout("ptn: %s\n", ptn);
 
-			if(strstr(from, ptn) || !strcmp(ptn, WILDCARD))
+			if (strstr(from, ptn) || !strcmp(ptn, WILDCARD))
 			{
 				goto found;
 			}
@@ -85,7 +85,7 @@ static void RecvEvent(autoList_t *mail)
 	memFree(from);
 	cout("ptn, index: %p, %u\n", ptn, index);
 
-	if(!ptn) // Not found ptn.
+	if (!ptn) // Not found ptn.
 		return;
 
 	mailAddrList = (autoList_t *)getElement(ForwardTable, index);
@@ -154,47 +154,47 @@ int main(int argc, char **argv)
 	ForwardTable = newList();
 
 readArgs:
-	if(argIs("/PD")) // Pop server Domain
+	if (argIs("/PD")) // Pop server Domain
 	{
 		PopServer = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/PP")) // Pop server Port number
+	if (argIs("/PP")) // Pop server Port number
 	{
 		PopPortno = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/SD")) // Smtp server Domain
+	if (argIs("/SD")) // Smtp server Domain
 	{
 		SmtpServer = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/SP")) // Smtp server Port number
+	if (argIs("/SP")) // Smtp server Port number
 	{
 		SmtpPortno = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/U")) // User name
+	if (argIs("/U")) // User name
 	{
 		PopUserName = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/P")) // Passphrase
+	if (argIs("/P")) // Passphrase
 	{
 		PopPassphrase = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/M")) // self Mail-address
+	if (argIs("/M")) // self Mail-address
 	{
 		SelfMailAddress = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/FT")) // Forward Table
+	if (argIs("/FT")) // Forward Table
 	{
 		addElements_x(ForwardTable, readResourceLinesList(nextArg()));
 		goto readArgs;
 	}
-	if(argIs("/KS")) // Keep Sender
+	if (argIs("/KS")) // Keep Sender
 	{
 		KeepSender = 1;
 		goto readArgs;

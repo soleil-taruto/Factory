@@ -29,18 +29,18 @@ static int Comp(autoBlock_t *a, autoBlock_t *b)
 	Norm(a); // 2bs?
 	Norm(b); // 2bs?
 
-	if(getSize(a) < getSize(b))
+	if (getSize(a) < getSize(b))
 		return -1;
 
-	if(getSize(b) < getSize(a))
+	if (getSize(b) < getSize(a))
 		return 1;
 
 	for(index = getSize(a); index; index--)
 	{
-		if(getByte(a, index - 1) < getByte(b, index - 1))
+		if (getByte(a, index - 1) < getByte(b, index - 1))
 			return -1;
 
-		if(getByte(b, index - 1) < getByte(a, index - 1))
+		if (getByte(b, index - 1) < getByte(a, index - 1))
 			return 1;
 	}
 	return 0;
@@ -101,7 +101,7 @@ static void DD_Red(uint aPos)
 		setByte(Rem, index + aPos, val & 0xff);
 		val >>= 8;
 	}
-	if(!val)
+	if (!val)
 	{
 		index += aPos;
 
@@ -171,7 +171,7 @@ static void DoDiv(void)
 
 		a = n / d;
 
-		if(a == 0ui64)
+		if (a == 0ui64)
 			break;
 
 		DD_Add(a, 0);

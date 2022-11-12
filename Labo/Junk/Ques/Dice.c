@@ -39,7 +39,7 @@ static double GetDiceWinRate(uint myDiceNum, uint osDiceNum)
 
 //		cout("%u %u %u -> %u %u %d\n", myDiceNum, osDiceNum, testcnt, mySum, osSum, winflg);
 
-		if(winflg)
+		if (winflg)
 			wincnt++;
 	}
 	return (double)wincnt / testcnt;

@@ -31,7 +31,7 @@ static void ChangeStage(uint stage)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		GameDir = nextArg();
 		goto readArgs;

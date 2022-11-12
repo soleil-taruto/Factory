@@ -8,14 +8,14 @@ static void CComSw(char *source, char *incPtn, uint lineno) // lineno: (1, 2, 3.
 
 	foreach(lines, line, index)
 	{
-		if(lineExp("<>//**//", line) && strstr(line, incPtn))
+		if (lineExp("<>//**//", line) && strstr(line, incPtn))
 		{
-			if(!startsWith(line, "/*"))
+			if (!startsWith(line, "/*"))
 			{
 				line = insertLine(line, 0, "/*");
 				setElement(lines, index, (uint)line);
 			}
-			if(lineno && !--lineno)
+			if (lineno && !--lineno)
 			{
 				eraseLine(line, 2);
 			}

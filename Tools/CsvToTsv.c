@@ -29,9 +29,9 @@ static void TsvFileToCsvFile(char *rFile, char *wFile)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/T2C")) // TSV to CSV
+	if (argIs("/T2C")) // TSV to CSV
 	{
-		if(hasArgs(2))
+		if (hasArgs(2))
 		{
 			TsvFileToCsvFile(getArg(0), getArg(1));
 			return;
@@ -42,9 +42,9 @@ int main(int argc, char **argv)
 		return;
 	}
 
-	if(argIs("/C2T"))
+	if (argIs("/C2T"))
 	{
-		if(hasArgs(2))
+		if (hasArgs(2))
 		{
 			CsvFileToTsvFile(getArg(0), getArg(1));
 			return;
@@ -55,7 +55,7 @@ int main(int argc, char **argv)
 		return;
 	}
 
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		CsvFileToTsvFile(getArg(0), getArg(1));
 		return;
@@ -64,12 +64,12 @@ int main(int argc, char **argv)
 	{
 		char *file = c_dropFile();
 
-		if(!_stricmp(getExt(file), "csv"))
+		if (!_stricmp(getExt(file), "csv"))
 		{
 			CsvFileToTsvFile(file, c_getOutFile("output.tsv"));
 			openOutDir();
 		}
-		else if(!_stricmp(getExt(file), "tsv"))
+		else if (!_stricmp(getExt(file), "tsv"))
 		{
 			TsvFileToCsvFile(file, c_getOutFile("output.csv"));
 			openOutDir();

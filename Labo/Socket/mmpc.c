@@ -21,31 +21,31 @@ int main(int argc, char **argv)
 	autoBlock_t *content;
 
 readArgs:
-	if(argIs("/S")) // String
+	if (argIs("/S")) // String
 	{
 		text = nextArg();
 		bodyLine = nextArg();
 		mmpc_addPart(text, "", gndBlockLineVar(bodyLine, gab));
 		goto readArgs;
 	}
-	if(argIs("/B")) // Binary-file
+	if (argIs("/B")) // Binary-file
 	{
 		text = nextArg();
 		bodyFile = nextArg();
 		mmpc_addPartFile(text, "", bodyFile);
 		goto readArgs;
 	}
-	if(argIs("/F")) // File
+	if (argIs("/F")) // File
 	{
 		text = nextArg();
 		bodyPath = nextArg();
 
-		if(bodyPath[0] == '*')
+		if (bodyPath[0] == '*')
 			bodyPath = dropDirFile();
 		else
 			bodyPath = makeFullPath(bodyPath);
 
-		if(existDir(bodyPath)) // ? ファイルじゃなくてDIR -> clu化してファイルにする。
+		if (existDir(bodyPath)) // ? ファイルじゃなくてDIR -> clu化してファイルにする。
 		{
 			bodyFile = makeTempPath("clu");
 			coExecute_x(xcout("C:\\Factory\\Tools\\Cluster.exe /I /M \"%s\" \"%s\"", bodyFile, bodyPath));

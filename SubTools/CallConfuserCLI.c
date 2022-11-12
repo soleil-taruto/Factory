@@ -20,7 +20,7 @@ static void CopyDLL(char *rExeFile, char *wDir)
 
 	foreach(files, file, index)
 	{
-		if(!_stricmp("DLL", getExt(file)))
+		if (!_stricmp("DLL", getExt(file)))
 		{
 			char *wFile = changeRoot(strx(file), rDir, wDir);
 

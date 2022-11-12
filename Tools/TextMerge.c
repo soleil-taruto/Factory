@@ -9,7 +9,7 @@
 
 static char *ArgPathFltr(char *arg)
 {
-	if(!strcmp(arg, "*"))
+	if (!strcmp(arg, "*"))
 		return NULL;
 
 	return arg;
@@ -21,23 +21,23 @@ int main(int argc, char **argv)
 	int sorted2 = 0;
 
 readArgs:
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		partSize = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/S1"))
+	if (argIs("/S1"))
 	{
 		sorted1 = 1;
 		goto readArgs;
 	}
-	if(argIs("/S2"))
+	if (argIs("/S2"))
 	{
 		sorted2 = 1;
 		goto readArgs;
 	}
 
-	if(argIs("/I"))
+	if (argIs("/I"))
 	{
 		MergeFileTextICase(getArg(0), sorted1, getArg(1), sorted2, ArgPathFltr(getArg(2)), ArgPathFltr(getArg(3)), ArgPathFltr(getArg(4)), partSize);
 	}

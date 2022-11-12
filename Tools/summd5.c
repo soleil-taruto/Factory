@@ -33,7 +33,7 @@ static void ProcFileSum(char *trgFile, char *sumFile)
 
 	errorCase(!existFile(trgFile));
 
-	if(existFile(sumFile))
+	if (existFile(sumFile))
 	{
 		char *trgHash;
 		char *sumHash;
@@ -46,7 +46,7 @@ static void ProcFileSum(char *trgFile, char *sumFile)
 		cout("<* %s\n", trgHash);
 		cout(">* %s\n", sumHash);
 
-		if(!_stricmp(trgHash, sumHash))
+		if (!_stricmp(trgHash, sumHash))
 		{
 			cout("CHECK OK\n");
 		}
@@ -71,7 +71,7 @@ static void ProcFile(char *file)
 	char *trgFile;
 	char *sumFile;
 
-	if(!_stricmp(SUM_EXT, getExt(file))) // == SUM_EXT
+	if (!_stricmp(SUM_EXT, getExt(file))) // == SUM_EXT
 	{
 		trgFile = changeExt(file, "");
 		sumFile = strx(file);
@@ -95,11 +95,11 @@ static void ProcDir(char *dir)
 
 	foreach(files, trgFile, index)
 	{
-		if(_stricmp(SUM_EXT, getExt(trgFile))) // != SUM_EXT
+		if (_stricmp(SUM_EXT, getExt(trgFile))) // != SUM_EXT
 		{
 			char *sumFile = addExt(strx(trgFile), SUM_EXT);
 
-			if(existFile(sumFile) || AutoMakeMode)
+			if (existFile(sumFile) || AutoMakeMode)
 			{
 				ProcFileSum(trgFile, sumFile);
 			}
@@ -112,11 +112,11 @@ static void ProcDir(char *dir)
 }
 static void ProcMain(char *path)
 {
-	if(existFile(path))
+	if (existFile(path))
 	{
 		ProcFile(path);
 	}
-	else if(existDir(path))
+	else if (existDir(path))
 	{
 		ProcDir(path);
 	}
@@ -128,18 +128,18 @@ static void ProcMain(char *path)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/-E"))
+	if (argIs("/-E"))
 	{
 		ResumeInvalidSum = 1;
 		goto readArgs;
 	}
-	if(argIs("/M"))
+	if (argIs("/M"))
 	{
 		AutoMakeMode = 1;
 		goto readArgs;
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		ProcMain(nextArg());
 	}

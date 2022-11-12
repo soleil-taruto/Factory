@@ -50,7 +50,7 @@ void $PMain(void)
 
 	for(; ; )
 	{
-		if(GetPound(INP_PAUSE))
+		if (GetPound(INP_PAUSE))
 		{
 			break;
 		}

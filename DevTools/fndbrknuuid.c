@@ -11,14 +11,14 @@ static uint ExitCode = 0;
 static void ToFormat(char *p)
 {
 	for(; *p; p++)
-		if(strchr("012345678abcdef", *p))
+		if (strchr("012345678abcdef", *p))
 			*p = '9';
 }
 static void ToNoJpn(char *p)
 {
 	while(*p)
 	{
-		if(isMbc(p))
+		if (isMbc(p))
 		{
 			*p++ = 'J';
 			*p++ = 'J';
@@ -48,13 +48,13 @@ static char *DoCheck(char *p)
 
 	p = strchr(p, '{');
 
-	if(!p)
+	if (!p)
 		return NULL;
 
 	p++;
 	q = strchr(p, '}');
 
-	if(!q)
+	if (!q)
 	{
 		FindError("閉じていません。");
 		return p;
@@ -63,7 +63,7 @@ static char *DoCheck(char *p)
 	q++;
 	ToFormat(p);
 
-	if(strcmp(p, NB_UUID_FMT))
+	if (strcmp(p, NB_UUID_FMT))
 	{
 		FindError("ブラケット内が破損しているようです。");
 	}
@@ -71,20 +71,20 @@ static char *DoCheck(char *p)
 }
 static int IsUUIDPoi(char *line)
 {
-	if(lineExp("<>// not_uuid", line)) return 0;
+	if (lineExp("<>// not_uuid", line)) return 0;
 
-	if(lineExp("<>{<>}<>shared_uuid<>", line)) return 1;
+	if (lineExp("<>{<>}<>shared_uuid<>", line)) return 1;
 
-	if(lineExp("<>\"<>{<>}<>\"<>", line))
+	if (lineExp("<>\"<>{<>}<>\"<>", line))
 	{
-		if(lineExp("<>\"<>{}<>\"<>", line)) return 0;
-		if(lineExp("<>\"<>{ <>}<>\"<>", line)) return 0;
-		if(lineExp("<>\"<>{<> }<>\"<>", line)) return 0;
-		if(lineExp("<>\"<>{<,10,>}<>\"<>", line)) return 0;
-		if(lineExp("<>\"<>{\"<>\"}<>\"<>", line)) return 0;
-		if(lineExp("<>\"<>{\\\"<>\"}<>\"<>", line)) return 0;
+		if (lineExp("<>\"<>{}<>\"<>", line)) return 0;
+		if (lineExp("<>\"<>{ <>}<>\"<>", line)) return 0;
+		if (lineExp("<>\"<>{<> }<>\"<>", line)) return 0;
+		if (lineExp("<>\"<>{<,10,>}<>\"<>", line)) return 0;
+		if (lineExp("<>\"<>{\"<>\"}<>\"<>", line)) return 0;
+		if (lineExp("<>\"<>{\\\"<>\"}<>\"<>", line)) return 0;
 
-		if(lineExp("<>\"<>${<>}<>\"<>", line)) return 0; // added @ 2019.2.9
+		if (lineExp("<>\"<>${<>}<>\"<>", line)) return 0; // added @ 2019.2.9
 
 		return 1;
 	}
@@ -102,7 +102,7 @@ static void FindBrokenUUID_File(char *file)
 
 		ToNoJpn(nj_line);
 
-		if(IsUUIDPoi(nj_line)) // ? uuid らしき行
+		if (IsUUIDPoi(nj_line)) // ? uuid らしき行
 		{
 			char *p = nj_line;
 
@@ -124,7 +124,7 @@ static int IsTargetFile(char *file)
 {
 	char *ext;
 
-	if(mbs_stristr(file, "fndbrknuuid"))
+	if (mbs_stristr(file, "fndbrknuuid"))
 		return 0;
 
 	ext = getExt(file);
@@ -143,7 +143,7 @@ static void FindBrokenUUID(char *dir)
 	uint index;
 
 	foreach(files, file, index)
-		if(IsTargetFile(file))
+		if (IsTargetFile(file))
 			FindBrokenUUID_File(file);
 
 	releaseDim(files, 1);

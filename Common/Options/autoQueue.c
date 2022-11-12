@@ -24,7 +24,7 @@ static void ForceTrim(autoQueue_t *i)
 }
 static void Trim(autoQueue_t *i)
 {
-	if(DEADSPACESIZEMAX < i->NextPos || i->NextPos == getSize(i->Buffer))
+	if (DEADSPACESIZEMAX < i->NextPos || i->NextPos == getSize(i->Buffer))
 	{
 		ForceTrim(i);
 	}

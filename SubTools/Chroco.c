@@ -73,7 +73,7 @@ static char *NormalizePathCase(char *path, char *dir)
 		memFree(ptkn);
 		setElement(ptkns, index, (uint)newPTkn);
 
-		if(index < getCount(ptkns) - 1)
+		if (index < getCount(ptkns) - 1)
 		{
 			changeCwd(newPTkn);
 		}
@@ -122,7 +122,7 @@ static void ExecCopy(char *path, char *dir1, char *dir2) // (dir1, dir2) == absD
 	path1 = combine(dir1, path);
 	path2 = combine(dir2, path);
 
-	if(existFile(path1))
+	if (existFile(path1))
 		copyFile(path1, path2);
 	else
 		mkdirEx(path2);
@@ -162,13 +162,13 @@ static void ProcCopy(void)
 
 		setElement(PathList, index, (uint)path);
 	}
-	if(!NoNormalizePathCase)
+	if (!NoNormalizePathCase)
 	{
 		foreach(PathList, path, index)
 		{
 			char *newPath = NormalizePathCase(path, RootDir);
 
-			if(strcmp(path, newPath))
+			if (strcmp(path, newPath))
 			{
 				cout("< %s\n", path);
 				cout("> %s\n", newPath);
@@ -177,7 +177,7 @@ static void ProcCopy(void)
 			setElement(PathList, index, (uint)newPath);
 		}
 	}
-	if(!NoClearDestDir)
+	if (!NoClearDestDir)
 	{
 		ClearDir(DestDir);
 	}
@@ -196,28 +196,28 @@ static void ProcCopy(void)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/R")) // Root dir
+	if (argIs("/R")) // Root dir
 	{
 		RootDir = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/D")) // Destination dir
+	if (argIs("/D")) // Destination dir
 	{
 		DestDir = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/P")) // Path list file
+	if (argIs("/P")) // Path list file
 	{
 		PathListFile = nextArg();
 		goto readArgs;
 	}
 
-	if(argIs("/-C")) // no Clear destination dir
+	if (argIs("/-C")) // no Clear destination dir
 	{
 		NoClearDestDir = 1;
 		goto readArgs;
 	}
-	if(argIs("/-N")) // no Normalize path case
+	if (argIs("/-N")) // no Normalize path case
 	{
 		NoNormalizePathCase = 1;
 		goto readArgs;

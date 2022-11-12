@@ -70,21 +70,21 @@ static void ChannelTh(uint prm)
 		{
 			for(index = 0; ; )
 			{
-				if(!KeepTheServer)
+				if (!KeepTheServer)
 					goto endLoop;
 
-				if(i->SendSockDead)
+				if (i->SendSockDead)
 					goto endLoop;
 
-				if(index == getSize(buffBlock))
+				if (index == getSize(buffBlock))
 					break;
 
-				if(SockSendISequ(i->SendSock, buffBlock, &index, 1000) == -1)
+				if (SockSendISequ(i->SendSock, buffBlock, &index, 1000) == -1)
 					goto endLoop;
 			}
 			setSize(buffBlock, 0);
 
-			if(SockRecvSequ(i->RecvSock, buffBlock, 1000) == -1)
+			if (SockRecvSequ(i->RecvSock, buffBlock, 1000) == -1)
 			{
 				*i->OtherSideSendSockDead = 1;
 				break;
@@ -108,7 +108,7 @@ static void PerformTh(int sock, char *strip)
 
 	cout("接続: %d\n", sock);
 
-	if(ServerList)
+	if (ServerList)
 	{
 		SockStream_t *ss = CreateSockStream(sock, 60);
 		char *name;
@@ -126,12 +126,12 @@ static void PerformTh(int sock, char *strip)
 		}
 
 		foreach(ServerList, i, index)
-			if(!strcmp(name, i->Name))
+			if (!strcmp(name, i->Name))
 				break;
 
 		memFree(name);
 
-		if(!i)
+		if (!i)
 		{
 			ReleaseSockStream(ss);
 			goto endConnect;
@@ -161,7 +161,7 @@ static void PerformTh(int sock, char *strip)
 
 	cout("転送先接続: %d\n", fwdSock);
 
-	if(fwdSock == -1)
+	if (fwdSock == -1)
 		goto endConnect;
 
 	channels[0].SendBuffer = blockSend;
@@ -196,7 +196,7 @@ static int IdleTh(void)
 {
 	while(hasKey())
 	{
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 		{
 			KeepTheServer = 0;
 			return 0;
@@ -214,23 +214,23 @@ int main(int argc, char **argv)
 	Divider.Name = "forward";
 
 readArgs:
-	if(argIs("/DD")) // Divider Domain
+	if (argIs("/DD")) // Divider Domain
 	{
 		Divider.Domain = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/DP")) // Divider Port
+	if (argIs("/DP")) // Divider Port
 	{
 		Divider.Port = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/DN")) // Divider Name
+	if (argIs("/DN")) // Divider Name
 	{
 		Divider.Name = nextArg();
 		goto readArgs;
 	}
 
-	if(argIs("/F")) // Forward
+	if (argIs("/F")) // Forward
 	{
 		ForwardInfo_t *i = (ForwardInfo_t *)memAlloc(sizeof(ForwardInfo_t));
 
@@ -241,25 +241,25 @@ readArgs:
 		cout("< %s\n", i->Name);
 		cout("> %s:%u\n", i->Domain, i->Port);
 
-		if(!ServerList)
+		if (!ServerList)
 			ServerList = newList();
 
 		addElement(ServerList, (uint)i);
 		goto readArgs;
 	}
 
-	if(argIs("/P")) // Port
+	if (argIs("/P")) // Port
 	{
 		portno = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/C")) // Connect max
+	if (argIs("/C")) // Connect max
 	{
 		connectmax = toValue(nextArg());
 		goto readArgs;
 	}
 
-	if(!ServerList)
+	if (!ServerList)
 	{
 		cout("クライアントモード\n");
 		cout("分配鯖: %s\n", Divider.Domain);

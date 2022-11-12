@@ -9,23 +9,23 @@ int main(int argc, char **argv)
 	uint count;
 
 readArgs:
-	if(argIs("/O"))
+	if (argIs("/O"))
 	{
 		dir = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		filecnt = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		dataflag = 1;
 		goto readArgs;
 	}
 
-	if(dataflag)
+	if (dataflag)
 	{
 		for(count = 0; count < filecnt; count++)
 		{

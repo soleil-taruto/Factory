@@ -13,7 +13,7 @@ static char *ExtFltr(char *ext)
 	memFree(fExt);
 	fExt = lineToPrintLine(ext, 0);
 
-	if(EXTLENMAX < strlen(fExt))
+	if (EXTLENMAX < strlen(fExt))
 		fExt[EXTLENMAX] = '\0';
 
 	return fExt;
@@ -113,7 +113,7 @@ static void CounterIncrement(autoBlock_t *counter)
 	{
 		uchar *p = (uchar *)directGetBuffer(counter) + index;
 
-		if(*p < 0xff)
+		if (*p < 0xff)
 		{
 			(*p)++;
 			break;
@@ -132,7 +132,7 @@ static void EncryptCluster(char *file, AES128_KeyTable_t *keys[4], autoBlock_t *
 
 	cout("EncryptCluster hom=%d\n", hashOnlyMode);
 
-	if(hashOnlyMode)
+	if (hashOnlyMode)
 	{
 		counter = copyAutoBlock(counter);
 
@@ -150,7 +150,7 @@ static void EncryptCluster(char *file, AES128_KeyTable_t *keys[4], autoBlock_t *
 
 		errorCase(getSize(block) != 16);
 
-		if(startCount <= count)
+		if (startCount <= count)
 		{
 			autoBlock_t *maskBlock = nobCreateBlock(16);
 
@@ -167,7 +167,7 @@ static void EncryptCluster(char *file, AES128_KeyTable_t *keys[4], autoBlock_t *
 
 		CounterIncrement(counter);
 
-		if(eqIntPulseSec(1, NULL))
+		if (eqIntPulseSec(1, NULL))
 			Progress();
 	}
 	endLoop:
@@ -180,7 +180,7 @@ static void EncryptCluster(char *file, AES128_KeyTable_t *keys[4], autoBlock_t *
 	moveFile(midFile, file);
 	memFree(midFile);
 
-	if(hashOnlyMode)
+	if (hashOnlyMode)
 		releaseAutoBlock(counter);
 }
 static void CheckSHA512(char *file)
@@ -301,9 +301,9 @@ int main(int argc, char **argv)
 	cout("初期化ベクトル4: %u\n", initVector[3]);
 	cout("モード: %s%s\n", restoreMode ? "復元" : "作成", batchMode ? "(バッチモード)" : "");
 
-	if(batchMode)
+	if (batchMode)
 	{
-		if(passphrase[0] == '*') // '*' 以降パスフレーズと見なす。
+		if (passphrase[0] == '*') // '*' 以降パスフレーズと見なす。
 			passphrase++;
 		else // ファイル名と見なす。
 			passphrase = readFirstLine(passphrase);
@@ -332,7 +332,7 @@ int main(int argc, char **argv)
 
 	cout("カウンタ初期値: %s\n", c_makeHexLine(counter));
 
-	if(!restoreMode)
+	if (!restoreMode)
 	{
 		MakeCluster(resourceDir, clusterFile);
 		Pad128(clusterFile);
@@ -340,7 +340,7 @@ int main(int argc, char **argv)
 		AddSHA512(clusterFile);
 		EncryptCluster(clusterFile, keys, counter, 0);
 	}
-	else if(!batchMode)
+	else if (!batchMode)
 	{
 		char *midFile = makeTempPath(NULL);
 		char *destDir = makeFreeDir();
@@ -367,12 +367,12 @@ int main(int argc, char **argv)
 
 		EncryptCluster(midFile, keys, counter, 1); // as Decrypt
 
-		if(CheckVerify(midFile))
+		if (CheckVerify(midFile))
 		{
 			EncryptCluster(midFile, keys, counter, 1); // as Encrypt
 			EncryptCluster(midFile, keys, counter, 0); // as Decrypt
 
-			if(CheckVerify(midFile))
+			if (CheckVerify(midFile))
 			{
 				UnmakeCluster(midFile, destDir);
 			}

@@ -30,14 +30,14 @@ static char *GetNextStamp(void)
 	static char *stamp;
 	static uint counter;
 
-	if(stamp)
+	if (stamp)
 	{
 		char *tmp = makeCompactStamp(NULL);
 		int cmp;
 
 		cmp = strcmp(stamp, tmp);
 
-		if(cmp < 0) // ? stamp < tmp
+		if (cmp < 0) // ? stamp < tmp
 		{
 			memFree(stamp);
 			stamp = tmp;
@@ -45,7 +45,7 @@ static char *GetNextStamp(void)
 		}
 		else
 		{
-			if(0 < cmp)
+			if (0 < cmp)
 				cout("★★★システム時刻が過去方向に修正されました★★★\n");
 
 			memFree(tmp);
@@ -62,7 +62,7 @@ static uint GetHeaderEndPos(autoBlock_t *buff, uint startPos)
 	uint index;
 
 	for(index = startPos; index + 4 <= getSize(buff); index++)
-		if(!memcmp((uchar *)directGetBuffer(buff) + index, "\r\n\r\n", 4))
+		if (!memcmp((uchar *)directGetBuffer(buff) + index, "\r\n\r\n", 4))
 			return index + 4;
 
 	return 0; // not found
@@ -81,7 +81,7 @@ static char *RCB_ReadLineTo(int endChr)
 
 		RCB_RPos++;
 
-		if(chr == endChr)
+		if (chr == endChr)
 			return unbindBlock2Line(buff);
 
 		addByte(buff, chr);
@@ -101,20 +101,20 @@ static uint ReadChunkedBody(autoBlock_t *buff, uint startPos, autoBlock_t *messa
 		uint partSize;
 //		autoBlock_t gab;
 
-		if(!line)
+		if (!line)
 			break;
 
 		p = strchr(line, ';');
 
-		if(p)
+		if (p)
 			*p = '\0'; // chunk-extension 破棄
 
 		partSize = toValueDigits_xc(line, hexadecimal);
 
-		if(!partSize)
+		if (!partSize)
 			return RCB_RPos - 2;
 
-		if(getSize(buff) < RCB_RPos + partSize + 2)
+		if (getSize(buff) < RCB_RPos + partSize + 2)
 			break;
 
 //		addBytes(message, gndSubBytesVar(buff, RCB_RPos, partSize, gab));
@@ -124,7 +124,7 @@ static uint ReadChunkedBody(autoBlock_t *buff, uint startPos, autoBlock_t *messa
 }
 static uint ReadBody(autoBlock_t *buff, uint startPos, uint size, autoBlock_t *message)
 {
-	if(startPos + size <= getSize(buff))
+	if (startPos + size <= getSize(buff))
 	{
 		/*
 		autoBlock_t gab;
@@ -163,12 +163,12 @@ static void ParseHeader(autoBlock_t *header)
 
 	foreach(lines, line, index)
 	{
-		if(!index)
+		if (!index)
 			continue;
 
-		if(line[0] <= ' ')
+		if (line[0] <= ' ')
 		{
-			if(getCount(values))
+			if (getCount(values))
 			{
 				ucTrimEdge(line);
 
@@ -181,7 +181,7 @@ static void ParseHeader(autoBlock_t *header)
 		{
 			char *p = strchr(line, ':');
 
-			if(p)
+			if (p)
 			{
 				*p = '\0';
 				name = strx(line);
@@ -210,11 +210,11 @@ static void ParseHeader(autoBlock_t *header)
 	{
 		value = getLine(values, index);
 
-		if(!_stricmp(name, "Content-Length"))
+		if (!_stricmp(name, "Content-Length"))
 		{
 			ContentLength = toValue(value);
 		}
-		else if(!_stricmp(name, "Transfer-Encoding"))
+		else if (!_stricmp(name, "Transfer-Encoding"))
 		{
 			ChunkedFlag = mbs_stristr(value, "chunked") ? 1 : 0;
 		}
@@ -236,7 +236,7 @@ static uint GetHeaderAndBody(autoBlock_t *buff, autoBlock_t *message) // ret: 0 
 {
 	uint endPos = GetHeaderEndPos(buff, 0);
 
-	if(endPos)
+	if (endPos)
 	{
 		autoBlock_t gab;
 
@@ -249,11 +249,11 @@ static uint GetHeaderAndBody(autoBlock_t *buff, autoBlock_t *message) // ret: 0 
 //		addBytes(message, HeaderBuff);
 //		releaseAutoBlock(HeaderBuff);
 
-		if(ChunkedFlag)
+		if (ChunkedFlag)
 		{
 			endPos = ReadChunkedBody(buff, endPos, message);
 
-			if(endPos)
+			if (endPos)
 				endPos = GetHeaderEndPos(buff, endPos); // trailer 破棄
 		}
 		else
@@ -284,7 +284,7 @@ static Info_t *CreateInfo(uint64 thID, uint direction)
 }
 static void ReleaseInfo(Info_t *i)
 {
-	if(getSize(i->Buff))
+	if (getSize(i->Buff))
 		cout("★★★未送信のデータを破棄します★★★\n");
 
 	releaseAutoBlock(i->Buff);
@@ -306,7 +306,7 @@ static void Monitor(autoBlock_t *buff, uint prm)
 //	endPos = GetHeaderAndBody(i->Buff, message);
 	endPos = GetHeaderAndBody(i->Buff, NULL);
 
-	if(endPos)
+	if (endPos)
 	{
 		char *file;
 		char *stamp = GetNextStamp();
@@ -335,7 +335,7 @@ static void Monitor(autoBlock_t *buff, uint prm)
 	}
 //	releaseAutoBlock(message);
 
-	if(BuffSizeMax < getSize(i->Buff))
+	if (BuffSizeMax < getSize(i->Buff))
 	{
 		cout("★★★サイズオーバー！切断します★★★\n");
 		ChannelDeadFlag = 1;
@@ -361,7 +361,7 @@ static void Perform(int sock, int fwdSock)
 }
 static int ReadArgs(void)
 {
-	if(argIs("/SX"))
+	if (argIs("/SX"))
 	{
 		BuffSizeMax = toValue(nextArg());
 		return 1;

@@ -32,7 +32,7 @@ static uint EvCancel;
 
 #define CheckCancel() \
 	do { \
-	if(EvCancel && eqIntPulseSec(2, NULL)) { \
+	if (EvCancel && eqIntPulseSec(2, NULL)) { \
 		errorCase_m(handleWaitForMillis(EvCancel, 0), "要求により、キャンセルします。"); \
 	} \
 	} while(0) \
@@ -43,12 +43,12 @@ static void PutLv(uint low, uint hi)
 	double weight;
 	uint index;
 
-	if(low == hi)
+	if (low == hi)
 	{
 		Lvs[low] += 1.0;
 		return;
 	}
-	if(hi < low)
+	if (hi < low)
 		m_swap(low, hi, uint);
 
 	range = hi - low;
@@ -88,7 +88,7 @@ static void DoConv(char *rFile, char *wFile, char *reportFile)
 		sint v1;
 		sint v2;
 
-		if(!row)
+		if (!row)
 			break;
 
 		v1 = (sint)toValue(getLine(row, 0));
@@ -120,7 +120,7 @@ static void DoConv(char *rFile, char *wFile, char *reportFile)
 		uint i1;
 		uint i2;
 
-		if(!row)
+		if (!row)
 			break;
 
 		v1 = (sint)toValue(getLine(row, 0));
@@ -165,7 +165,7 @@ static void DoConv(char *rFile, char *wFile, char *reportFile)
 	{
 		countLv += Lvs[index];
 
-		if(borderLv < countLv)
+		if (borderLv < countLv)
 			break;
 	}
 	borderIndex = index; // 0 ～ LV_RANGE
@@ -177,7 +177,7 @@ static void DoConv(char *rFile, char *wFile, char *reportFile)
 	cout("borderRate: %f\n", borderRate);
 	cout("changeRate: %f\n", changeRate);
 
-	if(m_isRange(changeRate, NOOP_RATE_LOW, NOOP_RATE_HI))
+	if (m_isRange(changeRate, NOOP_RATE_LOW, NOOP_RATE_HI))
 	{
 		message = "レートの振り幅が規定の範囲内なのでキャンセルします。";
 		OutputCancelled= 1;
@@ -199,7 +199,7 @@ static void DoConv(char *rFile, char *wFile, char *reportFile)
 		uint i1;
 		uint i2;
 
-		if(!row)
+		if (!row)
 			break;
 
 		v1 = (sint)toValue(getLine(row, 0));
@@ -214,14 +214,14 @@ static void DoConv(char *rFile, char *wFile, char *reportFile)
 		v1 += 0x8000;
 		v2 += 0x8000;
 
-		if(!m_isRange(v1, 0, 0xffff))
+		if (!m_isRange(v1, 0, 0xffff))
 		{
 			cout("音割れ-1 %d\n", v1);
 
 			otowareCount++;
 			m_range(v1, 0, 0xffff);
 		}
-		if(!m_isRange(v2, 0, 0xffff))
+		if (!m_isRange(v2, 0, 0xffff))
 		{
 			cout("音割れ-2 %d\n", v2);
 
@@ -267,7 +267,7 @@ outputReport:
 	writeLine_x(wfp, xcout("message,%s", message));
 	writeLine_x(wfp, xcout("OutputCancelled,%d", OutputCancelled));
 
-	if(!NoReportLvs)
+	if (!NoReportLvs)
 		for(index = 0; index < LV_RANGE; index++)
 			writeLine_x(wfp, xcout("Lvs,%u,%f", index, Lvs[index]));
 
@@ -299,14 +299,14 @@ int main(int argc, char **argv)
 	addFinalizer(Fnlz); // エラーダイアログ抑止！
 
 readArgs:
-	if(argIs("/E"))
+	if (argIs("/E"))
 	{
 		LOGPOS();
 		EvCancel = eventOpen(nextArg());
 		addFinalizer(ReleaseEvCancel);
 		goto readArgs;
 	}
-	if(argIs("/-LV"))
+	if (argIs("/-LV"))
 	{
 		LOGPOS();
 		NoReportLvs = 1;
@@ -333,7 +333,7 @@ readArgs:
 
 	LOGPOS();
 
-	if(!OutputCancelled)
+	if (!OutputCancelled)
 		writeWAVFileFromCSVFile(csvFile2, wFile, lastWAV_Hz);
 
 	LOGPOS();

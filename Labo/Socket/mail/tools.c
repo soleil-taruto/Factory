@@ -4,11 +4,11 @@ static char *GetFqdn(char *mailAddr)
 {
 	char *p;
 
-	if(mailAddr)
+	if (mailAddr)
 	{
 		p = mbs_strchr(mailAddr, '@');
 
-		if(p)
+		if (p)
 			p++;
 		else
 			p = mailAddr;
@@ -16,7 +16,7 @@ static char *GetFqdn(char *mailAddr)
 	else
 		p = "";
 
-	if(!*p)
+	if (!*p)
 		p = "default";
 
 	return strx(p);
@@ -42,11 +42,11 @@ char *GetMailHeader(autoList_t *mail, char *key)
 	{
 		char *p = strchr(line, ':');
 
-		if(p)
+		if (p)
 		{
 			p[0] = '\0';
 
-			if(!_stricmp(line, key)) // ? found
+			if (!_stricmp(line, key)) // ? found
 			{
 				char *q = p + 1;
 
@@ -57,13 +57,13 @@ char *GetMailHeader(autoList_t *mail, char *key)
 			}
 			p[0] = ':';
 
-			if(value)
+			if (value)
 			{
 				while(++index < getCount(mail))
 				{
 					line = getLine(mail, index);
 
-					if(line[0] != '\t' && line[0] != ' ') // ? not LWSP-char
+					if (line[0] != '\t' && line[0] != ' ') // ? not LWSP-char
 						break;
 
 					while(line[0] == '\t' || line[0] == ' ') // ? LWSP-char
@@ -82,7 +82,7 @@ char *RefMailHeader(autoList_t *mail, char *key)
 {
 	char *value = GetMailHeader(mail, key);
 
-	if(!value)
+	if (!value)
 		value = makeHexLine_x(makeCryptoRandBlock(32)); // dummy
 
 	return value;
@@ -96,11 +96,11 @@ autoList_t *GetMailBody(autoList_t *mail)
 
 	foreach(mail, line, index)
 	{
-		if(enterBody)
+		if (enterBody)
 		{
 			addElement(lines, (uint)strx(line));
 		}
-		else if(line[0] == '\0')
+		else if (line[0] == '\0')
 		{
 			enterBody = 1;
 		}

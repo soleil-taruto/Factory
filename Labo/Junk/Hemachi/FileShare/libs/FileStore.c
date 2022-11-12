@@ -36,7 +36,7 @@ static int CheckDiskFreeSpace(void) // ret: kept
 	cout("currSec: %u\n", currSec);
 	cout("HFS_StoreDir: %s\n", HFS_StoreDir);
 
-	if(lastSec + chkSpan <= currSec)
+	if (lastSec + chkSpan <= currSec)
 	{
 		updateDiskSpace(HFS_StoreDir[0]);
 
@@ -47,7 +47,7 @@ static int CheckDiskFreeSpace(void) // ret: kept
 		lastSec = currSec;
 		chkSpan = HFS_DiskFreeSpaceMin < lastDiskFree / 12 ? 60 : 5;
 
-		if(HFS_DiskFreeSpaceMin < lastDiskFree)
+		if (HFS_DiskFreeSpaceMin < lastDiskFree)
 		{
 			LastDiskFreeSpaceRemain = lastDiskFree - HFS_DiskFreeSpaceMin;
 			retval = 1;
@@ -82,7 +82,7 @@ static void RecoverDiskFreeSpace(void)
 	fileCount = getCount(files);
 	removeCount = fileCount / 10;
 
-	if(!removeCount)
+	if (!removeCount)
 		removeCount = 1;
 
 	cout("fileCount: %u\n", fileCount);
@@ -95,7 +95,7 @@ static void RecoverDiskFreeSpace(void)
 		cout("removeCount_Curr: %u\n", removeCount);
 		cout("file: %s\n", file);
 
-		if(HFS_NM_LockPath(file, 1))
+		if (HFS_NM_LockPath(file, 1))
 		{
 			cout("削除します。\n");
 			removeFile(file);
@@ -112,7 +112,7 @@ void HFS_KeepDiskFreeSpace(void)
 	HFS_MutexEnter();
 	{
 		for(rem = 100; rem && !CheckDiskFreeSpace(); rem--)
-//		if(!CheckDiskFreeSpace()) // old
+//		if (!CheckDiskFreeSpace()) // old
 		{
 			RecoverDiskFreeSpace();
 			cout("rem: %u\n", rem);
@@ -128,7 +128,7 @@ void KeepStoreDirSize(uint64 writeSize)
 	cout("estRemSize_1: %I64u\n", estRemSize);
 	cout("writeSize: %I64u\n", writeSize);
 
-	if(estRemSize < writeSize)
+	if (estRemSize < writeSize)
 	{
 		autoList_t *files = ls(HFS_StoreDir);
 		char *file;
@@ -143,7 +143,7 @@ void KeepStoreDirSize(uint64 writeSize)
 		cout("HFS_StoreDirSizeMax: %I64u\n", HFS_StoreDirSizeMax);
 		cout("dirSize: %I64u\n", dirSize);
 
-		if(HFS_StoreDirSizeMax < dirSize)
+		if (HFS_StoreDirSizeMax < dirSize)
 		{
 			RecoverDiskFreeSpace();
 			estRemSize = 0;
@@ -201,13 +201,13 @@ static void UploadPart(char *realPath, FILE *rfp, uint64 startPos)
 	cout("rfp: %p\n", rfp);
 	cout("startPos: %I64u\n", startPos);
 
-	if(existFile(realPath))
+	if (existFile(realPath))
 	{
 		fileSize = getFileSize(realPath);
 
 		cout("fileSize: %I64u\n", fileSize);
 
-		if(startPos < fileSize)
+		if (startPos < fileSize)
 		{
 			cout("サイズを調整します。\n");
 			setFileSize(realPath, startPos);
@@ -220,7 +220,7 @@ static void UploadPart(char *realPath, FILE *rfp, uint64 startPos)
 
 		cout("fileCount: %u\n", fileCount);
 
-		if(UPLOAD_FILENUMMAX <= fileCount)
+		if (UPLOAD_FILENUMMAX <= fileCount)
 		{
 			RecoverDiskFreeSpace();
 		}
@@ -233,7 +233,7 @@ static void UploadPart(char *realPath, FILE *rfp, uint64 startPos)
 	{
 		autoBlock_t *block = readBinaryStream(rfp, 512 * 1024);
 
-		if(!block)
+		if (!block)
 			break;
 
 		writeSize += (uint64)getSize(block);
@@ -245,7 +245,7 @@ static void UploadPart(char *realPath, FILE *rfp, uint64 startPos)
 	cout("fileSize: %I64u\n", fileSize);
 	cout("writeSize: %I64u\n", writeSize);
 
-	if(UPLOAD_FILESIZEMAX < fileSize)
+	if (UPLOAD_FILESIZEMAX < fileSize)
 	{
 		cout("削除します。\n");
 		removeFile(realPath);
@@ -261,22 +261,22 @@ static void DownloadPart(char *realPath, FILE *wfp, uint64 startPos, uint readSi
 	cout("startPos: %I64u\n", startPos);
 	cout("readSize: %u\n", readSize);
 
-	if(existFile(realPath))
+	if (existFile(realPath))
 	{
 		uint64 fileSize = getFileSize(realPath);
 
 		cout("fileSize: %I64u\n", fileSize);
 
-		if(startPos < fileSize)
+		if (startPos < fileSize)
 		{
 			FILE *rfp = fileOpen(realPath, "rb");
 
 			fileSeek(rfp, SEEK_SET, startPos);
 
-			if(DOWNLOAD_PARTSIZEMAX < readSize)
+			if (DOWNLOAD_PARTSIZEMAX < readSize)
 				readSize = DOWNLOAD_PARTSIZEMAX;
 
-			if(fileSize - startPos < readSize)
+			if (fileSize - startPos < readSize)
 				readSize = (uint)(fileSize - startPos);
 
 			cout("readSize_Resized: %u\n", readSize);
@@ -316,7 +316,7 @@ static void Prv_MoveFile(char *realPath, char *newRealPath)
 	cout("realPath: %s\n", realPath);
 	cout("newRealPath: %s\n", newRealPath);
 
-	if(!mbs_stricmp(realPath, newRealPath))
+	if (!mbs_stricmp(realPath, newRealPath))
 	{
 		cout("FAULT: SAME PATH!\n");
 	}
@@ -336,7 +336,7 @@ static char *ReadParamLine(void)
 {
 	char *line = readLineLenMax(ParamsFP, 1024);
 
-	if(!line)
+	if (!line)
 		line = strx("");
 
 	return line;
@@ -359,7 +359,7 @@ int HFS_Perform(char *prmFile, char *ansFile)
 
 	command = ReadParamLine();
 
-	if(!strcmp(command, "LS"))
+	if (!strcmp(command, "LS"))
 	{
 		HFS_MutexEnter();
 		{
@@ -368,7 +368,7 @@ int HFS_Perform(char *prmFile, char *ansFile)
 		HFS_MutexLeave();
 		retval = 1;
 	}
-	else if(!strcmp(command, "ST"))
+	else if (!strcmp(command, "ST"))
 	{
 		HFS_MutexEnter();
 		{
@@ -378,14 +378,14 @@ int HFS_Perform(char *prmFile, char *ansFile)
 		HFS_MutexLeave();
 		retval = 1;
 	}
-	else if(!strcmp(command, "UP"))
+	else if (!strcmp(command, "UP"))
 	{
 		realPath = FP_ReadRealPath();
 		startPos = toValue64_x(ReadParamLine());
 
 		HFS_MutexEnter();
 		{
-			if(HFS_NM_LockPath(realPath, 1))
+			if (HFS_NM_LockPath(realPath, 1))
 			{
 				UploadPart(realPath, ParamsFP, startPos);
 				retval = 1;
@@ -393,7 +393,7 @@ int HFS_Perform(char *prmFile, char *ansFile)
 		}
 		HFS_MutexLeave();
 	}
-	else if(!strcmp(command, "DL"))
+	else if (!strcmp(command, "DL"))
 	{
 		realPath = FP_ReadRealPath();
 		startPos = toValue64_x(ReadParamLine());
@@ -401,7 +401,7 @@ int HFS_Perform(char *prmFile, char *ansFile)
 
 		HFS_MutexEnter();
 		{
-			if(HFS_NM_LockPath(realPath, 1))
+			if (HFS_NM_LockPath(realPath, 1))
 			{
 				DownloadPart(realPath, AnswerFP, startPos, readSize);
 				retval = 1;
@@ -409,13 +409,13 @@ int HFS_Perform(char *prmFile, char *ansFile)
 		}
 		HFS_MutexLeave();
 	}
-	else if(!strcmp(command, "RM"))
+	else if (!strcmp(command, "RM"))
 	{
 		realPath = FP_ReadRealPath();
 
 		HFS_MutexEnter();
 		{
-			if(HFS_NM_LockPath(realPath, 1))
+			if (HFS_NM_LockPath(realPath, 1))
 			{
 				Prv_RemoveFile(realPath);
 				retval = 1;
@@ -423,14 +423,14 @@ int HFS_Perform(char *prmFile, char *ansFile)
 		}
 		HFS_MutexLeave();
 	}
-	else if(!strcmp(command, "MV"))
+	else if (!strcmp(command, "MV"))
 	{
 		realPath = FP_ReadRealPath();
 		newRealPath = FP_ReadRealPath();
 
 		HFS_MutexEnter();
 		{
-			if(
+			if (
 				HFS_NM_LockPath(realPath, 1) &&
 				HFS_NM_LockPath(newRealPath, 1)
 				)
@@ -459,7 +459,7 @@ char *HFS_GetRealPath(char *virPath) // ret: strx(), NULL == ロック失敗
 {
 	char *realPath = FP_GetRealPath(virPath);
 
-	if(!HFS_LockPath(realPath, 0))
+	if (!HFS_LockPath(realPath, 0))
 	{
 		memFree(realPath);
 		realPath = NULL;

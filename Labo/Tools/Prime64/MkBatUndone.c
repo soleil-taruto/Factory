@@ -23,7 +23,7 @@ static void MkBatUndone(void)
 	errorCase(MaxValue < MinValue);
 	errorCase(NUMB_SPAN * 9998ui64 < MaxValue - MinValue); // ƒXƒpƒ“‚ª’·‚·‚¬‚éB
 
-	if(CountMode)
+	if (CountMode)
 		localDir = xcout("PrimeCount_%I64u-%I64u", MinValue, MaxValue);
 	else
 		localDir = xcout("Prime_%I64u-%I64u", MinValue, MaxValue);
@@ -38,7 +38,7 @@ static void MkBatUndone(void)
 	{
 		uint64 end;
 
-		if(count < (UINT64MAX / NUMB_SPAN) * NUMB_SPAN)
+		if (count < (UINT64MAX / NUMB_SPAN) * NUMB_SPAN)
 			end = (count / NUMB_SPAN + 1) * NUMB_SPAN;
 		else
 			end = UINT64MAX;
@@ -47,7 +47,7 @@ static void MkBatUndone(void)
 
 		MakeBatch(count, end, bat_no);
 
-		if(end == MaxValue)
+		if (end == MaxValue)
 			break;
 
 		count = end;
@@ -68,7 +68,7 @@ static void MkBatUndone(void)
 		writeOneLine("_Go.bat", "FOR /L %%C IN (1,1,%NUMBER_OF_PROCESSORS%) DO START CMD /C _Go_1.bat");
 		writeOneLine("_Stop.bat", "BatToriai.exe . /S");
 
-		if(CountMode)
+		if (CountMode)
 		{
 			copyFile("C:\\Factory\\Labo\\Tools\\Prime64\\sub\\MakeSum.exe", "MakeSum.exe");
 			coExecute("C:\\Factory\\SubTools\\EmbedConfig.exe --factory-dir-disabled MakeSum.exe");
@@ -92,12 +92,12 @@ static void MkBatUndone(void)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		CountMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		MinValue = toValue64(nextArg());
 		MaxValue = toValue64(nextArg());

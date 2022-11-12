@@ -6,7 +6,7 @@ static void ExtFltr(char *path)
 {
 	char *ext = getExt(path);
 
-	if(lineExp("<1,,09AZaz>_", ext))
+	if (lineExp("<1,,09AZaz>_", ext))
 	{
 		char *newPath = strx(path);
 
@@ -29,7 +29,7 @@ static void Main2(char *dir)
 
 	foreach(paths, path, index)
 	{
-		if(ExtFltrMode)
+		if (ExtFltrMode)
 		{
 			ExtFltr(path);
 		}
@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 	char *dir;
 
 readArgs:
-	if(argIs("/EF"))
+	if (argIs("/EF"))
 	{
 		ExtFltrMode = 1;
 		goto readArgs;

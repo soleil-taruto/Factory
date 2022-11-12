@@ -13,7 +13,7 @@ static autoBlock_t *DoRecv(SockStream_t *ss)
 	uint recvSize = SockRecvValue(ss);
 	void *recvData;
 
-	if(RPC_RecvSizeMax < recvSize)
+	if (RPC_RecvSizeMax < recvSize)
 	{
 		cout("ClientRPC_Overflow: %u (max: %u)\n", recvSize, RPC_RecvSizeMax);
 		recvSize = 0;

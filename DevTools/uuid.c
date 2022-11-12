@@ -12,12 +12,12 @@ int main(int argc, char **argv)
 {
 	char *uuid = MakeUUID(1);
 
-	if(argIs("/U"))
+	if (argIs("/U"))
 		toUpperLine(uuid);
 
 	cout("%s\n", uuid);
 
-	if(!argIs("/P")) // ? not Print only
+	if (!argIs("/P")) // ? not Print only
 		viewLine(uuid);
 
 	memFree(uuid);

@@ -30,15 +30,15 @@ static void MakeStampList(char *dir, char *stampListFile, int subDirEnabled)
 	uint index;
 	autoList_t *lines = newList();
 
-	if(!stampListFile)
+	if (!stampListFile)
 		stampListFile = addExt(strx(dir), STAMPLIST_EXT);
 
-	if(existFile(stampListFile))
+	if (existFile(stampListFile))
 	{
 		cout("> %s\n", stampListFile);
 		cout("OVER-WRITE OK?\n");
 
-		if(clearGetKey() == 0x1b)
+		if (clearGetKey() == 0x1b)
 			termination(0);
 
 		cout("OK\n");
@@ -82,7 +82,7 @@ static void ApplyStampList(char *stampListFile, char *dir)
 	char *line;
 	uint index;
 
-	if(!dir)
+	if (!dir)
 		dir = changeExt(stampListFile, "");
 
 	addCwd(dir);
@@ -105,7 +105,7 @@ static void ApplyStampList(char *stampListFile, char *dir)
 		cout("UPDATE TIME %I64u\n", updateTime);
 		cout("> %s\n", file);
 
-		if(existFile(file))
+		if (existFile(file))
 		{
 			/*
 				ïsê≥Ç»ì˙éûÇÕ setFileStamp() ì‡Ç≈ error() Ç…ÇµÇƒÇ≠ÇÍÇÈÇÕÇ∏ÅB
@@ -128,12 +128,12 @@ int main(int argc, char **argv)
 	char *path;
 	char *subPath;
 
-	if(argIs("/-S"))
+	if (argIs("/-S"))
 	{
 		subDirEnabled = 0;
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		path = nextArg();
 	}
@@ -141,12 +141,12 @@ int main(int argc, char **argv)
 	{
 		path = c_dropPath();
 
-		if(!path)
+		if (!path)
 			termination(0);
 	}
 	path = makeFullPath(path);
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		subPath = nextArg();
 		subPath = makeFullPath(subPath);
@@ -156,7 +156,7 @@ int main(int argc, char **argv)
 		subPath = NULL;
 	}
 
-	if(existDir(path))
+	if (existDir(path))
 	{
 		errorCase(isAbsRootDir(path));
 		errorCase(subPath && !existFile(subPath));

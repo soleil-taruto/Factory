@@ -43,11 +43,11 @@ static void WrLog(char *line)
 	cout("%s\n", line);
 	memFree(line);
 
-	if(LogFileBase)
+	if (LogFileBase)
 	{
 		uint currTime = now();
 
-		if(LogFileNextChangeTime < currTime)
+		if (LogFileNextChangeTime < currTime)
 		{
 			memFree(LogFile);
 			LogFile = GetNextLogFile();
@@ -73,14 +73,14 @@ static void PipeLogger(void)
 	{
 		int chr = fgetc(stdin);
 
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
-		if(chr == '\r')
+		if (chr == '\r')
 		{
 			// noop
 		}
-		else if(chr == '\n')
+		else if (chr == '\n')
 		{
 			line[wPos] = '\0';
 			WrLog(line);
@@ -88,7 +88,7 @@ static void PipeLogger(void)
 		}
 		else
 		{
-			if(LOGLINELENMAX <= wPos)
+			if (LOGLINELENMAX <= wPos)
 			{
 				line[wPos] = '\0';
 				WrLog(line);
@@ -97,7 +97,7 @@ static void PipeLogger(void)
 			line[wPos++] = chr;
 		}
 	}
-	if(wPos)
+	if (wPos)
 	{
 		line[wPos] = '\0';
 		WrLog(line);
@@ -111,7 +111,7 @@ static void PipeLogger(void)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/DT"))
+	if (argIs("/DT"))
 	{
 		char *dir = nextArg();
 
@@ -120,7 +120,7 @@ int main(int argc, char **argv)
 		PipeLogger();
 		return;
 	}
-	if(argIs("/UDT"))
+	if (argIs("/UDT"))
 	{
 		char *dir = nextArg();
 
@@ -129,7 +129,7 @@ int main(int argc, char **argv)
 		PipeLogger();
 		return;
 	}
-	if(argIs("/B"))
+	if (argIs("/B"))
 	{
 		char *fileBase = nextArg();
 
@@ -138,7 +138,7 @@ int main(int argc, char **argv)
 		PipeLogger();
 		return;
 	}
-	if(argIs("/BH"))
+	if (argIs("/BH"))
 	{
 		LogFileBase = nextArg();
 
@@ -151,7 +151,7 @@ int main(int argc, char **argv)
 
 	errorCase_m(hasArgs(2), "不明なコマンド引数");
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		LogFile = nextArg();
 

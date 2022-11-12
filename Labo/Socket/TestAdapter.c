@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 	char *outDir = makeTempPath("test-adapter");
 	uint anscnt = 0;
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 		resFile = nextArg();
 	else
 		resFile = c_dropFile();
@@ -55,7 +55,7 @@ int main(int argc, char **argv)
 		char *file = dropPath();
 		int stopLoop = 0;
 
-		if(!file)
+		if (!file)
 			break;
 
 		handleWaitForever(mtx);
@@ -74,7 +74,7 @@ int main(int argc, char **argv)
 
 			handleWaitForever(mtx);
 			{
-				if(existFile(ansFile))
+				if (existFile(ansFile))
 				{
 					char *outFile = combine_cx(outDir, xcout("%010u.txt", anscnt));
 
@@ -90,7 +90,7 @@ int main(int argc, char **argv)
 					anscnt++;
 					stopLoop = 1;
 				}
-				else if(!existFile(prmFile))
+				else if (!existFile(prmFile))
 				{
 					cout("要求が削除されましたが、応答が無いので中止します。\n");
 					stopLoop = 1;
@@ -100,7 +100,7 @@ int main(int argc, char **argv)
 
 			while(hasKey())
 			{
-				if(getKey() == 0x1b)
+				if (getKey() == 0x1b)
 				{
 					cout("エスケープが押されたので中止します。\n");
 					stopLoop = 1;
@@ -123,7 +123,7 @@ int main(int argc, char **argv)
 
 	cout("TEST END\n");
 
-	if(existDir(outDir))
+	if (existDir(outDir))
 		recurRemoveDir(outDir);
 
 	memFree(outDir);

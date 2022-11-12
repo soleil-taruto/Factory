@@ -50,12 +50,12 @@ static void MakeRev(time_t revTime, int printOnly) // revTime: 0 == Œ»
 	rev_b = 1 + Date2Day(y, m, d) - Date2Day(y, 1, 1);
 	rev_c = h * 3600 + n * 60 + s;
 
-	if(rev_c < 10000)
+	if (rev_c < 10000)
 	{
 		rev_b--;
 		rev_c += 86400;
 	}
-	if(rev_b < 100)
+	if (rev_b < 100)
 	{
 		rev_a--;
 		rev_b += Date2Day(rev_a + 1, 1, 1) - Date2Day(rev_a, 1, 1);
@@ -64,7 +64,7 @@ static void MakeRev(time_t revTime, int printOnly) // revTime: 0 == Œ»
 
 	cout("%s\n", rev);
 
-	if(!printOnly)
+	if (!printOnly)
 		viewLineNoRet_NB(rev, 1);
 
 	memFree(rev);
@@ -102,7 +102,7 @@ int main(int argc, char **argv)
 	time_t revTime = 0;
 	int printOnly = 0;
 
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		stampData_t sd;
 
@@ -118,7 +118,7 @@ int main(int argc, char **argv)
 		cout("%I64d\n", stampDataToTime(&sd));
 		return;
 	}
-	if(argIs("/E"))
+	if (argIs("/E"))
 	{
 		time_t t = (time_t)toValue64(nextArg());
 		stampData_t *sd;
@@ -136,21 +136,21 @@ int main(int argc, char **argv)
 			);
 		return;
 	}
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		cout("%I64d\n", time(NULL));
 		return;
 	}
-	if(argIs("/U"))
+	if (argIs("/U"))
 	{
 		UnmakeRev(nextArg());
 		return;
 	}
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		printOnly = 1;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		revTime = toValue64(nextArg());
 		errorCase(revTime < 0);

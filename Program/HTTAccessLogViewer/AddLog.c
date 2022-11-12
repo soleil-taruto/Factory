@@ -9,7 +9,7 @@ static char *GetCaptureFile(void)
 {
 	static char *file;
 
-	if(!file)
+	if (!file)
 		file = combine(getSelfDir(), "Capture.exe");
 
 	return file;
@@ -42,14 +42,14 @@ static void DistributeToLog(char *rFile)
 		autoList_t *row = readCSVRow(rfp);
 		uint date;
 
-		if(!row)
+		if (!row)
 			break;
 
 		date = GetDateByStamp(getLine(row, 0));
 
-		if(wDate != date)
+		if (wDate != date)
 		{
-			if(wfp)
+			if (wfp)
 				fileClose(wfp);
 
 			wfp = fileOpen_xc(GetWFileByDate(date), "ab");
@@ -58,7 +58,7 @@ static void DistributeToLog(char *rFile)
 	}
 	fileClose(rfp);
 
-	if(wfp)
+	if (wfp)
 		fileClose(wfp);
 }
 static void AddLog(void)
@@ -79,7 +79,7 @@ static void AddLog(void)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/OAD"))
+	if (argIs("/OAD"))
 	{
 		LOGPOS();
 		OutputAndDelete = 1;

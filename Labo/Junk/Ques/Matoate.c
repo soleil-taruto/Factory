@@ -19,7 +19,7 @@ static void DoTest(uint n)
 	}
 	for(c = 0; c < n; c++)
 	{
-		if(mato[c])
+		if (mato[c])
 		{
 			numer++;
 		}

@@ -55,7 +55,7 @@ autoList_t *readWAVFile(char *file)
 		char name[5];
 		uint size;
 
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
 		name[0] = chr;
@@ -67,7 +67,7 @@ autoList_t *readWAVFile(char *file)
 
 		errorCase_m(IMAX < size, "チャンクサイズが大きすぎます。"); // HACK: 厳密な上限ではない。実際の上限はもっと低いはず。
 
-		if(!strcmp(name, "fmt "))
+		if (!strcmp(name, "fmt "))
 		{
 			errorCase_m(Fmt.Loaded, "複数のフォーマットチャンクは処理できません。"); // ? 2回目のフォーマットチャンク
 			errorCase(size < 16);
@@ -82,7 +82,7 @@ autoList_t *readWAVFile(char *file)
 
 			fileSeek(fp, SEEK_CUR, (sint64)size - 16);
 		}
-		else if(!strcmp(name, "data"))
+		else if (!strcmp(name, "data"))
 		{
 			errorCase_m(RawData, "複数のデータチャンクは処理できません。"); // ? 2回目のデータチャンク
 
@@ -109,7 +109,7 @@ autoList_t *readWAVFile(char *file)
 	*/
 	wavData = newList();
 
-	if(Fmt.BitPerSample == 8)
+	if (Fmt.BitPerSample == 8)
 	{
 		setAllocCount(wavData, getSize(RawData));
 
@@ -129,7 +129,7 @@ autoList_t *readWAVFile(char *file)
 			addElement(wavData, (getByte(RawData, index) | getByte(RawData, index + 1) << 8) ^ 0x8000); // 16ビットの場合は符号あり整数
 		}
 	}
-	if(Fmt.ChannelNum == 1) // monoral
+	if (Fmt.ChannelNum == 1) // monoral
 	{
 		for(index = 0; index < getCount(wavData); index++)
 		{

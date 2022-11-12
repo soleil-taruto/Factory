@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 
 	foreach(lines, line, index)
 	{
-		if(!strcmp(line, mLine))
+		if (!strcmp(line, mLine))
 		{
 			index++; // •ÒW‘ÎÛ‚ÍŸ‚Ìs
 			break;

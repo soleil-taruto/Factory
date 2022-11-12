@@ -20,7 +20,7 @@ static int IsAsciiStr(char *str)
 	char *p;
 
 	for(p = str; *p; p++)
-		if(!m_isRange(*p, '\x21', '\x7e'))
+		if (!m_isRange(*p, '\x21', '\x7e'))
 			return 0;
 
 	return 1;
@@ -50,7 +50,7 @@ static uint64 GetTotalSize_Paths(autoList_t *paths)
 
 	foreach(paths, path, index)
 	{
-		if(existDir(path))
+		if (existDir(path))
 			addElements_x(paths, ls(path));
 		else
 			totalSize += getFileSize(path);
@@ -88,7 +88,7 @@ static void TrimVer(char *appDir)
 	LOGPOS();
 
 	foreach(files, file, index)
-		if(!lineExpICase("<>_v<3,09>.zip", file))
+		if (!lineExpICase("<>_v<3,09>.zip", file))
 			*file = '\0';
 
 	trimLines(files);
@@ -125,7 +125,7 @@ static void TrimBeta(char *appDir)
 	LOGPOS();
 
 	foreach(files, file, index)
-		if(!lineExpICase("<>_BETA_<14,09>.zip", file))
+		if (!lineExpICase("<>_BETA_<14,09>.zip", file))
 			*file = '\0';
 
 	trimLines(files);
@@ -169,7 +169,7 @@ static void AddRev_File(char *arcFile, char *docRoot)
 	ext = getExt(localFile);
 	appName= changeExt(localFile, "");
 
-	if(!IsAsciiStr(appName))
+	if (!IsAsciiStr(appName))
 	{
 		cout("アスキーコードの文字列じゃないのでスキップ\n");
 		goto endFunc;
@@ -228,13 +228,13 @@ static void AddGameVer(char *arcFile, char *rootDir, int beta)
 	cout("4.> %s\n", wFile);
 	cout("5.> %s\n", wMD5File);
 
-	if(!existFile(md5File)) // ? .md5 ファイルが無い。
+	if (!existFile(md5File)) // ? .md5 ファイルが無い。
 		goto cancel;
 
-	if(existFile(wFile) || existFile(wMD5File)) // ? このバージョンは既に存在する。
+	if (existFile(wFile) || existFile(wMD5File)) // ? このバージョンは既に存在する。
 		goto cancel;
 
-	if(!existDir(wDir))
+	if (!existDir(wDir))
 	{
 		autoList_t *lines;
 
@@ -282,7 +282,7 @@ static void ExtractCluster(char *cluster, char *rootDir)
 
 	cout("wDir: %s\n", wDir);
 
-	if(existDir(wDir))
+	if (existDir(wDir))
 		coExecute_x(xcout("C:\\Factory\\Tools\\Cluster.exe /OAD /OW /R \"%s\" \"%s\"", cluster, wDir));
 
 	memFree(node);
@@ -313,22 +313,22 @@ static void AddRev(char *rDir, char *wDir, char *gameWDir, char *extCluWDir)
 
 		foreach(files, file, index)
 		{
-			if(!existFile(file)) // .md5 ファイルなど、消失する場合がある。
+			if (!existFile(file)) // .md5 ファイルなど、消失する場合がある。
 				continue;
 
-			if(!_stricmp("clu", getExt(file)))
+			if (!_stricmp("clu", getExt(file)))
 			{
 				ExtractCluster(file, extCluWDir);
 			}
-			else if(lineExpICase("<>_v<3,09>.zip", file))
+			else if (lineExpICase("<>_v<3,09>.zip", file))
 			{
 				AddGameVer(file, gameWDir, 0);
 			}
-			else if(lineExpICase("<>_BETA_<14,09>.zip", file))
+			else if (lineExpICase("<>_BETA_<14,09>.zip", file))
 			{
 				AddGameVer(file, gameWDir, 1);
 			}
-			else if(!_stricmp("zip", getExt(file)))
+			else if (!_stricmp("zip", getExt(file)))
 			{
 				AddRev_File(file, wDir);
 			}
@@ -342,7 +342,7 @@ static void AddRev(char *rDir, char *wDir, char *gameWDir, char *extCluWDir)
 }
 int main(int argc, char **argv)
 {
-	if(hasArgs(3))
+	if (hasArgs(3))
 	{
 		AddRev(getArg(0), getArg(1), getArg(2), getArg(3));
 		return;

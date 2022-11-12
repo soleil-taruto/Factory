@@ -105,8 +105,8 @@ static void Writer(uchar *block, uint size)
 	writeBinaryBlock(Stream, &writeBlock);
 	RWCount += size;
 
-//	if(2 <= size) // old
-	if(2 <= size && pulseSec(1, NULL))
+//	if (2 <= size) // old
+	if (2 <= size && pulseSec(1, NULL))
 		cout("\r%I64u bytes wrote OK", RWCount);
 }
 static void Reader(uchar *block, uint size)
@@ -117,7 +117,7 @@ static void Reader(uchar *block, uint size)
 
 	readSize = getSize(readBlock);
 
-	if(readSize != size)
+	if (readSize != size)
 	{
 		erred = 1;
 		memset(block, 0x00, size);
@@ -128,8 +128,8 @@ static void Reader(uchar *block, uint size)
 	releaseAutoBlock(readBlock);
 	RWCount += size;
 
-//	if(2 <= size || erred) // old
-	if(2 <= size && pulseSec(1, NULL) || erred)
+//	if (2 <= size || erred) // old
+	if (2 <= size && pulseSec(1, NULL) || erred)
 		cout("\r%I64u bytes read %s", RWCount, erred ? "ERROR\n" : "OK");
 }
 
@@ -143,13 +143,13 @@ static void BackupFile(char *file)
 
 #if 1 // 別のプロセスが使用中です。対策 @ 2016.5.11
 	// 無い場合もあるよ。@ 2017.7.2
-	if(existFile(file))
+	if (existFile(file))
 	{
 		for(; ; )
 		{
 			coExecute_x(xcout("DEL \"%s\"", oldFile));
 
-			if(!existFile(oldFile))
+			if (!existFile(oldFile))
 				break;
 
 			coSleep(2000);
@@ -158,7 +158,7 @@ static void BackupFile(char *file)
 		{
 			coExecute_x(xcout("REN \"%s\" \"%s\"", file, getLocal(oldFile)));
 
-			if(!existFile(file))
+			if (!existFile(file))
 				break;
 
 			coSleep(2000);
@@ -177,7 +177,7 @@ static void MakeCluster(char *file, char *dir)
 	cout("> %s\n", file);
 	cout("< %s\n", dir);
 
-	if(OverwriteMode)
+	if (OverwriteMode)
 	{
 		cout("OW_DELETE DEST\n");
 		recurRemovePathIfExist(file);
@@ -193,13 +193,13 @@ static void MakeCluster(char *file, char *dir)
 
 	cout("\r%I64u bytes wrote FINISHED\n", RWCount);
 
-	if(OutputAndCleanMode)
+	if (OutputAndCleanMode)
 	{
 		cout("CLEAN DIR\n");
 		recurClearDir(dir); // HACK: 超ファイル数に対応する？
 		cout("CLEAN DIR Ok.\n");
 	}
-	else if(OutputAndDeleteMode)
+	else if (OutputAndDeleteMode)
 	{
 		cout("DELETE DIR\n");
 		recurRemoveDir(dir); // HACK: 超ファイル数に対応する？
@@ -214,7 +214,7 @@ static void RestoreCluster(char *file, char *dir)
 	cout("< %s\n", file);
 	cout("> %s\n", dir);
 
-	if(OverwriteMode)
+	if (OverwriteMode)
 	{
 		cout("OW_DELETE DEST\n");
 		recurRemovePathIfExist(dir);
@@ -233,7 +233,7 @@ static void RestoreCluster(char *file, char *dir)
 	cout("\r%I64u bytes read %s\n", RWCount, retval ? "SUCCESSFUL" : "FAULT");
 	errorCase(!retval);
 
-	if(OutputAndCleanMode || OutputAndDeleteMode)
+	if (OutputAndCleanMode || OutputAndDeleteMode)
 	{
 		cout("DELETE CLU\n");
 		removeFile(file);
@@ -271,12 +271,12 @@ static int PickOutDxMode;
 
 static void AutoActCluster(char *path)
 {
-	if(existDir(path))
+	if (existDir(path))
 	{
 		char *fdir = NULL;
 		char *file;
 
-		if(RestoreFreeDirMode)
+		if (RestoreFreeDirMode)
 		{
 			fdir = makeFreeDir();
 			file = combine_cx(fdir, addExt(strx(getLocal(path)), EXT_CLUSTER));
@@ -286,7 +286,7 @@ static void AutoActCluster(char *path)
 
 		MakeCluster(file, path);
 
-		if(fdir)
+		if (fdir)
 		{
 			execute_x(xcout("START %s\n", fdir));
 			memFree(fdir);
@@ -300,7 +300,7 @@ static void AutoActCluster(char *path)
 
 		errorCase(_stricmp(EXT_CLUSTER, getExt(path)));
 
-		if(!RestoreSameDirMode)
+		if (!RestoreSameDirMode)
 		{
 			fdir = makeFreeDir();
 			dir = combine_cx(fdir, changeExt(getLocal(path), ""));
@@ -308,25 +308,25 @@ static void AutoActCluster(char *path)
 		else
 			dir = changeExt(path, "");
 
-		if(!NoCheckClusterMode)
+		if (!NoCheckClusterMode)
 			CheckCluster(path);
 
 		RestoreCluster(path, dir);
 
-		if(fdir)
+		if (fdir)
 		{
-			if(UnopenEmptyClusterMode && IsNoFilesDir(fdir))
+			if (UnopenEmptyClusterMode && IsNoFilesDir(fdir))
 			{
 				LOGPOS();
 				recurRemoveDir(fdir);
 			}
-			else if(FSqDivMode)
+			else if (FSqDivMode)
 			{
 				// memo: DSqDiv.exe は dir とは別のフォルダに出力する。
 
 				coExecute_x(xcout("C:\\Factory\\Tools\\FSqDiv.exe /T \"%s\" 5", dir));
 			}
-			else if(PickOutDxMode)
+			else if (PickOutDxMode)
 			{
 				// memo: PickOutDx.exe は dir とは別のフォルダに出力する。
 
@@ -334,7 +334,7 @@ static void AutoActCluster(char *path)
 			}
 			else
 			{
-				if(OrderStampMode)
+				if (OrderStampMode)
 					coExecute_x(xcout("C:\\Factory\\SubTools\\OrderStamp.exe \"%s\"", dir));
 
 				execute_x(xcout("START %s\n", fdir));
@@ -348,22 +348,22 @@ static void AutoActCluster(char *path)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/C")) // out to same dir (Current dir?) mode
+	if (argIs("/C")) // out to same dir (Current dir?) mode
 	{
 		RestoreSameDirMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/1")) // out to free dir mode
+	if (argIs("/1")) // out to free dir mode
 	{
 		RestoreFreeDirMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/Q")) // Quick mode
+	if (argIs("/Q")) // Quick mode
 	{
 		NoCheckClusterMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/T")) // Trust mode
+	if (argIs("/T")) // Trust mode
 	{
 		cout("***********\n");
 		cout("** TRUST **\n");
@@ -372,7 +372,7 @@ readArgs:
 		STD_TrustMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/OAC"))
+	if (argIs("/OAC"))
 	{
 		cout("**********************\n");
 		cout("** OUTPUT AND CLEAN **\n");
@@ -381,7 +381,7 @@ readArgs:
 		OutputAndCleanMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/OAD"))
+	if (argIs("/OAD"))
 	{
 		cout("***********************\n");
 		cout("** OUTPUT AND DELETE **\n");
@@ -390,7 +390,7 @@ readArgs:
 		OutputAndDeleteMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/OW"))
+	if (argIs("/OW"))
 	{
 		cout("***************\n");
 		cout("** OVERWRITE **\n");
@@ -399,30 +399,30 @@ readArgs:
 		OverwriteMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/E-"))
+	if (argIs("/E-"))
 	{
 		UnopenEmptyClusterMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/E-+"))
+	if (argIs("/E-+"))
 	{
 		UnopenEmptyClusterMode = 1;
 		FSqDivMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/E-2"))
+	if (argIs("/E-2"))
 	{
 		UnopenEmptyClusterMode = 1;
 		OrderStampMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/E-3"))
+	if (argIs("/E-3"))
 	{
 		UnopenEmptyClusterMode = 1;
 		PickOutDxMode = 1;
 		goto readArgs;
 	}
-	if(argIs("/I"))
+	if (argIs("/I"))
 	{
 		cout("+-------------------------------+\n");
 		cout("| 属性と日時もクラスタ化します。|\n");
@@ -431,7 +431,7 @@ readArgs:
 		DTS_WithInfo = 1;
 		goto readArgs;
 	}
-	if(argIs("/PP-"))
+	if (argIs("/PP-"))
 	{
 		char *ptPtn = nextArg();
 
@@ -442,40 +442,40 @@ readArgs:
 		goto readArgs;
 	}
 
-	if(argIs("/M")) // Make cluster
+	if (argIs("/M")) // Make cluster
 	{
 		MakeCluster(getArg(0), getArg(1)); // (0) 出力ファイル <- (1) 入力DIR, (0) ... 存在しない作成可能なパス
 		return;
 	}
-	if(argIs("/MO")) // Make cluster Overwrite
+	if (argIs("/MO")) // Make cluster Overwrite
 	{
 		removeFileIfExist(getArg(0));
 		MakeCluster(getArg(0), getArg(1)); // (0) 出力ファイル <- (1) 入力DIR, (0) ... 削除可能なファイル or 存在しない作成可能なパス
 		return;
 	}
-	if(argIs("/BM")) // Backup and Make cluster
+	if (argIs("/BM")) // Backup and Make cluster
 	{
 		BackupFile(getArg(0));
 		MakeCluster(getArg(0), getArg(1)); // (0) 出力ファイル <- (1) 入力DIR, (0) ... 存在しない作成可能なパス
 		return;
 	}
-	if(argIs("/K")) // Check cluster
+	if (argIs("/K")) // Check cluster
 	{
 		CheckCluster(getArg(0));
 		return;
 	}
-	if(argIs("/RQ")) // Restore dir from cluster
+	if (argIs("/RQ")) // Restore dir from cluster
 	{
 		RestoreCluster(getArg(0), getArg(1)); // (0) 入力ファイル -> (1) 出力DIR, (1) ... 存在しない作成可能なパス
 		return;
 	}
-	if(argIs("/R")) // Check and Restore dir from cluster
+	if (argIs("/R")) // Check and Restore dir from cluster
 	{
 		CheckCluster(getArg(0));
 		RestoreCluster(getArg(0), getArg(1)); // (0) 入力ファイル -> (1) 出力DIR, (1) ... 存在しない作成可能なパス
 		return;
 	}
-	if(argIs("/MR")) // Make and Restore (Copy)
+	if (argIs("/MR")) // Make and Restore (Copy)
 	{
 		char *inpDir = getArg(0); // (0) 入力DIR -> (2) 中間ファイル_省略可能 -> (1) 出力DIR, (1) ... 存在しない作成可能なパス, (2) ... 上書き可能なファイル or 存在しない作成可能なパス
 		char *outDir = getArg(1);
@@ -500,7 +500,7 @@ readArgs:
 		出力先は存在しない作成可能なパス
 	*/
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		AutoActCluster(getArg(0));
 		return;
@@ -510,7 +510,7 @@ readArgs:
 	{
 		char *path = dropPath();
 
-		if(!path)
+		if (!path)
 			break;
 
 		AutoActCluster(path);

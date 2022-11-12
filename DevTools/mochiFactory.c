@@ -24,7 +24,7 @@ static void Main2(void)
 
 	foreach(files, file, index)
 	{
-		if(IsTargetFile(file))
+		if (IsTargetFile(file))
 		{
 			char *wFile = changeRoot(strx(file), R_ROOT_DIR, wRootDir);
 

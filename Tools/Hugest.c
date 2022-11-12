@@ -24,12 +24,12 @@ static void DispHugest_Files_x(autoList_t *files)
 	{
 		uint64 csz = getFileSize(file);
 
-		if(csz < minsz && SmallestMin <= csz)
+		if (csz < minsz && SmallestMin <= csz)
 		{
 			minsz = csz;
 			cout("<%15s:%s\n", c_thousandComma(xcout("%I64u", minsz)), file);
 		}
-		if(maxsz < csz)
+		if (maxsz < csz)
 		{
 			maxsz = csz;
 			cout(">%15s:%s\n", c_thousandComma(xcout("%I64u", maxsz)), file);
@@ -54,24 +54,24 @@ int main(int argc, char **argv)
 	int ignoreSubDir = 0;
 
 readArgs:
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		SmallestMin = toValue64(nextArg());
 		cout("Smallest-Min: %I64u\n", SmallestMin);
 		goto readArgs;
 	}
-	if(argIs("/-S"))
+	if (argIs("/-S"))
 	{
 		ignoreSubDir = 1;
 		goto readArgs;
 	}
 
-	if(argIs("/LSS"))
+	if (argIs("/LSS"))
 	{
 		DispHugest_LSS();
 		return;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		DispHugest(nextArg(), ignoreSubDir);
 		return;

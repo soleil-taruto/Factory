@@ -6,7 +6,7 @@ void addFinalizer(void (*finalizer)(void))
 {
 	errorCase(!finalizer);
 
-	if(!Finalizers)
+	if (!Finalizers)
 		Finalizers = createAutoList(1);
 
 	addElement(Finalizers, (uint)finalizer);
@@ -20,7 +20,7 @@ void unaddFinalizer(void (*finalizer)(void))
 }
 void runFinalizers(void)
 {
-	if(Finalizers)
+	if (Finalizers)
 	{
 		while(getCount(Finalizers))
 		{
@@ -48,9 +48,9 @@ void error2(char *source, uint lineno, char *function, char *message)
 	uint mtx;
 
 	// 再帰防止
-	if(busy)
+	if (busy)
 	{
-		if(!noErrorDlgMode)
+		if (!noErrorDlgMode)
 			system("START ?_Error_In_Error"); // せめて何か出す。
 
 		exit(2);
@@ -62,7 +62,7 @@ void error2(char *source, uint lineno, char *function, char *message)
 	cout("+-------+\n");
 	cout("%s (%u) %s ", source, lineno, function); cout("LastError=%08x\n", GetLastError());
 
-	if(message)
+	if (message)
 	{
 		cout("----\n%s\n----\n", message);
 //		cout("%s\n", message);
@@ -80,10 +80,10 @@ void error2(char *source, uint lineno, char *function, char *message)
 #define SRC_MUTEX "Mutex.c"
 #define NM_MUTEX "cerulean.charlotte Factory error mutex object"
 
-	if(noErrorDlgMode)
+	if (noErrorDlgMode)
 		goto endproc;
 
-	if(!_stricmp(source, SRC_MUTEX)) // Mutex のエラーなら Mutex は使えないだろう。
+	if (!_stricmp(source, SRC_MUTEX)) // Mutex のエラーなら Mutex は使えないだろう。
 	{
 		system("START ?_Mutex_Error"); // せめて何か出す。
 		goto endproc;
@@ -95,11 +95,11 @@ void error2(char *source, uint lineno, char *function, char *message)
 		char *strw;
 		char *mbMessage;
 
-		if(message)
+		if (message)
 		{
 			mbMessage = strx(message);
 
-			if(
+			if (
 				strchr(mbMessage, '\r') ||
 				strchr(mbMessage, '\n') ||
 				strchr(mbMessage, '"')
@@ -123,7 +123,7 @@ void error2(char *source, uint lineno, char *function, char *message)
 			system はちゃんとキックしてるぽい。
 		*/
 
-		if(isFactoryDirEnabled())
+		if (isFactoryDirEnabled())
 			execute(vbsfile);
 		else
 			execute_x(xcout("START \"\" /WAIT \"%s\"", vbsfile));

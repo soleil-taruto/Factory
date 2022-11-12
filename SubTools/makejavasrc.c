@@ -7,7 +7,7 @@ static void AddDedokoro(char *package, char *className, char *file)
 {
 	FILE *fp;
 
-	if(!DedokoroListFile)
+	if (!DedokoroListFile)
 		DedokoroListFile = getOutFile("Dedokoro.txt");
 
 	fp = fileOpen(DedokoroListFile, "at");
@@ -42,7 +42,7 @@ static char *GetPackage(char *javaFile)
 	{
 		char *line = readLine(fp);
 
-		if(!line)
+		if (!line)
 		{
 			UnknownFlag = 1;
 			ret = strx("_$UnknownPackage");
@@ -50,7 +50,7 @@ static char *GetPackage(char *javaFile)
 		}
 		ucTrim(line);
 
-		if(startsWith(line, "package "))
+		if (startsWith(line, "package "))
 		{
 			char *p = line + 8;
 			char *q;
@@ -82,7 +82,7 @@ static char *GetJavaClassName(char *javaFile)
 		char *line = readLine(fp);
 		char *p;
 
-		if(!line)
+		if (!line)
 		{
 			UnknownFlag = 1;
 			ret = strx("_$UnknownClass");
@@ -90,21 +90,21 @@ static char *GetJavaClassName(char *javaFile)
 		}
 		ucTrim(line);
 
-		if(*line == '/') // ? コメント行っぽい。XXX
+		if (*line == '/') // ? コメント行っぽい。XXX
 			*line = '\0';
 
-		if(*line == '*') // ? コメント行っぽい。XXX
+		if (*line == '*') // ? コメント行っぽい。XXX
 			*line = '\0';
 
 		p = strstr(line, "class ");
 
-		if(!p)
+		if (!p)
 			p = strstr(line, "interface ");
 
-		if(!p)
+		if (!p)
 			p = strstr(line, "enum ");
 
-		if(p)
+		if (p)
 		{
 			char *q;
 
@@ -112,11 +112,11 @@ static char *GetJavaClassName(char *javaFile)
 			errorCase(!p);
 			p++;
 			q = strchr(p, ' ');
-			if(q) *q = '\0';
+			if (q) *q = '\0';
 			q = strchr(p, '<');
-			if(q) *q = '\0';
+			if (q) *q = '\0';
 			q = strchr(p, '{');
-			if(q) *q = '\0';
+			if (q) *q = '\0';
 
 			ret = strx(p);
 			trimEdge(ret, ' ');
@@ -146,7 +146,7 @@ static void ExtractJava(char *javaFile, char *packageRootDir)
 	wFile = lineToFairRelPath_x(wFile, strlen(packageRootDir));
 	wFile = combine_cx(packageRootDir, wFile);
 
-	if(existPath(wFile))
+	if (existPath(wFile))
 	{
 		wFile = addExt(wFile, "_$Collision.txt");
 		wFile = toCreatablePath(wFile, UINTMAX);
@@ -154,9 +154,9 @@ static void ExtractJava(char *javaFile, char *packageRootDir)
 	createPath(wFile, 'X');
 	copyFile(javaFile, wFile);
 
-	if(CurrJarFile)
+	if (CurrJarFile)
 		AddDedokoro(package, className, CurrJarFile);
-	else if(CurrClassFile)
+	else if (CurrClassFile)
 		AddDedokoro(package, className, CurrClassFile);
 	else
 		AddDedokoro(package, className, javaFile);
@@ -188,7 +188,7 @@ static void ExtractAllJava(char *rDir, char *wDir)
 	sortJLinesICase(files);
 
 	foreach(files, file, index)
-		if(!_stricmp("java", getExt(file)))
+		if (!_stricmp("java", getExt(file)))
 			ExtractJava(file, wDir);
 
 	releaseDim(files, 1);
@@ -202,7 +202,7 @@ static void ExtractAllClass(char *rDir, char *wDir)
 	sortJLinesICase(files);
 
 	foreach(files, file, index)
-		if(!_stricmp("class", getExt(file)) && !strchr(getLocal(file), '$'))
+		if (!_stricmp("class", getExt(file)) && !strchr(getLocal(file), '$'))
 			ExtractClass(file, wDir);
 
 	releaseDim(files, 1);
@@ -238,7 +238,7 @@ static void ExtractAllJar(char *rDir, char *wDir, char *target_ext)
 	sortJLinesICase(files);
 
 	foreach(files, file, index)
-		if(!_stricmp(target_ext, getExt(file)))
+		if (!_stricmp(target_ext, getExt(file)))
 			ExtractJar(file, wDir);
 
 	releaseDim(files, 1);
@@ -263,7 +263,7 @@ static void MakeJavaSrc(char *rDir, char *wDir)
 	memFree(rDir);
 	memFree(wDir);
 
-	if(DedokoroListFile)
+	if (DedokoroListFile)
 	{
 		MergeSortText(DedokoroListFile, DedokoroListFile, 128000000); // 128 MB
 		openOutDir();

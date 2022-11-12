@@ -28,12 +28,12 @@
 
 int main(int argc, char **argv)
 {
-	if(argIs("/DT2S"))
+	if (argIs("/DT2S"))
 	{
 		cout("%I64u\n", TimeData2TSec(Res2TimeData(nextArg())));
 		return;
 	}
-	if(argIs("/S2DT"))
+	if (argIs("/S2DT"))
 	{
 		cout("%I64u\n", TimeData2Stamp(TSec2TimeData(toValue64(nextArg()))));
 		return;
@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 	{
 		uint64 prm = toValue64(nextArg());
 
-		if(prm < 10000101000000ui64)
+		if (prm < 10000101000000ui64)
 		{
 			cout("%I64u\n", TimeData2Stamp(TSec2TimeData(prm)));
 		}

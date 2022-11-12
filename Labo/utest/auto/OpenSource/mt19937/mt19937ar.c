@@ -24,7 +24,7 @@ static void Test_mt19937(void)
 
 int main(int argc, char **argv)
 {
-	if(argIs("/ORIGINAL-MAIN"))
+	if (argIs("/ORIGINAL-MAIN"))
 	{
 		mt19937_main();
 		return;

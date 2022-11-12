@@ -11,10 +11,10 @@ static int GetPBit(uint prime)
 	uint bit;
 	uint index;
 
-	if(prime == 2)
+	if (prime == 2)
 		return 0;
 
-	if(prime % 2 == 0)
+	if (prime % 2 == 0)
 		return 1;
 
 	bit = prime / 2;
@@ -41,7 +41,7 @@ static void SetPBit(uint prime, int flag)
 
 	c = PBits[index];
 
-	if(flag)
+	if (flag)
 		c |= 1u << bit;
 	else
 		c &= ~(1u << bit);
@@ -55,9 +55,9 @@ static char *GetDatFile(void)
 {
 	static char *file;
 
-	if(!file)
+	if (!file)
 	{
-		if(isFactoryDirEnabled())
+		if (isFactoryDirEnabled())
 			file = "C:\\Factory\\tmp_Prime\\Prime.dat";
 		else
 			file = combine(getSelfDir(), "Prime.dat");
@@ -77,7 +77,7 @@ static int LoadPBits(void)
 	FILE *fp;
 	autoBlock_t gab;
 
-	if(!existFile(GetDatFile()))
+	if (!existFile(GetDatFile()))
 		return 0;
 
 	errorCase(getFileSize(GetDatFile()) != PBIT_LEN * sizeof(uint));
@@ -128,7 +128,7 @@ static void PutPrimeFrom17(void)
 	uint prime;
 
 	for(prime = 17; prime <= 0xffff; prime += 2)
-		if(!GetPBit(prime))
+		if (!GetPBit(prime))
 			PutPrime(prime, UINTMAX);
 }
 static void DoINIT(void)
@@ -139,7 +139,7 @@ static void DoINIT(void)
 
 	mutex();
 	{
-		if(!LoadPBits())
+		if (!LoadPBits())
 		{
 			LOGPOS();
 			PutPrimeTo13();
@@ -157,7 +157,7 @@ static void INIT(void)
 {
 	static int inited;
 
-	if(!inited)
+	if (!inited)
 	{
 		DoINIT();
 		inited = 1;
@@ -176,16 +176,16 @@ int IsPrime(uint64 value)
 	uint64 denom; // maxDenom is max UINTMAX
 	uint maxDenom;
 
-	if(value <= UINTMAX)
+	if (value <= UINTMAX)
 		return IsPrime_32((uint)value);
 
-	if(value % 2 == 0)
+	if (value % 2 == 0)
 		return 0;
 
 	maxDenom = iSqrt64(value);
 
 	for(denom = 3; denom <= maxDenom; denom += 2)
-		if(IsPrime_32(denom) && value % denom == 0) // IsPrime_32 <- value % denom == 0 ‚æ‚è‘¬‚¢‚Û‚¢B32bit‚¾‚©‚ç???
+		if (IsPrime_32(denom) && value % denom == 0) // IsPrime_32 <- value % denom == 0 ‚æ‚è‘¬‚¢‚Û‚¢B32bit‚¾‚©‚ç???
 			return 0;
 
 	return 1;
@@ -194,15 +194,15 @@ void Factorization(uint64 value, uint64 dest[64]) // dest: Å‘å 63 ŒÂ, ÅŒã‚Ì—v‘
 {
 	uint wPos = 0;
 
-	if(value == 0)
+	if (value == 0)
 	{
 		// noop
 	}
-	else if(value == 1)
+	else if (value == 1)
 	{
 		dest[wPos++] = 1;
 	}
-	else if(value <= UINTMAX && IsPrime_32((uint)value))
+	else if (value <= UINTMAX && IsPrime_32((uint)value))
 	{
 		dest[wPos++] = value;
 	}
@@ -216,21 +216,21 @@ void Factorization(uint64 value, uint64 dest[64]) // dest: Å‘å 63 ŒÂ, ÅŒã‚Ì—v‘
 			dest[wPos++] = 2;
 			value /= 2;
 
-			if(value < 2)
+			if (value < 2)
 				goto value_one;
 		}
 		maxDenom = iSqrt64(value);
 
 		for(denom = 3; denom <= maxDenom; denom += 2)
 		{
-			if(IsPrime_32(denom)) // value % denom == 0 ‚æ‚è‘¬‚¢‚Û‚¢B32bit‚¾‚©‚ç???
+			if (IsPrime_32(denom)) // value % denom == 0 ‚æ‚è‘¬‚¢‚Û‚¢B32bit‚¾‚©‚ç???
 			{
 				while(value % denom == 0)
 				{
 					dest[wPos++] = denom;
 					value /= denom;
 
-					if(value < 2)
+					if (value < 2)
 						goto value_one;
 
 					maxDenom = iSqrt64(value);

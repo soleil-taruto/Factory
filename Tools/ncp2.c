@@ -37,10 +37,10 @@ static void CheckAbortRequest(void)
 	int escapePressed = 0;
 
 	while(hasKey())
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 			escapePressed = 1;
 
-	if(!AbortRequested && escapePressed)
+	if (!AbortRequested && escapePressed)
 	{
 		AbortRequested = 1;
 
@@ -55,21 +55,21 @@ static char *GetNcpOptions(void) // ret: c_
 
 	CheckAbortRequest();
 
-	if(!ret)
+	if (!ret)
 		ret = strx("");
 
 	*ret = '\0';
 
-	if(ServerDomain)
+	if (ServerDomain)
 		ret = addLine_x(ret, xcout(" /S \"%s\"", ServerDomain));
 
-	if(ServerPort != UINTMAX)
+	if (ServerPort != UINTMAX)
 		ret = addLine_x(ret, xcout(" /P %u", ServerPort));
 
-	if(RetryCount != UINTMAX)
+	if (RetryCount != UINTMAX)
 		ret = addLine_x(ret, xcout(" /R %u", RetryCount));
 
-	if(RetryWaitMillis != UINTMAX)
+	if (RetryWaitMillis != UINTMAX)
 		ret = addLine_x(ret, xcout(" /T %u", RetryWaitMillis));
 
 	return ret;
@@ -82,7 +82,7 @@ static autoList_t *GetServerPaths(char *serverDir)
 
 	coExecute_x(xcout(NCP_EXE " //MOLP %s //O %s%s /LS \"%s\"", molp, outFile, GetNcpOptions(), serverDir));
 
-	if(!lastSystemRet) // ? コマンド実行成功
+	if (!lastSystemRet) // ? コマンド実行成功
 	{
 		char *line;
 		uint index;
@@ -91,7 +91,7 @@ static autoList_t *GetServerPaths(char *serverDir)
 
 		foreach(serverPaths, line, index)
 		{
-			if(startsWith(line, molp))
+			if (startsWith(line, molp))
 				eraseLine(line, strlen(molp));
 			else
 				*line = '\0';
@@ -128,7 +128,7 @@ static int MirrorDirMain(char *clientDir, char *serverDir, int direction)
 	autoList_t *serverFiles;
 	int retval = 0;
 
-	if(!serverPaths)
+	if (!serverPaths)
 		goto endFunc;
 
 	retval = 1;
@@ -146,21 +146,21 @@ static int MirrorDirMain(char *clientDir, char *serverDir, int direction)
 
 			escapeYen(serverPath);
 
-			if(endsWith(serverPath, "/"))
+			if (endsWith(serverPath, "/"))
 			{
 				strchr(serverPath, '\0')[-1] = '\0';
 				dirFlag = 1;
 			}
 			restoreYen(serverPath);
 
-			if(dirFlag)
+			if (dirFlag)
 				addElement(serverDirs, (uint)getLocal(serverPath));
 			else
 				addElement(serverFiles, (uint)getLocal(serverPath));
 		}
 	}
 
-	if(direction == 'U') // Upload
+	if (direction == 'U') // Upload
 	{
 		char *dummyFile = makeTempFile(NULL);
 		char *dummyServerPath = combine_cx(serverDir, addExt(MakeUUID(1), "ncp2_dummy.tmp"));
@@ -179,7 +179,7 @@ static int MirrorDirMain(char *clientDir, char *serverDir, int direction)
 		createDirIfNotExist(clientDir);
 	}
 
-	if(!retval)
+	if (!retval)
 		goto freeVars;
 
 	{
@@ -202,12 +202,12 @@ static int MirrorDirMain(char *clientDir, char *serverDir, int direction)
 			memFree(clientSubDir);
 			memFree(serverSubDir);
 
-			if(!retval)
+			if (!retval)
 				break;
 		}
 		releaseDim(bothExistDirs, 1);
 
-		if(!retval)
+		if (!retval)
 			goto endClientOnlyDirs;
 
 		foreach(dirs, dir, index)
@@ -215,7 +215,7 @@ static int MirrorDirMain(char *clientDir, char *serverDir, int direction)
 			char *clientSubDir = combine(clientDir, dir);
 			char *serverSubDir = combine(serverDir, dir);
 
-			if(direction == 'U') // Upload
+			if (direction == 'U') // Upload
 			{
 				retval = MirrorDirMain(clientSubDir, serverSubDir, direction);
 			}
@@ -226,13 +226,13 @@ static int MirrorDirMain(char *clientDir, char *serverDir, int direction)
 			memFree(clientSubDir);
 			memFree(serverSubDir);
 
-			if(!retval)
+			if (!retval)
 				break;
 		}
 	endClientOnlyDirs:
 		releaseDim(dirs, 1);
 
-		if(!retval)
+		if (!retval)
 			goto freeVars;
 
 		foreach(serverDirs, dir, index)
@@ -240,7 +240,7 @@ static int MirrorDirMain(char *clientDir, char *serverDir, int direction)
 			char *clientSubDir = combine(clientDir, dir);
 			char *serverSubDir = combine(serverDir, dir);
 
-			if(direction == 'U') // Upload
+			if (direction == 'U') // Upload
 			{
 				retval = RemoveServerPath(serverSubDir);
 			}
@@ -251,12 +251,12 @@ static int MirrorDirMain(char *clientDir, char *serverDir, int direction)
 			memFree(clientSubDir);
 			memFree(serverSubDir);
 
-			if(!retval)
+			if (!retval)
 				break;
 		}
 	}
 
-	if(!retval)
+	if (!retval)
 		goto freeVars;
 
 	{
@@ -273,7 +273,7 @@ static int MirrorDirMain(char *clientDir, char *serverDir, int direction)
 			char *clientFile = combine(clientDir, file);
 			char *serverFile = combine(serverDir, file);
 
-			if(direction == 'U') // Upload
+			if (direction == 'U') // Upload
 			{
 				retval = UploadFile(clientFile, serverFile);
 			}
@@ -284,12 +284,12 @@ static int MirrorDirMain(char *clientDir, char *serverDir, int direction)
 			memFree(clientFile);
 			memFree(serverFile);
 
-			if(!retval)
+			if (!retval)
 				break;
 		}
 		releaseDim(files, 1);
 
-		if(!retval)
+		if (!retval)
 			goto freeVars;
 
 		foreach(serverFiles, file, index)
@@ -297,7 +297,7 @@ static int MirrorDirMain(char *clientDir, char *serverDir, int direction)
 			char *clientFile = combine(clientDir, file);
 			char *serverFile = combine(serverDir, file);
 
-			if(direction == 'U') // Upload
+			if (direction == 'U') // Upload
 			{
 				retval = RemoveServerPath(serverFile);
 			}
@@ -308,7 +308,7 @@ static int MirrorDirMain(char *clientDir, char *serverDir, int direction)
 			memFree(clientFile);
 			memFree(serverFile);
 
-			if(!retval)
+			if (!retval)
 				break;
 		}
 	}
@@ -328,7 +328,7 @@ static void MirrorDir(char *clientDir, char *serverDir, int direction)
 
 	while(!MirrorDirMain(clientDir, serverDir, direction) && !AbortRequested)
 	{
-		if(MIRROR_DIR_RETRY_COUNT < ++retryCount)
+		if (MIRROR_DIR_RETRY_COUNT < ++retryCount)
 		{
 			cout("+--------------------------------------------------------+\n");
 			cout("| 失敗しましたがリトライ回数の上限に達したので終了します |\n");
@@ -340,7 +340,7 @@ static void MirrorDir(char *clientDir, char *serverDir, int direction)
 		coSleep(MIRROR_DIR_RETRY_WAIT_MILLIS);
 	}
 
-	if(AbortRequested)
+	if (AbortRequested)
 	{
 		cout("中断しました。\n");
 	}
@@ -348,28 +348,28 @@ static void MirrorDir(char *clientDir, char *serverDir, int direction)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		ServerDomain = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		ServerPort = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		RetryCount = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/RWTM"))
+	if (argIs("/RWTM"))
 	{
 		RetryWaitMillis = toValue(nextArg());
 		goto readArgs;
 	}
 
-	if(argIs("/MUP") || argIs("MUP")) // Mirror Upload
+	if (argIs("/MUP") || argIs("MUP")) // Mirror Upload
 	{
 		char *clientDir;
 		char *serverDir;
@@ -378,10 +378,10 @@ readArgs:
 
 		clientDir = nextArg();
 
-		if(clientDir[0] == '*')
+		if (clientDir[0] == '*')
 			clientDir = dropDirFile(); // g
 
-		if(hasArgs(1))
+		if (hasArgs(1))
 			serverDir = nextArg();
 		else
 			serverDir = getLocal(clientDir);
@@ -397,7 +397,7 @@ readArgs:
 
 		MirrorDir(clientDir, serverDir, 'U');
 	}
-	else if(argIs("/MDL") || argIs("MDL")) // Mirror Download
+	else if (argIs("/MDL") || argIs("MDL")) // Mirror Download
 	{
 		char *clientDir;
 		char *serverDir;
@@ -412,7 +412,7 @@ readArgs:
 		errorCase(!*clientDir);
 		errorCase(!*serverDir);
 
-		if(clientDir[0] == '*')
+		if (clientDir[0] == '*')
 			clientDir = combine(willOpenDir = makeFreeDir(), getLocal(serverDir)); // g
 
 		cout("> %s\n", clientDir);

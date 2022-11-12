@@ -29,7 +29,7 @@ static void DoTest(uint mode)
 			uint r;
 			uint tmp = Sq[index];
 
-			if(mode)
+			if (mode)
 				r = GetRand(N);
 			else
 				r = index + GetRand(N - index);
@@ -46,7 +46,7 @@ static void DoTest(uint mode)
 	{
 		for(val = 0; val < N; val++)
 		{
-			if(val)
+			if (val)
 				cout(", ");
 
 			cout("%f", (double)SumTbl[index][val] / TEST_NUM);

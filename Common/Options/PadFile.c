@@ -25,7 +25,7 @@ int UnpadFileHash(char *file)
 	uint64 size = getFileSize(file);
 	uint retval = 0;
 
-	if(HASHSIZE <= size)
+	if (HASHSIZE <= size)
 	{
 		FILE *fp = fileOpen(file, "rb");
 		autoBlock_t *rHash;
@@ -53,7 +53,7 @@ int UnpadFileFooter(char *file, autoBlock_t *footer)
 	uint64 size = getFileSize(file);
 	uint retval = 0;
 
-	if(getSize(footer) <= size)
+	if (getSize(footer) <= size)
 	{
 		FILE *fp = fileOpen(file, "rb");
 		autoBlock_t *rFooter;
@@ -109,7 +109,7 @@ int UnpadFile2(char *file, char *uniqueLabel)
 	uint64 size = getFileSize(file);
 	uint retval = 0;
 
-	if(HASHSIZE <= size)
+	if (HASHSIZE <= size)
 	{
 		FILE *fp = fileOpen(file, "rb");
 		autoBlock_t *rHash;

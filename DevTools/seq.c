@@ -13,11 +13,11 @@ static void PrintSq(char *line)
 {
 	uint back_ai = getArgIndex();
 
-	if(!hasArgs(1))
+	if (!hasArgs(1))
 	{
 		cout("%s\n", line);
 	}
-	else if(argIs("/C"))
+	else if (argIs("/C"))
 	{
 		uint width;
 		uint startVal;

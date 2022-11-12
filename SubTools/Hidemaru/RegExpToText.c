@@ -60,19 +60,19 @@ static void WriteLine_x(char *line)
 }
 static char *HKEY_xxxToHKxx(char *src)
 {
-	if(!strcmp(src, "HKEY_CLASSES_ROOT"))
+	if (!strcmp(src, "HKEY_CLASSES_ROOT"))
 		return "HKCR";
 
-	if(!strcmp(src, "HKEY_CURRENT_USER"))
+	if (!strcmp(src, "HKEY_CURRENT_USER"))
 		return "HKCU";
 
-	if(!strcmp(src, "HKEY_LOCAL_MACHINE"))
+	if (!strcmp(src, "HKEY_LOCAL_MACHINE"))
 		return "HKLM";
 
-	if(!strcmp(src, "HKEY_USERS"))
+	if (!strcmp(src, "HKEY_USERS"))
 		return "HKU";
 
-	if(!strcmp(src, "HKEY_CURRENT_CONFIG"))
+	if (!strcmp(src, "HKEY_CURRENT_CONFIG"))
 		return "HKCC";
 
 	error();
@@ -87,7 +87,7 @@ static void ParseValue(char *value)
 	memFree(PV_Type);
 	memFree(PV_Value);
 
-	if(lineExp("\"<>\"", value))
+	if (lineExp("\"<>\"", value))
 	{
 		char *r;
 		char *w;
@@ -98,7 +98,7 @@ static void ParseValue(char *value)
 		{
 			errorCase(!*r);
 
-			if(*r == '\\')
+			if (*r == '\\')
 			{
 				r++;
 				errorCase(!*r);
@@ -116,7 +116,7 @@ static void ParseValue(char *value)
 
 		return;
 	}
-	if(lineExp("dword:<8,09af>", value))
+	if (lineExp("dword:<8,09af>", value))
 	{
 		value += 6;
 
@@ -125,7 +125,7 @@ static void ParseValue(char *value)
 
 		return;
 	}
-	if(lineExp("hex:<>", value))
+	if (lineExp("hex:<>", value))
 	{
 		char *r;
 		char *w;
@@ -135,7 +135,7 @@ static void ParseValue(char *value)
 		w = value;
 
 		for(r = value; *r; r++)
-			if(m_ishexadecimal(*r))
+			if (m_ishexadecimal(*r))
 				*w++ = *r;
 
 		*w = '\0';
@@ -161,7 +161,7 @@ static void Main3(char *rFile, char *wFile)
 	{
 		char *line = LastLine;
 
-		if(line[0] == '[') // ex. [HKEY_CURRENT_USER\xxx\xxx\xxx]
+		if (line[0] == '[') // ex. [HKEY_CURRENT_USER\xxx\xxx\xxx]
 		{
 			autoList_t *ptkns;
 			char *ptkn;
@@ -188,7 +188,7 @@ static void Main3(char *rFile, char *wFile)
 			memFree(CurrPath);
 			CurrPath = untokenize(ptkns, "\\");
 		}
-		else if(line[0] == '@') // ex. @="xxx"
+		else if (line[0] == '@') // ex. @="xxx"
 		{
 			errorCase(!CurrPath);
 			errorCase(!lineExp("@=\"<>\"", line));
@@ -199,7 +199,7 @@ static void Main3(char *rFile, char *wFile)
 			WriteLine(PV_Type);
 			WriteLine(PV_Value);
 		}
-		else if(line[0] == '"') // ex. "xxx"=dword:00000000 , "yyy"="zzz"
+		else if (line[0] == '"') // ex. "xxx"=dword:00000000 , "yyy"="zzz"
 		{
 			char *buff;
 			char *key;
@@ -222,7 +222,7 @@ static void Main3(char *rFile, char *wFile)
 
 			memFree(buff);
 		}
-		else if(line[0] == '\0')
+		else if (line[0] == '\0')
 		{
 			errorCase(!CurrPath);
 
@@ -239,7 +239,7 @@ static void Main3(char *rFile, char *wFile)
 }
 static void Main2(char *rFile, char *wFile)
 {
-	if(existFile(rFile))
+	if (existFile(rFile))
 	{
 		char *midFile = makeTempPath(NULL);
 

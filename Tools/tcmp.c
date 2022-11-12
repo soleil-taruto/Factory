@@ -28,12 +28,12 @@ int main(int argc, char **argv)
 	char *file2;
 	int ignoreCase = 0;
 
-	if(argIs("/I")) // Ignore case
+	if (argIs("/I")) // Ignore case
 	{
 		ignoreCase = 1;
 	}
 
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		file1 = nextArg();
 		file2 = nextArg();

@@ -114,7 +114,7 @@ static void ReallocBuff(autoBlock_t **pBuff)
 {
 	errorCase(!ConnectMax); // 2bs: 起動時にエラーになるはず。
 
-	if(getSize(*pBuff) < MessageTotalSizeMax / ConnectMax) // ? 適当に小さいの
+	if (getSize(*pBuff) < MessageTotalSizeMax / ConnectMax) // ? 適当に小さいの
 	{
 		autoBlock_t *tmp = copyAutoBlock(*pBuff);
 		releaseAutoBlock(*pBuff);
@@ -161,11 +161,11 @@ static int RecvHTTPParse(Session_t *i, int sock, uint firstByteTmoutSec, uint no
 
 	for(; ; )
 	{
-		if(osss && !getSize(i->BkBuff) && SockRecvCharWait(osss, 0))
+		if (osss && !getSize(i->BkBuff) && SockRecvCharWait(osss, 0))
 		{
 			int chr = SockRecvChar(osss);
 
-			if(chr == EOF)
+			if (chr == EOF)
 			{
 				cout("対岸から切断されました。\n");
 				break;
@@ -177,7 +177,7 @@ static int RecvHTTPParse(Session_t *i, int sock, uint firstByteTmoutSec, uint no
 		{
 			int chr = SockRecvChar(ss);
 
-			if(chr == EOF)
+			if (chr == EOF)
 			{
 				needBreak = 1;
 				break;
@@ -192,11 +192,11 @@ static int RecvHTTPParse(Session_t *i, int sock, uint firstByteTmoutSec, uint no
 				rCnt++;
 				rCnt %= 65536;
 
-				if(!rCnt)
+				if (!rCnt)
 				{
 					ReallocSessionBuffs();
 
-					if(MessageTotalSizeMax < GetMessageTotalSize())
+					if (MessageTotalSizeMax < GetMessageTotalSize())
 					{
 						cout("+--------------------------------------------------+\n");
 						cout("| メッセージバッファサイズの合計が上限に達しました |\n");
@@ -210,7 +210,7 @@ static int RecvHTTPParse(Session_t *i, int sock, uint firstByteTmoutSec, uint no
 						rCnt2++;
 						rCnt2 %= 16;
 
-						if(!rCnt2)
+						if (!rCnt2)
 						{
 							break; // パース等強制的に実施する。
 						}
@@ -219,9 +219,9 @@ static int RecvHTTPParse(Session_t *i, int sock, uint firstByteTmoutSec, uint no
 			}
 		}
 
-		if(HTTPParse(i->Buff))
+		if (HTTPParse(i->Buff))
 		{
-			if(HttpDat.Expect100Continue)
+			if (HttpDat.Expect100Continue)
 			{
 				cout("Expect: 100-continue には対応していません。\n");
 				break;
@@ -236,15 +236,15 @@ static int RecvHTTPParse(Session_t *i, int sock, uint firstByteTmoutSec, uint no
 			break;
 		}
 
-		if(needBreak)
+		if (needBreak)
 			break;
 
-		if(ProcDeadFlag)
+		if (ProcDeadFlag)
 		{
 			cout("プロセスの終了による受信キャンセル\n");
 			break;
 		}
-		if(firstByteTmoutTime < now())
+		if (firstByteTmoutTime < now())
 		{
 			cout("最初の壱バイトのタイムアウト\n");
 			break;
@@ -258,7 +258,7 @@ endFunc:
 	ab_addBytes_x(i->Buff, SockRipRecvBuffer(ss));
 	ReleaseSockStream(ss);
 
-	if(osss)
+	if (osss)
 	{
 		ab_addBytes_x(i->BkBuff, SockRipRecvBuffer(osss));
 		ReleaseSockStream(osss);
@@ -270,7 +270,7 @@ endFunc:
 
 static char *HeaderRepValueFltr(char *value) // ret: strx()
 {
-	if(*value == '$')
+	if (*value == '$')
 	{
 		switch(c2upper(value[1]))
 		{
@@ -300,7 +300,7 @@ static void HeaderRepKill(autoList_t *r_keys, autoList_t *r_values, autoList_t *
 
 		cout("R_Key: [%s]\n", key);
 
-		if(hPos == getCount(HttpDat.H_Keys))
+		if (hPos == getCount(HttpDat.H_Keys))
 		{
 			addElement(HttpDat.H_Keys, (uint)strx(key));
 			addElement(HttpDat.H_Values, (uint)NULL);
@@ -318,7 +318,7 @@ static void HeaderRepKill(autoList_t *r_keys, autoList_t *r_values, autoList_t *
 
 		cout("K_Key: [%s]\n", key);
 
-		if(hPos < getCount(HttpDat.H_Keys))
+		if (hPos < getCount(HttpDat.H_Keys))
 		{
 			cout("K_Val: [%s]\n", getLine(HttpDat.H_Values, hPos));
 
@@ -339,7 +339,7 @@ static int DoConnect(char *fwdHost, uint fwdPortNo) // ret: -1 == 接続できなかっ
 	cout("FWD_HOST: %s\n", fwdHost);
 	cout("FWD_PORT: %u\n", fwdPortNo);
 
-	if(!m_isRange(fwdPortNo, 1, 65535))
+	if (!m_isRange(fwdPortNo, 1, 65535))
 	{
 		cout("★ポート番号に問題があります。\n");
 		return -1;
@@ -348,19 +348,19 @@ static int DoConnect(char *fwdHost, uint fwdPortNo) // ret: -1 == 接続できなかっ
 	strIp = SockIp2Line(ip);
 	cout("FWD_IP: %s\n", strIp);
 
-	if(!*(uint *)ip)
+	if (!*(uint *)ip)
 	{
 		cout("★転送先が見つかりません。\n");
 		return -1;
 	}
-	if(getCount(OKIPPrfxList))
+	if (getCount(OKIPPrfxList))
 	{
 		foreach(OKIPPrfxList, ipprfx, index)
 		{
-			if(startsWith(strIp, ipprfx))
+			if (startsWith(strIp, ipprfx))
 				break;
 		}
-		if(!ipprfx)
+		if (!ipprfx)
 		{
 			cout("●許可されたIPアドレスではありません。\n");
 			return -1;
@@ -368,7 +368,7 @@ static int DoConnect(char *fwdHost, uint fwdPortNo) // ret: -1 == 接続できなかっ
 	}
 	foreach(NGIPPrfxList, ipprfx, index)
 	{
-		if(startsWith(strIp, ipprfx))
+		if (startsWith(strIp, ipprfx))
 		{
 			cout("■許可されないIPアドレスです。\n");
 			return -1;
@@ -388,7 +388,7 @@ static int DoConnect(char *fwdHost, uint fwdPortNo) // ret: -1 == 接続できなかっ
 }
 static void DoConnect_HD(Session_t *i, uint defPortNo)
 {
-	if(ChangeFwdMode)
+	if (ChangeFwdMode)
 	{
 		char *host = strx(refLine(HttpDat.H_Values, findLineCase(HttpDat.H_Keys, "Host", 1)));
 		uint portNo;
@@ -397,7 +397,7 @@ static void DoConnect_HD(Session_t *i, uint defPortNo)
 
 		p = strchr(host, ':');
 
-		if(p)
+		if (p)
 		{
 			*p = '\0';
 			p++;
@@ -409,9 +409,9 @@ static void DoConnect_HD(Session_t *i, uint defPortNo)
 
 		name = xcout("%s:%u", host, portNo);
 
-		if(strcmp(name, i->FwdName)) // ? 前回の接続先と異なる。|| 未接続
+		if (strcmp(name, i->FwdName)) // ? 前回の接続先と異なる。|| 未接続
 		{
-			if(i->FwdSock != -1)
+			if (i->FwdSock != -1)
 				sockDisconnect(i->FwdSock);
 
 			i->FwdSock = DoConnect(host, portNo);
@@ -426,7 +426,7 @@ static void DoConnect_HD(Session_t *i, uint defPortNo)
 	}
 	else
 	{
-		if(i->FwdSock == -1) // ? 未接続
+		if (i->FwdSock == -1) // ? 未接続
 			i->FwdSock = DoConnect(FwdHost, FwdPortNo);
 		else
 			cout("KeepConn_2\n");
@@ -440,7 +440,7 @@ static int ProcHTTP_Upload(Session_t *i) // ret: ? 成功
 	{
 		DoConnect_HD(i, 80);
 
-		if(i->FwdSock == -1)
+		if (i->FwdSock == -1)
 		{
 			cout("+------------------------------+\n");
 			cout("| 転送先に接続できませんでした |\n");
@@ -449,11 +449,11 @@ static int ProcHTTP_Upload(Session_t *i) // ret: ? 成功
 		}
 	}
 
-	if(InsDomainMode)
+	if (InsDomainMode)
 	{
 		char *p = strchr(HttpDat.H_Request, ' ');
 
-		if(p && p[1] == '/') // ? スキーム・ドメインが無いっぽい。
+		if (p && p[1] == '/') // ? スキーム・ドメインが無いっぽい。
 		{
 			char *hostName = strx(refLine(HttpDat.H_Values, findLineCase(HttpDat.H_Keys, "Host", 1)));
 			char *insPtn;
@@ -472,21 +472,21 @@ static int ProcHTTP_Upload(Session_t *i) // ret: ? 成功
 		}
 	}
 
-	if(DelDomainMode)
+	if (DelDomainMode)
 	{
 		char *p = strchr(HttpDat.H_Request, ' ');
 		char *q;
 
-		if(p && p[1] != '/')
+		if (p && p[1] != '/')
 		{
 			p++;
 			q = strstr(p, "//");
 
-			if(q)
+			if (q)
 			{
 				q = strchr(q + 2, '/');
 
-				if(q) // ? スキーム・ドメインが有るっぽい。
+				if (q) // ? スキーム・ドメインが有るっぽい。
 				{
 					cout("DelDomain\n");
 					cout("< [%s]\n", HttpDat.H_Request);
@@ -516,7 +516,7 @@ static char *HFldFolding(char *str)
 
 	while(index + 10 <= strlen(str))
 	{
-		if(str[index] <= '\x20')
+		if (str[index] <= '\x20')
 		{
 			str = insertLine(str, index, "\r\n");
 			index += 50;
@@ -553,7 +553,7 @@ static autoBlock_t *MakeSendData(void)
 
 	ab_addLine(buff, "\r\n");
 
-	if(HttpDat.Chunked)
+	if (HttpDat.Chunked)
 	{
 		uint rPos = 0;
 
@@ -592,34 +592,34 @@ static int SendHTTP(Session_t *i, int sock, uint noDatTmoutSec) // ret: ? 通信エ
 
 	for(; ; )
 	{
-		if(!getSize(sendData))
+		if (!getSize(sendData))
 		{
 			cout("送信完了\n");
 			retval = 1;
 			break;
 		}
-		if(endTime < now())
+		if (endTime < now())
 		{
 			cout("送信タイムアウト\n");
 			break;
 		}
 		ret = SockSendSequ(sock, sendData, 2000);
 
-		if(ret == -1)
+		if (ret == -1)
 		{
 			cout("送信エラー\n");
 			break;
 		}
-		if(ret)
+		if (ret)
 		{
 			noDatTmoutTime = GetTimeoutTime(noDatTmoutSec);
 		}
-		else if(noDatTmoutTime < now())
+		else if (noDatTmoutTime < now())
 		{
 			cout("無通信タイムアウト！\n");
 			break;
 		}
-		if(ProcDeadFlag)
+		if (ProcDeadFlag)
 		{
 			cout("送信中止！(ProcDeadFlag)\n");
 			break;
@@ -635,7 +635,7 @@ static void PreDataFltr(autoBlock_t *buff, uint uPData)
 {
 	autoBlock_t **pData = (autoBlock_t **)uPData;
 
-	if(*pData)
+	if (*pData)
 	{
 		autoBlock_t *nb = newBlock();
 
@@ -653,14 +653,14 @@ static void PfmConnect(Session_t *i)
 {
 	autoBlock_t *sendData = newBlock();
 
-	if(i->FwdSock != -1) // ? 接続中 -> 切断
+	if (i->FwdSock != -1) // ? 接続中 -> 切断
 	{
 		sockDisconnect(i->FwdSock);
 		i->FwdSock = -1;
 	}
 	DoConnect_HD(i, 443);
 
-	if(i->FwdSock != -1) // ? 接続成功
+	if (i->FwdSock != -1) // ? 接続成功
 	{
 		autoBlock_t *iBuffTmp = copyAutoBlock(i->Buff); // i->Buff は ReallocSessionBuffs() で触られるので複製する。
 		autoBlock_t *buffTmp1;
@@ -684,7 +684,7 @@ static void PfmConnect(Session_t *i)
 }
 static void DoFilterCommand(char *filterCommand)
 {
-	if(!filterCommand)
+	if (!filterCommand)
 		return;
 
 	mutex();
@@ -717,10 +717,10 @@ static void PerformTh(int sock, char *strip)
 	{
 		// ---- 上り ----
 
-		if(!RecvHTTPParse(i, i->Sock, U_FirstByteTimeoutSec, U_NoDataTimeoutSec, i->FwdSock))
+		if (!RecvHTTPParse(i, i->Sock, U_FirstByteTimeoutSec, U_NoDataTimeoutSec, i->FwdSock))
 			break;
 
-		if(
+		if (
 			ConnectMethodOkMode &&
 			startsWithICase(HttpDat.H_Request, "CONNECT\x20")
 			)
@@ -730,25 +730,25 @@ static void PerformTh(int sock, char *strip)
 		}
 		DoFilterCommand(UploadFilterCommand);
 
-		if(!ProcHTTP_Upload(i))
+		if (!ProcHTTP_Upload(i))
 			break;
 
-		if(!SendHTTP(i, i->FwdSock, U_NoDataTimeoutSec))
+		if (!SendHTTP(i, i->FwdSock, U_NoDataTimeoutSec))
 			break;
 
 		ab_swap(i->Buff, i->BkBuff);
 
 		// ---- 下り ----
 
-		if(!RecvHTTPParse(i, i->FwdSock, D_FirstByteTimeoutSec, D_NoDataTimeoutSec, i->Sock))
+		if (!RecvHTTPParse(i, i->FwdSock, D_FirstByteTimeoutSec, D_NoDataTimeoutSec, i->Sock))
 			break;
 
 		DoFilterCommand(DownloadFilterCommand);
 
-		if(!ProcHTTP_Download(i))
+		if (!ProcHTTP_Download(i))
 			break;
 
-		if(!SendHTTP(i, i->Sock, D_NoDataTimeoutSec))
+		if (!SendHTTP(i, i->Sock, D_NoDataTimeoutSec))
 			break;
 
 		ab_swap(i->Buff, i->BkBuff);
@@ -756,7 +756,7 @@ static void PerformTh(int sock, char *strip)
 		// ----
 	}
 
-	if(i->FwdSock != -1)
+	if (i->FwdSock != -1)
 	{
 //		LOGPOS();
 		sockDisconnect(i->FwdSock);
@@ -784,62 +784,62 @@ static int ReadArg_HK(autoList_t *k_keys)
 }
 static int ReadArgs(void)
 {
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		SockTimeoutSec = toValue(nextArg());
 		return 1;
 	}
-	if(argIs("/FBT")) // 上り最初の１バイトのタイムアウト
+	if (argIs("/FBT")) // 上り最初の１バイトのタイムアウト
 	{
 		U_FirstByteTimeoutSec = toValue(nextArg());
 		return 1;
 	}
-	if(argIs("/FBT-")) // 下り最初の１バイトのタイムアウト
+	if (argIs("/FBT-")) // 下り最初の１バイトのタイムアウト
 	{
 		D_FirstByteTimeoutSec = toValue(nextArg());
 		return 1;
 	}
-	if(argIs("/NDT")) // 上り無通信タイムアウト
+	if (argIs("/NDT")) // 上り無通信タイムアウト
 	{
 		U_NoDataTimeoutSec = toValue(nextArg());
 		return 1;
 	}
-	if(argIs("/NDT-")) // 下り無通信タイムアウト
+	if (argIs("/NDT-")) // 下り無通信タイムアウト
 	{
 		D_NoDataTimeoutSec = toValue(nextArg());
 		return 1;
 	}
-	if(argIs("/MT"))
+	if (argIs("/MT"))
 	{
 		MessageTimeoutSec = toValue(nextArg());
 		return 1;
 	}
-	if(argIs("/M"))
+	if (argIs("/M"))
 	{
 		MessageTotalSizeMax = toValue(nextArg());
 		return 1;
 	}
-	if(argIs("/X"))
+	if (argIs("/X"))
 	{
 		ChangeFwdMode = 1;
 		return 1;
 	}
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		InsDomainMode = 1;
 		return 1;
 	}
-	if(argIs("/-D"))
+	if (argIs("/-D"))
 	{
 		DelDomainMode = 1;
 		return 1;
 	}
-	if(argIs("/+C"))
+	if (argIs("/+C"))
 	{
 		ConnectMethodOkMode = 1;
 		return 1;
 	}
-	if(argIs("/IP"))
+	if (argIs("/IP"))
 	{
 		char *ipprfx = nextArg();
 
@@ -848,7 +848,7 @@ static int ReadArgs(void)
 		addElement(OKIPPrfxList, (uint)ipprfx);
 		return 1;
 	}
-	if(argIs("/-IP"))
+	if (argIs("/-IP"))
 	{
 		char *ipprfx = nextArg();
 
@@ -857,45 +857,45 @@ static int ReadArgs(void)
 		addElement(NGIPPrfxList, (uint)ipprfx);
 		return 1;
 	}
-	if(argIs("/HR"))
+	if (argIs("/HR"))
 	{
 		return ReadArg_HR(UR_Keys, UR_Values);
 	}
-	if(argIs("/HK"))
+	if (argIs("/HK"))
 	{
 		return ReadArg_HK(UK_Keys);
 	}
-	if(argIs("/HR-"))
+	if (argIs("/HR-"))
 	{
 		return ReadArg_HR(DR_Keys, DR_Values);
 	}
-	if(argIs("/HK-"))
+	if (argIs("/HK-"))
 	{
 		return ReadArg_HK(DK_Keys);
 	}
-	if(argIs("/HR+"))
+	if (argIs("/HR+"))
 	{
 		return
 			ReadArg_HR(UR_Keys, UR_Values) &&
 			ReadArg_HR(DR_Keys, DR_Values);
 	}
-	if(argIs("/HK+"))
+	if (argIs("/HK+"))
 	{
 		return
 			ReadArg_HK(UK_Keys) &&
 			ReadArg_HK(DK_Keys);
 	}
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		UploadFilterCommand = FilterCommandFltr(nextArg());
 		return 1;
 	}
-	if(argIs("/F-"))
+	if (argIs("/F-"))
 	{
 		DownloadFilterCommand = FilterCommandFltr(nextArg());
 		return 1;
 	}
-	if(argIs("/F+"))
+	if (argIs("/F+"))
 	{
 		char *command = FilterCommandFltr(nextArg());
 

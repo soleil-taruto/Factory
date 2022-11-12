@@ -65,7 +65,7 @@ static void Sabun(char *lDir, char *rDir, char *outDir)
 	errorCase(!existDir(rDir));
 	errorCase(!existDir(outDir)); // 2bs
 
-	if(lsCount(outDir)) // ? 空ではない。
+	if (lsCount(outDir)) // ? 空ではない。
 	{
 #if 1
 		error_m("出力先ディレクトリが空ではありません。"); // やっぱ危ないし、、
@@ -77,7 +77,7 @@ static void Sabun(char *lDir, char *rDir, char *outDir)
 		cout("+---------------------------------------+\n");
 		cout("空にする？\n");
 
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 			termination(0);
 
 		cout("空にします。\n");
@@ -109,17 +109,17 @@ static void Sabun(char *lDir, char *rDir, char *outDir)
 	mergeLines2ICase(lFiles, rFiles, lOnlyFiles, bothFiles, rOnlyFiles);
 	LOGPOS();
 
-	if(OutputLeftOnly)
+	if (OutputLeftOnly)
 		foreach(lOnlyFiles, file, index)
 			DoOutput(outDir, lDir, file);
 
 	LOGPOS();
 
-	if(OutputSame || OutputDiff)
+	if (OutputSame || OutputDiff)
 	{
 		foreach(bothFiles, file, index)
 		{
-			if(OutputSame && OutputDiff)
+			if (OutputSame && OutputDiff)
 			{
 				DoOutput(outDir, OutputDiffLeft ? lDir : rDir, file);
 			}
@@ -133,14 +133,14 @@ static void Sabun(char *lDir, char *rDir, char *outDir)
 				errorCase(!existFile(lFile)); // 2bs?
 				errorCase(!existFile(rFile)); // 2bs?
 
-				if(isSameFile(lFile, rFile)) // ? 同じ内容
+				if (isSameFile(lFile, rFile)) // ? 同じ内容
 				{
-					if(OutputSame)
+					if (OutputSame)
 						DoOutput(outDir, lDir, file);
 				}
 				else // ? 異なる内容
 				{
-					if(OutputDiff)
+					if (OutputDiff)
 						DoOutput(outDir, OutputDiffLeft ? lDir : rDir, file);
 				}
 				memFree(lFile);
@@ -150,7 +150,7 @@ static void Sabun(char *lDir, char *rDir, char *outDir)
 	}
 	LOGPOS();
 
-	if(OutputRightOnly)
+	if (OutputRightOnly)
 		foreach(rOnlyFiles, file, index)
 			DoOutput(outDir, rDir, file);
 
@@ -170,27 +170,27 @@ int main(int argc, char **argv)
 readArgs:
 	// basic opt
 
-	if(argIs("/L"))
+	if (argIs("/L"))
 	{
 		OutputLeftOnly = 1;
 		goto readArgs;
 	}
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		OutputSame = 1;
 		goto readArgs;
 	}
-	if(argIs("/-D"))
+	if (argIs("/-D"))
 	{
 		OutputDiff = 0;
 		goto readArgs;
 	}
-	if(argIs("/DL"))
+	if (argIs("/DL"))
 	{
 		OutputDiffLeft = 1;
 		goto readArgs;
 	}
-	if(argIs("/-R"))
+	if (argIs("/-R"))
 	{
 		OutputRightOnly = 0;
 		goto readArgs;
@@ -198,13 +198,13 @@ readArgs:
 
 	// ext opt
 
-	if(argIs("/B"))
+	if (argIs("/B"))
 	{
 		OutputSame = 1;
 		OutputDiff = 1;
 		goto readArgs;
 	}
-	if(argIs("/-B"))
+	if (argIs("/-B"))
 	{
 		OutputSame = 0;
 		OutputDiff = 0;
@@ -213,7 +213,7 @@ readArgs:
 
 	// - - -
 
-	if(hasArgs(3))
+	if (hasArgs(3))
 	{
 		char *lDir;
 		char *rDir;
@@ -226,7 +226,7 @@ readArgs:
 		Sabun(lDir, rDir, outDir);
 		return;
 	}
-	if(hasArgs(2))
+	if (hasArgs(2))
 	{
 		char *lDir;
 		char *rDir;

@@ -53,7 +53,7 @@ static char *GetRSAExeFile(void)
 {
 	static char *file;
 
-	if(!file)
+	if (!file)
 		file = GetCollaboFile("C:\\app\\Kit\\RSA\\RSA.exe");
 
 	return file;
@@ -69,7 +69,7 @@ static char *ReadXText(char *name) // ret: xml_text
 	uint index;
 
 	foreach(KRoot->Children, node, index)
-		if(!strcmp(node->Name, name))
+		if (!strcmp(node->Name, name))
 			return node->Text;
 
 	error();
@@ -147,7 +147,7 @@ static autoBlock_t *ReadXMLKeyFile(char *file, int privateMode) // file の破損は
 	modulus  = ReadXText("Modulus");
 	exponent = ReadXText("Exponent");
 
-	if(privateMode)
+	if (privateMode)
 	{
 		p        = ReadXText("P");
 		q        = ReadXText("Q");
@@ -162,7 +162,7 @@ static autoBlock_t *ReadXMLKeyFile(char *file, int privateMode) // file の破損は
 	AddKText(modulus,  MODULUS_SIZE);
 	AddKText(exponent, EXPONENT_SIZE);
 
-	if(privateMode)
+	if (privateMode)
 	{
 		AddKText(p,        P_SIZE);
 		AddKText(q,        Q_SIZE);
@@ -203,7 +203,7 @@ static void WriteXMLKeyFile(char *file, int privateMode, autoBlock_t *keyData) /
 	assumedKeySize += MODULUS_SIZE;
 	assumedKeySize += EXPONENT_SIZE;
 
-	if(privateMode)
+	if (privateMode)
 	{
 		assumedKeySize += P_SIZE;
 		assumedKeySize += Q_SIZE;
@@ -212,7 +212,7 @@ static void WriteXMLKeyFile(char *file, int privateMode, autoBlock_t *keyData) /
 		assumedKeySize += INVERSE_Q_SIZE;
 		assumedKeySize += D_SIZE;
 	}
-	if(getSize(KData) != assumedKeySize)
+	if (getSize(KData) != assumedKeySize)
 	{
 		cout("WXKF_想定外のキーデータサイズ %u (ASSUMED: %u)\n", getSize(KData), assumedKeySize);
 		setSize(KData, assumedKeySize);
@@ -221,7 +221,7 @@ static void WriteXMLKeyFile(char *file, int privateMode, autoBlock_t *keyData) /
 	modulus  = ReadKText(MODULUS_SIZE);
 	exponent = ReadKText(EXPONENT_SIZE);
 
-	if(privateMode)
+	if (privateMode)
 	{
 		p        = ReadKText(P_SIZE);
 		q        = ReadKText(Q_SIZE);
@@ -237,7 +237,7 @@ static void WriteXMLKeyFile(char *file, int privateMode, autoBlock_t *keyData) /
 	AddXText_cx(buff, "Modulus",  modulus);
 	AddXText_cx(buff, "Exponent", exponent);
 
-	if(privateMode)
+	if (privateMode)
 	{
 		AddXText_cx(buff, "P",        p);
 		AddXText_cx(buff, "Q",        q);
@@ -272,7 +272,7 @@ static autoList_t *GetJamKeyTableList(void) // ret: bind
 {
 	static autoList_t *keyTableList;
 
-	if(!keyTableList)
+	if (!keyTableList)
 	{
 		keyTableList = newList();
 
@@ -314,7 +314,7 @@ static int JamDecrypt(autoBlock_t *data) // ret: ? 成功
 {
 	// Decrypt
 	{
-		if(
+		if (
 			getSize(data) < 32 ||
 			getSize(data) % 16 != 0
 			)
@@ -328,7 +328,7 @@ static int JamDecrypt(autoBlock_t *data) // ret: ? 成功
 		autoBlock_t *m_hash;
 		int retval;
 
-		if(getSize(data) < 16)
+		if (getSize(data) < 16)
 			return 0;
 
 		r_hash = unaddBytes(data, 16);
@@ -339,12 +339,12 @@ static int JamDecrypt(autoBlock_t *data) // ret: ? 成功
 		releaseAutoBlock(r_hash);
 		releaseAutoBlock(m_hash);
 
-		if(!retval)
+		if (!retval)
 			return 0;
 	}
 	// -= RandPart
 	{
-		if(getSize(data) < 16)
+		if (getSize(data) < 16)
 			return 0;
 
 		setSize(data, getSize(data) - 16);
@@ -353,12 +353,12 @@ static int JamDecrypt(autoBlock_t *data) // ret: ? 成功
 	{
 		uint size;
 
-		if(getSize(data) < 1)
+		if (getSize(data) < 1)
 			return 0;
 
 		size = getByte(data, getSize(data) - 1);
 
-		if(getSize(data) < size)
+		if (getSize(data) < size)
 			return 0;
 
 		setSize(data, getSize(data) - size);
@@ -376,7 +376,7 @@ void RSA_GenerateKey(void)
 	char *publicKeyFile  = makeTempPath("pub");
 	char *privateKeyFile = makeTempPath("prv");
 
-	if(S_PublicKey)
+	if (S_PublicKey)
 	{
 		releaseAutoBlock(S_PublicKey);
 		releaseAutoBlock(S_PrivateKey);
@@ -428,14 +428,14 @@ autoBlock_t *RSA_Encrypt(autoBlock_t *plainData, autoBlock_t *publicKey) // ret:
 
 	execute_x(xcout("start \"\" /b /wait \"%s\" /E \"%s\" \"%s\" \"%s\"", GetRSAExeFile(), publicKeyFile, plainDataFile, cipherDataFile));
 
-	if(!existFile(cipherDataFile))
+	if (!existFile(cipherDataFile))
 	{
 		cout("RSA_E_暗号化に失敗しました。(暗号化実行失敗)\n");
 		createFile(cipherDataFile);
 	}
 	cipherData = readBinary(cipherDataFile);
 
-	if(getSize(cipherData) != CIPHER_SIZE)
+	if (getSize(cipherData) != CIPHER_SIZE)
 	{
 		cout("RSA_E_暗号化に失敗しました。(想定外の暗号データサイズ)\n");
 		setSize(cipherData, CIPHER_SIZE);
@@ -460,7 +460,7 @@ autoBlock_t *RSA_Decrypt(autoBlock_t *cipherData) // ret: NULL == 復号に失敗した
 	errorCase(!cipherData);
 	errorCase(!S_PrivateKey);
 
-	if(getSize(cipherData) != CIPHER_SIZE)
+	if (getSize(cipherData) != CIPHER_SIZE)
 	{
 		cout("RSA_D_想定外の暗号データサイズ %u (ASSUMED: %u)\n", getSize(cipherData), CIPHER_SIZE);
 		goto endFunc;
@@ -470,14 +470,14 @@ autoBlock_t *RSA_Decrypt(autoBlock_t *cipherData) // ret: NULL == 復号に失敗した
 
 	execute_x(xcout("start \"\" /b /wait \"%s\" /D \"%s\" \"%s\" \"%s\"", GetRSAExeFile(), privateKeyFile, cipherDataFile, plainDataFile));
 
-	if(!existFile(plainDataFile))
+	if (!existFile(plainDataFile))
 	{
 		cout("RSA_D_復号に失敗しました。(復号実行失敗)\n");
 		goto endFunc;
 	}
 	plainData = readBinary(plainDataFile);
 
-	if(!JamDecrypt(plainData))
+	if (!JamDecrypt(plainData))
 	{
 		cout("RSA_D_復号に失敗しました。(平文データの破損)\n");
 		releaseAutoBlock(plainData);

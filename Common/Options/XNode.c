@@ -7,7 +7,7 @@ static char *DefStrFltr(char *str)
 }
 static char *StrFltrWrap(char *str, char *(*strFltr)(char *))
 {
-	if(!str)
+	if (!str)
 		str = strx("");
 
 	return strFltr(str);
@@ -18,7 +18,7 @@ void NormalizeXNode(XNode_t *root, char *(*strFltr)(char *))
 
 	errorCase(!root);
 
-	if(!strFltr)
+	if (!strFltr)
 		strFltr = DefStrFltr;
 
 	addElement(nodes, (uint)root);
@@ -30,7 +30,7 @@ void NormalizeXNode(XNode_t *root, char *(*strFltr)(char *))
 		node->Name = StrFltrWrap(node->Name, strFltr);
 		node->Text = StrFltrWrap(node->Text, strFltr);
 
-		if(!node->Children)
+		if (!node->Children)
 			node->Children = newList();
 
 		removeZero(node->Children);
@@ -40,13 +40,13 @@ void NormalizeXNode(XNode_t *root, char *(*strFltr)(char *))
 }
 void ReleaseXNode(XNode_t *root)
 {
-	if(!root)
+	if (!root)
 		return;
 
 	memFree(root->Name);
 	memFree(root->Text);
 
-	if(root->Children)
+	if (root->Children)
 		callAllElement_x(root->Children, (void (*)(uint))ReleaseXNode);
 
 	memFree(root);
@@ -58,7 +58,7 @@ XNode_t *GetDummyXNode(void)
 {
 	static XNode_t *node;
 
-	if(!node)
+	if (!node)
 	{
 		node = (XNode_t *)memAlloc(sizeof(XNode_t));
 
@@ -74,13 +74,13 @@ static autoList_t *CXN_Dest;
 
 static void CXN_Main(XNode_t *root, uint pTknIndex)
 {
-	if(pTknIndex < getCount(CXN_PTkns))
+	if (pTknIndex < getCount(CXN_PTkns))
 	{
 		XNode_t *node;
 		uint index;
 
 		foreach(root->Children, node, index)
-			if(!strcmp(node->Name, getLine(CXN_PTkns, pTknIndex)))
+			if (!strcmp(node->Name, getLine(CXN_PTkns, pTknIndex)))
 				CXN_Main(node, pTknIndex + 1);
 	}
 	else
@@ -102,7 +102,7 @@ autoList_t *CollectXNode(XNode_t *root, char *path)
 		uint index;
 
 		foreach(CXN_PTkns, pTkn, index)
-			if(!*pTkn)
+			if (!*pTkn)
 				cout("Warning: XNodeパスに空のパストークンが含まれています。\n");
 	}
 
@@ -116,7 +116,7 @@ XNode_t *GetXNode(XNode_t *root, char *path)
 	autoList_t *nodes = CollectXNode(root, path);
 	XNode_t *node;
 
-	if(getCount(nodes))
+	if (getCount(nodes))
 		node = (XNode_t *)getElement(nodes, 0);
 	else
 		node = NULL;
@@ -128,7 +128,7 @@ XNode_t *RefXNode(XNode_t *root, char *path)
 {
 	XNode_t *node = GetXNode(root, path);
 
-	if(!node)
+	if (!node)
 		node = GetDummyXNode();
 
 	return node;

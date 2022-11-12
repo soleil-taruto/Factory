@@ -5,12 +5,12 @@ int main(int argc, char **argv)
 {
 	int correctAddDelete = 0;
 
-	if(argIs("/CAD")) // Correct Add Delete
+	if (argIs("/CAD")) // Correct Add Delete
 	{
 		correctAddDelete = 1;
 	}
 
-	if(argIs("/M")) // Make sabun
+	if (argIs("/M")) // Make sabun
 	{
 		char *beforeDir;
 		char *afterDir;
@@ -60,12 +60,12 @@ int main(int argc, char **argv)
 		cout("処理を開始してからはキャンセルできません。\n");
 		cout("続行するにはエンターキーを押してね。\n");
 
-		if(clearGetKey() == 0x0d)
+		if (clearGetKey() == 0x0d)
 		{
 			cout("\n");
 			cout("アップデートしています...");
 
-			if(sabunUpdate(sabunFile, targetDir) == 0) // ? アップデート対象外だった。
+			if (sabunUpdate(sabunFile, targetDir) == 0) // ? アップデート対象外だった。
 			{
 				cout("\r");
 				cout("+----------------------------+\n");

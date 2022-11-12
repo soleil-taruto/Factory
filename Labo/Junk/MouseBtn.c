@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 		int lbtn = GetAsyncKeyState(VK_LBUTTON) ? 1 : 0;
 		int rbtn = GetAsyncKeyState(VK_RBUTTON) ? 1 : 0;
 
-		if(swpbtn)
+		if (swpbtn)
 		{
 			m_swap(lbtn, rbtn, int);
 		}

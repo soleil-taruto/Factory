@@ -24,7 +24,7 @@ static char *GetAllUpper(char *userParam)
 	char *p;
 
 	for(p = userParam; *p; p++)
-		if(m_isupper(*p))
+		if (m_isupper(*p))
 			ret = addChar(ret, *p);
 
 	return ret;
@@ -42,7 +42,7 @@ static void MakeTemplate(char *templateName, char *userParam)
 
 	lines = readLines(templateFile);
 
-	if(getCount(lines) && startsWith(getLine(lines, 0), DESCRIPTION_PREFIX))
+	if (getCount(lines) && startsWith(getLine(lines, 0), DESCRIPTION_PREFIX))
 	{
 		do
 		{
@@ -67,7 +67,7 @@ static void MakeTemplate(char *templateName, char *userParam)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/L"))
+	if (argIs("/L"))
 	{
 		autoList_t *files = lsFiles(TEMPLATE_DIR);
 		char *file;
@@ -82,12 +82,12 @@ int main(int argc, char **argv)
 
 		foreach(files, file, index)
 		{
-			if(!_stricmp("txt", getExt(file)))
+			if (!_stricmp("txt", getExt(file)))
 			{
 				char *templateName = changeExt(getLocal(file), "");
 				char *description = readFirstLine(file);
 
-				if(startsWith(description, DESCRIPTION_PREFIX))
+				if (startsWith(description, DESCRIPTION_PREFIX))
 					eraseLine(description, 4);
 				else
 					strzp(&description, "ê‡ñæÇÕÇ†ÇËÇ‹ÇπÇÒÅB");

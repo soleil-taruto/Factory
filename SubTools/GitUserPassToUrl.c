@@ -28,28 +28,28 @@ static void FoundCfgFile(char *cfgFile)
 		key = toknext(tmpLine, "=");
 		value = toknext(NULL, "");
 
-		if(value)
+		if (value)
 		{
 			char *tKey = strx(key);
 
 			ucTrim(tKey);
 
-			if(!strcmp(tKey, TARGET_KEY))
+			if (!strcmp(tKey, TARGET_KEY))
 			{
 				char *p = strstrNext(value, TARGET_VALUE_PREFIX);
 
-				if(p)
+				if (p)
 				{
 					char *q = strstr(p, TARGET_VALUE_SUFFIX_A);
 
-					if(q)
+					if (q)
 						q++;
 					else
 						q = strstr(p, TARGET_VALUE_SUFFIX_A + 1);
 
-					if(q)
+					if (q)
 					{
-						if(p + strlen(InsertPtn) == q && !memcmp(p, InsertPtn, strlen(InsertPtn)))
+						if (p + strlen(InsertPtn) == q && !memcmp(p, InsertPtn, strlen(InsertPtn)))
 						{
 							cout("ïœçXÇ≥ÇÍÇƒÇ¢Ç‹ÇπÇÒÅB\n");
 						}
@@ -78,7 +78,7 @@ static void FoundCfgFile(char *cfgFile)
 	}
 	cout("mod: %d\n", mod);
 
-	if(mod)
+	if (mod)
 		writeLines_b_cx(cfgFile, lines); // .git\config ÇÃâ¸çsÇÕ LF
 	else
 		releaseDim(lines, 1);
@@ -87,11 +87,11 @@ static void Search(char *currDir, uint remDeep)
 {
 	char *cfgFile = combine(currDir, ".git\\config");
 
-	if(existFile(cfgFile))
+	if (existFile(cfgFile))
 	{
 		FoundCfgFile(cfgFile);
 	}
-	else if(remDeep)
+	else if (remDeep)
 	{
 		autoList_t *dirs = lsDirs(currDir);
 		char *dir;
@@ -106,27 +106,27 @@ static void Search(char *currDir, uint remDeep)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		RootDir = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		SearchDeep = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/U"))
+	if (argIs("/U"))
 	{
 		User = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		Pass = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/C"))
+	if (argIs("/C"))
 	{
 		User = "";
 		Pass = "";
@@ -137,7 +137,7 @@ readArgs:
 	errorCase(IMAX < SearchDeep);
 	errorCase((*User || *Pass) && (!*User || !*Pass));
 
-	if(*User)
+	if (*User)
 		InsertPtn = xcout("%s:%s@", User, Pass);
 	else
 		InsertPtn = "";

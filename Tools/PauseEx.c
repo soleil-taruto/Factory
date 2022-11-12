@@ -2,7 +2,7 @@
 
 int main(int argc, char **argv)
 {
-	if(!strcmp("1", getEnvLine("@NoPause")))
+	if (!strcmp("1", getEnvLine("@NoPause")))
 	{
 		LOGPOS();
 		return;

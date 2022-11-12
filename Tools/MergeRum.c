@@ -184,7 +184,7 @@ int main(int argc, char **argv)
 	char *slaveDir;
 
 readArgs:
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		IgnoreDuplRev = 1;
 		goto readArgs;
@@ -211,12 +211,12 @@ readArgs:
 	cout("[マスター] > %s\n", masterDir);
 	cout("[スレーブ] < %s\n", slaveDir);
 
-	if(IgnoreDuplRev)
+	if (IgnoreDuplRev)
 		cout("*** 重複しているリビジョンはスレーブ側を破棄する ***\n");
 
 	cout("続行？\n");
 
-	if(getKey() == 0x1b)
+	if (getKey() == 0x1b)
 		termination(0);
 
 	cout("続行します。\n");

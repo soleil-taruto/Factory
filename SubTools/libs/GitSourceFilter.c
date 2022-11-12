@@ -21,7 +21,7 @@ static char *MaskLine(char *line, char *end)
 	while(p < end)
 		*p++ = '/';
 
-	if(span < 2)
+	if (span < 2)
 		line = insertLine(line, (uint)end - (uint)line, "//" + span);
 
 	return line;
@@ -40,7 +40,7 @@ static FilterSourceFile(char *file)
 		char *p = strstr(line, COMMAND_PREFIX);
 		int onSecretLater = 0;
 
-		if(p)
+		if (p)
 		{
 			char *command = strx(p + strlen(COMMAND_PREFIX));
 			char *q;
@@ -48,18 +48,18 @@ static FilterSourceFile(char *file)
 			ucTrim(command);
 			q = strchr(command, ' ');
 
-			if(q)
+			if (q)
 				*q = '\0';
 
-			if(!strcmp(command, COMMAND_SECRET))
+			if (!strcmp(command, COMMAND_SECRET))
 			{
 				setElement(lines, index, (uint)MaskLine(line, p));
 			}
-			else if(!strcmp(command, COMMAND_SECRET_BEGIN))
+			else if (!strcmp(command, COMMAND_SECRET_BEGIN))
 			{
 				onSecretLater = 1;
 			}
-			else if(!strcmp(command, COMMAND_SECRET_END))
+			else if (!strcmp(command, COMMAND_SECRET_END))
 			{
 				onSecret = 0;
 			}
@@ -69,7 +69,7 @@ static FilterSourceFile(char *file)
 
 			memFree(command);
 		}
-		if(onSecret)
+		if (onSecret)
 		{
 			setElement(lines, index, (uint)MaskLine(line, strchr(line, '\0')));
 		}
@@ -93,7 +93,7 @@ void GitSourceFilter(char *rootDir)
 	{
 		char *ext = getExt(file);
 
-		if(
+		if (
 			!_stricmp(ext, "bat") ||
 			!_stricmp(ext, "c") ||
 			!_stricmp(ext, "h") ||

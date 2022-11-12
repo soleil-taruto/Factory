@@ -19,10 +19,10 @@ static char *GetProjFile_Dir(char *dir)
 	char *projFile;
 
 	foreach(files, file, index)
-		if(!_stricmp("csproj", getExt(file)))
+		if (!_stricmp("csproj", getExt(file)))
 			break;
 
-	if(file)
+	if (file)
 		projFile = strx(file);
 	else
 		projFile = NULL;
@@ -56,7 +56,7 @@ static char *GetProjRootNamespace(char *projFile)
 	{
 		ucTrim(line);
 
-		if(startsWith(line, "<RootNamespace>") && endsWith(line, "</RootNamespace>"))
+		if (startsWith(line, "<RootNamespace>") && endsWith(line, "</RootNamespace>"))
 		{
 			ret = strx(ne_strchr(line, '>') + 1);
 			*ne_strchr(ret, '<') = '\0';
@@ -77,7 +77,7 @@ static char *GetNamespaceFromLine(char *line)
 {
 	char *namespace = strx(line + 10);
 
-	if(endsWith(namespace, " {"))
+	if (endsWith(namespace, " {"))
 	{
 		namespace[strlen(namespace) - 2] = '\0';
 		NSWithBracket = 1;
@@ -122,11 +122,11 @@ static void AdjustNamespace(char *targetDir)
 	cout("D %s\n", rootDir);
 	cout("N %s\n", rootNamespace);
 
-	if(!BatchMode)
+	if (!BatchMode)
 	{
 		cout("続行？\n");
 
-		if(clearGetKey() == 0x1b)
+		if (clearGetKey() == 0x1b)
 			termination(0);
 
 		cout("続行します。\n");
@@ -135,7 +135,7 @@ static void AdjustNamespace(char *targetDir)
 
 	foreach(files, file, index)
 	{
-		if(!_stricmp("cs", getExt(file)))
+		if (!_stricmp("cs", getExt(file)))
 		{
 			autoList_t *lines = readLines(file);
 			char *line;
@@ -145,7 +145,7 @@ static void AdjustNamespace(char *targetDir)
 
 			foreach(lines, line, index)
 			{
-				if(lineExp("namespace <1,,>", line))
+				if (lineExp("namespace <1,,>", line))
 				{
 					char *oldNamespace = GetNamespaceFromLine(line);
 					char *newNamespace = GetNamespaceFromPath(rootNamespace, rootDir, file);
@@ -154,7 +154,7 @@ static void AdjustNamespace(char *targetDir)
 					cout("< %s\n", oldNamespace);
 					cout("> %s\n", newNamespace);
 
-					if(strcmp(oldNamespace, newNamespace))
+					if (strcmp(oldNamespace, newNamespace))
 					{
 						LOGPOS();
 						memFree(line);
@@ -167,7 +167,7 @@ static void AdjustNamespace(char *targetDir)
 					memFree(newNamespace);
 				}
 			}
-			if(modified)
+			if (modified)
 			{
 				LOGPOS();
 				semiRemovePath(file);
@@ -187,12 +187,12 @@ static void AdjustNamespace(char *targetDir)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/B"))
+	if (argIs("/B"))
 	{
 		BatchMode = 1;
 	}
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		AdjustNamespace(nextArg());
 		return;

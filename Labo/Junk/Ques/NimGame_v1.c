@@ -11,19 +11,19 @@ static int IsWinOSTurn(int a, int b, int c)
 {
 	int n;
 
-	if(a == 0 && b == 0 && c == 0) // ? Ÿ‚¿(‘Šè‚Ì•‰‚¯)
+	if (a == 0 && b == 0 && c == 0) // ? Ÿ‚¿(‘Šè‚Ì•‰‚¯)
 		return 1;
 
 	for(n = 0; n < a; n++)
-		if(!IsWinMyTurn(n, b, c))
+		if (!IsWinMyTurn(n, b, c))
 			return 0;
 
 	for(n = 0; n < b; n++)
-		if(!IsWinMyTurn(a, n, c))
+		if (!IsWinMyTurn(a, n, c))
 			return 0;
 
 	for(n = 0; n < c; n++)
-		if(!IsWinMyTurn(a, b, n))
+		if (!IsWinMyTurn(a, b, n))
 			return 0;
 
 	return 1; // (©•ª‚ª)•‰‚¯‚é‘Šè‚Ìè‚ª–³‚¢ -> Ÿ‚Ä‚é
@@ -32,19 +32,19 @@ static int IsWinMyTurn(int a, int b, int c)
 {
 	int n;
 
-	if(a == 0 && b == 0 && c == 0) // ? •‰‚¯
+	if (a == 0 && b == 0 && c == 0) // ? •‰‚¯
 		return 0;
 
 	for(n = 0; n < a; n++)
-		if(IsWinOSTurn(n, b, c))
+		if (IsWinOSTurn(n, b, c))
 			return 1;
 
 	for(n = 0; n < b; n++)
-		if(IsWinOSTurn(a, n, c))
+		if (IsWinOSTurn(a, n, c))
 			return 1;
 
 	for(n = 0; n < c; n++)
-		if(IsWinOSTurn(a, b, n))
+		if (IsWinOSTurn(a, b, n))
 			return 1;
 
 	return 0; // Ÿ‚Ä‚é©•ª‚Ìè‚ª–³‚¢ -> •‰‚¯‚é
@@ -77,7 +77,7 @@ int main(int argc, char **argv)
 	for(b = 0; b <= a; b++)
 	for(c = 0; c <= b; c++)
 	{
-		if(IsWinOSTurn(a, b, c))
+		if (IsWinOSTurn(a, b, c))
 			cout("’cq‚Ì‚‚³ %d %d %d\n", a, b, c);
 	}
 }

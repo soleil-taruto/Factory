@@ -5,7 +5,7 @@ static void CharRecved(int chr)
 {
 	static int stock;
 
-	if(stock)
+	if (stock)
 	{
 		char str[3];
 
@@ -20,12 +20,12 @@ static void CharRecved(int chr)
 		stock = 0;
 		return;
 	}
-	if(_ismbblead(chr))
+	if (_ismbblead(chr))
 	{
 		stock = chr;
 		return;
 	}
-	if(chr == '\n')
+	if (chr == '\n')
 	{
 		cout("\n");
 		return;
@@ -43,7 +43,7 @@ static void BitRecved(uint bit)
 
 	bIndex++;
 
-	if(bIndex == 8)
+	if (bIndex == 8)
 	{
 		CharRecved((int)chr);
 		chr = 0;
@@ -74,13 +74,13 @@ static void DoRecv(void)
 	{
 		uint bit;
 
-		if(mltHandleWaitForMillis(evBits, 2000, &bit))
+		if (mltHandleWaitForMillis(evBits, 2000, &bit))
 		{
 			BitRecved(bit);
 			eventSet(evReady);
 		}
 		while(hasKey())
-			if(getKey() == 0x1b)
+			if (getKey() == 0x1b)
 				death = 1;
 	}
 	handleClose(evReady);

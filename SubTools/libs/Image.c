@@ -13,7 +13,7 @@ static autoTable_t *GetImage(void)
 {
 	static autoTable_t *imgs[IMAGE_ID_NUM];
 
-	if(!imgs[ImageId])
+	if (!imgs[ImageId])
 		imgs[ImageId] = newTable(getZero, noop_u);
 
 	return imgs[ImageId];

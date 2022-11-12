@@ -24,7 +24,7 @@ static void DoShuffle(void)
 		Sq[r] = tmp;
 	}
 	for(index = 0; index < N; index++)
-		if(Rnds[index] < index)
+		if (Rnds[index] < index)
 			break;
 
 	for(mode = index == N ? 0 : 1; mode < 2; mode++)
@@ -46,17 +46,17 @@ static void ShowResult(uint mode, int rateMode)
 	{
 		for(val = 0; val < N; val++)
 		{
-			if(val)
+			if (val)
 				cout(", ");
 
-			if(!rateMode)
+			if (!rateMode)
 				cout("%u", SumTbl[mode][index][val]);
 			else
 				cout("%f", (double)SumTbl[mode][index][val] / Totals[mode]);
 		}
 		cout("\n");
 	}
-	if(!rateMode)
+	if (!rateMode)
 		cout("%u\n", Totals[mode]);
 
 	cout("\n");
@@ -71,14 +71,14 @@ static void DoTest(void)
 
 		for(index = 0; index < N; index++)
 		{
-			if(Rnds[index] + 1 < N)
+			if (Rnds[index] + 1 < N)
 			{
 				Rnds[index]++;
 				break;
 			}
 			Rnds[index] = 0;
 		}
-		if(index == N)
+		if (index == N)
 			break;
 	}
 	ShowResult(0, 0);

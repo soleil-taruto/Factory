@@ -48,7 +48,7 @@ static void SpoofHeader(void)
 			char *h_val;
 			char *r_val = getLine(R_Values, r_ndx);
 
-			if(h_ndx == getCount(HttpDat.H_Keys))
+			if (h_ndx == getCount(HttpDat.H_Keys))
 			{
 				addElement(HttpDat.H_Keys, (uint)strx(r_key));
 				addElement(HttpDat.H_Values, (uint)strx("[未定義]"));
@@ -64,7 +64,7 @@ static void SpoofHeader(void)
 		}
 	}
 
-	if(PutDomainUrl) // ドメイン名をurlに挿入
+	if (PutDomainUrl) // ドメイン名をurlに挿入
 	{
 		char *host = refLine(HttpDat.H_Values, findLineCase(HttpDat.H_Keys, "Host", 1));
 		char *insPtn;
@@ -75,7 +75,7 @@ static void SpoofHeader(void)
 
 		insPtn = xcout("GET http://%s/", host);
 
-		if(5 <= strlen(HttpDat.H_Request))
+		if (5 <= strlen(HttpDat.H_Request))
 			eraseLine(HttpDat.H_Request, 5); // -= "GET /"
 
 		HttpDat.H_Request = insertLine_x(HttpDat.H_Request, 0, insPtn);
@@ -89,7 +89,7 @@ static char *HFldFolding(char *line)
 
 	while(index + 10 <= strlen(line))
 	{
-		if(line[index] <= '\x20') // ? WSP
+		if (line[index] <= '\x20') // ? WSP
 		{
 			line = insertLine(line, index, "\r\n");
 			line[index + 2] = '\t';
@@ -131,7 +131,7 @@ static void PreDataFltr(autoBlock_t *buff, uint uPData)
 {
 	autoBlock_t **pData = (autoBlock_t **)uPData;
 
-	if(*pData)
+	if (*pData)
 	{
 		autoBlock_t *nb = newBlock();
 
@@ -157,13 +157,13 @@ static void PerformTh(int sock, char *strip)
 		int chr = SockRecvChar(ss);
 		uint endPos;
 
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
 		addByte(buff, chr);
 		endPos = getSize(buff);
 
-		if(4 <= endPos && !memcmp((uchar *)directGetBuffer(buff) + endPos - 4, "\r\n\r\n", 4))
+		if (4 <= endPos && !memcmp((uchar *)directGetBuffer(buff) + endPos - 4, "\r\n\r\n", 4))
 		{
 			int fwdSock;
 
@@ -175,7 +175,7 @@ static void PerformTh(int sock, char *strip)
 
 			cout("FWD_SOCK: %d\n", fwdSock);
 
-			if(fwdSock != -1)
+			if (fwdSock != -1)
 			{
 				autoBlock_t *buffTmp = buff; // PreDataFltr() で NULL をセットされる。
 
@@ -186,7 +186,7 @@ static void PerformTh(int sock, char *strip)
 			}
 			break;
 		}
-		if(65000 < endPos)
+		if (65000 < endPos)
 		{
 			cout("OVERFLOW_HEADER_SIZE\n");
 			break;
@@ -199,12 +199,12 @@ static void PerformTh(int sock, char *strip)
 }
 static int ReadArgs(void)
 {
-	if(argIs("/D"))
+	if (argIs("/D"))
 	{
 		PutDomainUrl = 1;
 		return 1;
 	}
-	if(argIs("/R"))
+	if (argIs("/R"))
 	{
 		addElement(R_Keys, (uint)nextArg());
 		addElement(R_Values, (uint)nextArg());

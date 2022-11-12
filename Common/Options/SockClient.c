@@ -38,7 +38,7 @@ autoList_t *sockLookupList(char *domain)
 	SockStartup();
 	host = gethostbyname(domain); // domain == "" -> 自分のIP。複数のNICを挿していると、複数返る。
 
-	if(host)
+	if (host)
 	{
 		for(index = 0; host->h_addr_list[index]; index++)
 		{
@@ -78,7 +78,7 @@ static int IsTimeout(uchar ip[4])
 	uint uip = *(uint *)ip;
 	uint uipPos;
 
-	if(!uipList)
+	if (!uipList)
 	{
 //		LOGPOS(); // test
 		uipList = newList();
@@ -86,14 +86,14 @@ static int IsTimeout(uchar ip[4])
 	}
 	uipPos = findElement(uipList, uip, simpleComp);
 
-	if(uipPos == getCount(uipList))
+	if (uipPos == getCount(uipList))
 	{
 //		LOGPOS(); // test
 		addElement(uipList, uip);
 		addElement(tmoutList, now() + SEC_IP_TIMEOUT);
 		return 0;
 	}
-	if(getElement(tmoutList, uipPos) < now())
+	if (getElement(tmoutList, uipPos) < now())
 	{
 //		LOGPOS(); // test
 		fastDesertElement(uipList, uipPos);
@@ -113,7 +113,7 @@ static int ConnectWithTimeout(int sock, struct sockaddr *p_sa, uint timeoutMilli
 
 	ev = WSACreateEvent();
 
-	if(ev == WSA_INVALID_EVENT)
+	if (ev == WSA_INVALID_EVENT)
 		goto endfunc;
 
 //LOGPOS(); // test
@@ -121,7 +121,7 @@ static int ConnectWithTimeout(int sock, struct sockaddr *p_sa, uint timeoutMilli
 //cout("ret: %d\n", ret); // test
 //LOGPOS(); // test
 
-	if(ret == -1)
+	if (ret == -1)
 		goto endfunc_ev;
 
 //LOGPOS(); // test
@@ -129,23 +129,23 @@ static int ConnectWithTimeout(int sock, struct sockaddr *p_sa, uint timeoutMilli
 //cout("ret: %d\n", ret); // test
 //LOGPOS(); // test
 
-	if(ret == -1)
+	if (ret == -1)
 	{
 //LOGPOS(); // test
 		ret = WSAGetLastError();
 //cout("ret: %d\n", ret); // test
 //LOGPOS(); // test
 
-		if(ret != WSAEWOULDBLOCK)
+		if (ret != WSAEWOULDBLOCK)
 			goto endfunc_nwEv;
 	}
 //LOGPOS(); // test
-	if(nonBlocking)
+	if (nonBlocking)
 		inner_uncritical();
 
 	ret = WSAWaitForMultipleEvents(1, &ev, 0, timeoutMillis, 0);
 
-	if(nonBlocking)
+	if (nonBlocking)
 		inner_critical();
 //cout("ret: %d\n", ret); // test
 //LOGPOS(); // test
@@ -162,7 +162,7 @@ static int ConnectWithTimeout(int sock, struct sockaddr *p_sa, uint timeoutMilli
 	// WSA_WAIT_IO_COMPLETION == 192 (0xC0)
 	// WSA_WAIT_TIMEOUT       == 258
 
-	if(ret != WSA_WAIT_EVENT_0)
+	if (ret != WSA_WAIT_EVENT_0)
 	{
 		*p_timedOut = 1;
 		goto endfunc_nwEv;
@@ -172,7 +172,7 @@ static int ConnectWithTimeout(int sock, struct sockaddr *p_sa, uint timeoutMilli
 //cout("ret: %d\n", ret); // test
 //LOGPOS(); // test
 
-	if(
+	if (
 		ret == -1 ||
 		!(nwEv.lNetworkEvents & FD_CONNECT) ||
 		nwEv.iErrorCode[FD_CONNECT_BIT] != 0
@@ -200,7 +200,7 @@ endfunc:
 	簡単な使用例
 		SockStartup();
 		sock = sockConnect(ip, domain, portno);
-		if(sock != -1) {
+		if (sock != -1) {
 			ここで通信
 			sockDisconnect(sock);
 		}
@@ -213,15 +213,15 @@ int sockConnectEx(uchar ip[4], char *domain, uint portno, int nonBlocking) // re
 	struct sockaddr_in sa;
 	int retval;
 
-	if(!ip)
+	if (!ip)
 		ip = GetDefIP(domain);
 
-	if(!*(uint *)ip) // ? 0.0.0.0
+	if (!*(uint *)ip) // ? 0.0.0.0
 	{
 		errorCase(!domain);
 		sockLookup(ip, domain);
 
-		if(!*(uint *)ip) return -1;
+		if (!*(uint *)ip) return -1;
 	}
 	strip = SockIp2Line(ip);
 
@@ -243,16 +243,16 @@ int sockConnectEx(uchar ip[4], char *domain, uint portno, int nonBlocking) // re
 #if 1
 		retval = ConnectWithTimeout(sock, (struct sockaddr *)&sa, timeoutMillis, nonBlocking, &timedOut);
 #else // old @ 2018.8.20
-		if(nonBlocking)
+		if (nonBlocking)
 			inner_uncritical();
 
 		retval = connect(sock, (struct sockaddr *)&sa, sizeof(sa));
 
-		if(nonBlocking)
+		if (nonBlocking)
 			inner_critical();
 #endif
 
-		if(timedOut)
+		if (timedOut)
 		{
 			int warning = !nonBlocking && sockServerMode;
 
@@ -264,21 +264,21 @@ int sockConnectEx(uchar ip[4], char *domain, uint portno, int nonBlocking) // re
 				retval
 				);
 
-			if(warning)
+			if (warning)
 				setConsoleColor(0x5f);
 		}
 	}
 
-	if(retval == -1) // ? 接続失敗
+	if (retval == -1) // ? 接続失敗
 	{
-		if(domain) // ? domain 有効
+		if (domain) // ? domain 有効
 			*(uint *)ip = 0; // domain に対応する ip が更新されたかもしれない。-> 次回 ip 更新のため 0.0.0.0 再設定
 
 		SockPreClose(sock);
 		closesocket(sock);
 		return -1;
 	}
-	if(IsTimeout(ip))
+	if (IsTimeout(ip))
 	{
 		LOGPOS(); // test
 		*(uint *)ip = 0; // 定期的にリセットする。
@@ -386,10 +386,10 @@ char *sockClientEx(uchar ip[4], char *domain, uint portno, char *prmFile, int (*
 	SockStartup();
 	sock = sockConnect(ip, domain, portno);
 
-	if(sock == -1)
+	if (sock == -1)
 		goto error_connect;
 
-	if(transmitFunc)
+	if (transmitFunc)
 	{
 		transmitFunc(sock);
 		goto end_transmission;
@@ -405,8 +405,8 @@ char *sockClientEx(uchar ip[4], char *domain, uint portno, char *prmFile, int (*
 #define TransmitLoop(condLoop, condTransmitError) \
 	while(condLoop) { \
 		SockCurrTime = time(NULL); \
-		if(idleFunc() == 0) goto error_transmission; \
-		if(condTransmitError) goto error_transmission; \
+		if (idleFunc() == 0) goto error_transmission; \
+		if (condTransmitError) goto error_transmission; \
 	}
 
 	TransmitLoop(
@@ -428,7 +428,7 @@ char *sockClientEx(uchar ip[4], char *domain, uint portno, char *prmFile, int (*
 
 	t->AnsFile->FileSize = blockToValue64(t->AnsSize->Block);
 
-	if(sockClientAnswerFileSizeMax < t->AnsFile->FileSize)
+	if (sockClientAnswerFileSizeMax < t->AnsFile->FileSize)
 	{
 		cout("ERROR: sockClientAnswerFileSizeMax overflow. %I64u < %I64u\n", sockClientAnswerFileSizeMax, t->AnsFile->FileSize);
 		goto error_transmission;
@@ -470,7 +470,7 @@ char *sockClient(uchar ip[4], char *domain, uint portno, char *prmFile, int (*id
 */
 void sockClientUserTransmit(uchar ip[4], char *domain, uint portno, void (*transmitFunc)(int))
 {
-	if(sockClientEx(ip, domain, portno, NULL, NULL, transmitFunc) != NULL)
+	if (sockClientEx(ip, domain, portno, NULL, NULL, transmitFunc) != NULL)
 	{
 		error();
 	}

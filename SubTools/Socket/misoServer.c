@@ -6,7 +6,7 @@ static int Perform(char *prmFile, char *ansFile)
 	FILE *fp;
 	time_t retTime;
 
-	if(getFileSize(prmFile)) // ? 空ではない。
+	if (getFileSize(prmFile)) // ? 空ではない。
 		return 0;
 
 	retTime = time(NULL);
@@ -25,7 +25,7 @@ static int Idle(void)
 
 	while(hasKey())
 	{
-		if(getKey() == 0x1b)
+		if (getKey() == 0x1b)
 		{
 			cout("終了しました。\n");
 			retval = 0;

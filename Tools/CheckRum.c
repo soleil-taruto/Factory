@@ -35,10 +35,10 @@ static void CheckRevDirsRevFiles(void)
 	{
 		char *dir = changeLocal(getLine(RevDirs, i), "");
 
-		if(*dir) // ? ローカル名じゃない。
+		if (*dir) // ? ローカル名じゃない。
 		{
 			for(j = 0; j < i; j++)
-				if(!mbs_stricmp(dir, getLine(RevDirs, j)))
+				if (!mbs_stricmp(dir, getLine(RevDirs, j)))
 					break;
 
 			errorCase_m(j == i, "このツリーファイルは上から順に作成できません。");
@@ -53,10 +53,10 @@ static void CheckRevDirsRevFiles(void)
 	{
 		char *dir = changeLocal(getLine(RevFiles, i), "");
 
-		if(*dir) // ? ローカル名じゃない。
+		if (*dir) // ? ローカル名じゃない。
 		{
 			for(j = 0; j < getCount(RevDirs); j++)
-				if(!mbs_stricmp(dir, getLine(RevDirs, j)))
+				if (!mbs_stricmp(dir, getLine(RevDirs, j)))
 					break;
 
 			errorCase_m(j == getCount(RevDirs), "ファイルリストの問題：ツリーの配下に無いファイルがあります。");
@@ -79,7 +79,7 @@ static autoList_t *CheckAndReadLines(char *file, char *errorMessage)
 		errorCase_m(chr == '\0', errorMessage);
 		errorCase_m(chr == '\n', errorMessage);
 
-		if(chr == '\r')
+		if (chr == '\r')
 		{
 			index++;
 			errorCase_m(getSize(fileData) <= index, errorMessage);
@@ -297,12 +297,12 @@ static void CheckRum(char *rumDir)
 int main(int argc, char **argv)
 {
 readArgs:
-	if(argIs("/-S"))
+	if (argIs("/-S"))
 	{
 		NoStrict = 1;
 		goto readArgs;
 	}
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		CheckRum(nextArg());
 termination(0); // test

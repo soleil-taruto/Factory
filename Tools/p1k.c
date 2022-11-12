@@ -15,7 +15,7 @@ static void Phrase2Key(char *phrase)
 	char *file;
 	FILE *fp;
 
-	if(!OutputFile)
+	if (!OutputFile)
 	{
 		file = xcout("[%s].txt", phrase);
 		errorCase(!isFairLocalPath(file, strlen(KEYFILESDIR)));
@@ -41,17 +41,17 @@ int main(int argc, char **argv)
 {
 	mkdirEx(KEYFILESDIR);
 
-	if(argIs("/O")) // Output file
+	if (argIs("/O")) // Output file
 	{
 		OutputFile = nextArg();
 	}
 	errorCase(hasArgs(2));
 
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		Phrase2Key(nextArg());
 	}
-	if(!OutputFile)
+	if (!OutputFile)
 	{
 		execute("START " KEYFILESDIR);
 	}

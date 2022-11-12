@@ -40,9 +40,9 @@ static int RenumberPaths(autoList_t *paths)
 
 		for(p = path; *p; p++)
 		{
-			if(*p == '*') // 数字に置き換える。
+			if (*p == '*') // 数字に置き換える。
 			{
-				if(*q)
+				if (*q)
 				{
 					*p = *q;
 					q++;
@@ -84,8 +84,8 @@ static int Confirm(void)
 	{
 		int key = getKey();
 
-		if(key == 0x1b) return 0;
-		if(key == 'R') return 1;
+		if (key == 0x1b) return 0;
+		if (key == 'R') return 1;
 	}
 }
 
@@ -107,25 +107,25 @@ static void RenameEx(void)
 		releaseDim(newPaths, 1);
 		newPaths = tmpPaths;
 
-		if(getCount(newPaths) == 0)
+		if (getCount(newPaths) == 0)
 		{
 			goto endfunc;
 		}
-		if(getCount(newPaths) < getCount(paths))
+		if (getCount(newPaths) < getCount(paths))
 		{
 			for(index = 0; getCount(newPaths) < getCount(paths); index++)
 				addElement(newPaths, (uint)strx(getLine(newPaths, index)));
 		}
-		else if(getCount(paths) < getCount(newPaths))
+		else if (getCount(paths) < getCount(newPaths))
 		{
 			while(getCount(paths) < getCount(newPaths))
 				memFree((void *)unaddElement(newPaths));
 		}
-		else if(RenumberPaths(newPaths))
+		else if (RenumberPaths(newPaths))
 		{
 			// noop
 		}
-		else if(AntiSamePaths(newPaths))
+		else if (AntiSamePaths(newPaths))
 		{
 			// noop
 		}
@@ -136,7 +136,7 @@ static void RenameEx(void)
 	}
 	foreach(paths, path, index) // 変更しないファイルを排除
 	{
-		if(!strcmp(path, getLine(newPaths, index))) // ? 完全に一致
+		if (!strcmp(path, getLine(newPaths, index))) // ? 完全に一致
 		{
 			path[0] = '\0';
 			getLine(newPaths, index)[0] = '\0';
@@ -151,7 +151,7 @@ static void RenameEx(void)
 		cout("> %s\n", getLine(newPaths, index));
 		errorCase(mbs_strchr(getLine(newPaths, index), '\\')); // ? ローカル名ではない
 	}
-	if(!Confirm())
+	if (!Confirm())
 		goto endfunc;
 
 	tmpPaths = createAutoList(getCount(paths));
@@ -213,7 +213,7 @@ static void RenameExDir(char *dir)
 
 int main(int argc, char **argv)
 {
-	if(hasArgs(1))
+	if (hasArgs(1))
 	{
 		RenameExDir(nextArg());
 	}

@@ -7,16 +7,16 @@ int TestComp(char *str1, char *str2)
 	char *ansR = calc(str2, '-', str1);
 	int ret;
 
-	if(*ans == '-')
+	if (*ans == '-')
 	{
-		if(*ansR == '-')
+		if (*ansR == '-')
 			error(); // never
 		else
 			ret = -1;
 	}
 	else
 	{
-		if(*ansR == '-')
+		if (*ansR == '-')
 			ret = 1;
 		else
 			ret = 0;
@@ -44,17 +44,17 @@ static void Test_calcComp(char *str1, char *str2)
 	cout("ret1: %d\n", ret1);
 	cout("ret2: %d\n", ret2);
 
-	if(ret1 < 0) ret1 = -1;
-	if(ret1 > 0) ret1 = 1;
+	if (ret1 < 0) ret1 = -1;
+	if (ret1 > 0) ret1 = 1;
 
-	if(ret2 < 0) ret2 = -1;
-	if(ret2 > 0) ret2 = 1;
+	if (ret2 < 0) ret2 = -1;
+	if (ret2 > 0) ret2 = 1;
 
 	errorCase(ret1 != ret2);
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/Comp"))
+	if (argIs("/Comp"))
 	{
 		Test_calcComp(getArg(0), getArg(1));
 		return;

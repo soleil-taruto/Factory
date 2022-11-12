@@ -18,16 +18,16 @@ static void LockMain(char *file, int retrymax)
 	{
 		fp = FLock(file);
 
-		if(fp)
+		if (fp)
 			break;
 
-		if(retrymax <= retrycnt)
+		if (retrymax <= retrycnt)
 			break;
 
 		cout("失敗しました。2秒後にリトライします。\n");
 		sleep(2000);
 	}
-	if(!fp)
+	if (!fp)
 	{
 		cout("ロックできませんでした。\n");
 		return;
@@ -41,12 +41,12 @@ static void LockMain(char *file, int retrymax)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/1"))
+	if (argIs("/1"))
 	{
 		LockMain(nextArg(), 0);
 		return;
 	}
-	if(argIs("/L"))
+	if (argIs("/L"))
 	{
 		LockMain(nextArg(), 10);
 		return;

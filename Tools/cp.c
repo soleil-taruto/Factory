@@ -26,12 +26,12 @@ int main(int argc, char **argv)
 	int b_mode = 0;
 
 readArgs:
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		force_mode = 1;
 		goto readArgs;
 	}
-	if(argIs("/M") || argIs("/R"))
+	if (argIs("/M") || argIs("/R"))
 	{
 		move_mode = 1;
 		goto readArgs;
@@ -52,7 +52,7 @@ readArgs:
 
 	errorCase(!existFile(srcFile));
 
-	if(existDir(destFile))
+	if (existDir(destFile))
 	{
 		destFile = addLocal(destFile, getLocal(srcFile));
 
@@ -62,14 +62,14 @@ readArgs:
 	cout("< %s\n", srcFile);
 	cout("> %s\n", destFile);
 
-	if(existFile(destFile))
+	if (existFile(destFile))
 	{
-		if(!force_mode)
+		if (!force_mode)
 		{
 			cout("コピー先ファイルが存在します。\n");
 			cout("削除？\n");
 
-			if(clearGetKey() == 0x1b)
+			if (clearGetKey() == 0x1b)
 				termination(0);
 
 			cout("削除します。\n");
@@ -77,7 +77,7 @@ readArgs:
 		recurRemovePath(destFile);
 	}
 
-	if(move_mode)
+	if (move_mode)
 	{
 		moveFile(srcFile, destFile);
 	}

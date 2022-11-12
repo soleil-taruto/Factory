@@ -18,7 +18,7 @@ static void DoTestOnce(uint n)
 
 		for(c = 1; ; c++)
 		{
-			if(!mt19937_rnd(n))
+			if (!mt19937_rnd(n))
 				break;
 
 			errorCase(UINTMAX <= c);

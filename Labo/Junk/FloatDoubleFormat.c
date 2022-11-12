@@ -103,7 +103,7 @@ static void ShowFloat_Main(void *pVal, uint valSz, uint expBits, uint expBase, u
 
 	str = changeRadixCalcLine(str, 2, 10, basement);
 
-	if(calcLastMarume)
+	if (calcLastMarume)
 		str = calcLineToMarume_x(str, basement);
 
 	cout("DVAL = %s\n", str);
@@ -149,7 +149,7 @@ static void ShowFloat_Block(autoBlock_t *block)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/NAN"))
+	if (argIs("/NAN"))
 	{
 		float f = powf(-1.0f, 1.5f);
 		double d = pow(-1.0, 1.5);
@@ -158,7 +158,7 @@ int main(int argc, char **argv)
 		ShowDouble(d);
 		return;
 	}
-	if(argIs("/INF"))
+	if (argIs("/INF"))
 	{
 		float f  = 3.0f;
 		double d = 3.0;
@@ -175,7 +175,7 @@ int main(int argc, char **argv)
 		ShowDouble(-d);
 		return;
 	}
-	if(argIs("/B"))
+	if (argIs("/B"))
 	{
 		/*
 			最初の文字が float の最上位ビット
@@ -187,7 +187,7 @@ int main(int argc, char **argv)
 		releaseAutoBlock(block);
 		return;
 	}
-	if(argIs("/H"))
+	if (argIs("/H"))
 	{
 		/*
 			最初の文字が float の最下位バイトの上位 4 ビット

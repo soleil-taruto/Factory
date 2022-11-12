@@ -55,7 +55,7 @@ static void CheckColorMinMax(char *file, int mode, int rgb)
 }
 int main(int argc, char **argv)
 {
-	if(argIs("/XR"))
+	if (argIs("/XR"))
 	{
 		CheckColorMinMax(nextArg(), 'X', 'R');
 		return; // dummy

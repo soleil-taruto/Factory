@@ -58,22 +58,22 @@ static int ReadUTF16Char(FILE *fp)
 restart:
 	chr1 = readChar(fp);
 
-	if(chr1 == EOF)
+	if (chr1 == EOF)
 		return EOF;
 
 	chr2 = readChar(fp);
 
-	if(chr1 == 0xff && chr2 == 0xfe) // LE
+	if (chr1 == 0xff && chr2 == 0xfe) // LE
 	{
 		UTF_BE = 0;
 		goto restart;
 	}
-	if(chr1 == 0xfe && chr2 == 0xff) // BE
+	if (chr1 == 0xfe && chr2 == 0xff) // BE
 	{
 		UTF_BE = 1;
 		goto restart;
 	}
-	if(UTF_BE)
+	if (UTF_BE)
 		return chr1 << 8 | chr2;
 
 	return chr1 | chr2 << 8;
@@ -87,20 +87,20 @@ void UTF16ToSJISFile(char *rFile, char *wFile)
 	{
 		int chr = ReadUTF16Char(rfp);
 
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
-		if(UTF_UseJIS0208)
+		if (UTF_UseJIS0208)
 			chr = convCharUTF16ToSJIS(chr);
 		else
 			chr = convCharUTF16ToCP932(chr);
 
-		if(chr == -1)
+		if (chr == -1)
 		{
 			cout("Warning: UTF-16 ˆ—‚Å‚«‚È‚¢•¶Žš\n");
 			chr = 0x8148; // "H"
 		}
-		if(chr & 0xff00)
+		if (chr & 0xff00)
 			writeChar(wfp, chr >> 8);
 
 		writeChar(wfp, chr & 0xff);
@@ -110,7 +110,7 @@ void UTF16ToSJISFile(char *rFile, char *wFile)
 }
 static void WriteUTF16Char(FILE *fp, int chr1, int chr2)
 {
-	if(UTF_BE)
+	if (UTF_BE)
 	{
 		writeChar(fp, chr2);
 		writeChar(fp, chr1);
@@ -126,7 +126,7 @@ void SJISToUTF16File(char *rFile, char *wFile)
 	FILE *rfp = fileOpen(rFile, "rb");
 	FILE *wfp = fileOpen(wFile, "wb");
 
-	if(!UTF_NoWriteBOM)
+	if (!UTF_NoWriteBOM)
 	{
 		WriteUTF16Char(wfp, 0xff, 0xfe);
 	}
@@ -134,18 +134,18 @@ void SJISToUTF16File(char *rFile, char *wFile)
 	{
 		int chr = readChar(rfp);
 
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
-		if(_ismbblead(chr))
+		if (_ismbblead(chr))
 			chr = chr << 8 | readChar(rfp);
 
-		if(UTF_UseJIS0208)
+		if (UTF_UseJIS0208)
 			chr = convCharSJISToUTF16(chr);
 		else
 			chr = convCharCP932ToUTF16(chr);
 
-		if(chr == -1)
+		if (chr == -1)
 		{
 			cout("Warning: SJIS ˆ—‚Å‚«‚È‚¢•¶Žš\n");
 			chr = 0xff1f; // "H"
@@ -158,11 +158,11 @@ void SJISToUTF16File(char *rFile, char *wFile)
 
 static uint GetUTF8Size(int chr)
 {
-	if(!(chr & 0x80)) return 1;
-	if(!(chr & 0x20)) return 2;
-	if(!(chr & 0x10)) return 3;
-	if(!(chr & 0x08)) return 4;
-	if(!(chr & 0x04)) return 5;
+	if (!(chr & 0x80)) return 1;
+	if (!(chr & 0x20)) return 2;
+	if (!(chr & 0x10)) return 3;
+	if (!(chr & 0x08)) return 4;
+	if (!(chr & 0x04)) return 5;
 
 	return 6;
 }
@@ -171,7 +171,7 @@ void UTF8ToUTF16File(char *rFile, char *wFile)
 	FILE *rfp = fileOpen(rFile, "rb");
 	FILE *wfp = fileOpen(wFile, "wb");
 
-	if(!UTF_NoWriteBOM)
+	if (!UTF_NoWriteBOM)
 	{
 		WriteUTF16Char(wfp, 0xff, 0xfe);
 	}
@@ -181,7 +181,7 @@ void UTF8ToUTF16File(char *rFile, char *wFile)
 		uint size;
 		uint c;
 
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
 		size = GetUTF8Size(chr);
@@ -223,10 +223,10 @@ void UTF16ToUTF8File(char *rFile, char *wFile)
 	{
 		int chr = ReadUTF16Char(rfp);
 
-		if(chr == EOF)
+		if (chr == EOF)
 			break;
 
-		if(chr & 0xf800)
+		if (chr & 0xf800)
 		{
 			chr = 0xe08080 | (chr & 0xf000) << 4 | (chr & 0xfc0) << 2 | chr & 0x3f;
 
@@ -234,7 +234,7 @@ void UTF16ToUTF8File(char *rFile, char *wFile)
 			writeChar(wfp, chr >> 8 & 0xff);
 			writeChar(wfp, chr & 0xff);
 		}
-		else if(chr & 0xff80)
+		else if (chr & 0xff80)
 		{
 			chr = 0xc080 | (chr & 0x7c0) << 2 | chr & 0x3f;
 

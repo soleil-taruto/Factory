@@ -131,48 +131,48 @@ int main(int argc, char **argv)
 	BodyLines = newList();
 
 readArgs:
-	if(argIs("/S"))
+	if (argIs("/S"))
 	{
 		SmtpServer = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/P"))
+	if (argIs("/P"))
 	{
 		Portno = toValue(nextArg());
 		goto readArgs;
 	}
-	if(argIs("/U"))
+	if (argIs("/U"))
 	{
 		User = nextArg();
 		Pass = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/MF"))
+	if (argIs("/MF"))
 	{
 		MailAddressFrom = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/MT"))
+	if (argIs("/MT"))
 	{
 		MailAddressTo = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/T"))
+	if (argIs("/T"))
 	{
 		Subject = nextArg();
 		goto readArgs;
 	}
-	if(argIs("/L"))
+	if (argIs("/L"))
 	{
 		addElement(BodyLines, (uint)strx(nextArg()));
 		goto readArgs;
 	}
-	if(argIs("/F"))
+	if (argIs("/F"))
 	{
 		addElements_x(BodyLines, readLines(nextArg()));
 		goto readArgs;
 	}
-	if(argIs("/E"))
+	if (argIs("/E"))
 	{
 		SmtpServer      = getAppDataEnv("SMTPS_SERVER",        SmtpServer);
 		Portno          = getAppDataEnv32("SMTPS_SERVER_PORT", Portno);

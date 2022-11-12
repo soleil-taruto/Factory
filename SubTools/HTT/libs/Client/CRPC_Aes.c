@@ -29,10 +29,10 @@ void ClientCRPC_Begin(SockStream_t *ss)
 	clSeed = MakeEncCounterSeed();
 	svSeed = ClientRPC(ss, clSeed);
 
-	if(EncCounter)
+	if (EncCounter)
 		releaseAutoBlock(EncCounter);
 
-	if(getSize(svSeed) == 16)
+	if (getSize(svSeed) == 16)
 		EncCounter = MakeEncCounter(clSeed, svSeed);
 	else
 		EncCounter = NULL;
@@ -42,7 +42,7 @@ void ClientCRPC_Begin(SockStream_t *ss)
 }
 void ClientCRPC_End(void)
 {
-	if(EncCounter)
+	if (EncCounter)
 	{
 		releaseAutoBlock(EncCounter);
 		EncCounter = NULL;
@@ -57,7 +57,7 @@ autoBlock_t *ClientCRPC(SockStream_t *ss, autoBlock_t *sendData, autoBlock_t *ra
 	errorCase(!rawKey);
 	errorCase(getSize(rawKey) != 16);
 
-	if(!EncCounter) // ? ClientCRPC_Begin() 未実行・未成功
+	if (!EncCounter) // ? ClientCRPC_Begin() 未実行・未成功
 	{
 		cout("C_CRPC_Aes_カウンターが無い！\n");
 		return newBlock();
@@ -73,7 +73,7 @@ autoBlock_t *ClientCRPC(SockStream_t *ss, autoBlock_t *sendData, autoBlock_t *ra
 
 	Crypt(recvData, rawKey, EncCounter);
 
-	if(!UnputHash(recvData))
+	if (!UnputHash(recvData))
 	{
 		cout("C_CRPC_Aes_受信データ破損\n");
 		setSize(recvData, 0);
