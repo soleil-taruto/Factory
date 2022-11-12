@@ -43,7 +43,7 @@ typedef unsigned __int64 uint64;
 #define lengthof(list) \
 	(sizeof(list) / sizeof(*list))
 
-#define foreach (list, element, index) \
+#define foreach(list, element, index) \
 	for (index = 0; index < getCount(list) ? (*(uint *)&element = getElement(list, index), 1) : (*(uint *)&element = 0); index++)
 
 #define LOGPOS2(mode) \
