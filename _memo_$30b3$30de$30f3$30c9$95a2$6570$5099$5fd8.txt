@@ -16,6 +16,9 @@
 	ees /lss
 	ees /lss /e
 
+	RenameAll
+	RenameAllSub
+
 ----
 
 タイムスタンプのソート順がファイル名のソート順になるようにタイムスタンプを変更する。

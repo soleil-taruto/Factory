@@ -213,6 +213,8 @@ static void RenameExDir(char *dir)
 
 int main(int argc, char **argv)
 {
+	errorCase_m(getArg(0)[0] == '/', "オプション指定可能であると勘違いしていませんか？");
+
 	if (hasArgs(1))
 	{
 		RenameExDir(nextArg());
