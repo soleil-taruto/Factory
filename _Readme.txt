@@ -12,3 +12,13 @@ Factory
 
 このファイルが C:\Factory\_Readme.txt となるように展開する。
 
+
+------
+リンク
+
+りぽ：
+https://github.com/soleil-taruto/Factory
+
+先祖：
+https://github.com/stackprobe/Factory
+
