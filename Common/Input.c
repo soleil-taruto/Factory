@@ -88,6 +88,8 @@ static autoList_t *BackKeyStack;
 
 // ---- all proc pound key ----
 
+#if 0 // îpé~ @ 2022.11.22
+
 #define ALL_PROC_POUND_KEY_FILE "C:\\Factory\\tmp\\AllProcPoundKey.dat"
 
 int ignoreAllProcPoundKey;
@@ -137,6 +139,21 @@ static void CheckAllProcPoundKey(void)
 	}
 	unmutex();
 }
+
+#else
+
+int ignoreAllProcPoundKey;
+
+void setAllProcPoundKey(int key)
+{
+	error_m("Ç±ÇÃã@î\ÇÕîpé~Ç≥ÇÍÇ‹ÇµÇΩÅB");
+}
+static void CheckAllProcPoundKey(void)
+{
+	// noop
+}
+
+#endif
 
 // ----
 
