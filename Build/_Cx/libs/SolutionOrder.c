@@ -43,10 +43,10 @@ autoList_t *GetReferenceSolutions(char *source)
 				foreach (lines, line, index)
 				{
 					if (lineExpICase("/<HintPath><1,,>\\<1,,>\\bin\\Release\\<1,,>.dll/<//HintPath>", line))
-					//                                 ~~~~~                ~~~~~
-					//                                   ^                    ^
-					//                                   |                    |
-					//                                   +--------------------+---- プロジェクト名 (ソリューション名)
+					//                                  ~~~~~                ~~~~~
+					//                                    ^                    ^
+					//                                    |                    |
+					//                                    +--------------------+---- プロジェクト名 (ソリューション名)
 					{
 						char *solution = line + 10;
 						char *p;

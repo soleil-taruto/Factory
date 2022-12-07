@@ -197,13 +197,26 @@ static uint GetVSEditionYear(char *slnFile)
 	memFree(neReadLine(fp));
 	line = neReadLine(fp);
 
-	     if (!strcmp(line, "# Visual C# Express 2008"  )) ret = 2008;
-	else if (!strcmp(line, "# Visual C++ Express 2008" )) ret = 2008;
-	else if (!strcmp(line, "# Visual C# Express 2010"  )) ret = 2010;
-	else if (!strcmp(line, "# Visual C++ Express 2010" )) ret = 2010;
-	else if (!strcmp(line, "# Visual Studio Version 16")) ret = 2019;
+	if (lineExp("# Visual <1,,\x21\x7e> Express 2008", line))
+	{
+		ret = 2008;
+	}
+	else if (lineExp("# Visual <1,,\x21\x7e> Express 2010", line))
+	{
+		ret = 2010;
+	}
+	else if (!strcmp(line, "# Visual Studio Version 16"))
+	{
+		ret = 2019;
+	}
+	else if (!strcmp(line, "# Visual Studio Version 17"))
+	{
+		ret = 2022;
+	}
 	else
+	{
 		error_m("Unknown VS Edition");
+	}
 
 	memFree(line);
 	fileClose(fp);
