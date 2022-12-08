@@ -293,7 +293,9 @@ int GS_TrySend(void) // ret: ? ê¨å˜
 		removeFile(successfulFile);
 	}
 	else
+	{
 		retval = 0;
+	}
 
 	if (existFile(errorLogFile))
 	{

@@ -20,7 +20,9 @@ static void PrintIsPrime(uint64 value)
 			cout("%I64u\n", value);
 	}
 	else
+	{
 		cout("%I64u %s prime.\n", value, IsPrime_R(value) ? "is" : "is not");
+	}
 }
 static void PrimeRange(uint64 minval, uint64 maxval)
 {

@@ -153,7 +153,9 @@ static char *MakeDivList(uint depth, int noIndex)
 				releaseAutoBlock(pab);
 			}
 			else
+			{
 				hash = strx("unknown (not calculated)");
+			}
 
 			updateFindData(path);
 			stamp = makeStamp(lastFindData.time_write);

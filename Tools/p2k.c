@@ -26,7 +26,9 @@ static void Phrase2Key(char *phrase1, char *phrase2)
 		file = combine_cx(KEYFILESDIR, file);
 	}
 	else
+	{
 		file = strx(OutputFile);
+	}
 
 	crc = crc8UpdateBlock(crc, directGetBuffer(hash1), 16);
 	crc = crc8UpdateBlock(crc, directGetBuffer(hash2), 16);

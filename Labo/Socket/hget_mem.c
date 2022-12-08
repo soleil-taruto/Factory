@@ -111,8 +111,9 @@ retry:
 			memFree(outStr);
 		}
 		else
+		{
 			writeBinary(outFile, retContent);
-
+		}
 		releaseAutoBlock(retContent);
 	}
 	else

@@ -323,8 +323,9 @@ static char *c_GetTempSuffix(void)
 		counter++;
 	}
 	else
+	{
 		ret = xcout("%I64u", nextCommonCount());
-
+	}
 	return ret;
 }
 char *makeTempPath(char *ext) // ext: NULL ok
@@ -348,7 +349,9 @@ char *makeTempPath(char *ext) // ext: NULL ok
 			memFree(tmpDir);
 		}
 		else
+		{
 			pbase = "C:\\Factory\\tmp\\";
+		}
 	}
 	for (; ; )
 	{
@@ -641,7 +644,9 @@ static void ReadSysArgs(void)
 			cout("majorOutputLinePrefix: %s\n", majorOutputLinePrefix);
 		}
 		else
+		{
 			argi++;
+		}
 	}
 }
 static autoList_t *GetArgs(void)

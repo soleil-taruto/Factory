@@ -27,7 +27,9 @@ static void CheckFile(char *file)
 			chr = backedChr;
 		}
 		else
+		{
 			chr = readChar(fp);
+		}
 
 		if (chr == EOF)
 			break;
@@ -44,7 +46,9 @@ static void CheckFile(char *file)
 				num_cr++;
 			}
 			else
+			{
 				num_crlf++;
+			}
 		}
 		else if (chr == '\n')
 		{
@@ -89,7 +93,9 @@ static void ConvFile(char *file)
 			chr = backedChr;
 		}
 		else
+		{
 			chr = readChar(rfp);
+		}
 
 		if (chr == EOF)
 			break;

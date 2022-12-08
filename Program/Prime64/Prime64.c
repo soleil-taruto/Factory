@@ -129,8 +129,9 @@ static void PrimeRange(uint64 minval, uint64 maxval, char *outFile, char *cancel
 		minval = 3;
 	}
 	else
+	{
 		minval |= 1;
-
+	}
 	m_minim(maxval, PRIME_MAX);
 
 	if (IsShortRange(minval, maxval))
@@ -177,7 +178,9 @@ static void PrimeRange(uint64 minval, uint64 maxval, char *outFile, char *cancel
 							divrenflg = 1;
 						}
 						else
+						{
 							outFile = toCreatablePath(outFile, IMAX);
+						}
 
 						fp = fileOpen(outFile, "wb");
 					}
@@ -218,8 +221,9 @@ static void PrimeCount(uint64 minval, uint64 maxval, char *outFile, char *cancel
 		minval = 3;
 	}
 	else
+	{
 		minval |= 1;
-
+	}
 	m_minim(maxval, PRIME_MAX);
 
 	if (IsShortRange(minval, maxval))

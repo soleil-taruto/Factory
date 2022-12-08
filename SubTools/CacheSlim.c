@@ -82,7 +82,9 @@ static void SlimFile(FileInfo_t *i)
 		removeFile(i->File);
 	}
 	else
+	{
 		cout("キープします。\n");
+	}
 }
 static void SlimFiles(void)
 {

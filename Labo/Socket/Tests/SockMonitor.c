@@ -26,8 +26,9 @@ static uint NextBit(void)
 		RBitIndex++;
 	}
 	else
+	{
 		bit = 0;
-
+	}
 	return bit;
 }
 static uint NextValue(uint bitSize, char *name) // bitSize: 1-

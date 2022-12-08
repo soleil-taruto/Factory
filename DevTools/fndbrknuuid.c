@@ -24,7 +24,9 @@ static void ToNoJpn(char *p)
 			*p++ = 'J';
 		}
 		else
+		{
 			p++;
+		}
 	}
 }
 

@@ -89,7 +89,9 @@ static void GetMessageRange(Frtwv_t *i)
 			GMR_NextNo = lastNo + 1;
 		}
 		else
+		{
 			goto noMessages;
+		}
 	}
 	else
 	{

@@ -76,7 +76,9 @@ static autoList_t *RecvMail(SockStream_t *ss, uint mailno)
 				break;
 		}
 		else
+		{
 			addElement(lines, (uint)line);
+		}
 	}
 	cout("szCount: %u\n", szCount);
 

@@ -79,7 +79,9 @@ autoList_t *tokenizeMinMax(char *line, int delimiter, uint nummin, uint nummax, 
 			setSize(token, 0);
 		}
 		else
+		{
 			addByte(token, *p);
+		}
 	}
 	if (*p)
 		ab_addLine(token, p);

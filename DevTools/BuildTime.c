@@ -80,8 +80,9 @@ static void ShowBuildTime(char *trgPath)
 		releaseDim(paths, 1);
 	}
 	else
+	{
 		ShowBuildTime_File(trgPath, trgPath);
-
+	}
 	memFree(trgPath);
 }
 int main(int argc, char **argv)

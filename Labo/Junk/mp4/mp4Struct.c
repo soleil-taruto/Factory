@@ -81,7 +81,9 @@ static void PrintMp4Struct(char *path)
 		releaseDim(files, 1);
 	}
 	else
+	{
 		PrintMp4Struct_File(path);
+	}
 }
 int main(int argc, char **argv)
 {

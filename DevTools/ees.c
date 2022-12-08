@@ -118,8 +118,9 @@ static void EditSame_LSS(int userSelectMode)
 			baseFileIndex = index;
 	}
 	else
+	{
 		baseFileIndex = 0;
-
+	}
 	baseFile = (char *)desertElement(files, baseFileIndex);
 	cout("%s %s <•ÒW‘ÎÛ>\n", c_md5_makeHexHashFile(baseFile), baseFile);
 

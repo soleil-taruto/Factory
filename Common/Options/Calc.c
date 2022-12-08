@@ -367,7 +367,9 @@ calcOperand_t *makeCalcOperand(char *line)
 				break;
 		}
 		else
+		{
 			continue; // Unknown char
+		}
 
 		if (fndPeriod)
 			op->DecIndex++;
@@ -735,8 +737,9 @@ static uint GetLogarithm(char *line1, char *line2, char **p_expLine, uint radix)
 		exponent++;
 	}
 	else
+	{
 		memFree(rLine);
-
+	}
 	*p_expLine = qLine;
 	return exponent;
 }
@@ -774,7 +777,9 @@ uint calcLogarithm(char *line1, char *line2, uint radix) // line2: ’ê, set calcL
 			memFree(expLine);
 		}
 		else
+		{
 			calcLastMarume = 1;
+		}
 	}
 	memFree(line1);
 	memFree(line2);

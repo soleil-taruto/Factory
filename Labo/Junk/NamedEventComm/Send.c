@@ -32,7 +32,9 @@ static void DoSendBit(uint bit)
 		result = 1;
 	}
 	else
+	{
 		result = 0;
+	}
 
 	handleClose(evReady);
 	handleClose(evBit_0);

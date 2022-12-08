@@ -79,8 +79,9 @@ static void DoFRenum(void)
 			addElement(destFiles, (uint)dest);
 		}
 		else
+		{
 			file[0] = '\0';
-
+		}
 		no += NumStep;
 	}
 	trimLines(files);

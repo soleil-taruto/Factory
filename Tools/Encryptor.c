@@ -119,8 +119,9 @@ int main(int argc, char **argv)
 				retval = 1;
 			}
 			else
+			{
 				retval = rngcphrDecryptFile(outfile, ktlst);
-
+			}
 			cout("Done!\n");
 			cout("\n");
 

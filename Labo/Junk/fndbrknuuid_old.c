@@ -106,7 +106,9 @@ static void FindBrokenUUID(char *path)
 		releaseDim(files, 1);
 	}
 	else
+	{
 		FindBrokenUUID_File(path);
+	}
 }
 int main(int argc, char **argv)
 {

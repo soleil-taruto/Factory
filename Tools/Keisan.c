@@ -359,8 +359,9 @@ readArgs:
 			memFree(tmp);
 		}
 		else
+		{
 			cout("%s\n", ans);
-
+		}
 		memFree(op1);
 		memFree(op2);
 

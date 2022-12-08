@@ -120,7 +120,9 @@ static void Perform(int sock)
 		SockSendBlock(ss, directGetBuffer(Content), getSize(Content));
 	}
 	else
+	{
 		SockSendLine(ss, "");
+	}
 
 	SockFlush(ss);
 
@@ -139,7 +141,9 @@ static void Perform(int sock)
 		csize = strlen((char *)content) + 1;
 	}
 	else
+	{
 		httpRecvRequestMax(ss, &header, &content, &csize, RetContentSizeMax);
+	}
 
 	httpRecvRequestFirstWaitDisable = 0;
 	memFree(header);

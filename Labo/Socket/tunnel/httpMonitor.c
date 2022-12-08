@@ -53,8 +53,9 @@ static char *GetNextStamp(void)
 		}
 	}
 	else
+	{
 		stamp = makeCompactStamp(NULL);
-
+	}
 	return xcout("%s%03u", stamp, counter);
 }
 static uint GetHeaderEndPos(autoBlock_t *buff, uint startPos)
@@ -257,7 +258,9 @@ static uint GetHeaderAndBody(autoBlock_t *buff, autoBlock_t *message) // ret: 0 
 				endPos = GetHeaderEndPos(buff, endPos); // trailer ”jŠü
 		}
 		else
+		{
 			endPos = ReadBody(buff, endPos, ContentLength, message);
+		}
 	}
 	return endPos;
 }

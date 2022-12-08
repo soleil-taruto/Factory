@@ -340,7 +340,9 @@ retry:
 					line2JLine(pLine = strx(line), 1, 1, 0, 1);
 				}
 				else
+				{
 					pLine = lineToPrintLine(line, 0);
+				}
 
 				cout("%s\n", pLine);
 

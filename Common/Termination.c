@@ -111,8 +111,9 @@ void error2(char *source, uint lineno, char *function, char *message)
 			}
 		}
 		else
+		{
 			mbMessage = xcout("An error has occurred @ %s (%u) %s", source, lineno, function);
-
+		}
 		writeOneLine(vbsfile, strw = xcout("MsgBox \"%s\", 4096 + 16, \"Error\"", mbMessage));
 		memFree(strw);
 		memFree(mbMessage);

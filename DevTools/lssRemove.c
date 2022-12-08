@@ -37,8 +37,9 @@ static void RemoveEx(autoList_t *paths)
 			removeDir(path);
 		}
 		else
+		{
 			moveFile(path, destPath);
-
+		}
 		memFree(destPath);
 	}
 	memFree(destDir);

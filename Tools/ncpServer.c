@@ -291,8 +291,9 @@ static int Perform(char *prmFile, char *ansFile)
 				removeDir(path);
 			}
 			else
+			{
 				moveFile(path, subPath);
-
+			}
 			retval = 1;
 		}
 	}

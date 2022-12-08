@@ -630,7 +630,9 @@ int isFairHrefPath(char *path, int pathDelim) // pathDelim: "/\\"
 		tokens = tokenizeYen(path);
 	}
 	else
+	{
 		error();
+	}
 
 	foreach (tokens, token, index)
 		if (strcmp(token, ".") && strcmp(token, "..") && !isFairLocalPath(token, 0))
@@ -684,7 +686,9 @@ char *toFairFullPathFltr(char *path) // path Ç™ïsê≥Ç»èÍçáÇÕ error();
 		memFree(wkcwd);
 	}
 	else
+	{
 		eraseChar(path);
+	}
 
 	if (*path)
 	{
@@ -692,7 +696,9 @@ char *toFairFullPathFltr(char *path) // path Ç™ïsê≥Ç»èÍçáÇÕ error();
 		ptkns = tokenize(path, '/');
 	}
 	else
+	{
 		ptkns = newList();
+	}
 
 	for (ptknidx = 0; ptknidx < getCount(ptkns); )
 	{
@@ -712,7 +718,9 @@ char *toFairFullPathFltr(char *path) // path Ç™ïsê≥Ç»èÍçáÇÕ error();
 			memFree((char *)desertElement(ptkns, ptknidx));
 		}
 		else
+		{
 			ptknidx++;
+		}
 	}
 	foreach (ptkns, ptkn, ptknidx)
 	{

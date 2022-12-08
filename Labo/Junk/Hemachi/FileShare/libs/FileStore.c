@@ -62,8 +62,9 @@ static int CheckDiskFreeSpace(void) // ret: kept
 		cout("chkSpan: %u\n", chkSpan);
 	}
 	else
+	{
 		retval = 1;
-
+	}
 	cout("retval: %d\n", retval);
 	return retval;
 }
@@ -149,10 +150,14 @@ void KeepStoreDirSize(uint64 writeSize)
 			estRemSize = 0;
 		}
 		else
+		{
 			estRemSize = HFS_StoreDirSizeMax - dirSize;
+		}
 	}
 	else
+	{
 		estRemSize -= writeSize;
+	}
 
 	cout("estRemSize_2: %I64u\n", estRemSize);
 	cout("KeepStoreDirSize() End\n");
@@ -294,11 +299,14 @@ static void DownloadPart(char *realPath, FILE *wfp, uint64 startPos, uint readSi
 			fileClose(rfp);
 		}
 		else
+		{
 			cout("FAULT: startPos OUT OF RANGE!\n");
+		}
 	}
 	else
+	{
 		cout("FAULT: IS NOT EXIST!\n");
-
+	}
 	cout("DownloadPart() End\n");
 }
 static void Prv_RemoveFile(char *realPath)
@@ -442,7 +450,9 @@ int HFS_Perform(char *prmFile, char *ansFile)
 		HFS_MutexLeave();
 	}
 	else
+	{
 		cout("Unknown Command!\n");
+	}
 
 	memFree(command);
 	memFree(realPath);

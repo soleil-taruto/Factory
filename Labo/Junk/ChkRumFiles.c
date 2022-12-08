@@ -34,7 +34,9 @@ static void CheckFiles(void)
 				addElement(ngFiles, (uint)makeFullPath(file));
 			}
 			else
+			{
 				cout("ok\n");
+			}
 		}
 		else
 		{

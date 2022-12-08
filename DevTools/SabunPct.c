@@ -56,8 +56,9 @@ static char *GetWLine_File_File(char *file1, char *file2, char *wPath)
 			ret = xcout("%I64u / %I64u = %f*%s", diffCount, size1, (double)diffCount / size1, wPath);
 	}
 	else
+	{
 		ret = xcout("Different Size*%s", wPath);
-
+	}
 	return ret;
 }
 static void SabunPct(char *dir1, char *dir2)

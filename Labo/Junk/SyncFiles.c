@@ -252,7 +252,9 @@ static void SyncFiles(autoList_t *dirs)
 			cout("auto delete ok.\n");
 		}
 		else
+		{
 			cout("auto delete cancelled.\n");
+		}
 	}
 }
 

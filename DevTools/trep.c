@@ -204,7 +204,9 @@ readArgs:
 					memFree(srcPtn);
 				}
 				else
+				{
 					knownSrcPtn = srcPtn;
+				}
 			}
 
 			if (!isChangeableRoot(file, currDir))

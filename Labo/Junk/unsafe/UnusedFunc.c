@@ -166,8 +166,9 @@ static void ProcCppFile(char *file, int headerFlag)
 		removeFile(escFile);
 	}
 	else
+	{
 		moveFile(escFile, file);
-
+	}
 	releaseDim(Lines, 1);
 	Lines = NULL;
 

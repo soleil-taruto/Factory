@@ -50,7 +50,9 @@ static void Search(char *rootDir)
 			memFree(revRootDir);
 		}
 		else
+		{
 			Search(dir);
+		}
 	}
 	releaseDim(dirs, 1);
 }

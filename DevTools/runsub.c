@@ -108,7 +108,9 @@ readArgs:
 			insertElement(dirs, 0, (uint)strx(rootDir));
 	}
 	else
+	{
 		dirs = createOneElement((uint)strx(rootDir));
+	}
 
 	foreach (dirs, dir, index)
 	{

@@ -14,7 +14,9 @@ static char *GetFqdn(char *mailAddr)
 			p = mailAddr;
 	}
 	else
+	{
 		p = "";
+	}
 
 	if (!*p)
 		p = "default";
@@ -169,7 +171,9 @@ void PrintMailEntity(autoBlock_t *mail)
 		line = toPrintLine_x(buff, 1);
 	}
 	else
+	{
 		line = toPrintLine(mail, 1);
+	}
 
 	cout(
 		"mail-size: %u bytes\n"

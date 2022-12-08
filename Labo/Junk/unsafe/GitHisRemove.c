@@ -120,7 +120,9 @@ static void Main2(char *repositoryName, int manualMode)
 			cout("続行します。\n");
 		}
 		else
+		{
 			cout("続行します。(自動)\n");
+		}
 
 		foreach (files, file, index)
 		{

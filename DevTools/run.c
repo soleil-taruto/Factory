@@ -30,7 +30,9 @@ static char *ToPrms(autoList_t *args)
 			buff = addChar(buff, '"');
 		}
 		else
+		{
 			buff = addLine(buff, arg);
+		}
 	}
 	return buff;
 }
@@ -142,7 +144,9 @@ int main(int argc, char **argv)
 		memFree(wd);
 	}
 	else
+	{
 		execute_x(xcout("%s%s", program, prms));
+	}
 
 	memFree(program);
 	memFree(prms);

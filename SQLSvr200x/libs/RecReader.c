@@ -28,7 +28,9 @@ static autoList_t *GetColumnWidthList(char *bdrLine)
 			cw = 0;
 		}
 		else
+		{
 			cw++;
+		}
 	}
 	addElement(cwList, cw);
 

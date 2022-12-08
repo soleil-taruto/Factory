@@ -198,7 +198,9 @@ static void DecodeUrl(char *url)
 			rp += 2;
 		}
 		else
+		{
 			*wp = *rp;
+		}
 
 		// HACK: '+' -> ' ' ‚µ‚È‚­‚Ä‚¢‚¢‚Ì‚©H
 

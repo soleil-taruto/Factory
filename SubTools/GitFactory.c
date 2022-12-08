@@ -176,8 +176,10 @@ static void GitFactory(char *rDir, char *wDir, int allowOverwrite)
 		CleanupGitDir(wDir);
 	}
 	else
+	{
 		error(); // zantei
 //		createPath(wDir, 'D');
+	}
 
 	antiSubversion = 1;
 	files = lss(rDir);

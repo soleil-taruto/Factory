@@ -916,7 +916,9 @@ void copyPath(char *rPath, char *wPath)
 		copyDir(rPath, wPath);
 	}
 	else
+	{
 		copyFile(rPath, wPath);
+	}
 }
 void movePath(char *rPath, char *wPath)
 {
@@ -930,7 +932,9 @@ void movePath(char *rPath, char *wPath)
 		removeDir(rPath);
 	}
 	else
+	{
 		moveFile(rPath, wPath);
+	}
 }
 
 void setFileSizeFP(FILE *fp, uint64 size)

@@ -166,7 +166,9 @@ static int Perform(char *prmFile, char *ansFile)
 				stamp = realStamp;
 			}
 			else
+			{
 				memFree(realStamp);
+			}
 		}
 		if (getCount(TimeLine)) // ‘O‚Ì”­Œ¾‚Æ“¯‚¶E‚æ‚è‰ß‹‚É‚È‚ç‚È‚¢‚æ‚¤‚É‹¸³‚·‚éB
 		{
@@ -253,7 +255,9 @@ static int Perform(char *prmFile, char *ansFile)
 				HeartbeatLoginLogoutSerial++;
 			}
 			else
+			{
 				cout("™™™ message not changed [%s]\n", ident);
+			}
 
 			memFree(member->Message);
 			member->Message = strx(message);

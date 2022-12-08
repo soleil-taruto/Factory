@@ -133,8 +133,9 @@ static uint StrToSec(char *str)
 		sec = toValue(str) * 60 + toValue(p);
 	}
 	else
+	{
 		sec = toValue(str);
-
+	}
 	memFree(str);
 	return sec;
 }

@@ -194,7 +194,9 @@ copyFile_cx(file, toCreatableTildaPath(combine("C:\\temp", getLocal(file)), IMAX
 						deletedFlag = 1;
 					}
 					else
+					{
 						releaseDim(emLines, 1);
+					}
 
 					cout("TRY-ERASE-MEMBER.2\n");
 				}

@@ -166,7 +166,9 @@ static void MakeUploadScript(char *path, char *svrPath, int intoSubDirMode, char
 		releaseDim(files, 1);
 	}
 	else
+	{
 		AddToScript("UP", path, svrPath, NULL); // ƒtƒ@ƒCƒ‹‚Æ‚µ‚Ä
+	}
 
 	CloseScript();
 

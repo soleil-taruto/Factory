@@ -150,7 +150,9 @@ static void EraseNoChangeFiles(char *rRootDir, char *wRootDir, autoList_t *files
 			setElement(files, index, 0);
 		}
 		else
+		{
 			cout("š•ÏXƒAƒŠš\n");
+		}
 
 		memFree(rFile);
 		memFree(wFile);

@@ -41,8 +41,9 @@ static int DS_IsSameFile(char *file1, char *file2)
 		removeFile_x(tmpFile2);
 	}
 	else
+	{
 		ret = isSameFile(file1, file2);
-
+	}
 	return ret;
 }
 static void DoSearch(void)

@@ -106,8 +106,9 @@ static void FindDiffEnd(void)
 		swapped = 1;
 	}
 	else
+	{
 		swapped = 0;
-
+	}
 	FindSameArea();
 	FindSameBegin();
 

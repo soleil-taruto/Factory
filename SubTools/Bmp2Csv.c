@@ -27,7 +27,9 @@ static void Bmp2Csv(char *rFile, char *wFile)
 				addElement(wRow, (uint)xcout("%u", dot >> 8 * 0 & 0xff));
 			}
 			else
+			{
 				addElement(wRow, (uint)xcout("%06x", dot));
+			}
 		}
 		addElement(csv, (uint)wRow);
 	}

@@ -423,5 +423,7 @@ readArgs:
 		MirrorDir(clientDir, serverDir, 'D');
 	}
 	else
+	{
 		cout("不明なコマンド\n");
+	}
 }

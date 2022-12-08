@@ -73,8 +73,9 @@ int main(int argc, char **argv)
 				cout("+----------------------------+\n");
 			}
 			else
+			{
 				cout("\rアップデートは完了しました。\n");
-
+			}
 			clearWaitKey(5000); // 見えるように
 		}
 		memFree(targetDir);

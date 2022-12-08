@@ -73,8 +73,9 @@ static int ReadLine(FILE *rfp)
 			p += 2;
 		}
 		else
+		{
 			chr = *p;
-
+		}
 		addByte(RawData, chr);
 	}
 	return 1;

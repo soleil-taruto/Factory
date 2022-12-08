@@ -61,7 +61,9 @@ static void ParseUrl(char *url)
 		m_range(PortNo, 1, 65535);
 	}
 	else
+	{
 		PortNo = 80;
+	}
 }
 static void WebMon(char *url)
 {

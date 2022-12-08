@@ -30,7 +30,9 @@ static void Collect(int keepHierarchy)
 			createPath(outPath, 'X');
 		}
 		else
+		{
 			outPath = toCreatablePath(combine(outDir, getLocal(path)), index + 10); // index + margin
+		}
 
 		cout("< %s\n", path);
 		cout("> %s\n", outPath);

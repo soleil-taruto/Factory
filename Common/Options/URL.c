@@ -65,7 +65,9 @@ char *urlDecoder(char *url)
 			p += 2;
 		}
 		else
+		{
 			addByte(buff, *p);
+		}
 	}
 	url = unbindBlock2Line(buff);
 	url = ChgEnc_SJISToUTF8_x(url, 1);

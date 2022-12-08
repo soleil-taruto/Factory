@@ -37,7 +37,9 @@ static char *Request(char *prmText)
 		memFree(ansFile);
 	}
 	else
+	{
 		ansText = NULL;
+	}
 
 	removeFile(prmFile);
 	memFree(prmFile);

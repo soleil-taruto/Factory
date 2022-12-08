@@ -175,8 +175,9 @@ static autoBlock_t *InputPassphrase2KeyBundle(char *passEx)
 		}
 	}
 	else
+	{
 		sha512_makeHashLine(passphrase);
-
+	}
 	sha512_makeHexHash();
 
 	cout("(%02x) %s\n", crc8CheckBlock(sha512_hash, 64), sha512_hexHash);

@@ -190,8 +190,9 @@ static uint InputVersion(void) // ret: 0 == cancel, 1 Å` 999 == "0.01" Å` "9.99"
 		m_range(version, 0, 999);
 	}
 	else
+	{
 		version = coil_esc ? 0 : VER_CALENDAR;
-
+	}
 	memFree(sVersion);
 	return version;
 }
@@ -262,8 +263,9 @@ static char *MakeRev(void)
 		coExecute_x(xcout("C:\\Factory\\DevTools\\rev.exe //O \"%s\" /P %u", revFile, t));
 	}
 	else
+	{
 		coExecute_x(xcout("C:\\Factory\\DevTools\\rev.exe //O \"%s\" /P", revFile));
-
+	}
 	rev = readFirstLine(revFile);
 	errorCase(!lineExp("<4,09>.<3,09>.<5,09>", rev)); // 2bs
 	replaceChar(rev, '.', '0');
@@ -440,8 +442,9 @@ static void PackZipFileEx_K1D(char *zipFile, char *srcDir, int srcDirRmFlag, cha
 			cout("baseName: %s -> %s\n", BASENAME_AUTO, tmpbn);
 		}
 		else
+		{
 			tmpbn = strx(baseName);
-
+		}
 		destDir = combine_xc(destDir, tmpbn);
 		memFree(tmpbn);
 
@@ -456,7 +459,9 @@ static void PackZipFileEx_K1D(char *zipFile, char *srcDir, int srcDirRmFlag, cha
 		removeDir(srcDir);
 	}
 	else
+	{
 		copyDir(srcDir, destDir);
+	}
 
 	if (version)
 		ReplaceVersion(destDir, version);
@@ -528,8 +533,9 @@ static char *x_ProjNameFilter(char *projName)
 		projName = strr(tmppn);
 	}
 	else
+	{
 		projName = strx(projName);
-
+	}
 	return projName;
 }
 int main(int argc, char **argv)

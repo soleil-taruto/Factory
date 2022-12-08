@@ -221,8 +221,10 @@ char *strchrNext(char *line, int findChr)
 
 	p = strchr(line, findChr);
 
-	if (p) p++;
-	else  p = strchr(line, '\0');
+	if (p)
+		p++;
+	else
+		p = strchr(line, '\0');
 
 	return p;
 }
@@ -893,13 +895,15 @@ char *toknext(char *str, char *delims)
 			p++;
 		}
 		else
+		{
 			p = NULL;
-
+		}
 		TokPtr = p;
 	}
 	else
+	{
 		TokPtr = NULL;
-
+	}
 	return ret;
 }
 

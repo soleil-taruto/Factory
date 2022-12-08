@@ -524,7 +524,9 @@ static void FileHistory(char *storeDir, int fromLastRevisionFlag, int lastFileOn
 		addElement(srchRevisions, getLastElement(revisions));
 	}
 	else
+	{
 		srchRevisions = copyAutoList(revisions);
+	}
 
 	if (lastFileOnly)
 		reverseElements(revisions);
@@ -1248,8 +1250,9 @@ static void Rum(char *dir)
 		}
 	}
 	else
+	{
 		Commit(dir);
-
+	}
 	memFree(dir);
 }
 int main(int argc, char **argv)

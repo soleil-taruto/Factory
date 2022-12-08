@@ -23,7 +23,9 @@ char *URLToPath(char *url) // ret: 表示可能, NULL == 不正なパス
 			copyLine(url, p + 1);
 	}
 	else
+	{
 		copyLine(url, url + 1); // 先頭の '/' 除去
+	}
 
 	if (endsWithICase(url, "?mode=download"))
 	{
@@ -31,7 +33,9 @@ char *URLToPath(char *url) // ret: 表示可能, NULL == 不正なパス
 		strchr(url, '\0')[-14] = '\0';
 	}
 	else
+	{
 		UTP_DownloadMode = 0;
+	}
 
 	if (endsWithICase(url, "?mode=html"))
 	{
@@ -39,7 +43,9 @@ char *URLToPath(char *url) // ret: 表示可能, NULL == 不正なパス
 		strchr(url, '\0')[-10] = '\0';
 	}
 	else
+	{
 		UTP_HtmlMode = 0;
+	}
 
 	if (endsWith(url, "/"))
 	{
@@ -47,7 +53,9 @@ char *URLToPath(char *url) // ret: 表示可能, NULL == 不正なパス
 		strchr(url, '\0')[-1] = '\0';
 	}
 	else
+	{
 		UTP_EndSlash = 0;
+	}
 
 	memFree(UTP_Path);
 	UTP_Path = strx(url);
@@ -141,7 +149,9 @@ char *LiteUrlEncoder(char *name)
 			ab_addLine_x(buff, xcout("%%%02x", *p));
 		}
 		else
+		{
 			addByte(buff, *p);
+		}
 	}
 	return unbindBlock2Line(buff);
 }

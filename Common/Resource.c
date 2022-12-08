@@ -204,7 +204,9 @@ autoList_t *readResourceLinesList(char *file)
 			store = newList();
 		}
 		else
+		{
 			addElement(store, (uint)line);
+		}
 	}
 	addElement(linesList, (uint)store);
 	releaseAutoList(lines);

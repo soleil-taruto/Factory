@@ -244,7 +244,9 @@ static void GetNextEvals(uint *dest) // 次手の評価リスト -> dest
 			EraseStone(x); // 復帰
 		}
 		else
+		{
 			dest[x] = 0;
+		}
 	}
 	Depth--; // 復帰
 }

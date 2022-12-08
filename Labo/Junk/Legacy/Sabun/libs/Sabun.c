@@ -255,8 +255,9 @@ int sabunUpdate(char *sabunFile, char *targetDir) // ret: ? アップデートした。対
 			releaseAutoBlock(sabun);
 		}
 		else
+		{
 			error();
-
+		}
 		memFree(file);
 	}
 

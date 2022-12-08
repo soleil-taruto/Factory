@@ -53,8 +53,9 @@ uint64 Date2Day(uint y, uint m, uint d)
 		day += m * 31;
 	}
 	else
+	{
 		day += (m - 1) * 31;
-
+	}
 	day += d - 1;
 	return day;
 }

@@ -18,7 +18,9 @@ void CRLF_CheckFile(char *file, uint *p_num_cr, uint *p_num_crlf, uint *p_num_lf
 			chr = backedChr;
 		}
 		else
+		{
 			chr = readChar(fp);
+		}
 
 		if (chr == EOF)
 			break;
@@ -35,7 +37,9 @@ void CRLF_CheckFile(char *file, uint *p_num_cr, uint *p_num_crlf, uint *p_num_lf
 				num_cr++;
 			}
 			else
+			{
 				num_crlf++;
+			}
 		}
 		else if (chr == '\n')
 		{
@@ -84,7 +88,9 @@ void CRLF_ConvFile(char *rFile, char *wFile, char *newLine) // newLine: "\r", "\
 			chr = backedChr;
 		}
 		else
+		{
 			chr = readChar(rfp);
+		}
 
 		if (chr == EOF)
 			break;

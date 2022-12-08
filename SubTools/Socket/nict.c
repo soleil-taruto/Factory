@@ -65,7 +65,9 @@ static int NictPerform(int sock, uint prm_dummy)
 			removeBlank(line);
 		}
 		else
+		{
 			line = strx("<NULL>");
+		}
 
 		httpReleaseChunkedRecver(recver);
 	}

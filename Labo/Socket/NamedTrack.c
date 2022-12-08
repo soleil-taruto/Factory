@@ -574,8 +574,9 @@ readArgs:
 		cout("トラック名: %s\n", TrackName);
 	}
 	else
+	{
 		cout("サーバーモード\n");
-
+	}
 	cout("待ち受け港: %u\n", Port);
 	cout("最大接続数: %u\n", connectmax);
 

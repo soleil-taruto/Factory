@@ -116,12 +116,16 @@ void writeCSVFile(char *file, autoList_t *table)
 						writeChar(fp, '"');
 					}
 					else
+					{
 						writeChar(fp, *p);
+					}
 				}
 				writeChar(fp, '"');
 			}
 			else
+			{
 				writeToken(fp, cell);
+			}
 		}
 		writeChar(fp, '\n');
 	}

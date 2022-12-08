@@ -267,8 +267,9 @@ readArgs:
 		cout("•ªŠò–¼: %s\n", Divider.Name);
 	}
 	else
+	{
 		cout("•ª”zIƒ‚[ƒh\n");
-
+	}
 	cout("‘Ò‚¿ó‚¯`: %u\n", portno);
 	cout("Å‘åÚ‘±”: %u\n", connectmax);
 

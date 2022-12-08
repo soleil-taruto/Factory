@@ -22,7 +22,9 @@ static void Phrase2Key(char *phrase)
 		file = combine_cx(KEYFILESDIR, file);
 	}
 	else
+	{
 		file = strx(OutputFile);
+	}
 
 	sha512_makeHashLine(phrase);
 	sha512_makeHexHash();

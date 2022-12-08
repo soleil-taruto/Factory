@@ -117,7 +117,9 @@ static void EncryptFltr(autoBlock_t *buff, uint encCounter)
 		releaseAutoBlock(dest);
 	}
 	else
+	{
 		EncryptFltr_Real(buff, encCounter);
+	}
 }
 static void DecryptFltr(autoBlock_t *buff, uint decInfo)
 {

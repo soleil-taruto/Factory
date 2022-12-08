@@ -176,7 +176,9 @@ static void PerformTh(int sock, char *strip)
 				fwdPortNo = toValue(p + 1);
 			}
 			else
+			{
 				fwdPortNo = FwdPortNo;
+			}
 		}
 
 		cout("リダイレクトされた転送先は [%s] ポート番号 %u です。\n", fwdHost, fwdPortNo);

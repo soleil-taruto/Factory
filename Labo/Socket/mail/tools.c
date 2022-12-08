@@ -14,7 +14,9 @@ static char *GetFqdn(char *mailAddr)
 			p = mailAddr;
 	}
 	else
+	{
 		p = "";
+	}
 
 	if (!*p)
 		p = "default";

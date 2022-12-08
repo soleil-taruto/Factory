@@ -242,7 +242,9 @@ void UTF16ToUTF8File(char *rFile, char *wFile)
 			writeChar(wfp, chr & 0xff);
 		}
 		else
+		{
 			writeChar(wfp, chr);
+		}
 	}
 	fileClose(rfp);
 	fileClose(wfp);

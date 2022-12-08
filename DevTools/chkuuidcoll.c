@@ -163,7 +163,9 @@ static void CollectUUIDByPath(char *path)
 		releaseDim(files, 1);
 	}
 	else
+	{
 		CollectUUIDByFile(path);
+	}
 }
 static void CollectUUID(void)
 {
@@ -180,7 +182,9 @@ static void CollectUUID(void)
 		}
 	}
 	else
+	{
 		CollectUUIDByPath(c_dropDirFile());
+	}
 }
 static void DispAllProject(void)
 {

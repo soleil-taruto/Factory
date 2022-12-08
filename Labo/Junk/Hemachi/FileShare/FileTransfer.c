@@ -99,7 +99,9 @@ static int Perform(void)
 		retval = 0;
 	}
 	else
+	{
 		retval = HFS_UnpadFile(AnswerFile, 1);
+	}
 
 	AnswerFP = fileOpen(AnswerFile, "rb");
 
@@ -337,8 +339,9 @@ static void DownloadFile(char *file, char *svrPath, int autoCreateParentMode)
 		memFree(file);
 	}
 	else
+	{
 		removeFile(midFile);
-
+	}
 	memFree(midFile);
 }
 static void Prv_RemoveFile(char *svrPath)

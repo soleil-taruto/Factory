@@ -66,7 +66,9 @@ static void TryRecv(uint m0, uint m1, uint m2)
 			sleep(millis);
 		}
 		else
+		{
 			millis = 0;
+		}
 
 		if (pulseSec(1, NULL))
 			cmdTitle_x(xcout("Recv - %u", millis));

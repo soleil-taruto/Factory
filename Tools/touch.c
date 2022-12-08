@@ -31,7 +31,9 @@ static void Touch(char *path)
 		releaseDim(files, 1);
 	}
 	else
+	{
 		Touch_File(path);
+	}
 }
 int main(int argc, char **argv)
 {

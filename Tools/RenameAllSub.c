@@ -45,8 +45,9 @@ static int RenumberPaths(autoList_t *paths)
 					q++;
 				}
 				else
+				{
 					*p = '0';
-
+				}
 				rencnt++;
 			}
 		}

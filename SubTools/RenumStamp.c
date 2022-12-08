@@ -107,7 +107,9 @@ static void DoFRenumStmp(void)
 			addElement(destFiles, (uint)dest);
 		}
 		else
+		{
 			file[0] = '\0';
+		}
 	}
 	trimLines(files);
 	errorCase(getCount(files) != getCount(midFiles)); // 2bs

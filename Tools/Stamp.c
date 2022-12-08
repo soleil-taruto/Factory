@@ -113,8 +113,9 @@ static void ApplyStampList(char *stampListFile, char *dir)
 			setFileStamp(file, createTime, accessTime, updateTime);
 		}
 		else
+		{
 			cout("ファイルが存在しないのでスキップします。\n");
-
+		}
 		releaseDim(tokens, 1);
 	}
 	unaddCwd();

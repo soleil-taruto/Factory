@@ -75,12 +75,16 @@ void writeCSVCell(FILE *fp, char *cell)
 				writeChar(fp, '"');
 			}
 			else
+			{
 				writeChar(fp, *p);
+			}
 		}
 		writeChar(fp, '"');
 	}
 	else
+	{
 		writeToken(fp, cell);
+	}
 }
 void writeCSVRow(FILE *fp, autoList_t *row)
 {

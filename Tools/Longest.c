@@ -57,8 +57,9 @@ static void DispLongest(char *path, int ignoreSubDir)
 		insertElement(lines, 0, (uint)makeFullPath(path));
 	}
 	else
+	{
 		lines = readLines(path);
-
+	}
 	DispLongest_Lines_x(lines);
 }
 static void DispLongest_LSS(void)

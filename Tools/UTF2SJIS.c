@@ -167,16 +167,18 @@ static int DoConv2(char *rFile, char *wFile)
 			ret = 0;
 		}
 		else
+		{
 			moveFile(midFile, wFile);
-
+		}
 		removeFile(retFile);
 
 		memFree(midFile);
 		memFree(retFile);
 	}
 	else
+	{
 		DoConv3(rFile, wFile);
-
+	}
 	return ret;
 }
 static void DoConv(autoList_t *files)
@@ -241,7 +243,9 @@ static void DoConv_Path(char *path)
 		releaseDim(files, 1);
 	}
 	else
+	{
 		DoConv_File(path);
+	}
 }
 int main(int argc, char **argv)
 {

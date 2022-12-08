@@ -43,11 +43,14 @@ static uint NextBit(void)
 			RBitIndex = 0;
 		}
 		else
+		{
 			RBitIndex++;
+		}
 	}
 	else
+	{
 		bit = 0;
-
+	}
 	return bit;
 }
 static uint NextValue(uint bitSize)

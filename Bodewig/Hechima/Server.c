@@ -144,8 +144,9 @@ static char *GetPseudoIP(char *name) // ‚È‚ñ‚¿‚á‚Á‚ÄIP‚ğ•Ô‚·B
 			);
 	}
 	else
+	{
 		strcpy(buff, "199.0.99.99");
-
+	}
 	return buff;
 }
 static char *GetIdent(char *name, char *ip)
@@ -349,7 +350,9 @@ static void PerformTh(int sock, char *ip)
 		cout("GET-MEMBERS.2\n");
 	}
 	else
+	{
 		cout("Unknown command!\n");
+	}
 
 	ReleaseSockStream(ss);
 	memFree(command);

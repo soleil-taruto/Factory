@@ -118,8 +118,9 @@ static void MainLoop(void)
 					removeFile(ansFile);
 				}
 				else
+				{
 					moveFile(ansFile, AnswerFile);
-
+				}
 				memFree(ansFile);
 				cout("ANSWER %I64u\n", getFileSize(AnswerFile));
 			}

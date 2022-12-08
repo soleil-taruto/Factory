@@ -71,8 +71,9 @@ static void LoadFile(char *saveDir, char *loadedFile)
 			}
 		}
 		else
+		{
 			copyFile(loadedFile, savedFile);
-
+		}
 		memFree(savedFile);
 	}
 	if (origLoadedFile)

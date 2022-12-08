@@ -183,7 +183,9 @@ static void CamelliaCtr(camellia_keyTable_t *i, autoBlock_t *iv, autoBlock_t *in
 						break;
 			}
 			else
+			{
 				camellia_encrypt(i, eb, eb, 1);
+			}
 		}
 		bout[index] = bin[index] ^ eb[index & 0x0f];
 	}

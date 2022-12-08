@@ -47,8 +47,9 @@ static char *ChangeHeader(char *header) // ret: ? NULL == Ž¸”s
 		nameBgn++;
 	}
 	else
+	{
 		nameBgn = url + 1;
-
+	}
 	nameEnd = strchr(nameBgn, '/');
 
 	if (!nameEnd)

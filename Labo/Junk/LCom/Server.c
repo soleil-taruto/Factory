@@ -40,7 +40,9 @@ static char *RecvEvent(char *line)
 		resLine = value;
 	}
 	else
+	{
 		error();
+	}
 
 	cout("Send: %s\n", resLine);
 

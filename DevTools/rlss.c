@@ -32,8 +32,9 @@ static int IsMatch(char *relPath, autoList_t *searchPtns)
 		}
 	}
 	else
+	{
 		found = 1;
-
+	}
 	memFree(path_a);
 	return found;
 }

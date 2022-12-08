@@ -173,8 +173,9 @@ static int NextQryTokenIs(char *spell)
 		memFree(token);
 	}
 	else
+	{
 		ret = 0;
-
+	}
 	return ret;
 }
 

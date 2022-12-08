@@ -65,8 +65,9 @@ autoList_t *RSTR_LineToValues(char *line, autoList_t *colSpans, int asColName) /
 			p++;
 		}
 		else
+		{
 			errorCase(*p != '\0'); // s‚ª‚Ü‚¾I‚í‚ç‚È‚¢B
-
+		}
 		trimEdge(q, ' ');
 
 		if (asColName)

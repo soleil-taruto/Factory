@@ -144,7 +144,8 @@ int main(int argc, char **argv)
 		PublicToMemory();
 	}
 	else
+	{
 		error_m("不明なコマンド引数");
-
+	}
 	LOGPOS();
 }

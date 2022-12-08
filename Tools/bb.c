@@ -306,7 +306,9 @@ static void DoMid(char *rFile, uint64 start, uint64 size, char *wFile) // wFile:
 		start = rFileSize - size;
 	}
 	else
+	{
 		m_minim(size, rFileSize - start);
+	}
 
 	rfp = fileOpen(rFile, "rb");
 	fileSeek(rfp, SEEK_SET, start);

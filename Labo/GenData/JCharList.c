@@ -24,7 +24,9 @@ int main(int argc, char **argv)
 				value |= 1u << bit;
 			}
 			else
+			{
 				sBits[bit] = '0';
+			}
 		}
 		sBits[32] = '\0';
 

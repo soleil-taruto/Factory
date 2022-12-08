@@ -83,7 +83,9 @@ static char *GetNamespaceFromLine(char *line)
 		NSWithBracket = 1;
 	}
 	else
+	{
 		NSWithBracket = 0;
+	}
 
 	namespace = UTF8ToSJISText(namespace);
 

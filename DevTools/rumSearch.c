@@ -67,8 +67,9 @@ static void DispRange(sint64 start, sint64 end, sint64 fileSize)
 			}
 		}
 		else
+		{
 			chr = '?'; // ファイルの先頭より前 || ファイルの終端より後
-
+		}
 		cout("%c", chr);
 	}
 }

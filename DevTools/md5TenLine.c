@@ -41,7 +41,9 @@ int main(int argc, char **argv)
 		addElement(files, (uint)strx(path));
 	}
 	else
+	{
 		files = lsFiles(path);
+	}
 
 	sortJLinesICase(files);
 

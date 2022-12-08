@@ -87,7 +87,9 @@ void ReceptorLoop(
 				memFree(fileAns);
 			}
 			else
+			{
 				mutexRelease(mtx);
+			}
 		}
 	}
 	if (DoLock(mtx)) // Cleanup

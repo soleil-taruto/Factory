@@ -58,8 +58,9 @@ readArgs:
 			memFree(fileName);
 		}
 		else
+		{
 			mmpc_addPartFile(text, bodyPath, bodyPath);
-
+		}
 		memFree(bodyPath);
 		goto readArgs;
 	}

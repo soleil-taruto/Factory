@@ -123,8 +123,9 @@ static void Reader(uchar *block, uint size)
 		memset(block, 0x00, size);
 	}
 	else
+	{
 		memcpy(block, directGetBuffer(readBlock), readSize);
-
+	}
 	releaseAutoBlock(readBlock);
 	RWCount += size;
 
@@ -282,7 +283,9 @@ static void AutoActCluster(char *path)
 			file = combine_cx(fdir, addExt(strx(getLocal(path)), EXT_CLUSTER));
 		}
 		else
+		{
 			file = addExt(strx(path), EXT_CLUSTER);
+		}
 
 		MakeCluster(file, path);
 
@@ -306,7 +309,9 @@ static void AutoActCluster(char *path)
 			dir = combine_cx(fdir, changeExt(getLocal(path), ""));
 		}
 		else
+		{
 			dir = changeExt(path, "");
+		}
 
 		if (!NoCheckClusterMode)
 			CheckCluster(path);

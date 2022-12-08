@@ -37,7 +37,9 @@ int httpGetOrPostFile(char *url, autoBlock_t *sendBody, char *recvBodyFile) // s
 		*p = '\0';
 	}
 	else
+	{
 		path = strx("/");
+	}
 
 	if (p = strchr(domain, ':'))
 	{
@@ -45,7 +47,9 @@ int httpGetOrPostFile(char *url, autoBlock_t *sendBody, char *recvBodyFile) // s
 		*p = '\0';
 	}
 	else
+	{
 		portNo = 80;
+	}
 
 	httpMultiPartContentLenMax = httpGetOrPostRecvBodySizeMax;
 
@@ -97,8 +101,9 @@ autoBlock_t *httpGetOrPost(char *url, autoBlock_t *sendBody) // sendBody: NULL =
 		removeFile(recvBodyFile);
 	}
 	else
+	{
 		recvBody = NULL;
-
+	}
 	memFree(recvBodyFile);
 	return recvBody;
 }

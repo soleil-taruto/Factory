@@ -308,8 +308,9 @@ static void HeaderRepKill(autoList_t *r_keys, autoList_t *r_values, autoList_t *
 			cout("R_Val: noDef -> [%s]\n", r_value);
 		}
 		else
+		{
 			cout("R_Val: [%s] -> [%s]\n", getLine(HttpDat.H_Values, hPos), r_value);
-
+		}
 		strzp_x((char **)directGetPoint(HttpDat.H_Values, hPos), r_value);
 	}
 	foreach (k_keys, key, index)
@@ -326,7 +327,9 @@ static void HeaderRepKill(autoList_t *r_keys, autoList_t *r_values, autoList_t *
 			memFree((char *)desertElement(HttpDat.H_Values, hPos));
 		}
 		else
+		{
 			cout("K_Val: noDef\n");
+		}
 	}
 }
 static int DoConnect(char *fwdHost, uint fwdPortNo) // ret: -1 == Ú‘±‚Å‚«‚È‚©‚Á‚½B
@@ -405,8 +408,9 @@ static void DoConnect_HD(Session_t *i, uint defPortNo)
 			portNo = toValue(p);
 		}
 		else
+		{
 			portNo = defPortNo;
-
+		}
 		name = xcout("%s:%u", host, portNo);
 
 		if (strcmp(name, i->FwdName)) // ? ‘O‰ñ‚ÌÚ‘±æ‚ÆˆÙ‚È‚éB|| –¢Ú‘±
@@ -419,8 +423,9 @@ static void DoConnect_HD(Session_t *i, uint defPortNo)
 			i->FwdName = strx(name);
 		}
 		else
+		{
 			cout("KeepConn_1\n");
-
+		}
 		memFree(host);
 		memFree(name);
 	}
@@ -570,7 +575,9 @@ static autoBlock_t *MakeSendData(void)
 		ab_addLine(buff, "0\r\n\r\n");
 	}
 	else
+	{
 		ab_addBytes(buff, HttpDat.Body);
+	}
 
 	// test
 	/*

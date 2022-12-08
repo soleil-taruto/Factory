@@ -177,8 +177,9 @@ calcOperand_t *calcFromString(char *str)
 		co->E -= atoi(p);
 	}
 	else
+	{
 		co = calcFromSmplString(str);
-
+	}
 	memFree(str);
 	Trim(co);
 	return co;
@@ -195,8 +196,9 @@ calcOperand_t *calcFromInt(sint value)
 		co->Sign = -1;
 	}
 	else
+	{
 		AddInt(co, 0, (uint)value);
-
+	}
 	return co;
 }
 void calcRelease(calcOperand_t *co)
@@ -300,8 +302,9 @@ char *calcGetString(calcOperand_t *co)
 		ret = addLine_x(ret, xcout("%02d", abs(ee)));
 	}
 	else
+	{
 		ret = calcGetSmplString(co);
-
+	}
 	ReleaseOperand(co);
 	return ret;
 }

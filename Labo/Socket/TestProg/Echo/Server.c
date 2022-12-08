@@ -26,7 +26,9 @@ static int Idle(void)
 			return 0;
 		}
 		else
+		{
 			cout("ESCAPE == I—¹\n");
+		}
 	}
 	return 1;
 }

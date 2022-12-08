@@ -118,8 +118,9 @@ static void ProcCSFile_Main(char *csFile)
 		removeFile(bkFile);
 	}
 	else
+	{
 		moveFile(bkFile, csFile);
-
+	}
 	releaseDim(lines, 1);
 	memFree(bkFile);
 }

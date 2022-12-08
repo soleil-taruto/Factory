@@ -62,5 +62,7 @@ readArgs:
 			removeDir(srcDir);
 	}
 	else
+	{
 		copyDir(srcDir, destDir);
+	}
 }

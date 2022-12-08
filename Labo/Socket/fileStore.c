@@ -346,7 +346,9 @@ static void PerformTh(int sock, char *strip)
 			CheckUploadDirOverflow();
 		}
 		else
+		{
 			errored = 1;
+		}
 
 		/*
 			共有フォルダからファイルに触れるようにする。

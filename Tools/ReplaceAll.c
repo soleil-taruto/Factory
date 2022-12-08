@@ -210,7 +210,9 @@ static void ReplaceEx(void)
 			createFile(newPath);
 		}
 		else
+		{
 			createDir(newPath);
+		}
 	}
 	unaddCwd();
 	cout("move test ok.\n");

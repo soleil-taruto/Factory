@@ -21,13 +21,13 @@ static void DispList(char *targetDir, autoList_t *searchPtns)
 	{
 		     if (DirFileMode == 'D') paths = lsDirs(targetDir);
 		else if (DirFileMode == 'F') paths = lsFiles(targetDir);
-		else                        paths = ls(targetDir);
+		else                         paths = ls(targetDir);
 	}
 	else
 	{
 		     if (DirFileMode == 'D') paths = lssDirs(targetDir);
 		else if (DirFileMode == 'F') paths = lssFiles(targetDir);
-		else                        paths = lss(targetDir);
+		else                         paths = lss(targetDir);
 	}
 	sortJLinesICase(paths);
 
@@ -39,7 +39,9 @@ static void DispList(char *targetDir, autoList_t *searchPtns)
 		memFree(path);
 	}
 	else
+	{
 		coPathBgnPos = 0;
+	}
 
 	foreach (paths, path, index)
 	{
@@ -64,7 +66,9 @@ static void DispList(char *targetDir, autoList_t *searchPtns)
 			memFree(path_a);
 		}
 		else
+		{
 			found = 1;
+		}
 
 		if (found)
 		{

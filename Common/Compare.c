@@ -263,8 +263,9 @@ static void FindDiffEnd(void)
 		swapped = 1;
 	}
 	else
+	{
 		swapped = 0;
-
+	}
 	FDE.SLines = gndFollowElementsVar(FD.Lines1, FD.Index1, gal1);
 	FDE.LLines = gndFollowElementsVar(FD.Lines2, FD.Index2, gal2);
 

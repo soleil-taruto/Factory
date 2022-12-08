@@ -128,7 +128,9 @@ void httpRecvRequestHeader(SockStream_t *i, char **pHeader, int *pChunked, uint 
 				line2JLine(p, 0, 0, 0, 0);
 			}
 			else
+			{
 				p = strx("<NULL>");
+			}
 
 			cout("C-Host: %s\n", httpRecvRequestHostValue);
 			cout("R-Host: %s\n", p);
@@ -291,8 +293,10 @@ void httpDecodeUrl(char *url, httpDecode_t *out)
 	uint index;
 	char *decPath;
 
-	if (path) path = strchrEnd(path + 3, '/');
-	else     path = url;
+	if (path)
+		path = strchrEnd(path + 3, '/');
+	else
+		path = url;
 
 	if (!*path)
 		path = "/";
@@ -366,8 +370,9 @@ void httpDecode(char *header, uchar *content, httpDecode_t *out)
 			p++;
 		}
 		else
+		{
 			p = "";
-
+		}
 		content = (uchar *)p;
 	}
 	out->Url = url;

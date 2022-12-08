@@ -230,7 +230,9 @@ static void Main3(char *rFile, char *wFile)
 			CurrPath = NULL;
 		}
 		else
+		{
 			error();
+		}
 	}
 	errorCase(CurrPath);
 

@@ -125,7 +125,9 @@ static autoList_t *GetResponse(char *source, int buildFlag)
 					addElement(includes, (uint)strx(p));
 				}
 				else
+				{
 					memFree(p);
+				}
 			}
 		}
 		unaddCwd();
@@ -156,12 +158,16 @@ static autoList_t *GetResponse(char *source, int buildFlag)
 						objfile = testobjfile;
 					}
 					else
+					{
 						memFree(testobjfile);
+					}
 				}
 				addElement(response, (uint)objfile);
 			}
 			else
+			{
 				memFree(objfile);
+			}
 		}
 	}
 	foreach (includes, file, index)

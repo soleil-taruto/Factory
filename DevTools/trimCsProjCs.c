@@ -79,8 +79,9 @@ static int TrimProjLines(void)
 						trimmed = 1;
 					}
 					else
+					{
 						insertElement(ProjLines, index, (uint)line); // å≥Ç…ñﬂÇ∑ÅB
-
+					}
 					LOGPOS();
 				}
 			}
@@ -227,7 +228,9 @@ static void ProcProj(int checkOnly)
 		semiRemovePath(ProjBackupFile);
 	}
 	else
+	{
 		moveFile(ProjBackupFile, ProjFile);
+	}
 
 	LOGPOS();
 	releaseDim(DeletableCsFiles, 1);

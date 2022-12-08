@@ -34,8 +34,9 @@ autoBlock_t *MakeEncCounter(autoBlock_t *clSeed, autoBlock_t *svSeed)
 		memFree(tmp);
 	}
 	else
+	{
 		cout("encCounter: <NULL>\n");
-
+	}
 	return encCounter;
 }
 

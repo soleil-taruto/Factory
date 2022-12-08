@@ -25,8 +25,9 @@ static char *GetStrTimeZone(void)
 		sign = -1;
 	}
 	else
+	{
 		sign = 1;
-
+	}
 	s = tz % 60;
 	tz /= 60;
 	m = tz % 60;

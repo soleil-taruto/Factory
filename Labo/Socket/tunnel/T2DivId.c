@@ -47,8 +47,9 @@ static void T2DivId(char *rFile)
 			rbtAddValue(id2OutFile, id, (uint)wFile);
 		}
 		else
+		{
 			wFile = (char *)rbtGetLastAccessValue(id2OutFile);
-
+		}
 		addLine2File(wFile, line);
 
 		if (kind == 'D')

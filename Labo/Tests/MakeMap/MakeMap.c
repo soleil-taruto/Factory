@@ -118,8 +118,9 @@ static void MM_BattlePos(int x, int y)
 			}
 		}
 		else
+		{
 			wallcnt++;
-
+		}
 		setTableCell(Map, x, y, 5 <= wallcnt ? COLOR_WALL : COLOR_GROUND);
 	}
 }

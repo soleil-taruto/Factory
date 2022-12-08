@@ -57,8 +57,9 @@ static void Perform(int sock, int fwdSock)
 			waitMillis = m_min(waitMillis + 1, 2000);
 		}
 		else
+		{
 			waitMillis = 0;
-
+		}
 		endFlag = m_01(IsCommDead(a)) | m_01(IsCommDead(b)); // óºï˚é¿çsÇµÇΩÇ¢ÅB
 
 		inner_uncritical();

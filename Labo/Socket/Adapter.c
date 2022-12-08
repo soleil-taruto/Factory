@@ -80,8 +80,9 @@ static int Perform(char *prmFile, char *ansFile)
 		createFile(prmFile);
 	}
 	else
+	{
 		Deserializer(prmFile, ParamsFile);
-
+	}
 	removeFileIfExist(AnswerFile); // Cleanup
 	mutexRelease(MutexHandle);
 

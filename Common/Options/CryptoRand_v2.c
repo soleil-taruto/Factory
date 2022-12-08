@@ -128,13 +128,16 @@ static void GetCryptoSeed(uchar *seed, uint seed_size, char *seed_file)
 			}
 		}
 		else
+		{
 			getCryptoBlock_MS(seed, seed_size);
-
+		}
 		writeBinary(seed_file, gndBlockVar(seed, seed_size, gab));
 		unmutex();
 	}
 	else
+	{
 		getCryptoBlock_MS(seed, seed_size);
+	}
 }
 
 #define BUFFERSIZE 16 // == camellia block size

@@ -245,8 +245,9 @@ int main(int argc, char **argv)
 		TrimMain();
 	}
 	else
+	{
 		error_m("不明なコマンド引数");
-
+	}
 	cout("EndCode: %u\n", EndCode);
 	termination(EndCode);
 }

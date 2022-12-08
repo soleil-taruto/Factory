@@ -95,7 +95,9 @@ int main(int argc, char **argv)
 		errorCase(!existFile(UpFile));
 	}
 	else
+	{
 		UpFile = dropFile();
+	}
 
 	*(uint *)ip = 0;
 	sockClientUserTransmit(ip, domain, portno, SendUpFile);

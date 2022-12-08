@@ -43,8 +43,9 @@ MvAvg_t *MAC_GetMvAvg(uint fxTime, uint span, char *pair)
 		rbtAddValue(Tree, GetKey(span, pair), (uint)i);
 	}
 	else
+	{
 		i = (MvAvg_t *)rbtGetLastAccessValue(Tree);
-
+	}
 	return i;
 }
 void MAC_Clear(void)

@@ -38,7 +38,9 @@ autoList_t *SqlBcpReader(char *bcpFile, int chrT, int chrR)
 				}
 			}
 			else
+			{
 				addByte(buff, chr);
+			}
 		}
 		fileClose(fp);
 

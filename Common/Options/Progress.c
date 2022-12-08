@@ -20,8 +20,9 @@ void Progress(void)
 		}
 	}
 	else
+	{
 		cout("*");
-
+	}
 	StarCount++;
 }
 void ProgressRate(double rate) // rate 0.0 - 1.0

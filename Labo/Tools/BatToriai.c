@@ -35,8 +35,9 @@ static char *GetNextBatFile(void)
 			moveFile(file, batFile);
 		}
 		else
+		{
 			batFile = NULL;
-
+		}
 		releaseDim(files, 1);
 	}
 	FUnlock(lFp);

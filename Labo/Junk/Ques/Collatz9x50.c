@@ -19,8 +19,10 @@ int main(int argc, char **argv)
 			numb = calc_xc(numb, '+', "1");
 		}
 		else
+		{
 //			numb = calc_xc(numb, '/', "2");
 			numb = calc_xc(numb, '*', "0.5");
+		}
 	}
 	memFree(numb);
 	termination(0); // mem_dbg

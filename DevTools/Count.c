@@ -30,7 +30,9 @@ static uint CountLineFromStdin(void)
 			break;
 		}
 		else
+		{
 			entFlg = 1;
+		}
 	}
 	return count;
 }

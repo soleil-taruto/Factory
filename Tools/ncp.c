@@ -368,7 +368,9 @@ readArgs:
 			fileClose(fp);
 		}
 		else
+		{
 			cout("Error: bad type. %02x\n", type);
+		}
 
 		if (willOpenDir)
 		{
@@ -503,7 +505,9 @@ readArgs:
 		}
 	}
 	else
+	{
 		cout("不明なコマンド\n");
+	}
 
 cr_fnlz:
 	CR_Fnlz();

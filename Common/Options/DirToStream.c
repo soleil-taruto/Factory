@@ -76,8 +76,9 @@ enterDir:
 		lsInfos = NULL;
 	}
 	else
+	{
 		paths = ls(".");
-
+	}
 	eraseParents(paths);
 
 	if (withInfo)
@@ -99,7 +100,9 @@ enterDir:
 		}
 	}
 	else
+	{
 		rapidSortLines(paths);
+	}
 
 	for (; ; )
 	{
@@ -422,7 +425,9 @@ void StreamToDir(char *dir, void (*streamReader)(uchar *, uint))
 				}
 			}
 			else
+			{
 				error();
+			}
 		}
 		memFree(path);
 	}

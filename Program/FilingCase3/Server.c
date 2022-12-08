@@ -132,7 +132,9 @@ static void SendResFile(SockStream_t *ss, char *relPath)
 		leaveSemaphore(&SmphFileIO);
 	}
 	else
+	{
 		SockSendValue64(ss, 0ui64);
+	}
 
 	memFree(file);
 

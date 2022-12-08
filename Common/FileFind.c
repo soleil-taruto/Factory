@@ -32,7 +32,9 @@ static void AddPath(autoList_t *paths, char *path, FILE *extra_fp, void (*lsActi
 		memFree(path);
 	}
 	else
+	{
 		addElement(paths, (uint)path);
+	}
 
 	if (infos)
 	{

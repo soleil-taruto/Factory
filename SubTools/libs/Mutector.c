@@ -223,7 +223,9 @@ static void RecvBit(uint m0, uint m1, uint m2)
 			sleep(millis);
 		}
 		else
+		{
 			millis = 0;
+		}
 
 		R_Elapsed += millis + 1;
 	}

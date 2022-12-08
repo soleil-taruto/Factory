@@ -30,7 +30,9 @@ static void DoTest2(uint64 size, uint breakMode)
 		errorCase(!isSameFile(file, eFile));
 	}
 	else
+	{
 		errorCase(retval);
+	}
 
 	removeFile(file);
 	removeFile(eFile);

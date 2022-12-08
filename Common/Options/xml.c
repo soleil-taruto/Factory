@@ -170,10 +170,13 @@ static char *ReadLiteral(int quot)
 			ReadChar();
 		}
 		else if (RChr == '\\')
+		{
 			ReadChar();
+		}
 		else if (RChr == quot)
+		{
 			break;
-
+		}
 		RLine = addChar(RLine, RChr);
 	}
 	return RLine;
@@ -310,8 +313,9 @@ static void ReadXMLDeclaration(char *file)
 			Encoding_UTF8 = 1;
 	}
 	else
+	{
 		NoDeclaration = 1;
-
+	}
 	memFree(RData);
 }
 static void ReadXML(char *file)
@@ -387,7 +391,9 @@ static void ReadXML(char *file)
 			}
 		}
 		else
+		{
 			tagClosed = 1;
+		}
 
 		if (tagClosed)
 		{
@@ -510,8 +516,9 @@ cout("Encoding_UTF8: %d\n", Encoding_UTF8); // test
 		memFree(tmpFile);
 	}
 	else
+	{
 		ReadXML(file);
-
+	}
 	root = CurrNode;
 	NormalizeXNode(root, NULL);
 	AllNodeFltr(root);

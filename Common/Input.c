@@ -281,8 +281,9 @@ autoList_t *editLines(autoList_t *lines) // ret: newList(), not NULL
 		removeFile(file);
 	}
 	else
+	{
 		lines = newList();
-
+	}
 	memFree(file);
 	return lines;
 }
@@ -354,8 +355,9 @@ void viewLineNoRet_NB(char *line, int nonBlockingMode)
 		removeFile(file);
 	}
 	else
+	{
 		execute_x(xcout("START \"\" \"%s\"", file));
-
+	}
 	memFree(file);
 }
 void viewLineNoRet(char *line)
@@ -425,7 +427,9 @@ char *coInputLinePrn(void (*printFunc)(char *jbuffer))
 				*mp = '\0';
 			}
 			else
+			{
 				buffer = addChar(buffer, chr);
+			}
 		}
 	}
 	InputJTextMode = 0;

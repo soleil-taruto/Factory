@@ -100,7 +100,9 @@ static void FilesFilter(autoList_t *files)
 		cout("サブディレクトリの指定有り.2\n");
 	}
 	else
+	{
 		cout("サブディレクトリの指定無し\n");
+	}
 }
 static void MaskFileData(autoBlock_t *fileData)
 {

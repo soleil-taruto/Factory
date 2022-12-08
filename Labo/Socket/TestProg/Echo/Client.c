@@ -28,7 +28,9 @@ static int Idle(void)
 			cout("ÄŠJ\n");
 		}
 		else
+		{
 			cout("ESCAPE == ’†~, P == ˆê’â~\n");
+		}
 	}
 	return 1;
 }

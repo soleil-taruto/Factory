@@ -44,8 +44,9 @@ static void MakeCryptoRand(uint rowcnt, uint colcnt)
 		copyFile(file, KBOutFile);
 	}
 	else
+	{
 		execute(file);
-
+	}
 	remove(file);
 	memFree(file);
 }

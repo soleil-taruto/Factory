@@ -169,7 +169,9 @@ readArgs:
 			m = 12;
 		}
 		else
+		{
 			m--;
+		}
 
 		YMin = y;
 		MMin = m;

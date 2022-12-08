@@ -144,8 +144,9 @@ int main(int argc, char **argv)
 				retval = 1;
 			}
 			else
+			{
 				retval = cphrDecryptorFile(infile, outfile, ktlst, Interlude);
-
+			}
 			ProgressEnd(0);
 			cout("Done!\n");
 			cout("\n");

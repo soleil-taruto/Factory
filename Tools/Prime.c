@@ -15,7 +15,9 @@ static void PrintIsPrime(uint64 value)
 			cout("%I64u\n", value);
 	}
 	else
+	{
 		cout("%I64u %s prime.\n", value, IsPrime(value) ? "is" : "is not");
+	}
 }
 int main(int argc, char **argv)
 {

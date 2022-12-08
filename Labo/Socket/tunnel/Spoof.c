@@ -49,7 +49,9 @@ static FltrInfo_t *GetFltrInfo(char *path, char *header)
 		sortJLinesICase(lines);
 	}
 	else
+	{
 		lines = readLines(path);
+	}
 
 	for (index = 0; index < getCount(lines); index += 2)
 	{

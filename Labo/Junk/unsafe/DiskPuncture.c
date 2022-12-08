@@ -124,7 +124,9 @@ static DeleteGarbageFiles(void)
 			memFree(outFile);
 		}
 		else
+		{
 			removeFile(file);
+		}
 	}
 	removeDir(GarbageFilesDir);
 }

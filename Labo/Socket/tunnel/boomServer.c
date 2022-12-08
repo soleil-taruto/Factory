@@ -243,7 +243,9 @@ setConsoleColor(0x0e); // test
 		rbtAddValue(SessionTree, (uint)RecvCredential, (uint)session);
 	}
 	else
+	{
 		session = (Session_t *)rbtGetLastAccessValue(SessionTree);
+	}
 
 	if (RecvFlag == 'D') // Disconnect
 	{

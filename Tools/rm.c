@@ -56,8 +56,9 @@ static void RemoveEx(autoList_t *paths)
 			removeDir(path);
 		}
 		else
+		{
 			moveFile(path, destPath);
-
+		}
 		addElement(restoreCmds, (uint)xcout("MOVE \"%s\" \"%s\"", destPath, c_makeFullPath(path)));
 		memFree(destPath);
 	}
@@ -72,8 +73,9 @@ static void RemoveEx(autoList_t *paths)
 		memFree(batch);
 	}
 	else
+	{
 		removeDir(destDir);
-
+	}
 	memFree(destDir);
 	releaseDim(restoreCmds, 1);
 }
