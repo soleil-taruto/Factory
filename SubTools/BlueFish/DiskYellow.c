@@ -67,7 +67,7 @@ static void Monitor(void)
 		else if (rateLmt *  7.5 < rate) { waitMillis = 15000; }
 		else if (rateLmt *  5.0 < rate) { waitMillis = 10000; }
 		else if (rateLmt *  2.5 < rate) { waitMillis =  5000; }
-		else                           { waitMillis =  2000; }
+		else                            { waitMillis =  2000; }
 
 		cout("DiskFree: %I64u / %I64u, rate: %.3f / %.3f, wait: %u\n", diskFree, DiskFreeLimit, rate, rateLmt, waitMillis);
 

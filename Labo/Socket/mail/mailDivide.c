@@ -39,7 +39,7 @@ static autoList_t *MakeMailData(char *destAddr, autoList_t *mail)
 
 	CPY_HEADER("Date");
 	if (KeepSender) CPY_HEADER("From");
-	else           ADD_HEADER("From", SelfMailAddress);
+	else            ADD_HEADER("From", SelfMailAddress);
 	ADD_HEADER("To", destAddr);
 	CPY_HEADER("Subject");
 	ADD_HEADER("Message-Id", c_MakeMailMessageID(SelfMailAddress));

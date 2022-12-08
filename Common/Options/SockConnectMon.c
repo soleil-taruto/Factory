@@ -15,7 +15,7 @@ void sockConnectMonUpdated(void)
 
 	     if (0.9 < sockConnectedRate) level = 2;
 	else if (0.6 < sockConnectedRate) level = 1;
-	else                             level = 0;
+	else                              level = 0;
 
 	if (level == 2)
 		cout("[sockConnectMon] %u / %u = %.6f\n", sockConnectedCount, sockConnectMax, sockConnectedRate);
@@ -35,7 +35,7 @@ void sockConnectMonUpdated(void)
 				{
 				case 2: setEmgConsoleColor(0x4f); break;
 				case 1: setEmgConsoleColor(0x1f); break;
-				case 0: restoreConsoleColor(); break;
+				case 0: restoreConsoleColor();    break;
 
 				default:
 					error();
