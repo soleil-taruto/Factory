@@ -1,5 +1,7 @@
 #include "Common.h"
 
+#if 0 // îpé~ @ 2022.12.11
+
 static int Real_IsBlueFishComputer(void)
 {
 	return existDir("C:\\BlueFish");
@@ -17,3 +19,12 @@ int IsBlueFishComputer(void)
 	}
 	return ret;
 }
+
+#else
+
+int IsBlueFishComputer(void)
+{
+	return 0;
+}
+
+#endif
