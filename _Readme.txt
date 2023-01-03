@@ -2,7 +2,15 @@
 Factory
 =======
 
+Cで書いたツールとライブラリの寄せ集め。
 自分用ツール也。
+
+
+開発環境
+--------
+
+Windows 10 (Pro | Home)
+Visual Studio Community 2022
 
 
 ----
@@ -13,12 +21,12 @@ Factory
 このファイルが C:\Factory\_Readme.txt となるように展開する。
 
 
-------
-リンク
+----
+参照
 
-りぽ：
+この環境のリポジトリ：
 https://github.com/soleil-taruto/Factory
 
-先祖：
+昔のリポジトリ
 https://github.com/stackprobe/Factory
 
