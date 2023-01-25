@@ -75,6 +75,8 @@ int isChangeableRoot(char *path, char *root);
 void eraseParent(char *path);
 void eraseParents(autoList_t *pathList);
 
+extern int (*userIsCancel_CopyFile_DM)(char *srcFile, char *destFile, char *destMode);
+
 void joinFile(char *bodyFile, char *tailFile);
 void copyFile(char *srcFile, char *destFile);
 void copyDir(char *srcDir, char *destDir);

@@ -739,12 +739,21 @@ void eraseParents(autoList_t *pathList)
 	}
 }
 
+int (*userIsCancel_CopyFile_DM)(char *srcFile, char *destFile, char *destMode);
+
 static void CopyFile_DM(char *srcFile, char *destFile, char *destMode)
 {
-	uint64 buffSize = getFileSize(srcFile);
+	uint64 buffSize;
 	FILE *rfp;
 	FILE *wfp;
 
+	if (
+		userIsCancel_CopyFile_DM &&
+		userIsCancel_CopyFile_DM(srcFile, destFile, destMode)
+		)
+		return;
+
+	buffSize = getFileSize(srcFile);
 	buffSize = m_min(buffSize, 128 * 1024 * 1024);
 
 	rfp = fileOpen(srcFile, "rb");
