@@ -3,9 +3,10 @@
 
 	- - -
 
-	z7.exe [/C] [/T] [/7] [/OAD] [/P パスフレーズ] [入力ファイル | 入力DIR]
+	z7.exe [/C] [/D 出力ファイル] [/T] [/7] [/OAD] [/P パスフレーズ] [入力ファイル | 入力DIR]
 
 		/C   ... 入力ファイルと同じ場所に圧縮する。
+		/D   ... 出力ファイル名を指定する。
 		/T   ... 不要な上位階層を除去する。(DIRのときのみ)
 		/7   ... .7z にする。
 		/OAD ... 元ファイル・ディレクトリ自動削除
@@ -16,6 +17,7 @@
 #include "C:\Factory\Meteor\7z.h"
 
 static int OutputSameDir;
+static char *OutputFile;
 static int TrimTopDir;
 static int WFileType = 'Z'; // "7Z"
 static int OutputAndDelete;
@@ -68,6 +70,12 @@ static char *GetWFile(char *path)
 	{
 		file7z = addExt(strx(path), ext);
 		file7z = toCreatableTildaPath(file7z, IMAX);
+	}
+	else if (OutputFile)
+	{
+		errorCase_m(_stricmp(ext, getExt(OutputFile)), "出力形式と拡張子が一致していません。拡張子 = zip OR 7z");
+
+		file7z = strx(OutputFile);
 	}
 	else
 	{
@@ -138,7 +146,7 @@ static void Pack7z(char *path)
 	{
 		error();
 	}
-	if (!OutputSameDir)
+	if (LastOutputDir)
 	{
 		LOGPOS();
 		coExecute_x(xcout("START %s", LastOutputDir));
@@ -166,6 +174,26 @@ readArgs:
 		cout("+----------------+\n");
 
 		OutputSameDir = 1;
+		goto readArgs;
+	}
+	if (argIs("/D"))
+	{
+		// memo: Release.bat のために追加した。
+		// 出力ファイル名を指定するような使い方は SubTools/zip.c 向き。
+
+		OutputFile = makeFullPath(nextArg());
+
+		cout("+--------------------------------+\n");
+		cout("| 出力ファイル名が指定されました |\n");
+		cout("+--------------------------------+\n");
+		cout("* %s\n", OutputFile);
+
+		// 試し書き + 既存ファイルを削除
+		{
+			createFile(OutputFile);
+			removeFile(OutputFile);
+		}
+
 		goto readArgs;
 	}
 	if (argIs("/T"))
