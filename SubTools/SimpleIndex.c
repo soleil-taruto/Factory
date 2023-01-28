@@ -93,7 +93,8 @@ static char *MakeDivList(uint depth, int noIndex)
 	dircnt = lastDirCount;
 
 	if (depth)
-		addElement(divs, (uint)MkDivLine("../" INDEXFILE, "&lt;parent directory&gt;", ""));
+//		addElement(divs, (uint)MkDivLine("../" INDEXFILE, "&lt;parent directory&gt;", "")); // del @ 2023.1.28
+		addElement(divs, (uint)MkDivLine("../",           "&lt;parent directory&gt;", ""));
 	else if (RootParentHRef)
 		addElement(divs, (uint)MkDivLine(RootParentHRef, "&lt;return&gt;", ""));
 
@@ -122,7 +123,8 @@ static char *MakeDivList(uint depth, int noIndex)
 			if (hiddenItem)
 				goto nextPath;
 
-			href = xcout("%s/" INDEXFILE, path);
+//			href = xcout("%s/" INDEXFILE, path); // del @ 2023.1.28
+			href = xcout("%s/", path);
 			lref = xcout("%s", path);
 			trailer = strx("");
 		}
