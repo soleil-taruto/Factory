@@ -1,5 +1,5 @@
 CALL ff
 CALL Clean
 CALL mkt
-RDMD.exe /RM C:\Factory\tmp_Prime
+RDMD.exe /RM C:\Factory\tmp_data
 Prime 2

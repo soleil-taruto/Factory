@@ -4,7 +4,7 @@
 
 #include "C:\Factory\Common\all.h"
 
-#define DATA_FILE "C:\\Factory\\tmp\\zzEz.txt"
+#define DATA_FILE "C:\\Factory\\tmp_data\\zzEz.txt"
 
 static autoList_t *NNDirs;
 static autoList_t *NNDirDates;

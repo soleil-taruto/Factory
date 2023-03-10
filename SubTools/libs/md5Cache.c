@@ -10,7 +10,7 @@ static char *GetCacheDir(void)
 	{
 		char *tmpDir = "C:\\Factory\\tmp";
 //		char *tmpDir = "C:\\tmp";
-//		char *tmpDir = "C:\\Factory\\tmp_Prime";
+//		char *tmpDir = "C:\\Factory\\tmp_data";
 //		char *tmpDir = getEnvLine("TMP");
 
 //		errorCase(m_isEmpty(tmpDir));

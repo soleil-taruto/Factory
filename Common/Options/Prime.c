@@ -58,7 +58,7 @@ static char *GetDatFile(void)
 	if (!file)
 	{
 		if (isFactoryDirEnabled())
-			file = "C:\\Factory\\tmp_Prime\\Prime.dat";
+			file = "C:\\Factory\\tmp_data\\Prime.dat";
 		else
 			file = combine(getSelfDir(), "Prime.dat");
 	}
