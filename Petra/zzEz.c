@@ -7,8 +7,8 @@
 #define DATA_FILE "C:\\Factory\\tmp_data\\zzEz.txt"
 
 static autoList_t *NNDirs;
-static autoList_t *NNDirDates;
-static uint Today;
+static autoList_t *NNDirTimes;
+static uint TimeNow;
 
 static void LoadData(void)
 {
@@ -33,7 +33,7 @@ static void LoadData(void)
 		*p++ = '\0';
 
 		addElement(NNDirs, (uint)strx(p));
-		addElement(NNDirDates, toValue(line));
+		addElement(NNDirTimes, toValue(line));
 	}
 	releaseDim(lines, 1);
 
@@ -47,10 +47,10 @@ static void SaveData(void)
 
 	LOGPOS();
 
-	errorCase(getCount(NNDirs) != getCount(NNDirDates)); // 2bs
+	errorCase(getCount(NNDirs) != getCount(NNDirTimes)); // 2bs
 
 	foreach (NNDirs, nnDir, index)
-		addElement(lines, (uint)xcout("%u\t%s", getElement(NNDirDates, index), nnDir));
+		addElement(lines, (uint)xcout("%u\t%s", getElement(NNDirTimes, index), nnDir));
 
 	writeLines_cx(DATA_FILE, lines);
 
@@ -71,7 +71,7 @@ static void AddNewNNDirs(void)
 		if (findLine(NNDirs, nnDir) == getCount(NNDirs)) // ? not found
 		{
 			addElement(NNDirs, (uint)strx(nnDir));
-			addElement(NNDirDates, Today);
+			addElement(NNDirTimes, TimeNow);
 		}
 		memFree(nnDir);
 	}
@@ -89,13 +89,13 @@ static void RemoveOldNNDirs(void)
 		if (!existDir(nnDir)) // ? éûä‘êÿÇÍëOÇ…è¡ñ≈
 		{
 			setElement(NNDirs,     index, 0);
-			setElement(NNDirDates, index, 0);
+			setElement(NNDirTimes, index, 0);
 		}
 	}
 	removeZero(NNDirs);
-	removeZero(NNDirDates);
+	removeZero(NNDirTimes);
 
-	errorCase(getCount(NNDirs) != getCount(NNDirDates)); // 2bs
+	errorCase(getCount(NNDirs) != getCount(NNDirTimes)); // 2bs
 
 	LOGPOS();
 }
@@ -108,20 +108,20 @@ static void DeleteExpiredNNDirs(void)
 
 	foreach (NNDirs, nnDir, index)
 	{
-		uint nnDirDate = getElement(NNDirDates, index);
+		uint nnDirTime = getElement(NNDirTimes, index);
 
-		if (nnDirDate + 3 <= Today) // ? éûä‘êÿÇÍ
+		if (nnDirTime + 24 <= TimeNow) // ? éûä‘êÿÇÍ
 		{
 			coExecute_x(xcout("RD /S /Q %s", nnDir));
 
 			setElement(NNDirs,     index, 0);
-			setElement(NNDirDates, index, 0);
+			setElement(NNDirTimes, index, 0);
 		}
 	}
 	removeZero(NNDirs);
-	removeZero(NNDirDates);
+	removeZero(NNDirTimes);
 
-	errorCase(getCount(NNDirs) != getCount(NNDirDates)); // 2bs
+	errorCase(getCount(NNDirs) != getCount(NNDirTimes)); // 2bs
 
 	LOGPOS();
 }
@@ -131,10 +131,10 @@ int main(int argc, char **argv)
 	LOGPOS();
 
 	NNDirs     = newList();
-	NNDirDates = newList();
-	Today = (uint)(time(NULL) / 86400);
+	NNDirTimes = newList();
+	TimeNow = (uint)(time(NULL) / 3600);
 
-	errorCase(!Today); // 2bs
+	errorCase(!TimeNow); // 2bs
 
 	LoadData();
 	AddNewNNDirs();

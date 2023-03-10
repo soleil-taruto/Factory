@@ -7752,8 +7752,8 @@ C:\Factory\Petra\UpdatingCopy.c(65) : CopyZip // ŠÖ”
 C:\Factory\Petra\UpdatingCopy.c(77) : main // ŠÖ”
 C:\Factory\Petra\zzEz.c(7) : DATA_FILE // ’è‹`
 C:\Factory\Petra\zzEz.c(9) : NNDirs // •Ï”–”‚ÍéŒ¾
-C:\Factory\Petra\zzEz.c(10) : NNDirDates // •Ï”–”‚ÍéŒ¾
-C:\Factory\Petra\zzEz.c(11) : Today // •Ï”–”‚ÍéŒ¾
+C:\Factory\Petra\zzEz.c(10) : NNDirTimes // •Ï”–”‚ÍéŒ¾
+C:\Factory\Petra\zzEz.c(11) : TimeNow // •Ï”–”‚ÍéŒ¾
 C:\Factory\Petra\zzEz.c(13) : LoadData // ŠÖ”
 C:\Factory\Petra\zzEz.c(42) : SaveData // ŠÖ”
 C:\Factory\Petra\zzEz.c(60) : AddNewNNDirs // ŠÖ”
