@@ -28,7 +28,7 @@ static void LoadData(void)
 
 	foreach (lines, line, index)
 	{
-		char *p = ne_strchr(line, '\t');
+		char *p = ne_strchr(line, '*');
 
 		*p++ = '\0';
 
@@ -41,7 +41,7 @@ static void LoadData(void)
 }
 static void SaveData(void)
 {
-	autoList_t *lines = newList();
+	autoList_t *lines;
 	char *nnDir;
 	uint index;
 
@@ -49,8 +49,18 @@ static void SaveData(void)
 
 	errorCase(getCount(NNDirs) != getCount(NNDirTimes)); // 2bs
 
+	if (!getCount(NNDirs))
+	{
+		removeFileIfExist(DATA_FILE);
+
+		LOGPOS();
+		return;
+	}
+
+	lines = newList();
+
 	foreach (NNDirs, nnDir, index)
-		addElement(lines, (uint)xcout("%u\t%s", getElement(NNDirTimes, index), nnDir));
+		addElement(lines, (uint)xcout("%u*%s", getElement(NNDirTimes, index), nnDir));
 
 	writeLines_cx(DATA_FILE, lines);
 
