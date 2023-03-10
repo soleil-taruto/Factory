@@ -7750,6 +7750,16 @@ C:\Factory\Petra\UpdatingCopy.c(37) : RemoveOldZip // ŠÖ”
 C:\Factory\Petra\UpdatingCopy.c(49) : GetFirstZipFile // ŠÖ”
 C:\Factory\Petra\UpdatingCopy.c(65) : CopyZip // ŠÖ”
 C:\Factory\Petra\UpdatingCopy.c(77) : main // ŠÖ”
+C:\Factory\Petra\zzEz.c(7) : DATA_FILE // ’è‹`
+C:\Factory\Petra\zzEz.c(9) : NNDirs // •Ï”–”‚ÍéŒ¾
+C:\Factory\Petra\zzEz.c(10) : NNDirDates // •Ï”–”‚ÍéŒ¾
+C:\Factory\Petra\zzEz.c(11) : Today // •Ï”–”‚ÍéŒ¾
+C:\Factory\Petra\zzEz.c(13) : LoadData // ŠÖ”
+C:\Factory\Petra\zzEz.c(42) : SaveData // ŠÖ”
+C:\Factory\Petra\zzEz.c(60) : AddNewNNDirs // ŠÖ”
+C:\Factory\Petra\zzEz.c(80) : RemoveOldNNDirs // ŠÖ”
+C:\Factory\Petra\zzEz.c(102) : DeleteExpiredNNDirs // ŠÖ”
+C:\Factory\Petra\zzEz.c(129) : main // ŠÖ”
 C:\Factory\Program\FilingCase3\Server.c(15) : FILEIO_MAX // ’è‹`
 C:\Factory\Program\FilingCase3\Server.c(17) : KeepDiskFree // •Ï”–”‚ÍéŒ¾
 C:\Factory\Program\FilingCase3\Server.c(18) : RootDir // •Ï”–”‚ÍéŒ¾
