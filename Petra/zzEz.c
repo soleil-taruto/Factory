@@ -120,7 +120,9 @@ static void DeleteExpiredNNDirs(void)
 	{
 		uint nnDirTime = getElement(NNDirTimes, index);
 
-		if (nnDirTime + 24 <= TimeNow) // ? ŽžŠÔØ‚ê
+		// ? ŽžŠÔØ‚ê
+//		if (nnDirTime + 24 <= TimeNow) // 1“úŒo‰ß
+		if (nnDirTime + 23 <= TimeNow)
 		{
 			coExecute_x(xcout("RD /S /Q %s", nnDir));
 
