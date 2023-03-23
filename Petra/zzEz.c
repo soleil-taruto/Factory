@@ -126,6 +126,8 @@ static void DeleteExpiredNNDirs(void)
 		{
 			coExecute_x(xcout("RD /S /Q %s", nnDir));
 
+			memFree(nnDir);
+
 			setElement(NNDirs,     index, 0);
 			setElement(NNDirTimes, index, 0);
 		}
