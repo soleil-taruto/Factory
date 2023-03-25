@@ -7,7 +7,7 @@
 
 		HEX-STRING -> disp md5
 
-	md5.exe ... /S CP932-STRING
+	md5.exe ... /T CP932-STRING
 
 		CP932-STRING -> disp md5
 
@@ -18,6 +18,12 @@
 	md5.exe ... /LSS
 
 		found list -> disp md5
+
+	md5.exe ... /LSS-S
+
+		found list -> disp(Simple) md5
+
+		★表示されるハッシュ値は md5 /lss > out.txt ⇒ md5 out.txt で表示される値と同じ。
 
 	md5.exe ... PATH
 
@@ -73,7 +79,7 @@ int main(int argc, char **argv)
 		ShowHashBlock(c_makeBlockHexLine(nextArg()));
 		return;
 	}
-	if (argIs("/S")) // String
+	if (argIs("/T")) // Text
 	{
 		autoBlock_t gab;
 		char *line = nextArg();
@@ -109,6 +115,25 @@ int main(int argc, char **argv)
 		foreach (files, file, index)
 			cout("%s %s\n", c_md5_makeHexHashFile(file), file);
 
+		releaseDim(files, 1);
+		return;
+	}
+	if (argIs("/LSS-S")) // "/LSS" + Simple
+	{
+		autoList_t *files = readLines(FOUNDLISTFILE);
+		char *file;
+		uint index;
+		md5_t *i = md5_create();
+		autoBlock_t gab;
+
+		foreach (files, file, index)
+		{
+			char *line = xcout("%s %s\r\n", c_md5_makeHexHashFile(file), file);
+			md5_update(i, gndBlockLineVarPtr(line, &gab));
+			memFree(line);
+		}
+		cout("%s\n", c_makeHexLine_x(md5_makeHash(i)));
+		md5_release(i);
 		releaseDim(files, 1);
 		return;
 	}

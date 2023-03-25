@@ -9731,10 +9731,10 @@ C:\Factory\Tools\Longest.c(69) : main // ŠÖ”
 C:\Factory\Tools\Lookup.c(13) : main // ŠÖ”
 C:\Factory\Tools\LotCopy.c(20) : DoCopy // ŠÖ”
 C:\Factory\Tools\LotCopy.c(51) : main // ŠÖ”
-C:\Factory\Tools\md5.c(37) : QuietMode // •Ï”–”‚ÍéŒ¾
-C:\Factory\Tools\md5.c(39) : ShowHashDir // ŠÖ”
-C:\Factory\Tools\md5.c(55) : ShowHashBlock // ŠÖ”
-C:\Factory\Tools\md5.c(64) : main // ŠÖ”
+C:\Factory\Tools\md5.c(43) : QuietMode // •Ï”–”‚ÍéŒ¾
+C:\Factory\Tools\md5.c(45) : ShowHashDir // ŠÖ”
+C:\Factory\Tools\md5.c(61) : ShowHashBlock // ŠÖ”
+C:\Factory\Tools\md5.c(70) : main // ŠÖ”
 C:\Factory\Tools\MergeRum.c(7) : EXT_RUM // ’è‹`
 C:\Factory\Tools\MergeRum.c(9) : DIR_FILES // ’è‹`
 C:\Factory\Tools\MergeRum.c(10) : DIR_REVISIONS // ’è‹`
