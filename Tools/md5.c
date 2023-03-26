@@ -19,7 +19,7 @@
 
 		found list -> disp md5
 
-	md5.exe ... /LSS-S
+	md5.exe ... /S
 
 		found list -> disp(Simple) md5
 
@@ -118,7 +118,7 @@ int main(int argc, char **argv)
 		releaseDim(files, 1);
 		return;
 	}
-	if (argIs("/LSS-S")) // "/LSS" + Simple
+	if (argIs("/S")) // Simple + "/LSS"
 	{
 		autoList_t *files = readLines(FOUNDLISTFILE);
 		char *file;
