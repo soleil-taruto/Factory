@@ -38,6 +38,11 @@ autoList_t *lsDirs(char *dir);
 autoList_t *lssFiles(char *dir);
 autoList_t *lssDirs(char *dir);
 
+autoList_t *slsFiles(char *dir);
+autoList_t *slsDirs(char *dir);
+autoList_t *slssFiles(char *dir);
+autoList_t *slssDirs(char *dir);
+
 void ls2File(char *dir, char *dirsFile, char *filesFile);
 void lss2File(char *dir, char *dirsFile, char *filesFile);
 

@@ -293,6 +293,30 @@ autoList_t *lssDirs(char *dir)
 	return GetPaths(dir, 1, 1);
 }
 
+static autoList_t *GetSortedPaths(char *dir, int intoSubDir, int filterDir)
+{
+	autoList_t *paths = GetPaths(dir, intoSubDir, filterDir);
+
+	sortJLinesICase(paths);
+	return paths;
+}
+autoList_t *slsFiles(char *dir)
+{
+	return GetSortedPaths(dir, 0, 0);
+}
+autoList_t *slsDirs(char *dir)
+{
+	return GetSortedPaths(dir, 0, 1);
+}
+autoList_t *slssFiles(char *dir)
+{
+	return GetSortedPaths(dir, 1, 0);
+}
+autoList_t *slssDirs(char *dir)
+{
+	return GetSortedPaths(dir, 1, 1);
+}
+
 void ls2File(char *dir, char *dirsFile, char *filesFile)
 {
 	DirsExtraFp = fileOpen(dirsFile, "wt");
