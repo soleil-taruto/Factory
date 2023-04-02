@@ -11,7 +11,8 @@ static int IsCommonsDir(char *dir)
 {
 	return
 		endsWithICase(dir, "Commons") ||
-		!_stricmp(getLocal(dir), "Drawings");
+		!_stricmp(getLocal(dir), "Drawings") ||
+		!_stricmp(getLocal(dir), "WebServices");
 }
 static void AddCommonsDirsIfExist(char *projDir)
 {

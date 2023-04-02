@@ -37,7 +37,7 @@ static void ViewPasswordBrowser(char *pw, uint pwLen)
 
 		writeToken_x(htmlFp, xcout("%c", "=- "[c ? d : 2]));
 	}
-	writeLine(htmlFp, "");
+	writeLine(htmlFp, ";");
 
 	for (index = 0; index < pwLen; index++)
 	{
@@ -48,7 +48,7 @@ static void ViewPasswordBrowser(char *pw, uint pwLen)
 
 		writeToken_x(htmlFp, xcout("%c", " #"[c]));
 	}
-	writeLine(htmlFp, "");
+	writeLine(htmlFp, ";");
 	writeLine(htmlFp, "</pre>");
 
 	fileClose(htmlFp);
