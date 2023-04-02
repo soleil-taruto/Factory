@@ -1,23 +1,39 @@
 /*
-	display Dev *Commons-s Hash
+	display Dev *Commons dir Hash
 */
 
 #include "C:\Factory\Common\all.h"
 
-static autoList_t *CommonsDirs;
-static autoList_t *GUICommonsDirs;
+static autoList_t *CommonsDirNames;
+static autoList_t *CommonsDirsList;
 
-static void AddToCommonDirsIfExist(autoList_t *commonDirs, char *name)
+static void AddCommonsDirsIfExist(char *projDir)
 {
-	char *dir = makeFullPath(name);
+	autoList_t *dirs = slsDirs(projDir);
+	char *dir;
+	uint index;
 
-	if (existDir(dir))
+	foreach (dirs, dir, index)
 	{
-		cout("+ %s\n", dir);
+		if (endsWithICase(dir, "Commons")) // ? *Commons dir
+		{
+			char *name = getLocal(dir);
+			uint namePos;
 
-		addElement(commonDirs, (uint)strx(dir));
+			cout("< %s\n", dir);
+			cout("> %s\n", name);
+
+			namePos = findLineCase(CommonsDirNames, name, 1);
+
+			if (namePos == getCount(CommonsDirNames))
+			{
+				addElement(CommonsDirNames, (uint)strx(name));
+				addElement(CommonsDirsList, (uint)newList());
+			}
+			addElement(getList(CommonsDirsList, namePos), (uint)strx(dir));
+		}
 	}
-	memFree(dir);
+	releaseDim(dirs, 1);
 }
 static char *GetDirMD5(char *dir)
 {
@@ -35,7 +51,7 @@ static char *GetDirMD5(char *dir)
 
 	return hash;
 }
-static void ShowCommonDirs(autoList_t *commonDirs, char *name)
+static void ShowCommonsDirs(char *name, autoList_t *commonsDirs)
 {
 	char *dir;
 	uint index;
@@ -46,7 +62,7 @@ static void ShowCommonDirs(autoList_t *commonDirs, char *name)
 	cout("----\n");
 	cout("%s\n", name);
 
-	foreach (commonDirs, dir, index)
+	foreach (commonsDirs, dir, index)
 	{
 		char *hash = GetDirMD5(dir);
 
@@ -68,14 +84,24 @@ static void ShowCommonDirs(autoList_t *commonDirs, char *name)
 		cout("+----------+\n");
 	}
 }
+static void ShowAllCommonsDirs(void)
+{
+	char *name;
+	uint index;
+
+	foreach (CommonsDirNames, name, index)
+	{
+		ShowCommonsDirs(name, getList(CommonsDirsList, index));
+	}
+}
 int main(int argc, char **argv)
 {
 	autoList_t *dirs = slsDirs("C:\\Dev");
 	char *dir;
 	uint index;
 
-	CommonsDirs     = newList();
-	GUICommonsDirs  = newList();
+	CommonsDirNames = newList();
+	CommonsDirsList = newList();
 
 	foreach (dirs, dir, index)
 	{
@@ -89,12 +115,7 @@ int main(int argc, char **argv)
 
 		if (index < getCount(files)) // ? プロジェクトDIR
 		{
-			addCwd(dir);
-			{
-				AddToCommonDirsIfExist(CommonsDirs, "Commons");
-				AddToCommonDirsIfExist(GUICommonsDirs, "GUICommons");
-			}
-			unaddCwd();
+			AddCommonsDirsIfExist(dir);
 		}
 		else // ? not プロジェクトDIR
 		{
@@ -104,6 +125,5 @@ int main(int argc, char **argv)
 	}
 	releaseDim(dirs, 1);
 
-	ShowCommonDirs(CommonsDirs, "Commons");
-	ShowCommonDirs(GUICommonsDirs, "GUICommons");
+	ShowAllCommonsDirs();
 }
