@@ -1,7 +1,6 @@
 /*
-	b6288.exe [/U] [/P]
+	b6288.exe [/P]
 
-		/U ... 大文字にする。
 		/P ... 表示のみ。(エディタを開かない)
 
 	----
@@ -9,6 +8,15 @@
 	b6288 == Base-62 88 chars
 
 	62 P 88 L 2 == 524.*
+
+	----
+	書式
+
+	{b6288-XXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXX}
+	       ~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~
+	               22文字                 22文字                 22文字                 22文字
+
+		X ... Base-62 char
 */
 
 #include "C:\Factory\Common\all.h"
@@ -21,7 +29,7 @@ static char *MakeB6288(void)
 	char *buff = strx("");
 	uint index;
 
-	buff = addChar(buff, '{');
+	buff = addLine(buff, "{b6288-");
 
 	for (index = 0; index < 88; index++)
 	{
@@ -36,9 +44,6 @@ static char *MakeB6288(void)
 int main(int argc, char **argv)
 {
 	char *b6288 = MakeB6288();
-
-	if (argIs("/U"))
-		toUpperLine(b6288);
 
 	cout("%s\n", b6288);
 
