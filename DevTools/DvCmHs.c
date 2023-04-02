@@ -7,6 +7,12 @@
 static autoList_t *CommonsDirNames;
 static autoList_t *CommonsDirsList;
 
+static int IsCommonsDir(char *dir)
+{
+	return
+		endsWithICase(dir, "Commons") ||
+		!_stricmp(getLocal(dir), "Drawings");
+}
 static void AddCommonsDirsIfExist(char *projDir)
 {
 	autoList_t *dirs = slsDirs(projDir);
@@ -15,7 +21,7 @@ static void AddCommonsDirsIfExist(char *projDir)
 
 	foreach (dirs, dir, index)
 	{
-		if (endsWithICase(dir, "Commons")) // ? *Commons dir
+		if (IsCommonsDir(dir))
 		{
 			char *name = getLocal(dir);
 			uint namePos;
