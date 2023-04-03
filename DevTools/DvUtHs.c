@@ -6,6 +6,7 @@
 
 static autoList_t *UtilitiesFileNames;
 static autoList_t *UtilitiesFilesList;
+static int ExistDiffOverall;
 
 static void AddUtilitiesFiles_UtDir(char *utDir)
 {
@@ -100,6 +101,8 @@ static void ShowUtilitiesFiles(char *name, autoList_t *utFiles)
 		cout("+----------+\n");
 		cout("| ëäà·Ç†ÇË |\n");
 		cout("+----------+\n");
+
+		ExistDiffOverall = 1;
 	}
 }
 static void ShowAllUtilitiesFiles(void)
@@ -110,6 +113,14 @@ static void ShowAllUtilitiesFiles(void)
 	foreach (UtilitiesFileNames, name, index)
 	{
 		ShowUtilitiesFiles(name, getList(UtilitiesFilesList, index));
+	}
+
+	if (ExistDiffOverall)
+	{
+		cout("\n");
+		cout("#####################\n");
+		cout("## 1åèà»è„ëäà·Ç†ÇË ##\n");
+		cout("#####################\n");
 	}
 }
 int main(int argc, char **argv)

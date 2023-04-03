@@ -6,6 +6,7 @@
 
 static autoList_t *CommonsDirNames;
 static autoList_t *CommonsDirsList;
+static int ExistDiffOverall;
 
 static int IsCommonsDir(char *dir)
 {
@@ -89,6 +90,8 @@ static void ShowCommonsDirs(char *name, autoList_t *commonsDirs)
 		cout("+----------+\n");
 		cout("| ëäà·Ç†ÇË |\n");
 		cout("+----------+\n");
+
+		ExistDiffOverall = 1;
 	}
 }
 static void ShowAllCommonsDirs(void)
@@ -99,6 +102,14 @@ static void ShowAllCommonsDirs(void)
 	foreach (CommonsDirNames, name, index)
 	{
 		ShowCommonsDirs(name, getList(CommonsDirsList, index));
+	}
+
+	if (ExistDiffOverall)
+	{
+		cout("\n");
+		cout("#####################\n");
+		cout("## 1åèà»è„ëäà·Ç†ÇË ##\n");
+		cout("#####################\n");
 	}
 }
 int main(int argc, char **argv)
