@@ -8,6 +8,33 @@ static autoList_t *UtilitiesFileNames;
 static autoList_t *UtilitiesFilesList;
 static int ExistDiffOverall;
 
+static void AddUtilitiesFile(char *file)
+{
+	char *name = getLocal(file);
+	uint namePos;
+
+	cout("< %s\n", file);
+	cout("> %s\n", name);
+
+	namePos = findLineCase(UtilitiesFileNames, name, 1);
+
+	if (namePos == getCount(UtilitiesFileNames))
+	{
+		addElement(UtilitiesFileNames, (uint)strx(name));
+		addElement(UtilitiesFilesList, (uint)newList());
+	}
+	addElement(getList(UtilitiesFilesList, namePos), (uint)strx(file));
+}
+static void AddUtilitiesFile_IfExist(char *dir, char *name)
+{
+	char *file = combine(dir, name);
+
+	if (existFile(file))
+	{
+		AddUtilitiesFile(file);
+	}
+	memFree(file);
+}
 static void AddUtilitiesFiles_UtDir(char *utDir)
 {
 	autoList_t *files = slsFiles(utDir);
@@ -16,20 +43,7 @@ static void AddUtilitiesFiles_UtDir(char *utDir)
 
 	foreach (files, file, index)
 	{
-		char *name = getLocal(file);
-		uint namePos;
-
-		cout("< %s\n", file);
-		cout("> %s\n", name);
-
-		namePos = findLineCase(UtilitiesFileNames, name, 1);
-
-		if (namePos == getCount(UtilitiesFileNames))
-		{
-			addElement(UtilitiesFileNames, (uint)strx(name));
-			addElement(UtilitiesFilesList, (uint)newList());
-		}
-		addElement(getList(UtilitiesFilesList, namePos), (uint)strx(file));
+		AddUtilitiesFile(file);
 	}
 	releaseDim(files, 1);
 }
@@ -53,6 +67,8 @@ static void AddUtilitiesFiles_ProjDir(char *projDir)
 		}
 	}
 	releaseDim(dirs, 1);
+
+	AddUtilitiesFile_IfExist(projDir, "Extensions.cs");
 }
 static char *GetFileMD5(char *file)
 {
