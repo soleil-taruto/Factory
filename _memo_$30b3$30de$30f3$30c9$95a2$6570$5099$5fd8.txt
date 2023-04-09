@@ -19,6 +19,9 @@
 	RenameAll
 	RenameAllSub
 
+	DvCmHs
+	DvUtHs
+
 ----
 
 タイムスタンプのソート順がファイル名のソート順になるようにタイムスタンプを変更する。
