@@ -1,5 +1,8 @@
 /*
 	display Dev *Commons dir Hash
+
+	相違を発見した場合、最初に発見した相違のあるファイルセットを FOUNDLISTFILE へ書き出す。
+	但し、相違がファイルの有無であった場合 FOUNDLISTFILE は削除される。
 */
 
 #include "C:\Factory\Common\all.h"
@@ -59,6 +62,61 @@ static char *GetDirMD5(char *dir)
 
 	return hash;
 }
+static void OneDiffFileSetToFoundFileList(autoList_t *commonsDirs)
+{
+	char *firstCommonsDir;
+	autoList_t *files;
+	char *file;
+	uint index;
+
+	LOGPOS();
+
+	// あらかじめ削除しておく。
+	// 差分のあるファイルが見つからない場合は削除されたままになる。
+	// -- ディレクトリの差分がファイルの有無である場合
+	removeFileIfExist(FOUNDLISTFILE);
+
+	firstCommonsDir = getLine(commonsDirs, 0);
+	files = slssFiles(firstCommonsDir);
+	changeRoots(files, firstCommonsDir, NULL);
+
+	foreach (files, file, index)
+	{
+		char *commonsDir;
+		uint commonsDirIndex;
+
+		foreach (commonsDirs, commonsDir, commonsDirIndex)
+		if (commonsDirIndex)
+		{
+			char *file1 = combine(firstCommonsDir, file);
+			char *file2 = combine(commonsDir, file);
+			int existAndDiff;
+
+			existAndDiff = existFile(file2) && !isSameFile(file1, file2);
+
+			memFree(file1);
+			memFree(file2);
+
+			if(existAndDiff) // ? 相違あり
+				break;
+		}
+
+		if (commonsDirIndex < getCount(commonsDirs)) // ? 相違を発見した。-> 相違ありファイルセットを FOUNDLISTFILE へ書き出す。
+		{
+			FILE *fp = fileOpen(FOUNDLISTFILE, "wt");
+
+			foreach (commonsDirs, commonsDir, commonsDirIndex)
+				writeLine_x(fp, combine(commonsDir, file));
+
+			fileClose(fp);
+			LOGPOS();
+			break;
+		}
+	}
+	releaseDim(files, 1);
+
+	LOGPOS();
+}
 static void ShowCommonsDirs(char *name, autoList_t *commonsDirs)
 {
 	char *dir;
@@ -91,7 +149,11 @@ static void ShowCommonsDirs(char *name, autoList_t *commonsDirs)
 		cout("| 相違あり |\n");
 		cout("+----------+\n");
 
-		ExistDiffOverall = 1;
+		if (!ExistDiffOverall)
+		{
+			OneDiffFileSetToFoundFileList(commonsDirs);
+			ExistDiffOverall = 1;
+		}
 	}
 }
 static void ShowAllCommonsDirs(void)

@@ -1,5 +1,7 @@
 /*
 	display Dev Utilities file Hash
+
+	相違を発見した場合、最初に発見した相違のあるファイルセットを FOUNDLISTFILE へ書き出す。
 */
 
 #include "C:\Factory\Common\all.h"
@@ -86,6 +88,10 @@ static char *GetFileMD5(char *file)
 
 	return hash;
 }
+static void DiffFileSetToFoundFileList(autoList_t *utFiles)
+{
+	writeLines(FOUNDLISTFILE, utFiles);
+}
 static void ShowUtilitiesFiles(char *name, autoList_t *utFiles)
 {
 	char *file;
@@ -118,7 +124,11 @@ static void ShowUtilitiesFiles(char *name, autoList_t *utFiles)
 		cout("| 相違あり |\n");
 		cout("+----------+\n");
 
-		ExistDiffOverall = 1;
+		if (!ExistDiffOverall)
+		{
+			DiffFileSetToFoundFileList(utFiles);
+			ExistDiffOverall = 1;
+		}
 	}
 }
 static void ShowAllUtilitiesFiles(void)
