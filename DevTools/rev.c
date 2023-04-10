@@ -1,5 +1,5 @@
 /*
-	rev.exe [/D 年 月 日 時 分 秒 | /E POSIX-Time | /T | /U リビジョン | [/P] [POSIX-Time]]
+	rev.exe [/D 年 月 日 時 分 秒 | /E POSIX-Time | /T | /U リビジョン | [/P] [POSIX-Time | 年 月 日 時 分 秒]]
 
 		/D ... 指定日時から POSIX-時間 を表示する。
 		/E ... 指定の POSIX-時間 から年月日時分秒を表示する。但し 0 のときは現時刻, 32535244800 以上のときは 1970/1/1 0:0:0 を表示する。
@@ -150,11 +150,27 @@ int main(int argc, char **argv)
 	{
 		printOnly = 1;
 	}
-	if (hasArgs(1))
+	if (hasArgs(6))
+	{
+		stampData_t sd;
+
+		sd.year = toValue(nextArg());
+		sd.month = toValue(nextArg());
+		sd.day = toValue(nextArg());
+		sd.weekday = 0;
+		sd.hour = toValue(nextArg());
+		sd.minute = toValue(nextArg());
+		sd.second = toValue(nextArg());
+
+		errorCase(!isAllowStampData(&sd));
+		revTime = stampDataToTime(&sd);
+	}
+	else if (hasArgs(1))
 	{
 		revTime = toValue64(nextArg());
 		errorCase(revTime < 0);
 	}
+	errorCase_m(hasArgs(1), "不明なコマンド引数");
 
 	MakeRev(revTime, printOnly);
 }
