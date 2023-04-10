@@ -9535,6 +9535,9 @@ C:\Factory\Tools\7z.c(72) : DoTrimOneDir // ä÷êî
 C:\Factory\Tools\7z.c(111) : Post7z // ä÷êî
 C:\Factory\Tools\7z.c(122) : Extract7z // ä÷êî
 C:\Factory\Tools\7z.c(171) : main // ä÷êî
+C:\Factory\Tools\b36c.c(26) : BASE36_CHARS // íËã`
+C:\Factory\Tools\b36c.c(28) : MakeB36C // ä÷êî
+C:\Factory\Tools\b36c.c(45) : main // ä÷êî
 C:\Factory\Tools\b6288.c(25) : BASE62_CHARS // íËã`
 C:\Factory\Tools\b6288.c(27) : MakeB6288 // ä÷êî
 C:\Factory\Tools\b6288.c(44) : main // ä÷êî
