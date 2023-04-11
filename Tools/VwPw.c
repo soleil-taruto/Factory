@@ -96,7 +96,7 @@ static void ViewPasswordBrowser(char *pw, uint pwLen)
 
 	htmlFp = fileOpen(htmlFile, "wt");
 
-	writeLine(htmlFp, "<pre style=\"font: 48px 'Œ¹ƒmŠpƒSƒVƒbƒN Code JP';\">");
+	writeLine(htmlFp, "<pre style=\"font: 60px 'Consolas';\">");
 
 	for (index = 0; index < pwLen; index++)
 	{
