@@ -9541,6 +9541,9 @@ C:\Factory\Tools\b10155.c(45) : main // ä÷êî
 C:\Factory\Tools\b16128.c(26) : BASE16_CHARS // íËã`
 C:\Factory\Tools\b16128.c(28) : MakeB16128 // ä÷êî
 C:\Factory\Tools\b16128.c(46) : main // ä÷êî
+C:\Factory\Tools\b26110.c(26) : BASE26_CHARS // íËã`
+C:\Factory\Tools\b26110.c(28) : MakeB26110 // ä÷êî
+C:\Factory\Tools\b26110.c(45) : main // ä÷êî
 C:\Factory\Tools\b36c.c(26) : BASE36_CHARS // íËã`
 C:\Factory\Tools\b36c.c(28) : MakeB36C // ä÷êî
 C:\Factory\Tools\b36c.c(45) : main // ä÷êî
