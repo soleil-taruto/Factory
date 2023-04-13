@@ -11,7 +11,8 @@ static char *GetToolkitExeFile(void)
 	static char *file;
 
 	if (!file)
-		file = GetCollaboFile("C:\\app\\Kit\\Toolkit\\Toolkit.exe");
+//		file = GetCollaboFile("C:\\app\\Kit\\Toolkit\\Toolkit.exe"); // îpé~ @ 2023.4.13
+		file = GetCollaboFile("C:\\Factory\\tmp\\Kit_Dummy\\Toolkit\\Toolkit.exe");
 
 	return file;
 }

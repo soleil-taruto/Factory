@@ -1,5 +1,7 @@
 /*
 	éÂÇ… C:\app\Kit\* Ç∆ÇÃòAågÇëzíËÇ∑ÇÈÅBä÷òA -> innerResPathFltr
+
+	C:\app\Kit îpé~ @ 2023.4.13
 */
 
 #include "Collabo.h"

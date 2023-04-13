@@ -5,7 +5,8 @@ static char *GetHGetFile(void)
 	static char *file;
 
 	if (!file)
-		file = GetCollaboFile("C:\\app\\Kit\\HGet\\HGet.exe");
+//		file = GetCollaboFile("C:\\app\\Kit\\HGet\\HGet.exe"); // îpé~ @ 2023.4.13
+		file = GetCollaboFile("C:\\Factory\\tmp\\Kit_Dummy\\HGet\\HGet.exe");
 
 	return file;
 }

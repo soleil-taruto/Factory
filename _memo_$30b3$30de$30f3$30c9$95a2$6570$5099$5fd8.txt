@@ -112,3 +112,12 @@ StringTools.Enclosed
 バイナリファイルの比較
 
 	bb ファイル① ファイル②
+
+----
+MD5
+
+	md5 /lss
+	md5 /s
+
+	dmd5
+	dmd5 /s

@@ -5,7 +5,8 @@ static char *GetGmailSendExeFile(void)
 	static char *file;
 
 	if (!file)
-		file = GetCollaboFile("C:\\app\\Kit\\GmailSend\\GmailSend.exe");
+//		file = GetCollaboFile("C:\\app\\Kit\\GmailSend\\GmailSend.exe"); // îpé~ @ 2023.4.13
+		file = GetCollaboFile("C:\\Factory\\tmp\\Kit_Dummy\\GmailSend\\GmailSend.exe");
 
 	return file;
 }

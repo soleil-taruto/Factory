@@ -438,7 +438,7 @@ char *coInputLinePrn(void (*printFunc)(char *jbuffer))
 	return jbuffer;
 }
 
-#define WDROP_EXE_FILE "C:\\app\\Kit\\WDrop\\WDrop.exe"
+#define WDROP_EXE_FILE "C:\\app\\WDrop\\WDrop.exe"
 
 static char *DropPath_Win10(void)
 {

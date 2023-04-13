@@ -54,7 +54,8 @@ static char *GetRSAExeFile(void)
 	static char *file;
 
 	if (!file)
-		file = GetCollaboFile("C:\\app\\Kit\\RSA\\RSA.exe");
+//		file = GetCollaboFile("C:\\app\\Kit\\RSA\\RSA.exe"); // îpé~ @ 2023.4.13
+		file = GetCollaboFile("C:\\Factory\\tmp\\Kit_Dummy\\RSA\\RSA.exe");
 
 	return file;
 }

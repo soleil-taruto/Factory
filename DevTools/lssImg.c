@@ -6,9 +6,12 @@
 	> lssImg
 
 	> lssImg /F    -- ファイル名付き
+
+	> lssImg /S    -- シャッフル
 */
 
 #include "C:\Factory\Common\all.h"
+#include "C:\Factory\Common\Options\Sequence.h"
 
 int main(int argc, char **argv)
 {
@@ -19,9 +22,18 @@ int main(int argc, char **argv)
 	char *outFile = c_getOutFile("images.html");
 	FILE *fp;
 
+	mt19937_init();
+
+readArgs:
 	if (argIs("/F"))
 	{
 		mode ='F';
+		goto readArgs;
+	}
+	if (argIs("/S"))
+	{
+		shuffle(imgFiles);
+		goto readArgs;
 	}
 
 	fp = fileOpen(outFile, "wt");
