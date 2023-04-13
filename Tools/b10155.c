@@ -6,18 +6,23 @@
 
 	----
 
-	b10155 == Dec(Base-10) 155 chars
+	b10155 == Base-10(10êiêî) 155 chars
 
 	10 P 155 L 2 == 514.*
 
 	----
 	èëéÆ
 
-	{10155-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX}
+	{10155-YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY}
 	       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	                   31ï∂éö                          31ï∂éö                          31ï∂éö                          31ï∂éö                          31ï∂éö
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	                                                                                167ï∂éö
 
-		X ... Hex(Base-16) char
+		Y ... Hex(Base-16) char
+
+		10155 ... Base-10 115 chars
+		               ^^ ^^^
 */
 
 #include "C:\Factory\Common\all.h"

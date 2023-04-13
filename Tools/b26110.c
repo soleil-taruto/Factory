@@ -6,7 +6,7 @@
 
 	----
 
-	b26110 == Alphabet(Base-26, A-Z) CX(110) chars
+	b26110 == Base-26(A-Z) 110 chars
 
 	26 P 110 L 2 == 517.*
 
@@ -16,8 +16,13 @@
 	{AZCX-YYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYY}
 	      ~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~
 	              22•¶Žš                 22•¶Žš                 22•¶Žš                 22•¶Žš                 22•¶Žš
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	                                                         121•¶Žš
 
 		Y ... Base-26 char
+
+		AZCX ... [A-Z] 110(CX) chars
+		          ^ ^      ^^
 */
 
 #include "C:\Factory\Common\all.h"

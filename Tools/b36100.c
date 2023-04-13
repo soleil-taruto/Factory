@@ -1,23 +1,28 @@
 /*
-	b36c.exe [/L] [/P]
+	b36100.exe [/L] [/P]
 
 		/L ... 小文字
 		/P ... 表示のみ。(エディタを開かない)
 
 	----
 
-	b36c == Base-36 C(100) chars
+	b36100 == Base-36 100 chars
 
 	36 P 100 L 2 == 516.*
 
 	----
 	書式
 
-	{B36C-XXXXXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXX}
+	{B36C-YYYYYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYYYYY}
 	      ~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~
 	               25文字                    25文字                    25文字                    25文字
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	                                                   110文字
 
-		X ... Base-36 char
+		Y ... Base-36 char
+
+		B36C ... Base-36 100(C) chars
+		         ^    ^^     ^
 */
 
 #include "C:\Factory\Common\all.h"
@@ -25,7 +30,7 @@
 
 #define BASE36_CHARS "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-static char *MakeB36C(void)
+static char *MakeB36100(void)
 {
 	char *buff = strx("");
 	uint index;
@@ -44,15 +49,15 @@ static char *MakeB36C(void)
 }
 int main(int argc, char **argv)
 {
-	char *b36c = MakeB36C();
+	char *b36100 = MakeB36100();
 
 	if (argIs("/L"))
-		toLowerLine(b36c);
+		toLowerLine(b36100);
 
-	cout("%s\n", b36c);
+	cout("%s\n", b36100);
 
 	if (!argIs("/P")) // ? not Print only
-		viewLine(b36c);
+		viewLine(b36100);
 
-	memFree(b36c);
+	memFree(b36100);
 }

@@ -12,11 +12,16 @@
 	----
 	èëéÆ
 
-	{b6288-XXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXX}
+	{B62ee-YYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYY}
 	       ~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~
 	               22ï∂éö                 22ï∂éö                 22ï∂éö                 22ï∂éö
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	                                              98ï∂éö
 
-		X ... Base-62 char
+		Y ... Base-62 char
+
+		B62ee ... Base-62 eighty-eight(88) chars
+		          ^    ^^ ^      ^
 */
 
 #include "C:\Factory\Common\all.h"

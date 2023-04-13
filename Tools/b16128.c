@@ -6,18 +6,23 @@
 
 	----
 
-	b16128 == Hex(Base-16) 128 chars
+	b16128 == Base-16(16êiêî) 128 chars
 
 	16 P 128 L 2 == 512
 
 	----
 	èëéÆ
 
-	{bf80-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX}
+	{bf80-YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY}
 	      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	                   32ï∂éö                           32ï∂éö                           32ï∂éö                           32ï∂éö
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	                                                                 138ï∂éö
 
-		X ... Hex(Base-16) char
+		Y ... Hex(Base-16) char
+
+		bf80 ... base-16 [0123456789abcdef] 0x80(128) chars
+		         ^                       ^    ^^
 */
 
 #include "C:\Factory\Common\all.h"
