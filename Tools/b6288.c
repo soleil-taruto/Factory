@@ -34,7 +34,7 @@ static char *MakeB6288(void)
 	char *buff = strx("");
 	uint index;
 
-	buff = addLine(buff, "{b6288-");
+	buff = addLine(buff, "{B62ee-");
 
 	for (index = 0; index < 88; index++)
 	{
