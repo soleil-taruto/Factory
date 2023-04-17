@@ -57,13 +57,18 @@ static char *GetDatFile(void)
 
 	if (!file)
 	{
+#if 1
+		file = "C:\\app\\PrimeData\\Prime.dat";
+#else // îpé~ @ 2023.4.18
 		if (isFactoryDirEnabled())
 			file = "C:\\Factory\\tmp_data\\Prime.dat";
 		else
 			file = combine(getSelfDir(), "Prime.dat");
+#endif
 	}
 	return file;
 }
+#if 0 // îpé~ @ 2023.4.18
 static void SavePBits(void)
 {
 	autoBlock_t gab;
@@ -72,6 +77,7 @@ static void SavePBits(void)
 
 //	coExecute_x(xcout("ATTRIB.EXE +S +H \"%s\"", GetDatFile()));
 }
+#endif
 static int LoadPBits(void)
 {
 	FILE *fp;
@@ -90,6 +96,8 @@ static int LoadPBits(void)
 }
 
 // ---- INIT ----
+
+#if 0 // îpé~ @ 2023.4.18
 
 #define P13_LEN 15015
 
@@ -131,6 +139,7 @@ static void PutPrimeFrom17(void)
 		if (!GetPBit(prime))
 			PutPrime(prime, UINTMAX);
 }
+#endif
 static void DoINIT(void)
 {
 	PBits = (uint *)memAlloc(PBIT_LEN * sizeof(uint));
@@ -141,12 +150,16 @@ static void DoINIT(void)
 	{
 		if (!LoadPBits())
 		{
+#if 1
+			error_m("ëfêîÉfÅ[É^ÇîzíuÇµÇƒâ∫Ç≥Ç¢ÅB");
+#else // îpé~ @ 2023.4.18
 			LOGPOS();
 			PutPrimeTo13();
 			LOGPOS();
 			PutPrimeFrom17();
 			LOGPOS();
 			SavePBits();
+#endif
 		}
 	}
 	unmutex();
