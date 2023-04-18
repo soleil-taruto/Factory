@@ -2,31 +2,19 @@
 Factory
 =======
 
-Cで書いたツールとライブラリの寄せ集め。
+Ｃで書いたツールの寄せ集め。
 自分用ツール也。
 
 
-開発環境
+作業環境
 --------
 
-Windows 10 (Pro | Home)
-Visual Studio Community 2022
+Windows 10
+Visual Studio Community 2022 (CL.exe)
 
 
-----
-インストール方法
+------
+配置先
 
-インストール先は C:\Factory 固定。
-
-このファイルが C:\Factory\_Readme.txt となるように展開する。
-
-
-----
-参照
-
-この環境のリポジトリ：
-https://github.com/soleil-taruto/Factory
-
-昔のリポジトリ
-https://github.com/stackprobe/Factory
+C:\Factory
 
