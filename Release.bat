@@ -3,6 +3,6 @@ CALL Clean
 CALL mkt
 RDMD.exe /RM tmp_data
 
-z7 /D C:\home\HPStore\Program\Factory.zip .
+z7 .
 
 CALL dittybox\oninstall.bat
