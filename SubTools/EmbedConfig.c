@@ -65,6 +65,8 @@ static void ChangeEmbedConfig(uint cfgPos, int cfgVal)
 }
 int main(int argc, char **argv)
 {
+	error_m("Žg—p‹ÖŽ~"); // add @ 2023.4.23
+
 	if (argIs("--factory-dir-disabled"))
 	{
 		ChangeEmbedConfig(EMBCFG_FACTORY_DIR_DISABLED, 'D');
