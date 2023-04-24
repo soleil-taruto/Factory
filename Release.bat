@@ -5,4 +5,4 @@ RDMD.exe /RM tmp_data
 
 z7 .
 
-CALL JBKit\oninstall.bat
+CALL bat\oninstall.bat
