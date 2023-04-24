@@ -93,7 +93,7 @@ static void CheckGitRelease(char *dir)
 	{
 		char *text = readText_b(LOCAL_RUN_ME_FIRST_BAT);
 		char *text2 = strx(
-			"C:\\Factory\\dittybox\\devrunmefirst.bat\r\n"
+			"C:\\Factory\\JBKit\\devrunmefirst.bat\r\n"
 			);
 
 		if (strcmp(text, text2))

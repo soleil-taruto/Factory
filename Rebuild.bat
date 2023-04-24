@@ -5,4 +5,4 @@ CALL Rebuild.bat
 CALL ff
 cx ***
 
-CALL dittybox\oninstall.bat
+CALL JBKit\oninstall.bat
