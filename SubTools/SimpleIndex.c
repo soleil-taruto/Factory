@@ -8,7 +8,7 @@
 #include "C:\Factory\Common\Options\URL.h"
 #include "libs\md5Cache.h"
 
-#define DEF_INDEXTEMPLATE "C:\\Factory\\Resource\\index.html_"
+#define DEF_INDEXTEMPLATE "C:\\Factory\\Resource\\index.html.txt"
 //#define INDEXTEMPLATE "_index.html_" // îpé~ @ 2022.8.13
 #define HEADERFILE "_header.html_"
 #define FOOTERFILE "_footer.html_"
